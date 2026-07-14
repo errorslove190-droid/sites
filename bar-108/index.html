@@ -1,0 +1,219 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>108 · Гастробар в Иннополисе. Бургеры, пиво, веранда</title>
+<meta name="description" content="Гастробар 108 в Иннополисе: бургеры, европейская и американская кухня, крафтовое пиво и винная карта. Спортивная, 108. Рейтинг 4.5 на 2GIS.">
+<meta property="og:title" content="108 · Гастробар в Иннополисе">
+<meta property="og:description" content="Бургеры, пиво, летняя веранда и спортивные трансляции. Спортивная, 108. Рейтинг 4.5 на 2GIS.">
+<meta property="og:type" content="website">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='22' fill='%23120d08'/><text x='50' y='68' font-size='46' font-family='Arial' font-weight='bold' text-anchor='middle' fill='%23ffb454'>108</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;600;800&family=Golos+Text:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#120d08; --bg2:#1a130b; --card:#211810; --line:#332619;
+  --amber:#ffb454; --amber2:#ff8a3d; --text:#f4ece1; --muted:#b9a68e;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--text);font-family:'Golos Text',sans-serif;line-height:1.6;overflow-x:hidden}
+h1,h2,h3{font-family:'Unbounded',sans-serif;line-height:1.15}
+.wrap{max-width:1060px;margin:0 auto;padding:0 20px}
+a{color:inherit;text-decoration:none}
+
+/* demo ribbon */
+.demo{position:sticky;top:0;z-index:50;background:rgba(18,13,8,.92);backdrop-filter:blur(8px);border-bottom:1px solid var(--line);font-size:12.5px;color:var(--muted);text-align:center;padding:7px 14px}
+.demo b{color:var(--amber);font-weight:600}
+
+/* hero */
+.hero{position:relative;padding:84px 0 72px;background:
+  radial-gradient(900px 500px at 85% -10%, rgba(255,138,61,.22), transparent 60%),
+  radial-gradient(700px 420px at -10% 110%, rgba(255,180,84,.12), transparent 60%),
+  var(--bg)}
+.hero::before{content:"";position:absolute;inset:0;background-image:radial-gradient(rgba(255,180,84,.07) 1px, transparent 1px);background-size:26px 26px;mask-image:linear-gradient(180deg,transparent,black 30%,black 70%,transparent)}
+.hero .wrap{position:relative}
+.kicker{display:inline-flex;align-items:center;gap:8px;border:1px solid var(--line);background:var(--card);border-radius:999px;padding:7px 15px;font-size:13px;color:var(--muted);letter-spacing:.04em}
+.kicker .dot{width:7px;height:7px;border-radius:50%;background:var(--amber);box-shadow:0 0 12px var(--amber)}
+.hero h1{font-size:clamp(52px,10vw,110px);font-weight:800;margin:22px 0 6px;background:linear-gradient(120deg,var(--text) 40%,var(--amber) 75%,var(--amber2));-webkit-background-clip:text;background-clip:text;color:transparent}
+.hero .sub{font-size:clamp(18px,3vw,24px);color:var(--text);max-width:560px;font-weight:500}
+.hero .sub span{color:var(--amber)}
+.rating{display:inline-flex;align-items:center;gap:10px;margin-top:22px;background:var(--card);border:1px solid var(--line);border-radius:14px;padding:12px 18px}
+.rating .stars{color:var(--amber);letter-spacing:2px;font-size:15px}
+.rating .num{font-family:'Unbounded';font-weight:600;font-size:20px}
+.rating small{color:var(--muted);font-size:12.5px;display:block;line-height:1.3}
+.cta-row{display:flex;flex-wrap:wrap;gap:12px;margin-top:30px}
+.btn{display:inline-flex;align-items:center;gap:9px;border-radius:14px;padding:16px 26px;font-weight:600;font-size:16px;transition:transform .18s,box-shadow .18s}
+.btn:active{transform:scale(.97)}
+.btn-a{background:linear-gradient(120deg,var(--amber),var(--amber2));color:#1c1207;box-shadow:0 8px 30px rgba(255,138,61,.35)}
+.btn-a:hover{transform:translateY(-2px);box-shadow:0 12px 36px rgba(255,138,61,.45)}
+.btn-g{border:1px solid var(--line);background:var(--card);color:var(--text)}
+.btn-g:hover{border-color:var(--amber);transform:translateY(-2px)}
+.hero .meta{margin-top:26px;color:var(--muted);font-size:14px}
+
+/* sections */
+section{padding:72px 0}
+.sec-k{color:var(--amber);font-size:13px;letter-spacing:.18em;text-transform:uppercase;font-weight:600}
+h2{font-size:clamp(26px,4.6vw,40px);margin:10px 0 14px}
+.lead{color:var(--muted);max-width:640px;font-size:17px}
+
+/* feature grid */
+.grid{display:grid;gap:14px;margin-top:38px;grid-template-columns:repeat(auto-fit,minmax(250px,1fr))}
+.card{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:26px 24px;transition:transform .2s,border-color .2s}
+.card:hover{transform:translateY(-4px);border-color:rgba(255,180,84,.5)}
+.card .ic{width:46px;height:46px;border-radius:12px;background:linear-gradient(135deg,rgba(255,180,84,.18),rgba(255,138,61,.08));display:grid;place-items:center;margin-bottom:16px}
+.card .ic svg{width:24px;height:24px;stroke:var(--amber);fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.card h3{font-size:17px;font-weight:600;margin-bottom:8px}
+.card p{color:var(--muted);font-size:14.5px}
+
+/* kitchen band */
+.band{background:var(--bg2);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.kitchen{display:grid;gap:40px;grid-template-columns:1fr;align-items:center}
+.dish{position:relative;border-radius:24px;min-height:280px;background:
+  radial-gradient(340px 220px at 30% 35%, rgba(255,180,84,.35), transparent 70%),
+  radial-gradient(300px 200px at 75% 70%, rgba(255,138,61,.25), transparent 70%),
+  linear-gradient(160deg,#241a10,#160f08);border:1px solid var(--line);overflow:hidden;display:grid;place-items:center}
+.dish .n108{font-family:'Unbounded';font-weight:800;font-size:clamp(80px,16vw,150px);color:transparent;-webkit-text-stroke:1.5px rgba(255,180,84,.55);letter-spacing:.02em}
+.dish::after{content:"";position:absolute;inset:0;background-image:radial-gradient(rgba(255,180,84,.09) 1px,transparent 1px);background-size:20px 20px}
+.klist{list-style:none;margin-top:24px}
+.klist li{display:flex;gap:14px;padding:15px 0;border-bottom:1px solid var(--line);font-size:16px}
+.klist li:last-child{border-bottom:none}
+.klist .m{color:var(--amber);font-family:'Unbounded';font-size:13px;padding-top:3px;min-width:30px}
+
+/* reviews */
+.rev{display:grid;gap:14px;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));margin-top:38px}
+.rev .big{font-family:'Unbounded';font-size:64px;font-weight:800;color:var(--amber);line-height:1}
+.rev .card p{margin-top:8px}
+.rev a{color:var(--amber);font-size:14px;border-bottom:1px dashed rgba(255,180,84,.5)}
+
+/* contacts */
+.contact{display:grid;gap:14px;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));margin-top:38px}
+.contact .card a.line{display:flex;align-items:center;gap:12px;font-size:17px;font-weight:600;color:var(--text)}
+.contact .card a.line:hover{color:var(--amber)}
+.contact small{display:block;color:var(--muted);margin-top:6px;font-size:13.5px}
+
+/* footer */
+footer{border-top:1px solid var(--line);padding:34px 0 110px;color:var(--muted);font-size:13.5px}
+footer .wrap{display:flex;flex-wrap:wrap;gap:10px;justify-content:space-between}
+
+/* fixed call btn mobile */
+.callbar{position:fixed;left:0;right:0;bottom:0;z-index:60;padding:12px 16px calc(12px + env(safe-area-inset-bottom));background:rgba(18,13,8,.9);backdrop-filter:blur(10px);border-top:1px solid var(--line);display:none}
+.callbar .btn{width:100%;justify-content:center;font-size:17px;padding:16px}
+@media(max-width:720px){.callbar{display:block}footer{padding-bottom:130px}}
+@media(min-width:760px){.kitchen{grid-template-columns:1.05fr 1fr}}
+
+/* reveal */
+.rv{opacity:0;transform:translateY(26px);transition:opacity .7s ease,transform .7s ease}
+.rv.on{opacity:1;transform:none}
+</style>
+</head>
+<body>
+
+<div class="demo">Демо-версия сайта. Финальная версия собирается под ваши пожелания. <b>Разработка: Михаил</b></div>
+
+<header class="hero">
+  <div class="wrap">
+    <span class="kicker"><span class="dot"></span>Гастробар · Иннополис</span>
+    <h1>108</h1>
+    <p class="sub">Бургеры, пиво и своя атмосфера <span>на Спортивной, 108</span>. Кухня, ради которой не нужно ехать в Казань.</p>
+    <div class="rating rv">
+      <span class="num">4.5</span>
+      <span class="stars">★★★★★</span>
+      <small>186 отзывов · 924 оценки<br>на 2GIS</small>
+    </div>
+    <div class="cta-row">
+      <a class="btn btn-a" href="tel:+78435280655">
+        <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 2 .7 2.9a2 2 0 0 1-.5 2.1L8.1 10a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.9.5 2.9.7a2 2 0 0 1 1.6 2Z"/></svg>
+        Забронировать стол
+      </a>
+      <a class="btn btn-g" href="https://t.me/bar108" target="_blank" rel="noopener">
+        <svg width="19" height="19" viewBox="0 0 24 24" fill="currentColor"><path d="M21.9 3.4 2.7 10.8c-1.3.5-1.3 1.3-.2 1.6l4.9 1.5 1.9 5.7c.2.6.1.9.8.9.5 0 .7-.2 1-.5l2.4-2.3 5 3.7c.9.5 1.6.2 1.8-.9l3.3-15.5c.3-1.3-.5-1.9-1.7-1.6z"/></svg>
+        Telegram @bar108
+      </a>
+    </div>
+    <p class="meta">Открыты ежедневно с 13:00 · Спортивная улица, 108, 1 этаж</p>
+  </div>
+</header>
+
+<section>
+  <div class="wrap">
+    <span class="sec-k rv">Почему сюда</span>
+    <h2 class="rv">Больше, чем бар у дома</h2>
+    <p class="lead rv">Всё по фактам: так о заведении пишут на 2GIS и говорят гости.</p>
+    <div class="grid">
+      <div class="card rv"><div class="ic"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg></div><h3>Летняя веранда</h3><p>Тёплый сезон на свежем воздухе, а не в четырёх стенах.</p></div>
+      <div class="card rv"><div class="ic"><svg viewBox="0 0 24 24"><rect x="2" y="5" width="20" height="13" rx="2"/><path d="M8 21h8"/></svg></div><h3>Спортивные трансляции</h3><p>Матчи показываем на экранах. Место, где болеют вместе.</p></div>
+      <div class="card rv"><div class="ic"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="3"/><circle cx="8.5" cy="8.5" r="1.4"/><circle cx="15.5" cy="15.5" r="1.4"/><circle cx="15.5" cy="8.5" r="1.4"/><circle cx="8.5" cy="15.5" r="1.4"/></svg></div><h3>Настольные игры</h3><p>Вечер без телефона: настолки прямо в баре.</p></div>
+      <div class="card rv"><div class="ic"><svg viewBox="0 0 24 24"><path d="M5 12.5a12 12 0 0 1 14 0"/><path d="M8.5 16a7 7 0 0 1 7 0"/><circle cx="12" cy="19" r="1.3"/><path d="M2 9a17 17 0 0 1 20 0"/></svg></div><h3>Wi-Fi и место для ноутбука</h3><p>Днём можно поработать за чашкой кофе, вечером остаться на ужин.</p></div>
+      <div class="card rv"><div class="ic"><svg viewBox="0 0 24 24"><path d="M10 5.2C8.5 3.6 6 3.5 4.5 5s-1.6 4 0 5.5L12 18l7.5-7.4c1.6-1.6 1.5-4 0-5.5s-4-1.6-5.5 0L12 7z"/></svg></div><h3>Можно с собакой</h3><p>Dog friendly: хвостатым здесь рады.</p></div>
+      <div class="card rv"><div class="ic"><svg viewBox="0 0 24 24"><path d="M4 11h16l-1.5 9h-13z"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg></div><h3>Навынос и доставка</h3><p>Не хочется выходить? Привезём или соберём с собой.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="band">
+  <div class="wrap kitchen">
+    <div class="dish rv"><span class="n108">108</span></div>
+    <div>
+      <span class="sec-k rv">Кухня и бар</span>
+      <h2 class="rv">Бургеры и не только</h2>
+      <ul class="klist">
+        <li class="rv"><span class="m">01</span><span>Фирменные бургеры: то, с чего заведение начиналось как Burger &amp; Beer</span></li>
+        <li class="rv"><span class="m">02</span><span>Европейская и американская кухня</span></li>
+        <li class="rv"><span class="m">03</span><span>Пиво и винная карта</span></li>
+        <li class="rv"><span class="m">04</span><span>Зал до 50 мест, столик можно забронировать по телефону</span></li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <span class="sec-k rv">Гости о нас</span>
+    <h2 class="rv">Рейтинг, который заработан</h2>
+    <div class="rev">
+      <div class="card rv"><div class="big">4.5</div><p>средняя оценка на 2GIS</p></div>
+      <div class="card rv"><div class="big">186</div><p>отзывов от гостей</p></div>
+      <div class="card rv"><div class="big">924</div><p>оценки на 2GIS<br><a href="https://2gis.ru/innopolis/firm/70000001026632559" target="_blank" rel="noopener">Читать отзывы на 2GIS</a></p></div>
+    </div>
+  </div>
+</section>
+
+<section class="band">
+  <div class="wrap">
+    <span class="sec-k rv">Контакты</span>
+    <h2 class="rv">Ждём на Спортивной, 108</h2>
+    <div class="contact">
+      <div class="card rv">
+        <a class="line" href="tel:+78435280655"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 2 .7 2.9a2 2 0 0 1-.5 2.1L8.1 10a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.9.5 2.9.7a2 2 0 0 1 1.6 2Z"/></svg>+7 (843) 528-06-55</a>
+        <small>Бронь столов и заказ навынос</small>
+      </div>
+      <div class="card rv">
+        <a class="line" href="https://t.me/bar108" target="_blank" rel="noopener"><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M21.9 3.4 2.7 10.8c-1.3.5-1.3 1.3-.2 1.6l4.9 1.5 1.9 5.7c.2.6.1.9.8.9.5 0 .7-.2 1-.5l2.4-2.3 5 3.7c.9.5 1.6.2 1.8-.9l3.3-15.5c.3-1.3-.5-1.9-1.7-1.6z"/></svg>@bar108</a>
+        <small>Новости и анонсы в Telegram</small>
+      </div>
+      <div class="card rv">
+        <a class="line" href="https://2gis.ru/innopolis/firm/70000001026632559" target="_blank" rel="noopener"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12S4 16 4 10a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>Спортивная, 108, 1 этаж</a>
+        <small>Иннополис · открыты ежедневно с 13:00 · маршрут на 2GIS</small>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <span>Гастробар «108» · Иннополис</span>
+    <span>Демо-версия сайта · Разработка: Михаил</span>
+  </div>
+</footer>
+
+<div class="callbar"><a class="btn btn-a" href="tel:+78435280655">Позвонить и забронировать стол</a></div>
+
+<script>
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('on');io.unobserve(e.target)}}),{threshold:.12});
+document.querySelectorAll('.rv').forEach(el=>io.observe(el));
+</script>
+</body>
+</html>
