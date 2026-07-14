@@ -1,0 +1,209 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Aldente-Fusion · Ресторан европейской кухни в Казани</title>
+<meta name="description" content="Ресторан Aldente-Fusion в Казани: европейская кухня, завтраки с 8:00, бизнес-ланчи, банкеты до 100 гостей и кейтеринг. Ямашева, 122Б. Рейтинг 4.7 на 2GIS.">
+<meta property="og:title" content="Aldente-Fusion · Ресторан европейской кухни в Казани">
+<meta property="og:description" content="Завтраки, бизнес-ланчи, банкеты до 100 гостей и кейтеринг. Ямашева, 122Б. Рейтинг 4.7 на 2GIS.">
+<meta property="og:type" content="website">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='22' fill='%23f7f2e9'/><text x='50' y='70' font-size='52' font-family='Georgia' font-weight='bold' text-anchor='middle' fill='%231e5c46'>A</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;700;800&family=Onest:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#faf6ee; --bg2:#f3ecdf; --card:#ffffff; --line:#e6dcc8;
+  --green:#1e5c46; --green2:#2e7d5d; --gold:#b9903f; --text:#22271f; --muted:#6d7263;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--text);font-family:'Onest',sans-serif;line-height:1.65;overflow-x:hidden}
+h1,h2,h3{font-family:'Manrope',sans-serif;line-height:1.12;letter-spacing:-.02em}
+.wrap{max-width:1060px;margin:0 auto;padding:0 20px}
+a{color:inherit;text-decoration:none}
+
+.demo{position:sticky;top:0;z-index:50;background:rgba(250,246,238,.92);backdrop-filter:blur(8px);border-bottom:1px solid var(--line);font-size:12.5px;color:var(--muted);text-align:center;padding:7px 14px}
+.demo b{color:var(--green);font-weight:600}
+
+/* hero */
+.hero{position:relative;padding:88px 0 76px;background:
+  radial-gradient(800px 460px at 90% -15%, rgba(30,92,70,.10), transparent 60%),
+  radial-gradient(620px 420px at -8% 108%, rgba(185,144,63,.12), transparent 60%),
+  var(--bg)}
+.hero::before{content:"";position:absolute;inset:0;background-image:radial-gradient(rgba(30,92,70,.06) 1px, transparent 1px);background-size:26px 26px;mask-image:linear-gradient(180deg,transparent,black 25%,black 75%,transparent)}
+.hero .wrap{position:relative}
+.kicker{display:inline-flex;align-items:center;gap:8px;border:1px solid var(--line);background:var(--card);border-radius:999px;padding:7px 15px;font-size:13px;color:var(--muted);letter-spacing:.04em}
+.kicker .dot{width:7px;height:7px;border-radius:50%;background:var(--gold)}
+.hero h1{font-size:clamp(40px,7.6vw,76px);font-weight:800;margin:22px 0 10px;color:var(--green)}
+.hero h1 em{font-style:normal;color:var(--gold)}
+.hero .sub{font-size:clamp(17px,2.8vw,22px);max-width:600px;font-weight:500}
+.rating{display:inline-flex;align-items:center;gap:10px;margin-top:22px;background:var(--card);border:1px solid var(--line);border-radius:14px;padding:12px 18px;box-shadow:0 4px 20px rgba(34,39,31,.05)}
+.rating .stars{color:var(--gold);letter-spacing:2px;font-size:15px}
+.rating .num{font-family:'Manrope';font-weight:800;font-size:20px;color:var(--green)}
+.rating small{color:var(--muted);font-size:12.5px;line-height:1.3}
+.cta-row{display:flex;flex-wrap:wrap;gap:12px;margin-top:30px}
+.btn{display:inline-flex;align-items:center;gap:9px;border-radius:14px;padding:16px 26px;font-weight:600;font-size:16px;transition:transform .18s,box-shadow .18s}
+.btn:active{transform:scale(.97)}
+.btn-a{background:linear-gradient(120deg,var(--green),var(--green2));color:#fff;box-shadow:0 10px 28px rgba(30,92,70,.3)}
+.btn-a:hover{transform:translateY(-2px);box-shadow:0 14px 34px rgba(30,92,70,.38)}
+.btn-g{border:1px solid var(--line);background:var(--card);color:var(--text)}
+.btn-g:hover{border-color:var(--green);transform:translateY(-2px)}
+.hero .meta{margin-top:26px;color:var(--muted);font-size:14px}
+
+section{padding:74px 0}
+.sec-k{color:var(--gold);font-size:13px;letter-spacing:.18em;text-transform:uppercase;font-weight:700}
+h2{font-size:clamp(26px,4.4vw,38px);margin:10px 0 14px;color:var(--green)}
+.lead{color:var(--muted);max-width:640px;font-size:17px}
+
+.grid{display:grid;gap:14px;margin-top:38px;grid-template-columns:repeat(auto-fit,minmax(250px,1fr))}
+.card{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:26px 24px;transition:transform .2s,box-shadow .2s;box-shadow:0 2px 12px rgba(34,39,31,.04)}
+.card:hover{transform:translateY(-4px);box-shadow:0 12px 30px rgba(34,39,31,.08)}
+.card .ic{width:46px;height:46px;border-radius:12px;background:linear-gradient(135deg,rgba(30,92,70,.1),rgba(185,144,63,.1));display:grid;place-items:center;margin-bottom:16px}
+.card .ic svg{width:24px;height:24px;stroke:var(--green);fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.card h3{font-size:17px;font-weight:700;margin-bottom:8px}
+.card p{color:var(--muted);font-size:14.5px}
+.card .tag{display:inline-block;margin-top:12px;background:rgba(185,144,63,.12);color:var(--gold);font-size:12.5px;font-weight:600;border-radius:999px;padding:4px 12px}
+
+.band{background:var(--bg2);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.split{display:grid;gap:40px;grid-template-columns:1fr;align-items:center}
+.visual{position:relative;border-radius:24px;min-height:270px;background:
+  radial-gradient(300px 200px at 30% 30%, rgba(30,92,70,.25), transparent 70%),
+  radial-gradient(280px 190px at 75% 75%, rgba(185,144,63,.3), transparent 70%),
+  linear-gradient(160deg,#124434,#1e5c46);border:1px solid var(--line);overflow:hidden;display:grid;place-items:center}
+.visual .aw{font-family:'Manrope';font-weight:800;font-size:clamp(64px,12vw,110px);color:transparent;-webkit-text-stroke:1.5px rgba(250,246,238,.6)}
+.visual::after{content:"";position:absolute;inset:0;background-image:radial-gradient(rgba(250,246,238,.1) 1px,transparent 1px);background-size:20px 20px}
+.klist{list-style:none;margin-top:24px}
+.klist li{display:flex;gap:14px;padding:15px 0;border-bottom:1px solid var(--line);font-size:16px}
+.klist li:last-child{border-bottom:none}
+.klist .m{color:var(--gold);font-family:'Manrope';font-weight:800;font-size:13px;padding-top:3px;min-width:30px}
+
+.rev{display:grid;gap:14px;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));margin-top:38px}
+.rev .big{font-family:'Manrope';font-size:60px;font-weight:800;color:var(--green);line-height:1}
+.rev .card p{margin-top:8px}
+.rev a{color:var(--green);font-size:14px;border-bottom:1px dashed rgba(30,92,70,.5)}
+
+.contact{display:grid;gap:14px;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));margin-top:38px}
+.contact .card a.line{display:flex;align-items:center;gap:12px;font-size:17px;font-weight:700;color:var(--text)}
+.contact .card a.line:hover{color:var(--green)}
+.contact .card a.line svg{stroke:var(--green)}
+.contact small{display:block;color:var(--muted);margin-top:6px;font-size:13.5px}
+
+footer{border-top:1px solid var(--line);padding:34px 0 110px;color:var(--muted);font-size:13.5px}
+footer .wrap{display:flex;flex-wrap:wrap;gap:10px;justify-content:space-between}
+
+.callbar{position:fixed;left:0;right:0;bottom:0;z-index:60;padding:12px 16px calc(12px + env(safe-area-inset-bottom));background:rgba(250,246,238,.92);backdrop-filter:blur(10px);border-top:1px solid var(--line);display:none}
+.callbar .btn{width:100%;justify-content:center;font-size:17px;padding:16px}
+@media(max-width:720px){.callbar{display:block}footer{padding-bottom:130px}}
+@media(min-width:760px){.split{grid-template-columns:1fr 1.05fr}}
+
+.rv{opacity:0;transform:translateY(26px);transition:opacity .7s ease,transform .7s ease}
+.rv.on{opacity:1;transform:none}
+</style>
+</head>
+<body>
+
+<div class="demo">Демо-версия сайта. Финальная версия собирается под ваши пожелания. <b>Разработка: Михаил</b></div>
+
+<header class="hero">
+  <div class="wrap">
+    <span class="kicker"><span class="dot"></span>Ресторан · Кейтеринг · Казань</span>
+    <h1>Aldente<em>-</em>Fusion</h1>
+    <p class="sub">Европейская кухня на Ямашева, 122Б. С завтраков в 8 утра до банкета на 100 гостей.</p>
+    <div class="rating rv">
+      <span class="num">4.7</span>
+      <span class="stars">★★★★★</span>
+      <small>15 отзывов на 2GIS</small>
+    </div>
+    <div class="cta-row">
+      <a class="btn btn-a" href="tel:+78432949494">
+        <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 2 .7 2.9a2 2 0 0 1-.5 2.1L8.1 10a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.9.5 2.9.7a2 2 0 0 1 1.6 2Z"/></svg>
+        Забронировать стол
+      </a>
+      <a class="btn btn-g" href="https://2gis.ru/kazan/firm/70000001021081797" target="_blank" rel="noopener">Мы на 2GIS</a>
+    </div>
+    <p class="meta">Пн–Сб 8:00–21:00 · Вс 8:00–19:00 · проспект Ямашева, 122Б, 2 этаж</p>
+  </div>
+</header>
+
+<section>
+  <div class="wrap">
+    <span class="sec-k rv">Почему сюда</span>
+    <h2 class="rv">Ресторан на каждый повод</h2>
+    <p class="lead rv">Только факты: так о ресторане пишут на 2GIS и в ресторанных каталогах Казани.</p>
+    <div class="grid">
+      <div class="card rv"><div class="ic"><svg viewBox="0 0 24 24"><path d="M17 8h1a4 4 0 1 1 0 8h-1"/><path d="M3 8h14v7a4 4 0 0 1-4 4H7a4 4 0 0 1-4-4z"/><path d="M6 2v2M10 2v2M14 2v2"/></svg></div><h3>Завтраки с 8:00</h3><p>Открываемся раньше большинства ресторанов города: кофе и завтрак до работы.</p></div>
+      <div class="card rv"><div class="ic"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg></div><h3>Бизнес-ланч</h3><p>Будни с 12:00 до 15:00.</p><span class="tag">от 250 ₽</span></div>
+      <div class="card rv"><div class="ic"><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.9"/><path d="M16 3.1a4 4 0 0 1 0 7.8"/></svg></div><h3>Банкеты до 100 гостей</h3><p>Юбилей, свадьба или корпоратив: зал под ключ с обслуживанием.</p></div>
+      <div class="card rv"><div class="ic"><svg viewBox="0 0 24 24"><path d="M12 3l1.9 5.8H20l-5 3.6 1.9 5.8-4.9-3.6-4.9 3.6L9 12.4 4 8.8h6.1z"/></svg></div><h3>Детям здесь рады</h3><p>Детское меню, игры, аниматоры и мастер-классы. Взрослые отдыхают, дети заняты.</p></div>
+      <div class="card rv"><div class="ic"><svg viewBox="0 0 24 24"><path d="M4 11h16l-1.5 9h-13z"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg></div><h3>Навынос и доставка</h3><p>Любимые блюда домой или в офис. Бронь столов по телефону.</p></div>
+      <div class="card rv"><div class="ic"><svg viewBox="0 0 24 24"><path d="M5 12.5a12 12 0 0 1 14 0"/><path d="M8.5 16a7 7 0 0 1 7 0"/><circle cx="12" cy="19" r="1.3"/><path d="M2 9a17 17 0 0 1 20 0"/></svg></div><h3>Wi-Fi и парковка</h3><p>Бесплатная парковка у входа, ресторан на 2 этаже здания автосалона Mercedes-Benz.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="band">
+  <div class="wrap split">
+    <div class="visual rv"><span class="aw">AF</span></div>
+    <div>
+      <span class="sec-k rv">Кухня и форматы</span>
+      <h2 class="rv">Европейская кухня, fusion-подача</h2>
+      <ul class="klist">
+        <li class="rv"><span class="m">01</span><span>Европейское меню: от завтраков до ужина, есть вегетарианские блюда</span></li>
+        <li class="rv"><span class="m">02</span><span>Гриль, своя выпечка и десерты</span></li>
+        <li class="rv"><span class="m">03</span><span>Кейтеринг: выездное обслуживание ваших мероприятий</span></li>
+        <li class="rv"><span class="m">04</span><span>Банкетный формат до 100 посадочных мест</span></li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <span class="sec-k rv">Гости о нас</span>
+    <h2 class="rv">4.7 из 5 на 2GIS</h2>
+    <div class="rev">
+      <div class="card rv"><div class="big">4.7</div><p>средняя оценка гостей</p></div>
+      <div class="card rv"><div class="big">15</div><p>отзывов на 2GIS<br><a href="https://2gis.ru/kazan/firm/70000001021081797" target="_blank" rel="noopener">Читать отзывы</a></p></div>
+      <div class="card rv"><div class="big">100</div><p>гостей вмещает банкетный формат</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="band">
+  <div class="wrap">
+    <span class="sec-k rv">Контакты</span>
+    <h2 class="rv">Ждём на Ямашева, 122Б</h2>
+    <div class="contact">
+      <div class="card rv">
+        <a class="line" href="tel:+78432949494"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 2 .7 2.9a2 2 0 0 1-.5 2.1L8.1 10a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.9.5 2.9.7a2 2 0 0 1 1.6 2Z"/></svg>+7 (843) 294-94-94</a>
+        <small>Бронь столов, банкеты, кейтеринг, заказ навынос</small>
+      </div>
+      <div class="card rv">
+        <a class="line" href="https://2gis.ru/kazan/firm/70000001021081797" target="_blank" rel="noopener"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12S4 16 4 10a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>проспект Ямашева, 122Б</a>
+        <small>2 этаж · Ново-Савиновский район, Казань · маршрут на 2GIS</small>
+      </div>
+      <div class="card rv">
+        <a class="line" href="tel:+78432949494"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>Пн–Сб 8:00–21:00</a>
+        <small>Воскресенье 8:00–19:00</small>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <span>Ресторан Aldente-Fusion · Казань</span>
+    <span>Демо-версия сайта · Разработка: Михаил</span>
+  </div>
+</footer>
+
+<div class="callbar"><a class="btn btn-a" href="tel:+78432949494">Позвонить и забронировать стол</a></div>
+
+<script>
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('on');io.unobserve(e.target)}}),{threshold:.12});
+document.querySelectorAll('.rv').forEach(el=>io.observe(el));
+</script>
+</body>
+</html>
