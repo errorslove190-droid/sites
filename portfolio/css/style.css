@@ -264,6 +264,7 @@ a { color: inherit; text-decoration: none; }
 .work__preview--oladushki .work__mock { background: linear-gradient(135deg, #3d2b1f, #8a6a2f); }
 .work__preview--bar108    .work__mock { background: linear-gradient(135deg, #23252e, #4a4e69); }
 .work__preview--aldente   .work__mock { background: linear-gradient(135deg, #3d1420, #8c2f39); }
+.work__preview--apex      .work__mock { background: linear-gradient(135deg, #0c0e11, #6b4a22); }
 
 .work__browser {
   display: flex;

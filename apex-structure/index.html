@@ -1,0 +1,451 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Apex Structure — строительство премиальных домов хай-тек и барнхаус</title>
+  <meta name="description" content="Apex Structure: монолитные и каркасные дома в стиле хай-тек и барнхаус. Умный дом, энергоэффективность класса A+, 3D-туры по объектам и онлайн-калькулятор стоимости строительства.">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Apex Structure — архитектура вне времени, надёжность на века">
+  <meta property="og:description" content="Строим монолитные и каркасные дома хай-тек и барнхаус с умным домом и энергоэффективностью A+. Рассчитайте стоимость онлайн.">
+  <meta property="og:url" content="https://errorslove190-droid.github.io/sites/apex-structure/">
+  <meta property="og:locale" content="ru_RU">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%230c0e11'/%3E%3Cpath d='M32 12 L52 50 H42 L32 30 L22 50 H12 Z' fill='%23d99a4e'/%3E%3C/svg%3E">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Unbounded:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!-- ===== HEADER ===== -->
+  <header class="header" id="header">
+    <div class="container header__inner">
+      <a href="#top" class="logo" aria-label="Apex Structure — на главную">
+        <svg class="logo__mark" viewBox="0 0 40 40" aria-hidden="true"><path d="M20 4 L36 36 H29 L20 18 L11 36 H4 Z"/></svg>
+        <span class="logo__text">Apex<b>Structure</b></span>
+      </a>
+      <nav class="nav" id="nav" aria-label="Основная навигация">
+        <a href="#projects" class="nav__link">Проекты</a>
+        <a href="#tour" class="nav__link">3D-тур</a>
+        <a href="#calc" class="nav__link">Калькулятор</a>
+        <a href="#energy" class="nav__link">Технологии</a>
+        <a href="#contacts" class="nav__link">Контакты</a>
+        <a href="tel:+78430000000" class="nav__phone">+7 (843) 000-00-00</a>
+      </nav>
+      <a href="tel:+78430000000" class="header__phone" aria-label="Позвонить">+7 (843) 000-00-00</a>
+      <button class="burger" id="burger" aria-label="Открыть меню" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </header>
+
+  <main id="top">
+
+    <!-- ===== HERO ===== -->
+    <section class="hero">
+      <div class="hero__grid" aria-hidden="true"></div>
+      <div class="hero__glow" aria-hidden="true"></div>
+      <div class="container hero__inner">
+        <div class="hero__content">
+          <p class="hero__tag reveal">Монолит · Каркас · Хай-тек · Барнхаус</p>
+          <h1 class="hero__title reveal">Архитектура вне времени.<br><em>Надёжность на века.</em></h1>
+          <p class="hero__sub reveal">Проектируем и строим современные загородные дома с интеграцией систем «умный дом» и энергоэффективными технологиями. Казань и Республика Татарстан.</p>
+          <div class="hero__actions reveal">
+            <a href="#calc" class="btn btn--accent">Рассчитать стоимость</a>
+            <a href="#projects" class="btn btn--ghost">Смотреть проекты</a>
+          </div>
+          <dl class="hero__stats reveal">
+            <div><dt data-count="45" data-suffix="+">0</dt><dd>построенных домов</dd></div>
+            <div><dt data-count="10">0</dt><dd>лет гарантии на конструктив</dd></div>
+            <div><dt>A+</dt><dd>класс энергоэффективности</dd></div>
+          </dl>
+        </div>
+        <div class="hero__visual reveal" aria-hidden="true">
+          <svg class="hero__house" viewBox="0 0 560 400" fill="none">
+            <!-- сетка-чертёж -->
+            <g class="blueprint" stroke="currentColor" stroke-width="1" opacity=".14">
+              <path d="M0 340 H560 M0 260 H560 M0 180 H560 M100 60 V400 M240 60 V400 M420 60 V400"/>
+            </g>
+            <!-- барнхаус-объём -->
+            <g class="draw" stroke="currentColor" stroke-width="2">
+              <path d="M60 340 V210 L165 130 L270 210 V340 Z"/>
+              <path d="M100 340 V250 H160 V340" opacity=".7"/>
+              <path d="M185 340 V240 H245 V300" opacity=".7"/>
+              <path d="M60 210 L165 130 L270 210" stroke-width="3"/>
+            </g>
+            <!-- хай-тек объём -->
+            <g class="draw draw--accent" stroke-width="2">
+              <path d="M270 340 V170 H500 V340"/>
+              <path d="M270 170 H500" stroke-width="4"/>
+              <path d="M296 340 V200 H352 V340 M368 340 V200 H424 V340 M440 340 V200 H478 V340" opacity=".75"/>
+              <path d="M500 250 H528 V340" opacity=".6"/>
+            </g>
+            <path d="M20 340 H544" stroke="currentColor" stroke-width="3"/>
+            <!-- размерные линии -->
+            <g class="dims" stroke="currentColor" stroke-width="1" opacity=".4">
+              <path d="M60 366 H270 M60 360 V372 M270 360 V372"/>
+              <path d="M270 366 H500 M500 360 V372"/>
+            </g>
+            <text x="150" y="386" class="dim-text">12.4 м</text>
+            <text x="370" y="386" class="dim-text">14.8 м</text>
+          </svg>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== POSITIONING ===== -->
+    <section class="section section--tight">
+      <div class="container">
+        <div class="pillars">
+          <article class="pillar reveal">
+            <span class="pillar__num">01</span>
+            <h3>Монолит и каркас</h3>
+            <p>Две проверенные технологии: монолитный железобетон для максимальной прочности и энергоэффективный каркас для скорости и тепла.</p>
+          </article>
+          <article class="pillar reveal">
+            <span class="pillar__num">02</span>
+            <h3>Хай-тек и барнхаус</h3>
+            <p>Чистая геометрия, панорамное остекление, честные материалы. Архитектура, которая не устареет через десять лет.</p>
+          </article>
+          <article class="pillar reveal">
+            <span class="pillar__num">03</span>
+            <h3>Умный дом</h3>
+            <p>Свет, климат, безопасность и шторы — в одном приложении. Инженерия закладывается на этапе проекта, а не «после ремонта».</p>
+          </article>
+          <article class="pillar reveal">
+            <span class="pillar__num">04</span>
+            <h3>Энергоэффективность A+</h3>
+            <p>Тепловой насос, рекуперация, правильный контур утепления. Дом 200 м² отапливается дешевле городской квартиры.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== PROJECTS ===== -->
+    <section class="section section--alt" id="projects">
+      <div class="container">
+        <p class="section__tag reveal">Проекты</p>
+        <h2 class="section__title reveal">Готовые решения под ваш участок</h2>
+        <p class="section__note reveal">Каждый проект адаптируем под участок, сторону света и сценарий жизни семьи. Или проектируем с нуля.</p>
+        <div class="projects">
+
+          <article class="project reveal">
+            <div class="project__visual project__visual--horizon">
+              <svg viewBox="0 0 400 220" fill="none" aria-hidden="true">
+                <g stroke="currentColor" stroke-width="2">
+                  <path d="M40 190 V80 H250 V190"/>
+                  <path d="M40 80 H250" stroke-width="5"/>
+                  <path d="M62 190 V104 H120 V190 M136 190 V104 H194 V190 M210 190 V104 H236 V190" opacity=".7"/>
+                  <path d="M250 130 H340 V190" opacity=".8"/>
+                  <path d="M250 130 H340" stroke-width="4" opacity=".8"/>
+                </g>
+                <path d="M20 190 H380" stroke="currentColor" stroke-width="3"/>
+              </svg>
+              <span class="project__badge">хай-тек · монолит</span>
+            </div>
+            <div class="project__info">
+              <h3>Apex Horizon</h3>
+              <p class="project__desc">Одноэтажный монолитный дом с плоской эксплуатируемой кровлей и остеклением на юг.</p>
+              <ul class="project__specs">
+                <li><b>168 м²</b> площадь</li>
+                <li><b>3</b> спальни</li>
+                <li><b>от 18,9 млн ₽</b></li>
+              </ul>
+              <a class="project__tour" href="#tour">Смотреть 3D-тур →</a>
+            </div>
+          </article>
+
+          <article class="project reveal">
+            <div class="project__visual project__visual--nord">
+              <svg viewBox="0 0 400 220" fill="none" aria-hidden="true">
+                <g stroke="currentColor" stroke-width="2">
+                  <path d="M70 190 V110 L200 40 L330 110 V190 Z"/>
+                  <path d="M70 110 L200 40 L330 110" stroke-width="4"/>
+                  <path d="M110 190 V130 H180 V190 M220 190 V126 H290 V172" opacity=".7"/>
+                  <path d="M96 190 V116 M132 190 V102 M168 190 V96" opacity=".35"/>
+                </g>
+                <path d="M20 190 H380" stroke="currentColor" stroke-width="3"/>
+              </svg>
+              <span class="project__badge">барнхаус · каркас</span>
+            </div>
+            <div class="project__info">
+              <h3>Apex Nord</h3>
+              <p class="project__desc">Каркасный барнхаус со вторым светом, панорамным торцом и террасой под общей кровлей.</p>
+              <ul class="project__specs">
+                <li><b>142 м²</b> площадь</li>
+                <li><b>3</b> спальни</li>
+                <li><b>от 13,4 млн ₽</b></li>
+              </ul>
+              <a class="project__tour" href="#tour">Смотреть 3D-тур →</a>
+            </div>
+          </article>
+
+          <article class="project reveal">
+            <div class="project__visual project__visual--prime">
+              <svg viewBox="0 0 400 220" fill="none" aria-hidden="true">
+                <g stroke="currentColor" stroke-width="2">
+                  <path d="M40 190 V70 H180 V190"/>
+                  <path d="M40 70 H180" stroke-width="5"/>
+                  <path d="M180 190 V120 L265 74 L350 120 V190"/>
+                  <path d="M180 120 L265 74 L350 120" stroke-width="4"/>
+                  <path d="M60 190 V96 H120 V190 M200 190 V138 H260 V190 M282 190 V138 H332 V190" opacity=".7"/>
+                </g>
+                <path d="M20 190 H380" stroke="currentColor" stroke-width="3"/>
+              </svg>
+              <span class="project__badge">гибрид · монолит + каркас</span>
+            </div>
+            <div class="project__info">
+              <h3>Apex Prime</h3>
+              <p class="project__desc">Двухобъёмный дом: монолитная дневная зона хай-тек и приватное крыло-барнхаус.</p>
+              <ul class="project__specs">
+                <li><b>236 м²</b> площадь</li>
+                <li><b>4</b> спальни</li>
+                <li><b>от 27,8 млн ₽</b></li>
+              </ul>
+              <a class="project__tour" href="#tour">Смотреть 3D-тур →</a>
+            </div>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== 3D TOUR ===== -->
+    <section class="section" id="tour">
+      <div class="container">
+        <p class="section__tag reveal">3D-туры</p>
+        <h2 class="section__title reveal">Пройдитесь по дому до начала стройки</h2>
+        <p class="section__note reveal">Интерактивная панорама гостиной проекта Apex Nord. Потяните сцену в сторону — или дождитесь автопрокрутки. На готовых объектах снимаем полные 3D-туры в 360°.</p>
+      </div>
+      <div class="tour reveal">
+        <div class="tour__viewport" id="tourViewport">
+          <div class="tour__scene" id="tourScene">
+            <svg class="tour__svg" viewBox="0 0 2600 480" preserveAspectRatio="xMinYMid slice" aria-label="Панорама интерьера гостиной">
+              <defs>
+                <linearGradient id="tg-sky" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="0" stop-color="#1b2430"/><stop offset="1" stop-color="#2c3a4a"/>
+                </linearGradient>
+                <linearGradient id="tg-floor" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="0" stop-color="#241d15"/><stop offset="1" stop-color="#171310"/>
+                </linearGradient>
+                <linearGradient id="tg-fire" x1="0" y1="1" x2="0" y2="0">
+                  <stop offset="0" stop-color="#e39a4a"/><stop offset="1" stop-color="#7a4a22" stop-opacity="0"/>
+                </linearGradient>
+              </defs>
+              <!-- стены и пол -->
+              <rect width="2600" height="360" fill="#14181e"/>
+              <rect y="360" width="2600" height="120" fill="url(#tg-floor)"/>
+              <g stroke="#0d1014" stroke-width="2" opacity=".6">
+                <path d="M0 400 H2600 M0 440 H2600"/>
+              </g>
+              <!-- балки барнхауса -->
+              <g fill="#1d232b">
+                <rect x="0" y="0" width="2600" height="26"/>
+                <rect x="180" y="0" width="22" height="360"/><rect x="700" y="0" width="22" height="360"/>
+                <rect x="1220" y="0" width="22" height="360"/><rect x="1740" y="0" width="22" height="360"/>
+                <rect x="2260" y="0" width="22" height="360"/>
+              </g>
+              <!-- панорамное окно с видом -->
+              <g>
+                <rect x="240" y="60" width="420" height="300" fill="url(#tg-sky)"/>
+                <path d="M240 300 L340 240 L430 290 L520 220 L660 300 V360 H240 Z" fill="#26313d"/>
+                <path d="M240 320 L360 280 L470 320 L580 285 L660 325 V360 H240 Z" fill="#1b232d"/>
+                <circle cx="590" cy="120" r="26" fill="#e8e6e1" opacity=".85"/>
+                <g stroke="#0d1014" stroke-width="10"><path d="M240 60 V360 M450 60 V360 M660 60 V360 M240 60 H660"/></g>
+                <g stroke="#0d1014" stroke-width="6"><path d="M240 210 H660"/></g>
+              </g>
+              <!-- диван -->
+              <g>
+                <rect x="800" y="280" width="360" height="80" rx="14" fill="#2a3038"/>
+                <rect x="820" y="236" width="150" height="70" rx="12" fill="#333a44"/>
+                <rect x="990" y="236" width="150" height="70" rx="12" fill="#333a44"/>
+                <rect x="780" y="250" width="34" height="110" rx="10" fill="#242a32"/>
+                <rect x="1146" y="250" width="34" height="110" rx="10" fill="#242a32"/>
+              </g>
+              <!-- журнальный столик -->
+              <ellipse cx="1050" cy="392" rx="90" ry="16" fill="#20262e"/>
+              <!-- камин -->
+              <g>
+                <rect x="1330" y="120" width="220" height="240" fill="#10141a"/>
+                <rect x="1360" y="220" width="160" height="110" rx="6" fill="#05070a"/>
+                <path d="M1400 322 Q1412 270 1440 296 Q1452 250 1470 300 Q1486 268 1490 322 Z" fill="url(#tg-fire)"/>
+                <rect x="1330" y="110" width="220" height="14" fill="#d99a4e" opacity=".8"/>
+              </g>
+              <!-- обеденная зона -->
+              <g>
+                <rect x="1680" y="300" width="300" height="16" rx="6" fill="#3a2f22"/>
+                <rect x="1700" y="316" width="16" height="60" fill="#2a2218"/>
+                <rect x="1944" y="316" width="16" height="60" fill="#2a2218"/>
+                <g fill="#20262e">
+                  <rect x="1660" y="286" width="44" height="90" rx="8"/><rect x="1740" y="286" width="44" height="90" rx="8"/>
+                  <rect x="1820" y="286" width="44" height="90" rx="8"/><rect x="1900" y="286" width="44" height="90" rx="8"/>
+                </g>
+                <g stroke="#d99a4e" stroke-width="3" opacity=".9">
+                  <path d="M1730 26 V120 M1830 26 V150 M1930 26 V120"/>
+                </g>
+                <circle cx="1730" cy="132" r="12" fill="#e8c78f"/>
+                <circle cx="1830" cy="162" r="12" fill="#e8c78f"/>
+                <circle cx="1930" cy="132" r="12" fill="#e8c78f"/>
+              </g>
+              <!-- второе окно -->
+              <g>
+                <rect x="2100" y="80" width="300" height="280" fill="url(#tg-sky)"/>
+                <path d="M2100 300 L2210 230 L2310 290 L2400 240 V360 H2100 Z" fill="#26313d"/>
+                <g stroke="#0d1014" stroke-width="10"><path d="M2100 80 V360 M2250 80 V360 M2400 80 V360 M2100 80 H2400"/></g>
+              </g>
+              <!-- панель умного дома -->
+              <rect x="2480" y="180" width="46" height="72" rx="8" fill="#0d1014" stroke="#d99a4e" stroke-width="2"/>
+              <circle cx="2503" cy="204" r="8" fill="#d99a4e"/>
+              <rect x="2492" y="222" width="22" height="4" rx="2" fill="#4a5563"/>
+              <rect x="2492" y="232" width="22" height="4" rx="2" fill="#4a5563"/>
+            </svg>
+            <button class="tour__spot" style="left:13%" data-tip="Панорамное остекление 6 метров" aria-label="Панорамное остекление"></button>
+            <button class="tour__spot" style="left:38%" data-tip="Гостиная со вторым светом" aria-label="Гостиная"></button>
+            <button class="tour__spot" style="left:55%" data-tip="Биокамин в портале из бетона" aria-label="Камин"></button>
+            <button class="tour__spot" style="left:96%" data-tip="Панель управления умным домом" aria-label="Умный дом"></button>
+          </div>
+          <div class="tour__hint" id="tourHint"><span>↔</span> Потяните, чтобы осмотреться</div>
+          <span class="tour__badge">360° · демо-сцена</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== CALCULATOR ===== -->
+    <section class="section section--alt" id="calc">
+      <div class="container">
+        <p class="section__tag reveal">Калькулятор</p>
+        <h2 class="section__title reveal">Рассчитайте стоимость дома за минуту</h2>
+        <p class="section__note reveal">Предварительный расчёт по актуальным ценам. Точную смету зафиксируем в договоре после проектирования — и она не вырастет в процессе.</p>
+
+        <div class="calc reveal">
+          <form class="calc__form" id="calcForm" aria-label="Калькулятор стоимости строительства">
+            <div class="calc__row">
+              <label class="calc__label" for="calcArea">Площадь дома <output id="calcAreaOut" for="calcArea">180</output> м²</label>
+              <input type="range" id="calcArea" min="80" max="500" step="5" value="180">
+              <div class="calc__scale"><span>80 м²</span><span>500 м²</span></div>
+            </div>
+
+            <div class="calc__row calc__row--split">
+              <fieldset class="calc__group">
+                <legend>Технология</legend>
+                <label class="chip"><input type="radio" name="tech" value="frame"><span>Каркас</span></label>
+                <label class="chip"><input type="radio" name="tech" value="monolith" checked><span>Монолит</span></label>
+              </fieldset>
+              <fieldset class="calc__group">
+                <legend>Архитектура</legend>
+                <label class="chip"><input type="radio" name="style" value="barn"><span>Барнхаус</span></label>
+                <label class="chip"><input type="radio" name="style" value="hitech" checked><span>Хай-тек</span></label>
+              </fieldset>
+              <fieldset class="calc__group">
+                <legend>Этажность</legend>
+                <label class="chip"><input type="radio" name="floors" value="1" checked><span>1 этаж</span></label>
+                <label class="chip"><input type="radio" name="floors" value="2"><span>2 этажа</span></label>
+              </fieldset>
+            </div>
+
+            <fieldset class="calc__group calc__group--options">
+              <legend>Инженерия и опции</legend>
+              <label class="opt"><input type="checkbox" name="opt" value="smart" checked><span>Умный дом<b>+7 900 ₽/м²</b></span></label>
+              <label class="opt"><input type="checkbox" name="opt" value="glass"><span>Панорамное остекление<b>+6 500 ₽/м²</b></span></label>
+              <label class="opt"><input type="checkbox" name="opt" value="floor"><span>Тёплые полы<b>+2 900 ₽/м²</b></span></label>
+              <label class="opt"><input type="checkbox" name="opt" value="pump"><span>Тепловой насос + рекуперация<b>+1,85 млн ₽</b></span></label>
+              <label class="opt"><input type="checkbox" name="opt" value="solar"><span>Солнечные панели<b>+1,25 млн ₽</b></span></label>
+            </fieldset>
+          </form>
+
+          <aside class="calc__result">
+            <p class="calc__result-label">Предварительная стоимость</p>
+            <p class="calc__price"><span id="calcPrice">0</span> ₽</p>
+            <p class="calc__meta" id="calcMeta">— ₽ за м²</p>
+            <ul class="calc__includes">
+              <li>Фундамент, коробка, кровля, фасад</li>
+              <li>Окна, инженерные сети, чистовая отделка white box</li>
+              <li>Проект и авторский надзор — в подарок</li>
+            </ul>
+            <a href="tel:+78430000000" class="btn btn--accent calc__cta">Получить точную смету</a>
+            <p class="calc__disclaimer">Расчёт предварительный и не является публичной офертой.</p>
+          </aside>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== ENERGY ===== -->
+    <section class="section" id="energy">
+      <div class="container">
+        <p class="section__tag reveal">Энергоэффективность</p>
+        <h2 class="section__title reveal">Дом, который экономит каждый день</h2>
+        <p class="section__note reveal">Считаем теплотехнику на этапе проекта: контур утепления без мостиков холода, рекуперация тепла, тепловой насос. Результат — класс A+ и минимальные счета.</p>
+
+        <div class="energy">
+          <div class="energy__chart reveal" role="img" aria-label="Сравнение затрат на отопление: обычный дом 14 500 рублей в месяц, дом Apex 4 200 рублей в месяц">
+            <h3>Отопление дома 200 м², ₽/мес зимой</h3>
+            <div class="bar">
+              <span class="bar__label">Типовой дом из блоков</span>
+              <span class="bar__track"><i class="bar__fill" style="--w:100%">14 500 ₽</i></span>
+            </div>
+            <div class="bar">
+              <span class="bar__label">Дом Apex Structure</span>
+              <span class="bar__track"><i class="bar__fill bar__fill--accent" style="--w:29%">4 200 ₽</i></span>
+            </div>
+            <p class="energy__chart-note">Экономия до <b data-count="70" data-suffix="%">0</b> на отоплении за счёт теплового насоса и рекуперации</p>
+          </div>
+          <div class="energy__cards">
+            <article class="ecard reveal"><h4>Тепловой насос</h4><p>1 кВт электричества превращается в 4 кВт тепла. Работает и на охлаждение летом.</p></article>
+            <article class="ecard reveal"><h4>Рекуперация воздуха</h4><p>Свежий воздух без открытых окон: вентиляция возвращает до 85% тепла обратно в дом.</p></article>
+            <article class="ecard reveal"><h4>Контур без мостиков холода</h4><p>Непрерывное утепление и тепловизионный контроль каждого дома перед сдачей.</p></article>
+            <article class="ecard reveal"><h4>Умные сценарии</h4><p>Дом сам снижает температуру ночью и когда вы в отъезде — и прогревается к возвращению.</p></article>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== STEPS ===== -->
+    <section class="section section--alt" id="steps">
+      <div class="container">
+        <p class="section__tag reveal">Как мы работаем</p>
+        <h2 class="section__title reveal">От участка до ключей — прозрачно</h2>
+        <ol class="steps">
+          <li class="step reveal"><span class="step__num">1</span><h3>Консультация и участок</h3><p>Выезжаем на участок, оцениваем грунты, рельеф и стороны света. Бесплатно.</p></li>
+          <li class="step reveal"><span class="step__num">2</span><h3>Проект и смета</h3><p>Архитектурный и инженерный проект, фиксированная смета в договоре.</p></li>
+          <li class="step reveal"><span class="step__num">3</span><h3>Строительство</h3><p>Собственные бригады, еженедельные фотоотчёты и онлайн-камера на объекте.</p></li>
+          <li class="step reveal"><span class="step__num">4</span><h3>Инженерия и умный дом</h3><p>Отопление, вентиляция, электрика и сценарии автоматизации.</p></li>
+          <li class="step reveal"><span class="step__num">5</span><h3>Сдача и гарантия</h3><p>Тепловизионный контроль, 3D-тур готового дома, гарантия 10 лет.</p></li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- ===== CONTACTS ===== -->
+    <section class="section" id="contacts">
+      <div class="container">
+        <div class="contacts reveal">
+          <div class="contacts__text">
+            <p class="section__tag">Контакты</p>
+            <h2 class="section__title">Обсудим ваш будущий дом?</h2>
+            <p class="section__note">Расскажите про участок и пожелания — подготовим концепцию и предварительный расчёт за 3 дня.</p>
+            <ul class="contacts__list">
+              <li><span>Телефон</span><a href="tel:+78430000000">+7 (843) 000-00-00</a></li>
+              <li><span>Офис</span><p>Казань, ул. Профсоюзная, 1 · шоу-рум «умного дома»</p></li>
+              <li><span>Режим</span><p>Пн–Сб 9:00–19:00</p></li>
+            </ul>
+          </div>
+          <div class="contacts__actions">
+            <a href="tel:+78430000000" class="btn btn--accent btn--big">Позвонить</a>
+            <a href="https://wa.me/78430000000" class="btn btn--ghost btn--big" target="_blank" rel="noopener">Написать в WhatsApp</a>
+            <a href="https://t.me/apexstructure" class="btn btn--ghost btn--big" target="_blank" rel="noopener">Telegram</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container footer__inner">
+      <p>© 2026 Apex Structure · Строительство домов хай-тек и барнхаус</p>
+      <p class="footer__dev">Демо-проект для портфолио · Разработка: <a href="https://t.me/Miha0o0" target="_blank" rel="noopener">Михаил</a></p>
+    </div>
+  </footer>
+
+  <script src="js/script.js"></script>
+</body>
+</html>
