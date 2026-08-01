@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex">
+<title>БИБЛИОТЕКА ВКУСА · каталог референсов</title>
+<style>
+  :root {
+    --bg: #101312;
+    --panel: #161a18;
+    --line: #2a302d;
+    --ink: #d8ddd9;
+    --dim: #7d8681;
+    --acc: #d3fd50;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    background: var(--bg); color: var(--ink);
+    font-family: 'Cascadia Mono', 'JetBrains Mono', Consolas, ui-monospace, monospace;
+    font-size: 13px; line-height: 1.5;
+    -webkit-text-size-adjust: 100%;
+  }
+  .wrap { max-width: 1400px; margin: 0 auto; padding: 0 24px; }
+
+  header { border-bottom: 1px solid var(--line); padding: 18px 0; position: sticky; top: 0; background: var(--bg); z-index: 20; }
+  header .wrap { display: flex; justify-content: space-between; align-items: baseline; gap: 16px; flex-wrap: wrap; }
+  h1 { font-size: 18px; font-weight: 700; letter-spacing: .12em; }
+  h1 span { color: var(--acc); }
+  .meta-note { color: var(--dim); font-size: 11px; }
+
+  /* filters */
+  .filters { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; padding: 16px 0; border-bottom: 1px solid var(--line); }
+  .fbtn {
+    background: var(--panel); border: 1px solid var(--line); color: var(--ink);
+    font: inherit; padding: 7px 14px; cursor: pointer; letter-spacing: .04em;
+  }
+  .fbtn .cnt { color: var(--dim); margin-left: 6px; }
+  .fbtn:hover { border-color: var(--acc); }
+  .fbtn.active { background: var(--acc); color: #101312; }
+  .fbtn.active .cnt { color: #3c4423; }
+  .search {
+    background: #0b0d0c; border: 1px solid var(--line); color: var(--ink);
+    font: inherit; padding: 7px 12px; min-width: 200px;
+  }
+  .search:focus { outline: none; border-color: var(--acc); }
+  .search::placeholder { color: var(--dim); }
+  .fam-total { margin-left: auto; border: 1px dashed var(--line); padding: 7px 14px; color: var(--dim); }
+  .fam-total b { color: var(--acc); }
+
+  /* grid */
+  .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 18px; padding: 24px 0 60px; }
+  .card { background: var(--panel); border: 1px solid var(--line); cursor: pointer; display: flex; flex-direction: column; transition: border-color .15s; }
+  .card:hover { border-color: var(--acc); }
+  .thumb { aspect-ratio: 4/3; overflow: hidden; border-bottom: 1px solid var(--line); background: #0b0d0c; }
+  .thumb img { width: 100%; height: 100%; object-fit: cover; object-position: top; display: block; filter: saturate(.92); }
+  .card:hover .thumb img { filter: none; }
+  .card-body { padding: 12px 14px 14px; }
+  .card-site { font-weight: 700; font-size: 16px; }
+  .card-fam { color: var(--acc); font-size: 11px; letter-spacing: .08em; text-transform: uppercase; margin: 3px 0 10px; }
+  .tags { display: flex; flex-wrap: wrap; gap: 6px; }
+  .tag { border: 1px solid var(--line); color: var(--dim); font-size: 11px; padding: 2px 8px; }
+  .tag.more { border-style: dashed; color: var(--acc); }
+
+  .empty { padding: 60px 0; color: var(--dim); max-width: 70ch; }
+  .empty b { color: var(--acc); }
+  .empty code { background: #0b0d0c; border: 1px solid var(--line); padding: 2px 6px; color: var(--ink); }
+
+  /* family screen */
+  .fam-screen { padding: 24px 0 10px; display: none; }
+  .fam-screen.on { display: block; }
+  .fam-screen h2 { font-size: 28px; letter-spacing: .06em; text-transform: uppercase; }
+  .fam-screen h2 b { color: var(--acc); }
+  .fam-sum { color: var(--dim); max-width: 76ch; margin: 10px 0 16px; }
+  .dict-label { font-size: 11px; letter-spacing: .14em; color: var(--dim); text-transform: uppercase; margin-bottom: 8px; }
+  .dict { display: flex; flex-wrap: wrap; gap: 8px; border: 1px solid var(--line); background: var(--panel); padding: 14px; }
+  .dict .tag { color: var(--ink); }
+
+  /* modal */
+  .overlay { position: fixed; inset: 0; background: rgba(6,8,7,.82); display: none; align-items: flex-start; justify-content: center; overflow-y: auto; padding: 40px 16px; z-index: 100; }
+  .overlay.on { display: flex; }
+  .modal { background: var(--panel); border: 1px solid var(--line); max-width: 880px; width: 100%; display: grid; grid-template-columns: 320px 1fr; }
+  .modal .m-img { border-right: 1px solid var(--line); background: #0b0d0c; }
+  .modal .m-img img { width: 100%; height: 100%; object-fit: cover; object-position: top; display: block; }
+  .m-body { padding: 20px 22px; }
+  .m-site { font-size: 22px; font-weight: 700; }
+  .m-fam { color: var(--acc); font-size: 11px; letter-spacing: .1em; text-transform: uppercase; margin: 4px 0 12px; }
+  .m-why { border-left: 2px solid var(--acc); padding: 6px 12px; color: var(--ink); margin-bottom: 16px; }
+  .m-label { font-size: 11px; letter-spacing: .14em; color: var(--dim); text-transform: uppercase; margin: 14px 0 6px; }
+  .recipe { border: 1px dashed var(--line); padding: 12px; color: var(--dim); font-size: 12px; }
+  .recipe .r-head { color: var(--ink); margin-bottom: 8px; }
+  .recipe .r-head em { color: var(--acc); font-style: normal; }
+  .recipe .r-text { color: var(--ink); background: #0b0d0c; padding: 10px; display: block; white-space: pre-wrap; }
+  .m-actions { display: flex; gap: 10px; margin-top: 20px; flex-wrap: wrap; }
+  .abtn { font: inherit; padding: 9px 16px; cursor: pointer; border: 1px solid var(--acc); background: none; color: var(--acc); letter-spacing: .05em; }
+  .abtn.primary { background: var(--acc); color: #101312; font-weight: 700; }
+  .abtn.quiet { border-color: var(--line); color: var(--dim); }
+  .abtn:hover { filter: brightness(1.12); }
+  @media (max-width: 760px) {
+    .wrap { padding: 0 14px; }
+    .modal { grid-template-columns: 1fr; }
+    .modal .m-img { border-right: none; border-bottom: 1px solid var(--line); max-height: 300px; }
+    .fam-total { margin-left: 0; }
+    .search { flex: 1 1 100%; min-width: 0; }
+  }
+</style>
+</head>
+<body>
+<header>
+  <div class="wrap">
+    <h1>БИБЛИОТЕКА <span>ВКУСА</span> // каталог референсов</h1>
+    <span class="meta-note" id="metaNote">папка screens · подхват автоматический</span>
+  </div>
+</header>
+
+<div class="wrap">
+  <nav class="filters" id="filters"></nav>
+  <section class="fam-screen" id="famScreen"></section>
+  <main class="grid" id="grid"></main>
+</div>
+
+<div class="overlay" id="overlay">
+  <div class="modal" id="modal"></div>
+</div>
+
+<script>
+let DATA = null;
+let current = '__all__';
+let query = '';
+
+const $ = id => document.getElementById(id);
+const esc = s => String(s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+
+function entryFor(file) {
+  const m = DATA.meta.screens[file];
+  if (m) return m;
+  return {
+    site: file.replace(/\.[^.]+$/, ''),
+    family: 'неразобрано',
+    why: 'Новый файл из папки screens — ещё не описан. Скажи Claude «разбери библиотеку», чтобы получить семью, теги и рецепт.',
+    tags: ['новый файл']
+  };
+}
+
+function famOf(files) {
+  const map = {};
+  (files || DATA.files).forEach(f => {
+    const fam = entryFor(f).family;
+    (map[fam] = map[fam] || []).push(f);
+  });
+  return map;
+}
+
+function matches(file) {
+  if (!query) return true;
+  const e = entryFor(file);
+  const hay = (e.site + ' ' + e.family + ' ' + e.why + ' ' + e.tags.join(' ')).toLowerCase();
+  return query.split(/\s+/).filter(Boolean).every(w => hay.includes(w));
+}
+
+function brief(file) {
+  const e = entryFor(file);
+  const fam = DATA.meta.families[e.family];
+  return 'БРИФ НА САЙТ В СТИЛЕ «' + e.family.toUpperCase() + '» (референс: ' + e.site + ')\n\n' +
+    'Эстетика: ' + (fam ? fam.summary : '—') + '\n' +
+    'Почему работает: ' + e.why + '\n' +
+    'Словарь приёмов: ' + e.tags.join(', ') + '.\n\n' +
+    'Держи всю страницу в этой эстетике: те же приёмы в каждой секции, ничего из других семей не подмешивать. ' +
+    'Никогда: фиолетовые градиенты, шрифт Inter, карточки в карточках, стеклоблюр без причины.';
+}
+
+function imagePrompt(file) {
+  const e = entryFor(file);
+  const fam = DATA.meta.families[e.family];
+  return (fam ? fam.recipeBase : 'match the reference style') +
+    ', hero image for a website, [ПОДСТАВЬ СВОЙ ОБЪЕКТ], no text, no watermark';
+}
+
+function render() {
+  const visible = DATA.files.filter(matches);
+  const map = famOf(visible);
+  const fams = Object.keys(map);
+
+  // filters
+  let h = '<button class="fbtn' + (current === '__all__' ? ' active' : '') + '" data-f="__all__">все<span class="cnt">' + visible.length + '</span></button>';
+  fams.forEach(f => {
+    h += '<button class="fbtn' + (current === f ? ' active' : '') + '" data-f="' + esc(f) + '">' + esc(f) + '<span class="cnt">' + map[f].length + '</span></button>';
+  });
+  h += '<input class="search" id="search" placeholder="поиск по тегам…" value="' + esc(query) + '">';
+  h += '<span class="fam-total">семей: <b>' + fams.length + '</b></span>';
+  $('filters').innerHTML = h;
+  $('filters').querySelectorAll('.fbtn').forEach(b => b.onclick = () => { current = b.dataset.f; render(); });
+  const s = $('search');
+  s.oninput = () => { query = s.value.trim().toLowerCase(); current = '__all__'; render(); s.focus(); };
+  if (query) { s.focus(); s.setSelectionRange(s.value.length, s.value.length); }
+
+  // family screen (сводный словарь)
+  const fs = $('famScreen');
+  if (current !== '__all__' && map[current]) {
+    const famMeta = DATA.meta.families[current];
+    const allTags = [...new Set(map[current].flatMap(f => entryFor(f).tags))];
+    fs.className = 'fam-screen on';
+    fs.innerHTML = '<h2>семья // <b>' + esc(current) + '</b></h2>' +
+      '<p class="fam-sum">' + esc(famMeta ? famMeta.summary : 'Сводка появится после разбора.') + '</p>' +
+      '<div class="dict-label">сводный словарь стиля · ' + allTags.length + ' тегов</div>' +
+      '<div class="dict">' + allTags.map(t => '<span class="tag">' + esc(t) + '</span>').join('') + '</div>';
+  } else { fs.className = 'fam-screen'; fs.innerHTML = ''; }
+
+  // grid
+  const files = current === '__all__' ? visible : map[current] || [];
+  if (!DATA.files.length) {
+    $('grid').innerHTML = '<div class="empty">Библиотека пустая. Кинь скриншоты сайтов, которые нравятся, в папку <code>screens/</code> ' +
+      'и скажи Claude: <b>«разбери библиотеку»</b> — он разложит их по семьям стилей, придумает теги и рецепты картинок.</div>';
+    return;
+  }
+  $('grid').innerHTML = files.map(f => {
+    const e = entryFor(f);
+    const shown = e.tags.slice(0, 3);
+    const rest = e.tags.length - shown.length;
+    return '<article class="card" data-file="' + esc(f) + '">' +
+      '<div class="thumb"><img loading="lazy" src="screens/' + encodeURIComponent(f) + '" alt=""></div>' +
+      '<div class="card-body">' +
+        '<div class="card-site">' + esc(e.site) + '</div>' +
+        '<div class="card-fam">' + esc(e.family) + '</div>' +
+        '<div class="tags">' + shown.map(t => '<span class="tag">' + esc(t) + '</span>').join('') +
+          (rest > 0 ? '<span class="tag more">+' + rest + '</span>' : '') +
+        '</div>' +
+      '</div></article>';
+  }).join('') || '<div class="empty">Ничего не нашлось по запросу <b>' + esc(query) + '</b>.</div>';
+  $('grid').querySelectorAll('.card').forEach(c => c.onclick = () => openModal(c.dataset.file));
+}
+
+function openModal(file) {
+  const e = entryFor(file);
+  $('modal').innerHTML =
+    '<div class="m-img"><img src="screens/' + encodeURIComponent(file) + '" alt=""></div>' +
+    '<div class="m-body">' +
+      '<div class="m-site">' + esc(e.site) + '</div>' +
+      '<div class="m-fam">семья: ' + esc(e.family) + '</div>' +
+      '<div class="m-why">' + esc(e.why) + '</div>' +
+      '<div class="m-label">полный словарь · ' + e.tags.length + '</div>' +
+      '<div class="tags">' + e.tags.map(t => '<span class="tag">' + esc(t) + '</span>').join('') + '</div>' +
+      '<div class="m-label">рецепт картинки</div>' +
+      '<div class="recipe">' +
+        '<div class="r-head">шаблон: <em>[ПОДСТАВЬ СВОЙ ОБЪЕКТ]</em> → генератор картинок · качество <em>2K</em></div>' +
+        '<code class="r-text">' + esc(imagePrompt(file)) + '</code>' +
+      '</div>' +
+      '<div class="m-actions">' +
+        '<button class="abtn primary" id="copyBrief">скопировать бриф</button>' +
+        '<button class="abtn" id="copyImg">скопировать промпт картинки</button>' +
+        '<button class="abtn quiet" id="closeM">закрыть</button>' +
+      '</div>' +
+    '</div>';
+  $('overlay').className = 'overlay on';
+  const flash = (btn, t) => { const o = btn.textContent; btn.textContent = t; setTimeout(() => btn.textContent = o, 900); };
+  const copy = (text, btn) => {
+    if (navigator.clipboard && window.isSecureContext) navigator.clipboard.writeText(text);
+    else { const ta = document.createElement('textarea'); ta.value = text; document.body.appendChild(ta); ta.select(); document.execCommand('copy'); ta.remove(); }
+    flash(btn, 'скопировано ✓');
+  };
+  $('copyBrief').onclick = ev => copy(brief(file), ev.target);
+  $('copyImg').onclick = ev => copy(imagePrompt(file), ev.target);
+  $('closeM').onclick = () => $('overlay').className = 'overlay';
+}
+$('overlay').onclick = e => { if (e.target === $('overlay')) $('overlay').className = 'overlay'; };
+document.addEventListener('keydown', e => { if (e.key === 'Escape') $('overlay').className = 'overlay'; });
+
+// Локально данные отдаёт server.js, на GitHub Pages — статический data.json
+fetch('/api/data')
+  .then(r => { if (!r.ok) throw 0; return r.json(); })
+  .catch(() => fetch('data.json?v=' + Date.now()).then(r => r.json()).then(d => {
+    $('metaNote').textContent = 'опубликованная копия · обновляется при пуше';
+    return d;
+  }))
+  .then(d => { DATA = d; render(); })
+  .catch(() => { $('grid').innerHTML = '<div class="empty">Не удалось загрузить данные. Запусти <code>node server.js</code> в папке taste.</div>'; });
+</script>
+</body>
+</html>
