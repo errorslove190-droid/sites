@@ -1,0 +1,338 @@
+/* ============================================================
+   Суюхан — монтаж и моушен-дизайн
+   Паспорт стиля: style.md. Правки сверять с ним.
+   ============================================================ */
+
+:root {
+  --void: #0a0a0b;
+  --panel: #131316;
+  --line: #26262b;
+  --line-2: #3a3a41;
+  --ink: #edece8;
+  --dim: #8e8e88;
+  --acc: #ff4d1c;
+
+  --h1: clamp(38px, 7.2vw, 92px);
+  --h2: clamp(28px, 4.4vw, 54px);
+  --h3: clamp(18px, 2vw, 22px);
+  --body: clamp(15px, 1.15vw, 17px);
+
+  --gap: clamp(20px, 4vw, 48px);
+  --pad: clamp(18px, 5vw, 72px);
+  --sec: clamp(72px, 11vw, 168px);
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+
+body {
+  background: var(--void);
+  color: var(--ink);
+  font-family: 'Onest', 'Segoe UI', system-ui, sans-serif;
+  font-size: var(--body);
+  line-height: 1.6;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1, h2, h3, .mark, .price b, .tc {
+  font-family: 'Unbounded', 'Segoe UI', system-ui, sans-serif;
+  font-weight: 700;
+  line-height: 1.02;
+  letter-spacing: -0.02em;
+}
+
+em { font-style: normal; color: var(--acc); }
+a { color: inherit; text-decoration: none; }
+
+::selection { background: var(--acc); color: #0a0a0b; }
+
+:focus-visible { outline: 2px solid var(--acc); outline-offset: 3px; }
+
+.skip {
+  position: absolute; left: -9999px; top: 0; z-index: 200;
+  background: var(--acc); color: #0a0a0b; padding: 10px 16px; font-weight: 600;
+}
+.skip:focus { left: 0; }
+
+/* ---------------- шапка ---------------- */
+
+.top {
+  position: sticky; top: 0; z-index: 90;
+  display: flex; align-items: center; gap: var(--gap);
+  padding: 14px var(--pad);
+  background: rgba(10, 10, 11, .88);
+  border-bottom: 1px solid var(--line);
+  backdrop-filter: blur(8px);
+}
+.mark { font-size: 15px; letter-spacing: .16em; text-transform: uppercase; }
+.mark span { color: var(--acc); }
+
+.nav { display: flex; gap: 26px; margin-left: auto; font-size: 14px; color: var(--dim); }
+.nav a { position: relative; padding: 2px 0; transition: color .2s; }
+.nav a::after {
+  content: ''; position: absolute; left: 0; bottom: -2px; height: 1px; width: 0;
+  background: var(--acc); transition: width .25s;
+}
+.nav a:hover { color: var(--ink); }
+.nav a:hover::after { width: 100%; }
+
+/* ---------------- кнопки ---------------- */
+
+.btn {
+  display: inline-flex; align-items: center; justify-content: center;
+  background: var(--acc); color: #0a0a0b;
+  font-weight: 600; font-size: 15px;
+  padding: 13px 26px; border: 1px solid var(--acc);
+  transition: background .2s, color .2s, transform .12s;
+}
+.btn:hover { background: transparent; color: var(--acc); }
+.btn:active { transform: translateY(1px); }
+.btn--sm { padding: 11px 20px; font-size: 14px; }
+.btn--big { padding: 18px 40px; font-size: 17px; }
+.btn--ghost { background: transparent; color: var(--ink); border-color: var(--line-2); }
+.btn--ghost:hover { border-color: var(--acc); color: var(--acc); }
+.top .btn--sm { margin-left: 0; }
+
+/* ---------------- hero ---------------- */
+
+.hero {
+  display: grid; grid-template-columns: 1.05fr .95fr; gap: var(--gap);
+  align-items: center;
+  padding: clamp(48px, 8vw, 110px) var(--pad) clamp(40px, 6vw, 90px);
+}
+
+.eyebrow {
+  display: inline-flex; align-items: center; gap: 10px;
+  font-size: 12px; letter-spacing: .22em; text-transform: uppercase; color: var(--dim);
+  margin-bottom: 22px;
+}
+.dot { width: 7px; height: 7px; background: var(--acc); display: block; }
+
+h1 { font-size: var(--h1); }
+
+.lead {
+  max-width: 46ch; color: var(--dim); margin: 26px 0 34px;
+  font-size: clamp(16px, 1.4vw, 19px);
+}
+
+.hero__cta { display: flex; flex-wrap: wrap; gap: 12px; }
+
+.facts {
+  display: flex; flex-wrap: wrap; gap: clamp(24px, 4vw, 56px);
+  margin-top: clamp(36px, 5vw, 64px);
+  padding-top: 26px; border-top: 1px solid var(--line);
+}
+.facts dt { font-size: 12px; letter-spacing: .12em; text-transform: uppercase; color: var(--dim); }
+.facts dd { font-size: 30px; font-weight: 600; margin-top: 4px; }
+
+/* экран шоурила */
+
+.reel { width: 100%; }
+.reel__frame {
+  position: relative; aspect-ratio: 16 / 9;
+  background: var(--panel);
+  border: 1px solid var(--line);
+  display: grid; place-items: center;
+  overflow: hidden;
+}
+.reel__frame::before {
+  content: ''; position: absolute; inset: 0;
+  background:
+    repeating-linear-gradient(90deg, transparent 0 38px, rgba(255,255,255,.025) 38px 39px),
+    radial-gradient(120% 90% at 50% 0%, rgba(255,77,28,.10), transparent 62%);
+}
+.reel figcaption {
+  display: flex; justify-content: space-between;
+  font-size: 12px; letter-spacing: .14em; text-transform: uppercase; color: var(--dim);
+  margin-top: 12px;
+}
+
+.tc {
+  position: absolute; top: 14px; left: 16px; z-index: 2;
+  font-size: 12px; letter-spacing: .08em; color: var(--acc);
+  font-variant-numeric: tabular-nums;
+}
+
+.play {
+  position: relative; z-index: 2;
+  width: 78px; height: 78px; border-radius: 50%;
+  border: 1px solid var(--acc); background: rgba(10,10,11,.55);
+  cursor: pointer; transition: background .2s, transform .2s;
+}
+.play::after {
+  content: ''; position: absolute; top: 50%; left: 54%; transform: translate(-50%, -50%);
+  border-left: 17px solid var(--acc); border-top: 11px solid transparent; border-bottom: 11px solid transparent;
+  transition: border-color .2s;
+}
+.play:hover { background: var(--acc); transform: scale(1.05); }
+.play:hover::after { border-left-color: #0a0a0b; }
+
+.slot__note {
+  position: absolute; z-index: 2; bottom: 14px; left: 16px;
+  font-size: 11px; letter-spacing: .16em; text-transform: uppercase;
+  color: var(--dim); border: 1px dashed var(--line-2); padding: 4px 9px;
+}
+.slot .reel__frame, .slot .work__frame { border-style: dashed; }
+.slot--empty { animation: nudge .4s; }
+@keyframes nudge { 25% { transform: translateX(-5px); } 75% { transform: translateX(5px); } }
+
+/* ---------------- бегущая строка ---------------- */
+
+.strip {
+  border-top: 1px solid var(--line); border-bottom: 1px solid var(--line);
+  overflow: hidden; padding: 16px 0; background: var(--panel);
+}
+.strip__track {
+  display: flex; align-items: center; gap: 22px; width: max-content;
+  animation: run 46s linear infinite;
+  font-size: 13px; letter-spacing: .18em; text-transform: uppercase; color: var(--dim);
+  white-space: nowrap;
+}
+.strip__track i { width: 5px; height: 5px; background: var(--acc); display: block; }
+@keyframes run { to { transform: translateX(-50%); } }
+@media (prefers-reduced-motion: reduce) { .strip__track { animation: none; } }
+
+/* ---------------- секции ---------------- */
+
+.sec { padding: var(--sec) var(--pad) 0; }
+
+.sec__head {
+  display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: var(--gap);
+  align-items: end; margin-bottom: clamp(34px, 5vw, 62px);
+  padding-bottom: 22px; border-bottom: 1px solid var(--line);
+}
+.sec__head h2 { font-size: var(--h2); }
+.sec__head p { color: var(--dim); max-width: 44ch; }
+
+/* работы */
+
+.works { display: grid; grid-template-columns: repeat(2, 1fr); gap: var(--gap); }
+
+.work { cursor: pointer; }
+.work__frame {
+  position: relative; aspect-ratio: 16 / 10;
+  background: var(--panel); border: 1px solid var(--line);
+  overflow: hidden; transition: border-color .2s;
+}
+.work__frame::before {
+  content: var(--n); position: absolute; top: 12px; left: 16px; z-index: 2;
+  font-family: 'Unbounded', system-ui, sans-serif;
+  font-size: 13px; color: var(--dim); letter-spacing: .1em;
+}
+.work__frame::after {
+  content: ''; position: absolute; inset: 0;
+  background: repeating-linear-gradient(90deg, transparent 0 46px, rgba(255,255,255,.02) 46px 47px);
+}
+.work:hover .work__frame { border-color: var(--acc); }
+
+/* «плейхед» — линия бежит за курсором, как при перемотке клипа */
+.head {
+  position: absolute; top: 0; bottom: 0; left: var(--x, 50%); width: 1px; z-index: 3;
+  background: var(--acc); opacity: 0; transition: opacity .2s;
+}
+.head::before {
+  content: ''; position: absolute; top: 0; left: -4px;
+  border: 4px solid transparent; border-top: 7px solid var(--acc);
+}
+.work:hover .head { opacity: 1; }
+
+.work h3 { font-size: var(--h3); margin: 16px 0 5px; }
+.work__role { font-size: 13px; letter-spacing: .1em; text-transform: uppercase; color: var(--dim); }
+
+/* услуги */
+
+.services { list-style: none; display: grid; grid-template-columns: repeat(2, 1fr); gap: 1px; background: var(--line); border: 1px solid var(--line); }
+.services li { background: var(--void); padding: clamp(26px, 3.4vw, 46px); transition: background .2s; }
+.services li:hover { background: var(--panel); }
+.services h3 { font-size: var(--h3); margin-bottom: 12px; }
+.services p { color: var(--dim); max-width: 40ch; }
+.price { margin-top: 20px; color: var(--ink) !important; font-size: 14px; letter-spacing: .06em; }
+.price b { font-size: 26px; color: var(--acc); font-weight: 700; }
+
+/* процесс */
+
+.steps { list-style: none; counter-reset: s; display: grid; grid-template-columns: repeat(4, 1fr); gap: var(--gap); }
+.steps li { counter-increment: s; border-top: 2px solid var(--line); padding-top: 20px; position: relative; }
+.steps li::before {
+  content: '0' counter(s);
+  font-family: 'Unbounded', system-ui, sans-serif; font-size: 12px; letter-spacing: .1em;
+  color: var(--acc); display: block; margin-bottom: 14px;
+}
+.steps li::after {
+  content: ''; position: absolute; top: -2px; left: 0; height: 2px; width: 0; background: var(--acc);
+  transition: width .5s ease;
+}
+.steps li.on::after { width: 100%; }
+.steps h3 { font-size: var(--h3); margin-bottom: 8px; }
+.steps p { color: var(--dim); }
+
+/* призыв */
+
+.cta {
+  margin-top: var(--sec);
+  padding: clamp(72px, 10vw, 150px) var(--pad);
+  border-top: 1px solid var(--line);
+  text-align: center;
+  background: radial-gradient(90% 130% at 50% 100%, rgba(255,77,28,.13), transparent 66%);
+}
+.cta h2 { font-size: var(--h2); }
+.cta p { color: var(--dim); max-width: 48ch; margin: 20px auto 36px; }
+.cta__row { display: flex; flex-wrap: wrap; gap: 14px; justify-content: center; }
+
+/* подвал */
+
+.foot {
+  display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap;
+  padding: 26px var(--pad); border-top: 1px solid var(--line);
+  font-size: 13px; color: var(--dim);
+}
+
+/* ---------------- плеер ---------------- */
+
+.player {
+  position: fixed; inset: 0; z-index: 150;
+  background: rgba(6, 6, 7, .93);
+  display: grid; place-items: center; padding: var(--pad);
+}
+.player[hidden] { display: none; }
+.player__box { width: min(1100px, 100%); aspect-ratio: 16 / 9; background: #000; border: 1px solid var(--line); }
+.player__box iframe { width: 100%; height: 100%; border: 0; display: block; }
+.player__close {
+  position: absolute; top: 18px; right: 22px;
+  background: none; border: 1px solid var(--line-2); color: var(--ink);
+  width: 42px; height: 42px; font-size: 22px; line-height: 1; cursor: pointer;
+  transition: border-color .2s, color .2s;
+}
+.player__close:hover { border-color: var(--acc); color: var(--acc); }
+
+/* ---------------- появление при скролле ---------------- */
+
+.rise { opacity: 0; transform: translateY(22px); transition: opacity .6s ease, transform .6s ease; }
+.rise.on { opacity: 1; transform: none; }
+@media (prefers-reduced-motion: reduce) {
+  .rise { opacity: 1; transform: none; transition: none; }
+}
+
+/* ---------------- адаптив ---------------- */
+
+@media (max-width: 1000px) {
+  .hero { grid-template-columns: 1fr; }
+  .steps { grid-template-columns: repeat(2, 1fr); }
+  .sec__head { grid-template-columns: 1fr; align-items: start; }
+}
+
+@media (max-width: 640px) {
+  .nav { display: none; }
+  .top .btn--sm { margin-left: auto; }
+  .works, .services { grid-template-columns: 1fr; }
+  .steps { grid-template-columns: 1fr; gap: 26px; }
+  .facts { gap: 22px 32px; }
+  .facts dd { font-size: 24px; }
+  .play { width: 60px; height: 60px; }
+  .play::after { border-left-width: 14px; border-top-width: 9px; border-bottom-width: 9px; }
+  .lead { margin: 18px 0 26px; }
+  .btn--big { padding: 15px 28px; font-size: 16px; }
+}
