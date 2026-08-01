@@ -11,21 +11,23 @@
 <meta property="og:description" content="Reels и Shorts, ролики для YouTube, моушен-графика и титры. Смотреть работы и цены.">
 <meta property="og:image" content="img/og.jpg">
 <meta property="og:locale" content="ru_RU">
-<meta name="theme-color" content="#0a0a0b">
+<meta name="theme-color" content="#07080a">
 
-<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' fill='%230a0a0b'/><path d='M12 9l12 7-12 7z' fill='%23ff4d1c'/></svg>">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><defs><linearGradient id='c' x1='0' y1='0' x2='0' y2='1'><stop offset='0' stop-color='%23ffffff'/><stop offset='.5' stop-color='%238e97a2'/><stop offset='1' stop-color='%23e9eef3'/></linearGradient></defs><rect width='32' height='32' fill='%2307080a'/><path d='M12 9l12 7-12 7z' fill='url(%23c)'/></svg>">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Onest:wght@400;500;600&family=Unbounded:wght@500;700&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant:ital,wght@1,500&family=Onest:wght@400;500;600&family=Unbounded:wght@500;700&display=swap">
 <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
 
+<div class="grain" aria-hidden="true"></div>
+
 <a class="skip" href="#works">К работам</a>
 
 <header class="top">
-  <a class="mark" href="#top"><span>SUYU</span>KHAN</a>
+  <a class="mark" href="#top">SUYUKHAN</a>
   <nav class="nav">
     <a href="#works">работы</a>
     <a href="#services">услуги</a>
@@ -41,7 +43,7 @@
   <section class="hero">
     <div class="hero__text">
       <p class="eyebrow"><span class="dot"></span>монтаж · моушен-дизайн</p>
-      <h1>Собираю ролик так,<br>чтобы его <em>досмотрели</em></h1>
+      <h1>Собираю ролик так,<br>чтобы его <em class="irid">досмотрели</em></h1>
       <p class="lead">
         Режу, чищу звук, ставлю графику и титры. Из сырого материала — готовый ролик,
         который можно публиковать в тот же день.
@@ -58,15 +60,19 @@
       </dl>
     </div>
 
-    <!-- СЛОТ: шоурил. data-embed="" → вставить ссылку на видео -->
-    <figure class="reel slot" data-embed="" aria-label="Шоурил">
-      <div class="reel__frame">
-        <span class="tc" id="tc">00:00:00:00</span>
-        <button class="play" type="button" aria-label="Смотреть шоурил"></button>
-        <span class="slot__note">слот: шоурил 60–90 сек</span>
-      </div>
-      <figcaption>Шоурил · 2026</figcaption>
-    </figure>
+    <div class="stage">
+      <div class="chrome" aria-hidden="true"><span></span></div>
+
+      <!-- СЛОТ: шоурил. data-embed="" → вставить ссылку на видео -->
+      <figure class="reel slot" data-embed="" aria-label="Шоурил">
+        <div class="reel__frame">
+          <span class="tc" id="tc">00:00:00:00</span>
+          <button class="play" type="button" aria-label="Смотреть шоурил"></button>
+          <span class="slot__note">слот: шоурил 60–90 сек</span>
+        </div>
+        <figcaption><span>Шоурил</span><span>2026</span></figcaption>
+      </figure>
+    </div>
   </section>
 
   <!-- ============ БЕГУЩАЯ СТРОКА ============ -->
@@ -92,7 +98,7 @@
     <div class="works">
       <!-- ЗАМЕНИТЬ каждый слот:
            data-embed="https://www.youtube.com/embed/ID"  (для VK — ссылка из «Поделиться → Экспортировать»)
-           название, роль, теги -->
+           название, роль -->
       <article class="work slot" data-embed="" style="--n:'01'">
         <div class="work__frame"><span class="head"></span><span class="slot__note">слот 01 · вставь ролик</span></div>
         <h3>Название ролика</h3>
@@ -143,22 +149,22 @@
       <li>
         <h3>Reels и Shorts</h3>
         <p>Вертикаль из вашего материала: динамичная склейка, субтитры, звук, обложка.</p>
-        <p class="price">от <b>—</b> ₽ за ролик</p>
+        <p class="price">от <b class="irid">—</b> ₽ за ролик</p>
       </li>
       <li>
         <h3>Ролики для YouTube</h3>
         <p>Длинный монтаж: структура, перебивки, графика, чистый звук, цвет.</p>
-        <p class="price">от <b>—</b> ₽ за минуту</p>
+        <p class="price">от <b class="irid">—</b> ₽ за минуту</p>
       </li>
       <li>
         <h3>Моушен-графика</h3>
         <p>Титры, инфографика, анимация интерфейсов и схем под ваш фирменный стиль.</p>
-        <p class="price">от <b>—</b> ₽ за сцену</p>
+        <p class="price">от <b class="irid">—</b> ₽ за сцену</p>
       </li>
       <li>
         <h3>Ведение канала</h3>
         <p>Постоянный монтаж пакетом: столько-то роликов в месяц по фиксированной цене.</p>
-        <p class="price">от <b>—</b> ₽ в месяц</p>
+        <p class="price">от <b class="irid">—</b> ₽ в месяц</p>
       </li>
     </ul>
   </section>
@@ -192,7 +198,8 @@
 
   <!-- ============ КОНТАКТ ============ -->
   <section id="contact" class="cta">
-    <h2>Есть материал — <em>пишите</em></h2>
+    <div class="cta__glow" aria-hidden="true"></div>
+    <h2>Есть материал — <em class="irid">пишите</em></h2>
     <p>Отвечаю в течение дня. Скиньте пример того, что хотите получить, — скажу цену и срок.</p>
     <div class="cta__row">
       <a class="btn btn--big" href="https://t.me/username" target="_blank" rel="noopener">Telegram</a>
@@ -205,7 +212,7 @@
 
 <footer class="foot">
   <span>Суюхан · монтаж и моушен-дизайн</span>
-  <span class="foot__year">2026</span>
+  <span>2026</span>
 </footer>
 
 <!-- плеер -->
