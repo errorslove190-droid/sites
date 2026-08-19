@@ -586,6 +586,19 @@ async function init() {
     btn.addEventListener('click', () => { switchScreen(btn.dataset.screen); haptic('light'); });
   });
 
+  /* Распознать фото внутри мини-приложения нечем: считает Claude в чате.
+     Поэтому кнопка просто закрывает окно — Михаил оказывается в переписке с ботом,
+     фоткает тарелку, и ответом приходит кнопка «записать в трекер». */
+  document.getElementById('shot').addEventListener('click', () => {
+    haptic('medium');
+    if (tg && tg.close) {
+      toast('Пришли фото боту — посчитаю');
+      setTimeout(() => tg.close(), 700);
+    } else {
+      toast('Открой трекер из Telegram, тогда сработает');
+    }
+  });
+
   document.getElementById('prev-day').addEventListener('click', () => shiftDay(-1));
   document.getElementById('next-day').addEventListener('click', () => shiftDay(1));
   document.getElementById('add-weight').addEventListener('click', askWeight);

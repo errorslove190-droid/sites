@@ -43,6 +43,12 @@
       <path d="M10 54h44M18 54V34M31 54V18M44 54V28"/>
     </g>
   </symbol>
+  <symbol id="ic-camera" viewBox="0 0 64 64">
+    <g fill="none" stroke="currentColor" stroke-width="3" stroke-linejoin="round">
+      <path d="M6 20h11l5-7h20l5 7h11a2 2 0 0 1 2 2v26a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V22a2 2 0 0 1 2-2z"/>
+      <circle cx="32" cy="34" r="11"/>
+    </g>
+  </symbol>
   <symbol id="ic-user" viewBox="0 0 64 64">
     <g fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
       <circle cx="32" cy="23" r="10"/>
@@ -97,6 +103,15 @@
       <b id="m-c">0 г</b><span class="cap">углеводы</span><span class="goal" id="g-c">из 430</span>
     </button>
   </section>
+
+  <button class="shot" id="shot">
+    <svg class="shot-ic"><use href="#ic-camera"/></svg>
+    <span>
+      <b>Сфоткать еду</b>
+      <small>пришлю тарелку боту — он посчитает сам</small>
+    </span>
+    <em>›</em>
+  </button>
 
   <p class="advice" id="advice"></p>
 
