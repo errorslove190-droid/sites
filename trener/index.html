@@ -64,6 +64,30 @@ li{margin:7px 0}
 
 footer{margin-top:64px;padding-top:20px;border-top:1px solid var(--line);color:var(--grey);font-size:14px}
 
+/* интерактив */
+.open-app{
+  display:block;width:100%;text-align:center;text-decoration:none;
+  background:var(--ink);color:var(--lime);border:0;padding:16px;margin:24px 0 0;
+  font:600 13px/1 Oswald,sans-serif;letter-spacing:.18em;text-transform:uppercase;cursor:pointer;
+}
+.day-top{cursor:pointer;user-select:none;position:relative;padding-right:44px}
+.day-top::after{content:"–";position:absolute;right:16px;top:50%;transform:translateY(-50%);font:600 20px/1 Oswald,sans-serif;color:var(--grey)}
+.day.collapsed .day-top::after{content:"+"}
+.day.collapsed table{display:none}
+.check li{cursor:pointer;user-select:none;transition:color .15s}
+.check li:hover::before{background:var(--lime)}
+.check li.on{color:var(--grey);text-decoration:line-through}
+.check li.on::before{background:var(--lime)}
+.calc{display:flex;gap:10px;align-items:flex-end;flex-wrap:wrap;margin-top:14px}
+.calc label{font:600 11px/1.6 Oswald,sans-serif;letter-spacing:.14em;text-transform:uppercase;color:var(--grey);display:block}
+.calc input{
+  width:110px;border:1px solid var(--line);background:var(--paper);color:var(--ink);
+  padding:11px 12px;font:400 17px/1 Onest,sans-serif;
+}
+.calc input:focus{outline:0;border-color:var(--ink)}
+.calc-out{font:500 15px/1.4 Oswald,sans-serif;letter-spacing:.04em;padding-bottom:11px}
+.calc-out b{background:var(--lime);padding:0 .2em}
+
 @media(max-width:560px){
   .stats{grid-template-columns:repeat(2,1fr)}
   .macros{grid-template-columns:repeat(2,1fr)}
@@ -86,6 +110,7 @@ footer{margin-top:64px;padding-top:20px;border-top:1px solid var(--line);color:v
     <div class="stat"><b>3</b><span>тренировки</span></div>
     <div class="stat"><b>60</b><span>кг к лету</span></div>
   </div>
+  <a class="open-app" href="https://t.me/Manager_miha_bot/trener">Открыть трекер в Telegram</a>
 </header>
 
 <h2>Где ты <em>сейчас</em></h2>
@@ -108,6 +133,14 @@ footer{margin-top:64px;padding-top:20px;border-top:1px solid var(--line);color:v
 </div>
 
 <p class="muted">Взвешиваться раз в неделю, утром, натощак, после туалета. Растёт на 0,3–0,5 кг в неделю — всё верно. Три недели стоит на месте — добавляешь 200 ккал и не думаешь.</p>
+
+<div class="calc">
+  <div>
+    <label for="w-now">вес сейчас, кг</label>
+    <input id="w-now" type="number" inputmode="decimal" step="0.1" value="54.5">
+  </div>
+  <div class="calc-out" id="calc-out"></div>
+</div>
 
 <h3>Как это выглядит в еде</h3>
 <table>
@@ -199,5 +232,52 @@ footer{margin-top:64px;padding-top:20px;border-top:1px solid var(--line);color:v
 </footer>
 
 </div>
+
+<script>
+/* Страница помнит отметки и свёрнутые дни между заходами — localStorage хватает,
+   это личная страница, а не общий трекер. */
+(function () {
+  var LS = window.localStorage;
+
+  document.querySelectorAll('.check li').forEach(function (li, i) {
+    var key = 'plan_check_' + i;
+    if (LS.getItem(key) === '1') li.classList.add('on');
+    li.addEventListener('click', function () {
+      li.classList.toggle('on');
+      LS.setItem(key, li.classList.contains('on') ? '1' : '0');
+    });
+  });
+
+  document.querySelectorAll('.day').forEach(function (day, i) {
+    var key = 'plan_day_' + i;
+    if (LS.getItem(key) === '1') day.classList.add('collapsed');
+    day.querySelector('.day-top').addEventListener('click', function () {
+      day.classList.toggle('collapsed');
+      LS.setItem(key, day.classList.contains('collapsed') ? '1' : '0');
+    });
+  });
+
+  var input = document.getElementById('w-now');
+  var out = document.getElementById('calc-out');
+
+  function recount() {
+    var w = parseFloat(input.value);
+    if (isNaN(w) || w < 35 || w > 200) { out.textContent = ''; return; }
+    /* Миффлин–Сан Жеор для 18 лет и 173 см, коэффициент активности 1,5, сверху +400 */
+    var bmr = 10 * w + 6.25 * 173 - 5 * 18 + 5;
+    var kcal = Math.round((bmr * 1.5 + 400) / 10) * 10;
+    var prot = Math.round(w * 2 / 5) * 5;
+    var fat = Math.round(w * 1.1 / 5) * 5;
+    var carb = Math.round((kcal - prot * 4 - fat * 9) / 4 / 5) * 5;
+    out.innerHTML = 'норма: <b>' + kcal + ' ккал</b> · белок ' + prot + ' · жиры ' + fat + ' · углеводы ' + carb;
+    LS.setItem('plan_weight', w);
+  }
+
+  var saved = LS.getItem('plan_weight');
+  if (saved) input.value = saved;
+  input.addEventListener('input', recount);
+  recount();
+})();
+</script>
 </body>
 </html>

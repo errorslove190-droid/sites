@@ -302,22 +302,38 @@ function closeSheet() {
 function consumeStartParam() {
   const raw = (tg && tg.initDataUnsafe && tg.initDataUnsafe.start_param) ||
               new URLSearchParams(location.search).get('startapp');
-  if (!raw || raw[0] !== 'm') return;
+  if (!raw) return;
 
+  /* d_<base64url(JSON)> — сразу несколько приёмов, когда Claude заносит день целиком */
+  if (raw.slice(0, 2) === 'd_') {
+    const list = fromB64(raw.slice(2));
+    let items = null;
+    try { items = JSON.parse(list); } catch (e) { return; }
+    if (!Array.isArray(items)) return;
+    const known = new Set(state.meals.map(m => m.n));
+    items.forEach(it => { if (!known.has(it.n)) addMeal(it); });
+    return;
+  }
+
+  if (raw[0] !== 'm') return;
   const parts = raw.split('_');
   if (parts.length < 5) return;
 
   const [, kcal, p, f, c] = parts;
-  let name = 'Из чата';
-  if (parts[5]) {
-    try {
-      let b64 = parts[5].replace(/-/g, '+').replace(/_/g, '/');
-      while (b64.length % 4) b64 += '=';          // atob не любит обрезанный хвост
-      const bytes = Uint8Array.from(atob(b64), ch => ch.charCodeAt(0));
-      name = new TextDecoder().decode(bytes);
-    } catch (e) { /* оставляем «Из чата» */ }
-  }
+  const name = parts[5] ? (fromB64(parts[5]) || 'Из чата') : 'Из чата';
   addMeal({ n: name, kcal: +kcal, p: +p, f: +f, c: +c });
+}
+
+/* base64url → строка; пусто, если мусор */
+function fromB64(s) {
+  try {
+    let b64 = s.replace(/-/g, '+').replace(/_/g, '/');
+    while (b64.length % 4) b64 += '=';           // atob не любит обрезанный хвост
+    const bytes = Uint8Array.from(atob(b64), ch => ch.charCodeAt(0));
+    return new TextDecoder().decode(bytes);
+  } catch (e) {
+    return '';
+  }
 }
 
 /* ---------- мелочи ---------- */
