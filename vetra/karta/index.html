@@ -1,0 +1,428 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Карта продукта Ветра</title>
+<style>
+  :root {
+    --ground: #F5F8FC;
+    --surface: #FFFFFF;
+    --ink: #101E2B;
+    --ink-soft: #4E6274;
+    --ink-faint: #7C8EA0;
+    --line: #DAE4F0;
+    --line-soft: #EAF0F8;
+    --brand: #1F63BC;
+    --brand-bright: #2C78D5;
+    --brand-wash: #E8F0FB;
+    --ok: #1B6B45;
+    --ok-wash: #E2F1EA;
+    --half: #8A5A00;
+    --half-wash: #F8EEDC;
+    --gap: #A8342A;
+    --gap-wash: #FAE9E7;
+    --mono: ui-monospace, "Cascadia Mono", "Consolas", "Roboto Mono", monospace;
+    --sans: system-ui, "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --ground: #0D151E;
+      --surface: #131F2B;
+      --ink: #E8EEF5;
+      --ink-soft: #A3B4C4;
+      --ink-faint: #768899;
+      --line: #26374A;
+      --line-soft: #1C2C3C;
+      --brand: #6FA6E8;
+      --brand-bright: #8DBBF0;
+      --brand-wash: #17293D;
+      --ok: #6FCC9F;
+      --ok-wash: #142C22;
+      --half: #E0AC5A;
+      --half-wash: #2E2314;
+      --gap: #EE8779;
+      --gap-wash: #331A17;
+    }
+  }
+
+  :root[data-theme="dark"] {
+    --ground: #0D151E;
+    --surface: #131F2B;
+    --ink: #E8EEF5;
+    --ink-soft: #A3B4C4;
+    --ink-faint: #768899;
+    --line: #26374A;
+    --line-soft: #1C2C3C;
+    --brand: #6FA6E8;
+    --brand-bright: #8DBBF0;
+    --brand-wash: #17293D;
+    --ok: #6FCC9F;
+    --ok-wash: #142C22;
+    --half: #E0AC5A;
+    --half-wash: #2E2314;
+    --gap: #EE8779;
+    --gap-wash: #331A17;
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    background: var(--ground);
+    color: var(--ink);
+    font-family: var(--sans);
+    font-size: 17px;
+    line-height: 1.6;
+    margin: 0;
+    padding: 0 20px 96px;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  .wrap { max-width: 760px; margin: 0 auto; display: flex; flex-direction: column; gap: 56px; }
+
+  header { padding-top: 56px; display: flex; flex-direction: column; gap: 20px; }
+
+  .eyebrow {
+    font-size: 12px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+    font-weight: 600;
+  }
+
+  h1 {
+    font-size: clamp(32px, 8vw, 46px);
+    line-height: 1.08;
+    letter-spacing: -0.025em;
+    font-weight: 700;
+    margin: 0;
+    text-wrap: balance;
+  }
+
+  .lede {
+    font-size: clamp(18px, 4.4vw, 21px);
+    line-height: 1.5;
+    color: var(--ink-soft);
+    margin: 0;
+    max-width: 60ch;
+  }
+
+  .lede strong { color: var(--ink); font-weight: 650; }
+
+  .score {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2px;
+    background: var(--line);
+    border: 1px solid var(--line);
+  }
+
+  .score div { background: var(--surface); padding: 18px 14px 16px; display: flex; flex-direction: column; gap: 4px; }
+
+  .score b {
+    font-size: clamp(30px, 8vw, 40px);
+    line-height: 1;
+    font-weight: 700;
+    font-variant-numeric: tabular-nums;
+    letter-spacing: -0.03em;
+  }
+
+  .score span { font-size: 13px; line-height: 1.35; color: var(--ink-soft); }
+  .score i { font-style: normal; font-size: 12px; color: var(--ink-faint); }
+  .s-ok b { color: var(--ok); }
+  .s-half b { color: var(--half); }
+  .s-gap b { color: var(--gap); }
+
+  section { display: flex; flex-direction: column; gap: 22px; }
+
+  h2 {
+    font-size: clamp(23px, 5.5vw, 29px);
+    line-height: 1.18;
+    letter-spacing: -0.02em;
+    font-weight: 700;
+    margin: 0;
+    padding-bottom: 14px;
+    border-bottom: 2px solid var(--ink);
+    text-wrap: balance;
+  }
+
+  p { margin: 0; max-width: 66ch; }
+  .muted { color: var(--ink-soft); }
+  .small { font-size: 15px; }
+
+  .finds { display: flex; flex-direction: column; gap: 34px; }
+  .find { display: flex; flex-direction: column; gap: 12px; }
+
+  .find-tag {
+    align-self: flex-start;
+    font-family: var(--mono);
+    font-size: 11.5px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--gap);
+    background: var(--gap-wash);
+    padding: 5px 10px;
+    font-weight: 600;
+  }
+
+  .find h3 {
+    font-size: clamp(20px, 5vw, 24px);
+    line-height: 1.25;
+    letter-spacing: -0.015em;
+    font-weight: 680;
+    margin: 0;
+    text-wrap: balance;
+  }
+
+  .find p { color: var(--ink-soft); }
+  .find p strong { color: var(--ink); font-weight: 650; }
+
+  .verdict {
+    background: var(--brand-wash);
+    padding: 14px 16px;
+    font-size: 15.5px;
+    line-height: 1.5;
+    color: var(--ink);
+    border-top: 2px solid var(--brand);
+  }
+
+  .verdict b { font-weight: 680; }
+
+  .scroller { overflow-x: auto; border: 1px solid var(--line); background: var(--surface); }
+
+  table { border-collapse: collapse; width: 100%; min-width: 600px; font-size: 14.5px; }
+
+  th, td { text-align: left; padding: 10px 12px; border-bottom: 1px solid var(--line-soft); vertical-align: top; }
+
+  thead th {
+    font-size: 11.5px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+    font-weight: 650;
+    border-bottom: 1px solid var(--line);
+    white-space: nowrap;
+  }
+
+  tbody tr:last-child td { border-bottom: 0; }
+  td.name { font-weight: 650; white-space: nowrap; }
+  td.mono { font-family: var(--mono); font-size: 13px; color: var(--ink-soft); }
+  td.num { font-variant-numeric: tabular-nums; white-space: nowrap; font-weight: 650; }
+  .n { font-variant-numeric: tabular-nums; color: var(--ink-faint); width: 1%; }
+  tr.us td { background: var(--brand-wash); }
+
+  .pill { display: inline-block; font-size: 12px; font-weight: 650; padding: 2px 8px; white-space: nowrap; }
+  .p-ok { color: var(--ok); background: var(--ok-wash); }
+  .p-half { color: var(--half); background: var(--half-wash); }
+  .p-gap { color: var(--gap); background: var(--gap-wash); }
+  .p-no { color: var(--gap); background: var(--gap-wash); }
+
+  .hint { font-size: 13.5px; color: var(--ink-faint); max-width: 66ch; }
+
+  ol.decide { margin: 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: 2px; background: var(--line); border: 1px solid var(--line); }
+  ol.decide li { background: var(--surface); padding: 16px 18px; display: flex; flex-direction: column; gap: 5px; }
+  ol.decide b { font-weight: 680; font-size: 16.5px; line-height: 1.35; }
+  ol.decide span { font-size: 15px; color: var(--ink-soft); line-height: 1.5; }
+  ol.decide em { font-style: normal; color: var(--brand); font-weight: 650; }
+
+  footer {
+    border-top: 1px solid var(--line);
+    padding-top: 22px;
+    font-size: 14px;
+    color: var(--ink-faint);
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  code { font-family: var(--mono); font-size: 0.88em; background: var(--line-soft); padding: 1px 5px; }
+
+  a { color: var(--brand); text-underline-offset: 3px; }
+  a:focus-visible { outline: 2px solid var(--brand-bright); outline-offset: 3px; }
+
+  @media (max-width: 460px) {
+    body { font-size: 16px; padding: 0 16px 72px; }
+    .wrap { gap: 44px; }
+    .score { grid-template-columns: 1fr; }
+    .score div { flex-direction: row; align-items: baseline; gap: 12px; flex-wrap: wrap; }
+    .score b { font-size: 30px; }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header>
+    <div class="eyebrow">Ветра · 19 августа 2026</div>
+    <h1>Что описано, а чего нет</h1>
+    <p class="lede">Список из 11 блоков сверен с репозиторием, недостающее написано. <strong>Осталось три пункта, и все три — не работа, а решения, которые принимают люди.</strong> По ходу проверки всплыли четыре вещи, которые меняют план.</p>
+  </header>
+
+  <div class="score">
+    <div class="s-ok"><b>12</b><span>задач закрыто</span><i>было 6 утром</i></div>
+    <div class="s-half"><b>3</b><span>ждут решения</span><i>ниша, WB и Ozon, прайс</i></div>
+    <div class="s-gap"><b>0</b><span>не начато</span><i>было 3</i></div>
+  </div>
+
+  <section>
+    <h2>Четыре находки, которые меняют план</h2>
+    <p class="muted small">Всплыли при проверке API каналов и цен конкурентов по документации. Это не мнение — это проверяемое и уже произошедшее.</p>
+
+    <div class="finds">
+
+      <div class="find">
+        <div class="find-tag">находка 1 · канал мёртв</div>
+        <h3>WhatsApp в России недоступен</h3>
+        <p>В феврале 2026 Роскомнадзор исключил домены WhatsApp из НСДИ. Мессенджер открывается только через VPN, веб-версия не работает.</p>
+        <p><strong>Салон каналом пользоваться не может</strong> — значит Спринт 13, где стоял WhatsApp, был бы потрачен впустую. Андрей писал в стратегии «мёртв»: теперь это подтверждено фактом.</p>
+        <div class="verdict"><b>Убрано из плана, Спринт 13 освобождается</b> — это резерв, а не место под новую функцию. «Переезд с WhatsApp» остаётся крючком продажи, но это шаблон рассылки, а не интеграция.</div>
+      </div>
+
+      <div class="find">
+        <div class="find-tag">находка 2 · под вопросом первый канал</div>
+        <h3>Telegram тоже под ограничениями — а он у нас первый</h3>
+        <p>Роскомнадзор ограничивает доступ: задержки сообщений, проблемы с файлами. 10 марта 2026 ФАС признала продвижение в нём нарушением закона «О рекламе».</p>
+        <p><strong>Отделяю факт от страшилки.</strong> Bot API сегодня работает; «боты перестанут работать» — прогноз блогов, а не факт. Но ставить первую проверку всей цепочки на платформу, которую в стране душат, — риск, который надо назвать вслух.</p>
+        <div class="verdict"><b>Предлагаю первым каналом ВКонтакте.</b> Не ограничивается, поток у салонов больше, Callback API не сложнее. Telegram идёт вторым. <b>Решает Андрей</b> — его зона.</div>
+      </div>
+
+      <div class="find">
+        <div class="find-tag">находка 3 · новый класс барьеров</div>
+        <h3>У трёх каналов доступ зависит от того, сколько платит клиент</h3>
+        <p>Такого в плане не было. <strong>Авито</strong> — API мессенджера только на платном тарифе. <strong>Ozon</strong> — переписка только по подписке Premium Plus. <strong>MAX</strong> — токен после верификации юрлица.</p>
+        <div class="verdict"><b>Барьер показываем на плитке канала до нажатия кнопки.</b> Иначе человек три минуты ищет ключ, упирается в стену и уходит с ощущением, что сломались мы.</div>
+      </div>
+
+      <div class="find">
+        <div class="find-tag">находка 4 · ломается позиционирование</div>
+        <h3>Аргумент «дешевле в 2–5 раз» больше не работает</h3>
+        <p>Перепроверил цены. <strong>Салон с двумя администраторами может взять Jivo бесплатно</strong> и получить ВКонтакте, Telegram, MAX и почту в одном окне — буквально то, что мы обещаем на первом экране. OkoCRM подорожал до 712 ₽ за человека и уже имеет официальную интеграцию с MAX.</p>
+        <p><strong>«Мы рано в MAX» тоже отпадает</strong> — MAX есть и у OkoCRM в базовой подписке, и у Jivo на бесплатном тарифе. Окно закрылось.</p>
+        <div class="verdict"><b>Сравнение по цене убрать с лендинга до Спринта 1.</b> Вместо него три аргумента, которые выдерживают проверку: одна цена за весь салон · подключение за три минуты без CRM · панель владельца, считающая медиану, а не среднее.</div>
+      </div>
+
+    </div>
+  </section>
+
+  <section>
+    <h2>Сколько это стоит у них и у нас</h2>
+    <p class="muted small">Считаю по нашей целевой: салон, два администратора, четыре канала. Сравнивать стартовые цены бессмысленно — одни берут за человека, другие за канал, третьи за компанию.</p>
+
+    <div class="scroller">
+      <table>
+        <thead>
+          <tr><th>Сервис</th><th>Как считают</th><th>В месяц</th><th>Что важно</th></tr>
+        </thead>
+        <tbody>
+          <tr><td class="name">Jivo</td><td>за оператора</td><td class="num">0 ₽</td><td>бесплатно до 2 операторов: ВК, Telegram, MAX, почта; история 2 месяца</td></tr>
+          <tr><td class="name">OkoCRM</td><td>за пользователя</td><td class="num">1 424 ₽</td><td>712 ₽/чел, официальный MAX, AI-агенты</td></tr>
+          <tr><td class="name">Umnico</td><td>за пользователя</td><td class="num">от 700 ₽</td><td>25+ каналов, есть бесплатная версия</td></tr>
+          <tr class="us"><td class="name">Ветра</td><td><b>за компанию</b></td><td class="num">3 990 ₽</td><td>до 5 сотрудников, все каналы, панель, 14 дней без карты</td></tr>
+          <tr><td class="name">Chat2Desk</td><td>за компанию</td><td class="num">4–5 тыс ₽</td><td>операторов сколько угодно; сверх пакета 2,5 ₽ за диалог</td></tr>
+          <tr><td class="name">Wazzup</td><td><b>за канал</b></td><td class="num">12–20 тыс ₽</td><td>ВК и Telegram 3–4 тыс ₽ за канал, остальные 6 тыс ₽</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p class="hint">По цене мы в верхней половине рынка, а не в нижней. Дешевле только Wazzup. Полный разбор — где мы честно слабее и чем продаём вместо цены — в <code>docs/konkurenty.md</code>.</p>
+
+    <p class="small muted"><strong>Одно пустое поле мы всё-таки нашли:</strong> Wildberries и Ozon нет ни у кого из шести. Это аргумент в пользу того, чтобы описать вторую нишу, а не убирать её.</p>
+  </section>
+
+  <section>
+    <h2>Что умеет каждый канал</h2>
+
+    <div class="scroller">
+      <table>
+        <thead>
+          <tr><th>Канал</th><th>Реальное время</th><th>Что нужно от клиента</th><th>Подключение</th></tr>
+        </thead>
+        <tbody>
+          <tr><td class="name">Telegram</td><td>вебхук</td><td>бот у @BotFather, токен</td><td class="num">2–3 мин</td></tr>
+          <tr><td class="name">ВКонтакте</td><td>вебхук</td><td>ключ доступа сообщества</td><td class="num">3–5 мин</td></tr>
+          <tr><td class="name">Почта</td><td>IMAP IDLE</td><td><b>пароль приложения</b></td><td class="num">5–10 мин</td></tr>
+          <tr><td class="name">MAX</td><td>вебхук или опрос</td><td><b>верификация юрлица</b></td><td class="num">дни</td></tr>
+          <tr><td class="name">Авито</td><td>вебхук</td><td><b>платный тариф Авито</b></td><td class="num">зависит</td></tr>
+          <tr><td class="name">Wildberries</td><td>опрос</td><td>токен, категория «Чат»</td><td class="num">зависит</td></tr>
+          <tr><td class="name">Ozon</td><td>опрос</td><td><b>подписка Premium Plus</b></td><td class="num">зависит</td></tr>
+          <tr><td class="name">WhatsApp</td><td>—</td><td>—</td><td><span class="pill p-no">не делаем</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p class="hint">Главный вопрос списка звучал так: «может ли человек, не разбирающийся в API, подключиться за 1–2 минуты?» <strong>Честный ответ — ни один канал за две минуты не подключается.</strong> Значит «за минуту» на лендинге писать нельзя: обещание, которое ломается на первом же экране, дороже, чем его отсутствие.</p>
+  </section>
+
+  <section>
+    <h2>Карта по списку из 11 блоков</h2>
+
+    <div class="scroller">
+      <table>
+        <thead>
+          <tr><th class="n">№</th><th>Задача</th><th>Статус</th><th>Где лежит</th></tr>
+        </thead>
+        <tbody>
+          <tr><td class="n">1</td><td>Проблема, которую решает Ветра</td><td><span class="pill p-ok">закрыто</span></td><td class="mono">vision.md</td></tr>
+          <tr><td class="n">2</td><td>Целевая аудитория</td><td><span class="pill p-half">решение</span></td><td class="mono">вторая ниша не описана</td></tr>
+          <tr><td class="n">3</td><td>Главный сценарий использования</td><td><span class="pill p-ok">закрыто</span></td><td class="mono">vision.md</td></tr>
+          <tr><td class="n">4</td><td>MVP: что входит</td><td><span class="pill p-ok">закрыто</span></td><td class="mono">plan §4.10</td></tr>
+          <tr><td class="n">5</td><td>MVP: что НЕ входит</td><td><span class="pill p-ok">закрыто</span></td><td class="mono">plan §4.11</td></tr>
+          <tr><td class="n">6</td><td>Список интеграций</td><td><span class="pill p-half">решение</span></td><td class="mono">WB и Ozon не в плане</td></tr>
+          <tr><td class="n">7</td><td>Возможности и ограничения API</td><td><span class="pill p-ok">закрыто 19.08</span></td><td class="mono">integrations.md</td></tr>
+          <tr><td class="n">8</td><td>Архитектура Ветры</td><td><span class="pill p-ok">закрыто</span></td><td class="mono">architecture.md</td></tr>
+          <tr><td class="n">9</td><td>UX подключения сервиса</td><td><span class="pill p-ok">закрыто 19.08</span></td><td class="mono">user-journey.md</td></tr>
+          <tr><td class="n">10</td><td>Путь от регистрации до сообщения</td><td><span class="pill p-ok">закрыто 19.08</span></td><td class="mono">user-journey.md</td></tr>
+          <tr><td class="n">11</td><td>Тарифы и экономика</td><td><span class="pill p-half">решение</span></td><td class="mono">прайс ждёт Андрея</td></tr>
+          <tr><td class="n">12</td><td>Платежи, ИП, касса, юридика</td><td><span class="pill p-ok">закрыто 19.08</span></td><td class="mono">legal.md</td></tr>
+          <tr><td class="n">13</td><td>Безопасность и хранение переписок</td><td><span class="pill p-ok">закрыто 19.08</span></td><td class="mono">security.md</td></tr>
+          <tr><td class="n">14</td><td>Конкуренты и отличие</td><td><span class="pill p-ok">закрыто 19.08</span></td><td class="mono">konkurenty.md</td></tr>
+          <tr><td class="n">15</td><td>План первых 10 клиентов</td><td><span class="pill p-ok">закрыто</span></td><td class="mono">pilot.md</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section>
+    <h2>Что горит по срокам</h2>
+    <p class="muted">Из юридического разбора вылезла вещь, которую нельзя ускорить работой.</p>
+
+    <div class="find">
+      <div class="find-tag">август, раньше ИП</div>
+      <h3>Уведомление в Роскомнадзор подавать сейчас</h3>
+      <p>Подаётся <strong>до начала обработки персональных данных</strong>, а обработка начнётся, когда в базе появится первое сообщение первой клиентки — то есть в Спринте 3, в сентябре. В реестр вносят до 30 дней. Штраф за неподачу для ИП — до 50 000 ₽.</p>
+      <div class="verdict"><b>С ИП это не связано</b> — уведомление подаётся отдельно и раньше. Плюс: при регистрации ИП сразу подать уведомление о переходе на УСН, иначе год на общем режиме. И уточнить региональную ставку для IT — может быть <b>1 % вместо 6 %</b>.</div>
+    </div>
+  </section>
+
+  <section>
+    <h2>Что нужно решить</h2>
+    <ol class="decide">
+      <li><b>Первый канал: ВКонтакте вместо Telegram?</b><span><em>Андрей</em> — его зона. Если да, Спринты 3 и 5 меняются местами.</span></li>
+      <li><b>Убрать сравнение по цене с лендинга</b><span>Иначе Спринт 1 выйдет с утверждением, которое любой владелец салона опровергнет за минуту, открыв Jivo. Андрею — обновить раздел тарифов в своей стратегии: там старые цены.</span></li>
+      <li><b>Вторая ниша: описать или убрать</b><span>Продавцы Wildberries и Ozon обещаны на витрине, но не описаны. Довод в пользу «описать»: этих каналов нет ни у одного конкурента.</span></li>
+      <li><b>Wildberries: чат или отзывы первым?</b><span>Разные категории токена и разная работа. Продавцу обычно важнее отзывы — там сроки ответа и рейтинг.</span></li>
+    </ol>
+  </section>
+
+  <section>
+    <h2>Что делаю дальше</h2>
+    <p class="muted">Документы кончились — дальше то, что из них следует и что видно на экранах.</p>
+    <ol class="decide">
+      <li><b>Барьеры на плитках каналов и экран ошибки подключения</b><span>Ни того, ни другого нет ни в макете, ни в спеке. Сейчас все каналы выглядят одинаково доступными.</span></li>
+      <li><b>Полоса «канал не отвечает» в шапке «Входящих»</b><span>Администратор весь день смотрит в один экран и на страницу «Каналы» не заходит. Узнать о падении он должен там, где смотрит.</span></li>
+      <li><b>Поле «почта для чека» на экране оплаты</b><span>Требование 54-ФЗ при оплате картой. В макете его сейчас нет.</span></li>
+      <li><b>Спека подключения ВКонтакте</b><span>Если Андрей согласится сделать его первым каналом.</span></li>
+    </ol>
+  </section>
+
+  <footer>
+    <div>Всё подробно — в репозитории: <code>karta-produkta.md</code>, <code>integrations.md</code>, <code>user-journey.md</code>, <code>legal.md</code>, <code>security.md</code>, <code>konkurenty.md</code>. Запушено, Андрей видит.</div>
+    <div>Проверено 19 августа 2026. Первоисточники помечены отдельно от вторичных — на вторичные не ссылаемся в текстах для клиентов и не ставим их цифры на лендинг. Цены конкурентов перед запуском проверить руками в их личных кабинетах.</div>
+    <div>Юридический разбор сделан по открытым источникам со ссылками на статьи законов. Оферту, политику и согласие всё равно смотрит юрист.</div>
+  </footer>
+
+</div>
+</body>
+</html>

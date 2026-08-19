@@ -1,0 +1,404 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Откуда у Ветры клиенты</title>
+<style>
+  :root {
+    --ground: #F5F7FB;
+    --surface: #FFFFFF;
+    --line: #DBE3EE;
+    --line-soft: #E9EEF6;
+    --ink: #0E1621;
+    --ink-soft: #51617A;
+    --ink-faint: #8493A8;
+    --brand: #1F63BC;
+    --brand-lit: #2C78D5;
+    --brand-wash: #E8F0FB;
+    --good: #26694C;
+    --warn: #8E5A0D;
+    --stop: #9C3730;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --ground: #0B1017;
+      --surface: #141D28;
+      --line: #24313F;
+      --line-soft: #1B2632;
+      --ink: #E9EFF7;
+      --ink-soft: #9EAFC3;
+      --ink-faint: #6B7C91;
+      --brand: #74A9EC;
+      --brand-lit: #8FBDF2;
+      --brand-wash: #16243A;
+      --good: #6CC49A;
+      --warn: #DDA75B;
+      --stop: #E08981;
+    }
+  }
+  :root[data-theme="dark"] {
+    --ground: #0B1017;
+    --surface: #141D28;
+    --line: #24313F;
+    --line-soft: #1B2632;
+    --ink: #E9EFF7;
+    --ink-soft: #9EAFC3;
+    --ink-faint: #6B7C91;
+    --brand: #74A9EC;
+    --brand-lit: #8FBDF2;
+    --brand-wash: #16243A;
+    --good: #6CC49A;
+    --warn: #DDA75B;
+    --stop: #E08981;
+  }
+
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--ground);
+    color: var(--ink);
+    font-family: "Segoe UI", system-ui, -apple-system, "Helvetica Neue", sans-serif;
+    font-size: 17px;
+    line-height: 1.6;
+    padding: 0 20px 80px;
+  }
+  .deck { max-width: 780px; margin: 0 auto; display: flex; flex-direction: column; }
+
+  .slide {
+    padding: 56px 0;
+    border-top: 1px solid var(--line);
+    display: flex; flex-direction: column; gap: 22px;
+  }
+  .slide:first-child { border-top: none; padding-top: 64px; }
+  .mark {
+    font-size: 12px; letter-spacing: 0.16em; text-transform: uppercase;
+    color: var(--brand); font-weight: 700; font-variant-numeric: tabular-nums;
+  }
+  h1 {
+    font-size: clamp(34px, 7vw, 52px); line-height: 1.06; margin: 0;
+    font-weight: 680; letter-spacing: -0.03em; text-wrap: balance;
+  }
+  h2 {
+    font-size: clamp(25px, 4.6vw, 33px); line-height: 1.15; margin: 0;
+    font-weight: 660; letter-spacing: -0.02em; text-wrap: balance;
+  }
+  p { margin: 0; max-width: 62ch; }
+  .lede { font-size: 19px; color: var(--ink-soft); max-width: 58ch; }
+  .note { font-size: 15px; color: var(--ink-faint); max-width: 62ch; }
+  strong { font-weight: 660; }
+  em { font-style: normal; color: var(--brand); font-weight: 660; }
+
+  .figs { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 2px; background: var(--line); border: 1px solid var(--line); border-radius: 12px; overflow: hidden; }
+  .fig { background: var(--surface); padding: 18px 16px; display: flex; flex-direction: column; gap: 3px; }
+  .fig .n { font-size: 30px; font-weight: 680; letter-spacing: -0.02em; font-variant-numeric: tabular-nums; line-height: 1.1; }
+  .fig .c { font-size: 14px; color: var(--ink-soft); line-height: 1.4; }
+
+  .funnel { display: flex; flex-direction: column; gap: 3px; }
+  .step { display: grid; grid-template-columns: 1fr; gap: 5px; padding: 12px 0; border-bottom: 1px solid var(--line-soft); }
+  .step:last-child { border-bottom: none; }
+  .step-head { display: flex; justify-content: space-between; align-items: baseline; gap: 14px; }
+  .step-name { font-weight: 620; font-size: 17px; }
+  .step-n { font-variant-numeric: tabular-nums; font-weight: 680; font-size: 20px; white-space: nowrap; }
+  .bar { height: 9px; background: var(--brand-wash); border-radius: 5px; overflow: hidden; }
+  .bar i { display: block; height: 100%; background: var(--brand); border-radius: 5px; }
+  .step-note { font-size: 14.5px; color: var(--ink-soft); }
+  .step-note b { color: var(--ink); font-weight: 620; }
+
+  table { width: 100%; border-collapse: collapse; font-variant-numeric: tabular-nums; }
+  .scroller { overflow-x: auto; border: 1px solid var(--line); border-radius: 12px; background: var(--surface); }
+  th, td { padding: 11px 14px; text-align: right; border-bottom: 1px solid var(--line-soft); font-size: 15.5px; white-space: nowrap; }
+  th:first-child, td:first-child { text-align: left; }
+  thead th { font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-faint); font-weight: 660; }
+  tbody tr:last-child td { border-bottom: none; }
+  tr.hi td { background: var(--brand-wash); font-weight: 660; }
+
+  .split { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 14px; }
+  .card { background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 16px 18px; display: flex; flex-direction: column; gap: 8px; }
+  .card h3 { margin: 0; font-size: 16px; font-weight: 660; }
+  .card ul { margin: 0; padding-left: 18px; display: flex; flex-direction: column; gap: 5px; font-size: 15.5px; color: var(--ink-soft); }
+  .card.stop { border-left: 3px solid var(--stop); }
+  .card.go { border-left: 3px solid var(--good); }
+
+  .callout {
+    background: var(--surface); border: 1px solid var(--line); border-left: 3px solid var(--warn);
+    border-radius: 12px; padding: 16px 18px; display: flex; flex-direction: column; gap: 6px;
+  }
+  .callout .lbl { font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--warn); font-weight: 700; }
+
+  ol.steps { margin: 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: 10px; counter-reset: s; }
+  ol.steps li { display: grid; grid-template-columns: 26px 1fr; gap: 10px; align-items: start; font-size: 16px; }
+  ol.steps li::before {
+    counter-increment: s; content: counter(s);
+    font-variant-numeric: tabular-nums; font-weight: 700; color: var(--brand); font-size: 15px; padding-top: 2px;
+  }
+  code { font-family: ui-monospace, Consolas, monospace; font-size: 14.5px; background: var(--brand-wash); border-radius: 5px; padding: 1px 6px; }
+  footer { padding: 40px 0 0; border-top: 1px solid var(--line); color: var(--ink-faint); font-size: 15px; }
+  a { color: var(--brand); }
+</style>
+</head>
+<body>
+<div class="deck">
+
+  <section class="slide">
+    <div class="mark">Ветра · разбор для Андрея · 19 августа</div>
+    <h1>Откуда у Ветры возьмутся клиенты</h1>
+    <p class="lede">Семь шагов от списка салонов до денег на счету, с цифрами на каждом. Всё, что ниже, — либо взято из наших документов, либо посчитано из них. Что не проверено — помечено.</p>
+    <div class="figs">
+      <div class="fig"><span class="n">70</span><span class="c">салонов пройти до 5 октября</span></div>
+      <div class="fig"><span class="n">3</span><span class="c">пилота из них — цель</span></div>
+      <div class="fig"><span class="n">3 240 ₽</span><span class="c">средний чек при нашем прайсе</span></div>
+      <div class="fig"><span class="n">7–12</span><span class="c">платящих салонов = выходим в ноль</span></div>
+    </div>
+  </section>
+
+  <section class="slide">
+    <div class="mark">01 · кому и за что</div>
+    <h2>Салон теряет деньги молчанием, а не плохой работой</h2>
+    <p>Клиентка пишет в ВКонтакте «можно завтра к Насте на окрашивание?». Администратор в этот момент считает человека на кассе. Через двадцать минут она уже записалась в салон через дорогу — там ответили за минуту.</p>
+    <div class="figs">
+      <div class="fig"><span class="n">3–6 тыс ₽</span><span class="c">стоит одна потерянная запись на окрашивание</span></div>
+      <div class="fig"><span class="n">≈30 тыс ₽</span><span class="c">в месяц, если теряются две записи в неделю</span></div>
+      <div class="fig"><span class="n">3 990 ₽</span><span class="c">наша подписка — дешевле одной такой записи</span></div>
+    </div>
+    <p class="note">Отсюда весь разговор с владельцем: мы продаём не окно и не каналы, а то, что перестают теряться записи. Салон — 5–15 мастеров, один-два администратора. Не мастер-одиночка и не сеть.</p>
+  </section>
+
+  <section class="slide">
+    <div class="mark">02 · рынок</div>
+    <h2>Покупатель уже знает, что у него болит</h2>
+    <p>Цифры из твоей стратегии — опрос «Кибердома» в марте 2026 года, 1 226 руководителей, и разбор Forbes.</p>
+    <div class="figs">
+      <div class="fig"><span class="n">20–40 %</span><span class="c">выручки теряет малый бизнес после ограничения мессенджеров</span></div>
+      <div class="fig"><span class="n">64 %</span><span class="c">компаний столкнулись с проблемами в общении с клиентами</span></div>
+      <div class="fig"><span class="n">32 %</span><span class="c">боятся потерять контакты и историю переписки</span></div>
+      <div class="fig"><span class="n">28 %</span><span class="c">прямо сейчас ищут замену</span></div>
+    </div>
+    <p>Это редкая ситуация: не нужно объяснять проблему, нужно показать, что мы её снимаем. Поэтому первое сообщение владельцу — не про нас, а про его цифру.</p>
+  </section>
+
+  <section class="slide">
+    <div class="mark">03 · воронка</div>
+    <h2>Семь шагов, и на каждом мы что-то замеряем</h2>
+    <p class="lede">Расчёт на семь недель до 5 октября при десяти новых салонах в неделю.</p>
+
+    <div class="funnel">
+      <div class="step">
+        <div class="step-head"><span class="step-name">Салоны в таблице</span><span class="step-n">70</span></div>
+        <div class="bar"><i style="width:100%"></i></div>
+        <div class="step-note">2GIS и Карты, Казань: 5–15 мастеров, в карточке минимум два канала связи. <b>10 в неделю.</b></div>
+      </div>
+      <div class="step">
+        <div class="step-head"><span class="step-name">Тест-касание как клиент</span><span class="step-n">70</span></div>
+        <div class="bar"><i style="width:100%"></i></div>
+        <div class="step-note">Пишем в каждый их канал «можно завтра на окрашивание?» и засекаем время ответа. <b>Это не продажа — это сбор их цифры.</b></div>
+      </div>
+      <div class="step">
+        <div class="step-head"><span class="step-name">Ответил владелец</span><span class="step-n">18</span></div>
+        <div class="bar"><i style="width:26%"></i></div>
+        <div class="step-note">Гипотеза <b>25 %</b>. Сообщение персональное и с их фактом: «написал вам вчера в ВК и Telegram — в ВК ответили через 40 минут, в Telegram не ответили».</div>
+      </div>
+      <div class="step">
+        <div class="step-head"><span class="step-name">Дослушал разбор</span><span class="step-n">12</span></div>
+        <div class="bar"><i style="width:17%"></i></div>
+        <div class="step-note">Голосовое на пару минут: их каналы, их время ответа, оценка потерь в деньгах. <b>70 % от ответивших.</b></div>
+      </div>
+      <div class="step">
+        <div class="step-head"><span class="step-name">Встреча 15 минут</span><span class="step-n">5</span></div>
+        <div class="bar"><i style="width:7%"></i></div>
+        <div class="step-note">Показываем витрину макетов с телефона. <b>40 % от разборов.</b></div>
+      </div>
+      <div class="step">
+        <div class="step-head"><span class="step-name">Согласился на пилот</span><span class="step-n">3</span></div>
+        <div class="bar"><i style="width:4.3%"></i></div>
+        <div class="step-note">Месяц бесплатно в обмен на цифры «до/после» и отзыв. <b>60 % от встреч</b> — отказаться почти не от чего.</div>
+      </div>
+      <div class="step">
+        <div class="step-head"><span class="step-name">Стал платить</span><span class="step-n">1–2</span></div>
+        <div class="bar"><i style="width:2.2%"></i></div>
+        <div class="step-note">Гипотеза <b>50 %</b> от пилотов — и только если продукт к ноябрю реально работает.</div>
+      </div>
+    </div>
+
+    <div class="callout">
+      <span class="lbl">что здесь гипотеза</span>
+      <p>Проверены только два числа: 70 % на разбор и 50–70 % на закрытие — они из метода тёплого аутрича, обкатанного в другой нише. Ответ владельца 25 % — наша прикидка. Если на первой неделе выйдет 10 %, воронка даёт не три пилота, а один: <strong>7 ответов → 5 разборов → 2 встречи → 1 пилот</strong>. Тогда поднимаем до 15–20 салонов в неделю или переписываем первое сообщение.</p>
+    </div>
+  </section>
+
+  <section class="slide">
+    <div class="mark">04 · деньги</div>
+    <h2>Сколько платящих салонов — сколько денег</h2>
+    <p>Прайс за компанию: <em>1 490 ₽</em> «Старт» и <em>3 990 ₽</em> «Команда» с панелью владельца. Считаем, что семь из десяти берут «Команду» — у салона с 5–15 мастерами администраторов обычно двое, и панель нужна именно владельцу.</p>
+
+    <div class="scroller">
+      <table>
+        <thead>
+          <tr><th>Платящих салонов</th><th>Выручка в месяц</th><th>Вклад после комиссий</th><th>Итог за вычетом наших расходов</th></tr>
+        </thead>
+        <tbody>
+          <tr class="hi"><td>7</td><td>22 700 ₽</td><td>21 000 ₽</td><td>в ноль при одной подписке</td></tr>
+          <tr class="hi"><td>12</td><td>38 900 ₽</td><td>35 900 ₽</td><td>в ноль при двух подписках</td></tr>
+          <tr><td>17</td><td>55 100 ₽</td><td>50 900 ₽</td><td>16 400 ₽ прибыли</td></tr>
+          <tr><td>30</td><td>97 200 ₽</td><td>89 800 ₽</td><td>55 400 ₽ прибыли</td></tr>
+          <tr><td>50</td><td>162 000 ₽</td><td>149 600 ₽</td><td>115 200 ₽ прибыли</td></tr>
+          <tr><td>100</td><td>324 000 ₽</td><td>299 300 ₽</td><td>264 900 ₽ прибыли</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p class="note">Средний чек 3 240 ₽, после эквайринга и распознавания речи с него остаётся ≈3 000 ₽. Прибыль в последнем столбце посчитана при двух подписках Claude — самый дорогой сценарий.</p>
+
+    <div class="callout">
+      <span class="lbl">почему за компанию, а не за место</span>
+      <p>Твой вариант «1 190 ₽ за место» при 1,8 места даёт средний чек 2 100 ₽ — пятьдесят салонов это 105 000 ₽. Наш прайс на той же базе даёт <strong>162 000 ₽</strong>. Разница в полтора раза при том же числе клиентов. Плата: мы дороже OkoCRM и бесплатного Jivo, поэтому с лендинга уходит аргумент «дешевле в 2–5 раз», вместо него — «одна цена за весь салон, считать нечего».</p>
+    </div>
+  </section>
+
+  <section class="slide">
+    <div class="mark">05 · расходы</div>
+    <h2>Во что нам обходится месяц работы</h2>
+    <p class="lede">В первом расчёте стояло «меньше трёх тысяч в месяц» — там была только инфраструктура и не было инструментов, которыми проект собственно делается. Настоящая картина другая.</p>
+
+    <div class="scroller">
+      <table>
+        <thead><tr><th>Статья</th><th>В месяц</th></tr></thead>
+        <tbody>
+          <tr><td>Подписка Claude — Михаил</td><td>14 000 ₽</td></tr>
+          <tr><td>Генерация картинок</td><td>4 000 ₽</td></tr>
+          <tr><td>Сервер Timeweb Cloud</td><td>2 000 ₽</td></tr>
+          <tr><td>Хранилище файлов</td><td>300 ₽</td></tr>
+          <tr><td>Домен, в пересчёте на месяц</td><td>150 ₽</td></tr>
+          <tr><td>Sentry, GitHub, Метрика</td><td>0 ₽</td></tr>
+          <tr class="hi"><td>Сейчас</td><td>20 450 ₽</td></tr>
+          <tr><td>Вторая подписка Claude — Андрей</td><td>+14 000 ₽</td></tr>
+          <tr class="hi"><td>Если покупаем</td><td>34 450 ₽</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="figs">
+      <div class="fig"><span class="n">7</span><span class="c">салонов выводят в ноль сейчас</span></div>
+      <div class="fig"><span class="n">12</span><span class="c">салонов, если подписок две</span></div>
+      <div class="fig"><span class="n">72 тыс ₽</span><span class="c">вложить до запуска 29 ноября</span></div>
+      <div class="fig"><span class="n">121 тыс ₽</span><span class="c">то же самое при двух подписках</span></div>
+    </div>
+
+    <div class="callout">
+      <span class="lbl">это надо пересогласовать</span>
+      <p>17 августа мы записали бюджет <strong>до 5 000 ₽ в месяц</strong>. Реально выходит в четыре раза больше, а со второй подпиской — в семь. Резать тут нечего: подписка и есть то, чем двое заменяют команду. Но цифру бюджета надо переписать честно, иначе она врёт нам обоим.</p>
+    </div>
+
+    <div class="callout">
+      <span class="lbl">вопрос к тебе, Андрей</span>
+      <p>Ты уже работаешь через Claude — стратегия от 18 августа подписана соавторством модели. Значит доступ есть, вопрос в лимитах. <strong>Упираешься ли ты в них и на чём именно?</strong> Если да — берём вторую подписку, простой дороже. Если нет — отложим до момента, когда ты начнёшь писать код: пока твоя зона продажи и направление, а это 49 тысяч до запуска.</p>
+    </div>
+  </section>
+
+  <section class="slide">
+    <div class="mark">06 · предел</div>
+    <h2>Руками мы дойдём до десяти клиентов, дальше — нет</h2>
+    <p>Сквозной счёт: <strong>70 салонов дают 1–2 платящих</strong>. Это примерно <em>45 салонов на одного клиента</em>. Чтобы набрать двенадцать и выйти в ноль, ручной воронкой пришлось бы обойти около <em>540 салонов</em> — год при десяти в неделю.</p>
+    <p>Поэтому ручные продажи — это не способ вырасти, а способ <strong>узнать</strong>: что говорят владельцы, за что готовы платить, какой канал у них главный. Первые пять-десять клиентов приходят так, а дальше конверсия растёт сама, потому что появляются отзывы, цифры «до/после» и живой продукт вместо макетов.</p>
+    <div class="split">
+      <div class="card go">
+        <h3>Что включаем после первых клиентов</h3>
+        <ul>
+          <li>Отзывы и цифры пилотов на лендинге</li>
+          <li>Чаты предпринимателей города</li>
+          <li>Партнёрка внедренцам — 30 % с приведённого</li>
+          <li>Калькулятор потерь на сайте, которым делятся</li>
+        </ul>
+      </div>
+      <div class="card stop">
+        <h3>Что не начинаем сейчас</h3>
+        <ul>
+          <li>Блог и контент — не выдержим по часам</li>
+          <li>Реклама — некуда вести, продукта нет</li>
+          <li>Холодный обзвон — дороже по времени, чем переписка</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="slide">
+    <div class="mark">07 · сверка с рынком</div>
+    <h2>Что говорит рынок и что из этого мы берём</h2>
+    <p class="lede">Разбор одиннадцати трендов российского маркетинга за 2026 год (Алексей Гусев, маркетолог-практик). Нас касаются четыре. Остальные — про чужой масштаб: маркетплейсы, телевизор, штат маркетологов.</p>
+
+    <div class="callout">
+      <span class="lbl">проверить до лендинга</span>
+      <p><strong>Аудитория MAX не сходится.</strong> В твоей стратегии — 85 млн ежедневная, май 2026. В обзоре — 42 млн активной ежемесячной, август 2026. Дневная аудитория не может быть вдвое больше месячной: одна цифра неверна, либо это разные метрики — регистрации против активных. На MAX у нас завязан канал и часть позиционирования, ставить это число на сайт непроверенным нельзя.</p>
+      <p>Там же прогноз: <strong>Telegram после блокировок может потерять 30–40 %</strong> аудитории, как в своё время YouTube. Если сбудется — порядок каналов пересматривается сам собой.</p>
+    </div>
+
+    <div class="split">
+      <div class="card go">
+        <h3>Забираем</h3>
+        <ul>
+          <li><b>«Своя база — единственный актив, который нельзя заблокировать».</b> Для владельца это звучит так: переписка с клиентками — актив салона, а не имущество мессенджера. Готовая фраза для лендинга и разговора</li>
+          <li><b>90 % считают подлинность решающим фактором</b>, 82 % больше доверяют живым людям. Подтверждает наше «подсказка, а не автоответчик»</li>
+          <li><b>Инфляция Директа 30–50 % в год</b> для малых рекламодателей — ответ на вопрос «почему не реклама вместо ручных продаж»</li>
+          <li>Лендинг Спринта 1 сразу писать так, чтобы его цитировали ИИ-поисковики: вопрос-ответ, конкретные цифры, честное сравнение с конкурентами. Сейчас бесплатно, потом дорого</li>
+        </ul>
+      </div>
+      <div class="card stop">
+        <h3>Не берём</h3>
+        <ul>
+          <li><b>Блог и контент-маркетинг</b> — тренд верный, но автор сам оговаривается: длинный цикл, «долина отчаяния», отдачу не посчитать. У нас нет ни часов, ни продукта</li>
+          <li><b>GEO как канал</b> — в этом году отдачи не даст, это ставка на два-три года вперёд</li>
+          <li><b>Инфлюенсеры</b> — после пилотов, и не блогеры-миллионники, а локальные бьюти-эксперты и преподаватели курсов для салонов</li>
+          <li><b>Instagram</b> — не путать наш блог там с подключением клиентского Instagram к Ветре. Решение по продукту не меняется</li>
+        </ul>
+      </div>
+    </div>
+
+    <p class="note">Главное, что даёт этот разбор: платные каналы дорожают быстрее потребительской инфляции именно для маленьких, потому что у больших есть объём и данные. Это не аргумент «у нас нет бюджета» — это причина, по которой ручная воронка и своя база сейчас выгоднее покупки трафика.</p>
+  </section>
+
+  <section class="slide">
+    <div class="mark">08 · кто что делает</div>
+    <h2>Продажи на тебе, материалы на мне</h2>
+    <div class="split">
+      <div class="card">
+        <h3>Андрей — каждую неделю</h3>
+        <ul>
+          <li>10 новых салонов в таблицу</li>
+          <li>30 тест-сообщений и замер времени ответа</li>
+          <li>10 сообщений владельцам</li>
+          <li>3 разбора голосом, 1–2 встречи</li>
+          <li>Строка итогов недели в <code>docs/pilot.md</code></li>
+        </ul>
+        <p class="note">Примерно 3,5 часа в неделю из твоих десяти-пятнадцати.</p>
+      </div>
+      <div class="card">
+        <h3>Михаил — до первых разговоров</h3>
+        <ul>
+          <li>Витрина макетов, открывается с телефона</li>
+          <li>Таблица салонов и формула потерь</li>
+          <li>Текст первого сообщения владельцу</li>
+          <li>Дальше — код: продукт к ноябрю</li>
+        </ul>
+      </div>
+    </div>
+    <p>Три вопроса на каждой встрече, ради которых всё и затевается: <strong>откуда идёт поток обращений</strong> (решает спор «первый канал — ВКонтакте или Telegram»), <strong>кто отвечает, когда администратор занят</strong>, <strong>есть ли база в WhatsApp и что с ней делают</strong>.</p>
+  </section>
+
+  <section class="slide">
+    <div class="mark">09 · границы</div>
+    <h2>Три фразы, которые держат объём</h2>
+    <ol class="steps">
+      <li><strong>Ветра — не CRM.</strong> Появятся сделки и воронки продаж — конкурируем с Битрикс24 и amoCRM, у которых сотни разработчиков. Мы отвечаем за входящие.</li>
+      <li><strong>Мы не заменяем журнал записи.</strong> YCLIENTS и Dikidi не трогаем. Иначе на первой встрече попросят синхронизацию, и сроки поедут.</li>
+      <li><strong>Подключаем то, что работает в России.</strong> Пять каналов из семи официально; WhatsApp и Instagram — нет, и это говорим до регистрации, а не после оплаты.</li>
+    </ol>
+    <p class="note">Всё, что просят трое, — делаем модулем и продаём всем. Что просит один и оно не ложится в продукт — вежливо отдаём наружу. Ни одной отдельной версии под клиента: вдвоём это убивает продукт.</p>
+  </section>
+
+  <footer>
+    Источники: <code>docs/audit-klienty-2026-08-18.md</code> разделы 5 и 6 · <code>docs/strategiya.html</code> · <code>docs/vision.md</code> · <code>docs/plan.md</code> раздел 8 · <code>docs/pilot.md</code>. Расчёты пересчитываются, как только появятся первые настоящие цифры из таблицы салонов.
+  </footer>
+</div>
+</body>
+</html>
