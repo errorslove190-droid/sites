@@ -6,6 +6,10 @@
 const tg = window.Telegram && window.Telegram.WebApp ? window.Telegram.WebApp : null;
 const RING = 195;                       // длина окружности медальона, r = 31
 
+/* Приёмник фотографий (Cloudflare Worker, код в D:\Projects\trener-worker).
+   Пусто — кнопка «Сфоткать» просто уводит в чат с ботом. */
+const WORKER = '';
+
 const DEFAULT_GOAL = { kcal: 2700, p: 110, f: 60, c: 430 };
 const PROFILE = { h: 173, age: 18 };    // рост и возраст для пересчёта нормы
 
@@ -517,6 +521,56 @@ function fromB64(s) {
   }
 }
 
+/* ---------- фото прямо из приложения ---------- */
+
+/* Снимок уходит на Cloudflare Worker, тот пересылает его боту: токен нельзя
+   держать в браузере, а GitHub Pages принимать файлы не умеет. */
+async function sendPhoto(file) {
+  toast('Сжимаю фото…');
+  let blob;
+  try {
+    blob = await shrink(file);
+  } catch (e) {
+    blob = file;
+  }
+
+  const fd = new FormData();
+  fd.append('photo', blob, 'meal.jpg');
+  fd.append('initData', (tg && tg.initData) || '');
+  fd.append('note', 'Фото из трекера — оцени порцию, посчитай КБЖУ и дай кнопку записи');
+
+  toast('Отправляю…');
+  try {
+    const r = await fetch(WORKER, { method: 'POST', body: fd });
+    const res = await r.json();
+    if (!res.ok) throw new Error(res.error || 'отказ');
+    haptic('heavy');
+    toast('Готово, считаю в чате');
+    if (tg && tg.close) setTimeout(() => tg.close(), 1200);
+  } catch (err) {
+    toast('Не отправилось: ' + err.message);
+  }
+}
+
+/* Телефон снимает 4000 пикселей по стороне — столько не нужно ни Telegram, ни счёту */
+function shrink(file, max = 1400, quality = 0.82) {
+  return new Promise((resolve, reject) => {
+    const img = new Image();
+    const url = URL.createObjectURL(file);
+    img.onload = () => {
+      URL.revokeObjectURL(url);
+      const k = Math.min(max / img.width, max / img.height, 1);
+      const canvas = document.createElement('canvas');
+      canvas.width = Math.round(img.width * k);
+      canvas.height = Math.round(img.height * k);
+      canvas.getContext('2d').drawImage(img, 0, 0, canvas.width, canvas.height);
+      canvas.toBlob(b => (b ? resolve(b) : reject(new Error('canvas'))), 'image/jpeg', quality);
+    };
+    img.onerror = () => { URL.revokeObjectURL(url); reject(new Error('не читается')); };
+    img.src = url;
+  });
+}
+
 /* ---------- данные из чата ---------- */
 
 function consumeStartParam() {
@@ -586,17 +640,23 @@ async function init() {
     btn.addEventListener('click', () => { switchScreen(btn.dataset.screen); haptic('light'); });
   });
 
-  /* Распознать фото внутри мини-приложения нечем: считает Claude в чате.
-     Поэтому кнопка просто закрывает окно — Михаил оказывается в переписке с ботом,
-     фоткает тарелку, и ответом приходит кнопка «записать в трекер». */
   document.getElementById('shot').addEventListener('click', () => {
     haptic('medium');
-    if (tg && tg.close) {
+    if (WORKER) {
+      document.getElementById('shot-input').click();
+    } else if (tg && tg.close) {
+      /* Пока приёмник не подключён — просто уводим в чат, там фото примет бот */
       toast('Пришли фото боту — посчитаю');
       setTimeout(() => tg.close(), 700);
     } else {
       toast('Открой трекер из Telegram, тогда сработает');
     }
+  });
+
+  document.getElementById('shot-input').addEventListener('change', async e => {
+    const file = e.target.files && e.target.files[0];
+    e.target.value = '';
+    if (file) await sendPhoto(file);
   });
 
   document.getElementById('prev-day').addEventListener('click', () => shiftDay(-1));
