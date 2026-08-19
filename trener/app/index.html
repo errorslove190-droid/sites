@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, user-scalable=no">
+<meta name="robots" content="noindex, nofollow">
+<title>Трекер</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@700&family=Oswald:wght@500;600&family=Onest:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+<script src="https://telegram.org/js/telegram-web-app.js"></script>
+</head>
+<body>
+
+<div id="screen-food" class="screen">
+  <header class="head">
+    <div class="head-date" id="food-date">сегодня</div>
+    <h1>Еда</h1>
+  </header>
+
+  <section class="ring-block">
+    <svg class="ring" viewBox="0 0 120 120" aria-hidden="true">
+      <circle class="ring-bg" cx="60" cy="60" r="52"></circle>
+      <circle class="ring-fill" id="ring-kcal" cx="60" cy="60" r="52"></circle>
+    </svg>
+    <div class="ring-center">
+      <b id="kcal-now">0</b>
+      <span id="kcal-goal">из 2700 ккал</span>
+    </div>
+  </section>
+
+  <section class="bars">
+    <div class="bar-row">
+      <span class="bar-name">белок</span>
+      <div class="bar"><i id="bar-p"></i></div>
+      <span class="bar-val" id="val-p">0 / 110</span>
+    </div>
+    <div class="bar-row">
+      <span class="bar-name">жиры</span>
+      <div class="bar"><i id="bar-f"></i></div>
+      <span class="bar-val" id="val-f">0 / 60</span>
+    </div>
+    <div class="bar-row">
+      <span class="bar-name">углеводы</span>
+      <div class="bar"><i id="bar-c"></i></div>
+      <span class="bar-val" id="val-c">0 / 430</span>
+    </div>
+  </section>
+
+  <section>
+    <h2 class="sec-title">Приёмы <span id="meal-count"></span></h2>
+    <div id="meal-list" class="list"></div>
+  </section>
+
+  <section>
+    <h2 class="sec-title">Быстро добавить</h2>
+    <div id="quick" class="chips"></div>
+    <button class="btn-ghost" id="btn-manual">Ввести своё</button>
+  </section>
+
+  <div class="hint">Сфоткай еду и пришли боту — он посчитает и добавит сюда сам.</div>
+</div>
+
+<div id="screen-gym" class="screen hidden">
+  <header class="head">
+    <div class="head-date" id="gym-date">сегодня</div>
+    <h1>Тренировка</h1>
+  </header>
+
+  <div class="tabs" id="day-tabs">
+    <button data-day="A" class="tab">A · верх</button>
+    <button data-day="B" class="tab">B · ноги</button>
+    <button data-day="C" class="tab">C · всё тело</button>
+  </div>
+
+  <div id="ex-list" class="list"></div>
+
+  <button class="btn-main" id="btn-finish">Завершить тренировку</button>
+  <div class="hint" id="gym-hint"></div>
+</div>
+
+<nav class="nav">
+  <button class="nav-btn active" data-screen="food"><span>Еда</span></button>
+  <button class="nav-btn" data-screen="gym"><span>Зал</span></button>
+</nav>
+
+<div class="sheet hidden" id="sheet">
+  <div class="sheet-box">
+    <h3 id="sheet-title">Добавить приём</h3>
+    <div id="sheet-body"></div>
+    <div class="sheet-btns">
+      <button class="btn-ghost" id="sheet-cancel">Отмена</button>
+      <button class="btn-main" id="sheet-ok">Добавить</button>
+    </div>
+  </div>
+</div>
+
+<script src="js/app.js"></script>
+</body>
+</html>
