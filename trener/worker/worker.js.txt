@@ -1,0 +1,107 @@
+/**
+ * Приёмник фотографий для трекера питания.
+ *
+ * Мини-приложение (GitHub Pages) не может отправить файл боту напрямую: токен нельзя
+ * держать в браузере. Этот воркер стоит посредником — принимает снимок, проверяет,
+ * что запрос действительно из Telegram и от Михаила, и пересылает фото боту.
+ * Дальше фото попадает в обычную переписку, Claude его считает и возвращает кнопку.
+ *
+ * Переменные окружения (Cloudflare → Settings → Variables and Secrets):
+ *   BOT_TOKEN — токен @Manager_miha_bot, тип Secret
+ *   OWNER_ID  — 1309163276, тип Text
+ *
+ * Разворачивается копипастом в редакторе Cloudflare Workers, ничего ставить не надо.
+ */
+
+const ALLOWED_ORIGIN = 'https://errorslove190-droid.github.io';
+const MAX_BYTES = 6 * 1024 * 1024;      // Telegram принимает до 10 МБ, нам хватит шести
+
+export default {
+  async fetch(request, env) {
+    if (request.method === 'OPTIONS') return cors(new Response(null, { status: 204 }));
+    if (request.method !== 'POST') return cors(json({ ok: false, error: 'only POST' }, 405));
+
+    let form;
+    try {
+      form = await request.formData();
+    } catch (e) {
+      return cors(json({ ok: false, error: 'bad form' }, 400));
+    }
+
+    const photo = form.get('photo');
+    const initData = form.get('initData') || '';
+    const note = (form.get('note') || '').toString().slice(0, 200);
+
+    if (!photo || typeof photo === 'string') return cors(json({ ok: false, error: 'no photo' }, 400));
+    if (photo.size > MAX_BYTES) return cors(json({ ok: false, error: 'слишком большое фото' }, 413));
+
+    const user = await checkInitData(initData, env.BOT_TOKEN);
+    if (!user) return cors(json({ ok: false, error: 'подпись Telegram не сошлась' }, 403));
+    if (String(user.id) !== String(env.OWNER_ID)) return cors(json({ ok: false, error: 'чужой' }, 403));
+
+    const out = new FormData();
+    out.append('chat_id', env.OWNER_ID);
+    out.append('caption', note || 'Фото из трекера — посчитай КБЖУ');
+    out.append('photo', photo, 'meal.jpg');
+
+    const r = await fetch(`https://api.telegram.org/bot${env.BOT_TOKEN}/sendPhoto`, {
+      method: 'POST',
+      body: out,
+    });
+    const res = await r.json();
+    return cors(json({ ok: !!res.ok, error: res.description || null }, res.ok ? 200 : 502));
+  },
+};
+
+/**
+ * Проверка initData по схеме Telegram: секрет = HMAC("WebAppData", токен),
+ * затем HMAC(секрет, строка_проверки) должен совпасть с полем hash.
+ */
+async function checkInitData(initData, token) {
+  if (!initData || !token) return null;
+  const params = new URLSearchParams(initData);
+  const hash = params.get('hash');
+  if (!hash) return null;
+  params.delete('hash');
+
+  const dataCheck = [...params.entries()]
+    .map(([k, v]) => `${k}=${v}`)
+    .sort()
+    .join('\n');
+
+  const enc = new TextEncoder();
+  const secret = await hmac(enc.encode('WebAppData'), enc.encode(token));
+  const sig = await hmac(secret, enc.encode(dataCheck));
+  const hex = [...new Uint8Array(sig)].map(b => b.toString(16).padStart(2, '0')).join('');
+  if (hex !== hash) return null;
+
+  /* Данные старше суток не принимаем — защита от повторного запроса со старой подписью */
+  const authDate = +(params.get('auth_date') || 0);
+  if (!authDate || Date.now() / 1000 - authDate > 86400) return null;
+
+  try {
+    return JSON.parse(params.get('user') || 'null');
+  } catch (e) {
+    return null;
+  }
+}
+
+async function hmac(keyBytes, msgBytes) {
+  const key = await crypto.subtle.importKey('raw', keyBytes, { name: 'HMAC', hash: 'SHA-256' }, false, ['sign']);
+  return crypto.subtle.sign('HMAC', key, msgBytes);
+}
+
+function json(obj, status = 200) {
+  return new Response(JSON.stringify(obj), {
+    status,
+    headers: { 'content-type': 'application/json; charset=utf-8' },
+  });
+}
+
+function cors(res) {
+  res.headers.set('Access-Control-Allow-Origin', ALLOWED_ORIGIN);
+  res.headers.set('Access-Control-Allow-Methods', 'POST, OPTIONS');
+  res.headers.set('Access-Control-Allow-Headers', 'content-type');
+  res.headers.set('Access-Control-Max-Age', '86400');
+  return res;
+}
