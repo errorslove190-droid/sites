@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Трекер — макросы как продукты</title>
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@600;700&family=Onest:wght@400;500;600;700&family=Golos+Text:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:#0e0f12;color:#e9eaee;font:400 16px/1.5 Onest,system-ui,sans-serif;padding:26px 16px 70px}
+.wrap{max-width:900px;margin:0 auto}
+.top{max-width:640px;margin:0 auto 32px;text-align:center}
+.top h1{font:700 clamp(23px,5.4vw,34px)/1.15 Unbounded,sans-serif;letter-spacing:-.02em;margin-bottom:11px}
+.top p{color:#9aa0ad;font-size:15px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(330px,1fr));gap:28px;justify-items:center}
+.col{width:100%;max-width:370px}
+.label{display:flex;align-items:baseline;gap:9px;margin-bottom:12px}
+.label b{font:700 17px/1 Onest,sans-serif}
+.label span{color:#9aa0ad;font-size:13px}
+.note{color:#9aa0ad;font-size:13.5px;line-height:1.5;margin-top:13px}
+.phone{width:100%;aspect-ratio:9/17.6;border-radius:30px;overflow:hidden;box-shadow:0 20px 50px rgba(0,0,0,.5);position:relative}
+.screen{position:absolute;inset:0;overflow:hidden}
+
+/* ══════ ВАРИАНТ A — тёмный, продукты наливаются ══════ */
+.a{background:#0f1114;color:#f3f4f6;padding:20px 15px;font-family:Onest,sans-serif}
+.a .kick{font:600 10px/1 Onest;letter-spacing:.18em;text-transform:uppercase;color:#7f8794}
+.a h2{font:700 24px/1 Unbounded,sans-serif;letter-spacing:-.03em;margin:7px 0 15px}
+
+.a .kcal{
+  background:linear-gradient(158deg,#1b1f26,#141821);border:1px solid #232833;
+  border-radius:22px;padding:16px 18px;display:flex;align-items:center;gap:14px;
+}
+.a .kcal .fire{width:44px;height:44px;flex:none}
+.a .kcal b{font:700 32px/1 Unbounded;letter-spacing:-.04em}
+.a .kcal small{display:block;font-size:11.5px;color:#7f8794;letter-spacing:.1em;text-transform:uppercase;margin-top:4px}
+.a .kcal .bar{flex:1;height:6px;border-radius:99px;background:#232833;overflow:hidden;margin-left:4px}
+.a .kcal .bar i{display:block;height:100%;width:59%;border-radius:99px;background:#ff7a3d}
+
+.a .macros{display:grid;gap:10px;margin-top:11px}
+.a .mac{
+  background:#161a20;border:1px solid #232833;border-radius:20px;padding:13px 14px;
+  display:flex;align-items:center;gap:13px;position:relative;overflow:hidden;
+}
+.a .mac .ill{width:52px;height:52px;flex:none}
+.a .mac .txt{flex:1;min-width:0}
+.a .mac .txt b{display:block;font:600 15px/1 Onest}
+.a .mac .txt span{display:block;font-size:12.5px;color:#7f8794;margin-top:4px}
+.a .mac .num{text-align:right}
+.a .mac .num b{font:700 19px/1 Unbounded;letter-spacing:-.02em}
+.a .mac .num span{display:block;font-size:11px;color:#7f8794;margin-top:5px}
+.a .mac.p{border-color:#2e3a46}
+.a .mac.f{border-color:#3b3325}
+.a .mac.c{border-color:#33361f}
+
+.a .meals{margin-top:14px;background:#161a20;border:1px solid #232833;border-radius:20px;overflow:hidden}
+.a .meals .h{display:flex;justify-content:space-between;padding:12px 14px;font-size:14px;font-weight:600}
+.a .meals .h span{color:#7f8794;font-weight:400;font-size:12.5px}
+.a .meals .it{display:flex;align-items:center;gap:10px;padding:10px 14px;border-top:1px solid #232833;font-size:13.5px}
+.a .meals .it .dot{width:26px;height:26px;flex:none}
+.a .meals .it em{margin-left:auto;font-style:normal;font:700 14px/1 Unbounded}
+
+/* ══════ ВАРИАНТ B — светлый, медальоны с кольцом ══════ */
+.b{background:#faf7f2;color:#15140f;padding:20px 15px;font-family:'Golos Text',sans-serif}
+.b .kick{font-size:12px;color:#8a8578;font-weight:500}
+.b h2{font:700 25px/1.1 'Golos Text';letter-spacing:-.02em;margin:5px 0 15px}
+
+.b .kcal{background:#15140f;color:#faf7f2;border-radius:26px;padding:17px 19px;display:flex;align-items:center;gap:14px}
+.b .kcal .fire{width:40px;height:40px;flex:none}
+.b .kcal b{font:700 30px/1 'Golos Text';letter-spacing:-.02em}
+.b .kcal small{display:block;font-size:11.5px;color:#9c968a;margin-top:4px}
+.b .kcal .right{margin-left:auto;text-align:right}
+.b .kcal .right u{display:block;text-decoration:none;font-size:11.5px;color:#9c968a}
+.b .kcal .right i{font-style:normal;font-weight:600;font-size:15px}
+
+.b .macros{display:grid;grid-template-columns:repeat(3,1fr);gap:9px;margin-top:11px}
+.b .mac{background:#fff;border-radius:22px;padding:14px 8px 12px;text-align:center;box-shadow:0 5px 16px rgba(21,20,15,.05)}
+.b .mac .med{width:66px;height:66px;margin:0 auto 8px;position:relative}
+.b .mac .med svg{position:absolute;inset:0}
+.b .mac b{display:block;font-size:16px;font-weight:700}
+.b .mac span{display:block;font-size:11px;color:#8a8578;margin-top:2px}
+
+.b .meals{margin-top:12px;background:#fff;border-radius:24px;padding:14px 15px;box-shadow:0 5px 16px rgba(21,20,15,.05)}
+.b .meals .h{display:flex;justify-content:space-between;font-size:14px;font-weight:600;margin-bottom:8px}
+.b .meals .h span{color:#8a8578;font-weight:400;font-size:12.5px}
+.b .meals .it{display:flex;align-items:center;gap:10px;padding:9px 0;border-top:1px solid #f0ece3;font-size:13.5px}
+.b .meals .it .dot{width:26px;height:26px;flex:none}
+.b .meals .it em{margin-left:auto;font-style:normal;font-weight:700}
+.b .add{margin-top:12px;background:#15140f;color:#faf7f2;border-radius:18px;text-align:center;padding:14px;font-size:14px;font-weight:600}
+
+.pick{max-width:640px;margin:40px auto 0;text-align:center;color:#9aa0ad;font-size:15px;line-height:1.6}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<div class="top">
+  <h1>Макросы как продукты</h1>
+  <p>Белок — яйцо, жиры — авокадо, углеводы — колос, калории — огонь. Иллюстрации нарисованы в одном стиле и наливаются по мере того, как ты добираешь норму.</p>
+</div>
+
+<div class="grid">
+
+  <!-- ВАРИАНТ A -->
+  <div class="col">
+    <div class="label"><b>Вариант A</b><span>тёмный, продукт наливается</span></div>
+    <div class="phone"><div class="screen a">
+      <div class="kick">Среда, 19 августа</div>
+      <h2>Еда</h2>
+
+      <div class="kcal">
+        <svg class="fire" viewBox="0 0 64 64">
+          <defs><clipPath id="fA"><rect x="0" y="26" width="64" height="38"/></clipPath></defs>
+          <path d="M32 6c2 10 12 13 12 24 0 9-5 16-12 16s-12-7-12-16c0-6 3-9 5-12 1 5 4 6 5 3 1-4-1-9 2-15z"
+                fill="none" stroke="#3a4049" stroke-width="3" stroke-linejoin="round"/>
+          <path d="M32 6c2 10 12 13 12 24 0 9-5 16-12 16s-12-7-12-16c0-6 3-9 5-12 1 5 4 6 5 3 1-4-1-9 2-15z"
+                fill="#ff7a3d" clip-path="url(#fA)" opacity=".95"/>
+        </svg>
+        <div>
+          <b>1600</b>
+          <small>из 2700 ккал</small>
+        </div>
+        <div class="bar"><i></i></div>
+      </div>
+
+      <div class="macros">
+        <div class="mac p">
+          <svg class="ill" viewBox="0 0 64 64">
+            <defs><clipPath id="eA"><rect x="0" y="4" width="64" height="60"/></clipPath></defs>
+            <path d="M32 7c9 0 17 13 17 25 0 12-7 21-17 21s-17-9-17-21C15 20 23 7 32 7z" fill="#1d232b" stroke="#4a596b" stroke-width="3"/>
+            <path d="M32 7c9 0 17 13 17 25 0 12-7 21-17 21s-17-9-17-21C15 20 23 7 32 7z" fill="#5aa9ff" clip-path="url(#eA)" opacity=".9"/>
+            <circle cx="32" cy="36" r="8" fill="#0f1114" opacity=".35"/>
+          </svg>
+          <div class="txt"><b>Белок</b><span>норма закрыта</span></div>
+          <div class="num"><b>129</b><span>из 110 г</span></div>
+        </div>
+
+        <div class="mac f">
+          <svg class="ill" viewBox="0 0 64 64">
+            <defs><clipPath id="aA"><rect x="0" y="6" width="64" height="58"/></clipPath></defs>
+            <path d="M32 6c7 0 11 7 11 13 0 4-2 7-2 11 0 12-4 22-9 22s-9-10-9-22c0-4-2-7-2-11 0-6 4-13 11-13z" fill="#231f18" stroke="#6b5a3d" stroke-width="3"/>
+            <path d="M32 6c7 0 11 7 11 13 0 4-2 7-2 11 0 12-4 22-9 22s-9-10-9-22c0-4-2-7-2-11 0-6 4-13 11-13z" fill="#ffc247" clip-path="url(#aA)" opacity=".85"/>
+            <ellipse cx="32" cy="36" rx="7" ry="9" fill="#0f1114" opacity=".4"/>
+          </svg>
+          <div class="txt"><b>Жиры</b><span>чуть перебрал</span></div>
+          <div class="num"><b>74</b><span>из 60 г</span></div>
+        </div>
+
+        <div class="mac c">
+          <svg class="ill" viewBox="0 0 64 64">
+            <defs><clipPath id="cA"><rect x="0" y="48" width="64" height="16"/></clipPath></defs>
+            <g fill="none" stroke="#5b6033" stroke-width="3" stroke-linecap="round">
+              <path d="M32 56V14"/>
+              <path d="M32 20c5-6 11-6 11-6s0 7-5 10-6-4-6-4zM32 20c-5-6-11-6-11-6s0 7 5 10 6-4 6-4z"/>
+              <path d="M32 32c5-6 11-6 11-6s0 7-5 10-6-4-6-4zM32 32c-5-6-11-6-11-6s0 7 5 10 6-4 6-4z"/>
+              <path d="M32 44c5-6 11-6 11-6s0 7-5 10-6-4-6-4zM32 44c-5-6-11-6-11-6s0 7 5 10 6-4 6-4z"/>
+            </g>
+            <g clip-path="url(#cA)" fill="none" stroke="#d8f34e" stroke-width="3" stroke-linecap="round">
+              <path d="M32 56V14"/>
+              <path d="M32 44c5-6 11-6 11-6s0 7-5 10-6-4-6-4zM32 44c-5-6-11-6-11-6s0 7 5 10 6-4 6-4z"/>
+            </g>
+          </svg>
+          <div class="txt"><b>Углеводы</b><span>главный провал дня</span></div>
+          <div class="num"><b>102</b><span>из 430 г</span></div>
+        </div>
+      </div>
+
+      <div class="meals">
+        <div class="h">Сегодня <span>4 приёма</span></div>
+        <div class="it">
+          <svg class="dot" viewBox="0 0 64 64"><path d="M32 7c9 0 17 13 17 25 0 12-7 21-17 21s-17-9-17-21C15 20 23 7 32 7z" fill="none" stroke="#5aa9ff" stroke-width="4"/></svg>
+          <span>Протеин + молоко</span><em>730</em>
+        </div>
+        <div class="it">
+          <svg class="dot" viewBox="0 0 64 64"><path d="M32 7c9 0 17 13 17 25 0 12-7 21-17 21s-17-9-17-21C15 20 23 7 32 7z" fill="none" stroke="#5aa9ff" stroke-width="4"/></svg>
+          <span>Омлет 4 яйца</span><em>420</em>
+        </div>
+        <div class="it">
+          <svg class="dot" viewBox="0 0 64 64"><path d="M32 6c7 0 11 7 11 13 0 4-2 7-2 11 0 12-4 22-9 22s-9-10-9-22c0-4-2-7-2-11 0-6 4-13 11-13z" fill="none" stroke="#ffc247" stroke-width="4"/></svg>
+          <span>Орехи горсть</span><em>130</em>
+        </div>
+      </div>
+    </div></div>
+    <p class="note">Каждый макрос — своя карточка со своим продуктом и цветом. Заливка показывает, сколько добрал: яйцо полное, колос пустой.</p>
+  </div>
+
+  <!-- ВАРИАНТ B -->
+  <div class="col">
+    <div class="label"><b>Вариант B</b><span>светлый, медальоны с кольцом</span></div>
+    <div class="phone"><div class="screen b">
+      <div class="kick">Среда, 19 августа</div>
+      <h2>Твой день</h2>
+
+      <div class="kcal">
+        <svg class="fire" viewBox="0 0 64 64">
+          <path d="M32 6c2 10 12 13 12 24 0 9-5 16-12 16s-12-7-12-16c0-6 3-9 5-12 1 5 4 6 5 3 1-4-1-9 2-15z" fill="#ff7a3d"/>
+        </svg>
+        <div><b>1600</b><small>съедено сегодня</small></div>
+        <div class="right"><u>осталось</u><i>1100 ккал</i></div>
+      </div>
+
+      <div class="macros">
+        <div class="mac">
+          <div class="med">
+            <svg viewBox="0 0 72 72">
+              <circle cx="36" cy="36" r="31" fill="none" stroke="#eee9df" stroke-width="6"/>
+              <circle cx="36" cy="36" r="31" fill="none" stroke="#2f6fd0" stroke-width="6" stroke-linecap="round"
+                      stroke-dasharray="195" stroke-dashoffset="0" transform="rotate(-90 36 36)"/>
+              <path d="M36 20c6 0 11 9 11 17 0 8-5 14-11 14s-11-6-11-14c0-8 5-17 11-17z" fill="#dfe9f8" stroke="#2f6fd0" stroke-width="2.5"/>
+              <circle cx="36" cy="39" r="5" fill="#ffc247"/>
+            </svg>
+          </div>
+          <b>129 г</b><span>белок</span>
+        </div>
+
+        <div class="mac">
+          <div class="med">
+            <svg viewBox="0 0 72 72">
+              <circle cx="36" cy="36" r="31" fill="none" stroke="#eee9df" stroke-width="6"/>
+              <circle cx="36" cy="36" r="31" fill="none" stroke="#d08a2f" stroke-width="6" stroke-linecap="round"
+                      stroke-dasharray="195" stroke-dashoffset="0" transform="rotate(-90 36 36)"/>
+              <path d="M36 20c5 0 8 5 8 9 0 3-1 5-1 8 0 8-3 15-7 15s-7-7-7-15c0-3-1-5-1-8 0-4 3-9 8-9z" fill="#f6e8cd" stroke="#d08a2f" stroke-width="2.5"/>
+              <ellipse cx="36" cy="41" rx="4.5" ry="6" fill="#a8642a"/>
+            </svg>
+          </div>
+          <b>74 г</b><span>жиры</span>
+        </div>
+
+        <div class="mac">
+          <div class="med">
+            <svg viewBox="0 0 72 72">
+              <circle cx="36" cy="36" r="31" fill="none" stroke="#eee9df" stroke-width="6"/>
+              <circle cx="36" cy="36" r="31" fill="none" stroke="#7a8f2e" stroke-width="6" stroke-linecap="round"
+                      stroke-dasharray="195" stroke-dashoffset="149" transform="rotate(-90 36 36)"/>
+              <g fill="none" stroke="#7a8f2e" stroke-width="2.5" stroke-linecap="round">
+                <path d="M36 52V22"/>
+                <path d="M36 27c4-4 8-4 8-4s0 5-4 7-4-3-4-3zM36 27c-4-4-8-4-8-4s0 5 4 7 4-3 4-3z"/>
+                <path d="M36 38c4-4 8-4 8-4s0 5-4 7-4-3-4-3zM36 38c-4-4-8-4-8-4s0 5 4 7 4-3 4-3z"/>
+              </g>
+            </svg>
+          </div>
+          <b>102 г</b><span>углеводы</span>
+        </div>
+      </div>
+
+      <div class="meals">
+        <div class="h">Завтрак <span>730 ккал</span></div>
+        <div class="it">
+          <svg class="dot" viewBox="0 0 64 64"><path d="M32 7c9 0 17 13 17 25 0 12-7 21-17 21s-17-9-17-21C15 20 23 7 32 7z" fill="#dfe9f8" stroke="#2f6fd0" stroke-width="3"/></svg>
+          <span>Протеин + молоко</span><em>730</em>
+        </div>
+        <div class="h" style="margin-top:12px">Обед <span>550 ккал</span></div>
+        <div class="it">
+          <svg class="dot" viewBox="0 0 64 64"><path d="M32 7c9 0 17 13 17 25 0 12-7 21-17 21s-17-9-17-21C15 20 23 7 32 7z" fill="#dfe9f8" stroke="#2f6fd0" stroke-width="3"/></svg>
+          <span>Омлет 4 яйца</span><em>420</em>
+        </div>
+        <div class="it">
+          <svg class="dot" viewBox="0 0 64 64"><path d="M32 6c7 0 11 7 11 13 0 4-2 7-2 11 0 12-4 22-9 22s-9-10-9-22c0-4-2-7-2-11 0-6 4-13 11-13z" fill="#f6e8cd" stroke="#d08a2f" stroke-width="3"/></svg>
+          <span>Орехи горсть</span><em>130</em>
+        </div>
+      </div>
+
+      <div class="add">Добавить приём</div>
+    </div></div>
+    <p class="note">Светлая база, каждый макрос — медальон: кольцо прогресса снаружи, продукт внутри. Приёмы помечены иконкой того, чего в них больше.</p>
+  </div>
+
+</div>
+
+<p class="pick">Иллюстрации одни и те же в обоих вариантах — меняется подача. Скажи A или B, и я соберу всё приложение на этой системе: зал получит свои образы (штанга, гантель, турник).</p>
+
+</div>
+</body>
+</html>
