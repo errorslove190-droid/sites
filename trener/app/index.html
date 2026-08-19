@@ -7,94 +7,105 @@
 <title>Трекер</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@700&family=Oswald:wght@500;600&family=Onest:wght@400;500;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@600;700&family=Onest:wght@400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="css/style.css">
 <script src="https://telegram.org/js/telegram-web-app.js"></script>
 </head>
 <body>
 
+<!-- ЕДА -->
 <div id="screen-food" class="screen">
-  <header class="head">
-    <div class="head-date" id="food-date">сегодня</div>
-    <h1>Еда</h1>
-  </header>
 
-  <section class="ring-block">
-    <svg class="ring" viewBox="0 0 120 120" aria-hidden="true">
-      <circle class="ring-bg" cx="60" cy="60" r="52"></circle>
-      <circle class="ring-fill" id="ring-kcal" cx="60" cy="60" r="52"></circle>
-    </svg>
-    <div class="ring-center">
-      <b id="kcal-now">0</b>
-      <span id="kcal-goal">из 2700 ккал</span>
+  <div class="week" id="week"></div>
+
+  <section class="hero">
+    <div class="hero-ring">
+      <svg viewBox="0 0 200 200" aria-hidden="true">
+        <circle class="tr" cx="100" cy="100" r="86"></circle>
+        <circle class="fg" id="ring-kcal" cx="100" cy="100" r="86"></circle>
+      </svg>
+      <div class="hero-center">
+        <b id="kcal-left">2700</b>
+        <span id="kcal-cap">осталось</span>
+      </div>
+    </div>
+    <div class="hero-side">
+      <div class="hero-stat"><span>цель</span><b id="kcal-goal">2700</b></div>
+      <div class="hero-stat"><span>съедено</span><b id="kcal-eat">0</b></div>
     </div>
   </section>
 
-  <section class="bars">
-    <div class="bar-row">
-      <span class="bar-name">белок</span>
-      <div class="bar"><i id="bar-p"></i></div>
-      <span class="bar-val" id="val-p">0 / 110</span>
+  <section class="macros">
+    <div class="macro" data-k="p">
+      <div class="macro-top"><span>Белок</span><b><i id="m-p">0</i> / 110 г</b></div>
+      <div class="track"><i id="bar-p"></i></div>
     </div>
-    <div class="bar-row">
-      <span class="bar-name">жиры</span>
-      <div class="bar"><i id="bar-f"></i></div>
-      <span class="bar-val" id="val-f">0 / 60</span>
+    <div class="macro" data-k="f">
+      <div class="macro-top"><span>Жиры</span><b><i id="m-f">0</i> / 60 г</b></div>
+      <div class="track"><i id="bar-f"></i></div>
     </div>
-    <div class="bar-row">
-      <span class="bar-name">углеводы</span>
-      <div class="bar"><i id="bar-c"></i></div>
-      <span class="bar-val" id="val-c">0 / 430</span>
+    <div class="macro" data-k="c">
+      <div class="macro-top"><span>Углеводы</span><b><i id="m-c">0</i> / 430 г</b></div>
+      <div class="track"><i id="bar-c"></i></div>
     </div>
   </section>
 
-  <section>
-    <h2 class="sec-title">Приёмы <span id="meal-count"></span></h2>
-    <div id="meal-list" class="list"></div>
-  </section>
+  <div id="slots"></div>
 
-  <section>
-    <h2 class="sec-title">Быстро добавить</h2>
+  <section class="quick-wrap">
+    <div class="row-head"><h2>Часто ем</h2></div>
     <div id="quick" class="chips"></div>
-    <button class="btn-ghost" id="btn-manual">Ввести своё</button>
   </section>
 
-  <div class="hint">Сфоткай еду и пришли боту — он посчитает и добавит сюда сам.</div>
+  <p class="foot-hint">Сфоткай тарелку и отправь боту — посчитаю и добавлю сюда.</p>
 </div>
 
+<!-- ЗАЛ -->
 <div id="screen-gym" class="screen hidden">
-  <header class="head">
-    <div class="head-date" id="gym-date">сегодня</div>
-    <h1>Тренировка</h1>
-  </header>
-
-  <div class="tabs" id="day-tabs">
-    <button data-day="A" class="tab">A · верх</button>
-    <button data-day="B" class="tab">B · ноги</button>
-    <button data-day="C" class="tab">C · всё тело</button>
+  <div class="gym-head">
+    <div>
+      <span class="over" id="gym-date">сегодня</span>
+      <h1 id="gym-title">День A</h1>
+    </div>
+    <button class="day-switch" id="day-switch">сменить</button>
   </div>
 
-  <div id="ex-list" class="list"></div>
+  <div class="rest hidden" id="rest">
+    <div class="rest-num" id="rest-num">1:30</div>
+    <div class="rest-cap">отдых</div>
+    <button class="rest-stop" id="rest-stop">пропустить</button>
+  </div>
 
-  <button class="btn-main" id="btn-finish">Завершить тренировку</button>
-  <div class="hint" id="gym-hint"></div>
+  <div id="ex-list"></div>
+
+  <button class="btn-primary" id="btn-finish">Завершить тренировку</button>
+  <p class="foot-hint" id="gym-hint"></p>
 </div>
 
-<nav class="nav">
-  <button class="nav-btn active" data-screen="food"><span>Еда</span></button>
-  <button class="nav-btn" data-screen="gym"><span>Зал</span></button>
+<nav class="tabbar">
+  <button class="tab-btn active" data-screen="food">
+    <svg viewBox="0 0 24 24"><path d="M6 3v8a3 3 0 0 0 6 0V3M9 11v10M18 3c-1.5 2-2 4-2 6s.5 3 2 3v9"/></svg>
+    <span>Еда</span>
+  </button>
+  <button class="tab-btn" data-screen="gym">
+    <svg viewBox="0 0 24 24"><path d="M4 9v6M8 6v12M16 6v12M20 9v6M8 12h8"/></svg>
+    <span>Зал</span>
+  </button>
 </nav>
 
-<div class="sheet hidden" id="sheet">
-  <div class="sheet-box">
-    <h3 id="sheet-title">Добавить приём</h3>
+<div class="modal hidden" id="sheet">
+  <div class="modal-box">
+    <div class="grabber"></div>
+    <h3 id="sheet-title">Добавить</h3>
     <div id="sheet-body"></div>
-    <div class="sheet-btns">
+    <div class="modal-actions">
       <button class="btn-ghost" id="sheet-cancel">Отмена</button>
-      <button class="btn-main" id="sheet-ok">Добавить</button>
+      <button class="btn-primary" id="sheet-ok">Готово</button>
     </div>
   </div>
 </div>
+
+<div class="toast hidden" id="toast"></div>
 
 <script src="js/app.js"></script>
 </body>
