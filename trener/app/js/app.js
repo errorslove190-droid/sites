@@ -315,6 +315,22 @@ function consumeStartParam() {
     return;
   }
 
+  /* w_<день>_<номер упражнения>_<вес>_<повторы>_<сколько подходов> — тренировка из чата */
+  if (raw.slice(0, 2) === 'w_') {
+    const [, day, idx, w, r, n] = raw.split('_');
+    if (!PROGRAM[day]) return;
+    const i = +idx, count = +n || 1;
+    if (!state.workout || state.workout.day !== day) state.workout = { day, sets: {}, done: false };
+    if (!state.workout.sets[i]) state.workout.sets[i] = [];
+    for (let k = 0; k < count; k++) state.workout.sets[i].push({ w: +w, r: +r });
+    state.last[day + i] = { w: +w, r: +r, d: state.day };
+    saveGym();
+    Store.set('last', state.last);
+    renderGym();
+    haptic('medium');
+    return;
+  }
+
   if (raw[0] !== 'm') return;
   const parts = raw.split('_');
   if (parts.length < 5) return;
