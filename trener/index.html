@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Программа набора массы — Михаил</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;700&family=Oswald:wght@500;600&family=Onest:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#0a0a0a; --paper:#ffffff; --lime:#d8f34e;
+  --grey:#6b6b6b; --line:#e4e4e4; --soft:#f6f6f6;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--paper);color:var(--ink);font:400 17px/1.6 Onest,system-ui,sans-serif;-webkit-text-size-adjust:100%}
+.wrap{max-width:760px;margin:0 auto;padding:0 20px 80px}
+
+header{padding:48px 0 32px;border-bottom:3px solid var(--ink)}
+.kicker{font:600 12px/1 Oswald,sans-serif;letter-spacing:.22em;text-transform:uppercase;color:var(--grey)}
+h1{font:700 clamp(30px,7vw,52px)/1.02 Unbounded,sans-serif;letter-spacing:-.02em;margin:14px 0 12px}
+.sub{color:var(--grey);font-size:16px}
+
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--line);border:1px solid var(--line);margin:28px 0 0}
+.stat{background:var(--paper);padding:14px 12px}
+.stat b{display:block;font:700 22px/1 Unbounded,sans-serif}
+.stat span{font:500 11px/1.3 Oswald,sans-serif;letter-spacing:.12em;text-transform:uppercase;color:var(--grey)}
+
+h2{font:700 clamp(22px,5vw,32px)/1.1 Unbounded,sans-serif;letter-spacing:-.01em;margin:56px 0 6px}
+h2 em{font-style:normal;background:var(--lime);padding:0 .18em}
+h3{font:600 15px/1.2 Oswald,sans-serif;letter-spacing:.14em;text-transform:uppercase;margin:32px 0 12px}
+p{margin:12px 0}
+.lead{font-size:19px}
+strong{font-weight:700}
+.muted{color:var(--grey);font-size:15px}
+
+.day{border:1px solid var(--line);margin:18px 0}
+.day-top{display:flex;align-items:baseline;gap:12px;background:var(--ink);color:var(--paper);padding:12px 16px}
+.day-top b{font:700 14px/1 Oswald,sans-serif;letter-spacing:.16em;text-transform:uppercase;color:var(--lime)}
+.day-top span{font:400 14px/1 Onest,sans-serif;opacity:.8}
+table{width:100%;border-collapse:collapse;font-size:15px}
+td{padding:11px 16px;border-top:1px solid var(--line);vertical-align:top}
+td:first-child{width:58%}
+td:last-child{text-align:right;white-space:nowrap;font:500 14px/1.4 Oswald,sans-serif;letter-spacing:.04em;color:var(--grey)}
+tr:first-child td{border-top:0}
+.note{display:block;font-size:13px;color:var(--grey);margin-top:3px}
+
+ul{margin:12px 0 12px 20px}
+li{margin:7px 0}
+
+.box{background:var(--soft);border-left:4px solid var(--lime);padding:18px 20px;margin:24px 0}
+.box.warn{border-left-color:var(--ink)}
+.box h4{font:600 13px/1 Oswald,sans-serif;letter-spacing:.16em;text-transform:uppercase;margin-bottom:8px}
+
+.macros{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--line);border:1px solid var(--line);margin:20px 0}
+.macro{background:var(--paper);padding:16px 12px;text-align:center}
+.macro b{display:block;font:700 26px/1 Unbounded,sans-serif}
+.macro span{font:500 11px/1.3 Oswald,sans-serif;letter-spacing:.1em;text-transform:uppercase;color:var(--grey)}
+
+.check{list-style:none;margin-left:0}
+.check li{padding-left:30px;position:relative}
+.check li::before{content:"";position:absolute;left:0;top:5px;width:15px;height:15px;border:2px solid var(--ink)}
+
+footer{margin-top:64px;padding-top:20px;border-top:1px solid var(--line);color:var(--grey);font-size:14px}
+
+@media(max-width:560px){
+  .stats{grid-template-columns:repeat(2,1fr)}
+  .macros{grid-template-columns:repeat(2,1fr)}
+  td:first-child{width:52%}
+  td{padding:10px 12px}
+  .day-top{flex-direction:column;gap:4px}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header>
+  <div class="kicker">Личная программа · 19 августа 2026</div>
+  <h1>Набор массы<br>за три дня в неделю</h1>
+  <p class="sub">173 см · 54,5 кг · 18 лет · зал · стаж 1–3 года · плечо и спина под присмотром</p>
+  <div class="stats">
+    <div class="stat"><b>2700</b><span>ккал в день</span></div>
+    <div class="stat"><b>+0,4</b><span>кг в неделю</span></div>
+    <div class="stat"><b>3</b><span>тренировки</span></div>
+    <div class="stat"><b>60</b><span>кг к лету</span></div>
+  </div>
+</header>
+
+<h2>Где ты <em>сейчас</em></h2>
+<p class="lead">173 см при 54,5 кг — это индекс массы 18,2, чуть ниже нижней границы нормы. Хорошая новость: у тела огромный запас, куда расти, и в 18 лет он расходуется быстрее всего.</p>
+<p>Плохая новость — расти будешь не от тренировок. Тренировка даёт сигнал, а материал даёт еда, и именно её у тебя не хватает. Ты сам описал: работа, перекусы, поесть некогда. Пока это так, зал будет крутить колесо вхолостую.</p>
+
+<div class="box warn">
+  <h4>Сразу проясним про белок</h4>
+  <p>Ты сказал «коктейль на 100–120 грамм белка». Столько белка — это твоя <strong>норма за весь день</strong>, а в одной порции протеина всего 20–25 г. Если ты правда считал порцию за 100 г белка, то весь месяц недобирал примерно вчетверо — и это объясняет, почему вес стоит.</p>
+</div>
+
+<h2>Сколько <em>есть</em></h2>
+<p>Поддержание при твоём весе и работе — около 2250 ккал. Для роста добавляем сверху, но аккуратно: не «жрать всё подряд», а стабильно на 400 ккал больше каждый день.</p>
+
+<div class="macros">
+  <div class="macro"><b>2700</b><span>ккал</span></div>
+  <div class="macro"><b>110 г</b><span>белок</span></div>
+  <div class="macro"><b>430 г</b><span>углеводы</span></div>
+  <div class="macro"><b>60 г</b><span>жиры</span></div>
+</div>
+
+<p class="muted">Взвешиваться раз в неделю, утром, натощак, после туалета. Растёт на 0,3–0,5 кг в неделю — всё верно. Три недели стоит на месте — добавляешь 200 ккал и не думаешь.</p>
+
+<h3>Как это выглядит в еде</h3>
+<table>
+  <tr><td>Завтрак — каша на молоке, 2 яйца, банан, орехи<span class="note">то, что ты и так делаешь, просто не пропускать</span></td><td>~700 ккал</td></tr>
+  <tr><td>Второй завтрак — коктейль: протеин + молоко + банан + 2 ложки овсянки<span class="note">делается за минуту, пьётся на ходу</span></td><td>~500 ккал</td></tr>
+  <tr><td>Обед — мясо/курица/рыба + гарнир с горкой + хлеб</td><td>~750 ккал</td></tr>
+  <tr><td>Перекус — творог с мёдом, или бутерброды, или горсть орехов с сухофруктами</td><td>~350 ккал</td></tr>
+  <tr><td>Ужин — яичница из 3 яиц с хлебом, или то, что мама приготовила</td><td>~450 ккал</td></tr>
+</table>
+
+<div class="box">
+  <h4>Главный приём — жидкие калории</h4>
+  <p>У тебя нет времени есть, значит основную ставку делаем на то, что <strong>пьётся</strong>. Коктейль «протеин + молоко + банан + овсянка + ложка арахисовой пасты» — это 600 ккал и три минуты. Два таких в день закрывают весь твой дефицит, даже если день сорвался.</p>
+</div>
+
+<h2>Как <em>тренироваться</em></h2>
+<p>Три дня, каждая мышца дважды в неделю. Понедельник — верх, среда — низ, пятница — всё тело. Дни можно двигать, главное — держать день отдыха между ними.</p>
+
+<div class="day">
+  <div class="day-top"><b>День A</b><span>верх тела</span></div>
+  <table>
+    <tr><td>Жим гантелей лёжа<span class="note">гантели, а не штанга — плечо в свободном положении</span></td><td>4 × 6–10</td></tr>
+    <tr><td>Тяга верхнего блока нейтральным хватом</td><td>4 × 8–12</td></tr>
+    <tr><td>Жим гантелей сидя<span class="note">не опускать ниже уровня ушей</span></td><td>3 × 8–12</td></tr>
+    <tr><td>Тяга в тренажёре с упором в грудь</td><td>3 × 10–12</td></tr>
+    <tr><td>Подъём на бицепс + разгибания на трицепс</td><td>3 × 10–15</td></tr>
+    <tr><td>Отведения в стороны с лёгкими гантелями</td><td>3 × 15</td></tr>
+  </table>
+</div>
+
+<div class="day">
+  <div class="day-top"><b>День B</b><span>ноги и спина</span></div>
+  <table>
+    <tr><td>Приседания со штангой<span class="note">спина болит — начинай с гоблет-приседа с гантелью</span></td><td>4 × 6–10</td></tr>
+    <tr><td>Жим ногами</td><td>3 × 10–12</td></tr>
+    <tr><td>Румынская тяга с гантелями<span class="note">лёгкий вес, идеальная техника, при боли — пропускаем</span></td><td>3 × 10–12</td></tr>
+    <tr><td>Сгибания и разгибания ног в тренажёре</td><td>3 × 12</td></tr>
+    <tr><td>Гиперэкстензия<span class="note">лечит спину лучше, чем щадящий режим</span></td><td>3 × 15</td></tr>
+    <tr><td>Подъёмы на носки, планка</td><td>3 × 15 / 3 × 40 сек</td></tr>
+  </table>
+</div>
+
+<div class="day">
+  <div class="day-top"><b>День C</b><span>всё тело</span></div>
+  <table>
+    <tr><td>Подтягивания нейтральным хватом<span class="note">не тянет — в гравитроне или с резиной</span></td><td>4 × макс</td></tr>
+    <tr><td>Жим гантелей на наклонной</td><td>4 × 8–12</td></tr>
+    <tr><td>Выпады с гантелями</td><td>3 × 10 на ногу</td></tr>
+    <tr><td>Тяга гантели в наклоне с упором в скамью</td><td>3 × 10–12</td></tr>
+    <tr><td>Жим гантелей сидя или отжимания на брусьях</td><td>3 × 10</td></tr>
+    <tr><td>Бицепс, трицепс, пресс</td><td>3 × 12–15</td></tr>
+  </table>
+</div>
+
+<div class="box">
+  <h4>Правило, которое двигает вес</h4>
+  <p>Записывай, что поднял. Каждую неделю добавляй либо повторение, либо 2,5 кг — хотя бы в одном упражнении. Без записи прогресс не отслеживается и через месяц ты будешь ходить с теми же весами, что сегодня.</p>
+</div>
+
+<h2>Плечо и <em>спина</em></h2>
+<ul>
+  <li><strong>Никогда:</strong> жим из-за головы, тяга штанги к подбородку, разводки выше уровня плеч, становая с пола — пока болит.</li>
+  <li><strong>Боль во время подхода</strong> — подход закончен, вес вниз. Не «дотерплю».</li>
+  <li>Разминка 5–7 минут обязательна: вращения плечами, лёгкий вес на 15 повторов перед рабочим.</li>
+  <li>Массаж — хорошая идея, но он снимает симптом. Если через 2–3 недели по-прежнему болит, иди к врачу, а не к массажисту второй раз.</li>
+</ul>
+
+<h2>Добавки: что <em>реально</em> нужно</h2>
+<table>
+  <tr><td><strong>Креатин</strong> — 5 г каждый день, включая дни отдыха<span class="note">время не важно, важна регулярность; пей больше воды</span></td><td>работает</td></tr>
+  <tr><td><strong>Протеин</strong> — 1–2 порции, чтобы добрать белок<span class="note">это еда, а не волшебство: 25 г белка на порцию</span></td><td>удобно</td></tr>
+  <tr><td><strong>Предтрен</strong> — не чаще 2 раз в неделю, не после 17:00<span class="note">каждый раз — и он перестанет работать, плюс убьёт сон</span></td><td>осторожно</td></tr>
+  <tr><td><strong>Сон 8 часов</strong> — сильнее любой добавки<span class="note">мышцы растут ночью, а не в зале</span></td><td>обязательно</td></tr>
+</table>
+
+<h2>Первая <em>неделя</em></h2>
+<ul class="check">
+  <li>Взвеситься утром и записать цифру — это точка отсчёта</li>
+  <li>Купить овсянку, арахисовую пасту, бананы, творог — на коктейли</li>
+  <li>Три тренировки, каждую записать: упражнение, вес, повторы</li>
+  <li>Два коктейля в день, даже если день сорвался</li>
+  <li>Записаться на массаж</li>
+  <li>В воскресенье — взвеситься снова и сказать мне цифру</li>
+</ul>
+
+<footer>
+  Программа собрана 19 августа 2026 под конкретные вводные. Это не медицинское назначение:
+  если плечо или спина болят дольше двух-трёх недель, нужен врач, а не корректировка упражнений.
+</footer>
+
+</div>
+</body>
+</html>
