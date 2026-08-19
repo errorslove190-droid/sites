@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, user-scalable=no">
 <meta name="robots" content="noindex, nofollow">
-<title>Трекер</title>
+<title>Трекер питания</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Golos+Text:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -13,7 +13,6 @@
 </head>
 <body>
 
-<!-- иллюстрации: один набор на всё приложение -->
 <svg style="position:absolute;width:0;height:0;overflow:hidden" aria-hidden="true">
   <symbol id="ic-egg" viewBox="0 0 64 64">
     <path d="M32 8c9 0 16 13 16 24 0 12-7 20-16 20s-16-8-16-20C16 21 23 8 32 8z" fill="var(--fill,#dfe9f8)" stroke="currentColor" stroke-width="3"/>
@@ -34,44 +33,40 @@
   <symbol id="ic-fire" viewBox="0 0 64 64">
     <path d="M32 6c2 10 12 13 12 24 0 9-5 16-12 16s-12-7-12-16c0-6 3-9 5-12 1 5 4 6 5 3 1-4-1-9 2-15z" fill="currentColor"/>
   </symbol>
-  <symbol id="ic-barbell" viewBox="0 0 64 64">
-    <g fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round">
-      <path d="M6 26v12M13 21v22M51 21v22M58 26v12M13 32h38"/>
-    </g>
-  </symbol>
-  <symbol id="ic-dumbbell" viewBox="0 0 64 64">
-    <g fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round">
-      <path d="M12 22v20M20 26v12M44 26v12M52 22v20M20 32h24"/>
-    </g>
-  </symbol>
-  <symbol id="ic-pullup" viewBox="0 0 64 64">
-    <g fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
-      <path d="M10 14h44M18 14v6M46 14v6"/>
-      <circle cx="32" cy="32" r="5"/>
-      <path d="M32 37v12M24 22l6 10M40 22l-6 10M27 56l5-7 5 7"/>
-    </g>
-  </symbol>
   <symbol id="ic-fork" viewBox="0 0 64 64">
     <g fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
       <path d="M20 8v16a6 6 0 0 0 12 0V8M26 24v32M46 8c-4 6-5 11-5 15s2 7 5 7v26"/>
     </g>
   </symbol>
+  <symbol id="ic-chart" viewBox="0 0 64 64">
+    <g fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M10 54h44M18 54V34M31 54V18M44 54V28"/>
+    </g>
+  </symbol>
+  <symbol id="ic-user" viewBox="0 0 64 64">
+    <g fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+      <circle cx="32" cy="23" r="10"/>
+      <path d="M13 54c0-10 8-16 19-16s19 6 19 16"/>
+    </g>
+  </symbol>
 </svg>
 
-<!-- ЕДА -->
-<main id="screen-food" class="screen">
-  <header class="head">
-    <span class="date" id="food-date">сегодня</span>
-    <h1>Твой день</h1>
+<!-- ДЕНЬ -->
+<main id="screen-day" class="screen">
+  <header class="head daynav">
+    <button class="nav-arrow" id="prev-day" aria-label="Назад">‹</button>
+    <div class="daynav-mid">
+      <span class="date" id="food-date">сегодня</span>
+      <h1 id="day-title">Твой день</h1>
+    </div>
+    <button class="nav-arrow" id="next-day" aria-label="Вперёд">›</button>
   </header>
-
-  <div class="week" id="week"></div>
 
   <section class="kcal">
     <svg class="kcal-fire"><use href="#ic-fire"/></svg>
     <div class="kcal-main">
       <b id="kcal-eat">0</b>
-      <small>съедено сегодня</small>
+      <small>съедено</small>
     </div>
     <div class="kcal-right">
       <span id="kcal-cap">осталось</span>
@@ -82,43 +77,28 @@
   <section class="macros">
     <button class="mac" data-k="p">
       <span class="med">
-        <svg class="ring" viewBox="0 0 72 72">
-          <circle class="tr" cx="36" cy="36" r="31"/>
-          <circle class="fg" id="ring-p" cx="36" cy="36" r="31" transform="rotate(-90 36 36)"/>
-        </svg>
+        <svg class="ring" viewBox="0 0 72 72"><circle class="tr" cx="36" cy="36" r="31"/><circle class="fg" id="ring-p" cx="36" cy="36" r="31" transform="rotate(-90 36 36)"/></svg>
         <svg class="ill"><use href="#ic-egg"/></svg>
       </span>
-      <b id="m-p">0 г</b>
-      <span class="cap">белок</span>
-      <span class="goal">из 110</span>
+      <b id="m-p">0 г</b><span class="cap">белок</span><span class="goal" id="g-p">из 110</span>
     </button>
-
     <button class="mac" data-k="f">
       <span class="med">
-        <svg class="ring" viewBox="0 0 72 72">
-          <circle class="tr" cx="36" cy="36" r="31"/>
-          <circle class="fg" id="ring-f" cx="36" cy="36" r="31" transform="rotate(-90 36 36)"/>
-        </svg>
+        <svg class="ring" viewBox="0 0 72 72"><circle class="tr" cx="36" cy="36" r="31"/><circle class="fg" id="ring-f" cx="36" cy="36" r="31" transform="rotate(-90 36 36)"/></svg>
         <svg class="ill"><use href="#ic-avocado"/></svg>
       </span>
-      <b id="m-f">0 г</b>
-      <span class="cap">жиры</span>
-      <span class="goal">из 60</span>
+      <b id="m-f">0 г</b><span class="cap">жиры</span><span class="goal" id="g-f">из 60</span>
     </button>
-
     <button class="mac" data-k="c">
       <span class="med">
-        <svg class="ring" viewBox="0 0 72 72">
-          <circle class="tr" cx="36" cy="36" r="31"/>
-          <circle class="fg" id="ring-c" cx="36" cy="36" r="31" transform="rotate(-90 36 36)"/>
-        </svg>
+        <svg class="ring" viewBox="0 0 72 72"><circle class="tr" cx="36" cy="36" r="31"/><circle class="fg" id="ring-c" cx="36" cy="36" r="31" transform="rotate(-90 36 36)"/></svg>
         <svg class="ill"><use href="#ic-grain"/></svg>
       </span>
-      <b id="m-c">0 г</b>
-      <span class="cap">углеводы</span>
-      <span class="goal">из 430</span>
+      <b id="m-c">0 г</b><span class="cap">углеводы</span><span class="goal" id="g-c">из 430</span>
     </button>
   </section>
+
+  <p class="advice" id="advice"></p>
 
   <div id="slots"></div>
 
@@ -130,41 +110,63 @@
   <p class="hint">Сфоткай тарелку и отправь боту — посчитаю и добавлю сюда.</p>
 </main>
 
-<!-- ЗАЛ -->
-<main id="screen-gym" class="screen hidden">
+<!-- НЕДЕЛЯ -->
+<main id="screen-week" class="screen hidden">
   <header class="head">
-    <span class="date" id="gym-date">сегодня</span>
-    <h1>Тренировка</h1>
+    <span class="date">последние 7 дней</span>
+    <h1>Неделя</h1>
   </header>
 
-  <section class="daycard">
-    <svg class="daycard-ic" id="day-ic"><use href="#ic-barbell"/></svg>
-    <div class="daycard-main">
-      <b id="gym-title">День A</b>
-      <small id="gym-sub">верх тела</small>
+  <section class="wcard">
+    <div class="wsum">
+      <div><span>в среднем</span><b id="w-avg">0</b><em>ккал в день</em></div>
+      <div><span>дней в норме</span><b id="w-hit">0</b><em>из 7</em></div>
     </div>
-    <button class="daycard-switch" id="day-switch">сменить</button>
+    <div class="chart" id="chart"></div>
   </section>
 
-  <section class="rest hidden" id="rest">
-    <b id="rest-num">1:30</b>
-    <span>отдых между подходами</span>
-    <button id="rest-stop">пропустить</button>
+  <section class="wmacros">
+    <div class="wrow"><span class="dot p"></span>Белок<b id="w-p">0 г</b><small>в среднем за день</small></div>
+    <div class="wrow"><span class="dot f"></span>Жиры<b id="w-f">0 г</b><small>в среднем за день</small></div>
+    <div class="wrow"><span class="dot c"></span>Углеводы<b id="w-c">0 г</b><small>в среднем за день</small></div>
   </section>
 
-  <div id="ex-list"></div>
+  <p class="advice" id="w-advice"></p>
+</main>
 
-  <button class="btn-dark" id="btn-finish">Завершить тренировку</button>
-  <p class="hint" id="gym-hint"></p>
+<!-- ПРОФИЛЬ -->
+<main id="screen-me" class="screen hidden">
+  <header class="head">
+    <span class="date">цели и вес</span>
+    <h1>Профиль</h1>
+  </header>
+
+  <section class="slot">
+    <div class="slot-head"><h2>Вес</h2><button class="slot-add" id="add-weight" aria-label="Записать">+</button></div>
+    <div id="weight-list"></div>
+  </section>
+
+  <section class="slot">
+    <div class="slot-head"><h2>Норма на день</h2><button class="slot-add" id="edit-goal" aria-label="Изменить">✎</button></div>
+    <div class="goal-grid">
+      <div><span>ккал</span><b id="gg-kcal">2700</b></div>
+      <div><span>белок</span><b id="gg-p">110</b></div>
+      <div><span>жиры</span><b id="gg-f">60</b></div>
+      <div><span>углев.</span><b id="gg-c">430</b></div>
+    </div>
+    <p class="goal-note" id="goal-note"></p>
+  </section>
+
+  <section class="slot">
+    <div class="slot-head"><h2>Мои блюда</h2><button class="slot-add" id="add-dish" aria-label="Добавить">+</button></div>
+    <div id="my-list"></div>
+  </section>
 </main>
 
 <nav class="tabbar">
-  <button class="tab active" data-screen="food">
-    <svg><use href="#ic-fork"/></svg><span>Еда</span>
-  </button>
-  <button class="tab" data-screen="gym">
-    <svg><use href="#ic-dumbbell"/></svg><span>Зал</span>
-  </button>
+  <button class="tab active" data-screen="day"><svg><use href="#ic-fork"/></svg><span>День</span></button>
+  <button class="tab" data-screen="week"><svg><use href="#ic-chart"/></svg><span>Неделя</span></button>
+  <button class="tab" data-screen="me"><svg><use href="#ic-user"/></svg><span>Профиль</span></button>
 </nav>
 
 <div class="modal hidden" id="sheet">

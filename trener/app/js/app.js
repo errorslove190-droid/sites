@@ -1,13 +1,13 @@
 'use strict';
 
-/* Трекер еды и тренировок. Telegram Mini App, без сервера:
+/* Трекер питания. Telegram Mini App, без сервера:
    данные лежат в облаке Telegram (CloudStorage), в браузере — в localStorage. */
 
 const tg = window.Telegram && window.Telegram.WebApp ? window.Telegram.WebApp : null;
+const RING = 195;                       // длина окружности медальона, r = 31
 
-const GOAL = { kcal: 2700, p: 110, f: 60, c: 430 };
-const REST_SEC = 90;
-const RING = 195;                      // длина окружности медальона, r = 31
+const DEFAULT_GOAL = { kcal: 2700, p: 110, f: 60, c: 430 };
+const PROFILE = { h: 173, age: 18 };    // рост и возраст для пересчёта нормы
 
 const SLOTS = [
   { k: 'b', n: 'Завтрак',  till: 11 },
@@ -16,34 +16,7 @@ const SLOTS = [
   { k: 's', n: 'Перекусы', till: 24 },
 ];
 
-const PROGRAM = {
-  A: { title: 'верх тела', ic: 'ic-dumbbell', ex: [
-    { n: 'Жим гантелей лёжа', s: '4 × 6–10', ic: 'ic-dumbbell' },
-    { n: 'Тяга верхнего блока', s: '4 × 8–12', ic: 'ic-pullup' },
-    { n: 'Жим гантелей сидя', s: '3 × 8–12', ic: 'ic-dumbbell' },
-    { n: 'Тяга в тренажёре', s: '3 × 10–12', ic: 'ic-barbell' },
-    { n: 'Бицепс + трицепс', s: '3 × 10–15', ic: 'ic-dumbbell' },
-    { n: 'Отведения в стороны', s: '3 × 15', ic: 'ic-dumbbell' },
-  ]},
-  B: { title: 'ноги и спина', ic: 'ic-barbell', ex: [
-    { n: 'Приседания', s: '4 × 6–10', ic: 'ic-barbell' },
-    { n: 'Жим ногами', s: '3 × 10–12', ic: 'ic-barbell' },
-    { n: 'Румынская тяга', s: '3 × 10–12', ic: 'ic-barbell' },
-    { n: 'Сгибания и разгибания ног', s: '3 × 12', ic: 'ic-dumbbell' },
-    { n: 'Гиперэкстензия', s: '3 × 15', ic: 'ic-pullup' },
-    { n: 'Носки + планка', s: '3 × 15', ic: 'ic-dumbbell' },
-  ]},
-  C: { title: 'всё тело', ic: 'ic-pullup', ex: [
-    { n: 'Подтягивания', s: '4 × макс', ic: 'ic-pullup' },
-    { n: 'Жим гантелей на наклонной', s: '4 × 8–12', ic: 'ic-dumbbell' },
-    { n: 'Выпады с гантелями', s: '3 × 10', ic: 'ic-dumbbell' },
-    { n: 'Тяга гантели в наклоне', s: '3 × 10–12', ic: 'ic-dumbbell' },
-    { n: 'Жим сидя или брусья', s: '3 × 10', ic: 'ic-barbell' },
-    { n: 'Бицепс, трицепс, пресс', s: '3 × 12–15', ic: 'ic-dumbbell' },
-  ]},
-};
-
-const QUICK = [
+const BASE_DISHES = [
   { n: 'Коктейль полный',   d: 'протеин + молоко + банан', kcal: 600, p: 40, f: 16, c: 72 },
   { n: 'Протеин 110 + молоко', d: '600 мл',                kcal: 730, p: 95, f: 22, c: 39 },
   { n: 'Каша на молоке',    d: 'овсянка 80 г',             kcal: 420, p: 13, f: 12, c: 62 },
@@ -99,31 +72,33 @@ function dayKey(d) {
   return `${d.getFullYear()}${pad(d.getMonth() + 1)}${pad(d.getDate())}`;
 }
 
+function fromKey(key) {
+  return new Date(+key.slice(0, 4), +key.slice(4, 6) - 1, +key.slice(6, 8));
+}
+
 /* ---------- состояние ---------- */
 
 const state = {
-  day: dayKey(new Date()),
+  today: dayKey(new Date()),
+  view: dayKey(new Date()),   // какой день смотрим
   meals: [],
-  workout: null,
-  last: {},
-  gymDay: null,
-  rest: null,
+  goal: Object.assign({}, DEFAULT_GOAL),
+  dishes: [],                 // свои блюда
+  weights: [],
 };
 
-/* ---------- вспомогательное ---------- */
+/* ---------- общее ---------- */
 
-function icon(id, cls) {
-  return `<svg class="${cls}"><use href="#${id}"/></svg>`;
-}
+const KIND_ICON = { p: 'ic-egg', f: 'ic-avocado', c: 'ic-grain' };
 
-/* Чем приём богаче — то и рисуем: белок → яйцо, жиры → авокадо, углеводы → колос */
+function icon(id, cls) { return `<svg class="${cls}"><use href="#${id}"/></svg>`; }
+
+/* Чем блюдо богаче — то и рисуем */
 function mealKind(m) {
   const cal = { p: m.p * 4, f: m.f * 9, c: m.c * 4 };
   if (cal.p >= cal.f && cal.p >= cal.c) return 'p';
   return cal.f >= cal.c ? 'f' : 'c';
 }
-
-const KIND_ICON = { p: 'ic-egg', f: 'ic-avocado', c: 'ic-grain' };
 
 function sum(list) {
   return (list || state.meals).reduce((a, m) => ({
@@ -136,22 +111,67 @@ function slotOfNow() {
   return (SLOTS.find(s => h < s.till) || SLOTS[3]).k;
 }
 
-/* ---------- еда ---------- */
+function niceDate(key) {
+  const d = fromKey(key);
+  const dows = ['воскресенье','понедельник','вторник','среда','четверг','пятница','суббота'];
+  const months = ['января','февраля','марта','апреля','мая','июня','июля','августа','сентября','октября','ноября','декабря'];
+  return dows[d.getDay()] + ', ' + d.getDate() + ' ' + months[d.getMonth()];
+}
 
-function renderFood() {
+/* ---------- экран «День» ---------- */
+
+function renderDay() {
   const t = sum();
+  const G = state.goal;
+
+  document.getElementById('food-date').textContent = niceDate(state.view);
+  document.getElementById('day-title').textContent =
+    state.view === state.today ? 'Твой день' : 'Тот день';
+  document.getElementById('next-day').disabled = state.view >= state.today;
 
   document.getElementById('kcal-eat').textContent = Math.round(t.kcal);
-  const left = GOAL.kcal - t.kcal;
+  const left = G.kcal - t.kcal;
   document.getElementById('kcal-cap').textContent = left >= 0 ? 'осталось' : 'перебор';
   document.getElementById('kcal-left').textContent = Math.abs(Math.round(left)) + ' ккал';
 
   ['p', 'f', 'c'].forEach(k => {
     document.getElementById('m-' + k).textContent = Math.round(t[k]) + ' г';
-    const ring = document.getElementById('ring-' + k);
-    ring.style.strokeDashoffset = (RING * (1 - Math.min(t[k] / GOAL[k], 1))).toFixed(1);
+    document.getElementById('g-' + k).textContent = 'из ' + G[k];
+    document.getElementById('ring-' + k).style.strokeDashoffset =
+      (RING * (1 - Math.min(t[k] / G[k], 1))).toFixed(1);
   });
 
+  renderAdvice(t);
+  renderSlots();
+}
+
+/* Одна честная подсказка: где сегодня дыра и чем её закрыть */
+function renderAdvice(t) {
+  const G = state.goal, el = document.getElementById('advice');
+  const leftK = Math.round(G.kcal - t.kcal);
+  const leftC = Math.round(G.c - t.c);
+  const leftP = Math.round(G.p - t.p);
+
+  if (!state.meals.length) {
+    el.innerHTML = `Пока пусто. За день нужно набрать <b>${G.kcal} ккал</b> — это примерно пять приёмов.`;
+    return;
+  }
+  if (leftK <= 0) {
+    el.innerHTML = `Норма закрыта: <b>${Math.round(t.kcal)} ккал</b>. Так и держи.`;
+    return;
+  }
+  if (leftC > 120) {
+    el.innerHTML = `Не хватает <b>${leftK} ккал</b>, и почти всё это углеводы (<b>${leftC} г</b>). Закрывай гарниром: рис, макароны, картошка, хлеб — не белком.`;
+    return;
+  }
+  if (leftP > 40) {
+    el.innerHTML = `Осталось <b>${leftK} ккал</b> и <b>${leftP} г</b> белка — самое время для коктейля или творога.`;
+    return;
+  }
+  el.innerHTML = `Осталось добрать <b>${leftK} ккал</b>. Проще всего — коктейль на молоке или тарелка плова.`;
+}
+
+function renderSlots() {
   const box = document.getElementById('slots');
   box.innerHTML = '';
 
@@ -188,7 +208,7 @@ function renderFood() {
       row.querySelector('b').textContent = m.n;
       row.querySelector('.item-del').addEventListener('click', () => {
         state.meals.splice(idx, 1);
-        saveFood(); renderFood(); renderWeek(); haptic('light');
+        saveMeals(); renderDay(); haptic('light');
       });
       el.appendChild(row);
     });
@@ -201,32 +221,68 @@ function addMeal(meal, slot) {
   const d = new Date();
   const pad = n => String(n).padStart(2, '0');
   state.meals.push({
-    n: meal.n, kcal: +meal.kcal || 0, p: +meal.p || 0, f: +meal.f || 0, c: +meal.c || 0,
+    n: meal.n, kcal: Math.round(+meal.kcal || 0), p: Math.round(+meal.p || 0),
+    f: Math.round(+meal.f || 0), c: Math.round(+meal.c || 0),
     s: slot || meal.s || slotOfNow(),
-    t: `${pad(d.getHours())}:${pad(d.getMinutes())}`,
+    t: state.view === state.today ? `${pad(d.getHours())}:${pad(d.getMinutes())}` : '',
   });
-  saveFood();
-  renderFood();
-  renderWeek();
+  saveMeals();
+  renderDay();
   haptic('medium');
   toast(meal.n + ' · +' + Math.round(meal.kcal));
 }
 
-function saveFood() { Store.set('f' + state.day, state.meals); }
+function saveMeals() { Store.set('f' + state.view, state.meals); }
+
+/* ---------- добавление ---------- */
+
+function allDishes() { return state.dishes.concat(BASE_DISHES); }
 
 function renderQuick() {
   const box = document.getElementById('quick-list');
   box.innerHTML = '';
-  QUICK.forEach(q => {
-    const kind = mealKind(q);
+  allDishes().slice(0, 10).forEach(q => {
     const b = document.createElement('button');
     b.className = 'chip';
-    b.innerHTML = `${icon(KIND_ICON[kind], 'item-ic ' + kind)}<span><b></b><small></small></span>`;
+    b.innerHTML = `${icon(KIND_ICON[mealKind(q)], 'item-ic ' + mealKind(q))}<span><b></b><small></small></span>`;
     b.querySelector('b').textContent = q.n;
-    b.querySelector('small').textContent = q.kcal + ' ккал · ' + q.d;
-    b.addEventListener('click', () => addMeal(q));
+    b.querySelector('small').textContent = q.kcal + ' ккал · ' + (q.d || '');
+    b.addEventListener('click', () => askPortion(q));
     box.appendChild(b);
   });
+}
+
+/* Порция редко бывает ровно такой, как в справочнике — спрашиваем множитель */
+function askPortion(dish) {
+  let mult = 1;
+  openSheet(dish.n, `
+    <div class="mult">
+      <button data-m="0.5">½ порции</button>
+      <button data-m="1" class="on">1 порция</button>
+      <button data-m="1.5">1½</button>
+      <button data-m="2">2 порции</button>
+    </div>
+    <div class="mult-out" id="mult-out"></div>`, () => {
+    addMeal({
+      n: dish.n + (mult !== 1 ? ` (×${mult})` : ''),
+      kcal: dish.kcal * mult, p: dish.p * mult, f: dish.f * mult, c: dish.c * mult,
+    });
+    return true;
+  });
+
+  const out = document.getElementById('mult-out');
+  const show = () => {
+    out.innerHTML = `<b>${Math.round(dish.kcal * mult)} ккал</b> · Б ${Math.round(dish.p * mult)} · Ж ${Math.round(dish.f * mult)} · У ${Math.round(dish.c * mult)}`;
+  };
+  document.querySelectorAll('.mult button').forEach(b => {
+    b.addEventListener('click', () => {
+      mult = +b.dataset.m;
+      document.querySelectorAll('.mult button').forEach(x => x.classList.toggle('on', x === b));
+      show();
+      haptic('light');
+    });
+  });
+  show();
 }
 
 function askMeal(slot) {
@@ -251,10 +307,9 @@ function askMeal(slot) {
   });
 }
 
-/* ---------- неделя ---------- */
+/* ---------- экран «Неделя» ---------- */
 
 async function renderWeek() {
-  const box = document.getElementById('week');
   const names = ['вс', 'пн', 'вт', 'ср', 'чт', 'пт', 'сб'];
   const days = [];
   for (let i = 6; i >= 0; i--) {
@@ -264,135 +319,161 @@ async function renderWeek() {
   }
   const data = await Store.many(days.map(d => 'f' + dayKey(d)));
 
-  box.innerHTML = '';
-  days.forEach(d => {
+  const totals = days.map(d => {
     const key = dayKey(d);
-    const meals = key === state.day ? state.meals : data['f' + key];
-    const kcal = meals ? sum(meals).kcal : 0;
-    const el = document.createElement('div');
-    el.className = 'wd' + (kcal >= GOAL.kcal * 0.9 ? ' hit' : '') + (key === state.day ? ' today' : '');
-    el.innerHTML = '<span></span><i></i>';
-    el.querySelector('span').textContent = names[d.getDay()];
-    box.appendChild(el);
+    const meals = key === state.view ? state.meals : data['f' + key];
+    return { key, dow: names[d.getDay()], t: sum(meals || []) };
   });
-}
 
-/* ---------- зал ---------- */
+  const filled = totals.filter(x => x.t.kcal > 0);
+  const avg = filled.length ? filled.reduce((a, x) => a + x.t.kcal, 0) / filled.length : 0;
+  const hit = totals.filter(x => x.t.kcal >= state.goal.kcal * 0.9).length;
 
-function suggestDay() {
-  const wd = new Date().getDay();
-  if (wd === 1 || wd === 2) return 'A';
-  if (wd === 3 || wd === 4) return 'B';
-  return 'C';
-}
+  document.getElementById('w-avg').textContent = Math.round(avg);
+  document.getElementById('w-hit').textContent = hit;
+  ['p', 'f', 'c'].forEach(k => {
+    const v = filled.length ? filled.reduce((a, x) => a + x.t[k], 0) / filled.length : 0;
+    document.getElementById('w-' + k).textContent = Math.round(v) + ' г';
+  });
 
-function renderGym() {
-  const day = state.gymDay || (state.workout && state.workout.day) || suggestDay();
-  state.gymDay = day;
-  const prog = PROGRAM[day];
-
-  document.getElementById('gym-title').textContent = 'День ' + day;
-  document.getElementById('gym-sub').textContent = prog.title;
-  document.querySelector('#day-ic use').setAttribute('href', '#' + prog.ic);
-
-  const list = document.getElementById('ex-list');
-  list.innerHTML = '';
-
-  prog.ex.forEach((ex, i) => {
-    const sets = (state.workout && state.workout.day === day && state.workout.sets[i]) || [];
-    const last = state.last[day + i];
-
-    const el = document.createElement('section');
-    el.className = 'ex' + (sets.length ? ' filled' : '');
-    el.innerHTML = `
-      <div class="ex-head">${icon(ex.ic, 'ex-ic')}<b></b><span class="ex-target">${ex.s}</span></div>
-      <div class="ex-prev"></div>`;
-    el.querySelector('b').textContent = ex.n;
-
-    const prev = el.querySelector('.ex-prev');
-    if (last) {
-      prev.innerHTML = 'прошлый раз: <i></i>';
-      prev.querySelector('i').textContent = `${last.w} кг × ${last.r}`;
-    } else {
-      prev.textContent = 'ещё не делал — запиши первый подход';
-    }
-
-    sets.forEach((s, si) => {
-      const row = document.createElement('div');
-      row.className = 'set';
-      row.innerHTML = `
-        <span class="set-n">${si + 1}</span>
-        <span class="set-v">${s.w} кг <em>×</em> ${s.r}</span>
-        <button class="set-del" aria-label="Удалить">×</button>`;
-      row.querySelector('.set-del').addEventListener('click', () => {
-        state.workout.sets[i].splice(si, 1);
-        saveGym(); renderGym(); haptic('light');
-      });
-      el.appendChild(row);
+  const max = Math.max(state.goal.kcal, ...totals.map(x => x.t.kcal)) * 1.1;
+  const chart = document.getElementById('chart');
+  chart.innerHTML = '';
+  totals.forEach(x => {
+    const bar = document.createElement('div');
+    bar.className = 'bar' + (x.t.kcal >= state.goal.kcal * 0.9 ? ' hit' : '') + (x.key === state.today ? ' today' : '');
+    bar.innerHTML = `<i style="height:${Math.max(x.t.kcal / max * 100, 2)}%"></i><span>${x.dow}</span>`;
+    bar.title = Math.round(x.t.kcal) + ' ккал';
+    bar.addEventListener('click', async () => {
+      state.view = x.key;
+      state.meals = (await Store.get('f' + x.key)) || [];
+      switchScreen('day');
+      renderDay();
     });
-
-    const add = document.createElement('button');
-    add.className = 'set-add';
-    add.textContent = sets.length ? '+ ещё подход' : '+ подход';
-    add.addEventListener('click', () => askSet(day, i, ex.n, sets[sets.length - 1] || last));
-    el.appendChild(add);
-
-    list.appendChild(el);
+    chart.appendChild(bar);
   });
 
-  document.getElementById('gym-hint').textContent =
-    state.workout && state.workout.done
-      ? 'Тренировка закрыта. Теперь поешь.'
-      : 'Каждую неделю добавляй повтор или 2,5 кг хотя бы в одном упражнении.';
+  const adv = document.getElementById('w-advice');
+  if (!filled.length) adv.textContent = '';
+  else if (avg < state.goal.kcal - 400) {
+    adv.innerHTML = `В среднем <b>${Math.round(avg)} ккал</b> в день — это на <b>${Math.round(state.goal.kcal - avg)}</b> меньше нормы. При таком раскладе вес стоит на месте, сколько ни тренируйся.`;
+  } else if (hit >= 5) {
+    adv.innerHTML = `Пять дней и больше в норме — это уже режим. Взвесься в воскресенье, вес должен пойти вверх.`;
+  } else {
+    adv.innerHTML = `Средний день — <b>${Math.round(avg)} ккал</b>. Норма закрыта <b>${hit}</b> раз из семи.`;
+  }
 }
 
-function askSet(day, i, name, prev) {
-  openSheet(name, `
-    <div class="field-row two">
-      <div class="field"><label>вес, кг</label><input id="in-w" type="number" inputmode="decimal" step="0.5" value="${prev ? prev.w : ''}"></div>
-      <div class="field"><label>повторы</label><input id="in-r" type="number" inputmode="numeric" value="${prev ? prev.r : ''}"></div>
-    </div>`, () => {
+/* ---------- экран «Профиль» ---------- */
+
+function renderMe() {
+  const G = state.goal;
+  document.getElementById('gg-kcal').textContent = G.kcal;
+  document.getElementById('gg-p').textContent = G.p;
+  document.getElementById('gg-f').textContent = G.f;
+  document.getElementById('gg-c').textContent = G.c;
+
+  const w = state.weights.length ? state.weights[state.weights.length - 1].w : null;
+  document.getElementById('goal-note').textContent = w
+    ? `Посчитано под ${w} кг, рост ${PROFILE.h}, три тренировки в неделю, плюс 400 ккал на рост.`
+    : 'Запиши вес — пересчитаю норму под него.';
+
+  const box = document.getElementById('weight-list');
+  box.innerHTML = '';
+  if (!state.weights.length) {
+    box.innerHTML = '<div class="slot-empty">пока ни одной записи</div>';
+  } else {
+    state.weights.slice().reverse().slice(0, 8).forEach((rec, i, arr) => {
+      const prev = arr[i + 1];
+      const diff = prev ? +(rec.w - prev.w).toFixed(1) : 0;
+      const d = fromKey(rec.d);
+      const row = document.createElement('div');
+      row.className = 'wlog';
+      row.innerHTML = `
+        <b>${rec.w} кг</b>
+        <small>${d.getDate()}.${String(d.getMonth() + 1).padStart(2, '0')}</small>
+        <em class="${diff > 0 ? 'up' : diff < 0 ? 'down' : ''}">${diff ? (diff > 0 ? '+' : '') + diff : '—'}</em>`;
+      box.appendChild(row);
+    });
+  }
+
+  const my = document.getElementById('my-list');
+  my.innerHTML = '';
+  if (!state.dishes.length) {
+    my.innerHTML = '<div class="slot-empty">свои блюда появятся здесь — их удобно добавлять в один тап</div>';
+  } else {
+    state.dishes.forEach((dish, i) => {
+      const row = document.createElement('div');
+      row.className = 'item';
+      row.innerHTML = `
+        ${icon(KIND_ICON[mealKind(dish)], 'item-ic ' + mealKind(dish))}
+        <div class="item-body"><b></b><small>Б ${dish.p} · Ж ${dish.f} · У ${dish.c}</small></div>
+        <div class="item-kcal">${dish.kcal}</div>
+        <button class="item-del" aria-label="Удалить">×</button>`;
+      row.querySelector('b').textContent = dish.n;
+      row.querySelector('.item-del').addEventListener('click', () => {
+        state.dishes.splice(i, 1);
+        Store.set('my', state.dishes);
+        renderMe(); renderQuick(); haptic('light');
+      });
+      my.appendChild(row);
+    });
+  }
+}
+
+function askWeight() {
+  const last = state.weights.length ? state.weights[state.weights.length - 1].w : 54.5;
+  openSheet('Вес сегодня', `
+    <div class="field"><label>кг, утром натощак</label><input id="in-w" type="number" inputmode="decimal" step="0.1" value="${last}"></div>`, () => {
     const w = parseFloat(document.getElementById('in-w').value);
-    const r = parseInt(document.getElementById('in-r').value, 10);
-    if (isNaN(w) || isNaN(r)) return false;
-    pushSet(day, i, w, r, 1);
-    startRest();
+    if (isNaN(w) || w < 30 || w > 200) return false;
+    state.weights = state.weights.filter(r => r.d !== state.today);
+    state.weights.push({ d: state.today, w });
+    state.weights.sort((a, b) => a.d.localeCompare(b.d));
+    Store.set('weights', state.weights);
+    recountGoal(w);
+    renderMe();
+    haptic('medium');
+    toast('Записал: ' + w + ' кг');
     return true;
   });
 }
 
-function pushSet(day, i, w, r, times) {
-  if (!state.workout || state.workout.day !== day) state.workout = { day, sets: {}, done: false };
-  if (!state.workout.sets[i]) state.workout.sets[i] = [];
-  for (let k = 0; k < (times || 1); k++) state.workout.sets[i].push({ w, r });
-  state.last[day + i] = { w, r, d: state.day };
-  saveGym();
-  Store.set('last', state.last);
-  renderGym();
-  haptic('medium');
+/* Миффлин–Сан Жеор, коэффициент активности 1,5, сверху +400 на рост */
+function recountGoal(w) {
+  const bmr = 10 * w + 6.25 * PROFILE.h - 5 * PROFILE.age + 5;
+  const kcal = Math.round((bmr * 1.5 + 400) / 10) * 10;
+  const p = Math.round(w * 2 / 5) * 5;
+  const f = Math.round(w * 1.1 / 5) * 5;
+  const c = Math.round((kcal - p * 4 - f * 9) / 4 / 5) * 5;
+  state.goal = { kcal, p, f, c };
+  Store.set('goal', state.goal);
+  renderDay();
 }
 
-function saveGym() { Store.set('g' + state.day, state.workout); }
-
-function startRest() {
-  const box = document.getElementById('rest');
-  const num = document.getElementById('rest-num');
-  let left = REST_SEC;
-  box.classList.remove('hidden');
-  clearInterval(state.rest);
-  const tick = () => {
-    num.textContent = Math.floor(left / 60) + ':' + String(left % 60).padStart(2, '0');
-    if (left <= 0) {
-      clearInterval(state.rest);
-      box.classList.add('hidden');
-      haptic('heavy');
-      toast('Отдых закончен');
-      return;
-    }
-    left--;
-  };
-  tick();
-  state.rest = setInterval(tick, 1000);
+function askDish() {
+  openSheet('Своё блюдо', `
+    <div class="field"><label>название</label><input id="in-n" type="text" placeholder="шаурма у дома"></div>
+    <div class="field"><label>ккал</label><input id="in-k" type="number" inputmode="numeric"></div>
+    <div class="field-row">
+      <div class="field"><label>белок</label><input id="in-p" type="number" inputmode="numeric"></div>
+      <div class="field"><label>жиры</label><input id="in-f" type="number" inputmode="numeric"></div>
+      <div class="field"><label>углев.</label><input id="in-c" type="number" inputmode="numeric"></div>
+    </div>`, () => {
+    const n = document.getElementById('in-n').value.trim();
+    const kcal = parseFloat(document.getElementById('in-k').value);
+    if (!n || isNaN(kcal)) return false;
+    state.dishes.unshift({
+      n, kcal: Math.round(kcal), d: 'моё',
+      p: Math.round(parseFloat(document.getElementById('in-p').value) || 0),
+      f: Math.round(parseFloat(document.getElementById('in-f').value) || 0),
+      c: Math.round(parseFloat(document.getElementById('in-c').value) || 0),
+    });
+    Store.set('my', state.dishes);
+    renderMe(); renderQuick();
+    toast('Блюдо сохранено');
+    return true;
+  });
 }
 
 /* ---------- модалка и мелочи ---------- */
@@ -453,18 +534,7 @@ function consumeStartParam() {
     return;
   }
 
-  /* w_<день>_<упражнение>_<вес>_<повторы>_<подходов> */
-  if (raw.slice(0, 2) === 'w_') {
-    const [, day, idx, w, r, n] = raw.split('_');
-    if (!PROGRAM[day]) return;
-    state.gymDay = day;
-    pushSet(day, +idx, +w, +r, +n || 1);
-    switchScreen('gym');
-    toast('Подходы записаны');
-    return;
-  }
-
-  /* m_<ккал>_<б>_<ж>_<у>_<название base64url> */
+  /* m_<ккал>_<б>_<ж>_<у>_<название base64url> — один приём */
   if (raw[0] !== 'm') return;
   const parts = raw.split('_');
   if (parts.length < 5) return;
@@ -474,9 +544,23 @@ function consumeStartParam() {
 
 function switchScreen(name) {
   document.querySelectorAll('.tab').forEach(b => b.classList.toggle('active', b.dataset.screen === name));
-  document.getElementById('screen-food').classList.toggle('hidden', name !== 'food');
-  document.getElementById('screen-gym').classList.toggle('hidden', name !== 'gym');
+  ['day', 'week', 'me'].forEach(s => {
+    document.getElementById('screen-' + s).classList.toggle('hidden', s !== name);
+  });
+  if (name === 'week') renderWeek();
+  if (name === 'me') renderMe();
   window.scrollTo(0, 0);
+}
+
+async function shiftDay(delta) {
+  const d = fromKey(state.view);
+  d.setDate(d.getDate() + delta);
+  const key = dayKey(d);
+  if (key > state.today) return;
+  state.view = key;
+  state.meals = (await Store.get('f' + key)) || [];
+  renderDay();
+  haptic('light');
 }
 
 /* ---------- запуск ---------- */
@@ -489,63 +573,55 @@ async function init() {
     if (tg.setBackgroundColor) tg.setBackgroundColor('#faf7f2');
   }
 
-  const d = new Date();
-  const dows = ['воскресенье','понедельник','вторник','среда','четверг','пятница','суббота'];
-  const months = ['января','февраля','марта','апреля','мая','июня','июля','августа','сентября','октября','ноября','декабря'];
-  const nice = dows[d.getDay()] + ', ' + d.getDate() + ' ' + months[d.getMonth()];
-  document.getElementById('food-date').textContent = nice;
-  document.getElementById('gym-date').textContent = nice;
-
-  state.meals = (await Store.get('f' + state.day)) || [];
-  state.workout = await Store.get('g' + state.day);
-  state.last = (await Store.get('last')) || {};
+  state.meals = (await Store.get('f' + state.view)) || [];
+  state.goal = (await Store.get('goal')) || Object.assign({}, DEFAULT_GOAL);
+  state.dishes = (await Store.get('my')) || [];
+  state.weights = (await Store.get('weights')) || [];
 
   renderQuick();
-  renderFood();
-  renderGym();
-  renderWeek();
+  renderDay();
   consumeStartParam();
 
   document.querySelectorAll('.tab').forEach(btn => {
     btn.addEventListener('click', () => { switchScreen(btn.dataset.screen); haptic('light'); });
   });
 
-  document.querySelectorAll('.mac').forEach(mac => {
-    mac.addEventListener('click', () => {
-      const k = mac.dataset.k;
-      const t = sum();
-      const names = { p: 'Белок', f: 'Жиры', c: 'Углеводы' };
-      const left = Math.round(GOAL[k] - t[k]);
-      toast(left > 0 ? `${names[k]}: добрать ещё ${left} г` : `${names[k]}: норма закрыта`);
-      haptic('light');
+  document.getElementById('prev-day').addEventListener('click', () => shiftDay(-1));
+  document.getElementById('next-day').addEventListener('click', () => shiftDay(1));
+  document.getElementById('add-weight').addEventListener('click', askWeight);
+  document.getElementById('add-dish').addEventListener('click', askDish);
+  document.getElementById('edit-goal').addEventListener('click', () => {
+    const G = state.goal;
+    openSheet('Норма на день', `
+      <div class="field"><label>ккал</label><input id="in-k" type="number" inputmode="numeric" value="${G.kcal}"></div>
+      <div class="field-row">
+        <div class="field"><label>белок</label><input id="in-p" type="number" inputmode="numeric" value="${G.p}"></div>
+        <div class="field"><label>жиры</label><input id="in-f" type="number" inputmode="numeric" value="${G.f}"></div>
+        <div class="field"><label>углев.</label><input id="in-c" type="number" inputmode="numeric" value="${G.c}"></div>
+      </div>`, () => {
+      const kcal = parseInt(document.getElementById('in-k').value, 10);
+      if (isNaN(kcal)) return false;
+      state.goal = {
+        kcal,
+        p: parseInt(document.getElementById('in-p').value, 10) || G.p,
+        f: parseInt(document.getElementById('in-f').value, 10) || G.f,
+        c: parseInt(document.getElementById('in-c').value, 10) || G.c,
+      };
+      Store.set('goal', state.goal);
+      renderDay(); renderMe();
+      toast('Норма обновлена');
+      return true;
     });
   });
 
-  document.getElementById('day-switch').addEventListener('click', () => {
-    const order = ['A', 'B', 'C'];
-    const next = order[(order.indexOf(state.gymDay) + 1) % 3];
-    const busy = state.workout && Object.keys(state.workout.sets).length && state.workout.day !== next;
-    if (busy && !confirm('За сегодня уже записаны подходы другого дня. Всё равно сменить?')) return;
-    state.gymDay = next;
-    renderGym();
-    haptic('light');
-  });
-
-  document.getElementById('rest-stop').addEventListener('click', () => {
-    clearInterval(state.rest);
-    document.getElementById('rest').classList.add('hidden');
-  });
-
-  document.getElementById('btn-finish').addEventListener('click', () => {
-    if (!state.workout || !Object.keys(state.workout.sets).length) {
-      toast('Сначала запиши подход');
-      return;
-    }
-    state.workout.done = true;
-    saveGym();
-    renderGym();
-    haptic('heavy');
-    toast('Тренировка закрыта');
+  document.querySelectorAll('.mac').forEach(mac => {
+    mac.addEventListener('click', () => {
+      const k = mac.dataset.k;
+      const names = { p: 'Белок', f: 'Жиры', c: 'Углеводы' };
+      const left = Math.round(state.goal[k] - sum()[k]);
+      toast(left > 0 ? `${names[k]}: добрать ещё ${left} г` : `${names[k]}: норма закрыта`);
+      haptic('light');
+    });
   });
 
   document.getElementById('sheet-cancel').addEventListener('click', closeSheet);
