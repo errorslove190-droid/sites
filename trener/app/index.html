@@ -55,6 +55,17 @@
       <path d="M13 54c0-10 8-16 19-16s19 6 19 16"/>
     </g>
   </symbol>
+  <symbol id="ic-dumbbell" viewBox="0 0 64 64">
+    <g fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M24 32h16"/>
+      <rect x="12" y="22" width="9" height="20" rx="3"/>
+      <rect x="43" y="22" width="9" height="20" rx="3"/>
+      <path d="M6 27v10M58 27v10"/>
+    </g>
+  </symbol>
+  <symbol id="ic-bolt" viewBox="0 0 64 64">
+    <path d="M36 4 14 36h14l-4 24 22-32H32z" fill="currentColor"/>
+  </symbol>
 </svg>
 
 <!-- ДЕНЬ -->
@@ -179,8 +190,49 @@
   </section>
 </main>
 
+<!-- СПОРТ -->
+<main id="screen-gym" class="screen hidden">
+  <header class="head daynav">
+    <button class="nav-arrow" id="gym-prev" aria-label="Назад">‹</button>
+    <div class="daynav-mid">
+      <span class="date" id="gym-date">сегодня</span>
+      <h1>Спорт</h1>
+    </div>
+    <button class="nav-arrow" id="gym-next" aria-label="Вперёд">›</button>
+  </header>
+
+  <section class="days" id="gym-days"></section>
+
+  <section class="tonn">
+    <svg class="tonn-ic"><use href="#ic-bolt"/></svg>
+    <div class="tonn-main">
+      <b id="tonn-v">0</b>
+      <small>кг поднято</small>
+    </div>
+    <div class="tonn-right">
+      <span id="tonn-sets">0 из 0</span>
+      <i id="tonn-diff">первая тренировка</i>
+    </div>
+  </section>
+
+  <div id="gym-list"></div>
+
+  <section class="slot rules">
+    <div class="slot-head"><h2>Пока болит плечо и спина</h2></div>
+    <p class="rule-no"><b>Никогда:</b> жим из-за головы, тяга штанги к подбородку, разводки выше плеч, становая с пола.</p>
+    <p class="rule-no">Боль в подходе — подход закончен, вес вниз. Не «дотерплю».</p>
+    <p class="rule-ok">Разминка 5–7 минут обязательна: вращения плечами, лёгкий вес на 15 повторов перед рабочим.</p>
+  </section>
+
+  <section class="slot">
+    <div class="slot-head"><h2>Прошлые тренировки</h2></div>
+    <div id="gym-history"></div>
+  </section>
+</main>
+
 <nav class="tabbar">
   <button class="tab active" data-screen="day"><svg><use href="#ic-fork"/></svg><span>День</span></button>
+  <button class="tab" data-screen="gym"><svg><use href="#ic-dumbbell"/></svg><span>Спорт</span></button>
   <button class="tab" data-screen="week"><svg><use href="#ic-chart"/></svg><span>Неделя</span></button>
   <button class="tab" data-screen="me"><svg><use href="#ic-user"/></svg><span>Профиль</span></button>
 </nav>

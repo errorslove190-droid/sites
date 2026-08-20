@@ -1,13 +1,14 @@
 'use strict';
 
-/* Трекер питания. Telegram Mini App, без сервера:
-   данные лежат в облаке Telegram (CloudStorage), в браузере — в localStorage. */
+/* Трекер питания. Telegram Mini App.
+   Быстрый слой — облако Telegram (CloudStorage), в браузере localStorage.
+   Общий склад — Cloudflare Worker: через него в дневник пишет Claude из чата. */
 
 const tg = window.Telegram && window.Telegram.WebApp ? window.Telegram.WebApp : null;
 const RING = 195;                       // длина окружности медальона, r = 31
 
-/* Приёмник фотографий (Cloudflare Worker, код в D:\Projects\trener-worker).
-   Пусто — кнопка «Сфоткать» просто уводит в чат с ботом. */
+/* Адрес воркера (код в D:\Projects\trener-worker) — без косой черты на конце.
+   Пусто — кнопка «Сфоткать» уводит в чат с ботом, а дневник живёт только на телефоне. */
 const WORKER = '';
 
 const DEFAULT_GOAL = { kcal: 2700, p: 110, f: 60, c: 430 };
@@ -30,6 +31,37 @@ const BASE_DISHES = [
   { n: 'Творог с мёдом',    d: '200 г',                    kcal: 300, p: 34, f: 5,  c: 28 },
   { n: 'Орехи горсть',      d: '30 г',                     kcal: 190, p: 5,  f: 17, c: 6  },
 ];
+
+/* Программа зала. Три дня, каждая мышца дважды в неделю.
+   note — ограничение из-за плеча и спины, оно важнее нагрузки и висит прямо в карточке. */
+const PROGRAM = {
+  A: { n: 'Верх тела', ex: [
+    { id: 'a1', n: 'Жим гантелей лёжа',              sets: 4, reps: '6–10',  note: 'гантели, а не штанга — плечо в свободном положении' },
+    { id: 'a2', n: 'Тяга верхнего блока',            sets: 4, reps: '8–12',  d: 'нейтральным хватом' },
+    { id: 'a3', n: 'Жим гантелей сидя',              sets: 3, reps: '8–12',  note: 'не опускать ниже уровня ушей' },
+    { id: 'a4', n: 'Тяга с упором в грудь',          sets: 3, reps: '10–12', d: 'в тренажёре' },
+    { id: 'a5', n: 'Бицепс и трицепс',               sets: 3, reps: '10–15', d: 'подъём на бицепс, разгибания' },
+    { id: 'a6', n: 'Отведения в стороны',            sets: 3, reps: '15',    d: 'лёгкие гантели' },
+  ]},
+  B: { n: 'Ноги и спина', ex: [
+    { id: 'b1', n: 'Приседания со штангой',          sets: 4, reps: '6–10',  note: 'спина болит — начинай с гоблет-приседа с гантелью' },
+    { id: 'b2', n: 'Жим ногами',                     sets: 3, reps: '10–12' },
+    { id: 'b3', n: 'Румынская тяга с гантелями',     sets: 3, reps: '10–12', note: 'лёгкий вес, идеальная техника, при боли — пропускаем' },
+    { id: 'b4', n: 'Сгибания и разгибания ног',      sets: 3, reps: '12',    d: 'в тренажёре' },
+    { id: 'b5', n: 'Гиперэкстензия',                 sets: 3, reps: '15',    note: 'лечит спину лучше, чем щадящий режим' },
+    { id: 'b6', n: 'Носки и планка',                 sets: 3, reps: '15 / 40 сек' },
+  ]},
+  C: { n: 'Всё тело', ex: [
+    { id: 'c1', n: 'Подтягивания',                   sets: 4, reps: 'макс',  d: 'нейтральным хватом', note: 'не тянет — в гравитроне или с резиной' },
+    { id: 'c2', n: 'Жим гантелей на наклонной',      sets: 4, reps: '8–12' },
+    { id: 'c3', n: 'Выпады с гантелями',             sets: 3, reps: '10 на ногу' },
+    { id: 'c4', n: 'Тяга гантели в наклоне',         sets: 3, reps: '10–12', d: 'с упором в скамью' },
+    { id: 'c5', n: 'Жим гантелей сидя или брусья',   sets: 3, reps: '10' },
+    { id: 'c6', n: 'Бицепс, трицепс, пресс',         sets: 3, reps: '12–15' },
+  ]},
+};
+
+const DAY_ORDER = ['A', 'B', 'C'];
 
 /* ---------- хранилище ---------- */
 
@@ -71,6 +103,90 @@ function safeParse(raw) {
   try { return JSON.parse(raw); } catch (e) { return null; }
 }
 
+/* ---------- общий склад (воркер) ----------
+
+   Зачем: CloudStorage виден только изнутри Telegram, и Claude туда не дотянется.
+   Поэтому дни еды дублируются в KV воркера — тогда посчитанное в чате появляется
+   в приложении само. CloudStorage остаётся быстрым кэшем и работает без сети.
+
+   Правило простое: сервер главнее. Любая местная правка сразу уходит туда, а если
+   не ушла (метро, лифт) — ложится в очередь и досылается при следующем запуске.
+   Значит расхождения живут секунды, и сложный разбор конфликтов не нужен. */
+
+const Sync = {
+  ready() { return !!WORKER && !!(tg && tg.initData); },
+
+  head() {
+    return { 'content-type': 'application/json', 'x-init-data': (tg && tg.initData) || '' };
+  },
+
+  async pull(day) {
+    if (!this.ready()) return null;
+    try {
+      const r = await fetch(`${WORKER}/day?d=${day}`, { headers: this.head() });
+      const res = await r.json();
+      return res.ok && Array.isArray(res.meals) ? res.meals : null;
+    } catch (e) {
+      return null;
+    }
+  },
+
+  async push(day, meals) {
+    if (!this.ready()) return false;
+    try {
+      const r = await fetch(`${WORKER}/day`, {
+        method: 'POST',
+        headers: this.head(),
+        body: JSON.stringify({ day, meals }),
+      });
+      const res = await r.json();
+      if (!res.ok) throw new Error(res.error || 'отказ');
+      return true;
+    } catch (e) {
+      await this.hold(day, meals);
+      return false;
+    }
+  },
+
+  /* Не ушло — держим до следующего раза. На день храним только последнюю версию. */
+  async hold(day, meals) {
+    const q = (await Store.get('pending')) || {};
+    q[day] = meals;
+    await Store.set('pending', q);
+  },
+
+  async flush() {
+    if (!this.ready()) return;
+    const q = (await Store.get('pending')) || {};
+    const days = Object.keys(q);
+    if (!days.length) return;
+    const left = {};
+    for (const day of days) {
+      let sent = false;
+      try {
+        const r = await fetch(`${WORKER}/day`, {
+          method: 'POST',
+          headers: this.head(),
+          body: JSON.stringify({ day, meals: q[day] }),
+        });
+        sent = (await r.json()).ok === true;
+      } catch (e) { /* сети всё ещё нет */ }
+      if (!sent) left[day] = q[day];
+    }
+    await Store.set('pending', left);
+  },
+
+  /* Подтянуть день с сервера и, если он отличается от показанного, перерисовать. */
+  async refresh(day) {
+    const fresh = await this.pull(day);
+    if (!fresh || day !== state.view) return;
+    if (JSON.stringify(fresh) === JSON.stringify(state.meals)) return;
+    state.meals = fresh;
+    await Store.set('f' + day, fresh);
+    renderDay();
+  },
+};
+
 function dayKey(d) {
   const pad = n => String(n).padStart(2, '0');
   return `${d.getFullYear()}${pad(d.getMonth() + 1)}${pad(d.getDate())}`;
@@ -89,6 +205,11 @@ const state = {
   goal: Object.assign({}, DEFAULT_GOAL),
   dishes: [],                 // свои блюда
   weights: [],
+
+  gymView: dayKey(new Date()),// какую тренировку смотрим
+  gym: null,                  // { d:'A', ex:{ a1:[{w,r}] } }
+  last: {},                   // последний подход по каждому упражнению
+  gymHist: [],                // прошлые тренировки, чтобы считать прогресс
 };
 
 /* ---------- общее ---------- */
@@ -236,7 +357,12 @@ function addMeal(meal, slot) {
   toast(meal.n + ' · +' + Math.round(meal.kcal));
 }
 
-function saveMeals() { Store.set('f' + state.view, state.meals); }
+function saveMeals() {
+  const day = state.view;
+  const meals = state.meals.slice();
+  Store.set('f' + day, meals);
+  Sync.push(day, meals);        // фоном; не дождались — уйдёт из очереди при следующем запуске
+}
 
 /* ---------- добавление ---------- */
 
@@ -353,6 +479,7 @@ async function renderWeek() {
       state.meals = (await Store.get('f' + x.key)) || [];
       switchScreen('day');
       renderDay();
+      Sync.refresh(x.key);
     });
     chart.appendChild(bar);
   });
@@ -480,6 +607,325 @@ function askDish() {
   });
 }
 
+/* ---------- экран «Спорт» ---------- */
+
+function exById(id) {
+  for (const k of DAY_ORDER) {
+    const e = PROGRAM[k].ex.find(x => x.id === id);
+    if (e) return e;
+  }
+  return null;
+}
+
+/** Сколько железа поднято за тренировку: вес × повторы по всем подходам. */
+function tonnage(w) {
+  if (!w || !w.ex) return 0;
+  let t = 0;
+  Object.values(w.ex).forEach(list => list.forEach(s => { t += (s.w || 0) * (s.r || 0); }));
+  return Math.round(t);
+}
+
+function setsDone(w) {
+  if (!w || !w.ex) return 0;
+  return Object.values(w.ex).reduce((a, l) => a + l.length, 0);
+}
+
+/** Какой день предлагать: следующий по кругу после последней тренировки. */
+function suggestDay() {
+  const prev = state.gymHist.find(h => h.w && h.w.d);
+  if (!prev) return 'A';
+  const i = DAY_ORDER.indexOf(prev.w.d);
+  return DAY_ORDER[(i + 1) % DAY_ORDER.length];
+}
+
+async function loadGym() {
+  state.gym = (await Store.get('g' + state.gymView)) || null;
+  if (!state.gym) state.gym = { d: suggestDay(), ex: {} };
+  if (!state.gym.ex) state.gym.ex = {};
+}
+
+/** Прошлые тренировки за три недели — нужны и для истории, и для «сколько было в прошлый раз». */
+async function loadGymHistory() {
+  const keys = [];
+  const base = fromKey(state.gymView);
+  for (let i = 1; i <= 21; i++) {
+    const d = new Date(base);
+    d.setDate(base.getDate() - i);
+    keys.push('g' + dayKey(d));
+  }
+  const got = await Store.many(keys);
+  state.gymHist = keys
+    .map(k => ({ key: k.slice(1), w: got[k] }))
+    .filter(x => x.w && setsDone(x.w));
+}
+
+function renderGym() {
+  const dk = state.gymView;
+  document.getElementById('gym-date').textContent =
+    dk === state.today ? 'сегодня' : niceDate(dk);
+  document.getElementById('gym-next').disabled = dk >= state.today;
+
+  renderGymDays();
+  renderGymSum();
+  renderGymList();
+  renderGymHistory();
+}
+
+function renderGymDays() {
+  const box = document.getElementById('gym-days');
+  box.innerHTML = '';
+  DAY_ORDER.forEach(k => {
+    const b = document.createElement('button');
+    b.className = 'day' + (state.gym.d === k ? ' on' : '');
+    b.innerHTML = `<b>${k}</b><span></span>`;
+    b.querySelector('span').textContent = PROGRAM[k].n;
+    b.addEventListener('click', () => {
+      state.gym.d = k;
+      saveGym();
+      renderGym();
+      haptic('light');
+    });
+    box.appendChild(b);
+  });
+}
+
+function renderGymSum() {
+  const t = tonnage(state.gym);
+  const done = setsDone(state.gym);
+  const plan = PROGRAM[state.gym.d].ex.reduce((a, e) => a + e.sets, 0);
+
+  document.getElementById('tonn-v').textContent = t.toLocaleString('ru-RU');
+  document.getElementById('tonn-sets').textContent = `подходов ${done} из ${plan}`;
+
+  // сравнение с прошлым таким же днём — то самое «добавь повтор или 2,5 кг»
+  const prev = state.gymHist.find(h => h.w && h.w.d === state.gym.d);
+  const el = document.getElementById('tonn-diff');
+  if (!prev) {
+    el.textContent = done ? 'первый раз этот день' : 'ещё не начинал';
+    el.className = '';
+    return;
+  }
+  const was = tonnage(prev.w);
+  const diff = t - was;
+
+  // Посреди тренировки «минус тонна» — не отставание, а недоделанность.
+  // Красным показываем только когда подходы уже выбраны, иначе это просто счётчик до цели.
+  if (!done) {
+    el.textContent = `в прошлый раз ${was.toLocaleString('ru-RU')} кг`;
+    el.className = '';
+  } else if (diff > 0) {
+    el.textContent = `+${diff.toLocaleString('ru-RU')} кг к прошлому`;
+    el.className = 'up';
+  } else if (diff === 0) {
+    el.textContent = 'ровно как в прошлый раз';
+    el.className = '';
+  } else if (done < plan) {
+    el.textContent = `до прошлого ещё ${(-diff).toLocaleString('ru-RU')} кг`;
+    el.className = '';
+  } else {
+    el.textContent = `${diff.toLocaleString('ru-RU')} кг к прошлому`;
+    el.className = 'down';
+  }
+}
+
+function renderGymList() {
+  const box = document.getElementById('gym-list');
+  box.innerHTML = '';
+
+  PROGRAM[state.gym.d].ex.forEach(ex => {
+    const done = state.gym.ex[ex.id] || [];
+    const el = document.createElement('section');
+    el.className = 'ex' + (done.length >= ex.sets ? ' full' : '');
+    el.innerHTML = `
+      <div class="ex-head">
+        <b></b>
+        <span class="ex-target">${ex.sets} × ${ex.reps}</span>
+      </div>
+      ${ex.d ? '<p class="ex-d"></p>' : ''}
+      ${ex.note ? '<p class="ex-note"></p>' : ''}
+      <div class="ex-sets"></div>`;
+
+    el.querySelector('b').textContent = ex.n;
+    if (ex.d) el.querySelector('.ex-d').textContent = ex.d;
+    if (ex.note) el.querySelector('.ex-note').textContent = ex.note;
+
+    const row = el.querySelector('.ex-sets');
+    done.forEach((s, i) => {
+      const b = document.createElement('button');
+      b.className = 'set';
+      b.textContent = s.w ? `${fmtW(s.w)}×${s.r}` : `${s.r} повт`;
+      b.addEventListener('click', () => askSet(ex.id, i));
+      row.appendChild(b);
+    });
+
+    const add = document.createElement('button');
+    add.className = 'set add';
+    add.textContent = '+';
+    add.setAttribute('aria-label', 'Записать подход');
+    add.addEventListener('click', () => askSet(ex.id, null));
+    row.appendChild(add);
+
+    const hint = hintFor(ex.id, done);
+    if (hint) {
+      const h = document.createElement('div');
+      h.className = 'ex-last';
+      h.textContent = hint;
+      el.appendChild(h);
+    }
+    box.appendChild(el);
+  });
+}
+
+/**
+ * Лучший подход этого упражнения на прошлых тренировках.
+ * Берём из истории, а не из `last`: тот перезаписывается сегодняшним подходом,
+ * и подсказка начала бы сравнивать сегодня с сегодня.
+ */
+function prevSetOf(id) {
+  for (const h of state.gymHist) {          // история идёт от свежих к старым
+    const list = h.w && h.w.ex && h.w.ex[id];
+    if (list && list.length) return list.reduce((a, s) => (s.w * s.r > a.w * a.r ? s : a), list[0]);
+  }
+  return null;
+}
+
+/** Подсказка под упражнением: что было в прошлый раз и что делать сегодня. */
+function hintFor(id, done) {
+  const prev = prevSetOf(id);
+  if (!prev) return done.length ? 'записано — в следующий раз будет с чем сравнить' : 'первый раз — начни с лёгкого и запиши';
+
+  const was = prev.w ? `${fmtW(prev.w)} кг × ${prev.r}` : `${prev.r} повторов`;
+  if (!done.length) return `в прошлый раз ${was} — добавь повтор или 2,5 кг`;
+
+  const best = done.reduce((a, s) => (s.w * s.r > a.w * a.r ? s : a), done[0]);
+  if (best.w * best.r > prev.w * prev.r) return `прошлый раз ${was} — сегодня больше`;
+  if (best.w * best.r === prev.w * prev.r) return `прошлый раз ${was} — пока вровень`;
+  return `в прошлый раз было больше: ${was}`;
+}
+
+function fmtW(w) {
+  return Number.isInteger(w) ? String(w) : String(w).replace('.', ',');
+}
+
+/**
+ * Что подставить в новый подход: сегодняшний предыдущий → прошлая тренировка →
+ * последнее вообще (`last` помнит и то, что старше трёх недель) → по умолчанию.
+ */
+function prefillFor(id) {
+  const today = state.gym.ex[id];
+  if (today && today.length) return Object.assign({}, today[today.length - 1]);
+  const prev = prevSetOf(id);
+  if (prev) return { w: prev.w, r: prev.r };
+  if (state.last[id]) return { w: state.last[id].w, r: state.last[id].r };
+  return { w: 0, r: 8 };
+}
+
+function askSet(id, idx) {
+  const ex = exById(id);
+  const cur = idx == null ? prefillFor(id) : state.gym.ex[id][idx];
+
+  openSheet(idx == null ? 'Подход' : 'Изменить подход', `
+    <div class="step">
+      <label>вес, кг</label>
+      <div class="step-row">
+        <button class="step-b" data-t="w" data-v="-2.5">−</button>
+        <input id="in-w" type="number" inputmode="decimal" step="2.5" value="${cur.w}">
+        <button class="step-b" data-t="w" data-v="2.5">+</button>
+      </div>
+    </div>
+    <div class="step">
+      <label>повторы</label>
+      <div class="step-row">
+        <button class="step-b" data-t="r" data-v="-1">−</button>
+        <input id="in-r" type="number" inputmode="numeric" value="${cur.r}">
+        <button class="step-b" data-t="r" data-v="1">+</button>
+      </div>
+    </div>
+    <p class="step-note">${ex ? ex.sets + ' × ' + ex.reps + ' — цель на сегодня' : ''}</p>
+    ${idx == null ? '' : '<button class="sheet-del" id="set-del">Удалить подход</button>'}`, () => {
+
+    const w = parseFloat(String(document.getElementById('in-w').value).replace(',', '.')) || 0;
+    const r = parseInt(document.getElementById('in-r').value, 10) || 0;
+    if (r <= 0) return false;
+
+    if (!state.gym.ex[id]) state.gym.ex[id] = [];
+    if (idx == null) state.gym.ex[id].push({ w, r });
+    else state.gym.ex[id][idx] = { w, r };
+
+    state.last[id] = { w, r, day: state.gymView };
+    Store.set('last', state.last);
+    saveGym();
+    renderGym();
+    haptic('light');
+    return true;
+  });
+
+  document.querySelectorAll('#sheet-body .step-b').forEach(b => {
+    b.addEventListener('click', () => {
+      const inp = document.getElementById(b.dataset.t === 'w' ? 'in-w' : 'in-r');
+      const step = parseFloat(b.dataset.v);
+      const now = parseFloat(String(inp.value).replace(',', '.')) || 0;
+      inp.value = Math.max(0, Math.round((now + step) * 10) / 10);
+      haptic('light');
+    });
+  });
+
+  const del = document.getElementById('set-del');
+  if (del) del.addEventListener('click', () => {
+    state.gym.ex[id].splice(idx, 1);
+    if (!state.gym.ex[id].length) delete state.gym.ex[id];
+    saveGym();
+    renderGym();
+    closeSheet();
+    toast('Подход убран');
+  });
+}
+
+function saveGym() {
+  Store.set('g' + state.gymView, state.gym);
+}
+
+function renderGymHistory() {
+  const box = document.getElementById('gym-history');
+  box.innerHTML = '';
+  const list = state.gymHist.slice(0, 6);
+
+  if (!list.length) {
+    box.innerHTML = '<div class="slot-empty">пока пусто — первая тренировка появится здесь</div>';
+    return;
+  }
+
+  list.forEach(h => {
+    const row = document.createElement('div');
+    row.className = 'item';
+    row.innerHTML = `
+      <span class="hday"></span>
+      <div class="item-body"><b></b><small></small></div>
+      <div class="item-kcal"></div>`;
+    row.querySelector('.hday').textContent = h.w.d || '?';
+    row.querySelector('b').textContent = PROGRAM[h.w.d] ? PROGRAM[h.w.d].n : 'Тренировка';
+    row.querySelector('small').textContent = niceDate(h.key) + ' · ' + setsDone(h.w) + ' подходов';
+    row.querySelector('.item-kcal').textContent = tonnage(h.w).toLocaleString('ru-RU');
+    row.addEventListener('click', () => shiftGym(null, h.key));
+    box.appendChild(row);
+  });
+}
+
+async function shiftGym(delta, exact) {
+  if (exact) state.gymView = exact;
+  else {
+    const d = fromKey(state.gymView);
+    d.setDate(d.getDate() + delta);
+    const next = dayKey(d);
+    if (next > state.today) return;
+    state.gymView = next;
+  }
+  await loadGymHistory();
+  await loadGym();
+  renderGym();
+  window.scrollTo(0, 0);
+}
+
 /* ---------- модалка и мелочи ---------- */
 
 let sheetHandler = null;
@@ -541,7 +987,7 @@ async function sendPhoto(file) {
 
   toast('Отправляю…');
   try {
-    const r = await fetch(WORKER, { method: 'POST', body: fd });
+    const r = await fetch(WORKER + '/photo', { method: 'POST', body: fd });
     const res = await r.json();
     if (!res.ok) throw new Error(res.error || 'отказ');
     haptic('heavy');
@@ -598,12 +1044,25 @@ function consumeStartParam() {
 
 function switchScreen(name) {
   document.querySelectorAll('.tab').forEach(b => b.classList.toggle('active', b.dataset.screen === name));
-  ['day', 'week', 'me'].forEach(s => {
+  ['day', 'gym', 'week', 'me'].forEach(s => {
     document.getElementById('screen-' + s).classList.toggle('hidden', s !== name);
   });
   if (name === 'week') renderWeek();
   if (name === 'me') renderMe();
+  if (name === 'gym') openGym();
   window.scrollTo(0, 0);
+}
+
+/* Данные зала читаем при первом заходе, а не на старте: экран «День» должен
+   открываться мгновенно, а история — это 21 запрос в облако Telegram. */
+let gymLoaded = false;
+async function openGym() {
+  if (gymLoaded) { renderGym(); return; }
+  state.last = (await Store.get('last')) || {};
+  await loadGymHistory();
+  await loadGym();
+  gymLoaded = true;
+  renderGym();
 }
 
 async function shiftDay(delta) {
@@ -615,6 +1074,7 @@ async function shiftDay(delta) {
   state.meals = (await Store.get('f' + key)) || [];
   renderDay();
   haptic('light');
+  Sync.refresh(key);
 }
 
 /* ---------- запуск ---------- */
@@ -635,6 +1095,15 @@ async function init() {
   renderQuick();
   renderDay();
   consumeStartParam();
+
+  /* Сначала досылаем то, что не ушло раньше, потом берём с сервера свежий день:
+     иначе серверная версия затёрла бы запись, сделанную без сети. */
+  Sync.flush().then(() => Sync.refresh(state.view));
+
+  /* Вернулся в приложение из чата — подтягиваем то, что Claude успел записать */
+  document.addEventListener('visibilitychange', () => {
+    if (!document.hidden) Sync.refresh(state.view);
+  });
 
   document.querySelectorAll('.tab').forEach(btn => {
     btn.addEventListener('click', () => { switchScreen(btn.dataset.screen); haptic('light'); });
@@ -661,6 +1130,8 @@ async function init() {
 
   document.getElementById('prev-day').addEventListener('click', () => shiftDay(-1));
   document.getElementById('next-day').addEventListener('click', () => shiftDay(1));
+  document.getElementById('gym-prev').addEventListener('click', () => shiftGym(-1));
+  document.getElementById('gym-next').addEventListener('click', () => shiftGym(1));
   document.getElementById('add-weight').addEventListener('click', askWeight);
   document.getElementById('add-dish').addEventListener('click', askDish);
   document.getElementById('edit-goal').addEventListener('click', () => {
