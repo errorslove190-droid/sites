@@ -63,6 +63,31 @@ const PROGRAM = {
 
 const DAY_ORDER = ['A', 'B', 'C'];
 
+/* Какие мышцы задействует каждое упражнение — для карты тела.
+   Спина и трицепс на силуэте спереди не видны, поэтому живут только в списке слева. */
+const MUSCLES = [
+  { k: 'shoulders', n: 'Плечи' },
+  { k: 'chest',     n: 'Грудь' },
+  { k: 'back',      n: 'Спина' },
+  { k: 'biceps',    n: 'Бицепс' },
+  { k: 'triceps',   n: 'Трицепс' },
+  { k: 'abs',       n: 'Пресс' },
+  { k: 'legs',      n: 'Ноги' },
+  { k: 'calves',    n: 'Икры' },
+];
+
+const EX_MUSCLES = {
+  a1: ['chest', 'triceps', 'shoulders'], a2: ['back', 'biceps'],
+  a3: ['shoulders', 'triceps'],          a4: ['back'],
+  a5: ['biceps', 'triceps'],             a6: ['shoulders'],
+  b1: ['legs'],                          b2: ['legs'],
+  b3: ['legs', 'back'],                  b4: ['legs'],
+  b5: ['back'],                          b6: ['calves', 'abs'],
+  c1: ['back', 'biceps'],                c2: ['chest', 'shoulders', 'triceps'],
+  c3: ['legs'],                          c4: ['back', 'biceps'],
+  c5: ['shoulders', 'triceps', 'chest'], c6: ['biceps', 'triceps', 'abs'],
+};
+
 /* ---------- хранилище ---------- */
 
 const cloudReady = !!(tg && tg.CloudStorage && tg.isVersionAtLeast && tg.isVersionAtLeast('6.9'));
@@ -723,6 +748,7 @@ function renderGym() {
   document.getElementById('gym-next').disabled = dk >= state.today;
 
   renderGymDays();
+  renderBodyMap();
   renderGymSum();
   renderGymList();
   renderGymHistory();
@@ -783,6 +809,36 @@ function renderGymSum() {
     el.textContent = `${diff.toLocaleString('ru-RU')} кг к прошлому`;
     el.className = 'down';
   }
+}
+
+/**
+ * Карта тела: что уже нагружено в этой тренировке.
+ * Считаем по фактически записанным подходам, а не по плану дня — иначе мышца
+ * горела бы просто потому, что упражнение есть в программе.
+ */
+function renderBodyMap() {
+  const hit = {};
+  Object.keys(state.gym.ex).forEach(id => {
+    const sets = state.gym.ex[id];
+    if (!sets || !sets.length) return;
+    (EX_MUSCLES[id] || []).forEach(m => { hit[m] = (hit[m] || 0) + sets.length; });
+  });
+
+  const box = document.getElementById('muscle-list');
+  box.innerHTML = '';
+  MUSCLES.forEach(m => {
+    const on = !!hit[m.k];
+    const el = document.createElement('div');
+    el.className = 'mus' + (on ? ' on' : '');
+    el.innerHTML = '<i></i><span></span>' + (on ? '<b></b>' : '');
+    el.querySelector('span').textContent = m.n;
+    if (on) el.querySelector('b').textContent = hit[m.k] + ' п.';
+    box.appendChild(el);
+  });
+
+  document.querySelectorAll('#figure .grp').forEach(p => {
+    p.classList.toggle('on', !!hit[p.dataset.m]);
+  });
 }
 
 function renderGymList() {
