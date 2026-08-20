@@ -75,9 +75,17 @@ body.on-gym .tab.active{color:#b8ff2e}
 }
 #screen-gym .mus b{margin-left:auto;font-size:11px;font-weight:700;color:var(--neon)}
 
+#screen-gym .fig-box{display:flex;flex-direction:column;align-items:center;gap:8px}
+#screen-gym .fig-side{display:flex;gap:5px}
+#screen-gym .fs{
+  background:#000;border:1px solid var(--edge);border-radius:999px;
+  color:var(--ash);padding:5px 11px;font-size:11.5px;font-weight:600;
+}
+#screen-gym .fs.on{background:var(--neon);border-color:var(--neon);color:#000}
+
 #screen-gym .figure{width:100%;height:auto;display:block}
-#screen-gym .figure .base{fill:#1e1e1e}
-#screen-gym .figure .grp{fill:#262626;transition:fill .25s}
+#screen-gym .figure .base{fill:#2b2b2b}
+#screen-gym .figure .grp{fill:#3d3d3d;transition:fill .25s}
 #screen-gym .figure .grp.on{fill:var(--neon)}
 
 #screen-gym .mus{cursor:pointer;text-align:left;width:100%}

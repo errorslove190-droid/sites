@@ -289,6 +289,7 @@ const state = {
   gym: null,                  // { d:'A', ex:{ a1:[{w,r}] } }
   last: {},                   // последний подход по каждому упражнению
   gymHist: [],                // прошлые тренировки, чтобы считать прогресс
+  figSide: 'front',           // какой стороной повёрнута фигура на карте тела
 };
 
 /* ---------- общее ---------- */
@@ -837,10 +838,23 @@ function renderBodyMap() {
     box.appendChild(el);
   });
 
-  document.querySelectorAll('#figure .grp').forEach(p => {
+  /* Фигуру перерисовываем целиком: сторона могла смениться, а <use> с defs
+     не даёт вешать обработчики на копию — только на оригинал в defs. */
+  const fig = document.getElementById('figure-box');
+  fig.innerHTML = bodySvg(state.figSide);
+  fig.querySelectorAll('.grp').forEach(p => {
     p.classList.toggle('on', !!hit[p.dataset.m]);
     /* тапать по самой фигуре — самый короткий путь: увидел мышцу, ткнул, выбрал */
     p.onclick = () => openMuscle(p.dataset.m);
+  });
+
+  document.querySelectorAll('.fs').forEach(b => {
+    b.classList.toggle('on', b.dataset.side === state.figSide);
+    b.onclick = () => {
+      state.figSide = b.dataset.side;
+      renderBodyMap();
+      haptic('light');
+    };
   });
 }
 
