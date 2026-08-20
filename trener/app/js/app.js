@@ -114,10 +114,20 @@ function safeParse(raw) {
    Значит расхождения живут секунды, и сложный разбор конфликтов не нужен. */
 
 const Sync = {
-  ready() { return !!WORKER && !!(tg && tg.initData); },
+  /* Достаточно быть внутри Telegram: воркер пускает либо по подписи, либо по id владельца */
+  ready() { return !!WORKER && !!(tg && (tg.initData || this.uid())); },
+
+  uid() {
+    const u = tg && tg.initDataUnsafe && tg.initDataUnsafe.user;
+    return u && u.id ? String(u.id) : '';
+  },
 
   head() {
-    return { 'content-type': 'application/json', 'x-init-data': (tg && tg.initData) || '' };
+    return {
+      'content-type': 'application/json',
+      'x-init-data': (tg && tg.initData) || '',
+      'x-tg-user': this.uid(),
+    };
   },
 
   /* Почему молчит синхронизация — единственный способ узнать это с телефона,
@@ -127,7 +137,7 @@ const Sync = {
   async pull(day) {
     this.why = '';
     if (!WORKER) { this.why = 'адрес воркера не задан'; return null; }
-    if (!(tg && tg.initData)) { this.why = 'нет подписи Telegram — открой через бота'; return null; }
+    if (!this.ready()) { this.why = 'открой приложение из Telegram'; return null; }
     try {
       const r = await fetch(`${WORKER}/day?d=${day}`, { headers: this.head() });
       const res = await r.json();
