@@ -9,7 +9,7 @@ const RING = 195;                       // длина окружности ме�
 
 /* Адрес воркера (код в D:\Projects\trener-worker) — без косой черты на конце.
    Пусто — кнопка «Сфоткать» уводит в чат с ботом, а дневник живёт только на телефоне. */
-const WORKER = '';
+const WORKER = 'https://trener.trener-worker.workers.dev';
 
 const DEFAULT_GOAL = { kcal: 2700, p: 110, f: 60, c: 430 };
 const PROFILE = { h: 173, age: 18 };    // рост и возраст для пересчёта нормы
