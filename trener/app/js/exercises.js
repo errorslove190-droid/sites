@@ -185,37 +185,45 @@ const EXERCISES = [
 
 /* Фигурка собрана из вложенных групп: каждая крутится вокруг своего сустава,
    поэтому поза задаётся углами, а не координатами — и позы можно смешивать. */
+/* Плечи и таз разнесены по ширине: если руки и ноги растут из одной точки,
+   при любых углах фигура складывается в одну палку и движение не читается. */
+const SH_L = 82, SH_R = 118, HIP_L = 90, HIP_R = 110, SH_Y = 62, HIP_Y = 116;
+
 const STICK = `
 <svg class="stick" viewBox="0 0 200 200" aria-hidden="true">
   <g class="st-root">
     <g class="st-body">
-      <circle class="st-head" cx="100" cy="46" r="11"/>
-      <line class="st-spine" x1="100" y1="57" x2="100" y2="112"/>
-      <g class="st-arm" data-j="armU" data-s="0" style="--ox:100px; --oy:66px">
-        <line x1="100" y1="66" x2="100" y2="98"/>
-        <g class="st-fore" data-j="armF" data-s="0" style="--ox:100px; --oy:98px">
-          <line x1="100" y1="98" x2="100" y2="128"/>
+      <circle class="st-head" cx="100" cy="38" r="11"/>
+      <line class="st-spine" x1="100" y1="49" x2="100" y2="${HIP_Y}"/>
+      <line class="st-bar" x1="${SH_L}" y1="${SH_Y}" x2="${SH_R}" y2="${SH_Y}"/>
+      <line class="st-bar" x1="${HIP_L}" y1="${HIP_Y}" x2="${HIP_R}" y2="${HIP_Y}"/>
+
+      <g data-j="armU" data-s="0" style="--ox:${SH_L}px; --oy:${SH_Y}px">
+        <line x1="${SH_L}" y1="${SH_Y}" x2="${SH_L}" y2="${SH_Y + 30}"/>
+        <g data-j="armF" data-s="0" style="--ox:${SH_L}px; --oy:${SH_Y + 30}px">
+          <line x1="${SH_L}" y1="${SH_Y + 30}" x2="${SH_L}" y2="${SH_Y + 58}"/>
         </g>
       </g>
-      <g class="st-arm" data-j="armU" data-s="1" style="--ox:100px; --oy:66px">
-        <line x1="100" y1="66" x2="100" y2="98"/>
-        <g class="st-fore" data-j="armF" data-s="1" style="--ox:100px; --oy:98px">
-          <line x1="100" y1="98" x2="100" y2="128"/>
+      <g data-j="armU" data-s="1" style="--ox:${SH_R}px; --oy:${SH_Y}px">
+        <line x1="${SH_R}" y1="${SH_Y}" x2="${SH_R}" y2="${SH_Y + 30}"/>
+        <g data-j="armF" data-s="1" style="--ox:${SH_R}px; --oy:${SH_Y + 30}px">
+          <line x1="${SH_R}" y1="${SH_Y + 30}" x2="${SH_R}" y2="${SH_Y + 58}"/>
         </g>
       </g>
     </g>
-    <g class="st-leg" data-j="thigh" data-s="0" style="--ox:100px; --oy:112px">
-      <line x1="100" y1="112" x2="100" y2="150"/>
-      <g class="st-calf" data-j="shin" data-s="0" style="--ox:100px; --oy:150px">
-        <line x1="100" y1="150" x2="100" y2="184"/>
-        <line class="st-foot" x1="100" y1="184" x2="114" y2="184"/>
+
+    <g data-j="thigh" data-s="0" style="--ox:${HIP_L}px; --oy:${HIP_Y}px">
+      <line x1="${HIP_L}" y1="${HIP_Y}" x2="${HIP_L}" y2="${HIP_Y + 36}"/>
+      <g data-j="shin" data-s="0" style="--ox:${HIP_L}px; --oy:${HIP_Y + 36}px">
+        <line x1="${HIP_L}" y1="${HIP_Y + 36}" x2="${HIP_L}" y2="${HIP_Y + 70}"/>
+        <line class="st-foot" x1="${HIP_L}" y1="${HIP_Y + 70}" x2="${HIP_L + 13}" y2="${HIP_Y + 70}"/>
       </g>
     </g>
-    <g class="st-leg" data-j="thigh" data-s="1" style="--ox:100px; --oy:112px">
-      <line x1="100" y1="112" x2="100" y2="150"/>
-      <g class="st-calf" data-j="shin" data-s="1" style="--ox:100px; --oy:150px">
-        <line x1="100" y1="150" x2="100" y2="184"/>
-        <line class="st-foot" x1="100" y1="184" x2="114" y2="184"/>
+    <g data-j="thigh" data-s="1" style="--ox:${HIP_R}px; --oy:${HIP_Y}px">
+      <line x1="${HIP_R}" y1="${HIP_Y}" x2="${HIP_R}" y2="${HIP_Y + 36}"/>
+      <g data-j="shin" data-s="1" style="--ox:${HIP_R}px; --oy:${HIP_Y + 36}px">
+        <line x1="${HIP_R}" y1="${HIP_Y + 36}" x2="${HIP_R}" y2="${HIP_Y + 70}"/>
+        <line class="st-foot" x1="${HIP_R}" y1="${HIP_Y + 70}" x2="${HIP_R + 13}" y2="${HIP_Y + 70}"/>
       </g>
     </g>
   </g>

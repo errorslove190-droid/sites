@@ -93,6 +93,18 @@ body.on-gym .tab.active{color:#b8ff2e}
 #screen-gym .figure .grp{cursor:pointer}
 #screen-gym .figure .grp:active{fill:#4a6b12}
 
+/* Окно, открытое из зала, тоже тёмное: светлая шторка поверх чёрного экрана
+   смотрится чужой, а белый текст на ней просто не читается. */
+body.on-gym .modal-box{background:#0e0e0e;color:#fff}
+body.on-gym .modal-box h3{color:#fff}
+body.on-gym .grab{background:#2a2a2a}
+body.on-gym .field label{color:#7c7c7c}
+body.on-gym .field input{background:#000;border-color:#2a2a2a;color:#fff}
+body.on-gym .field input:focus{border-color:#b8ff2e}
+body.on-gym .btn-light{background:#1a1a1a;color:#fff}
+body.on-gym .btn-dark{background:#b8ff2e;color:#000}
+body.on-gym .modal-actions{grid-template-columns:1fr}
+
 /* ---------- окно выбора: мышца → упражнение ---------- */
 
 .pick{display:flex;flex-direction:column;gap:8px}
