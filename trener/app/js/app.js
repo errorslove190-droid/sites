@@ -186,9 +186,21 @@ const Sync = {
   },
 
   /* Подтянуть день с сервера и, если он отличается от показанного, перерисовать. */
+  /* Строка внизу экрана «День» — единственная отладка, доступная с телефона.
+     Пишем в неё каждый раз, иначе непонятно, синхронизация молчит или её не было. */
+  note(text) {
+    const el = document.getElementById('sync-note');
+    if (el) el.textContent = text;
+  },
+
   async refresh(day, loud) {
     const fresh = await this.pull(day);
-    if (!fresh) { if (loud && this.why) toast('Синхронизация: ' + this.why); return; }
+    if (!fresh) {
+      this.note('Синхронизация не прошла: ' + (this.why || 'причина неизвестна'));
+      if (loud && this.why) toast('Синхронизация: ' + this.why);
+      return;
+    }
+    this.note(`Синхронизировано: ${fresh.length} записей в облаке`);
     if (day !== state.view) return;
     if (JSON.stringify(fresh) === JSON.stringify(state.meals)) return;
     state.meals = fresh;
