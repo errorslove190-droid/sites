@@ -120,13 +120,22 @@ const Sync = {
     return { 'content-type': 'application/json', 'x-init-data': (tg && tg.initData) || '' };
   },
 
+  /* Почему молчит синхронизация — единственный способ узнать это с телефона,
+     где ни консоли, ни отладчика нет. Пустая строка значит «всё хорошо». */
+  why: '',
+
   async pull(day) {
-    if (!this.ready()) return null;
+    this.why = '';
+    if (!WORKER) { this.why = 'адрес воркера не задан'; return null; }
+    if (!(tg && tg.initData)) { this.why = 'нет подписи Telegram — открой через бота'; return null; }
     try {
       const r = await fetch(`${WORKER}/day?d=${day}`, { headers: this.head() });
       const res = await r.json();
-      return res.ok && Array.isArray(res.meals) ? res.meals : null;
+      if (!res.ok) { this.why = res.error || ('ответ ' + r.status); return null; }
+      if (!Array.isArray(res.meals)) { this.why = 'пустой ответ'; return null; }
+      return res.meals;
     } catch (e) {
+      this.why = 'сеть: ' + (e && e.message || e);
       return null;
     }
   },
@@ -177,9 +186,10 @@ const Sync = {
   },
 
   /* Подтянуть день с сервера и, если он отличается от показанного, перерисовать. */
-  async refresh(day) {
+  async refresh(day, loud) {
     const fresh = await this.pull(day);
-    if (!fresh || day !== state.view) return;
+    if (!fresh) { if (loud && this.why) toast('Синхронизация: ' + this.why); return; }
+    if (day !== state.view) return;
     if (JSON.stringify(fresh) === JSON.stringify(state.meals)) return;
     state.meals = fresh;
     await Store.set('f' + day, fresh);
@@ -1098,7 +1108,7 @@ async function init() {
 
   /* Сначала досылаем то, что не ушло раньше, потом берём с сервера свежий день:
      иначе серверная версия затёрла бы запись, сделанную без сети. */
-  Sync.flush().then(() => Sync.refresh(state.view));
+  Sync.flush().then(() => Sync.refresh(state.view, true));
 
   /* Вернулся в приложение из чата — подтягиваем то, что Claude успел записать */
   document.addEventListener('visibilitychange', () => {
