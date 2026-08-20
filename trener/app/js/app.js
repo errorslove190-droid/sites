@@ -821,24 +821,144 @@ function renderBodyMap() {
   Object.keys(state.gym.ex).forEach(id => {
     const sets = state.gym.ex[id];
     if (!sets || !sets.length) return;
-    (EX_MUSCLES[id] || []).forEach(m => { hit[m] = (hit[m] || 0) + sets.length; });
+    musclesOf(id).forEach(m => { hit[m] = (hit[m] || 0) + sets.length; });
   });
 
   const box = document.getElementById('muscle-list');
   box.innerHTML = '';
   MUSCLES.forEach(m => {
     const on = !!hit[m.k];
-    const el = document.createElement('div');
+    const el = document.createElement('button');
     el.className = 'mus' + (on ? ' on' : '');
     el.innerHTML = '<i></i><span></span>' + (on ? '<b></b>' : '');
     el.querySelector('span').textContent = m.n;
     if (on) el.querySelector('b').textContent = hit[m.k] + ' п.';
+    el.addEventListener('click', () => openMuscle(m.k));
     box.appendChild(el);
   });
 
   document.querySelectorAll('#figure .grp').forEach(p => {
     p.classList.toggle('on', !!hit[p.dataset.m]);
+    /* тапать по самой фигуре — самый короткий путь: увидел мышцу, ткнул, выбрал */
+    p.onclick = () => openMuscle(p.dataset.m);
   });
+}
+
+/* ---------- интерактивная карта тела ---------- */
+
+/** Упражнение может прийти из плана дня (id вида a1) или из каталога (ch-press). */
+function musclesOf(id) {
+  if (EX_MUSCLES[id]) return EX_MUSCLES[id];
+  const ex = EXERCISES.find(e => e.id === id);
+  return ex ? ex.m : [];
+}
+
+function exById(id) {
+  return EXERCISES.find(e => e.id === id) || null;
+}
+
+let stickStop = null;      // остановка анимации предыдущего упражнения
+
+/** Шаг 1: тапнули по мышце — показываем, чем её грузить. */
+function openMuscle(key) {
+  const m = MUSCLES.find(x => x.k === key);
+  if (!m) return;
+  haptic('light');
+
+  const list = exercisesFor(key);
+  const box = document.createElement('div');
+  box.className = 'pick';
+
+  list.forEach(ex => {
+    const done = (state.gym.ex[ex.id] || []).length;
+    const b = document.createElement('button');
+    b.className = 'pick-row' + (done ? ' done' : '');
+    b.innerHTML = '<span class="pick-n"></span><span class="pick-eq"></span>' +
+      (done ? '<b class="pick-done"></b>' : '<em>›</em>');
+    b.querySelector('.pick-n').textContent = ex.n;
+    b.querySelector('.pick-eq').textContent = ex.eq;
+    if (done) b.querySelector('.pick-done').textContent = done + ' п.';
+    box.appendChild(b);
+  });
+
+  openSheet(m.n, box.outerHTML, null, { ok: false });
+  /* обработчики после вставки: openSheet кладёт в DOM строку, а не узлы */
+  const rows = document.querySelectorAll('#sheet .pick-row');
+  list.forEach((ex, i) => rows[i] && rows[i].addEventListener('click', () => openExercise(ex)));
+}
+
+/** Шаг 2: карточка упражнения — как делать и сколько сделал. */
+function openExercise(ex) {
+  const done = state.gym.ex[ex.id] || [];
+  const last = done[done.length - 1] || bestBefore(ex.id) || { w: 0, r: 10 };
+
+  const html = `
+    <div class="card">
+      <div class="card-fig">${STICK}</div>
+      <p class="card-tech"></p>
+      ${ex.warn ? '<p class="card-warn"></p>' : ''}
+      <div class="card-sets" id="card-sets"></div>
+      <div class="field-row card-in">
+        <div class="field"><label>кг</label><input id="in-w" type="number" inputmode="decimal" step="2.5" value="${last.w || ''}"></div>
+        <div class="field"><label>повторы</label><input id="in-r" type="number" inputmode="numeric" value="${last.r || 10}"></div>
+      </div>
+      <button class="card-add" id="card-add">Записать подход</button>
+    </div>`;
+
+  openSheet(ex.n, html, null, { ok: false });
+
+  const sheet = document.getElementById('sheet');
+  sheet.querySelector('.card-tech').textContent = ex.tech;
+  if (ex.warn) sheet.querySelector('.card-warn').textContent = ex.warn;
+
+  if (stickStop) stickStop();
+  stickStop = animateStick(sheet.querySelector('.stick'), ex);
+
+  const paint = () => {
+    const box = document.getElementById('card-sets');
+    const sets = state.gym.ex[ex.id] || [];
+    box.innerHTML = '';
+    if (!sets.length) {
+      box.innerHTML = '<span class="card-empty">подходов пока нет</span>';
+      return;
+    }
+    sets.forEach((s, i) => {
+      const b = document.createElement('button');
+      b.className = 'set';
+      b.textContent = s.w ? `${fmtW(s.w)}×${s.r}` : `${s.r} повт`;
+      b.title = 'Убрать';
+      b.addEventListener('click', () => {
+        sets.splice(i, 1);
+        if (!sets.length) delete state.gym.ex[ex.id];
+        saveGym(); paint(); renderGym();
+        haptic('light');
+      });
+      box.appendChild(b);
+    });
+  };
+  paint();
+
+  document.getElementById('card-add').addEventListener('click', () => {
+    const w = parseFloat(document.getElementById('in-w').value) || 0;
+    const r = parseInt(document.getElementById('in-r').value, 10) || 0;
+    if (!r) return;
+    if (!state.gym.ex[ex.id]) state.gym.ex[ex.id] = [];
+    state.gym.ex[ex.id].push({ w, r });
+    saveGym();
+    paint();
+    renderGym();
+    haptic('medium');
+    toast(ex.n + ' · записано');
+  });
+}
+
+/** Лучший подход этого упражнения в прошлых тренировках — чтобы подставить вес. */
+function bestBefore(id) {
+  for (const h of state.gymHist) {
+    const sets = h.w && h.w.ex && h.w.ex[id];
+    if (sets && sets.length) return sets[sets.length - 1];
+  }
+  return null;
 }
 
 function renderGymList() {
@@ -885,6 +1005,36 @@ function renderGymList() {
       h.textContent = hint;
       el.appendChild(h);
     }
+    box.appendChild(el);
+  });
+
+  /* Всё, что записано через карту тела и не входит в план дня — отдельным блоком,
+     иначе подход исчезал бы из виду сразу после записи. */
+  const planned = PROGRAM[state.gym.d].ex.map(e => e.id);
+  const extra = Object.keys(state.gym.ex).filter(id => !planned.includes(id) && state.gym.ex[id].length);
+  if (!extra.length) return;
+
+  const head = document.createElement('h2');
+  head.className = 'extra-head';
+  head.textContent = 'Сверх плана';
+  box.appendChild(head);
+
+  extra.forEach(id => {
+    const ex = exById(id);
+    const sets = state.gym.ex[id];
+    const el = document.createElement('section');
+    el.className = 'ex full';
+    el.innerHTML = '<div class="ex-head"><b></b></div><div class="ex-sets"></div>';
+    el.querySelector('b').textContent = ex ? ex.n : id;
+
+    const row = el.querySelector('.ex-sets');
+    sets.forEach(s => {
+      const b = document.createElement('button');
+      b.className = 'set';
+      b.textContent = s.w ? `${fmtW(s.w)}×${s.r}` : `${s.r} повт`;
+      if (ex) b.addEventListener('click', () => openExercise(ex));
+      row.appendChild(b);
+    });
     box.appendChild(el);
   });
 }
@@ -1044,11 +1194,17 @@ async function shiftGym(delta, exact) {
 
 let sheetHandler = null;
 
-function openSheet(title, html, onOk) {
+/* opts.ok:false — окно без кнопки «Готово» и без автофокуса: в карточке упражнения
+   клавиатура выехала бы поверх анимации, ради которой окно и открывали. */
+function openSheet(title, html, onOk, opts) {
+  const withOk = !opts || opts.ok !== false;
   document.getElementById('sheet-title').textContent = title;
   document.getElementById('sheet-body').innerHTML = html;
   document.getElementById('sheet').classList.remove('hidden');
+  document.getElementById('sheet-ok').classList.toggle('hidden', !withOk);
+  document.getElementById('sheet-cancel').textContent = withOk ? 'Отмена' : 'Закрыть';
   sheetHandler = onOk;
+  if (!withOk) return;
   const first = document.querySelector('#sheet-body input');
   if (first) setTimeout(() => first.focus(), 80);
 }

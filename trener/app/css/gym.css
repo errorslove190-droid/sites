@@ -80,6 +80,57 @@ body.on-gym .tab.active{color:#b8ff2e}
 #screen-gym .figure .grp{fill:#262626;transition:fill .25s}
 #screen-gym .figure .grp.on{fill:var(--neon)}
 
+#screen-gym .mus{cursor:pointer;text-align:left;width:100%}
+#screen-gym .mus:active{border-color:var(--neon)}
+#screen-gym .figure .grp{cursor:pointer}
+#screen-gym .figure .grp:active{fill:#4a6b12}
+
+/* ---------- окно выбора: мышца → упражнение ---------- */
+
+.pick{display:flex;flex-direction:column;gap:8px}
+.pick-row{
+  display:flex;align-items:center;gap:10px;width:100%;text-align:left;
+  background:#0e0e0e;border:1px solid #2a2a2a;border-radius:16px;
+  padding:12px 14px;color:#fff;font:inherit;
+}
+.pick-row.done{border-color:#b8ff2e}
+.pick-n{font-size:15px;font-weight:600}
+.pick-eq{margin-left:auto;font-size:11.5px;color:#7c7c7c}
+.pick-row em{font-style:normal;color:#7c7c7c;font-size:17px;margin-left:4px}
+.pick-done{font-size:11.5px;font-weight:700;color:#b8ff2e;margin-left:4px}
+
+/* ---------- карточка упражнения ---------- */
+
+.card-fig{
+  background:#0e0e0e;border:1px solid #2a2a2a;border-radius:20px;
+  padding:6px;display:grid;place-items:center;
+}
+.stick{width:100%;max-width:190px;height:190px;display:block}
+.stick line{stroke:#b8ff2e;stroke-width:6;stroke-linecap:round}
+.stick .st-spine{stroke-width:7}
+.stick .st-foot{stroke-width:5}
+.stick .st-head{fill:none;stroke:#b8ff2e;stroke-width:6}
+.stick g{transition:none}
+
+.card-tech{font-size:14px;line-height:1.5;color:#fff;margin-top:12px}
+.card-warn{
+  font-size:13px;line-height:1.45;color:#ffd9d9;margin-top:9px;
+  background:rgba(255,77,77,.08);border:1px solid rgba(255,77,77,.35);
+  border-radius:14px;padding:9px 11px;
+}
+.card-sets{display:flex;flex-wrap:wrap;gap:7px;margin-top:14px;min-height:20px}
+.card-sets .set{
+  border-radius:999px;border:1px solid #2a2a2a;background:#000;color:#fff;
+  padding:8px 13px;font-size:14px;font-weight:600;font-variant-numeric:tabular-nums;
+}
+.card-empty{font-size:12.5px;color:#7c7c7c}
+.card-in{margin-top:12px}
+.card-add{
+  width:100%;margin-top:12px;padding:14px;border:0;border-radius:999px;
+  background:#b8ff2e;color:#000;font:inherit;font-size:15px;font-weight:700;
+}
+.card-add:active{opacity:.85}
+
 /* ---------- плита тоннажа ---------- */
 
 #screen-gym .tonn{
@@ -161,3 +212,5 @@ body.on-gym .tab.active{color:#b8ff2e}
   #screen-gym .tonn-main b{font-size:32px}
   #screen-gym .mus{font-size:12.5px;padding:7px 11px 7px 8px}
 }
+
+#screen-gym .extra-head{margin:20px 0 2px;color:#b8ff2e}
