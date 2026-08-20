@@ -196,6 +196,28 @@ const Sync = {
   },
 
   /* Подтянуть день с сервера и, если он отличается от показанного, перерисовать. */
+  async pullGym(day) {
+    if (!this.ready()) return null;
+    try {
+      const r = await fetch(`${WORKER}/gym?d=${day}`, { headers: this.head() });
+      const res = await r.json();
+      return res.ok && res.gym ? res.gym : null;
+    } catch (e) {
+      return null;
+    }
+  },
+
+  async pushGym(day, gym) {
+    if (!this.ready() || !gym || !gym.d) return;
+    try {
+      await fetch(`${WORKER}/gym`, {
+        method: 'POST',
+        headers: this.head(),
+        body: JSON.stringify({ day, gym }),
+      });
+    } catch (e) { /* нет сети — тренировка осталась в облаке Telegram */ }
+  },
+
   /* Строка внизу экрана «День» — единственная отладка, доступная с телефона.
      Пишем в неё каждый раз, иначе непонятно, синхронизация молчит или её не было. */
   note(text) {
@@ -671,7 +693,10 @@ function suggestDay() {
 }
 
 async function loadGym() {
-  state.gym = (await Store.get('g' + state.gymView)) || null;
+  /* Сервер главнее — там лежит то, что записал Claude из чата */
+  const cloud = await Sync.pullGym(state.gymView);
+  state.gym = cloud || (await Store.get('g' + state.gymView)) || null;
+  if (cloud) Store.set('g' + state.gymView, cloud);
   if (!state.gym) state.gym = { d: suggestDay(), ex: {} };
   if (!state.gym.ex) state.gym.ex = {};
 }
@@ -915,6 +940,7 @@ function askSet(id, idx) {
 
 function saveGym() {
   Store.set('g' + state.gymView, state.gym);
+  Sync.pushGym(state.gymView, state.gym);
 }
 
 function renderGymHistory() {
@@ -1082,6 +1108,14 @@ function switchScreen(name) {
   if (name === 'week') renderWeek();
   if (name === 'me') renderMe();
   if (name === 'gym') openGym();
+
+  /* Зал чёрный — шапка Telegram должна уходить в тот же цвет, иначе сверху
+     остаётся светлая полоса и экран выглядит сломанным, а не задуманным. */
+  const dark = name === 'gym';
+  document.body.classList.toggle('on-gym', dark);
+  if (tg && tg.setHeaderColor) tg.setHeaderColor(dark ? '#0c0c0c' : '#faf7f2');
+  if (tg && tg.setBackgroundColor) tg.setBackgroundColor(dark ? '#0c0c0c' : '#faf7f2');
+
   window.scrollTo(0, 0);
 }
 

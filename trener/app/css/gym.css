@@ -1,0 +1,165 @@
+/* Брутальный слой для экрана «Спорт».
+   Отдельный файл и всё в скоупе #screen-gym: еда остаётся светлой и мягкой,
+   зал — чёрный, угловатый и громкий. Подключается после style.css. */
+
+#screen-gym{
+  --steel:#0c0c0c;      /* фон */
+  --plate:#171717;      /* блок */
+  --edge:#f2f2f2;       /* рамки и текст */
+  --acid:#d8f34e;       /* акцент: сделано, прирост, действие */
+  --blood:#ff3b30;      /* запреты */
+  --ash:#8b8b8b;
+
+  background:var(--steel);
+  color:var(--edge);
+  /* тянем фон на всю ширину экрана, оставаясь в колонке контента */
+  box-shadow:0 0 0 100vmax var(--steel);
+  clip-path:inset(0 -100vmax);
+  min-height:100vh;
+  padding-top:22px;
+  font-family:'Golos Text',system-ui,sans-serif;
+}
+
+/* Пока открыт зал, таббар тоже чёрный — светлая полоса снизу рвала бы картинку */
+body.on-gym{background:#0c0c0c}
+body.on-gym .tabbar{background:#0c0c0c;border-top:2px solid #f2f2f2}
+body.on-gym .tab{color:#8b8b8b}
+body.on-gym .tab.active{color:#d8f34e}
+
+/* ---------- шапка ---------- */
+
+#screen-gym h1,
+#screen-gym h2{
+  font-family:'Oswald','Golos Text',sans-serif;
+  text-transform:uppercase;
+  letter-spacing:.04em;
+  font-weight:700;
+}
+#screen-gym h1{font-size:34px;line-height:.95;color:var(--edge)}
+#screen-gym h2{font-size:15px;letter-spacing:.12em}
+#screen-gym .date{color:var(--ash);text-transform:uppercase;letter-spacing:.14em;font-size:11px;font-weight:600}
+
+#screen-gym .nav-arrow{
+  width:42px;height:42px;border-radius:0;
+  background:none;border:2px solid var(--edge);color:var(--edge);
+  font-size:20px;line-height:1;
+}
+#screen-gym .nav-arrow:disabled{opacity:.25}
+
+/* ---------- выбор дня A / B / C ---------- */
+
+#screen-gym .days{display:flex;gap:0;margin:18px 0 16px;border:2px solid var(--edge)}
+#screen-gym .days .day{
+  flex:1;background:none;border:0;border-right:2px solid var(--edge);
+  color:var(--edge);padding:13px 4px;border-radius:0;
+  font-family:'Oswald','Golos Text',sans-serif;
+  font-size:15px;font-weight:600;text-transform:uppercase;letter-spacing:.08em;
+}
+#screen-gym .days .day:last-child{border-right:0}
+#screen-gym .days .day.on{background:var(--acid);color:#000}
+
+/* ---------- плита тоннажа ---------- */
+
+#screen-gym .tonn{
+  background:var(--acid);color:#000;border-radius:0;
+  border:2px solid var(--acid);
+  padding:16px 18px;display:flex;align-items:center;gap:14px;
+}
+#screen-gym .tonn-ic{width:34px;height:34px;flex:none;color:#000}
+#screen-gym .tonn-main b{
+  font-family:'Oswald','Golos Text',sans-serif;
+  font-size:44px;font-weight:700;line-height:.9;letter-spacing:-.01em;
+  font-variant-numeric:tabular-nums;
+}
+#screen-gym .tonn-main small{
+  display:block;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.16em;margin-top:3px;
+}
+#screen-gym .tonn-right{margin-left:auto;text-align:right}
+#screen-gym .tonn-right span{
+  display:block;font-family:'Oswald','Golos Text',sans-serif;
+  font-size:19px;font-weight:600;font-variant-numeric:tabular-nums;
+}
+#screen-gym .tonn-right i{display:block;font-style:normal;font-size:11px;font-weight:600;opacity:.75;margin-top:2px}
+#screen-gym .tonn-right i.up::before{content:'▲ '}
+#screen-gym .tonn-right i.down::before{content:'▼ '}
+
+/* ---------- упражнение ---------- */
+
+#screen-gym .ex{
+  background:var(--plate);border:2px solid var(--edge);border-radius:0;
+  box-shadow:none;padding:14px 15px 15px;margin-top:12px;
+}
+#screen-gym .ex.full{border-color:var(--acid)}
+#screen-gym .ex.full .ex-head b{color:var(--acid)}
+
+#screen-gym .ex-head{display:flex;align-items:baseline;gap:10px}
+#screen-gym .ex-head b{
+  font-family:'Oswald','Golos Text',sans-serif;
+  font-size:18px;font-weight:600;text-transform:uppercase;letter-spacing:.03em;line-height:1.1;
+}
+#screen-gym .ex-target{
+  margin-left:auto;flex:none;font-size:11px;font-weight:700;letter-spacing:.1em;
+  color:#000;background:var(--edge);padding:3px 7px;
+}
+#screen-gym .ex-d{color:var(--ash);font-size:13px;margin-top:5px}
+#screen-gym .ex-note{
+  color:var(--edge);font-size:12.5px;margin-top:8px;
+  border-left:3px solid var(--blood);padding-left:9px;
+}
+#screen-gym .ex-last{color:var(--ash);font-size:12px;margin-top:9px;text-transform:uppercase;letter-spacing:.06em}
+
+/* ---------- подходы ---------- */
+
+#screen-gym .ex-sets{display:flex;flex-wrap:wrap;gap:7px;margin-top:12px}
+#screen-gym .set{
+  border-radius:0;border:2px solid var(--edge);background:none;color:var(--edge);
+  padding:9px 11px;min-width:62px;
+  font-family:'Oswald','Golos Text',sans-serif;
+  font-size:15px;font-weight:600;font-variant-numeric:tabular-nums;letter-spacing:.02em;
+}
+#screen-gym .set.add{border-style:dashed;color:var(--acid);border-color:var(--acid);font-size:20px;min-width:48px;padding:6px 11px}
+#screen-gym .set:active{background:var(--edge);color:#000}
+
+/* ---------- блоки-секции ---------- */
+
+#screen-gym .slot{
+  background:none;border:2px solid var(--edge);border-radius:0;
+  box-shadow:none;margin-top:16px;padding:14px 15px;
+}
+#screen-gym .slot-head{margin-bottom:10px}
+#screen-gym .slot-empty{color:var(--ash);font-size:13px}
+
+/* Правила — предупреждающая лента, её должно быть видно раньше текста */
+#screen-gym .rules{border-color:var(--blood)}
+#screen-gym .rules h2{color:var(--blood)}
+#screen-gym .rule-no{font-size:13px;margin-top:8px;color:var(--edge)}
+#screen-gym .rule-no b{color:var(--blood);text-transform:uppercase;letter-spacing:.06em}
+#screen-gym .rule-ok{font-size:13px;margin-top:10px;color:var(--ash);border-top:2px solid #262626;padding-top:10px}
+
+/* ---------- история ---------- */
+
+#screen-gym .item{
+  background:none;border:0;border-top:2px solid #262626;border-radius:0;
+  display:flex;align-items:center;gap:12px;padding:12px 0;box-shadow:none;
+}
+#screen-gym .item:first-child{border-top:0}
+#screen-gym .hday{
+  flex:none;width:34px;height:34px;display:grid;place-items:center;
+  border:2px solid var(--edge);color:var(--edge);
+  font-family:'Oswald','Golos Text',sans-serif;font-size:16px;font-weight:700;
+}
+#screen-gym .item-body b{
+  display:block;font-family:'Oswald','Golos Text',sans-serif;
+  font-size:15px;font-weight:600;text-transform:uppercase;letter-spacing:.04em;
+}
+#screen-gym .item-body small{display:block;color:var(--ash);font-size:12px;margin-top:2px}
+#screen-gym .item-kcal{
+  margin-left:auto;font-family:'Oswald','Golos Text',sans-serif;
+  font-size:19px;font-weight:700;color:var(--acid);font-variant-numeric:tabular-nums;
+}
+#screen-gym .item-kcal::after{content:' кг';font-size:11px;font-weight:600;color:var(--ash)}
+
+@media (max-width:360px){
+  #screen-gym h1{font-size:28px}
+  #screen-gym .tonn-main b{font-size:36px}
+}
