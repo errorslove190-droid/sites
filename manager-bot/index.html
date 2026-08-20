@@ -213,34 +213,32 @@ footer{padding:26px 0 40px;font-size:14px;color:var(--grey)}
 
   <article class="step" data-step="2">
     <div class="step-head"><span class="num"><span>2</span></span>
-      <span class="step-title"><b>Положить токен в файл</b><span class="where">Компьютер · 2 минуты</span></span>
+      <span class="step-title"><b>Вписать токен</b><span class="where">Компьютер · 1 минута</span></span>
     </div>
     <div class="step-body">
-      <p>Рядом уже лежит образец — скопируй его и убери из имени <code>.example</code>:</p>
+      <p>Файл уже создан — просто открой его блокнотом:</p>
       <div class="copy"><code>C:\Users\Михаил\Desktop\clod code\.secrets\manager-cloud.env</code><button>копировать</button></div>
-      <p>Внутри одна строка — вместо звёздочек вставь токен:</p>
-      <div class="copy"><code>MANAGER_CLOUD_TOKEN=8123456789:AAF***</code><button>копировать</button></div>
-      <div class="note">Папка <code>.secrets</code> не попадает в Git. Токен в чат не присылай — он мне не нужен, скрипт заливки прочитает его сам.</div>
-      <span class="check">Проверка</span>
-      <p>Файл называется ровно <code>manager-cloud.env</code>, без <code>.txt</code> на конце.</p>
+      <p>Внутри найди эту строку и вставь токен сразу после знака <code>=</code>, без пробела:</p>
+      <div class="copy"><code>MANAGER_CLOUD_TOKEN=</code><button>копировать</button></div>
+      <p>Строку <code>AI_KEY=</code> оставь пустой — ключа к модели пока нет, и без него бот работает.</p>
+      <div class="note"><b>Файлы с <code>.example</code> не трогай</b> — это образцы, они только показывают формат. Заполнять нужно <code>manager-cloud.env</code> и <code>beget-main.txt</code>, оба уже лежат на месте.</div>
+      <div class="note">Токен в чат не присылай — он мне не нужен, скрипт заливки прочитает его сам.</div>
     </div>
   </article>
 
   <article class="step" data-step="3">
     <div class="step-head"><span class="num"><span>3</span></span>
-      <span class="step-title"><b>Дать главный доступ к Beget</b><span class="where">Панель Beget + компьютер · 3 минуты</span></span>
+      <span class="step-title"><b>Вписать пароль от Beget</b><span class="where">Панель Beget + компьютер · 2 минуты</span></span>
     </div>
     <div class="step-body">
       <p>В панели: <b>Хостинг → FTP</b>. Нужен <b>основной</b> аккаунт — логин <code>mabrosz9</code>.</p>
       <div class="note warn"><b>Не <code>mabrosz9_r</code>.</b> Тот заперт внутри папки Оладушек — я проверял, он видит только их сайт, бота туда положить некуда.</div>
-      <p>Создай файл:</p>
+      <p>Файл уже создан, хост и логин в нём проставлены. Открой:</p>
       <div class="copy"><code>C:\Users\Михаил\Desktop\clod code\.secrets\beget-main.txt</code><button>копировать</button></div>
-      <p>Три строки:</p>
-      <div class="copy"><code>хост: mabrosz9.beget.tech</code><button>копировать</button></div>
-      <div class="copy"><code>логин: mabrosz9</code><button>копировать</button></div>
-      <div class="copy"><code>пароль: пароль_основного_аккаунта</code><button>копировать</button></div>
+      <p>Допиши пароль в третью строку, через пробел после двоеточия:</p>
+      <div class="copy"><code>пароль: сюда_пароль</code><button>копировать</button></div>
       <span class="check">Проверка</span>
-      <p>Образец с этими же строками лежит рядом: <code>beget-main.txt.example</code>.</p>
+      <p>Если пароль не вписать, заливка на шаге 5 честно скажет «не заполнено: пароль» и до сервера не пойдёт.</p>
     </div>
   </article>
 
