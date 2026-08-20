@@ -271,11 +271,12 @@ footer{padding:26px 0 40px;font-size:14px;color:var(--grey)}
     </div>
     <div class="step-body">
       <p>Открой <b>Терминал</b> в панели, вставь и выполни:</p>
-      <div class="copy"><code>php ~/manager-cloud/check.php</code><button>копировать</button></div>
+      <div class="copy"><code>/usr/local/bin/php8.3 ~/manager-cloud/check.php</code><button>копировать</button></div>
       <p>Должно выйти десять строк, все со словом <b>ok</b>: PHP, интернет наружу, токен, каталог данных.</p>
-      <p>Если пишет, что <code>php</code> не найден — посмотри, где он лежит:</p>
-      <div class="copy"><code>which php || ls /usr/local/bin/php*</code><button>копировать</button></div>
-      <p>и подставь найденный полный путь вместо слова <code>php</code>. Этот же путь понадобится на шаге 7.</p>
+      <div class="note warn"><b>Версию пишем полным путём, и это важно.</b> Голое слово <code>php</code> на Beget — это <b>PHP 5.6</b>, ей десять лет, и наш код она не понимает. Если её позвать, скрипт молча падает с кодом 255 и не печатает вообще ничего: разбор файла обрывается раньше первой строки вывода. Проверено 20.08 — именно так и вышло. Полный путь <code>/usr/local/bin/php8.3</code> снимает вопрос; тот же путь обязателен и в кронах на шаге 7.</div>
+      <p>Посмотреть, что вообще стоит на сервере, и увидеть текст ошибки, если она будет:</p>
+      <div class="copy"><code>php -v | head -1; ls /usr/local/bin/php*</code><button>копировать</button></div>
+      <div class="copy"><code>/usr/local/bin/php8.3 -d display_errors=1 -l ~/manager-cloud/check.php</code><button>копировать</button></div>
     </div>
   </article>
 
@@ -286,9 +287,9 @@ footer{padding:26px 0 40px;font-size:14px;color:var(--grey)}
     <div class="step-body">
       <p>Панель → <b>CronTab</b>. Добавь два задания.</p>
       <p><b>Первое — бот слушает Telegram.</b> Расписание: <b>каждую минуту</b>.</p>
-      <div class="copy"><code>/usr/local/bin/php ~/manager-cloud/bot.php >/dev/null 2>&amp;1</code><button>копировать</button></div>
+      <div class="copy"><code>/usr/local/bin/php8.3 ~/manager-cloud/bot.php >/dev/null 2>&amp;1</code><button>копировать</button></div>
       <p><b>Второе — напоминания.</b> Расписание: <b>каждые 5 минут</b>.</p>
-      <div class="copy"><code>/usr/local/bin/php ~/manager-cloud/cron.php >/dev/null 2>&amp;1</code><button>копировать</button></div>
+      <div class="copy"><code>/usr/local/bin/php8.3 ~/manager-cloud/cron.php >/dev/null 2>&amp;1</code><button>копировать</button></div>
       <div class="note"><b>Почему кроном, а не вебхуком.</b> Вебхук Telegram требует HTTPS с настоящим сертификатом. У технических доменов Beget его нет — я проверял, <code>mabrosz9.beget.tech</code> и <code>mabrosz9.bget.ru</code> рвут соединение. Единственный домен с рабочим HTTPS на аккаунте — клиентский, а вешать на него личного бота нельзя: уйдёт клиент — умрёт бот. Крон снимает вопрос: бот стартует раз в минуту и полминуты держит открытым запрос к Telegram, поэтому отвечает за секунды, а висящего процесса на хостинге нет.</div>
     </div>
   </article>
