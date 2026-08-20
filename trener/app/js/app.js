@@ -908,7 +908,7 @@ function openExercise(ex) {
 
   const html = `
     <div class="card">
-      <div class="card-fig">${STICK}</div>
+      <div class="card-fig">${HUMAN}</div>
       <p class="card-tech"></p>
       ${ex.warn ? '<p class="card-warn"></p>' : ''}
       <div class="card-sets" id="card-sets"></div>
@@ -926,7 +926,7 @@ function openExercise(ex) {
   if (ex.warn) sheet.querySelector('.card-warn').textContent = ex.warn;
 
   if (stickStop) stickStop();
-  stickStop = animateStick(sheet.querySelector('.stick'), ex);
+  stickStop = animateHuman(sheet.querySelector('.human'), ex);
 
   const paint = () => {
     const box = document.getElementById('card-sets');

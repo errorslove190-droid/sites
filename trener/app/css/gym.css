@@ -125,12 +125,12 @@ body.on-gym .modal-actions{grid-template-columns:1fr}
   background:#0e0e0e;border:1px solid #2a2a2a;border-radius:20px;
   padding:6px;display:grid;place-items:center;
 }
-.stick{width:100%;max-width:190px;height:190px;display:block}
-.stick line{stroke:#b8ff2e;stroke-width:6;stroke-linecap:round}
-.stick .st-spine{stroke-width:7}
-.stick .st-foot{stroke-width:5}
-.stick .st-head{fill:none;stroke:#b8ff2e;stroke-width:6}
-.stick g{transition:none}
+.human{width:100%;max-width:230px;height:230px;display:block}
+/* тело серое, работающие мышцы горят — как в анатомических приложениях */
+.human .lb{fill:#43474d;stroke:#22252a;stroke-width:1}
+.human .mus{fill:#565b62;stroke:none;transition:fill .3s}
+.human .mus.on{fill:#b8ff2e}
+/* повороты идут атрибутом transform, поэтому CSS сюда не лезет */
 
 .card-tech{font-size:14px;line-height:1.5;color:#fff;margin-top:12px}
 .card-warn{
