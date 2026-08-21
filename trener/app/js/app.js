@@ -34,32 +34,38 @@ const BASE_DISHES = [
 
 /* Программа зала. Три дня, каждая мышца дважды в неделю.
    note — ограничение из-за плеча и спины, оно важнее нагрузки и висит прямо в карточке. */
+/* Программа привязана к дням недели: понедельник — верх, среда — низ, пятница — всё тело.
+   Упражнения ссылаются на каталог из exercises.js, поэтому у каждого сразу есть картинка. */
 const PROGRAM = {
-  A: { n: 'Верх тела', ex: [
-    { id: 'a1', n: 'Жим гантелей лёжа',              sets: 4, reps: '6–10',  note: 'гантели, а не штанга — плечо в свободном положении' },
-    { id: 'a2', n: 'Тяга верхнего блока',            sets: 4, reps: '8–12',  d: 'нейтральным хватом' },
-    { id: 'a3', n: 'Жим гантелей сидя',              sets: 3, reps: '8–12',  note: 'не опускать ниже уровня ушей' },
-    { id: 'a4', n: 'Тяга с упором в грудь',          sets: 3, reps: '10–12', d: 'в тренажёре' },
-    { id: 'a5', n: 'Бицепс и трицепс',               sets: 3, reps: '10–15', d: 'подъём на бицепс, разгибания' },
-    { id: 'a6', n: 'Отведения в стороны',            sets: 3, reps: '15',    d: 'лёгкие гантели' },
+  A: { n: 'Верх тела', wd: 1, ex: [
+    { id: 'ch-press',  sets: 4, reps: '6–10' },
+    { id: 'bk-lat',    sets: 4, reps: '8–12' },
+    { id: 'sh-press',  sets: 3, reps: '8–12' },
+    { id: 'bk-row',    sets: 3, reps: '10–12' },
+    { id: 'bi-curl',   sets: 3, reps: '10–15' },
+    { id: 'tr-push',   sets: 3, reps: '10–15' },
   ]},
-  B: { n: 'Ноги и спина', ex: [
-    { id: 'b1', n: 'Приседания со штангой',          sets: 4, reps: '6–10',  note: 'спина болит — начинай с гоблет-приседа с гантелью' },
-    { id: 'b2', n: 'Жим ногами',                     sets: 3, reps: '10–12' },
-    { id: 'b3', n: 'Румынская тяга с гантелями',     sets: 3, reps: '10–12', note: 'лёгкий вес, идеальная техника, при боли — пропускаем' },
-    { id: 'b4', n: 'Сгибания и разгибания ног',      sets: 3, reps: '12',    d: 'в тренажёре' },
-    { id: 'b5', n: 'Гиперэкстензия',                 sets: 3, reps: '15',    note: 'лечит спину лучше, чем щадящий режим' },
-    { id: 'b6', n: 'Носки и планка',                 sets: 3, reps: '15 / 40 сек' },
+  B: { n: 'Ноги и спина', wd: 3, ex: [
+    { id: 'lg-squat',  sets: 4, reps: '6–10' },
+    { id: 'lg-press',  sets: 3, reps: '10–12' },
+    { id: 'lg-rdl',    sets: 3, reps: '10–12' },
+    { id: 'bk-hyper',  sets: 3, reps: '15' },
+    { id: 'cf-raise',  sets: 3, reps: '15' },
+    { id: 'ab-plank',  sets: 3, reps: '40 сек' },
   ]},
-  C: { n: 'Всё тело', ex: [
-    { id: 'c1', n: 'Подтягивания',                   sets: 4, reps: 'макс',  d: 'нейтральным хватом', note: 'не тянет — в гравитроне или с резиной' },
-    { id: 'c2', n: 'Жим гантелей на наклонной',      sets: 4, reps: '8–12' },
-    { id: 'c3', n: 'Выпады с гантелями',             sets: 3, reps: '10 на ногу' },
-    { id: 'c4', n: 'Тяга гантели в наклоне',         sets: 3, reps: '10–12', d: 'с упором в скамью' },
-    { id: 'c5', n: 'Жим гантелей сидя или брусья',   sets: 3, reps: '10' },
-    { id: 'c6', n: 'Бицепс, трицепс, пресс',         sets: 3, reps: '12–15' },
+  C: { n: 'Всё тело', wd: 5, ex: [
+    { id: 'bk-pullup', sets: 4, reps: 'макс' },
+    { id: 'ch-incline',sets: 4, reps: '8–12' },
+    { id: 'lg-lunge',  sets: 3, reps: '10 на ногу' },
+    { id: 'ch-dip',    sets: 3, reps: '10' },
+    { id: 'sh-lat',    sets: 3, reps: '15' },
+    { id: 'ab-legs',   sets: 3, reps: '12–15' },
   ]},
 };
+
+/* Понедельник=1 … воскресенье=0. В остальные дни зал не запланирован. */
+const WEEK_PLAN = { 1: 'A', 3: 'B', 5: 'C' };
+const WD_NAME = ['воскресенье', 'понедельник', 'вторник', 'среда', 'четверг', 'пятница', 'суббота'];
 
 const DAY_ORDER = ['A', 'B', 'C'];
 
@@ -718,10 +724,17 @@ function setsDone(w) {
 
 /** Какой день предлагать: следующий по кругу после последней тренировки. */
 function suggestDay() {
+  /* День берём из расписания: понедельник — верх, среда — низ, пятница — всё тело.
+     В свободный день предлагаем ближайшую прошедшую тренировку, чтобы дописать её. */
+  const wd = fromKey(state.gymView).getDay();
+  if (WEEK_PLAN[wd]) return WEEK_PLAN[wd];
   const prev = state.gymHist.find(h => h.w && h.w.d);
-  if (!prev) return 'A';
-  const i = DAY_ORDER.indexOf(prev.w.d);
-  return DAY_ORDER[(i + 1) % DAY_ORDER.length];
+  return prev ? prev.w.d : 'A';
+}
+
+/** Запланирован ли зал в этот день недели */
+function isPlannedDay(key) {
+  return !!WEEK_PLAN[fromKey(key).getDay()];
 }
 
 async function loadGym() {
@@ -767,8 +780,9 @@ function renderGymDays() {
   DAY_ORDER.forEach(k => {
     const b = document.createElement('button');
     b.className = 'day' + (state.gym.d === k ? ' on' : '');
-    b.innerHTML = `<b>${k}</b><span></span>`;
-    b.querySelector('span').textContent = PROGRAM[k].n;
+    b.innerHTML = '<b></b><span></span>';
+    b.querySelector('b').textContent = PROGRAM[k].n;
+    b.querySelector('span').textContent = WD_NAME[PROGRAM[k].wd].slice(0, 2).toUpperCase();
     b.addEventListener('click', () => {
       state.gym.d = k;
       saveGym();
@@ -787,8 +801,13 @@ function renderGymSum() {
   document.getElementById('tonn-v').textContent = t.toLocaleString('ru-RU');
   document.getElementById('tonn-sets').textContent = `подходов ${done} из ${plan}`;
   const hd = document.getElementById('hero-day');
-  if (hd) hd.textContent = (state.gymView === state.today ? 'сегодня' : niceDate(state.gymView)) +
-    ' · день ' + state.gym.d;
+  if (hd) {
+    const wd = WD_NAME[fromKey(state.gymView).getDay()];
+    const when = state.gymView === state.today ? 'сегодня, ' + wd : wd + ', ' + niceDate(state.gymView);
+    hd.textContent = isPlannedDay(state.gymView)
+      ? `${when} · ${PROGRAM[state.gym.d].n}`
+      : `${when} · день отдыха`;
+  }
 
   // сравнение с прошлым таким же днём — то самое «добавь повтор или 2,5 кг»
   const prev = state.gymHist.find(h => h.w && h.w.d === state.gym.d);
@@ -988,77 +1007,65 @@ function renderGymList() {
   const box = document.getElementById('gym-list');
   box.innerHTML = '';
 
-  PROGRAM[state.gym.d].ex.forEach(ex => {
-    const done = state.gym.ex[ex.id] || [];
-    const el = document.createElement('section');
-    el.className = 'ex' + (done.length >= ex.sets ? ' full' : '');
-    el.innerHTML = `
-      <div class="ex-head">
-        <b></b>
-        <span class="ex-target">${ex.sets} × ${ex.reps}</span>
-      </div>
-      ${ex.d ? '<p class="ex-d"></p>' : ''}
-      ${ex.note ? '<p class="ex-note"></p>' : ''}
-      <div class="ex-sets"></div>`;
+  const plan = PROGRAM[state.gym.d];
+  const head = document.createElement('div');
+  head.className = 'plan-head';
+  head.innerHTML = '<h2></h2><span></span>';
+  head.querySelector('h2').textContent = 'План: ' + plan.n;
+  head.querySelector('span').textContent = isPlannedDay(state.gymView)
+    ? WD_NAME[fromKey(state.gymView).getDay()]
+    : 'вне расписания';
+  box.appendChild(head);
 
-    el.querySelector('b').textContent = ex.n;
-    if (ex.d) el.querySelector('.ex-d').textContent = ex.d;
-    if (ex.note) el.querySelector('.ex-note').textContent = ex.note;
+  const grid = document.createElement('div');
+  grid.className = 'plan-grid';
+  box.appendChild(grid);
 
-    const row = el.querySelector('.ex-sets');
-    done.forEach((s, i) => {
-      const b = document.createElement('button');
-      b.className = 'set';
-      b.textContent = s.w ? `${fmtW(s.w)}×${s.r}` : `${s.r} повт`;
-      b.addEventListener('click', () => askSet(ex.id, i));
-      row.appendChild(b);
-    });
-
-    const add = document.createElement('button');
-    add.className = 'set add';
-    add.textContent = '+';
-    add.setAttribute('aria-label', 'Записать подход');
-    add.addEventListener('click', () => askSet(ex.id, null));
-    row.appendChild(add);
-
-    const hint = hintFor(ex.id, done);
-    if (hint) {
-      const h = document.createElement('div');
-      h.className = 'ex-last';
-      h.textContent = hint;
-      el.appendChild(h);
-    }
-    box.appendChild(el);
+  plan.ex.forEach(p => {
+    const ex = exById(p.id);
+    if (!ex) return;
+    const done = (state.gym.ex[p.id] || []).length;
+    const card = document.createElement('button');
+    card.className = 'pcard' + (done >= p.sets ? ' full' : done ? ' part' : '');
+    card.innerHTML = `
+      <img src="../ex/${p.id}.png" alt="" loading="lazy">
+      <span class="pc-n"></span>
+      <span class="pc-s"></span>`;
+    card.querySelector('.pc-n').textContent = ex.n;
+    card.querySelector('.pc-s').textContent = done
+      ? `${done} из ${p.sets} подходов`
+      : `${p.sets} × ${p.reps}`;
+    card.addEventListener('click', () => openExercise(ex));
+    grid.appendChild(card);
   });
 
-  /* Всё, что записано через карту тела и не входит в план дня — отдельным блоком,
-     иначе подход исчезал бы из виду сразу после записи. */
-  const planned = PROGRAM[state.gym.d].ex.map(e => e.id);
+  /* Всё, что записано сверх плана дня — отдельным блоком, теми же карточками */
+  const planned = plan.ex.map(e => e.id);
   const extra = Object.keys(state.gym.ex).filter(id => !planned.includes(id) && state.gym.ex[id].length);
   if (!extra.length) return;
 
-  const head = document.createElement('h2');
-  head.className = 'extra-head';
-  head.textContent = 'Сверх плана';
-  box.appendChild(head);
+  const h2 = document.createElement('div');
+  h2.className = 'plan-head';
+  h2.innerHTML = '<h2>Сверх плана</h2>';
+  box.appendChild(h2);
+
+  const grid2 = document.createElement('div');
+  grid2.className = 'plan-grid';
+  box.appendChild(grid2);
 
   extra.forEach(id => {
     const ex = exById(id);
     const sets = state.gym.ex[id];
-    const el = document.createElement('section');
-    el.className = 'ex full';
-    el.innerHTML = '<div class="ex-head"><b></b></div><div class="ex-sets"></div>';
-    el.querySelector('b').textContent = ex ? ex.n : id;
-
-    const row = el.querySelector('.ex-sets');
-    sets.forEach(s => {
-      const b = document.createElement('button');
-      b.className = 'set';
-      b.textContent = s.w ? `${fmtW(s.w)}×${s.r}` : `${s.r} повт`;
-      if (ex) b.addEventListener('click', () => openExercise(ex));
-      row.appendChild(b);
-    });
-    box.appendChild(el);
+    const card = document.createElement('button');
+    card.className = 'pcard full';
+    card.innerHTML = `
+      <img src="../ex/${id}.png" alt="" loading="lazy">
+      <span class="pc-n"></span>
+      <span class="pc-s"></span>`;
+    card.querySelector('.pc-n').textContent = ex ? ex.n : id;
+    card.querySelector('.pc-s').textContent = sets.length + ' подходов';
+    if (ex) card.addEventListener('click', () => openExercise(ex));
+    grid2.appendChild(card);
   });
 }
 
