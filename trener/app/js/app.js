@@ -1353,10 +1353,10 @@ function consumeStartParam() {
 
 function switchScreen(name) {
   document.querySelectorAll('.tab').forEach(b => b.classList.toggle('active', b.dataset.screen === name));
-  ['day', 'gym', 'week', 'me'].forEach(s => {
+  ['day', 'gym', 'chat', 'me'].forEach(s => {
     document.getElementById('screen-' + s).classList.toggle('hidden', s !== name);
   });
-  if (name === 'week') renderWeek();
+  if (name === 'chat') Chat.open(); else Chat.close();
   if (name === 'me') renderMe();
   if (name === 'gym') openGym();
 
