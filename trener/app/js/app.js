@@ -1422,6 +1422,8 @@ async function init() {
     if (!document.hidden) Sync.refresh(state.view);
   });
 
+  Chat.bind();
+
   document.querySelectorAll('.tab').forEach(btn => {
     btn.addEventListener('click', () => { switchScreen(btn.dataset.screen); haptic('light'); });
   });

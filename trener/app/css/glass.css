@@ -132,3 +132,22 @@ body.on-gym{background:var(--g-bg)}
 }
 .item-kcal{color:var(--g-neon)}
 .card-tech{color:var(--g-txt)}
+
+/* ---------- читаемость на тёмном ----------
+   Светлые плашки из старой темы еды на чёрном фоне превращались в белое пятно
+   с невидимым текстом. Переводим их в то же стекло. */
+
+.advice, .hint, #screen-day .slot-empty{
+  background:var(--g-fill);border:1px solid var(--g-brd);border-radius:20px;
+  color:var(--g-txt);padding:12px 14px;
+  -webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);
+}
+.advice b, .hint b{color:var(--g-neon)}
+.slot-head h2, .quick h2, h2{color:var(--g-txt)}
+.item-body b, .slot b{color:var(--g-txt)}
+.chips button{color:var(--g-txt)}
+.chips button b, .chips button strong{color:var(--g-txt)}
+
+/* последний блок упирался в таббар — даём воздух снизу */
+.screen{padding-bottom:calc(var(--tab-h) + env(safe-area-inset-bottom) + 26px)}
+#screen-chat{padding-bottom:0}
