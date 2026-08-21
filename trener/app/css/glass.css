@@ -151,3 +151,39 @@ body.on-gym{background:var(--g-bg)}
 /* воздух снизу задаёт body; у экрана свой отступ не нужен, иначе страница
    становится выше содержимого и внизу остаётся чёрное поле */
 .screen{padding-bottom:18px}
+
+/* ---------- календарь ---------- */
+
+.cal{
+  background:var(--g-fill);border:1px solid var(--g-brd);border-radius:26px;
+  padding:14px 12px 12px;margin-bottom:14px;
+  -webkit-backdrop-filter:var(--g-blur);backdrop-filter:var(--g-blur);
+  box-shadow:inset 0 1px 0 var(--g-hi), 0 10px 30px rgba(0,0,0,.35);
+}
+.cal-wd{display:grid;grid-template-columns:repeat(7,1fr);gap:2px;margin-bottom:6px}
+.cal-wd i{
+  font-style:normal;text-align:center;font-size:10.5px;font-weight:700;
+  letter-spacing:.08em;text-transform:uppercase;color:var(--g-dim);
+}
+.cal-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:3px}
+.cday{
+  position:relative;aspect-ratio:1/1;border:1px solid transparent;border-radius:13px;
+  background:none;color:var(--g-txt);font:600 14px/1 'Golos Text',sans-serif;
+  display:grid;place-items:center;padding:0;
+}
+.cday b{font-weight:600}
+/* точка под числом — признак, что на день что-то есть */
+.cday i{position:absolute;bottom:6px;width:5px;height:5px;border-radius:50%;background:var(--g-neon)}
+.cday.hot i{background:#ff4d4d}
+.cday.today{border-color:var(--g-brd);background:rgba(255,255,255,.07)}
+.cday.pick{background:var(--g-neon);color:#0a0a0a}
+.cday.pick i{background:#0a0a0a}
+
+/* ---------- задача ---------- */
+
+.task{display:flex;gap:10px;align-items:flex-start;padding:10px 0;border-top:1px solid var(--g-brd)}
+.task:first-child{border-top:0}
+.task-dot{flex:none;width:7px;height:7px;border-radius:50%;background:var(--g-neon);margin-top:7px}
+.task.hot .task-dot{background:#ff4d4d}
+.task b{display:block;font-size:14.5px;font-weight:600;line-height:1.35;color:var(--g-txt)}
+.task small{display:block;font-size:11.5px;color:var(--g-dim);margin-top:3px}

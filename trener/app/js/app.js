@@ -1363,10 +1363,10 @@ function consumeStartParam() {
 
 function switchScreen(name) {
   document.querySelectorAll('.tab').forEach(b => b.classList.toggle('active', b.dataset.screen === name));
-  ['day', 'gym', 'week', 'me'].forEach(s => {
+  ['day', 'gym', 'plan', 'me'].forEach(s => {
     document.getElementById('screen-' + s).classList.toggle('hidden', s !== name);
   });
-  if (name === 'week') renderWeek();
+  if (name === 'plan') Plan.open();
   if (name === 'me') renderMe();
   if (name === 'gym') openGym();
 
@@ -1431,6 +1431,8 @@ async function init() {
   document.addEventListener('visibilitychange', () => {
     if (!document.hidden) Sync.refresh(state.view);
   });
+
+  Plan.bind();
 
   document.querySelectorAll('.tab').forEach(btn => {
     btn.addEventListener('click', () => { switchScreen(btn.dataset.screen); haptic('light'); });
