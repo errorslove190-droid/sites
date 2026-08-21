@@ -1,0 +1,134 @@
+/* Единый стеклянный слой поверх обоих экранов — по референсу от 21.08.
+   Идея референса: размытый цветной фон, а поверх него полупрозрачные плашки
+   с блюром, светлой гранью сверху и крупными цифрами. Подключается последним,
+   поэтому переопределяет и светлую тему еды, и тёмную тему зала. */
+
+:root{
+  --g-bg:#07080a;
+  --g-fill:rgba(255,255,255,.06);
+  --g-fill-2:rgba(255,255,255,.1);
+  --g-brd:rgba(255,255,255,.13);
+  --g-hi:rgba(255,255,255,.26);      /* светлая грань сверху — от неё «стекло» */
+  --g-txt:#ffffff;
+  --g-dim:rgba(255,255,255,.55);
+  --g-neon:#b8ff2e;
+  --g-blur:blur(22px) saturate(150%);
+}
+
+/* ---------- фон ---------- */
+
+body{
+  background:var(--g-bg);
+  color:var(--g-txt);
+}
+/* три размытых пятна: без них стекло не на чем показать */
+body::before{
+  content:'';position:fixed;inset:-20% -10%;z-index:-1;pointer-events:none;
+  background:
+    radial-gradient(38% 28% at 22% 12%, rgba(184,255,46,.28), transparent 70%),
+    radial-gradient(42% 30% at 84% 30%, rgba(60,140,255,.22), transparent 72%),
+    radial-gradient(46% 32% at 50% 92%, rgba(255,120,60,.18), transparent 74%);
+  filter:blur(60px);
+}
+
+/* ---------- общая плашка ---------- */
+
+.kcal, .macros .mac, .slot, .wcard, .wmacros, .quick, .shot,
+#screen-gym .hero, #screen-gym .mus, #screen-gym .pcard,
+#screen-gym .ex, #screen-gym .slot, #screen-gym .rules,
+.pick-row, .card-fig, .modal-box, .item, .card-add{
+  background:var(--g-fill);
+  border:1px solid var(--g-brd);
+  -webkit-backdrop-filter:var(--g-blur);
+  backdrop-filter:var(--g-blur);
+  box-shadow:inset 0 1px 0 var(--g-hi), 0 10px 30px rgba(0,0,0,.35);
+  color:var(--g-txt);
+}
+
+.kcal, .wcard, .slot, .quick, #screen-gym .hero{border-radius:28px}
+.macros .mac, #screen-gym .mus, #screen-gym .pcard, .card-fig{border-radius:24px}
+.pick-row, .item{border-radius:18px}
+
+/* ---------- текст ---------- */
+
+h1, h2, .kcal-main b, .hero-in b{color:var(--g-txt)}
+.date, .cap, .goal, .hint, .advice, small, .slot-empty,
+.pick-eq, .mus-c, .pc-s, .item-body small{color:var(--g-dim)}
+
+/* ---------- экран еды ---------- */
+
+.kcal{color:var(--g-txt)}
+.kcal-main b{font-size:34px}
+.kcal-right i{color:var(--g-neon)}
+.macros .mac b{color:var(--g-txt)}
+.med{background:transparent}
+.ring .tr{stroke:rgba(255,255,255,.12)}
+.chips button, .slot-add, .nav-arrow{
+  background:var(--g-fill-2);border:1px solid var(--g-brd);color:var(--g-txt);
+  -webkit-backdrop-filter:var(--g-blur);backdrop-filter:var(--g-blur);
+}
+.slot-head h2{color:var(--g-dim)}
+
+/* ---------- зал ---------- */
+
+#screen-gym{
+  background:transparent;
+  box-shadow:none;clip-path:none;
+}
+body.on-gym{background:var(--g-bg)}
+#screen-gym .hero{background-image:url('../../ex/hero.png');background-size:cover;background-position:right center}
+#screen-gym .hero::before{background:linear-gradient(90deg,rgba(7,8,10,.96) 10%,rgba(7,8,10,.6) 46%,transparent 80%)}
+#screen-gym .days .day{
+  background:var(--g-fill-2);border:1px solid var(--g-brd);color:var(--g-txt);
+  -webkit-backdrop-filter:var(--g-blur);backdrop-filter:var(--g-blur);
+}
+#screen-gym .days .day.on{background:var(--g-neon);border-color:transparent;color:#0a0a0a}
+#screen-gym .days .day.on span{color:rgba(0,0,0,.6)}
+#screen-gym .set{
+  background:var(--g-fill-2);border:1px solid var(--g-brd);color:var(--g-txt);
+  -webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);
+}
+#screen-gym .set.add{border-color:rgba(184,255,46,.5);color:var(--g-neon)}
+#screen-gym .ex-target{background:var(--g-fill-2);border-color:var(--g-brd)}
+
+/* активная плашка светится лаймом по грани, а не сплошной рамкой */
+#screen-gym .mus.on, #screen-gym .pcard.full, .pick-row.done{
+  border-color:rgba(184,255,46,.55);
+  box-shadow:inset 0 1px 0 rgba(184,255,46,.35), 0 10px 30px rgba(120,200,20,.14);
+}
+#screen-gym .pcard.part{border-color:rgba(255,220,80,.4)}
+
+/* ---------- окна ---------- */
+
+.modal{background:rgba(6,7,9,.55);-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px)}
+.modal-box{border-radius:30px 30px 0 0;border-bottom:0}
+#sheet.dark .modal-box, .modal-box{background:var(--g-fill);color:var(--g-txt)}
+.modal-box h3{color:var(--g-txt)}
+.grab{background:rgba(255,255,255,.22)}
+.field label{color:var(--g-dim)}
+.field input{
+  background:rgba(255,255,255,.07);border:1px solid var(--g-brd);color:var(--g-txt);
+  -webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);
+}
+.field input:focus{border-color:rgba(184,255,46,.6)}
+.btn-light{background:var(--g-fill-2);color:var(--g-txt);border:1px solid var(--g-brd)}
+.btn-dark, .card-add{background:var(--g-neon);color:#0a0a0a;border:0;box-shadow:0 8px 24px rgba(184,255,46,.22)}
+
+/* ---------- таббар ---------- */
+
+.tabbar, body.on-gym .tabbar{
+  background:rgba(10,12,14,.62);
+  border-top:1px solid var(--g-brd);
+  -webkit-backdrop-filter:var(--g-blur);backdrop-filter:var(--g-blur);
+}
+.tab, body.on-gym .tab{color:var(--g-dim)}
+.tab.active, body.on-gym .tab.active{color:var(--g-neon)}
+
+/* ---------- мелочи ---------- */
+
+.toast{
+  background:rgba(20,22,26,.82);color:#fff;border:1px solid var(--g-brd);
+  -webkit-backdrop-filter:var(--g-blur);backdrop-filter:var(--g-blur);
+}
+.item-kcal{color:var(--g-neon)}
+.card-tech{color:var(--g-txt)}

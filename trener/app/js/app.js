@@ -1364,8 +1364,8 @@ function switchScreen(name) {
      остаётся светлая полоса и экран выглядит сломанным, а не задуманным. */
   const dark = name === 'gym';
   document.body.classList.toggle('on-gym', dark);
-  if (tg && tg.setHeaderColor) tg.setHeaderColor(dark ? '#0c0c0c' : '#faf7f2');
-  if (tg && tg.setBackgroundColor) tg.setBackgroundColor(dark ? '#0c0c0c' : '#faf7f2');
+  if (tg && tg.setHeaderColor) tg.setHeaderColor('#07080a');
+  if (tg && tg.setBackgroundColor) tg.setBackgroundColor('#07080a');
 
   window.scrollTo(0, 0);
 }
@@ -1400,8 +1400,8 @@ async function init() {
   if (tg) {
     tg.ready();
     tg.expand();
-    if (tg.setHeaderColor) tg.setHeaderColor('#faf7f2');
-    if (tg.setBackgroundColor) tg.setBackgroundColor('#faf7f2');
+    if (tg.setHeaderColor) tg.setHeaderColor('#07080a');
+    if (tg.setBackgroundColor) tg.setBackgroundColor('#07080a');
   }
 
   state.meals = (await Store.get('f' + state.view)) || [];
