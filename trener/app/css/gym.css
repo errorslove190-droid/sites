@@ -50,61 +50,6 @@ body.on-gym .tab.active{color:#b8ff2e}
 }
 #screen-gym .days .day.on{background:var(--neon);border-color:var(--neon);color:#000}
 
-/* ---------- карта тела ---------- */
-
-#screen-gym .body-map{
-  background:var(--plate);border:1px solid var(--edge);border-radius:26px;
-  padding:16px 14px;margin-bottom:14px;
-  display:grid;grid-template-columns:1fr 132px;gap:10px;align-items:center;
-}
-#screen-gym .muscle-list{display:flex;flex-direction:column;gap:7px}
-#screen-gym .mus{
-  display:flex;align-items:center;gap:9px;
-  background:#000;border:1px solid var(--edge);border-radius:999px;
-  padding:8px 13px 8px 9px;color:var(--ash);font-size:13.5px;font-weight:600;
-}
-#screen-gym .mus i{
-  flex:none;width:17px;height:17px;border-radius:50%;
-  border:1.5px solid var(--edge);position:relative;
-}
-#screen-gym .mus.on{border-color:var(--neon);color:var(--text)}
-#screen-gym .mus.on i{background:var(--neon);border-color:var(--neon)}
-#screen-gym .mus.on i::after{
-  content:'';position:absolute;left:4.5px;top:3.5px;width:4px;height:7px;
-  border:solid #000;border-width:0 2px 2px 0;transform:rotate(45deg);
-}
-#screen-gym .mus b{margin-left:auto;font-size:11px;font-weight:700;color:var(--neon)}
-
-#screen-gym .fig-box{display:flex;flex-direction:column;align-items:center;gap:8px}
-#screen-gym .fig-side{display:flex;gap:5px}
-#screen-gym .fs{
-  background:#000;border:1px solid var(--edge);border-radius:999px;
-  color:var(--ash);padding:5px 11px;font-size:11.5px;font-weight:600;
-}
-#screen-gym .fs.on{background:var(--neon);border-color:var(--neon);color:#000}
-
-#screen-gym .figure{width:100%;height:auto;display:block}
-#screen-gym .figure .base{fill:#2b2b2b}
-#screen-gym .figure .grp{fill:#3d3d3d;transition:fill .25s}
-#screen-gym .figure .grp.on{fill:var(--neon)}
-
-#screen-gym .mus{cursor:pointer;text-align:left;width:100%}
-#screen-gym .mus:active{border-color:var(--neon)}
-#screen-gym .figure .grp{cursor:pointer}
-#screen-gym .figure .grp:active{fill:#4a6b12}
-
-/* Окно, открытое из зала, тоже тёмное: светлая шторка поверх чёрного экрана
-   смотрится чужой, а белый текст на ней просто не читается. */
-body.on-gym .modal-box{background:#0e0e0e;color:#fff}
-body.on-gym .modal-box h3{color:#fff}
-body.on-gym .grab{background:#2a2a2a}
-body.on-gym .field label{color:#7c7c7c}
-body.on-gym .field input{background:#000;border-color:#2a2a2a;color:#fff}
-body.on-gym .field input:focus{border-color:#b8ff2e}
-body.on-gym .btn-light{background:#1a1a1a;color:#fff}
-body.on-gym .btn-dark{background:#b8ff2e;color:#000}
-body.on-gym .modal-actions{grid-template-columns:1fr}
-
 /* ---------- окно выбора: мышца → упражнение ---------- */
 
 .pick{display:flex;flex-direction:column;gap:8px}
@@ -155,18 +100,71 @@ body.on-gym .modal-actions{grid-template-columns:1fr}
 }
 .card-add:active{opacity:.85}
 
-/* ---------- плита тоннажа ---------- */
+/* ---------- шапка с фигурой ---------- */
 
-#screen-gym .tonn{
-  background:var(--neon);color:#000;border-radius:26px;
-  padding:15px 18px;display:flex;align-items:center;gap:13px;
+#screen-gym .hero{
+  position:relative;border-radius:26px;overflow:hidden;margin:16px 0 14px;
+  background:#000 url('../../ex/hero.png') right center / cover no-repeat;
+  min-height:186px;display:flex;align-items:flex-end;
+  border:1px solid var(--edge);
 }
-#screen-gym .tonn-ic{width:32px;height:32px;flex:none;color:#000}
-#screen-gym .tonn-main b{font-size:38px;font-weight:800;line-height:.9;letter-spacing:-.03em;font-variant-numeric:tabular-nums}
-#screen-gym .tonn-main small{display:block;font-size:10.5px;font-weight:700;text-transform:uppercase;letter-spacing:.12em;margin-top:3px}
-#screen-gym .tonn-right{margin-left:auto;text-align:right}
-#screen-gym .tonn-right span{display:block;font-size:17px;font-weight:700;font-variant-numeric:tabular-nums}
-#screen-gym .tonn-right i{display:block;font-style:normal;font-size:11px;font-weight:600;opacity:.7;margin-top:2px}
+/* затемняем левую часть, чтобы цифры читались поверх снимка */
+#screen-gym .hero::before{
+  content:'';position:absolute;inset:0;
+  background:linear-gradient(90deg,#000 8%,rgba(0,0,0,.75) 42%,transparent 78%);
+}
+#screen-gym .hero-in{position:relative;padding:18px 18px 16px;max-width:62%}
+#screen-gym .hero-day{
+  display:block;font-size:11px;font-weight:700;letter-spacing:.12em;
+  text-transform:uppercase;color:var(--neon);
+}
+#screen-gym .hero-in b{
+  display:block;font-size:46px;font-weight:800;line-height:.92;letter-spacing:-.03em;
+  font-variant-numeric:tabular-nums;margin-top:6px;
+}
+#screen-gym .hero-in small{
+  display:block;font-size:11px;font-weight:700;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--ash);margin-top:2px;
+}
+#screen-gym .hero-in i{display:block;font-style:normal;font-size:13px;color:#fff;margin-top:8px}
+
+#screen-gym .tonn-diff{font-size:12.5px;color:var(--ash);margin:-4px 0 14px;text-align:center}
+#screen-gym .tonn-diff.up{color:var(--neon)}
+#screen-gym .tonn-diff.down{color:var(--blood)}
+
+/* ---------- плитки групп мышц ---------- */
+
+#screen-gym .mus-grid{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin-bottom:18px}
+#screen-gym .mus{
+  position:relative;display:block;width:100%;text-align:left;padding:0;
+  background:var(--plate);border:1px solid var(--edge);border-radius:20px;
+  overflow:hidden;aspect-ratio:16/10;
+}
+#screen-gym .mus img{
+  position:absolute;inset:0;width:100%;height:100%;object-fit:cover;
+  opacity:.85;transition:opacity .2s;
+}
+#screen-gym .mus::after{
+  content:'';position:absolute;inset:0;
+  background:linear-gradient(0deg,rgba(0,0,0,.92) 22%,rgba(0,0,0,.15) 70%);
+}
+#screen-gym .mus-n{
+  position:absolute;left:13px;bottom:24px;z-index:2;
+  font-size:15px;font-weight:700;color:#fff;
+}
+#screen-gym .mus-c{
+  position:absolute;left:13px;bottom:9px;z-index:2;
+  font-size:11.5px;font-weight:600;color:var(--ash);
+}
+#screen-gym .mus.on{border-color:var(--neon)}
+#screen-gym .mus.on .mus-c{color:var(--neon)}
+#screen-gym .mus.on img{opacity:1}
+#screen-gym .mus.on::before{
+  content:'';position:absolute;right:11px;top:11px;z-index:3;
+  width:19px;height:19px;border-radius:50%;background:var(--neon);
+  background-image:linear-gradient(45deg,transparent 45%,#000 45%,#000 55%,transparent 55%);
+}
+#screen-gym .mus:active img{opacity:1}
 
 /* ---------- упражнение ---------- */
 
@@ -238,3 +236,15 @@ body.on-gym .modal-actions{grid-template-columns:1fr}
 }
 
 #screen-gym .extra-head{margin:20px 0 2px;color:#b8ff2e}
+
+/* Правила по травмам — свёрнуты: важные, но каждый раз читать их не нужно */
+#screen-gym .rules{
+  background:var(--plate);border:1px solid rgba(255,77,77,.4);border-radius:22px;
+  margin-top:14px;padding:13px 15px;
+}
+#screen-gym .rules summary{
+  font-size:13px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;
+  color:var(--blood);cursor:pointer;list-style:none;
+}
+#screen-gym .rules summary::after{content:' ▾';font-size:11px}
+#screen-gym .rules[open] summary::after{content:' ▴'}

@@ -76,6 +76,12 @@ const MUSCLES = [
   { k: 'calves',    n: 'Икры' },
 ];
 
+/* Какой кадр показывать на плитке группы мышц */
+const MUSCLE_PIC = {
+  shoulders: 'sh-press', chest: 'ch-press', back: 'bk-pullup', biceps: 'bi-curl',
+  triceps: 'tr-push', abs: 'ab-plank', legs: 'lg-squat', calves: 'cf-raise',
+};
+
 const EX_MUSCLES = {
   a1: ['chest', 'triceps', 'shoulders'], a2: ['back', 'biceps'],
   a3: ['shoulders', 'triceps'],          a4: ['back'],
@@ -780,6 +786,9 @@ function renderGymSum() {
 
   document.getElementById('tonn-v').textContent = t.toLocaleString('ru-RU');
   document.getElementById('tonn-sets').textContent = `подходов ${done} из ${plan}`;
+  const hd = document.getElementById('hero-day');
+  if (hd) hd.textContent = (state.gymView === state.today ? 'сегодня' : niceDate(state.gymView)) +
+    ' · день ' + state.gym.d;
 
   // сравнение с прошлым таким же днём — то самое «добавь повтор или 2,5 кг»
   const prev = state.gymHist.find(h => h.w && h.w.d === state.gym.d);
@@ -825,36 +834,22 @@ function renderBodyMap() {
     musclesOf(id).forEach(m => { hit[m] = (hit[m] || 0) + sets.length; });
   });
 
+  /* Плитки групп мышц: на каждой — кадр упражнения, которое её грузит.
+     Живая картинка вместо схемы, и сразу видно, что уже проработано сегодня. */
   const box = document.getElementById('muscle-list');
   box.innerHTML = '';
   MUSCLES.forEach(m => {
     const on = !!hit[m.k];
     const el = document.createElement('button');
     el.className = 'mus' + (on ? ' on' : '');
-    el.innerHTML = '<i></i><span></span>' + (on ? '<b></b>' : '');
-    el.querySelector('span').textContent = m.n;
-    if (on) el.querySelector('b').textContent = hit[m.k] + ' п.';
+    el.innerHTML = `
+      <img src="../ex/${MUSCLE_PIC[m.k]}.png" alt="" loading="lazy">
+      <span class="mus-n"></span>
+      <span class="mus-c"></span>`;
+    el.querySelector('.mus-n').textContent = m.n;
+    el.querySelector('.mus-c').textContent = on ? hit[m.k] + ' подх.' : 'не трогал';
     el.addEventListener('click', () => openMuscle(m.k));
     box.appendChild(el);
-  });
-
-  /* Фигуру перерисовываем целиком: сторона могла смениться, а <use> с defs
-     не даёт вешать обработчики на копию — только на оригинал в defs. */
-  const fig = document.getElementById('figure-box');
-  fig.innerHTML = bodySvg(state.figSide);
-  fig.querySelectorAll('.grp').forEach(p => {
-    p.classList.toggle('on', !!hit[p.dataset.m]);
-    /* тапать по самой фигуре — самый короткий путь: увидел мышцу, ткнул, выбрал */
-    p.onclick = () => openMuscle(p.dataset.m);
-  });
-
-  document.querySelectorAll('.fs').forEach(b => {
-    b.classList.toggle('on', b.dataset.side === state.figSide);
-    b.onclick = () => {
-      state.figSide = b.dataset.side;
-      renderBodyMap();
-      haptic('light');
-    };
   });
 }
 
