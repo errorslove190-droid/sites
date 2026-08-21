@@ -88,17 +88,26 @@ const MUSCLE_PIC = {
   triceps: 'tr-push', abs: 'ab-plank', legs: 'lg-squat', calves: 'cf-raise',
 };
 
-const EX_MUSCLES = {
-  a1: ['chest', 'triceps', 'shoulders'], a2: ['back', 'biceps'],
-  a3: ['shoulders', 'triceps'],          a4: ['back'],
-  a5: ['biceps', 'triceps'],             a6: ['shoulders'],
-  b1: ['legs'],                          b2: ['legs'],
-  b3: ['legs', 'back'],                  b4: ['legs'],
-  b5: ['back'],                          b6: ['calves', 'abs'],
-  c1: ['back', 'biceps'],                c2: ['chest', 'shoulders', 'triceps'],
-  c3: ['legs'],                          c4: ['back', 'biceps'],
-  c5: ['shoulders', 'triceps', 'chest'], c6: ['biceps', 'triceps', 'abs'],
+/* Старые коды тренировок (a1…c6) из первой версии программы.
+   Записи 19.08 сделаны ими, поэтому переводим их в упражнения каталога —
+   иначе в истории висят «c1» без названия и картинки. */
+const OLD_IDS = {
+  a1: 'ch-press', a2: 'bk-lat',  a3: 'sh-press', a4: 'bk-row',  a5: 'bi-curl', a6: 'sh-lat',
+  b1: 'lg-squat', b2: 'lg-press', b3: 'lg-rdl',  b4: 'lg-press', b5: 'bk-hyper', b6: 'cf-raise',
+  c1: 'bk-pullup', c2: 'ch-incline', c3: 'lg-lunge', c4: 'bk-row', c5: 'ch-dip', c6: 'bi-curl',
 };
+
+/** Переносит день на новые коды. Подходы одного упражнения складываются. */
+function migrateGym(gym) {
+  if (!gym || !gym.ex) return gym;
+  const out = {};
+  Object.keys(gym.ex).forEach(id => {
+    const key = OLD_IDS[id] || id;
+    out[key] = (out[key] || []).concat(gym.ex[id] || []);
+  });
+  gym.ex = out;
+  return gym;
+}
 
 /* ---------- хранилище ---------- */
 
@@ -740,7 +749,7 @@ function isPlannedDay(key) {
 async function loadGym() {
   /* Сервер главнее — там лежит то, что записал Claude из чата */
   const cloud = await Sync.pullGym(state.gymView);
-  state.gym = cloud || (await Store.get('g' + state.gymView)) || null;
+  state.gym = migrateGym(cloud || (await Store.get('g' + state.gymView)) || null);
   if (cloud) Store.set('g' + state.gymView, cloud);
   if (!state.gym) state.gym = { d: suggestDay(), ex: {} };
   if (!state.gym.ex) state.gym.ex = {};
@@ -876,8 +885,7 @@ function renderBodyMap() {
 
 /** Упражнение может прийти из плана дня (id вида a1) или из каталога (ch-press). */
 function musclesOf(id) {
-  if (EX_MUSCLES[id]) return EX_MUSCLES[id];
-  const ex = EXERCISES.find(e => e.id === id);
+  const ex = exById(OLD_IDS[id] || id);
   return ex ? ex.m : [];
 }
 
@@ -1068,6 +1076,8 @@ function renderGymList() {
       <img src="../ex/${id}.png" alt="" loading="lazy">
       <span class="pc-n"></span>
       <span class="pc-s"></span>`;
+    /* картинки может не быть (упражнение из старой версии) — прячем битый значок */
+    card.querySelector('img').addEventListener('error', e => e.target.remove());
     card.querySelector('.pc-n').textContent = ex ? ex.n : id;
     card.querySelector('.pc-s').textContent = sets.length + ' подходов';
     if (ex) card.addEventListener('click', () => openExercise(ex));
