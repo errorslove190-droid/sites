@@ -291,3 +291,25 @@ body.on-gym .tab.active{color:#b8ff2e}
 #screen-gym .days .day b{font-size:12.5px;font-weight:700;line-height:1.1}
 #screen-gym .days .day span{font-size:10px;font-weight:700;letter-spacing:.1em;color:var(--ash)}
 #screen-gym .days .day.on span{color:rgba(0,0,0,.55)}
+
+/* ---------- тёмное окно зала ----------
+   Красим по классу на самом окне, а не по классу на body: раньше зависели от него,
+   и стоило ему не встать — окно приезжало светлым, а белый текст на нём исчезал. */
+
+#sheet.dark .modal-box{background:#0e0e0e;color:#fff}
+#sheet.dark .modal-box h3{color:#fff;font-size:22px}
+#sheet.dark .grab{background:#2a2a2a}
+#sheet.dark .field label{color:#7c7c7c}
+#sheet.dark .field input{background:#000;border:1px solid #2a2a2a;color:#fff}
+#sheet.dark .field input:focus{border-color:#b8ff2e}
+#sheet.dark .btn-light{background:#1a1a1a;color:#fff;border:0}
+#sheet.dark .btn-dark{background:#b8ff2e;color:#000}
+#sheet.dark .modal-actions{grid-template-columns:1fr}
+
+/* чипы мышц под названием упражнения */
+.card-chips{display:flex;flex-wrap:wrap;gap:6px;margin:-4px 0 12px}
+.card-chips .chip{
+  font-size:11.5px;font-weight:700;color:#b8ff2e;
+  background:rgba(184,255,46,.1);border:1px solid rgba(184,255,46,.35);
+  border-radius:999px;padding:4px 10px;
+}

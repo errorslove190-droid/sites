@@ -909,7 +909,7 @@ function openMuscle(key) {
     box.appendChild(b);
   });
 
-  openSheet(m.n, box.outerHTML, null, { ok: false });
+  openSheet(m.n, box.outerHTML, null, { ok: false, dark: true });
   /* обработчики после вставки: openSheet кладёт в DOM строку, а не узлы */
   const rows = document.querySelectorAll('#sheet .pick-row');
   list.forEach((ex, i) => rows[i] && rows[i].addEventListener('click', () => openExercise(ex)));
@@ -920,8 +920,14 @@ function openExercise(ex) {
   const done = state.gym.ex[ex.id] || [];
   const last = done[done.length - 1] || bestBefore(ex.id) || { w: 0, r: 10 };
 
+  const chips = ex.m.map(k => {
+    const m = MUSCLES.find(x => x.k === k);
+    return `<span class="chip">${m ? m.n : k}</span>`;
+  }).join('');
+
   const html = `
     <div class="card">
+      <div class="card-chips">${chips}</div>
       <div class="card-fig">
         <img class="card-img" src="../ex/${ex.id}.png" alt="">
         <div class="card-draw">${HUMAN}</div>
@@ -936,7 +942,7 @@ function openExercise(ex) {
       <button class="card-add" id="card-add">Записать подход</button>
     </div>`;
 
-  openSheet(ex.n, html, null, { ok: false });
+  openSheet(ex.n, html, null, { ok: false, dark: true });
 
   const sheet = document.getElementById('sheet');
   sheet.querySelector('.card-tech').textContent = ex.tech;
@@ -1228,6 +1234,9 @@ let sheetHandler = null;
    клавиатура выехала бы поверх анимации, ради которой окно и открывали. */
 function openSheet(title, html, onOk, opts) {
   const withOk = !opts || opts.ok !== false;
+  /* Окна зала тёмные всегда: раньше это зависело от класса на body, и стоило ему
+     не встать — окно приезжало светлым, а белый текст на нём просто исчезал. */
+  document.getElementById('sheet').classList.toggle('dark', !!(opts && opts.dark));
   document.getElementById('sheet-title').textContent = title;
   document.getElementById('sheet-body').innerHTML = html;
   document.getElementById('sheet').classList.remove('hidden');
