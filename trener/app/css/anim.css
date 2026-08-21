@@ -1,111 +1,57 @@
-/* Движение и оптимизация.
-   Правило одно: анимируем только transform и opacity — их считает видеокарта.
-   Всё остальное (высота, тени, блюр в движении) на телефоне даёт дёрганье. */
+/* Движение: только отклик на действия.
+   Появление экранов и лесенка плашек убраны — они читались как «резиновый»
+   интерфейс и мешали. Осталось то, что подтверждает нажатие и открытие окна. */
 
 :root{
-  --ease:cubic-bezier(.22,.9,.3,1);   /* быстрый старт, мягкая остановка */
+  --ease:cubic-bezier(.22,.9,.3,1);
   --fast:.18s;
-  --mid:.28s;
-}
-
-/* ---------- появление экрана ---------- */
-
-.screen{animation:screen-in var(--mid) var(--ease) both}
-@keyframes screen-in{
-  from{opacity:0;transform:translateY(10px)}
-  to{opacity:1;transform:none}
-}
-
-/* Плашки въезжают лесенкой: каждая следующая чуть позже.
-   Пяти шагов хватает — дальше глаз разницы не ловит, а ждать надоедает. */
-.screen > *{animation:card-in var(--mid) var(--ease) both}
-.screen > *:nth-child(1){animation-delay:.02s}
-.screen > *:nth-child(2){animation-delay:.05s}
-.screen > *:nth-child(3){animation-delay:.08s}
-.screen > *:nth-child(4){animation-delay:.11s}
-.screen > *:nth-child(n+5){animation-delay:.14s}
-@keyframes card-in{
-  from{opacity:0;transform:translateY(14px) scale(.985)}
-  to{opacity:1;transform:none}
+  --mid:.26s;
 }
 
 /* ---------- нажатия ---------- */
 
 .mac, .shot, .chips button, .set, .day, .mus, .pcard, .pick-row,
-.card-add, .btn-dark, .btn-light, .nav-arrow, .slot-add, .tab{
+.card-add, .btn-dark, .btn-light, .nav-arrow, .slot-add, .tab, .item{
   transition:transform var(--fast) var(--ease), border-color var(--fast) var(--ease),
              background-color var(--fast) var(--ease), opacity var(--fast) var(--ease);
 }
 .mac:active, .shot:active, .chips button:active, .set:active,
 .day:active, .pick-row:active, .nav-arrow:active, .slot-add:active{transform:scale(.96)}
-.mus:active, .pcard:active{transform:scale(.975)}
+.mus:active, .pcard:active{transform:scale(.98)}
 .card-add:active, .btn-dark:active, .btn-light:active{transform:scale(.98)}
 
 /* ---------- окно снизу ---------- */
 
 .modal{animation:fade var(--fast) var(--ease) both}
 @keyframes fade{from{opacity:0}to{opacity:1}}
-.modal-box{animation:sheet-up .34s var(--ease) both}
+.modal-box{animation:sheet-up var(--mid) var(--ease) both}
 @keyframes sheet-up{
-  from{transform:translateY(34px);opacity:.4}
-  to{transform:none;opacity:1}
+  from{transform:translateY(26px)}
+  to{transform:none}
 }
 
-/* ---------- списки внутри окна ---------- */
+/* переключение экрана — только проявление, без сдвига */
+.screen{animation:fade var(--mid) var(--ease) both}
 
-.pick-row{animation:row-in var(--mid) var(--ease) both}
-.pick-row:nth-child(1){animation-delay:.02s}
-.pick-row:nth-child(2){animation-delay:.045s}
-.pick-row:nth-child(3){animation-delay:.07s}
-.pick-row:nth-child(4){animation-delay:.095s}
-.pick-row:nth-child(n+5){animation-delay:.12s}
-@keyframes row-in{
-  from{opacity:0;transform:translateX(-10px)}
-  to{opacity:1;transform:none}
-}
+/* картинки проявляются, чтобы не мигали белым */
+.card-img, .mus img, .pcard img{transition:opacity var(--mid) var(--ease)}
 
-/* новый подход прилетает заметно — чтобы было видно, что записалось */
-.card-sets .set{animation:pop .3s var(--ease) both}
-@keyframes pop{
-  0%{opacity:0;transform:scale(.7)}
-  60%{transform:scale(1.06)}
-  100%{opacity:1;transform:none}
-}
-
-/* ---------- всплывашка ---------- */
-
-.toast{animation:toast-in .26s var(--ease) both}
-@keyframes toast-in{
-  from{opacity:0;transform:translate(-50%,12px)}
-  to{opacity:1;transform:translate(-50%,0)}
-}
-
-/* ---------- картинки ---------- */
-
-.card-img, .mus img, .pcard img{animation:img-in .4s var(--ease) both}
-@keyframes img-in{from{opacity:0}to{opacity:1}}
-
-/* ---------- оптимизация ----------
-
-   Блюр — самая дорогая часть стекла. На каждой мелкой плашке он стоит кадров,
-   поэтому крупным блокам оставляем сильный, мелким даём слабый, а на время
-   прокрутки браузеру подсказываем, что содержимое можно изолировать. */
+/* ---------- оптимизация ---------- */
 
 .kcal, .wcard, .slot, .modal-box, #screen-gym .hero{contain:paint}
 .mus, .pcard, .set, .chips button, .pick-row{
   -webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);
 }
-/* картинки в плитках блюрить не нужно вовсе — под ними нет фона */
 .mus img, .pcard img{-webkit-backdrop-filter:none;backdrop-filter:none}
-
 img{content-visibility:auto}
-.screen{contain:layout style}
 
-/* Уважаем системную настройку: если человек выключил анимации, всё замирает */
+/* никакой «резины»: страница стоит на месте, тянуться ей некуда */
+html, body{overscroll-behavior:none}
+body{-webkit-overflow-scrolling:auto}
+
 @media (prefers-reduced-motion:reduce){
   *,*::before,*::after{
     animation-duration:.01ms !important;
-    animation-iteration-count:1 !important;
     transition-duration:.01ms !important;
   }
 }

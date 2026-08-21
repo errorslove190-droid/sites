@@ -148,6 +148,6 @@ body.on-gym{background:var(--g-bg)}
 .chips button{color:var(--g-txt)}
 .chips button b, .chips button strong{color:var(--g-txt)}
 
-/* последний блок упирался в таббар — даём воздух снизу */
-.screen{padding-bottom:calc(var(--tab-h) + env(safe-area-inset-bottom) + 26px)}
-#screen-chat{padding-bottom:0}
+/* воздух снизу задаёт body; у экрана свой отступ не нужен, иначе страница
+   становится выше содержимого и внизу остаётся чёрное поле */
+.screen{padding-bottom:18px}

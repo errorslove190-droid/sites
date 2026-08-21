@@ -17,7 +17,6 @@
   /* тянем фон на всю ширину, оставаясь в колонке контента */
   box-shadow:0 0 0 100vmax var(--void);
   clip-path:inset(0 -100vmax);
-  min-height:100vh;
   padding-top:20px;
 }
 
