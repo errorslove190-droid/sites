@@ -125,6 +125,10 @@ body.on-gym .modal-actions{grid-template-columns:1fr}
   background:#0e0e0e;border:1px solid #2a2a2a;border-radius:20px;
   padding:6px;display:grid;place-items:center;
 }
+.card-img{width:100%;display:block;border-radius:18px}
+/* рисованная фигура ждёт в стороне и показывается, только если картинки нет */
+.card-draw{display:none}
+.card-draw.on{display:block}
 .human{width:100%;max-width:230px;height:230px;display:block}
 /* тело серое, работающие мышцы горят — как в анатомических приложениях */
 .human .lb{fill:#43474d;stroke:#22252a;stroke-width:1}

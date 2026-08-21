@@ -908,7 +908,10 @@ function openExercise(ex) {
 
   const html = `
     <div class="card">
-      <div class="card-fig">${HUMAN}</div>
+      <div class="card-fig">
+        <img class="card-img" src="../ex/${ex.id}.png" alt="">
+        <div class="card-draw">${HUMAN}</div>
+      </div>
       <p class="card-tech"></p>
       ${ex.warn ? '<p class="card-warn"></p>' : ''}
       <div class="card-sets" id="card-sets"></div>
@@ -925,8 +928,19 @@ function openExercise(ex) {
   sheet.querySelector('.card-tech').textContent = ex.tech;
   if (ex.warn) sheet.querySelector('.card-warn').textContent = ex.warn;
 
+  /* Основной показ — картинка упражнения. Рисованная фигура остаётся запасной:
+     включается, только если картинки для этого упражнения ещё нет. */
+  const img = sheet.querySelector('.card-img');
+  const draw = sheet.querySelector('.card-draw');
   if (stickStop) stickStop();
-  stickStop = animateHuman(sheet.querySelector('.human'), ex);
+  stickStop = null;
+
+  img.addEventListener('load', () => { draw.remove(); });
+  img.addEventListener('error', () => {
+    img.remove();
+    draw.classList.add('on');
+    stickStop = animateHuman(draw.querySelector('.human'), ex);
+  });
 
   const paint = () => {
     const box = document.getElementById('card-sets');
