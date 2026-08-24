@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="robots" content="noindex, nofollow">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Командный центр — 25.08.2026</title>
+<style>
+  :root {
+    --bg:#0d0d0c; --panel:#151513; --line:#26261f; --text:#f4f1e8; --dim:#8f897c; --acc:#c9f24d;
+  }
+  * { box-sizing:border-box; margin:0; padding:0; }
+  body { background:var(--bg); color:var(--text); padding:26px 20px 60px;
+         font:15px/1.6 -apple-system,"Segoe UI",Roboto,sans-serif; }
+  .wrap { max-width:1240px; margin:0 auto; }
+  header { display:flex; align-items:baseline; gap:16px; flex-wrap:wrap; margin-bottom:6px; }
+  h1 { font-size:1.7rem; font-weight:600; letter-spacing:-.02em; }
+  .today { color:var(--dim); }
+  .stats { display:flex; gap:10px; flex-wrap:wrap; margin:18px 0 26px; }
+  .stat { background:var(--panel); border:1px solid var(--line); border-radius:12px;
+           padding:12px 18px; min-width:120px; }
+  .stat b { display:block; font-size:1.7rem; line-height:1.1; color:var(--acc); font-weight:600; }
+  .stat span { color:var(--dim); font-size:.85rem; }
+  .grid { display:grid; grid-template-columns:1.25fr 1fr; gap:18px; align-items:start; }
+  @media (max-width:920px) { .grid { grid-template-columns:1fr; } }
+  section { background:var(--panel); border:1px solid var(--line); border-radius:14px;
+             padding:18px 20px; margin-bottom:18px; }
+  h2 { font-size:1rem; text-transform:uppercase; letter-spacing:.08em; color:var(--acc);
+        font-weight:600; margin-bottom:14px; }
+  ul { list-style:none; }
+  li { padding:7px 0 7px 16px; border-bottom:1px solid var(--line); position:relative; }
+  li:last-child { border-bottom:0; }
+  li::before { content:"·"; position:absolute; left:2px; color:var(--acc); }
+  details { margin-bottom:10px; }
+  summary { cursor:pointer; padding:6px 0; font-weight:600; }
+  summary::marker { color:var(--acc); }
+  .cnt { color:var(--dim); font-weight:400; font-size:.85rem; }
+  .dim { color:var(--dim); font-size:.85rem; }
+  a { color:var(--acc); }
+  code { background:#1e1e19; padding:1px 5px; border-radius:4px; font-size:.88em; }
+  .jday { margin-bottom:14px; }
+  .jdate { color:var(--acc); font-weight:600; margin-bottom:4px; }
+  .jday li { padding-left:14px; font-size:.93rem; color:#d8d3c6; }
+  .skill { padding:10px 0; border-bottom:1px solid var(--line); }
+  .skill:last-child { border-bottom:0; }
+  .skill p { color:var(--dim); font-size:.86rem; margin-top:2px; }
+  .tag { color:var(--dim); font-size:.78rem; }
+  footer { color:var(--dim); font-size:.83rem; margin-top:22px; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <h1>Командный центр</h1>
+    <span class="today">25.08.2026</span>
+  </header>
+
+  <div class="stats">
+    <div class="stat"><b>8</b><span>горит сегодня</span></div>
+    <div class="stat"><b>99</b><span>дел всего</span></div>
+    <div class="stat"><b>24</b><span>скилов</span></div>
+    <div class="stat"><b>14</b><span>страниц опубликовано</span></div>
+  </div>
+
+  <div class="grid">
+    <div>
+      <section>
+        <h2>Дела</h2>
+        <details open><summary>🔥 Горит (срок близко) <span class="cnt">8</span></summary><ul>
+<li><b>написать Матвею: прогоны дальше не веду</b> — решение Михаила 25.08 («слишком много времени уходит, всё — Ветре»). Пишет сам; после сообщения раздел «Прогоны» и Прогон 2 в «Отложено» переносим в «Сделано»</li>
+<li><b>до 23 августа</b> — Спринт 0 Ветра (17–23.08): 18 вопросов в <code>D:\Projects\vetra\docs\sprint-0-decisions.md</code>, среда у обоих, сверка концепта с Андреем → <b>Vetra — план на 17 августа</b></li>
+<li>🔴 <b>до 23 августа — ответить на 11 решений Р1–Р11 по прогону gstack</b> (кнопками в чате или созвоном с Андреем): что первым отдаём пилоту · одна ёмкость и дата запуска · критерий поворота к 21.09 · вход паролем или кодом · первый канал · панель · очередь · WB/Ozon · «под ключ» · ставить ли gstack · main без PR → <a href="https://errorslove190-droid.github.io/sites/vetra/gstack/" target="_blank">https://errorslove190-droid.github.io/sites/vetra/gstack/</a></li>
+<li>🔴 <b>до 24 августа — 10 тест-касаний в салоны Казани + 5 записанных ответов владельцев</b> (Андрей ведёт, замеры может делать Михаил). Без этого тексты лендинга Спринта 1 не пишем — сейчас 0 разговоров с рынком</li>
+<li><b>Поставить Docker Desktop у обоих; Node 22 LTS</b> (у Михаила стоит Node 25 — не LTS). pnpm <b>не нужен</b> — репозиторий на npm, <code>pnpm-workspace.yaml</code> уберём</li>
+<li><b>22–23 августа</b> — фестиваль в Верхнем Услоне: текст для ведущего готов, проверить, что у Оладушек всё на руках → <b>Свияжские Оладушки — текст для ведущего (Соколка)</b> *(жёсткая дата, поэтому не отложено)*</li>
+<li><b>Спросить у Ольги и Софьи, кто оператор данных</b> (ИП, самозанятость, ФИО) — вписать в <code>privacy.html</code>, сейчас там только название лавки и телефон</li>
+<li><b>Оладушки — облегчить видео</b>: папка <code>video/</code> весит 33 МБ, <code>derevo-full.mp4</code> один 6 МБ, из-за них страницы тянут по 7 МБ. Пережать в 720p/H.265 или оставить только постеры с подгрузкой по клику — это заметная переделка главной, поэтому сначала показать</li>
+</ul></details>
+<details><summary>🤖 Ассистент <span class="cnt">3</span></summary><ul>
+<li><b>Написать <code>/start</code> боту @Manager_miha_bot</b> — после этого он знает чат и может будить сам (напоминания, дедлайны в 10:00). Окно «Manager bot» на компе не закрывать; автозапуск настроен → <b>Личный ассистент в Telegram</b></li>
+<li>Обкатать неделю и решить, включать ли утренний бриф (<code>/утро</code>) и вечернюю сводку (<code>/вечер</code>)</li>
+<li>Удалить лишнего бота <code>@miha_manager2_bot</code> у @BotFather (<code>/deletebot</code>) — он больше не нужен</li>
+</ul></details>
+<details><summary>🎣 Лиды из Telegram <span class="cnt">4</span></summary><ul>
+<li><b>Подключить основной TG-аккаунт для отправки от имени Михаила</b>: ключи в <code>.secrets\telegram-me.env</code>, затем <code>D:\Projects\tg-me\login.bat</code> → <b>Telegram от моего имени</b></li>
+<li><b>Добить <code>api_id</code> на my.telegram.org</b> — форма Create application валится в <code>ERROR</code> на обоих аккаунтах и с зарубежным VPN. Пробовать в другое время суток, с телефона по мобильному интернету, между попытками пауза 15 мин; перед каждой попыткой заглянуть на <code>my.telegram.org/apps</code> — вдруг уже создано. Ключи вписать в <code>C:\Users\Михаил\Desktop\clod code\.secrets\telegram-userbot.env</code> → <b>Слушалка групп Telegram</b></li>
+<li>После входа: найти и вступить в 10–15 чатов (бизнес-чаты Казани, барахолки услуг, нишевые), прогнать <code>--scan 7</code> и вместе посмотреть, что наловилось</li>
+<li>Решить по внешнему сервису поиска лидов («Рокфеллер») — подключаем, только если у него есть API</li>
+</ul></details>
+<details><summary>🦅 Ветра — план недели в `D:\Projects\vetra\docs\sprints\00.md` <span class="cnt">24</span></summary><ul>
+<li><b>Бортовой компьютер запущен</b> — бот <code>@vetra01_bot</code> в группе VETRA, окно «Vetra bot» на компе не закрывать; автозапуск: <code>Win+R</code> → <code>shell:startup</code> → ярлык на <code>D:/Projects/vetra-bot/start-bot.bat</code>. Андрею: написать в группе <code>/whoami</code>, Мише — <code>/allow &lt;его id&gt;</code></li>
+<li>Показать Андрею заставку группы (стоит с 19.08): <a href="https://errorslove190-droid.github.io/sites/vetra/zastavka/" target="_blank">https://errorslove190-droid.github.io/sites/vetra/zastavka/</a></li>
+<li>Отправить Андрею сообщение про прогон gstack (текст готов, решили «позже») — можно ботом в группу или самому из буфера</li>
+<li>Бот: закреплённое сообщение с планом и дедлайнами, которое обновляется из <code>context.md</code> (следующий шаг после обкатки)</li>
+<li>Посмотреть макеты (<code>cd D:\Projects\vetra\mockups</code>, <code>python serve.py</code>) с компьютера и с телефона — до этого код не пишем</li>
+<li>Созвон с Андреем 40–60 мин: сверить ответы на 18 вопросов, разницу обсудить</li>
+<li>Купить <b>оба домена сразу</b>: <code>vetra.me</code> (основной) + <code>vetra-app.ru</code> (запас с переадресацией — решено 19.08, <code>docs/imya-i-domen.md</code>) и занять имена в Telegram, ВК, MAX. Приложение и оплата — на <code>app.vetra.me</code>, отдельного домена под них не заводим</li>
+<li>Знак: направление «птица из круга» выбрано, вектор снят (<code>packages/ui/logo/</code>) — осталось сказать Андрею, что именно подправить в форме. <b>Генерации и бренд заморожены до трёх пилотов</b> (прогон gstack: 25 генераций при 0 разговоров)</li>
+<li><b>Михаилу, 1 час:</b> пройти Jivo и OkoCRM как салон — регистрация, подключить тестовое сообщество ВК, секундомер, 5 отличий → в <code>docs/konkurenty.md</code>. Jivo бесплатно даёт ВК/TG/MAX/почту — это наш первый конкурент, и его никто не трогал руками</li>
+<li>Claude по команде «чиним скелет»: prisma/vitest/tsup, <code>.env</code> через <code>--env-file</code>, npm-only, убрать WhatsApp из 12 мест, пересобрать <code>/dlya-andreya/</code> (там отменённые цены), <code>.gitignore</code>, чистка <code>plan.md</code> §10–11 и <code>context.md</code> (утверждает Михаил) — список в <code>docs/audit-gstack-2026-08-19.md</code> §1.2</li>
+<li><b>Передать Андрею материалы для продаж</b>: ссылка на витрину макетов с телефона, <code>docs/pilot.md</code>, текст первого сообщения владельцу, формула потерь (запись 3–6 тыс. ₽) → <a href="https://errorslove190-droid.github.io/sites/vetra/audit/" target="_blank">аудит</a>, <a href="https://errorslove190-droid.github.io/sites/vetra/klienty/" target="_blank">разбор для Андрея</a></li>
+<li><b>Андрею: раздел тарифов в его <code>strategiya.html</code></b> («Ветерок», 1 190 ₽ за место) привести к решённому прайсу 0 / 1 500 / 4 000 / «Своё» — документ его → <a href="https://errorslove190-droid.github.io/sites/vetra/tarify/" target="_blank">разбор</a></li>
+<li><b>Спросить Андрея: первый канал — ВКонтакте вместо Telegram?</b> Появился технический довод: Telegram под ограничениями РКН, ФАС запретила в нём рекламу. Если да — Спринты 3 и 5 меняются местами → <a href="https://errorslove190-droid.github.io/sites/vetra/karta/" target="_blank">карта</a></li>
+<li><b>Wildberries и Ozon — вписать в план или убрать с витрины</b>: сейчас обещаны на лендинге и на экране подключения, но их нет ни в списке каналов, ни в спринтах</li>
+<li>Для Wildberries решить, что делаем первым — чат с покупателем или вопросы и отзывы (разные категории токена; продавцу обычно важнее отзывы)</li>
+<li>🔴 <b>Убрать сравнение по цене с лендинга до Спринта 1</b> — «дешевле в 2–5 раз» неверно: Jivo бесплатно даёт ВК, Telegram, MAX и почту до 2 операторов. Андрею — обновить раздел тарифов в его <code>strategiya.html</code></li>
+<li>🔴 <b>Уведомление в Роскомнадзор — подать в августе</b>, отдельно и раньше ИП: реестр обновляется до 30 дней, обработка данных начнётся в сентябре, штраф для ИП до 50 000 ₽</li>
+<li><b>При регистрации ИП сразу подать уведомление о переходе на УСН</b> + уточнить региональную ставку для IT (может быть 1 % вместо 6 %)</li>
+<li>Вторая ниша (продавцы WB и Ozon) — описать так же подробно, как салон, или убрать с витрины. Довод за «описать»: этих каналов нет ни у одного из шести конкурентов</li>
+<li><b>Начало октября — крайний срок по ИП</b> (оформление + счёт + эквайринг 3–6 недель, оплата нужна к спринту 11)</li>
+<li>Записать на бумаге сценарий ухода одного из двоих: доля замораживается на дате ухода, код и аккаунты остаются проекту</li>
+<li>Завести аккаунты: Timeweb Cloud, Sentry, бот у BotFather, сообщество ВК, <code>dev.max.ru</code></li>
+<li>Рабочий чат команды в Telegram + отдельная тема «Алерты»</li>
+<li><b>База на телефон</b> — Syncthing-Fork и Obsidian из Google Play, прислать Claude ID телефона → <b>База знаний на телефоне</b> *(нужно, чтобы вести Ветру с телефона)*</li>
+</ul></details>
+<details><summary>🦅 Ветра — после комнаты инвесторов (21.08) <span class="cnt">21</span></summary><ul>
+<li>🔴 <b>Ответить на 30 вопросов вдвоём с Андреем</b> → <a href="https://errorslove190-droid.github.io/sites/vetra/voprosy/" target="_blank">https://errorslove190-droid.github.io/sites/vetra/voprosy/</a> — 6 отвечает Михаил, 11 Андрей, 13 только вместе (созвон 40–60 мин). Скинуть Андрею ссылку</li>
+<li><b>Сказать «делай» по фундаменту (вопрос М5)</b> — 7 технических правок до Спринта 1, потом только с миграцией и переустановкой вебхуков у клиентов</li>
+<li>🔴 <b>Форма URL вебхука <code>/webhooks/:type/:channelId</code> + секрет на канал, а не на тип.</b> Сейчас секрет один на всю систему — знающий его пишет от имени любого салона; HMAC по сырому телу невозможен, Fastify его выбрасывает</li>
+<li>🔴 <b>Таблица <code>WebhookEvent</code></b> (сырое тело до разбора). Сейчас <code>Message.raw</code> пишется только после успешного разбора — что не распарсилось, теряется навсегда</li>
+<li>🔴 <b><code>workspaceId</code> в <code>Message</code>, <code>Attachment</code>, <code>Note</code>, <code>Transcript</code></b> + глобальный <code>@@unique([type, externalId])</code> на <code>Channel</code> (иначе один бот подключается в двух компаниях и вторая уводит вебхук)</li>
+<li><b>Классы ошибок адаптера</b> (<code>permanent / retryable / auth / rateLimited</code> + <code>retryAfter</code>) — сейчас 403 и 429 обрабатываются одинаково, и Telegram блокирует бота клиента</li>
+<li><b>Внешний адресат в <code>OutgoingMessage</code></b> — иначе адаптер лезет в базу и критерий Спринта 5 «второй канал без правок ядра» проваливается по построению</li>
+<li><b><code>AuditLog</code> в схеме Спринта 2</b> — журнал действий задним числом не восстанавливается ни за какие деньги</li>
+<li><b>Sentry: <code>sendDefaultPii=false</code> + <code>beforeSend</code></b> и перечень субпроцессоров — иначе тексты переписок клиенток уезжают за рубеж вопреки ч. 5 ст. 18 152-ФЗ</li>
+<li><b>Поручение обработчику (ст. 6 ч. 3 152-ФЗ) — черновик к Спринту 3, а не к Спринту 11.</b> Без него салон нарушает закон в момент подключения канала</li>
+<li><b>LTV и отток.</b> Вся безубыточность («7 салонов») верна только при нулевом churn. При оттоке 10 % потолок ручного канала ≈9–10 платящих, а безубыточность при двух подписках — 12: модель может не сходиться до первого клиента</li>
+<li><b>CAC в часах</b> — ≈15 часов Андрея на одного платящего, оплачивается не деньгами, а сроком запуска</li>
+<li><b>Разделить «расходы стройки» и «себестоимость сервиса»</b>: 18 000 из 20 450 ₽ — инструменты разработки, себестоимость сервиса 2 450 ₽. С учётом труда по 500 ₽/ч безубыточность ≈23 салона, а не 7</li>
+<li><b>Размер рынка</b> — сколько в РФ и в Казани салонов 5–15 мастеров с ≥2 каналами и наёмным администратором</li>
+<li><b>Бизнес на продажу или на дивиденды</b> — от ответа зависят юрлицо, тарифы и нужен ли расчёт рынка</li>
+<li><b>Что администратор получает в первый день</b> — покупает владелец, а провалить внедрение может администратор, которого продукт измеряет медианой. Интервью с пользователем не было ни одного</li>
+<li><b>Что удерживает клиента после бесплатного месяца</b> — «переписка остаётся там же, где была» обнуляет издержки ухода</li>
+<li><b>Кто дежурит вечером и в выходные и какое время реакции пишем в оферту</b> — цена простоя для салона выше нашей месячной подписки, строки «поддержка» нет ни в расходах, ни в расписании</li>
+<li><b>YCLIENTS и Dikidi</b> — их нет в <code>konkurenty.md</code>, а это реальный status quo салона и возможный партнёрский канал</li>
+<li><b>Тест-касание фальшивыми заявками — оставляем или заменяем?</b> 70 салонов за 7 недель в одном городе; метод создаёт у клиента ту потерю, которую продаёт</li>
+<li><b>Вестинг</b> — сейчас двухнедельного участника и годового не отличить</li>
+</ul></details>
+<details><summary>🦅 Ветра — Спринт 0, по дням (в приложении, вкладка «План») <span class="cnt">12</span></summary><ul>
+<li>11 решений Р1–Р11 по прогону gstack</li>
+<li>Docker Desktop + Node 22 LTS</li>
+<li>Посмотреть макеты с компа и с телефона</li>
+<li>Созвон с Андреем 40–60 мин: сверить 18 вопросов</li>
+<li>Расхождения → <code>docs/vision.md</code></li>
+<li>Вопрос 17 (макеты) и вопрос 18 (маскот)</li>
+<li>Домены <code>vetra.me</code> и <code>vetra-app.ru</code></li>
+<li>Имена в Telegram, ВК, MAX</li>
+<li>Рабочий чат команды + тема «Алерты»</li>
+<li>Аккаунты: Timeweb Cloud, Sentry, BotFather, сообщество ВК, dev.max.ru</li>
+<li>Доли и сценарий ухода — на бумаге</li>
+<li><code>npm run db:up</code> поднимается</li>
+</ul></details>
+<details><summary>🎬 Прогоны для Матвея — ⛔️ закрываются решением 25.08 <span class="cnt">1</span></summary><ul>
+<li>Ждёт только сообщения Михаила Матвею (см. «Горит»). Прогон 3 не стартовал (материалы так и не пришли), Прогон 2 стоял на скрине макета. Папки и наработки не удаляем → <b>Прогон 3</b></li>
+</ul></details>
+<details><summary>🏠 Личное и бытовое <span class="cnt">12</span></summary><ul>
+<li><b>Записаться на массаж</b> — болит плечо и немного спина (сказал 19.08)</li>
+<li><b>Плащёвка на весну-осень до 5 000 ₽</b> (уточнено 21.08): винтаж Adidas / Nike / Arc&#x27;teryx, погода до −5. Ссылки на поиски — в ответе от 21.08; смотреть Авито (там реально до 5к), WB/Ozon — только реплики</li>
+<li><b>Проверить в бою</b>: сфоткать тарелку боту @Manager_miha_bot и убедиться, что приём появился в приложении на вкладке «День»</li>
+<li><b>Набор массы — первая неделя</b> → <b>Тренировки — набор массы</b> · <a href="https://errorslove190-droid.github.io/sites/trener/" target="_blank">программа</a></li>
+<li>купить овсянку, арахисовую пасту, бананы, творог (на коктейли)</li>
+<li>проверить на банке протеина, сколько реально белка в порции</li>
+<li>три тренировки, каждую записать: упражнение, вес, повторы</li>
+<li>воскресенье 23.08 — взвеситься утром и сказать цифру</li>
+<li>Тренировка — успеть <b>до 11:00</b></li>
+<li>Автовокзал: посмотреть одежду (верх), присмотреть площадку</li>
+<li>Время с Ксюшей</li>
+<li>Поработать, сколько останется времени</li>
+</ul></details>
+<details><summary>⏸ Отложено (пауза с 18.08 — фокус на Ветре) <span class="cnt">14</span></summary><ul>
+<li>Доработка сайта → <b>Apex Structure</b></li>
+<li>Собрать сайт-визитку → <b>Портфолио</b></li>
+<li>Прожечь Material Test в LightBurn на обрезке → записать режимы в <code>brandbook/style.md</code></li>
+<li>Посмотреть Успенский собор → если ок, дорисовать три оставшихся храма</li>
+<li>Собрать шаблон опоясывающей ленты для бочонка</li>
+<li>Решить по редизайну: 6 стилей ждут выбора → <b>Редизайн Оладушек — выбор стиля</b></li>
+<li>~~Ждём скрин макета Apple WWDC 26~~ — не ждём: Михаил сообщает Матвею о завершении</li>
+<li>Ждём материалы от него</li>
+<li>Решить по адаптации тёплого аутрича: письменный канал (Telegram/MAX) параллельно звонкам? мини-блог для догрева? → <b>Тёплый аутрич — разбор видео dairen</b> (раздел 10)</li>
+<li>Добавить в <b>Таблица обзвона</b> столбцы воронки: касание → ответ → разбор → созвон → клиент</li>
+<li>Разобрать накопившиеся видео из <code>Входящее/</code> → выжимка в базу</li>
+<li>Отдать Клоду на ПК <b>Задание Клоду — чистка инструкций</b> (метод Черни: замер → карантин → проверки вместо инструкций) → <b>Промпты умерли — разбор выступления Бориса Черни</b></li>
+<li>Пройти по <b>Чек-лист качества</b> на живом проекте, чтобы запомнить пункты руками</li>
+<li>Открыть kitbitz.art и проверить лицензию (коммерция, атрибуция) + форматы SVG/PNG — до первого использования иллюстраций на клиентском сайте → <b>Каталоги референсов</b></li>
+</ul></details>
+      </section>
+
+      <section>
+        <h2>Скилы — что умею по команде</h2>
+        <div class="skill"><b>/audit-website</b> <span class="tag">общие</span><p>Audit a website with the squirrelscan CLI and fix the findings in code. Runs SEO, performance, security, technical, content, accessibility, and 15 oth</p></div>
+<div class="skill"><b>/find-skills</b> <span class="tag">общие</span><p>Helps users discover and install agent skills when they ask questions like &quot;how do I do X&quot;, &quot;find a skill for X&quot;, &quot;is there a skill that can...&quot;, or e</p></div>
+<div class="skill"><b>/frontend-design</b> <span class="tag">общие</span><p>Guidance for distinctive, intentional visual design when building new UI or reshaping an existing one. Helps with aesthetic direction, typography, and</p></div>
+<div class="skill"><b>/general-video</b> <span class="tag">общие</span><p>&gt;</p></div>
+<div class="skill"><b>/graphify</b> <span class="tag">общие</span><p>Use for any question about a codebase, its architecture, file relationships, or project content — especially when graphify-out/ exists, where the ques</p></div>
+<div class="skill"><b>/hyperframes</b> <span class="tag">общие</span><p>&gt;</p></div>
+<div class="skill"><b>/hyperframes-animation</b> <span class="tag">общие</span><p>All animation knowledge for HyperFrames — atomic motion rules, multi-phase scene blueprints, scene transitions, broader motion-design techniques, AND </p></div>
+<div class="skill"><b>/hyperframes-audio</b> <span class="tag">общие</span><p>&gt;</p></div>
+<div class="skill"><b>/hyperframes-cli</b> <span class="tag">общие</span><p>&gt;</p></div>
+<div class="skill"><b>/hyperframes-core</b> <span class="tag">общие</span><p>The HyperFrames composition contract — build one renderable project. Use for composition structure, the `data-*` timing attributes, `class=&quot;clip&quot;`, tr</p></div>
+<div class="skill"><b>/hyperframes-creative</b> <span class="tag">общие</span><p>Non-animation creative direction for HyperFrames videos. Use for design spec (frame.md / design.md) handling, palettes, typography, narration, beat pl</p></div>
+<div class="skill"><b>/hyperframes-keyframes</b> <span class="tag">общие</span><p>&gt;</p></div>
+<div class="skill"><b>/hyperframes-registry</b> <span class="tag">общие</span><p>Install, discover, and wire registry blocks and components into HyperFrames compositions. Use when running hyperframes add or hyperframes catalog, ins</p></div>
+<div class="skill"><b>/impeccable</b> <span class="tag">общие</span><p>Use when the user wants to design, redesign, shape, critique, audit, polish, clarify, distill, harden, optimize, adapt, animate, colorize, extract, or</p></div>
+<div class="skill"><b>/invoice</b> <span class="tag">общие</span><p>Счёт на оплату для клиента — одностраничный HTML под печать/PDF в фирменном стиле Михаила. Триггеры: «выстави счёт», «сделай счёт для {клиент}», «инво</p></div>
+<div class="skill"><b>/lead-form</b> <span class="tag">общие</span><p>Рабочая форма заявок на статическом сайте без сервера и платных сервисов — Google Apps Script пишет заявку в Google Таблицу и шлёт письмо, опционально</p></div>
+<div class="skill"><b>/media-use</b> <span class="tag">общие</span><p>Agent Media OS, the single skill for every media need in a HyperFrames project. Resolve BGM, SFX, image, icon, brand logo, voice, color grade, or LUT </p></div>
+<div class="skill"><b>/squirrelscan</b> <span class="tag">общие</span><p>squirrelscan audits websites for SEO, performance, security, accessibility, content, and structured data issues (260+ rules) and scores site health, v</p></div>
+<div class="skill"><b>/web-interface-guidelines</b> <span class="tag">общие</span><p>Чек-аудит интерфейса по гайдлайнам Vercel (доступность, клавиатура, формы, анимации, перфоманс). Используй перед сдачей любого сайта: пройди по правил</p></div>
+<div class="skill"><b>/generate</b> <span class="tag">этой папки</span><p>Генерация картинок и видео через API kie.ai вместо платной подписки. Срабатывает на /generate, «сгенерируй картинку», «сгенерируй видео», «создай изоб</p></div>
+<div class="skill"><b>/refs</b> <span class="tag">этой папки</span><p>Открывает каталоги референсов вкладками в Chrome — все сразу, под конкретную нишу («сайт для тату салона»), по компонентам с 21st.dev («покажи курсоры</p></div>
+<div class="skill"><b>/style-lab</b> <span class="tag">этой папки</span><p>Экономичная сборка сайта клиенту в два этапа — сначала дешёвая галерея стилей на выбор, потом полная сборка только выбранного. Используй, когда Михаил</p></div>
+<div class="skill"><b>/taste-library</b> <span class="tag">этой папки</span><p>Библиотека вкуса — каталог референсов из скриншотов. Claude смотрит картинки, раскладывает их по семьям стилей, пишет теги и рецепты, обновляет катало</p></div>
+<div class="skill"><b>/vetra</b> <span class="tag">этой папки</span><p>Войти в контекст проекта Ветра (мини-SaaS «все мессенджеры в одном окне») за одно сообщение и сразу взять в работу правки из общего контекста. Срабаты</p></div>
+      </section>
+    </div>
+
+    <div>
+      <section>
+        <h2>Журнал — последние дни</h2>
+        <div class="jday"><div class="jdate">2026-08-25</div><ul><li>Что сделано</li><li>Решения и договорённости</li><li>Что дальше</li></ul></div>
+<div class="jday"><div class="jdate">2026-08-24</div><ul><li>Договор ИП Антонова — скан и электронная копия</li></ul></div>
+<div class="jday"><div class="jdate">2026-08-22</div><ul><li>Разбор четырёх роликов про скилы Claude</li><li>Оладушки: починка по аудиту (24.08)</li></ul></div>
+<div class="jday"><div class="jdate">2026-08-21</div><ul><li>Комната инвесторов по Ветре</li><li>Оладушки: афиша фестиваля «Соколка» на сайте + истории для Яндекс Карт</li></ul></div>
+<div class="jday"><div class="jdate">2026-08-20</div><ul><li>Что сделано</li><li>Решения и договорённости</li><li>Что дальше</li><li>Бот-менеджер на хостинге</li><li>Что дальше по боту</li><li>Разворот: облачный бот отменён, вернулся зал в трекере</li><li>Чего не хватает</li><li>Воркер трекера развёрнут</li><li>Что осталось проверить</li><li>Повторы в обоих ботах</li></ul></div>
+      </section>
+
+      <section>
+        <h2>Опубликовано (GitHub Pages)</h2>
+        <ul><li><a href="https://errorslove190-droid.github.io/sites/status/2026-08-25/" target="_blank">Сводка 25.08 — статус и план</a> <span class="dim">2026-08-25</span></li>
+<li><a href="https://errorslove190-droid.github.io/sites/vetra/voprosy/" target="_blank">Тридцать вопросов на созвон</a> <span class="dim">2026-08-22</span></li>
+<li><a href="https://errorslove190-droid.github.io/sites/oladushki-sokolka/" target="_blank">Истории для Яндекс Карт — Оладушки на «Соколке»</a> <span class="dim">2026-08-21</span></li>
+<li><a href="https://errorslove190-droid.github.io/sites/trener/app/" target="_blank">Трекер питания</a> <span class="dim">2026-08-21</span></li>
+<li><a href="https://errorslove190-droid.github.io/sites/trener/ex/" target="_blank">Проба картинок упражнений</a> <span class="dim">2026-08-21</span></li>
+<li><a href="https://errorslove190-droid.github.io/sites/plan/" target="_blank">Маршрут — что делаем по шагам</a> <span class="dim">2026-08-20</span></li>
+<li><a href="https://errorslove190-droid.github.io/sites/trener/" target="_blank">Программа набора массы — Михаил</a> <span class="dim">2026-08-19</span></li>
+<li><a href="https://errorslove190-droid.github.io/sites/trener/styles/" target="_blank">Трекер — четыре направления</a> <span class="dim">2026-08-19</span></li>
+<li><a href="https://errorslove190-droid.github.io/sites/trener/styles2/" target="_blank">Трекер — макросы как продукты</a> <span class="dim">2026-08-19</span></li>
+<li><a href="https://errorslove190-droid.github.io/sites/vetra/" target="_blank">Макеты Ветра</a> <span class="dim">2026-08-19</span></li>
+<li><a href="https://errorslove190-droid.github.io/sites/vetra/andrey-19-08/" target="_blank">Что было, пока тебя не было</a> <span class="dim">2026-08-19</span></li>
+<li><a href="https://errorslove190-droid.github.io/sites/vetra/audit/" target="_blank">Аудит: компания и стратегия привлечения клиентов — 18 августа 2026</a> <span class="dim">2026-08-19</span></li>
+<li><a href="https://errorslove190-droid.github.io/sites/vetra/brandbook/" target="_blank">Бренд-бук Ветра</a> <span class="dim">2026-08-19</span></li>
+<li><a href="https://errorslove190-droid.github.io/sites/vetra/gstack/" target="_blank">Прогон Ветры через gstack</a> <span class="dim">2026-08-19</span></li></ul>
+      </section>
+
+      <section>
+        <h2>Сайты в работе</h2>
+        <ul><li><b>oladushki</b> <span class="dim">правился 2026-08-24</span></li>
+<li><b>portfolio</b> <span class="dim">правился 2026-07-23</span></li>
+<li><b>redesign-lab</b> <span class="dim">правился 2026-07-25</span></li>
+<li><b>sites</b> <span class="dim">правился 2026-07-23</span></li></ul>
+      </section>
+
+      <section>
+        <h2>База знаний</h2>
+        <details><summary>Проекты <span class="cnt">28</span></summary><ul><li>00 Роутер</li><li>Apex Structure</li><li>MA Studio — архитектура единого окна заявок</li><li>MA Studio — маркетинговый аудит сайта</li><li>MA Studio — позиционирование и структура сайта</li><li>MA Studio — тексты сайта</li><li>Vetra — контекст</li><li>Vetra — план на 17 августа</li><li>Vetra — план разработки</li><li>Агентство — исследование рынка 2026-08</li><li>Агентство — разбор конкурентов 2026-08</li><li>Агентство — сайты и автоматизация</li><li>Идея — единое окно заявок (контекст для нового диалога)</li><li>Конвейер лидов</li><li>Ниша — строительство домов и продажа объектов</li><li>Оладушки — брендбук для лазерной гравировки</li><li>Оладушки — кластерный аудит 2026-08-13</li><li>Портфолио</li><li>Портфолио Суюхана</li><li>Прогон 2 design-genius</li><li>Прогон 3</li><li>Прогон antislop</li><li>Редизайн Оладушек — выбор стиля</li><li>Редизайн-лаборатория</li><li>Свияжские Оладушки</li><li>Свияжские Оладушки — текст для ведущего (Соколка)</li><li>Цех</li><li>Цех — запуск сегодня</li></ul></details>
+<details><summary>Инструменты <span class="cnt">38</span></summary><ul><li>00 Роутер</li><li>21st.dev и MotionSites</li><li>Anime.js — анимации на нашем стеке</li><li>Graphify</li><li>Skills CLI — установка скилов одной командой</li><li>Telegram от моего имени</li><li>gstack — конвейер ревью для Claude Code</li><li>squirrelscan — аудит сайтов</li><li>База знаний на телефоне</li><li>Библиотека вкуса</li><li>Бот-менеджер на хостинге</li><li>Генерация картинок для сайтов</li><li>Деплой на хостинг</li><li>Дзен — правила, экономика, разбор ниши</li><li>Каталоги референсов</li><li>Командный центр</li><li>Личный ассистент в Telegram</li><li>Маркетинговый воркфлоу</li><li>Монтаж видео кодом (HyperFrames)</li><li>Обзор инструментов</li><li>Облачные агенты CMA</li><li>Ошибки деплоя</li><li>Панель Tweaks</li><li>Порядок на компьютере</li><li>Приём заявок MA Studio — пошагово</li><li>Промпты — разбор внешности по фото</li><li>Работа с телефона — Remote Control</li><li>Разбор видео с кадрами (video-look)</li><li>Разбор видео через NotebookLM</li><li>Разбор видео — как достаём текст</li><li>Скан документов с подписью и печатью</li><li>Скилл generate — картинки и видео через API</li><li>Ссылки на MAX</li><li>Трекер еды и тренировок</li><li>Форма заявок без сервера</li><li>Что лежит в папке Claude</li><li>Что не внедряем (решения)</li><li>Экономия лимитов Claude Code</li></ul></details>
+<details><summary>Методология <span class="cnt">24</span></summary><ul><li>00 Роутер</li><li>7 библиотек компонентов — разбор видео</li><li>ARMS — как устроен рабочий стол агента</li><li>style.md — паспорт стиля проекта</li><li>Два контура</li><li>Дизайн премиум-сайтов</li><li>Дизайн строительных сайтов — что продаёт</li><li>Инструменты вкуса</li><li>Кириллица в вёрстке</li><li>Личный стиль Михаила</li><li>Мышление агента — ADHD Skill</li><li>Принципы скилов</li><li>Приём — портфолио с облётом (3D-скролл)</li><li>Приём — свечение за курсором в hero</li><li>Промпты умерли — разбор выступления Бориса Черни</li><li>Самоулучшение промпта</li><li>Скилл Impeccable</li><li>Скилл frontend-design</li><li>Скилл style-lab</li><li>Скролл-параллакс как у Apple</li><li>Формула промпта</li><li>Чек-лист качества</li><li>Чертежи секций по нишам</li><li>Экономика соло-SaaS — разбор Ромы Райта</li></ul></details>
+<details><summary>Клиенты <span class="cnt">5</span></summary><ul><li>00 Роутер</li><li>Бригадиры — первые кейсы в стройке</li><li>Дядя — металл и заборы (первый кейс)</li><li>Как вести клиентов</li><li>Таблица обзвона</li></ul></details>
+      </section>
+    </div>
+  </div>
+
+  <footer>Собрано 25.08.2026 01:24 · обновить: <code>Обновить центр.cmd</code> в этой папке</footer>
+</div>
+</body>
+</html>
