@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Уведомление в Роскомнадзор — на пальцах</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Unbounded:wght@600;700&family=Onest:wght@400;500;600&display=swap">
+<style>
+  :root {
+    --bg:#0d0d0c; --card:#171714; --line:#2a2a22; --text:#f4f1e8; --dim:#958f82; --acc:#c9f24d;
+    --warn:#f2814d;
+  }
+  * { box-sizing:border-box; margin:0; padding:0; }
+  body { background:var(--bg); color:var(--text);
+         font:17px/1.65 Onest, -apple-system, "Segoe UI", sans-serif; padding:0 18px 80px; }
+  .wrap { max-width:820px; margin:0 auto; }
+
+  header { padding:56px 0 30px; }
+  .kicker { color:var(--acc); font-size:.82rem; letter-spacing:.14em; text-transform:uppercase;
+            font-weight:600; margin-bottom:14px; }
+  h1 { font-family:Unbounded, sans-serif; font-size:clamp(2rem, 6vw, 3.1rem); line-height:1.08;
+       font-weight:700; letter-spacing:-.02em; }
+  .sub { color:var(--dim); font-size:1.15rem; margin-top:16px; max-width:34ch; }
+
+  section { margin:44px 0; }
+  h2 { font-family:Unbounded, sans-serif; font-size:clamp(1.3rem, 4vw, 1.9rem); font-weight:600;
+       line-height:1.2; margin-bottom:18px; }
+  p { font-size:1.08rem; margin-bottom:14px; }
+  p.big { font-size:1.3rem; line-height:1.5; }
+  .dim { color:var(--dim); }
+
+  .scene { background:var(--card); border:1px solid var(--line); border-radius:22px;
+           padding:28px 24px; margin:22px 0; }
+  .scene svg { width:100%; height:auto; display:block; }
+  .cap { color:var(--dim); font-size:.95rem; margin-top:14px; text-align:center; }
+
+  .row { display:grid; grid-template-columns:repeat(3, 1fr); gap:14px; margin:22px 0; }
+  @media (max-width:640px) { .row { grid-template-columns:1fr; } }
+  .tile { background:var(--card); border:1px solid var(--line); border-radius:18px; padding:22px 20px; }
+  .tile .em { font-size:2.6rem; line-height:1; display:block; margin-bottom:12px; }
+  .tile b { display:block; font-size:1.05rem; margin-bottom:6px; }
+  .tile span { color:var(--dim); font-size:.95rem; }
+
+  .warnbox { border-left:4px solid var(--warn); background:rgba(242,129,77,.08);
+             padding:18px 22px; border-radius:0 14px 14px 0; margin:26px 0; }
+  .warnbox b { color:var(--warn); }
+
+  .steps { counter-reset:s; list-style:none; margin:22px 0; }
+  .steps li { counter-increment:s; position:relative; padding:16px 0 16px 62px;
+              border-bottom:1px solid var(--line); font-size:1.08rem; }
+  .steps li:last-child { border-bottom:0; }
+  .steps li::before { content:counter(s); position:absolute; left:0; top:14px;
+    width:40px; height:40px; border-radius:50%; background:var(--acc); color:#12120f;
+    font-family:Unbounded, sans-serif; font-weight:700; display:grid; place-items:center; }
+
+  .remember { background:var(--acc); color:#12120f; border-radius:22px; padding:30px 26px; margin:44px 0 0; }
+  .remember h2 { color:#12120f; }
+  .remember ul { list-style:none; }
+  .remember li { font-size:1.15rem; font-weight:500; padding:10px 0 10px 30px; position:relative; }
+  .remember li::before { content:"✓"; position:absolute; left:0; font-weight:700; }
+
+  footer { color:var(--dim); font-size:.9rem; margin-top:40px; border-top:1px solid var(--line);
+           padding-top:18px; }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header>
+  <div class="kicker">Объясняю на пальцах</div>
+  <h1>Уведомление в Роскомнадзор</h1>
+  <p class="sub">Что это за бумага, зачем она сайту с формой заявки и почему её лучше подать до ИП.</p>
+</header>
+
+<section>
+  <h2>Представь библиотеку</h2>
+  <p class="big">Ты собираешь у людей карточки: имя и телефон. Собирать можно — но государство хочет знать, <b>у кого лежат карточки и зачем</b>. Для этого есть общая тетрадь — реестр. Уведомление это и есть запись в тетради: «я такой-то, собираю имена и телефоны, чтобы отвечать на заявки».</p>
+
+  <div class="scene">
+    <svg viewBox="0 0 640 220" role="img" aria-label="Гость отдаёт карточку с именем и телефоном, она попадает в вашу коробку, а запись о коробке — в общую тетрадь">
+      <g fill="none" stroke="#2a2a22" stroke-width="2">
+        <rect x="20" y="60" width="140" height="100" rx="14"/>
+        <rect x="250" y="60" width="140" height="100" rx="14"/>
+        <rect x="480" y="60" width="140" height="100" rx="14"/>
+      </g>
+      <text x="90" y="118" text-anchor="middle" font-size="46">🙋</text>
+      <text x="320" y="118" text-anchor="middle" font-size="46">📥</text>
+      <text x="550" y="118" text-anchor="middle" font-size="46">📒</text>
+      <text x="90" y="186" text-anchor="middle" fill="#958f82" font-size="15" font-family="Onest, sans-serif">гость оставил заявку</text>
+      <text x="320" y="186" text-anchor="middle" fill="#958f82" font-size="15" font-family="Onest, sans-serif">данные у тебя</text>
+      <text x="550" y="186" text-anchor="middle" fill="#958f82" font-size="15" font-family="Onest, sans-serif">запись в реестре РКН</text>
+      <g stroke="#c9f24d" stroke-width="3" fill="none" marker-end="url(#a)">
+        <path d="M168 110 h74"/>
+        <path d="M398 110 h74"/>
+      </g>
+      <defs>
+        <marker id="a" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+          <path d="M0 0 L10 5 L0 10 z" fill="#c9f24d"/>
+        </marker>
+      </defs>
+    </svg>
+    <div class="cap">Уведомление — это не разрешение. Это «я записался, вот кто я».</div>
+  </div>
+</section>
+
+<section>
+  <h2>Кого это касается</h2>
+  <div class="row">
+    <div class="tile"><span class="em">📝</span><b>Форма на сайте</b><span>просит имя, телефон или почту — уже персональные данные</span></div>
+    <div class="tile"><span class="em">📞</span><b>Записная книжка клиентов</b><span>ведёшь список тех, кто обращался — тоже они</span></div>
+    <div class="tile"><span class="em">📊</span><b>Аналитика и рассылки</b><span>привязываешь поведение к человеку — считается</span></div>
+  </div>
+  <p class="dim">Не касается только тех, кто вообще ничего ни у кого не спрашивает. Сайт-визитка с одним телефоном — можно жить спокойно.</p>
+</section>
+
+<section>
+  <h2>Почему тянуть невыгодно</h2>
+  <div class="warnbox">
+    <p><b>Реестр обновляется до 30 дней.</b> Подал в конце месяца — попал в список через месяц. А обработка данных у тебя начнётся раньше.</p>
+    <p style="margin:0"><b>Штраф для ИП — до 50 000 ₽</b> за работу без уведомления. Само уведомление бесплатное.</p>
+  </div>
+  <p class="big">Отсюда простое правило: <b>уведомление подаётся раньше ИП</b>, отдельно от него. Сначала запись в тетради, потом всё остальное.</p>
+</section>
+
+<section>
+  <h2>Как это выглядит по шагам</h2>
+  <ol class="steps">
+    <li>Заходишь на портал Роскомнадзора в раздел уведомлений</li>
+    <li>Заполняешь: кто ты, какие данные собираешь, зачем и как долго хранишь</li>
+    <li>Отправляешь — госпошлины нет</li>
+    <li>Ждёшь до 30 дней, пока запись появится в реестре</li>
+    <li>На сайте держишь политику конфиденциальности — она объясняет гостям то же самое</li>
+  </ol>
+  <p class="dim">Политику мы уже написали и выложили — она отвечает ровно на те вопросы, что и уведомление.</p>
+</section>
+
+<div class="remember">
+  <h2>Что запомнить</h2>
+  <ul>
+    <li>Собираешь имя и телефон — ты оператор данных, и об этом надо сообщить</li>
+    <li>Уведомление бесплатное, но реестр обновляется месяц — подавать заранее</li>
+    <li>Сначала уведомление, потом ИП; штраф за пропуск — до 50 000 ₽</li>
+  </ul>
+</div>
+
+<footer>
+  Собрано скилом <b>/eli5</b> 25.08.2026 · это объяснение своими словами, а не юридическая консультация: перед подачей сверь формулировки на портале РКН.
+</footer>
+
+</div>
+</body>
+</html>
