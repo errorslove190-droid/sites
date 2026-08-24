@@ -94,12 +94,15 @@
     overflow:hidden;white-space:nowrap;
     padding:12px 0;margin:24px 0 0;
   }
+  .ticker-inner{display:inline-block;animation:tick 30s linear infinite}
   .ticker span{
     font-family:'Oswald',sans-serif;font-weight:500;font-size:14px;
     text-transform:uppercase;letter-spacing:.14em;color:var(--muted);
     display:inline-block;padding-right:14px;
   }
   .ticker .sep{color:var(--lime)}
+  @keyframes tick{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+  @media (prefers-reduced-motion: reduce){.ticker-inner{animation:none}}
 
   section{padding:56px 0}
 
@@ -214,7 +217,9 @@
   </div>
   <p class="lead">Что построили, что реально работает, где застряли и главное — <b>откуда возьмутся деньги</b>. Внизу план на неделю 25–31 августа: что делает Михаил, что делает Claude.</p>
   <div class="ticker" aria-hidden="true">
-    <span>Два бота в Telegram <span class="sep">✳︎</span> Трекер еды и спорта <span class="sep">✳︎</span> Комната инвесторов <span class="sep">✳︎</span> Оладушки 48 → 73 <span class="sep">✳︎</span> Тарифы Ветры решены <span class="sep">✳︎</span> База в кармане <span class="sep">✳︎</span> Прогон gstack <span class="sep">✳︎</span></span>
+    <div class="ticker-inner">
+      <span>Два бота в Telegram <span class="sep">✳︎</span> Трекер еды и спорта <span class="sep">✳︎</span> Комната инвесторов <span class="sep">✳︎</span> Оладушки 48 → 73 <span class="sep">✳︎</span> Тарифы Ветры решены <span class="sep">✳︎</span> База в кармане <span class="sep">✳︎</span> Прогон gstack <span class="sep">✳︎</span></span><span>Два бота в Telegram <span class="sep">✳︎</span> Трекер еды и спорта <span class="sep">✳︎</span> Комната инвесторов <span class="sep">✳︎</span> Оладушки 48 → 73 <span class="sep">✳︎</span> Тарифы Ветры решены <span class="sep">✳︎</span> База в кармане <span class="sep">✳︎</span> Прогон gstack <span class="sep">✳︎</span></span>
+    </div>
   </div>
 </header>
 
