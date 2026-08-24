@@ -1,0 +1,395 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Сводка 25.08 — статус и план</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%230a0b0d'/><text x='50' y='68' font-size='52' text-anchor='middle' fill='%23d8f34e' font-family='Arial' font-weight='bold'>С</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@700;800&family=Oswald:wght@500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#0a0b0d;
+    --card:#15171c;
+    --card-hover:#1d2028;
+    --paper:#e4ded7;
+    --muted:rgba(228,222,215,.62);
+    --lime:#d8f34e;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    background:var(--ink);
+    color:var(--paper);
+    font-family:'Inter',system-ui,-apple-system,sans-serif;
+    font-size:16px;
+    line-height:1.65;
+    -webkit-font-smoothing:antialiased;
+    overflow-x:hidden;
+  }
+  .wrap{max-width:960px;margin:0 auto;padding:0 20px}
+  a{color:var(--paper)}
+  a:hover{color:var(--lime)}
+
+  /* ── типографика ── */
+  .label{
+    font-family:'Oswald',sans-serif;
+    font-weight:600;
+    text-transform:uppercase;
+    letter-spacing:.18em;
+    font-size:12px;
+    color:var(--lime);
+  }
+  h2{
+    font-family:'Oswald',sans-serif;
+    font-weight:700;
+    text-transform:uppercase;
+    letter-spacing:.04em;
+    font-size:clamp(26px,5vw,40px);
+    line-height:1.1;
+    margin:10px 0 28px;
+  }
+  .mark{
+    background:linear-gradient(to top, var(--lime) 0 .34em, transparent .34em);
+    color:var(--ink);
+    background-clip:border-box;
+    padding:0 .08em;
+    color:inherit;
+  }
+  .num{font-family:'Oswald',sans-serif;font-weight:600;color:var(--lime)}
+
+  /* ── hero ── */
+  header{padding:56px 0 40px}
+  .giant{
+    font-family:'Unbounded',sans-serif;
+    font-weight:800;
+    font-size:clamp(44px,13vw,140px);
+    line-height:.95;
+    letter-spacing:-.02em;
+    text-transform:uppercase;
+  }
+  .giant .outline{
+    color:transparent;
+    -webkit-text-stroke:2px var(--paper);
+  }
+  .hero-meta{
+    display:flex;flex-wrap:wrap;gap:10px;margin-top:26px;
+  }
+  .pill{
+    font-family:'Oswald',sans-serif;font-weight:500;font-size:13px;
+    text-transform:uppercase;letter-spacing:.1em;
+    border-radius:999px;padding:8px 16px;background:var(--card);
+    color:var(--muted);
+  }
+  .pill.lit{background:var(--lime);color:var(--ink);font-weight:600}
+  .lead{margin-top:26px;font-size:18px;max-width:640px;color:var(--muted)}
+  .lead b{color:var(--paper);font-weight:600}
+
+  /* ── бегущая строка ── */
+  .ticker{
+    border-top:1px solid rgba(228,222,215,.12);
+    border-bottom:1px solid rgba(228,222,215,.12);
+    overflow:hidden;white-space:nowrap;
+    padding:12px 0;margin:24px 0 0;
+  }
+  .ticker span{
+    font-family:'Oswald',sans-serif;font-weight:500;font-size:14px;
+    text-transform:uppercase;letter-spacing:.14em;color:var(--muted);
+    display:inline-block;padding-right:14px;
+  }
+  .ticker .sep{color:var(--lime)}
+
+  section{padding:56px 0}
+
+  /* ── лента недели ── */
+  .day{
+    display:grid;grid-template-columns:96px 1fr;gap:18px;
+    padding:20px 0;border-top:1px solid rgba(228,222,215,.1);
+  }
+  .day:last-child{border-bottom:1px solid rgba(228,222,215,.1)}
+  .day-date{
+    font-family:'Oswald',sans-serif;font-weight:700;font-size:22px;
+    color:var(--lime);line-height:1.2;
+  }
+  .day-date small{display:block;font-size:11px;letter-spacing:.14em;color:var(--muted);font-weight:500}
+  .day-body{color:var(--muted);font-size:15px}
+  .day-body b{color:var(--paper);font-weight:600}
+
+  /* ── карточки ── */
+  .cards{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+  .card{
+    background:var(--card);border-radius:20px;padding:22px;
+    transition:background .2s;
+  }
+  .card:hover{background:var(--card-hover)}
+  .card h3{
+    font-family:'Oswald',sans-serif;font-weight:600;font-size:16px;
+    text-transform:uppercase;letter-spacing:.06em;margin-bottom:8px;
+  }
+  .card p{font-size:14.5px;color:var(--muted)}
+  .card p b{color:var(--paper);font-weight:600}
+  .card .tag{
+    display:inline-block;font-family:'Oswald',sans-serif;font-size:11px;
+    letter-spacing:.14em;text-transform:uppercase;font-weight:600;
+    border-radius:999px;padding:3px 10px;margin-bottom:12px;
+  }
+  .tag.ok{background:rgba(216,243,78,.14);color:var(--lime)}
+  .tag.stuck{background:rgba(228,222,215,.1);color:var(--muted)}
+
+  /* ── деньги ── */
+  .money-strip{
+    background:var(--lime);color:var(--ink);
+    margin:0 0 40px;padding:36px 0;
+  }
+  .money-strip .wrap{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+  .money-cell .big{
+    font-family:'Unbounded',sans-serif;font-weight:800;
+    font-size:clamp(24px,4.6vw,44px);line-height:1;letter-spacing:-.02em;
+  }
+  .money-cell .cap{
+    font-family:'Oswald',sans-serif;font-weight:600;font-size:12px;
+    text-transform:uppercase;letter-spacing:.14em;margin-top:8px;opacity:.75;
+  }
+  .money-row{
+    display:grid;grid-template-columns:130px 1fr;gap:16px;
+    padding:18px 0;border-top:1px solid rgba(228,222,215,.1);
+  }
+  .money-row:last-child{border-bottom:1px solid rgba(228,222,215,.1)}
+  .money-when{font-family:'Oswald',sans-serif;font-weight:700;font-size:17px;color:var(--lime);text-transform:uppercase;letter-spacing:.04em}
+  .money-row p{color:var(--muted);font-size:15px}
+  .money-row p b{color:var(--paper)}
+
+  /* ── план ── */
+  .track{background:var(--card);border-radius:20px;padding:26px 24px;margin-bottom:16px}
+  .track h3{
+    font-family:'Oswald',sans-serif;font-weight:700;font-size:19px;
+    text-transform:uppercase;letter-spacing:.05em;margin-bottom:4px;
+  }
+  .track .sub{font-size:13.5px;color:var(--muted);margin-bottom:16px}
+  .todo{list-style:none}
+  .todo li{
+    position:relative;padding:9px 0 9px 34px;font-size:15px;color:var(--paper);
+    border-top:1px solid rgba(228,222,215,.08);
+  }
+  .todo li::before{
+    content:"";position:absolute;left:0;top:14px;width:16px;height:16px;
+    border:2px solid var(--lime);border-radius:5px;
+  }
+  .todo li small{display:block;color:var(--muted);font-size:13px}
+  .todo li.claude::after{
+    content:"CLAUDE";position:absolute;right:0;top:12px;
+    font-family:'Oswald',sans-serif;font-size:10px;font-weight:600;
+    letter-spacing:.12em;color:var(--ink);background:var(--lime);
+    border-radius:999px;padding:2px 8px;
+  }
+
+  .skills{margin-top:8px}
+  .skills td{padding:8px 14px 8px 0;font-size:14px;color:var(--muted);vertical-align:top}
+  .skills td:first-child{font-family:'Oswald',sans-serif;font-weight:600;font-size:13px;letter-spacing:.06em;color:var(--paper);white-space:nowrap}
+
+  footer{padding:40px 0 60px;color:var(--muted);font-size:13px}
+  footer .label{display:block;margin-bottom:8px}
+
+  @media (max-width:640px){
+    .cards{grid-template-columns:1fr}
+    .day{grid-template-columns:72px 1fr;gap:12px}
+    .day-date{font-size:18px}
+    .money-strip .wrap{grid-template-columns:1fr;gap:24px}
+    .money-row{grid-template-columns:1fr;gap:4px}
+    .todo li.claude::after{position:static;display:inline-block;margin-left:8px}
+  }
+</style>
+</head>
+<body>
+
+<header class="wrap">
+  <p class="label">clod code · рабочая сводка</p>
+  <h1 class="giant">Сводка<br><span class="outline">25.08</span></h1>
+  <div class="hero-meta">
+    <span class="pill lit">Неделя 17–24 августа</span>
+    <span class="pill">Фокус: Ветра</span>
+    <span class="pill">+ телефонный контур</span>
+  </div>
+  <p class="lead">Что построили, что реально работает, где застряли и главное — <b>откуда возьмутся деньги</b>. Внизу план на неделю 25–31 августа: что делает Михаил, что делает Claude.</p>
+  <div class="ticker" aria-hidden="true">
+    <span>Два бота в Telegram <span class="sep">✳︎</span> Трекер еды и спорта <span class="sep">✳︎</span> Комната инвесторов <span class="sep">✳︎</span> Оладушки 48 → 73 <span class="sep">✳︎</span> Тарифы Ветры решены <span class="sep">✳︎</span> База в кармане <span class="sep">✳︎</span> Прогон gstack <span class="sep">✳︎</span></span>
+  </div>
+</header>
+
+<!-- ═══ ЛЕНТА НЕДЕЛИ ═══ -->
+<section class="wrap" id="week">
+  <p class="label">01 — что наделали</p>
+  <h2>Неделя по дням</h2>
+
+  <div class="day">
+    <div class="day-date">17.08<small>вс</small></div>
+    <div class="day-body"><b>Старт Ветры и телефонного контура.</b> Репозиторий Ветры создан, Андрей приглашён, ответы на 18 вопросов Спринта 0 внесены. Настроен режим работы с телефона (Remote Control, белый список разрешений) и Syncthing — база знаний теперь синхронизируется в карман.</div>
+  </div>
+  <div class="day">
+    <div class="day-date">18.08<small>пн</small></div>
+    <div class="day-body"><b>Решение «фокус — только Ветра»</b>, остальное в «Отложено». Разобран метод тёплого аутрича (dairen) и тренды-2026 (Гусев). Аудит привлечения клиентов Ветры: главный пробел — <b>0 разговоров с рынком</b>. Расходы пересчитаны честно: <span class="num">20 450 ₽/мес</span> с одной подпиской Claude.</div>
+  </div>
+  <div class="day">
+    <div class="day-date">19.08<small>вт</small></div>
+    <div class="day-body"><b>Самый плотный день.</b> Карта продукта Ветры закрыта на 12/15, разобраны все 8 каналов (WhatsApp в РФ мёртв — выкинут из плана; Telegram под ограничениями РКН). Конкуренты перепроверены: Jivo бесплатно даёт ВК+TG+MAX — аргумент «дешевле» умер. <b>Тарифы решены: 0 / 1 500 / 4 000 / «Своё»</b>. Родились два бота: личный ассистент <b>@Manager_miha_bot</b> и бортовой компьютер <b>@vetra01_bot</b>, оба понимают голосовые. Побеждён вечный 401 (прокси-ключ убран из системы). Собран личный тренер + трекер еды. Прогон Ветры через gstack: 11 решений Р1–Р11 на стол.</div>
+  </div>
+  <div class="day">
+    <div class="day-date">20.08<small>ср</small></div>
+    <div class="day-body"><b>Облачный бот собран и в тот же день отменён</b> — считать КБЖУ умеет только Claude на ПК, облако давало бы одни напоминания. Воркер трекера развёрнут на Cloudflare: фото еды → дневник в приложении. В трекере появилась вкладка «Спорт». Заведена папка Прогона 3 для Матвея. Боты научены переживать обрывы связи.</div>
+  </div>
+  <div class="day">
+    <div class="day-date">21.08<small>чт</small></div>
+    <div class="day-body"><b>Комната инвесторов по Ветре:</b> 15 инвесторов, 75 вопросов методом «5 почему», найдены 5 корневых проблем и дыры в коде скелета. Итог — <a href="https://errorslove190-droid.github.io/sites/vetra/voprosy/">30 вопросов на ответ</a>. Для Оладушек: страница фестиваля «Соколка» на боевом сайте + 3 истории для Яндекс.Карт.</div>
+  </div>
+  <div class="day">
+    <div class="day-date">22.08<small>пт</small></div>
+    <div class="day-body">Разбор 4 роликов про скилы: поставлен <b>Skills CLI</b> (установка скилов одной командой). Окончательно починен разбор видео с YouTube — yt-dlp + Deno, теперь субтитры любого ролика достаются за минуту.</div>
+  </div>
+  <div class="day">
+    <div class="day-date">24.08<small>вс</small></div>
+    <div class="day-body"><b>Оладушки вычищены по аудиту: 48 (F) → 73 (C)</b>, ошибок 13 → 1, доступность 51 → 97, SEO 50 → 87. Появилась политика конфиденциальности. Оцифрован договор ТКО для ИП: скан + электронная копия с подписью и печатью.</div>
+  </div>
+</section>
+
+<!-- ═══ ЧТО РАБОТАЕТ ═══ -->
+<section class="wrap" id="works">
+  <p class="label">02 — система</p>
+  <h2>Что <span class="mark">работает</span> прямо сейчас</h2>
+  <div class="cards">
+    <div class="card"><span class="tag ok">Живьём</span>
+      <h3>Телефонный контур</h3>
+      <p>Remote Control с ярлыка, база знаний в Obsidian на телефоне (Syncthing), показ страниц через GitHub Pages, вопросы кнопками. Комп можно не трогать почти весь день.</p></div>
+    <div class="card"><span class="tag ok">Живьём</span>
+      <h3>Два бота в Telegram</h3>
+      <p><b>@Manager_miha_bot</b> — задачи, напоминания, фото еды в трекер. <b>@vetra01_bot</b> — пульт Ветры в группе. Автозапуск одной кнопкой, голосовые понимают.</p></div>
+    <div class="card"><span class="tag ok">Живьём</span>
+      <h3>Трекер еды и спорта</h3>
+      <p>Mini App в Telegram: КБЖУ, неделя, вес, программа A/B/C с тоннажём. Воркер на Cloudflare развёрнут — <a href="https://errorslove190-droid.github.io/sites/trener/">программа тренировок</a> рядом.</p></div>
+    <div class="card"><span class="tag ok">Сдано</span>
+      <h3>Оладушки на боевом</h3>
+      <p><a href="https://sviyazhskie-oladushki.ru">sviyazhskie-oladushki.ru</a> — после починки 73/C, страница фестиваля отработала. Осталось снять афишу и облегчить видео.</p></div>
+    <div class="card"><span class="tag ok">Готово к работе</span>
+      <h3>Документация Ветры</h3>
+      <p>Карта продукта 12/15, тарифы решены, макеты обновлены, интеграции всех 8 каналов разобраны, процесс написан. <a href="https://errorslove190-droid.github.io/sites/vetra/karta/">Карта</a> · <a href="https://errorslove190-droid.github.io/sites/vetra/tarify/">тарифы</a> · <a href="https://errorslove190-droid.github.io/sites/vetra/gstack/">gstack</a>.</p></div>
+    <div class="card"><span class="tag ok">Инструменты</span>
+      <h3>Конвейер знаний</h3>
+      <p>Разбор любого видео за минуту (yt-dlp + Deno), Skills CLI, публикация страниц скриптом, генерации kie.ai (баланс ~400 кредитов), библиотека вкуса.</p></div>
+  </div>
+</section>
+
+<!-- ═══ ЧТО ЗАСТРЯЛО ═══ -->
+<section class="wrap" id="stuck">
+  <p class="label">03 — честно</p>
+  <h2>Что <span class="mark">застряло</span></h2>
+  <div class="cards">
+    <div class="card"><span class="tag stuck">Дедлайн прошёл</span>
+      <h3>Спринт 0 Ветры</h3>
+      <p>Показ был назначен на 23.08 — по базе не закрыт: Р1–Р11 без ответа, 30 вопросов инвесторов без ответа, созвона с Андреем не было, Docker и Node 22 не стоят, домены не куплены.</p></div>
+    <div class="card"><span class="tag stuck">Критично</span>
+      <h3>Рынок не тронут</h3>
+      <p><b>0 разговоров, 0 пилотов, 0 листа ожидания</b> — при 55+ коммитах документации. Тест-касания в салоны (за Андреем, дедлайн был 24.08) не сделаны. Это корень №1 из комнаты инвесторов.</p></div>
+    <div class="card"><span class="tag stuck">Внешний блок</span>
+      <h3>Прогоны Матвея стоят</h3>
+      <p>Прогон 2 ждёт скрин макета, Прогон 3 ждёт ссылку и раскадровку. Папки готовы, дедлайн — 24 ч от получения материалов. Мяч на стороне Матвея, но напомнить можем мы.</p></div>
+    <div class="card"><span class="tag stuck">Техблок</span>
+      <h3>Слушалка TG-лидов</h3>
+      <p>Скрипт готов, но my.telegram.org не выдаёт api_id — форма падает в ERROR на любых аккаунтах. Пробовать с телефона по мобильному интернету, в другое время суток.</p></div>
+    <div class="card"><span class="tag stuck">Юрдедлайн</span>
+      <h3>Роскомнадзор — до 31.08</h3>
+      <p>Уведомление оператора персданных решили подать в августе — осталась неделя. Реестр обновляется до 30 дней, штраф для ИП до 50 000 ₽.</p></div>
+    <div class="card"><span class="tag stuck">Мелочи копятся</span>
+      <h3>Хвосты</h3>
+      <p>Афиша фестиваля всё ещё на главной Оладушек (снять было 24.08). Боту не написан /start — не может будить сам. В privacy.html нет оператора данных (спросить сестёр).</p></div>
+  </div>
+</section>
+
+<!-- ═══ ДЕНЬГИ ═══ -->
+<div class="money-strip" id="money">
+  <div class="wrap">
+    <div class="money-cell"><div class="big">1</div><div class="cap">оплаченная работа сдана (прогон)</div></div>
+    <div class="money-cell"><div class="big">−20 450 ₽</div><div class="cap">расходы Ветры в месяц уже идут</div></div>
+    <div class="money-cell"><div class="big">0</div><div class="cap">разговоров с платящим рынком</div></div>
+  </div>
+</div>
+
+<section class="wrap" style="padding-top:0">
+  <p class="label">04 — главный вопрос</p>
+  <h2>Когда будут <span class="mark">деньги</span></h2>
+  <p style="color:var(--muted);max-width:680px;margin-bottom:26px">Честная картина: Ветра — это <b style="color:var(--paper)">ставка, а не зарплата</b>. До её запуска (план — 29 ноября) она только тратит. Живых источника дохода на сегодня три, по скорости:</p>
+
+  <div class="money-row">
+    <div class="money-when">Эта неделя</div>
+    <p><b>Прогоны Матвея.</b> Единственный источник, который платит уже сейчас. Папки готовы, работа — сутки от получения материалов. Действие: <b>написать Матвею сегодня</b> — спросить скрин для Прогона 2 и материалы Прогона 3.</p>
+  </div>
+  <div class="money-row">
+    <div class="money-when">Сентябрь</div>
+    <p><b>Сайты по обзвону.</b> Конвейер построен (черновик → СМС со ссылкой → предоплата → доработка), но на паузе с 18.08 и в таблице обзвона один звонок за всю историю. Если вернуть хотя бы 3–5 касаний в день — первая предоплата реалистична за 2–3 недели. Решение — за тобой, кнопка в чате.</p>
+  </div>
+  <div class="money-row">
+    <div class="money-when">Декабрь</div>
+    <p><b>Ветра.</b> Запуск 29.11, безубыточность — 7 салонов при одной подписке (12 при двух). Но подписки появятся только если пилоты начнутся <b>сейчас</b>: 10 тест-касаний Андрея — критический путь ко всем деньгам Ветры. Без разговоров с рынком в декабре запускать будет нечего кому.</p>
+  </div>
+
+  <p style="color:var(--muted);max-width:680px;margin-top:26px">Вывод: <b style="color:var(--paper)">до ноября деньги приносят только прогоны и (если вернём) обзвон.</b> Всё, что ускоряет деньги Ветры, лежит не в коде, а в разговорах — и это зона Андрея, которую надо дожать на созвоне.</p>
+</section>
+
+<!-- ═══ ПЛАН ═══ -->
+<section class="wrap" id="plan">
+  <p class="label">05 — план недели 25–31.08</p>
+  <h2>Три дорожки</h2>
+
+  <div class="track">
+    <h3>А. Ветра — добить Спринт 0</h3>
+    <p class="sub">2–3 вечера. Всё это должно было закрыться 23.08 — закрываем без переноса дальше.</p>
+    <ul class="todo">
+      <li>Новый чат → <b>/vetra</b> → ответить на Р1–Р11 кнопками<small>~30 минут, главные: что первым отдаём пилоту · дата запуска · первый канал</small></li>
+      <li>Созвон с Андреем 40–60 мин<small>сверить 18 вопросов + 30 вопросов инвесторов + договориться про его 10 тест-касаний</small></li>
+      <li>Docker Desktop + Node 22 LTS у обоих<small>~30 минут</small></li>
+      <li>Купить vetra.me + vetra-app.ru, занять имена в TG / ВК / MAX<small>~30 минут</small></li>
+      <li>Подать уведомление в Роскомнадзор<small>жёсткий срок — до 31.08</small></li>
+      <li class="claude">По команде «чиним скелет» — исправить каркас по списку аудита<small>prisma, vitest, секреты вебхуков, workspaceId — до первой строки кода фич</small></li>
+    </ul>
+  </div>
+
+  <div class="track">
+    <h3>Б. Деньги сейчас</h3>
+    <p class="sub">Параллельно Ветре, малыми порциями времени.</p>
+    <ul class="todo">
+      <li>Написать Матвею: материалы Прогона 3 + скрин для Прогона 2<small>5 минут, сегодня — единственный живой источник дохода</small></li>
+      <li>Решить: возвращаем ли обзвон параллельно Ветре<small>кнопка в чате; если «да» — Claude готовит 3 черновика по нишам, звонишь ты</small></li>
+      <li class="claude">Если обзвон вернули: 3 черновых лендинга из топ-ниш (ремонт, мебель, автосервис)<small>через style-lab + библиотеку вкуса, дёшево по лимитам</small></li>
+    </ul>
+  </div>
+
+  <div class="track">
+    <h3>В. Хвосты — по 10–20 минут</h3>
+    <p class="sub">Мелкое, но протухает.</p>
+    <ul class="todo">
+      <li class="claude">Снять афишу фестиваля с главной Оладушек<small>по команде — сниму полосу и залью на боевой</small></li>
+      <li>Написать /start боту @Manager_miha_bot<small>после этого он сам будит по дедлайнам в 10:00</small></li>
+      <li>Спросить сестёр, кто оператор данных → вписать в privacy.html<small>ИП или самозанятость, ФИО</small></li>
+      <li>Удалить @miha_manager2_bot у BotFather<small>/deletebot, больше не нужен</small></li>
+    </ul>
+  </div>
+
+  <p class="label" style="margin-top:36px">Какие скилы под что зову</p>
+  <table class="skills">
+    <tr><td>/vetra</td><td>вход в контекст Ветры одним сообщением — для Р1–Р11 и «чиним скелет»</td></tr>
+    <tr><td>style-lab + refs</td><td>черновики лендингов для обзвона: сначала дешёвая галерея стилей, потом сборка</td></tr>
+    <tr><td>lead-form</td><td>рабочая форма заявок, когда лендинг продан</td></tr>
+    <tr><td>invoice</td><td>счёт клиенту при первой предоплате</td></tr>
+    <tr><td>squirrelscan</td><td>аудит перед сдачей — как у Оладушек (48 → 73)</td></tr>
+  </table>
+</section>
+
+<footer>
+  <div class="wrap">
+    <span class="label">clod code · сводка</span>
+    Собрано Claude по базе знаний 25.08.2026. Источники: журнал 17–24.08, Дела.md, заметки проектов. Страница не индексируется.
+  </div>
+</footer>
+
+</body>
+</html>
