@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="robots" content="noindex">
+<title>Мобильный просмотр</title>
+<style>
+  /* Обёртка для снятия мобильных скриншотов.
+     Headless Chrome на Windows не даёт окно уже 500px, поэтому страницу
+     показываем в iframe нужной ширины: внутри него viewport настоящий,
+     и медиазапросы считаются от него. */
+  html,body{margin:0;background:#e9eef7;font:14px/1.4 sans-serif}
+  .frames{display:flex; gap:24px; padding:24px; align-items:flex-start}
+  .phone{background:#fff;border-radius:22px;overflow:hidden;box-shadow:0 8px 26px -12px rgba(15,29,46,.5)}
+  .phone b{display:block;padding:8px 12px;background:#0E2A4A;color:#fff;font:600 12px/1.4 sans-serif}
+  iframe{display:block;border:0}
+</style>
+</head>
+<body>
+<div class="frames" id="f"></div>
+<script>
+  const q = new URLSearchParams(location.search);
+  const page = q.get('src') || 'index.html';
+  const widths = (q.get('w') || '360,390').split(',').map(Number);
+  const h = Number(q.get('h') || 820);
+  document.getElementById('f').innerHTML = widths.map(w =>
+    `<div class="phone"><b>${w} px</b><iframe src="${page}?static=1" width="${w}" height="${h}"></iframe></div>`
+  ).join('');
+</script>
+</body>
+</html>

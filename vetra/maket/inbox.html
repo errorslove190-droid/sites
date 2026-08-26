@@ -1,0 +1,335 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="robots" content="noindex">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Входящие — Ветра</title>
+<meta name="description" content="Рабочее место сотрудника: все диалоги из каналов в одном списке.">
+<link rel="stylesheet" href="css/vetra.css">
+<style>
+body{background:var(--white); overflow:hidden}
+.app-top{background:#fff; border-bottom:1px solid var(--line)}
+.app-top__in{display:flex; align-items:center; gap:16px; height:62px; padding-inline:clamp(14px,2vw,24px)}
+.app-top__right{margin-left:auto; display:flex; align-items:center; gap:10px}
+.ava{width:34px; height:34px; border-radius:50%; background:var(--blue); color:#fff; display:grid;
+  place-items:center; font-family:'Google Sans',sans-serif; font-weight:500; font-size:14px}
+
+.work{display:grid; grid-template-columns:330px minmax(0,1fr) 292px; height:calc(100vh - 62px)}
+.work > *{min-width:0}
+
+/* ---------- Список диалогов ---------- */
+.list{border-right:1px solid var(--line); display:flex; flex-direction:column; min-height:0}
+.list__top{padding:14px 16px 10px; border-bottom:1px solid var(--line)}
+.search{width:100%; padding:11px 15px; border:1.5px solid var(--line); border-radius:var(--r-pill);
+  font-size:14.5px; font-family:inherit; background:var(--page)}
+.search:focus{outline:none; border-color:var(--blue); background:#fff}
+.filters{display:flex; gap:7px; margin-top:11px; overflow-x:auto; padding-bottom:2px}
+.filters button{border:1px solid var(--line); background:#fff; color:var(--muted); cursor:pointer;
+  padding:7px 14px; border-radius:var(--r-pill); font-family:'Google Sans',sans-serif; font-size:13px;
+  white-space:nowrap; transition:all var(--fast) var(--ease)}
+.filters button:hover{border-color:var(--blue-mid); color:var(--blue-press)}
+.filters button[aria-pressed="true"]{background:var(--blue-soft); border-color:var(--blue-soft); color:var(--blue-press)}
+.list__body{overflow-y:auto; flex:1; padding:8px}
+
+.dlg{display:grid; grid-template-columns:auto 1fr auto; gap:11px; padding:12px; border-radius:var(--r);
+  cursor:pointer; transition:background var(--fast) var(--ease)}
+.dlg:hover{background:var(--blue-tint)}
+.dlg.on{background:var(--blue-soft)}
+.dlg__ava{width:40px; height:40px; border-radius:50%; display:grid; place-items:center; color:#fff;
+  font-family:'Google Sans',sans-serif; font-weight:500; position:relative; flex:none}
+.dlg__ava i{position:absolute; right:-2px; bottom:-2px; width:15px; height:15px; border-radius:50%; border:2px solid #fff}
+.dlg__nm{display:block; font-family:'Google Sans',sans-serif; font-weight:500; font-size:14.5px}
+.dlg__tx{display:block; font-size:13px; color:var(--muted); margin-top:2px; overflow:hidden;
+  text-overflow:ellipsis; white-space:nowrap; max-width:24ch}
+.dlg__meta{text-align:right; font-size:12px; color:var(--faint); white-space:nowrap}
+.dlg__badge{display:inline-block; min-width:20px; padding:2px 6px; border-radius:var(--r-pill);
+  background:var(--blue); color:#fff; font-size:11.5px; font-weight:500; margin-top:6px}
+.dlg__wait{color:var(--warn); font-weight:500}
+.dlg__owner{display:block; font-size:11.5px; color:var(--faint); margin-top:4px}
+
+/* ---------- Переписка ---------- */
+.chat{display:flex; flex-direction:column; min-height:0; background:var(--page)}
+.chat__top{display:flex; align-items:center; gap:12px; padding:13px 20px; background:#fff;
+  border-bottom:1px solid var(--line)}
+.chat__who{font-family:'Google Sans',sans-serif; font-weight:500}
+.chat__sub{font-size:12.5px; color:var(--muted)}
+.chat__acts{margin-left:auto; display:flex; gap:8px}
+.chat__body{flex:1; overflow-y:auto; padding:20px; display:flex; flex-direction:column; gap:12px}
+.day{align-self:center; font-size:12px; color:var(--faint); background:#fff; border:1px solid var(--line);
+  padding:4px 12px; border-radius:var(--r-pill)}
+.msg{max-width:66%; padding:11px 15px; border-radius:18px; font-size:14.5px; line-height:1.45; position:relative}
+.msg small{display:block; font-size:11.5px; color:var(--faint); margin-top:5px}
+.msg-in{background:#fff; border:1px solid var(--line); border-bottom-left-radius:6px; align-self:flex-start}
+.msg-out{background:var(--blue-pale); border-bottom-right-radius:6px; align-self:flex-end}
+.msg-note{background:#FFF6E3; border:1px solid #F1DFB6; align-self:center; max-width:74%; font-size:13.5px; color:#7A5C1E}
+.voice{display:flex; align-items:center; gap:11px; margin-bottom:8px}
+.voice__play{width:34px; height:34px; border-radius:50%; background:var(--blue); color:#fff; display:grid;
+  place-items:center; flex:none; cursor:pointer; transition:transform var(--fast) var(--ease)}
+.voice__play:hover{transform:scale(1.07)}
+.voice__wave{display:flex; align-items:center; gap:3px; height:22px}
+.voice__wave i{width:3px; border-radius:2px; background:var(--blue-mid)}
+.transcribed{font-size:12px; color:var(--blue-press); display:inline-flex; align-items:center; gap:6px;
+  background:var(--blue-soft); padding:3px 9px; border-radius:var(--r-pill); margin-bottom:7px}
+
+/* строка ввода */
+.compose{background:#fff; border-top:1px solid var(--line); padding:14px 20px}
+.compose__box{border:1.5px solid var(--line); border-radius:var(--r-lg); padding:12px 16px; background:#fff;
+  transition:border-color var(--fast) var(--ease), box-shadow var(--fast) var(--ease)}
+.compose__box:hover{border-color:var(--blue-mid)}
+.compose__box:focus-within{border-color:var(--blue); box-shadow:0 0 0 4px rgba(44,120,213,.13)}
+.compose__line{display:flex; align-items:center; min-height:26px; font-size:15px}
+[data-ghost]{color:var(--faint)}
+.caret{width:2px; height:19px; background:var(--blue); animation:blink 1.05s step-end infinite; margin-left:1px}
+@keyframes blink{50%{opacity:0}}
+.compose__tools{display:flex; align-items:center; gap:8px; margin-top:11px}
+.tool{border:0; background:transparent; cursor:pointer; color:var(--muted); padding:7px 11px;
+  border-radius:var(--r-pill); font-family:'Google Sans',sans-serif; font-size:13.5px;
+  display:inline-flex; align-items:center; gap:7px; transition:background var(--fast) var(--ease), color var(--fast) var(--ease)}
+.tool:hover{background:var(--blue-soft); color:var(--blue-press)}
+.compose__send{margin-left:auto}
+.hint{display:inline-flex; align-items:center; gap:9px; margin-top:10px; padding:7px 13px;
+  border-radius:var(--r-pill); background:var(--blue-soft); color:var(--blue-press); font-size:13px;
+  opacity:0; transform:translateY(-4px); transition:opacity var(--mid) var(--ease), transform var(--mid) var(--ease)}
+.hint.show{opacity:1; transform:none}
+kbd{font-family:'Google Sans',sans-serif; font-size:12px; font-weight:700; background:#fff;
+  border:1px solid var(--blue-mid); border-bottom-width:2px; border-radius:6px; padding:2px 7px; color:var(--blue-press)}
+.wave{display:inline-flex; align-items:center; gap:3px; height:18px}
+.wave i{width:3px; height:6px; background:var(--blue-mid); border-radius:2px}
+.rec .wave i{animation:wv .85s var(--ease) infinite alternate}
+@keyframes wv{to{height:17px; background:var(--blue)}}
+
+/* ---------- Карточка контакта ---------- */
+.contact{border-left:1px solid var(--line); padding:20px; overflow-y:auto}
+.contact__ava{width:64px; height:64px; border-radius:50%; background:var(--blue); color:#fff; display:grid;
+  place-items:center; font-family:'Google Sans',sans-serif; font-weight:500; font-size:25px; margin:0 auto}
+.contact__nm{text-align:center; font-family:'Google Sans',sans-serif; font-weight:500; font-size:18px; margin-top:12px}
+.contact__ch{text-align:center; font-size:13px; color:var(--muted); margin-top:4px}
+.kv{margin-top:22px; display:grid; gap:12px; font-size:14px}
+.kv div{display:flex; justify-content:space-between; gap:12px}
+.kv span{color:var(--muted)}
+.kv b{font-weight:500}
+.contact h3{font-size:12px; letter-spacing:.1em; text-transform:uppercase; color:var(--faint);
+  margin:24px 0 10px; font-family:'Google Sans',sans-serif}
+.note-item{background:#FFF6E3; border:1px solid #F1DFB6; border-radius:var(--r); padding:12px 14px;
+  font-size:13.5px; color:#7A5C1E}
+.note-item small{display:block; color:#A98A45; margin-top:6px; font-size:11.5px}
+.qr{display:grid; gap:8px}
+.qr button{text-align:left; border:1px solid var(--line); background:#fff; border-radius:var(--r);
+  padding:11px 13px; font-size:13.5px; cursor:pointer; font-family:inherit; color:var(--ink);
+  transition:border-color var(--fast) var(--ease), background var(--fast) var(--ease), transform var(--fast) var(--ease)}
+.qr button:hover{border-color:var(--blue); background:var(--blue-tint); transform:translateX(3px)}
+.qr b{display:block; font-family:'Google Sans',sans-serif; font-weight:500; margin-bottom:3px}
+.qr span{color:var(--muted)}
+
+/* ---------- Адаптив ----------
+   Медиазапросы держим в конце файла: выше по коду .chat{display:flex}
+   перебивал их, потому что специфичность одинаковая, а порядок решает. */
+@media (max-width:1180px){
+  .work{grid-template-columns:300px minmax(0,1fr)}
+  .contact{display:none}
+}
+@media (max-width:760px){
+  .work{grid-template-columns:1fr}
+  .filters button{min-height:40px; padding-inline:16px}
+  .search{min-height:44px}
+  .dlg{padding:14px 12px}
+  .chat,.contact{display:none}
+  .app-top .chip{display:none}
+  .app-top__right .btn{display:none}
+  .app-top__in{gap:10px}
+}
+</style>
+</head>
+<body>
+
+<header class="app-top">
+  <div class="app-top__in">
+    <a class="logo" href="index.html"><span class="logo__word" style="font-size:21px">Ветра</span><span class="logo__dot"></span></a>
+    <span class="chip chip-line">Салон «Аврора»</span>
+    <div class="app-top__right">
+      <a class="btn btn-light btn-sm" href="app.html">Панель руководителя</a>
+      <span class="ava" title="Ольга">О</span>
+    </div>
+  </div>
+</header>
+
+<div class="work">
+  <!-- ---------- Слева: список ---------- -->
+  <section class="list" aria-label="Диалоги">
+    <div class="list__top">
+      <input class="search" placeholder="Поиск по имени и тексту" aria-label="Поиск">
+      <div class="filters">
+        <button aria-pressed="true">Все · 12</button>
+        <button aria-pressed="false">Мои · 5</button>
+        <button aria-pressed="false">Ничьи · 3</button>
+        <button aria-pressed="false">Просроченные · 1</button>
+      </div>
+    </div>
+
+    <div class="list__body">
+      <div class="dlg on">
+        <span class="dlg__ava" style="background:#2C78D5">А<i style="background:#2AABEE"></i></span>
+        <span>
+          <span class="dlg__nm">Анна Ковалёва</span>
+          <span class="dlg__tx">Есть окно к Насте в субботу?</span>
+          <span class="dlg__owner">Вы отвечаете</span>
+        </span>
+        <span class="dlg__meta">12:41<br><span class="dlg__badge">2</span></span>
+      </div>
+
+      <div class="dlg">
+        <span class="dlg__ava" style="background:#81AEE6">И<i style="background:#0077FF"></i></span>
+        <span>
+          <span class="dlg__nm">Ирина</span>
+          <span class="dlg__tx">Сколько стоит окрашивание в два тона?</span>
+          <span class="dlg__owner">Никто не взял</span>
+        </span>
+        <span class="dlg__meta"><span class="dlg__wait">22 мин</span></span>
+      </div>
+
+      <div class="dlg">
+        <span class="dlg__ava" style="background:#5B8FD6">М<i style="background:#7B5CFA"></i></span>
+        <span>
+          <span class="dlg__nm">Марина</span>
+          <span class="dlg__tx">Голосовое · расшифровано</span>
+          <span class="dlg__owner">Кристина</span>
+        </span>
+        <span class="dlg__meta"><span class="dlg__wait">40 мин</span></span>
+      </div>
+
+      <div class="dlg">
+        <span class="dlg__ava" style="background:#7C8AA0">Я<i style="background:#7C8AA0"></i></span>
+        <span>
+          <span class="dlg__nm">Яндекс Бизнес</span>
+          <span class="dlg__tx">Новая заявка с карты</span>
+          <span class="dlg__owner">Никто не взял</span>
+        </span>
+        <span class="dlg__meta">11:58</span>
+      </div>
+
+      <div class="dlg">
+        <span class="dlg__ava" style="background:#3E8E63">С<i style="background:#25D366"></i></span>
+        <span>
+          <span class="dlg__nm">Светлана Панова</span>
+          <span class="dlg__tx">Спасибо, всё очень понравилось</span>
+          <span class="dlg__owner">Кристина · закрыт</span>
+        </span>
+        <span class="dlg__meta">11:20</span>
+      </div>
+
+      <div class="dlg">
+        <span class="dlg__ava" style="background:#2C78D5">Е<i style="background:#2AABEE"></i></span>
+        <span>
+          <span class="dlg__nm">Екатерина</span>
+          <span class="dlg__tx">Можно перенести на пятницу?</span>
+          <span class="dlg__owner">Ольга</span>
+        </span>
+        <span class="dlg__meta">10:47</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ---------- Центр: переписка ---------- -->
+  <section class="chat" aria-label="Переписка">
+    <div class="chat__top">
+      <span class="dlg__ava" style="background:#2C78D5; width:36px; height:36px">А<i style="background:#2AABEE"></i></span>
+      <span>
+        <span class="chat__who">Анна Ковалёва</span><br>
+        <span class="chat__sub">Telegram · отвечено за 2 минуты</span>
+      </span>
+      <span class="chat__acts">
+        <button class="btn btn-light btn-sm">Закрыть диалог</button>
+        <button class="btn btn-light btn-sm">Передать</button>
+      </span>
+    </div>
+
+    <div class="chat__body">
+      <span class="day">Сегодня</span>
+
+      <div class="msg msg-in">
+        Здравствуйте! Есть окно к Насте в субботу на окрашивание?
+        <small>12:38</small>
+      </div>
+
+      <div class="msg msg-out">
+        Добрый день! У Насти свободно в 12:00 и 15:30 — какое время удобнее?
+        <small>12:40 · Ольга · доставлено</small>
+      </div>
+
+      <div class="msg msg-in">
+        Давайте в 12
+        <small>12:41</small>
+      </div>
+
+      <div class="msg msg-in">
+        <span class="transcribed">Расшифровано</span>
+        <div class="voice">
+          <span class="voice__play" aria-hidden="true">▶</span>
+          <span class="voice__wave" aria-hidden="true">
+            <i style="height:8px"></i><i style="height:14px"></i><i style="height:20px"></i><i style="height:11px"></i>
+            <i style="height:17px"></i><i style="height:9px"></i><i style="height:15px"></i><i style="height:20px"></i>
+            <i style="height:12px"></i><i style="height:7px"></i>
+          </span>
+          <span class="small">0:12</span>
+        </div>
+        И ещё вопрос — можно с ребёнком прийти?
+        <small>12:41</small>
+      </div>
+
+      <div class="msg msg-note">
+        Внутренняя заметка · Дмитрий: постоянный клиент, скидка 10 % — клиент этого не видит
+      </div>
+    </div>
+
+    <!-- строка ввода с демонстрацией -->
+    <div class="compose">
+      <div class="compose__box" data-demo="type" tabindex="0"
+           data-stem="доб" data-full="Добрый день! Конечно, можно — у нас есть детский уголок.">
+        <div class="compose__line">
+          <span data-typed></span><span data-ghost></span><span class="caret" aria-hidden="true"></span>
+        </div>
+        <div class="compose__tools">
+          <button class="tool" type="button">Шаблоны «/»</button>
+          <button class="tool" type="button"><span class="wave" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></span> Голосом</button>
+          <button class="tool" type="button">Файл</button>
+          <button class="btn btn-primary btn-sm compose__send" type="button">Отправить</button>
+        </div>
+      </div>
+      <span class="hint" data-hint><kbd>Tab</kbd> вставить подсказку · <kbd>Esc</kbd> отклонить</span>
+      <span data-sent hidden></span>
+      <p class="small" style="margin-top:9px">Наведите на поле — покажем, как работает подсказка.</p>
+    </div>
+  </section>
+
+  <!-- ---------- Справа: контакт ---------- -->
+  <aside class="contact" aria-label="О клиенте">
+    <div class="contact__ava">А</div>
+    <p class="contact__nm">Анна Ковалёва</p>
+    <p class="contact__ch">Telegram · @anna_k</p>
+
+    <div class="kv">
+      <div><span>Обращений</span><b>4</b></div>
+      <div><span>Первое</span><b>12 мая</b></div>
+      <div><span>Последнее</span><b>сегодня</b></div>
+      <div><span>Средний ответ</span><b class="good">2 мин</b></div>
+    </div>
+
+    <h3>Заметки команды</h3>
+    <div class="note-item">
+      Постоянный клиент, скидка 10 %
+      <small>Дмитрий · 3 августа</small>
+    </div>
+
+    <h3>Быстрые ответы</h3>
+    <div class="qr">
+      <button type="button"><b>Приветствие</b><span>Добрый день! Чем могу помочь?</span></button>
+      <button type="button"><b>Цена окрашивания</b><span>Окрашивание в один тон — от 3 500 ₽, в два…</span></button>
+      <button type="button"><b>Подтверждение</b><span>Записала вас к {мастер} на {дата} в {время}.</span></button>
+    </div>
+  </aside>
+</div>
+
+<script src="js/vetra.js"></script>
+</body>
+</html>

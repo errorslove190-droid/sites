@@ -1,0 +1,336 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="robots" content="noindex">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Панель руководителя — Ветра</title>
+<meta name="description" content="Панель руководителя Ветра: сколько диалогов, как быстро отвечают, что висит без ответа.">
+<link rel="stylesheet" href="css/vetra.css">
+<style>
+body{background:var(--white)}
+
+/* ---------- Шапка приложения ---------- */
+.app-top{position:sticky; top:0; z-index:40; background:#fff; border-bottom:1px solid var(--line)}
+.app-top__in{display:flex; align-items:center; gap:18px; height:66px; padding-inline:clamp(16px,2vw,28px)}
+.app-top__right{margin-left:auto; display:flex; align-items:center; gap:10px}
+.icon-btn{width:40px; height:40px; border-radius:50%; border:0; background:transparent; cursor:pointer;
+  display:grid; place-items:center; color:var(--muted);
+  transition:background var(--fast) var(--ease), color var(--fast) var(--ease)}
+.icon-btn:hover{background:var(--blue-soft); color:var(--blue-press)}
+.ava{width:36px; height:36px; border-radius:50%; background:var(--blue); color:#fff; display:grid;
+  place-items:center; font-family:'Google Sans',sans-serif; font-weight:500; font-size:15px; cursor:pointer;
+  transition:box-shadow var(--fast) var(--ease)}
+.ava:hover{box-shadow:0 0 0 4px var(--blue-soft)}
+
+/* ---------- Каркас ---------- */
+.app{display:grid; grid-template-columns:248px minmax(0,1fr); min-height:calc(100vh - 66px)}
+/* без min-width:0 грид-элемент раздувается под широкой таблицей и тянет всю страницу */
+.app > *{min-width:0}
+@media (max-width:900px){.app{grid-template-columns:1fr} .side{display:none}}
+.side{border-right:1px solid var(--line); padding:18px 14px}
+.side a{display:flex; align-items:center; gap:13px; padding:12px 16px; border-radius:var(--r-pill);
+  color:var(--muted); font-family:'Google Sans',sans-serif; font-size:15px; font-weight:500;
+  transition:background var(--fast) var(--ease), color var(--fast) var(--ease)}
+.side a:hover{background:var(--blue-tint); color:var(--ink); text-decoration:none}
+.side a.on{background:var(--blue-soft); color:var(--blue-press)}
+/* Разделы, которых в макетах ещё нет. Честнее показать «скоро», чем оставить
+   ссылку, которая никуда не ведёт: человек жмёт и думает, что сломалось. */
+.side a[href="#"]{color:var(--faint); cursor:default}
+.side a[href="#"]:hover{background:transparent; color:var(--faint)}
+.side a[href="#"]::after{content:'скоро'; margin-left:auto; font-size:10.5px; font-weight:700;
+  letter-spacing:.08em; text-transform:uppercase; color:var(--faint);
+  background:var(--blue-tint); padding:3px 7px; border-radius:var(--r-pill)}
+.side a .dotmark{width:8px; height:8px; border-radius:50%; background:var(--warn); margin-left:auto}
+.side__group{margin-top:22px; padding:0 16px 8px; font-size:11.5px; letter-spacing:.12em;
+  text-transform:uppercase; color:var(--faint); font-family:'Google Sans',sans-serif; font-weight:700}
+
+.main{padding:clamp(22px,3vw,40px) clamp(16px,3vw,44px) 64px; max-width:1180px}
+
+/* ---------- Приветствие ---------- */
+.hello{text-align:center; margin-bottom:clamp(26px,3vw,40px)}
+.hello h1{font-size:clamp(28px,3.6vw,44px); font-weight:400; letter-spacing:-.025em}
+.hello h1 b{font-weight:700}
+.hello p{color:var(--muted); margin-top:10px}
+
+/* ---------- Плитки ---------- */
+.tiles{display:grid; grid-template-columns:repeat(4,1fr); gap:16px}
+@media (max-width:1080px){.tiles{grid-template-columns:repeat(2,1fr)}}
+@media (max-width:560px){.tiles{grid-template-columns:1fr}}
+.tile{background:#fff; border:1px solid var(--line); border-radius:var(--r-lg); padding:22px;
+  transition:border-color var(--mid) var(--ease), box-shadow var(--mid) var(--ease), transform var(--mid) var(--ease)}
+.tile:hover{border-color:var(--blue-mid); box-shadow:var(--sh-2); transform:translateY(-3px)}
+.tile__l{font-size:14px; color:var(--muted)}
+.tile__n{font-family:'Google Sans',sans-serif; font-size:clamp(32px,3.4vw,42px); font-weight:700;
+  letter-spacing:-.03em; line-height:1.1; margin-top:6px}
+.tile__d{margin-top:8px; font-size:13.5px; color:var(--ok); display:flex; align-items:center; gap:6px}
+.tile__d.warn{color:var(--warn)}
+.tile--alert{background:linear-gradient(180deg,#FFF8EC,#fff 70%); border-color:#F0D9AE}
+
+/* кольцо загрузки, как в референсе */
+.ring{display:grid; place-items:center; position:relative; width:104px; height:104px; margin:4px auto 0}
+.ring svg{transform:rotate(-90deg)}
+.ring__v{position:absolute; text-align:center; font-family:'Google Sans',sans-serif; line-height:1.15}
+.ring__v b{display:block; font-size:23px; font-weight:700; letter-spacing:-.02em}
+.ring__v span{font-size:12px; color:var(--muted)}
+
+/* ---------- Таблица ---------- */
+.panel{background:#fff; border:1px solid var(--line); border-radius:var(--r-lg); margin-top:26px; overflow:hidden}
+.panel__top{display:flex; align-items:center; gap:14px; padding:20px 24px; border-bottom:1px solid var(--line); flex-wrap:wrap}
+.panel__top h2{font-size:19px; font-weight:500}
+.panel__top .seg{margin-left:auto}
+table{width:100%; border-collapse:collapse; font-size:14.5px}
+th,td{text-align:left; padding:14px 16px; border-bottom:1px solid var(--line); white-space:nowrap}
+th{font-family:'Google Sans',sans-serif; font-size:12.5px; font-weight:500; color:var(--muted);
+  text-transform:uppercase; letter-spacing:.06em; cursor:pointer; transition:color var(--fast) var(--ease)}
+th:hover{color:var(--blue-press)}
+tbody tr{transition:background var(--fast) var(--ease)}
+tbody tr:hover{background:var(--blue-tint)}
+tbody tr:last-child td{border-bottom:0}
+td.num{font-variant-numeric:tabular-nums}
+.person{display:flex; align-items:center; gap:11px}
+.person__ava{width:34px; height:34px; border-radius:50%; display:grid; place-items:center; color:#fff;
+  font-family:'Google Sans',sans-serif; font-weight:500; font-size:14px; flex:none}
+.person__nm{font-family:'Google Sans',sans-serif; font-weight:500}
+.person__st{font-size:12.5px; color:var(--muted)}
+.state{display:inline-flex; align-items:center; gap:7px; font-size:13px; color:var(--muted)}
+.state i{width:8px; height:8px; border-radius:50%; background:var(--ok)}
+.state.off i{background:var(--faint)}
+.bar{display:inline-block; vertical-align:middle; height:7px; width:78px; border-radius:4px;
+  background:var(--blue-soft); overflow:hidden}
+.bar i{display:block; height:100%; background:var(--blue); border-radius:4px}
+.good{color:var(--ok); font-weight:500}
+.slow{color:var(--warn); font-weight:500}
+
+/* ---------- Требует внимания ---------- */
+.att{display:grid; gap:12px; padding:18px 24px 24px}
+.att__i{display:grid; grid-template-columns:auto 1fr auto; gap:14px; align-items:center; padding:15px 18px;
+  border:1px solid var(--line); border-radius:var(--r); background:var(--white);
+  transition:border-color var(--fast) var(--ease), transform var(--fast) var(--ease), box-shadow var(--mid) var(--ease)}
+.att__i:hover{border-color:var(--warn); transform:translateX(4px); box-shadow:var(--sh-2)}
+.att__time{font-family:'Google Sans',sans-serif; font-weight:700; font-size:15px; color:var(--warn); min-width:78px}
+.att__i .person__nm{display:block}
+.att__who{display:block; font-size:13.5px; color:var(--muted); margin-top:3px}
+.att__act{opacity:0; transform:translateX(-6px); transition:opacity var(--mid) var(--ease), transform var(--mid) var(--ease)}
+.att__i:hover .att__act,.att__i:focus-within .att__act{opacity:1; transform:none}
+
+.note{margin-top:26px; padding:18px 22px; background:var(--blue-tint); border:1px solid var(--blue-soft);
+  border-radius:var(--r-lg); font-size:14.5px; color:var(--muted); display:grid;
+  grid-template-columns:auto 1fr; gap:14px; align-items:start}
+.note b{color:var(--ink); font-weight:500}
+
+/* ---------- Телефон ---------- */
+@media (max-width:680px){
+  /* три колонки не помещаются: время и текст сверху, кнопка отдельной строкой */
+  .att__i{grid-template-columns:auto 1fr; row-gap:12px}
+  .att__act{grid-column:1 / -1; opacity:1; transform:none}
+  .att__act .btn{width:100%}
+  .panel__top{padding:16px 18px}
+  .panel__top .seg{margin-left:0; width:100%; overflow-x:auto}
+  .att{padding:14px 18px 20px}
+  .main{padding-inline:16px}
+}
+
+/* Шапка вылезала за экран на 15 px: название компании и две служебные кнопки
+   не помещались рядом с логотипом. На телефоне они не нужны. */
+@media (max-width:520px){
+  .app-top__in{gap:10px; padding-inline:14px}
+  .app-top .chip{display:none}
+  .app-top__right .icon-btn{display:none}
+}
+</style>
+</head>
+<body>
+
+<header class="app-top">
+  <div class="app-top__in">
+    <a class="logo" href="index.html"><span class="logo__word" style="font-size:22px">Ветра</span><span class="logo__dot"></span></a>
+    <span class="chip chip-line" style="margin-left:6px">Салон «Аврора»</span>
+    <div class="app-top__right">
+      <button class="icon-btn" title="Помощь" aria-label="Помощь">?</button>
+      <button class="icon-btn" title="Настройки" aria-label="Настройки">⚙</button>
+      <span class="ava" title="Михаил">М</span>
+    </div>
+  </div>
+</header>
+
+<div class="app">
+  <!-- ---------- Меню ---------- -->
+  <nav class="side" aria-label="Разделы">
+    <a class="on" href="app.html">Главная</a>
+    <a href="inbox.html">Диалоги <span class="dotmark" title="3 без ответа"></span></a>
+    <a href="#">Сотрудники</a>
+    <a href="connect.html">Каналы</a>
+    <div class="side__group">Компания</div>
+    <a href="#">Тариф и оплата</a>
+    <a href="#">Настройки</a>
+  </nav>
+
+  <!-- ---------- Содержимое ---------- -->
+  <main class="main">
+    <div class="hello reveal">
+      <h1>Здравствуйте, <b>Михаил</b></h1>
+      <p>Воскресенье, 16 августа · за сегодня всё под контролем, кроме трёх диалогов</p>
+    </div>
+
+    <div class="tiles">
+      <div class="tile reveal d1">
+        <p class="tile__l">Новых диалогов</p>
+        <p class="tile__n"><span data-count="48">0</span></p>
+        <p class="tile__d">↑ на 12 больше, чем неделю назад</p>
+      </div>
+
+      <div class="tile reveal d2">
+        <p class="tile__l">Первый ответ</p>
+        <p class="tile__n"><span data-count="4" data-suffix=" мин">0</span></p>
+        <p class="tile__d">было 19 минут до Ветра</p>
+      </div>
+
+      <div class="tile tile--alert reveal d3">
+        <p class="tile__l">Ждут ответа сейчас</p>
+        <p class="tile__n"><span data-count="3">0</span></p>
+        <p class="tile__d warn">один висит 40 минут</p>
+      </div>
+
+      <div class="tile reveal d4">
+        <p class="tile__l">Закрыто за сегодня</p>
+        <div class="ring">
+          <svg width="104" height="104" viewBox="0 0 104 104" aria-hidden="true">
+            <circle cx="52" cy="52" r="44" fill="none" stroke="var(--blue-soft)" stroke-width="12"/>
+            <circle cx="52" cy="52" r="44" fill="none" stroke="var(--blue)" stroke-width="12"
+                    stroke-linecap="round" stroke-dasharray="276" stroke-dashoffset="41"/>
+          </svg>
+          <span class="ring__v"><b>85 %</b><span>41 из 48</span></span>
+        </div>
+      </div>
+    </div>
+
+    <!-- ---------- Сотрудники ---------- -->
+    <section class="panel reveal d1">
+      <div class="panel__top">
+        <h2>Сотрудники</h2>
+        <div class="seg" data-tabs="click" role="tablist" aria-label="Период">
+          <button role="tab" data-tab="d" aria-selected="true">Сегодня</button>
+          <button role="tab" data-tab="w" aria-selected="false">Неделя</button>
+          <button role="tab" data-tab="m" aria-selected="false">Месяц</button>
+        </div>
+      </div>
+
+      <div class="scroll-x">
+        <table>
+          <thead>
+            <tr>
+              <th scope="col">Сотрудник</th>
+              <th scope="col">Взял</th>
+              <th scope="col">Закрыл</th>
+              <th scope="col">Первый ответ</th>
+              <th scope="col">Решение</th>
+              <th scope="col">Доля нагрузки</th>
+              <th scope="col">На смене</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>
+                <span class="person">
+                  <span class="person__ava" style="background:#2C78D5">О</span>
+                  <span>
+                    <span class="person__nm">Ольга</span><br>
+                    <span class="state"><i></i> в сети</span>
+                  </span>
+                </span>
+              </td>
+              <td class="num">21</td>
+              <td class="num">19</td>
+              <td class="num good">2 мин</td>
+              <td class="num">14 мин</td>
+              <td><span class="bar"><i style="width:44%"></i></span> <span class="small num">44 %</span></td>
+              <td class="num">6 ч 40 м</td>
+            </tr>
+            <tr>
+              <td>
+                <span class="person">
+                  <span class="person__ava" style="background:#81AEE6">Д</span>
+                  <span>
+                    <span class="person__nm">Дмитрий</span><br>
+                    <span class="state"><i></i> в сети</span>
+                  </span>
+                </span>
+              </td>
+              <td class="num">15</td>
+              <td class="num">14</td>
+              <td class="num good">3 мин</td>
+              <td class="num">21 мин</td>
+              <td><span class="bar"><i style="width:31%"></i></span> <span class="small num">31 %</span></td>
+              <td class="num">5 ч 10 м</td>
+            </tr>
+            <tr>
+              <td>
+                <span class="person">
+                  <span class="person__ava" style="background:#5B8FD6">К</span>
+                  <span>
+                    <span class="person__nm">Кристина</span><br>
+                    <span class="state off"><i></i> была 12 минут назад</span>
+                  </span>
+                </span>
+              </td>
+              <td class="num">12</td>
+              <td class="num">8</td>
+              <td class="num slow">17 мин</td>
+              <td class="num">48 мин</td>
+              <td><span class="bar"><i style="width:25%"></i></span> <span class="small num">25 %</span></td>
+              <td class="num">3 ч 05 м</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- ---------- Требует внимания ---------- -->
+    <section class="panel reveal d2">
+      <div class="panel__top">
+        <h2>Требует внимания</h2>
+        <span class="chip" style="margin-left:auto">3 диалога</span>
+      </div>
+      <div class="att">
+        <div class="att__i">
+          <span class="att__time">40 мин</span>
+          <span>
+            <span class="person__nm">Марина · MAX</span>
+            <span class="att__who">Голосовое сообщение, расшифровано · ответственная Кристина</span>
+          </span>
+          <span class="att__act"><a class="btn btn-light btn-sm" href="inbox.html">Переназначить</a></span>
+        </div>
+        <div class="att__i">
+          <span class="att__time">22 мин</span>
+          <span>
+            <span class="person__nm">Игорь · ВКонтакте</span>
+            <span class="att__who">«Сколько стоит выезд?» · никто не взял</span>
+          </span>
+          <span class="att__act"><a class="btn btn-light btn-sm" href="inbox.html">Переназначить</a></span>
+        </div>
+        <div class="att__i">
+          <span class="att__time">16 мин</span>
+          <span>
+            <span class="person__nm">Яндекс Бизнес · почта</span>
+            <span class="att__who">Новая заявка с карточки организации · никто не взял</span>
+          </span>
+          <span class="att__act"><a class="btn btn-light btn-sm" href="inbox.html">Переназначить</a></span>
+        </div>
+      </div>
+    </section>
+
+    <div class="note reveal d3">
+      <span aria-hidden="true">📄</span>
+      <span>
+        <b>Отчёт за неделю уходит в понедельник в 9:00</b><br>
+        На почту mikhail@avrora.ru. Те же цифры плюс динамика по дням — открывать Ветра для этого не нужно.
+        Сотрудники видят свои цифры сами: так контроль работает лучше, чем скрытый.
+      </span>
+    </div>
+  </main>
+</div>
+
+<script src="js/vetra.js"></script>
+</body>
+</html>

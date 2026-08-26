@@ -1,0 +1,192 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="robots" content="noindex">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Вход в Ветра</title>
+<meta name="description" content="Вход и регистрация в Ветра — все сообщения клиентов в одном окне.">
+<link rel="stylesheet" href="css/vetra.css">
+<style>
+.auth{min-height:100vh; display:grid; grid-template-columns:1.05fr .95fr}
+
+/* левая колонка — форма */
+.auth__form{display:flex; flex-direction:column; justify-content:center;
+  padding:clamp(28px,5vw,72px); background:var(--page); position:relative}
+.auth__box{width:100%; max-width:452px; margin:0 auto}
+.auth__top{display:flex; justify-content:space-between; align-items:center; margin-bottom:clamp(28px,4vw,52px)}
+.auth__title{margin-top:8px}
+.auth__sub{margin-top:12px; color:var(--muted); font-size:16px}
+.auth__seg{margin:26px 0 28px}
+.auth__or{display:flex; align-items:center; gap:14px; margin:24px 0; color:var(--faint); font-size:14px}
+.auth__or::before,.auth__or::after{content:''; height:1px; background:var(--line); flex:1}
+.social{display:grid; gap:11px}
+.social a{display:flex; align-items:center; justify-content:center; gap:11px; padding:14px 18px;
+  background:#fff; border:1.5px solid var(--line); border-radius:var(--r-pill);
+  font-family:'Google Sans',sans-serif; font-weight:500; font-size:15.5px; color:var(--ink);
+  transition:border-color var(--fast) var(--ease), transform var(--fast) var(--ease), background var(--fast) var(--ease)}
+.social a:hover{border-color:var(--blue-mid); background:var(--blue-tint); transform:translateY(-2px); text-decoration:none}
+.social i{width:20px; height:20px; border-radius:50%; flex:none}
+.auth__foot{margin-top:26px; font-size:14.5px; color:var(--muted); text-align:center}
+.pw{position:relative}
+/* поле внутри label вместе с подписью — привязываем кнопку к низу, а не к центру */
+.pw button{position:absolute; right:8px; bottom:9px; border:0; background:transparent;
+  color:var(--muted); font-size:13.5px; cursor:pointer; padding:8px 12px; border-radius:var(--r-pill);
+  font-family:'Google Sans',sans-serif; transition:background var(--fast) var(--ease), color var(--fast) var(--ease)}
+.pw button:hover{background:var(--blue-soft); color:var(--blue-press)}
+[data-form-note]{margin-top:16px; padding:13px 16px; border-radius:var(--r); background:var(--blue-soft);
+  color:var(--blue-press); font-size:14.5px}
+
+/* правая колонка — витрина */
+.auth__side{background:var(--navy); color:#EAF2FC; padding:clamp(30px,4vw,64px);
+  display:flex; flex-direction:column; justify-content:center; position:relative; overflow:hidden}
+.auth__side .shape{opacity:.2}
+.side__quote{font-family:'Google Sans',sans-serif; font-size:clamp(24px,2.6vw,38px); font-weight:700;
+  line-height:1.14; letter-spacing:-.03em; max-width:16ch}
+.side__list{margin-top:34px; display:grid; gap:14px; position:relative; z-index:1}
+.side__item{display:grid; grid-template-columns:26px 1fr; gap:13px; align-items:start; font-size:16px; color:#C6DAF0}
+.side__item b{color:#fff; font-weight:500}
+.side__tick{width:26px; height:26px; border-radius:50%; background:rgba(129,174,230,.22); color:#BBD6F5;
+  display:grid; place-items:center; font-size:14px}
+.side__card{margin-top:40px; background:rgba(255,255,255,.07); border:1px solid rgba(255,255,255,.17);
+  border-radius:var(--r-lg); padding:22px; position:relative; z-index:1}
+.side__card p{font-size:15.5px; color:#D5E5F7}
+.side__who{margin-top:14px; display:flex; align-items:center; gap:11px; font-size:14px; color:#9DBAD9}
+.side__ava{width:36px; height:36px; border-radius:50%; background:var(--blue); display:grid; place-items:center;
+  font-family:'Google Sans',sans-serif; font-weight:500; color:#fff}
+
+/* ---------- Адаптив ----------
+   Держим в конце файла: выше по коду .auth__side{display:flex} перебивал
+   медиазапрос — при равной специфичности решает порядок. */
+@media (max-width:940px){
+  .auth{grid-template-columns:1fr}
+  .auth__side{display:none}
+}
+@media (max-width:680px){
+  .auth__form{padding:24px 18px 40px}
+  .auth__box{max-width:none}
+  /* «Показать» — текстовая кнопка внутри поля, пальцу нужна зона побольше */
+  .pw button{min-height:40px; padding-inline:14px; bottom:6px}
+}
+</style>
+</head>
+<body>
+
+<main class="auth">
+  <!-- ================= ФОРМА ================= -->
+  <section class="auth__form">
+    <div class="auth__box">
+      <div class="auth__top">
+        <a class="logo" href="index.html"><span class="logo__word">Ветра</span><span class="logo__dot"></span></a>
+        <a class="small" href="index.html">На сайт</a>
+      </div>
+
+      <div class="seg auth__seg" data-tabs="click" role="tablist" aria-label="Вход или регистрация">
+        <button role="tab" data-tab="in" aria-selected="true">Вход</button>
+        <button role="tab" data-tab="up" aria-selected="false">Регистрация</button>
+      </div>
+
+      <!-- вход -->
+      <div data-panel="in">
+        <h1 class="h-2 auth__title">С возвращением</h1>
+        <p class="auth__sub">Войдите, чтобы увидеть сообщения клиентов.</p>
+
+        <form style="margin-top:28px" data-fake-form="Это макет — вход не выполняется.">
+          <label class="field">
+            <span class="field__label">Почта</span>
+            <input class="input" type="email" name="email" placeholder="you@company.ru" autocomplete="email" required>
+          </label>
+          <label class="field pw">
+            <span class="field__label">Пароль</span>
+            <input class="input" type="password" name="password" placeholder="Ваш пароль" autocomplete="current-password" required>
+            <button type="button" onclick="const i=this.parentElement.querySelector('input'); i.type = i.type==='password'?'text':'password'; this.textContent = i.type==='password'?'Показать':'Скрыть'">Показать</button>
+          </label>
+
+          <div style="display:flex; justify-content:space-between; align-items:center; gap:14px; margin:6px 0 24px">
+            <label class="check"><input type="checkbox" checked> Запомнить меня</label>
+            <a class="small" href="#">Забыли пароль?</a>
+          </div>
+
+          <button class="btn btn-primary btn-block" type="submit">Войти</button>
+          <p class="small" data-form-note hidden></p>
+        </form>
+
+        <div class="auth__or">или</div>
+        <div class="social">
+          <a href="#"><i style="background:#2AABEE"></i> Войти через Telegram</a>
+          <a href="#"><i style="background:#0077FF"></i> Войти через ВКонтакте</a>
+        </div>
+
+        <p class="auth__foot">Ещё нет аккаунта? <a href="checkout.html">Попробовать бесплатно</a></p>
+      </div>
+
+      <!-- регистрация -->
+      <div data-panel="up" hidden>
+        <h1 class="h-2 auth__title">Заведём компанию</h1>
+        <p class="auth__sub">14 дней бесплатно. Карта не нужна.</p>
+
+        <form style="margin-top:28px" data-fake-form="Это макет — аккаунт не создаётся. Дальше был бы шаг подключения канала.">
+          <label class="field">
+            <span class="field__label">Как вас зовут</span>
+            <input class="input" name="name" placeholder="Михаил" autocomplete="name" required>
+            <span class="field__hint">Так к вам будет обращаться сервис.</span>
+          </label>
+          <label class="field">
+            <span class="field__label">Название компании</span>
+            <input class="input" name="company" placeholder="Салон «Аврора»" required>
+          </label>
+          <label class="field">
+            <span class="field__label">Почта</span>
+            <input class="input" type="email" name="email" placeholder="you@company.ru" autocomplete="email" required>
+          </label>
+          <label class="field pw">
+            <span class="field__label">Пароль</span>
+            <input class="input" type="password" name="password" placeholder="Не короче 8 символов" autocomplete="new-password" minlength="8" required>
+            <button type="button" onclick="const i=this.parentElement.querySelector('input'); i.type = i.type==='password'?'text':'password'; this.textContent = i.type==='password'?'Показать':'Скрыть'">Показать</button>
+          </label>
+
+          <label class="check" style="margin:6px 0 24px">
+            <input type="checkbox" required>
+            <span>Соглашаюсь с <a href="#">офертой</a> и <a href="#">обработкой персональных данных</a></span>
+          </label>
+
+          <button class="btn btn-primary btn-block" type="submit">Создать компанию</button>
+          <p class="small" data-form-note hidden></p>
+        </form>
+
+        <p class="auth__foot">Уже пользуетесь? <a href="#" onclick="document.querySelector('[data-tab=in]').click(); return false">Войти</a></p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= ВИТРИНА ================= -->
+  <aside class="auth__side">
+    <svg class="shape" style="top:-18%;right:-22%;width:40rem" viewBox="0 0 600 600" aria-hidden="true">
+      <circle cx="300" cy="300" r="270" fill="none" stroke="currentColor" stroke-width="60"/>
+    </svg>
+    <svg class="shape" style="bottom:-24%;left:-18%;width:34rem" viewBox="0 0 600 600" aria-hidden="true">
+      <circle cx="300" cy="300" r="290" fill="currentColor"/>
+    </svg>
+
+    <p class="eyebrow" style="color:var(--blue-mid); position:relative; z-index:1">Ветра</p>
+    <p class="side__quote" style="margin-top:16px; position:relative; z-index:1">Клиенты пишут отовсюду. Отвечать можно из одного окна.</p>
+
+    <div class="side__list">
+      <div class="side__item"><span class="side__tick">✓</span><span><b>Ничего не теряется</b> — каждое сообщение попадает в список</span></div>
+      <div class="side__item"><span class="side__tick">✓</span><span><b>Ответ за секунды</b> — шаблоны, подсказки и голос</span></div>
+      <div class="side__item"><span class="side__tick">✓</span><span><b>Руководитель видит цифры</b>, а не переписку</span></div>
+    </div>
+
+    <div class="side__card">
+      <p>«Раньше заявки из Авито находили вечером. Теперь отвечаем за пять минут — и это видно в цифрах».</p>
+      <div class="side__who">
+        <span class="side__ava">К</span>
+        <span>Кирилл, автосервис · пилот сервиса</span>
+      </div>
+    </div>
+  </aside>
+</main>
+
+<script src="js/vetra.js"></script>
+</body>
+</html>

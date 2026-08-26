@@ -1,0 +1,268 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="robots" content="noindex">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Знак и стиль — Ветра</title>
+<meta name="description" content="Кандидаты в знак Ветры, палитра и шрифт — страница для выбора вдвоём.">
+<link rel="stylesheet" href="css/vetra.css">
+<style>
+.br-top{background:var(--white); border-bottom:1px solid var(--line);
+  padding:clamp(28px,5vw,64px) 0 clamp(24px,3.5vw,44px)}
+.br-body{background:var(--page); padding:clamp(28px,4vw,56px) 0}
+.br-body + .br-body{padding-top:0}
+.br-h{margin:0 0 6px; font-family:'Google Sans',sans-serif; font-size:clamp(22px,2.6vw,30px);
+  font-weight:700; color:var(--ink); letter-spacing:-.02em}
+.br-sub{margin:0 0 clamp(20px,2.6vw,30px); color:var(--muted); font-size:15px; max-width:70ch; line-height:1.55}
+
+/* кандидаты */
+.marks{display:grid; gap:clamp(14px,1.6vw,22px);
+  grid-template-columns:repeat(auto-fill,minmax(min(100%,232px),1fr))}
+.mark{margin:0; background:var(--white); border:1px solid var(--line);
+  border-radius:var(--r-lg); overflow:hidden; display:flex; flex-direction:column; min-width:0}
+.mark img{width:100%; height:auto; display:block; background:#fff}
+.mark figcaption{padding:14px 16px 16px; display:flex; flex-direction:column; gap:5px; flex:1}
+.mark__n{font-family:'Google Sans',sans-serif; font-size:16px; font-weight:700; color:var(--ink)}
+.mark__d{font-size:13.5px; line-height:1.5; color:var(--muted)}
+.mark__v{align-self:flex-start; margin-top:auto; padding:3px 9px; border-radius:999px;
+  font-size:11.5px; font-weight:700; letter-spacing:.05em; text-transform:uppercase;
+  font-family:'Google Sans',sans-serif; background:var(--blue-soft); color:var(--blue-press)}
+.mark__v.no{background:#F0EDE7; color:#9A5A00}
+
+/* проверка размером */
+.sizes{display:flex; flex-wrap:wrap; gap:clamp(18px,3vw,44px); align-items:flex-end;
+  background:var(--white); border:1px solid var(--line); border-radius:var(--r-lg);
+  padding:clamp(20px,3vw,32px)}
+.size{text-align:center}
+.size img{display:block; margin:0 auto 10px; image-rendering:auto}
+.size span{font-size:12px; color:var(--faint); font-family:'Google Sans',sans-serif; font-weight:700;
+  letter-spacing:.06em}
+.size--64 img{width:64px} .size--32 img{width:32px} .size--16 img{width:16px}
+.sizes__note{flex:1; min-width:min(100%,260px); font-size:14.5px; line-height:1.6; color:var(--muted)}
+
+/* палитра */
+.pal{display:grid; gap:clamp(12px,1.4vw,18px);
+  grid-template-columns:repeat(auto-fill,minmax(min(100%,180px),1fr))}
+.sw{border:1px solid var(--line); border-radius:var(--r-lg); overflow:hidden; background:var(--white)}
+.sw__c{height:96px; display:grid; place-items:center; font-family:'Google Sans',sans-serif;
+  font-weight:700; font-size:15px}
+.sw__b{padding:12px 14px 14px}
+.sw__n{font-family:'Google Sans',sans-serif; font-weight:700; font-size:14px; color:var(--ink)}
+.sw__h{font-size:13px; color:var(--muted); margin-top:2px}
+.sw__u{font-size:12.5px; color:var(--faint); margin-top:6px; line-height:1.45}
+
+/* шрифт */
+.type{background:var(--white); border:1px solid var(--line); border-radius:var(--r-lg);
+  padding:clamp(20px,3vw,34px); display:flex; flex-direction:column; gap:16px}
+.type__row{display:flex; flex-wrap:wrap; align-items:baseline; gap:8px 18px;
+  padding-bottom:14px; border-bottom:1px solid var(--line)}
+.type__row:last-child{border:0; padding-bottom:0}
+.type__l{font-size:12px; font-weight:700; letter-spacing:.07em; text-transform:uppercase;
+  color:var(--faint); font-family:'Google Sans',sans-serif; min-width:104px}
+.type__s{font-family:'Google Sans',sans-serif; color:var(--ink)}
+
+.choose{background:var(--navy); color:#EAF2FC; border-radius:var(--r-lg);
+  padding:clamp(22px,3.4vw,38px); display:flex; flex-direction:column; gap:12px}
+.choose h2{margin:0; color:#fff; font-family:'Google Sans',sans-serif;
+  font-size:clamp(20px,2.4vw,27px); font-weight:700; letter-spacing:-.02em}
+.choose p{margin:0; color:#B3C9E2; font-size:15px; line-height:1.6; max-width:74ch}
+.choose b{color:#fff}
+</style>
+</head>
+<body>
+
+<header class="app-top">
+  <div class="app-top__in">
+    <a class="logo" href="preview.html"><span class="logo__word" style="font-size:22px">Ветра</span><span class="logo__dot"></span></a>
+    <span class="chip chip-line" style="margin-left:6px">Знак и стиль</span>
+    <div class="app-top__right">
+      <a class="btn btn-light btn-sm" href="empty.html">Пустые экраны</a>
+      <a class="btn btn-light btn-sm" href="index.html">Сайт</a>
+    </div>
+  </div>
+</header>
+
+<section class="br-top">
+  <div class="wrap">
+    <p class="eyebrow">Маскот · выбираем вдвоём</p>
+    <h1 class="h-1" style="margin-top:14px; max-width:19ch">Восемь способов сделать стрижа</h1>
+    <p class="lead" style="margin-top:18px">
+      Орёл отменён. Стриж точнее по смыслу: самая быстрая птица, почти всё время в полёте,
+      и с именем «Ветра» читается заодно. Ниже — не варианты одного рисунка, а восемь разных подходов.
+    </p>
+  </div>
+</section>
+
+<section class="br-body">
+  <div class="wrap">
+    <h2 class="br-h">Кандидаты в знак</h2>
+    <p class="br-sub">Черновики из генерации. Финальный знак будет нарисован в SVG: точный цвет,
+      ровные кривые, чёткость в любом размере и вес в килобайтах.</p>
+
+    <div class="marks">
+      <figure class="mark">
+        <img src="img/mark-topdown.png" alt="Симметричный стриж, вид сверху" loading="lazy" width="520" height="520">
+        <figcaption>
+          <span class="mark__n">Вид сверху</span>
+          <span class="mark__d">Два серпа и вилка хвоста. Ничего мелкого — поэтому держится в значке вкладки.</span>
+          <span class="mark__v">советую</span>
+        </figcaption>
+      </figure>
+
+      <figure class="mark">
+        <img src="img/mark-circle.png" alt="Белый стриж вырезан из синего круга" loading="lazy" width="520" height="520">
+        <figcaption>
+          <span class="mark__n">Птица в круге</span>
+          <span class="mark__d">Читается пустотой. Готовый аватар компании: круг заметен в списке вкладок.</span>
+          <span class="mark__v">советую</span>
+        </figcaption>
+      </figure>
+
+      <figure class="mark">
+        <img src="img/mark-tile.png" alt="Знак в скруглённом квадрате" loading="lazy" width="520" height="520">
+        <figcaption>
+          <span class="mark__n">Плитка приложения</span>
+          <span class="mark__d">Не идея, а проверка: знак садится в иконку приложения без переделки.</span>
+          <span class="mark__v">советую</span>
+        </figcaption>
+      </figure>
+
+      <figure class="mark">
+        <img src="img/mark-wind.png" alt="Лента ветра переходит в птицу" loading="lazy" width="520" height="520">
+        <figcaption>
+          <span class="mark__n">Ветер переходит в птицу</span>
+          <span class="mark__d">Самое буквальное прочтение имени. Крупно дорого, в 16 пикселях лента схлопнется.</span>
+          <span class="mark__v no">на сайт, не в знак</span>
+        </figcaption>
+      </figure>
+
+      <figure class="mark">
+        <img src="img/mark-trio.png" alt="Три стрижа летят в одну точку" loading="lazy" width="760" height="428">
+        <figcaption>
+          <span class="mark__n">Три стрижа стайкой</span>
+          <span class="mark__d">Три канала сходятся в одну точку. Это иллюстрация для сайта, а не логотип.</span>
+          <span class="mark__v no">на сайт, не в знак</span>
+        </figcaption>
+      </figure>
+
+      <figure class="mark">
+        <img src="img/mark-arcs.png" alt="Знак, построенный по сетке окружностей" loading="lazy" width="520" height="520">
+        <figcaption>
+          <span class="mark__n">Из дуг по сетке</span>
+          <span class="mark__d">Построение приятное, но цвет ушёл в сине-зелёный, а птица вышла голубем.</span>
+          <span class="mark__v no">мимо</span>
+        </figcaption>
+      </figure>
+
+      <figure class="mark">
+        <img src="img/mark-line.png" alt="Стриж одной непрерывной линией" loading="lazy" width="520" height="520">
+        <figcaption>
+          <span class="mark__n">Одна линия</span>
+          <span class="mark__d">Самый хрупкий вариант: линия поплывёт уже в шапке сайта.</span>
+          <span class="mark__v no">мимо</span>
+        </figcaption>
+      </figure>
+
+      <figure class="mark">
+        <img src="img/mark-chevron.png" alt="Угловатый знак-шеврон" loading="lazy" width="520" height="520">
+        <figcaption>
+          <span class="mark__n">Шеврон</span>
+          <span class="mark__d">Задумывался «птица и стрелка», вышел крестик. Читается как «закрыть».</span>
+          <span class="mark__v no">мимо</span>
+        </figcaption>
+      </figure>
+    </div>
+  </div>
+</section>
+
+<section class="br-body">
+  <div class="wrap">
+    <h2 class="br-h">Проверка размером</h2>
+    <p class="br-sub">Знак живёт не на постере, а в значке вкладки. Один и тот же файл в трёх размерах.</p>
+
+    <div class="sizes">
+      <div class="size size--64"><img src="img/mark-topdown.png" alt="Знак в 64 пикселя"><span>64 px</span></div>
+      <div class="size size--32"><img src="img/mark-topdown.png" alt="Знак в 32 пикселя"><span>32 px</span></div>
+      <div class="size size--16"><img src="img/mark-topdown.png" alt="Знак в 16 пикселей"><span>16 px</span></div>
+      <p class="sizes__note">Крупные формы переживают уменьшение, тонкие детали — нет.
+        Поэтому в мелком размере выигрывают силуэты, а не рисунки: клюв и вилка хвоста
+        превращаются в пятно раньше, чем крылья.</p>
+    </div>
+  </div>
+</section>
+
+<section class="br-body">
+  <div class="wrap">
+    <h2 class="br-h">Палитра</h2>
+    <p class="br-sub">Проверена на контраст живьём: витрина дизайн-системы считает его прямо на странице
+      и уже поймала две ошибки.</p>
+
+    <div class="pal">
+      <div class="sw">
+        <div class="sw__c" style="background:#2C78D5; color:#fff">Aa</div>
+        <div class="sw__b"><div class="sw__n">Фирменный</div><div class="sw__h">#2C78D5</div>
+          <div class="sw__u">Крупные пятна, фон плиток. Белый текст на нём даёт 4,4 — ниже нормы.</div></div>
+      </div>
+      <div class="sw">
+        <div class="sw__c" style="background:#1F63BC; color:#fff">Aa</div>
+        <div class="sw__b"><div class="sw__n">Кнопки и ссылки</div><div class="sw__h">#1F63BC</div>
+          <div class="sw__u">5,6 к белому — проходит. Всё, где есть белый текст, только на нём.</div></div>
+      </div>
+      <div class="sw">
+        <div class="sw__c" style="background:#81AEE6; color:#0F1D2E">Aa</div>
+        <div class="sw__b"><div class="sw__n">Второй акцент</div><div class="sw__h">#81AEE6</div>
+          <div class="sw__u">Линии, второстепенные фигуры, подложки под иллюстрации.</div></div>
+      </div>
+      <div class="sw">
+        <div class="sw__c" style="background:#D6E5F7; color:#0F1D2E">Aa</div>
+        <div class="sw__b"><div class="sw__n">Подсветка</div><div class="sw__h">#D6E5F7</div>
+          <div class="sw__u">Выделенная строка, подложка выбранного диалога.</div></div>
+      </div>
+      <div class="sw">
+        <div class="sw__c" style="background:#167A41; color:#fff">Aa</div>
+        <div class="sw__b"><div class="sw__n">Успех</div><div class="sw__h">#167A41</div>
+          <div class="sw__u">Заменён с #1B8A4B: тот давал 4,4 и белый текст на нём не читался.</div></div>
+      </div>
+      <div class="sw">
+        <div class="sw__c" style="background:#9A5A00; color:#fff">Aa</div>
+        <div class="sw__b"><div class="sw__n">Внимание</div><div class="sw__h">#9A5A00</div>
+          <div class="sw__u">Заменён с #B96A00 по той же причине. Красного в палитре нет вовсе.</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="br-body" style="padding-bottom:clamp(56px,8vw,110px)">
+  <div class="wrap">
+    <h2 class="br-h">Шрифт</h2>
+    <p class="br-sub">Google Sans для заголовков, Google Sans Text для текста. Лежат в проекте,
+      не тянутся со стороннего сервера.</p>
+
+    <div class="type">
+      <div class="type__row"><span class="type__l">Заголовок</span>
+        <span class="type__s" style="font-size:clamp(26px,3.4vw,42px); font-weight:700; letter-spacing:-.03em">Все клиенты — в одном окне</span></div>
+      <div class="type__row"><span class="type__l">Подзаголовок</span>
+        <span class="type__s" style="font-size:clamp(17px,1.6vw,21px); font-weight:500">Сообщение появляется в окне за три секунды</span></div>
+      <div class="type__row"><span class="type__l">Текст</span>
+        <span style="font-size:16px; color:var(--muted); line-height:1.6">Клиентка пишет «есть окно к Насте в субботу?» — и ждёт ответа минуту, а не полчаса.</span></div>
+      <div class="type__row"><span class="type__l">Цифры</span>
+        <span class="type__s" style="font-size:clamp(22px,2.4vw,30px); font-weight:700; font-variant-numeric:tabular-nums">0 1 2 3 4 5 6 7 8 9 · 4 мин · 4 000 ₽</span></div>
+    </div>
+
+    <div class="choose" style="margin-top:clamp(22px,3vw,34px)">
+      <h2>Выбирают Михаил и Андрей</h2>
+      <p>Знак — решение на годы, его не переигрывают через месяц. Поэтому страница не выбирает
+        за вас: моя рекомендация помечена, но последнее слово ваше.</p>
+      <p><b>Что смотреть при выборе.</b> Как выглядит в 16 пикселях. Не похож ли на чужой знак.
+        Работает ли в одну краску — на печати и в чёрно-белом документе. Не читается ли как что-то
+        постороннее: у шеврона, например, вышел крестик «закрыть».</p>
+      <p><b>Что дальше.</b> Выбранный знак рисуется в SVG начисто, из него собираются favicon
+        всех размеров, иконка приложения и подпись в шапке сайта.</p>
+    </div>
+  </div>
+</section>
+
+<script src="js/vetra.js"></script>
+</body>
+</html>

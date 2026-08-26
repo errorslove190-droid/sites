@@ -1,0 +1,205 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="robots" content="noindex">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Оформление — Ветра</title>
+<meta name="description" content="Оформление подписки Ветра: 14 дней бесплатно, оплата картой или по счёту.">
+<link rel="stylesheet" href="css/vetra.css">
+<style>
+.co{min-height:100vh; display:flex; flex-direction:column}
+.co__top{border-bottom:1px solid var(--line); background:#fff}
+.co__top-in{display:flex; align-items:center; justify-content:space-between; height:72px}
+.co__body{flex:1; padding:clamp(26px,4vw,56px) 0}
+.co__grid{display:grid; grid-template-columns:1.35fr .85fr; gap:clamp(22px,3vw,44px); align-items:start}
+@media (max-width:960px){.co__grid{grid-template-columns:1fr}}
+
+/* шаги */
+.stepline{display:flex; align-items:center; gap:12px; margin-bottom:clamp(22px,3vw,36px); flex-wrap:wrap}
+.stepline__i{display:flex; align-items:center; gap:9px; font-size:14.5px; color:var(--faint)}
+.stepline__i b{width:26px; height:26px; border-radius:50%; background:var(--line); color:var(--white);
+  display:grid; place-items:center; font-family:'Google Sans',sans-serif; font-size:13px; font-weight:700}
+.stepline__i.now{color:var(--ink)} .stepline__i.now b{background:var(--blue)}
+.stepline__i.done{color:var(--muted)} .stepline__i.done b{background:var(--ok)}
+.stepline__sep{flex:1; min-width:18px; height:1px; background:var(--line)}
+
+/* выбор тарифа */
+.pick{display:grid; gap:14px}
+.pick__i{position:relative; display:grid; grid-template-columns:24px 1fr auto; gap:16px; align-items:start;
+  padding:22px 24px; background:#fff; border:1.5px solid var(--line); border-radius:var(--r-lg); cursor:pointer;
+  transition:border-color var(--fast) var(--ease), background var(--fast) var(--ease),
+             transform var(--fast) var(--ease), box-shadow var(--mid) var(--ease)}
+.pick__i:hover{border-color:var(--blue-mid); transform:translateY(-2px); box-shadow:var(--sh-2)}
+.pick__i input{position:absolute; opacity:0; pointer-events:none}
+.pick__i:has(input:checked){border-color:var(--blue); background:var(--blue-tint)}
+.pick__dot{width:22px; height:22px; border-radius:50%; border:2px solid var(--line); margin-top:3px;
+  display:grid; place-items:center; transition:border-color var(--fast) var(--ease)}
+.pick__i:has(input:checked) .pick__dot{border-color:var(--blue)}
+.pick__dot::after{content:''; width:11px; height:11px; border-radius:50%; background:var(--blue);
+  transform:scale(0); transition:transform var(--fast) var(--ease)}
+.pick__i:has(input:checked) .pick__dot::after{transform:scale(1)}
+.pick__name{display:block; font-family:'Google Sans',sans-serif; font-weight:500; font-size:19px}
+.pick__desc{display:block; font-size:14.5px; color:var(--muted); margin-top:5px; max-width:46ch}
+.pick__price{font-family:'Google Sans',sans-serif; font-weight:700; font-size:23px; white-space:nowrap; letter-spacing:-.02em}
+.pick__price span{display:block; font-size:13px; font-weight:400; color:var(--muted); letter-spacing:0; text-align:right}
+
+/* способ оплаты */
+.pay{display:grid; grid-template-columns:1fr 1fr; gap:14px; margin-top:14px}
+@media (max-width:620px){.pay{grid-template-columns:1fr}}
+.pay .pick__i{grid-template-columns:24px 1fr}
+
+/* карточка счёта */
+.sum{position:sticky; top:24px; background:#fff; border:1px solid var(--line); border-radius:var(--r-xl);
+  padding:clamp(22px,2.6vw,30px)}
+.sum__row{display:flex; justify-content:space-between; gap:14px; padding:11px 0; font-size:15.5px; color:var(--muted)}
+.sum__row b{color:var(--ink); font-weight:500}
+.sum__total{display:flex; justify-content:space-between; align-items:baseline; gap:14px;
+  border-top:1px solid var(--line); margin-top:10px; padding-top:18px}
+.sum__total span{font-size:15.5px; color:var(--muted)}
+.sum__total b{font-family:'Google Sans',sans-serif; font-size:30px; font-weight:700; letter-spacing:-.03em}
+.sum__free{margin-top:16px; padding:15px 17px; background:var(--blue-soft); border-radius:var(--r);
+  font-size:14.5px; color:var(--blue-press)}
+.sum__list{margin-top:20px; display:grid; gap:10px; font-size:14.5px; color:var(--muted)}
+.sum__list div{display:grid; grid-template-columns:20px 1fr; gap:9px}
+.trust{margin-top:18px; font-size:13.5px; color:var(--faint); text-align:center}
+</style>
+</head>
+<body>
+
+<div class="co">
+  <header class="co__top">
+    <div class="wrap co__top-in">
+      <a class="logo" href="index.html"><span class="logo__word">Ветра</span><span class="logo__dot"></span></a>
+      <a class="small" href="login.html">Уже есть аккаунт? Войти</a>
+    </div>
+  </header>
+
+  <main class="co__body">
+    <div class="wrap">
+
+      <div class="stepline">
+        <span class="stepline__i done"><b>✓</b> Компания</span>
+        <span class="stepline__sep"></span>
+        <span class="stepline__i now"><b>2</b> Тариф и оплата</span>
+        <span class="stepline__sep"></span>
+        <span class="stepline__i"><b>3</b> Первый канал</span>
+      </div>
+
+      <h1 class="h-1" style="max-width:16ch">Первые 14 дней — бесплатно</h1>
+      <p class="lead" style="margin-top:16px">
+        Деньги спишутся только через две недели, и мы напомним об этом за три дня.
+        Отменить можно в один клик.
+      </p>
+
+      <form class="co__grid" style="margin-top:clamp(28px,3.5vw,44px)"
+            data-fake-form="Это макет — оплата не проводится. В рабочем сервисе здесь открылась бы страница ЮKassa.">
+        <div>
+          <h2 class="h-3" style="margin-bottom:16px">Тариф</h2>
+          <div class="pick">
+            <label class="pick__i">
+              <input type="radio" name="plan" value="start">
+              <span class="pick__dot" aria-hidden="true"></span>
+              <span>
+                <span class="pick__name">Старт</span>
+                <span class="pick__desc">Один сотрудник, два канала. Шаблоны, автодополнение и голос — включены.</span>
+              </span>
+              <span class="pick__price">1 500 ₽<span>в месяц</span></span>
+            </label>
+
+            <label class="pick__i">
+              <input type="radio" name="plan" value="team" checked>
+              <span class="pick__dot" aria-hidden="true"></span>
+              <span>
+                <span class="pick__name">Команда <span class="chip" style="margin-left:6px">чаще выбирают</span></span>
+                <span class="pick__desc">До пяти сотрудников, все каналы, панель руководителя с метриками и отчёт за неделю.</span>
+              </span>
+              <span class="pick__price">4 000 ₽<span>в месяц</span></span>
+            </label>
+          </div>
+
+          <div style="display:flex; align-items:center; gap:14px; margin-top:20px; flex-wrap:wrap">
+            <div class="seg" data-tabs="click" role="tablist" aria-label="Период оплаты">
+              <button role="tab" data-tab="m" aria-selected="true">Помесячно</button>
+              <button role="tab" data-tab="y" aria-selected="false">На год — минус 20 %</button>
+            </div>
+            <span class="small" data-panel="y" hidden>Экономия 9 600 ₽ за год</span>
+          </div>
+
+          <h2 class="h-3" style="margin:34px 0 16px">Как будете платить</h2>
+          <div class="pay">
+            <label class="pick__i">
+              <input type="radio" name="pay" value="card" checked>
+              <span class="pick__dot" aria-hidden="true"></span>
+              <span>
+                <span class="pick__name" style="font-size:17px">Картой</span>
+                <span class="pick__desc">Спишется автоматически после пробного периода</span>
+              </span>
+            </label>
+            <label class="pick__i">
+              <input type="radio" name="pay" value="bill">
+              <span class="pick__dot" aria-hidden="true"></span>
+              <span>
+                <span class="pick__name" style="font-size:17px">По счёту</span>
+                <span class="pick__desc">Для ИП и юрлиц, с закрывающими документами</span>
+              </span>
+            </label>
+          </div>
+
+          <h2 class="h-3" style="margin:34px 0 16px">Реквизиты для чека</h2>
+          <div class="grid g2">
+            <label class="field">
+              <span class="field__label">Название компании</span>
+              <input class="input" name="company" value="Салон «Аврора»" required>
+            </label>
+            <label class="field">
+              <span class="field__label">Почта для чеков</span>
+              <input class="input" type="email" name="email" placeholder="buh@company.ru" required>
+            </label>
+          </div>
+
+          <label class="check" style="margin-top:6px">
+            <input type="checkbox" required>
+            <span>Соглашаюсь с <a href="#">офертой</a> и <a href="#">обработкой персональных данных</a></span>
+          </label>
+
+          <button class="btn btn-primary" style="margin-top:26px" type="submit">
+            Начать бесплатно — 14 дней
+          </button>
+          <p class="small" data-form-note hidden></p>
+        </div>
+
+        <!-- итог -->
+        <aside class="sum">
+          <h2 class="h-3">Ваш заказ</h2>
+          <div style="margin-top:14px">
+            <div class="sum__row"><span>Тариф</span><b>Команда</b></div>
+            <div class="sum__row"><span>Сотрудников</span><b>до 5</b></div>
+            <div class="sum__row"><span>Каналов</span><b>без ограничений</b></div>
+            <div class="sum__row"><span>Пробный период</span><b>14 дней</b></div>
+          </div>
+          <div class="sum__total">
+            <span>Сегодня к оплате</span>
+            <b>0 ₽</b>
+          </div>
+          <p class="sum__free">
+            С 30 августа — 4 000 ₽ в месяц. Напомним за три дня; не оплатите — останется «Бесплатно», ничего не пропадёт.
+          </p>
+
+          <div class="sum__list">
+            <div><span>✓</span><span>Панель руководителя с метриками</span></div>
+            <div><span>✓</span><span>Шаблоны, автодополнение, голос</span></div>
+            <div><span>✓</span><span>Данные хранятся в России</span></div>
+            <div><span>✓</span><span>Поддержка отвечает за рабочий день</span></div>
+          </div>
+
+          <p class="trust">Оплата через ЮKassa. Данные карты к нам не попадают.</p>
+        </aside>
+      </form>
+    </div>
+  </main>
+</div>
+
+<script src="js/vetra.js"></script>
+</body>
+</html>

@@ -1,0 +1,223 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="robots" content="noindex">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Подключение канала — Ветра</title>
+<meta name="description" content="Подключение канала в Ветра за три шага: выбрать мессенджер, вставить ключ, получить тестовое сообщение.">
+<link rel="stylesheet" href="css/vetra.css">
+<style>
+body{background:var(--page)}
+.app-top{background:#fff; border-bottom:1px solid var(--line)}
+.app-top__in{display:flex; align-items:center; gap:16px; height:66px; padding-inline:clamp(16px,2vw,28px)}
+.app-top__right{margin-left:auto; display:flex; gap:10px; align-items:center}
+.ava{width:34px; height:34px; border-radius:50%; background:var(--blue); color:#fff; display:grid;
+  place-items:center; font-family:'Google Sans',sans-serif; font-weight:500; font-size:14px}
+
+.page{max-width:860px; margin:0 auto; padding:clamp(26px,4vw,52px) clamp(16px,3vw,28px) 80px}
+
+/* полоска шагов */
+.bar3{display:flex; gap:10px; margin-bottom:clamp(24px,3vw,38px)}
+.bar3 div{flex:1; height:5px; border-radius:3px; background:var(--line); overflow:hidden}
+.bar3 div i{display:block; height:100%; background:var(--blue); width:0; border-radius:3px;
+  transition:width var(--slow) var(--ease)}
+.bar3 div.done i,.bar3 div.now i{width:100%}
+.bar3 div.now i{background:var(--blue)}
+.bar3 div.done i{background:var(--ok)}
+
+.stepbox{background:#fff; border:1px solid var(--line); border-radius:var(--r-xl);
+  padding:clamp(22px,3vw,36px); margin-bottom:16px}
+.stepbox--muted{opacity:.55}
+.stepbox__hd{display:flex; align-items:center; gap:14px; margin-bottom:6px}
+.stepbox__n{width:32px; height:32px; border-radius:50%; background:var(--blue-soft); color:var(--blue-press);
+  display:grid; place-items:center; font-family:'Google Sans',sans-serif; font-weight:700; font-size:15px; flex:none}
+.stepbox--done .stepbox__n{background:var(--ok); color:#fff}
+.stepbox--now .stepbox__n{background:var(--blue); color:#fff}
+.stepbox h2{font-size:20px; font-weight:500}
+.stepbox p.small{margin-top:4px}
+
+/* выбор канала */
+.chans{display:grid; grid-template-columns:repeat(3,1fr); gap:12px; margin-top:20px}
+@media (max-width:700px){.chans{grid-template-columns:repeat(2,1fr)}}
+
+/* Название компании рядом с логотипом не помещалось: шапка вылезала за экран на 2 px. */
+@media (max-width:520px){
+  .app-top__in{gap:10px; padding-inline:14px}
+  .app-top .chip{display:none}
+}
+.chanbox{display:flex; flex-direction:column; gap:9px; align-items:flex-start; padding:16px;
+  border:1.5px solid var(--line); border-radius:var(--r-lg); background:#fff; cursor:pointer; position:relative;
+  transition:border-color var(--fast) var(--ease), transform var(--fast) var(--ease),
+             box-shadow var(--mid) var(--ease), background var(--fast) var(--ease)}
+.chanbox:hover{border-color:var(--blue-mid); transform:translateY(-3px); box-shadow:var(--sh-2)}
+.chanbox input{position:absolute; opacity:0; pointer-events:none}
+.chanbox:has(input:checked){border-color:var(--blue); background:var(--blue-tint)}
+.chanbox i{width:34px; height:34px; border-radius:10px; display:block}
+.chanbox b{font-family:'Google Sans',sans-serif; font-weight:500; font-size:15.5px}
+.chanbox span{font-size:12.5px; color:var(--muted)}
+.chanbox.soon{opacity:.55; cursor:not-allowed}
+.chanbox.soon:hover{transform:none; box-shadow:none; border-color:var(--line)}
+
+/* инструкция */
+.howto{margin-top:20px; background:var(--blue-tint); border:1px solid var(--blue-soft);
+  border-radius:var(--r-lg); padding:20px 22px}
+.howto ol{counter-reset:h; display:grid; gap:12px; margin-top:12px}
+.howto li{counter-increment:h; display:grid; grid-template-columns:26px 1fr; gap:12px; font-size:14.5px; color:var(--muted)}
+.howto li::before{content:counter(h); width:24px; height:24px; border-radius:50%; background:#fff;
+  border:1px solid var(--blue-soft); color:var(--blue-press); display:grid; place-items:center;
+  font-family:'Google Sans',sans-serif; font-size:12.5px; font-weight:700}
+.howto b{color:var(--ink); font-weight:500}
+.howto code{background:#fff; border:1px solid var(--blue-soft); border-radius:6px; padding:2px 7px; font-size:13.5px}
+
+/* ожидание сообщения */
+.waiting{margin-top:20px; border:1.5px dashed var(--blue-mid); border-radius:var(--r-lg);
+  padding:26px; text-align:center; background:var(--blue-tint)}
+.pulse{width:56px; height:56px; border-radius:50%; background:var(--blue-soft); margin:0 auto 14px;
+  display:grid; place-items:center; position:relative}
+.pulse::after{content:''; position:absolute; inset:0; border-radius:50%; border:2px solid var(--blue);
+  animation:ripple 2s var(--ease) infinite}
+@keyframes ripple{from{transform:scale(1); opacity:.65} to{transform:scale(1.7); opacity:0}}
+.waiting b{font-family:'Google Sans',sans-serif; font-weight:500; font-size:17px}
+.waiting p{margin-top:8px; color:var(--muted); font-size:14.5px}
+
+.done-note{display:flex; align-items:center; gap:12px; padding:16px 20px; background:#EAF7EF;
+  border:1px solid #BFE4CD; border-radius:var(--r-lg); margin-top:18px; font-size:14.5px}
+.done-note b{color:#136B39}
+.tick{width:26px; height:26px; border-radius:50%; background:var(--ok); color:#fff; display:grid;
+  place-items:center; flex:none; font-size:14px}
+</style>
+</head>
+<body>
+
+<header class="app-top">
+  <div class="app-top__in">
+    <a class="logo" href="index.html"><span class="logo__word" style="font-size:21px">Ветра</span><span class="logo__dot"></span></a>
+    <span class="chip chip-line">Салон «Аврора»</span>
+    <div class="app-top__right">
+      <a class="btn btn-light btn-sm" href="app.html">В панель</a>
+      <span class="ava">М</span>
+    </div>
+  </div>
+</header>
+
+<main class="page">
+  <h1 class="h-2">Подключение канала</h1>
+  <p class="lead" style="margin-top:12px">Три шага, примерно три минуты. Ничего устанавливать не нужно.</p>
+
+  <div class="bar3" style="margin-top:26px" aria-hidden="true">
+    <div class="done"><i></i></div>
+    <div class="now"><i></i></div>
+    <div><i></i></div>
+  </div>
+
+  <!-- Шаг 1 -->
+  <section class="stepbox stepbox--done">
+    <div class="stepbox__hd">
+      <span class="stepbox__n">✓</span>
+      <div>
+        <h2>Выберите, откуда пишут клиенты</h2>
+        <p class="small">Можно подключить несколько — по одному за раз.</p>
+      </div>
+    </div>
+
+    <div class="chans">
+      <label class="chanbox">
+        <input type="radio" name="ch" value="tg" checked>
+        <i style="background:#2AABEE"></i>
+        <b>Telegram</b><span>Бот отвечает от имени компании</span>
+      </label>
+      <label class="chanbox">
+        <input type="radio" name="ch" value="vk">
+        <i style="background:#0077FF"></i>
+        <b>ВКонтакте</b><span>Сообщения сообщества</span>
+      </label>
+      <label class="chanbox">
+        <input type="radio" name="ch" value="max">
+        <i style="background:#7B5CFA"></i>
+        <b>MAX</b><span>Бот в мессенджере MAX</span>
+      </label>
+      <label class="chanbox">
+        <input type="radio" name="ch" value="mail">
+        <i style="background:#7C8AA0"></i>
+        <b>Почта</b><span>Заявки с Яндекс Бизнеса и 2ГИС</span>
+      </label>
+      <label class="chanbox soon">
+        <input type="radio" name="ch" value="wa" disabled>
+        <i style="background:#25D366"></i>
+        <b>WhatsApp</b><span>Скоро · нужен бизнес-аккаунт</span>
+      </label>
+      <label class="chanbox soon">
+        <input type="radio" name="ch" value="avito" disabled>
+        <i style="background:#0AF"></i>
+        <b>Авито</b><span>Скоро · нужен профессиональный тариф</span>
+      </label>
+      <label class="chanbox soon">
+        <input type="radio" name="ch" value="wb" disabled>
+        <i style="background:#CB11AB"></i>
+        <b>Wildberries</b><span>Скоро · вопросы и отзывы покупателей</span>
+      </label>
+      <label class="chanbox soon">
+        <input type="radio" name="ch" value="ozon" disabled>
+        <i style="background:#005BFF"></i>
+        <b>Ozon</b><span>Скоро · чат с покупателем в кабинете продавца</span>
+      </label>
+    </div>
+  </section>
+
+  <!-- Шаг 2 -->
+  <section class="stepbox stepbox--now">
+    <div class="stepbox__hd">
+      <span class="stepbox__n">2</span>
+      <div>
+        <h2>Вставьте ключ доступа</h2>
+        <p class="small">Ключ выдаёт сам Telegram. Мы храним его в зашифрованном виде.</p>
+      </div>
+    </div>
+
+    <div class="howto">
+      <b>Где взять ключ</b>
+      <ol>
+        <li><span>Откройте в Telegram чат с <b>@BotFather</b> — это официальный бот Telegram.</span></li>
+        <li><span>Отправьте ему команду <code>/newbot</code> и придумайте имя — клиенты увидят именно его.</span></li>
+        <li><span>В ответ придёт строка вида <code>7712345678:AAH…</code> — это и есть ключ. Скопируйте её целиком.</span></li>
+      </ol>
+    </div>
+
+    <form style="margin-top:20px" data-fake-form="Это макет — канал не подключается. В рабочем сервисе ключ бы проверился за пару секунд.">
+      <label class="field">
+        <span class="field__label">Ключ доступа</span>
+        <input class="input" name="token" placeholder="7712345678:AAH…" required>
+        <span class="field__hint">Проверим ключ и сразу покажем название бота.</span>
+      </label>
+      <button class="btn btn-primary" type="submit">Проверить и подключить</button>
+      <p class="small" data-form-note hidden></p>
+    </form>
+  </section>
+
+  <!-- Шаг 3 -->
+  <section class="stepbox stepbox--muted">
+    <div class="stepbox__hd">
+      <span class="stepbox__n">3</span>
+      <div>
+        <h2>Проверьте, что всё работает</h2>
+        <p class="small">Последний шаг: убедимся, что сообщения доходят.</p>
+      </div>
+    </div>
+
+    <div class="waiting">
+      <div class="pulse" aria-hidden="true">✉</div>
+      <b>Напишите своему боту слово «привет»</b>
+      <p>Как только сообщение придёт, оно появится здесь — и канал будет готов.</p>
+    </div>
+
+    <div class="done-note">
+      <span class="tick">✓</span>
+      <span>После этого <b>ссылка на бота и QR-код</b> появятся в настройках канала — их можно поставить на сайт, в визитки и в описание группы.</span>
+    </div>
+  </section>
+</main>
+
+<script src="js/vetra.js"></script>
+</body>
+</html>
