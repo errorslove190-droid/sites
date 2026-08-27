@@ -54,6 +54,14 @@ body{background:var(--white); margin:0}
 .dlg__badge{display:inline-block; min-width:20px; padding:2px 6px; border-radius:var(--r-pill);
   background:var(--blue); color:#fff; font-size:11.5px; font-weight:500; margin-top:6px}
 
+/* Сколько клиент ждёт ответа. Пороги — SLA из @vetra/shared: 15 минут «висит»,
+   30 минут «горит». Диалоги без ответа поднимаются наверх списка. */
+.dlg__wait{display:block; margin-top:5px; font-size:11.5px; font-weight:500; color:var(--muted)}
+.dlg__wait.warn{color:#A8600C}
+.dlg__wait.late{color:#B3261E}
+.dlg.late{background:#FEF3F1}
+.dlg.late:hover{background:#FBE7E3}
+
 .empty{padding:44px 22px; text-align:center; color:var(--muted); font-size:14.5px; line-height:1.55}
 .empty b{display:block; font-family:'Google Sans',sans-serif; font-weight:500; color:var(--ink);
   font-size:16px; margin-bottom:8px}
@@ -74,9 +82,46 @@ body{background:var(--white); margin:0}
 .msg-in{background:#fff; border:1px solid var(--line); border-bottom-left-radius:6px; align-self:flex-start}
 .msg-out{background:var(--blue-pale); border-bottom-right-radius:6px; align-self:flex-end}
 
+/* ---------- Вложения ----------
+   Фото показываем прямо в переписке: половина обращений в салон — «хочу вот такой
+   цвет» с картинкой, и ради неё лезть в Telegram означает, что окно не одно. */
+.att{display:block; margin-top:8px}
+.msg .att:first-child{margin-top:0}
+.att img{display:block; max-width:100%; width:auto; max-height:320px; border-radius:12px; cursor:zoom-in}
+.att audio,.att video{display:block; max-width:100%; border-radius:12px}
+.att video{max-height:320px}
+.att-file{display:inline-flex; align-items:center; gap:8px; padding:9px 13px; border-radius:12px;
+  background:rgba(0,0,0,.045); color:var(--ink); font-size:14px; text-decoration:none}
+.att-file:hover{background:rgba(0,0,0,.075); text-decoration:none}
+.att-file b{font-weight:500}
+.att-file span{color:var(--muted); font-size:12.5px}
+
+/* Просмотр фото во весь экран: в списке оно ужато, а мастеру нужны детали. */
+.zoom{position:fixed; inset:0; background:rgba(12,18,28,.9); display:none; place-items:center;
+  z-index:50; padding:20px; cursor:zoom-out}
+.zoom.on{display:grid}
+.zoom img{max-width:100%; max-height:100%; border-radius:8px}
+
 .compose{background:#fff; border-top:1px solid var(--line); padding:12px 16px;
   padding-bottom:calc(12px + env(safe-area-inset-bottom))}
 .compose__box{display:flex; gap:10px; align-items:flex-end}
+
+/* Заготовки: частые фразы в одно нажатие. Прокрутка вбок, чтобы не съедали высоту. */
+.chips{display:flex; gap:8px; overflow-x:auto; padding-bottom:10px; scrollbar-width:none}
+.chips::-webkit-scrollbar{display:none}
+.chips button{flex:none; border:1.5px solid var(--line); background:var(--page); color:var(--ink);
+  font:inherit; font-size:13.5px; padding:7px 14px; border-radius:var(--r-pill); cursor:pointer;
+  white-space:nowrap; transition:border-color var(--fast) var(--ease), background var(--fast) var(--ease)}
+.chips button:hover{border-color:var(--blue-mid); background:var(--blue-tint)}
+.chips a{flex:none; align-self:center; font-size:13px; color:var(--muted); white-space:nowrap; padding:0 4px}
+
+/* Голосовой ввод. Кнопка появляется, только если браузер умеет распознавание. */
+.mic{border:1.5px solid var(--line); background:#fff; color:var(--muted); font-size:19px; line-height:1;
+  width:46px; height:46px; border-radius:50%; cursor:pointer; flex:none; display:none; place-items:center}
+.mic.can{display:grid}
+.mic:hover{border-color:var(--blue-mid); color:var(--blue-press)}
+.mic.rec{background:#B3261E; border-color:#B3261E; color:#fff; animation:pulse 1.1s ease-in-out infinite}
+@keyframes pulse{50%{opacity:.55}}
 .compose textarea{flex:1; border:1.5px solid var(--line); border-radius:var(--r-lg); padding:11px 14px;
   font:inherit; font-size:15px; resize:none; max-height:140px; background:#fff; box-sizing:border-box}
 .compose textarea:focus{outline:none; border-color:var(--blue); box-shadow:0 0 0 4px rgba(44,120,213,.13)}
@@ -131,7 +176,9 @@ body{background:var(--white); margin:0}
     <div class="chat__body" id="body"></div>
     <div class="err" id="err" hidden></div>
     <form class="compose" id="form" hidden>
+      <div class="chips" id="chips"></div>
       <div class="compose__box">
+        <button class="mic" id="mic" type="button" title="Надиктовать ответ" aria-label="Надиктовать ответ">🎙</button>
         <textarea id="text" rows="1" placeholder="Ответ клиенту. Enter — отправить" aria-label="Ответ клиенту"></textarea>
         <button class="send" id="send" type="submit">Отправить</button>
       </div>
@@ -139,63 +186,130 @@ body{background:var(--white); margin:0}
   </section>
 </div>
 
+<div class="zoom" id="zoom"><img id="zoom-img" alt="Фото от клиента"></div>
+
 <script>
 const $ = (id) => document.getElementById(id);
 let openId = null;
 let query = '';
 
 /* ---------- Придуманная переписка салона ----------
-   Поля ровно те же, что отдаёт сервер. Меняется только источник данных. */
+   Дальше идёт код настоящего окна, слово в слово: список, метки ожидания,
+   вложения. Заменён только источник данных и отправка ответа. */
+
 const H = (h, m) => { const d = new Date(); d.setHours(h, m, 0, 0); return d.toISOString(); };
+const AGO = (min) => new Date(Date.now() - min * 60000).toISOString();
 const Y = (h, m) => { const d = new Date(); d.setDate(d.getDate() - 1); d.setHours(h, m, 0, 0); return d.toISOString(); };
+
+/* Фото клиента: маленькая картинка прямо в файле, чтобы снимок работал без сервера. */
+const PHOTO = 'data:image/svg+xml;utf8,' + encodeURIComponent(
+  '<svg xmlns="http://www.w3.org/2000/svg" width="520" height="380">' +
+  '<defs><linearGradient id="g" x1="0" y1="0" x2="1" y2="1">' +
+  '<stop offset="0" stop-color="#C9A227"/><stop offset="0.55" stop-color="#8E5A3B"/>' +
+  '<stop offset="1" stop-color="#3F2A22"/></linearGradient></defs>' +
+  '<rect width="520" height="380" fill="url(#g)"/>' +
+  '<text x="50%" y="52%" text-anchor="middle" font-family="sans-serif" font-size="22" fill="#fff" opacity=".92">' +
+  'фото от клиента</text></svg>');
 
 const DATA = [
   { id: 'telegram:1', contactName: 'Алина Сафина', contactUsername: 'alina_sfn', unread: 2,
     messages: [
-      { direction: 'in',  text: 'Здравствуйте! Подскажите, на субботу к Лилии есть окошко на маникюр?', sentAt: H(11, 42) },
-      { direction: 'in',  text: 'Желательно после обеда', sentAt: H(11, 43) },
+      { id: 1, direction: 'in', text: 'Здравствуйте! Подскажите, на субботу к Лилии есть окошко на маникюр?', sentAt: AGO(47), attachments: [] },
+      { id: 2, direction: 'in', text: 'Желательно после обеда', sentAt: AGO(45), attachments: [] },
     ] },
   { id: 'telegram:2', contactName: 'Гульнара', contactUsername: null, unread: 1,
     messages: [
-      { direction: 'in',  text: 'Сколько будет стоить окрашивание в два тона, волосы до лопаток?', sentAt: H(11, 15) },
+      { id: 3, direction: 'in', text: 'Хочу вот такой оттенок, получится?', sentAt: AGO(18),
+        attachments: [{ kind: 'image', url: PHOTO, mime: 'image/svg+xml' }] },
     ] },
-  { id: 'telegram:3', contactName: 'Марат Хайруллин', contactUsername: 'marat_kzn', unread: 0,
+  { id: 'telegram:3', contactName: 'Рената Ахметова', contactUsername: 'renata_a', unread: 1,
     messages: [
-      { direction: 'in',  text: 'Добрый день. Можно перенести стрижку с четверга на пятницу?', sentAt: H(10, 4) },
-      { direction: 'out', text: 'Здравствуйте, Марат! Да, в пятницу свободно в 15:00 и в 18:30. Какое время удобнее?', sentAt: H(10, 9) },
-      { direction: 'in',  text: '18:30 подойдёт', sentAt: H(10, 12) },
-      { direction: 'out', text: 'Записала вас на пятницу, 18:30, мастер Ильнур. Напомним за день.', sentAt: H(10, 13) },
-      { direction: 'in',  text: 'Спасибо!', sentAt: H(10, 14) },
+      { id: 4, direction: 'in', text: 'А вы в воскресенье работаете?', sentAt: AGO(6), attachments: [] },
     ] },
-  { id: 'telegram:4', contactName: 'Рената Ахметова', contactUsername: 'renata_a', unread: 0,
+  { id: 'telegram:4', contactName: 'Марат Хайруллин', contactUsername: 'marat_kzn', unread: 0,
     messages: [
-      { direction: 'in',  text: 'А вы в воскресенье работаете?', sentAt: Y(19, 21) },
-      { direction: 'out', text: 'Да, с 10:00 до 20:00. Записать вас?', sentAt: Y(19, 26) },
+      { id: 5, direction: 'in',  text: 'Добрый день. Можно перенести стрижку с четверга на пятницу?', sentAt: H(10, 4), attachments: [] },
+      { id: 6, direction: 'out', text: 'Здравствуйте, Марат! Да, в пятницу свободно в 15:00 и в 18:30. Какое время удобнее?', sentAt: H(10, 9), attachments: [] },
+      { id: 7, direction: 'in',  text: '18:30 подойдёт', sentAt: H(10, 12), attachments: [] },
+      { id: 8, direction: 'out', text: 'Записала вас на пятницу, 18:30, мастер Ильнур. Напомним за день.', sentAt: H(10, 13), attachments: [] },
     ] },
   { id: 'telegram:5', contactName: 'Ильдар', contactUsername: null, unread: 0,
     messages: [
-      { direction: 'in',  text: 'Подарочный сертификат у вас есть? Хочу маме на день рождения', sentAt: Y(16, 2) },
-      { direction: 'out', text: 'Есть, на любую сумму от 3 000 ₽. Оформляем в салоне или пришлём электронный.', sentAt: Y(16, 8) },
-      { direction: 'in',  text: 'Электронный давайте', sentAt: Y(16, 9) },
+      { id: 9,  direction: 'in',  text: 'Подарочный сертификат у вас есть? Хочу маме на день рождения', sentAt: Y(16, 2), attachments: [] },
+      { id: 10, direction: 'out', text: 'Есть, на любую сумму от 3 000 ₽. Оформляем в салоне или пришлём электронный.', sentAt: Y(16, 8), attachments: [] },
     ] },
 ];
 
-const dialogsFromData = () => DATA.map((d) => {
+const TEMPLATES = [
+  { title: 'Часы работы', text: 'Мы работаем ежедневно с 10:00 до 20:00.' },
+  { title: 'Адрес', text: 'Мы находимся по адресу: ______. Ориентир — ______.' },
+  { title: 'Прайс', text: 'Пришлю цены: ______. Точную стоимость скажет мастер после осмотра.' },
+  { title: 'Записала', text: 'Записала вас на ______, мастер ______. Напомним за день до визита.' },
+  { title: 'Уточню и вернусь', text: 'Секунду, уточню у мастера и напишу вам в течение нескольких минут.' },
+];
+
+/* Ожидание считает сервер; в снимке — то же правило: время первого сообщения
+   после нашего последнего ответа. */
+function withWait(d) {
   const last = d.messages[d.messages.length - 1];
+  let waitingSince = null;
+  if (last.direction === 'in') {
+    const lastOut = [...d.messages].reverse().find((m) => m.direction === 'out');
+    const first = d.messages.find((m) => m.direction === 'in' && (!lastOut || m.sentAt > lastOut.sentAt));
+    waitingSince = first ? first.sentAt : null;
+  }
   return { id: d.id, contactName: d.contactName, contactUsername: d.contactUsername,
-           lastText: last.text, lastAt: last.sentAt, unread: d.unread };
-});
-let dialogs = dialogsFromData();
+           lastText: last.text || 'Фото', lastAt: last.sentAt, unread: d.unread, waitingSince };
+}
+let dialogs = DATA.map(withWait);
 const byId = (id) => DATA.find((d) => d.id === id);
+const showError = () => {};
+
+const WARN_MIN = 15;
+
+const waitMinutes = (d) =>
+  d.waitingSince ? Math.max(0, Math.floor((Date.now() - new Date(d.waitingSince)) / 60000)) : null;
+
+
+function humanWait(min) {
+  if (min < 60) return min + ' мин';
+  if (min < 1440) {
+    const h = Math.floor(min / 60);
+    const m = min % 60;
+    return m ? h + ' ч ' + m + ' мин' : h + ' ч';
+  }
+  return 'больше суток';
+}
+
+
+function waitMarkup(d) {
+  const min = waitMinutes(d);
+  if (min === null) return '';
+  const cls = min >= LATE_MIN ? ' late' : min >= WARN_MIN ? ' warn' : '';
+  const word = min >= LATE_MIN ? 'висит ' : 'ждёт ';
+  return '<span class="dlg__wait' + cls + '">' + word + humanWait(min) + '</span>';
+}
+
+
+function byUrgency(a, b) {
+  const wa = waitMinutes(a);
+  const wb = waitMinutes(b);
+  if (wa !== null && wb !== null) return wb - wa;
+  if (wa !== null) return -1;
+  if (wb !== null) return 1;
+  return new Date(b.lastAt) - new Date(a.lastAt);
+}
+
 
 const initials = (name) =>
   String(name).split(/\s+/).filter(Boolean).slice(0, 2).map((w) => w[0].toUpperCase()).join('');
+
 
 function escapeHtml(s) {
   return String(s).replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' })[c]);
 }
 
-/** Время в списке: сегодняшнее — часами, вчерашнее и старее — датой. */
+
 function shortTime(iso) {
   const d = new Date(iso);
   const sameDay = d.toDateString() === new Date().toDateString();
@@ -204,55 +318,116 @@ function shortTime(iso) {
     : d.toLocaleDateString('ru-RU', { day: '2-digit', month: '2-digit' });
 }
 
+
+const sizeText = (bytes) =>
+  !bytes ? '' : bytes < 1024 * 1024
+    ? Math.max(1, Math.round(bytes / 1024)) + ' КБ'
+    : (bytes / 1024 / 1024).toFixed(1).replace('.', ',') + ' МБ';
+
+
+function attachmentMarkup(messageId, file, index) {
+  const src = file.url;
+  if (file.kind === 'image' || file.kind === 'sticker') {
+    return '<span class="att"><img src="' + src + '" alt="Фото от клиента" loading="lazy" data-zoom="' + src + '"></span>';
+  }
+  if (file.kind === 'voice') {
+    return '<span class="att"><audio controls preload="none" src="' + src + '"></audio></span>';
+  }
+  if (file.kind === 'video') {
+    return '<span class="att"><video controls preload="metadata" src="' + src + '"></video></span>';
+  }
+  const name = file.name ? escapeHtml(file.name) : 'Файл';
+  const size = sizeText(file.size);
+  return (
+    '<span class="att"><a class="att-file" href="' + src + '" target="_blank" rel="noopener" download>' +
+    '📎 <b>' + name + '</b>' + (size ? '<span>' + size + '</span>' : '') + '</a></span>'
+  );
+}
+
+
+function messageMarkup(m) {
+  const files = (m.attachments || [])
+    .map((f, i) => attachmentMarkup(m.id, f, i))
+    .join('');
+  const text = m.text ? escapeHtml(m.text) : '';
+  return (
+    '<div class="msg msg-' + (m.direction === 'in' ? 'in' : 'out') + '">' +
+    files + text + '<small>' + shortTime(m.sentAt) + '</small></div>'
+  );
+}
+
+
 function renderDialogs() {
   const box = $('dialogs');
   const q = query.trim().toLowerCase();
-  const shown = q
+  const shown = (q
     ? dialogs.filter((d) => (d.contactName + ' ' + d.lastText).toLowerCase().includes(q))
-    : dialogs;
+    : dialogs.slice()
+  ).sort(byUrgency);
 
   if (!shown.length) {
-    box.innerHTML = '<div class="empty"><b>Ничего не нашлось</b>Попробуйте другое слово.</div>';
+    box.innerHTML = q
+      ? '<div class="empty"><b>Ничего не нашлось</b>Попробуйте другое слово.</div>'
+      : '<div class="empty"><b>Пока пусто</b>Как только клиент напишет боту, диалог появится здесь.</div>';
     return;
   }
 
   box.innerHTML = shown
-    .map(
-      (d) =>
-        '<button class="dlg' + (d.id === openId ? ' on' : '') + '" data-id="' + escapeHtml(d.id) + '" type="button">' +
+    .map((d) => {
+      const min = waitMinutes(d);
+      const hot = min !== null && min >= LATE_MIN ? ' late' : '';
+      return (
+        '<button class="dlg' + (d.id === openId ? ' on' : '') + hot + '" data-id="' + escapeHtml(d.id) + '" type="button">' +
         '<span class="dlg__ava">' + escapeHtml(initials(d.contactName)) + '</span>' +
         '<span><span class="dlg__nm">' + escapeHtml(d.contactName) + '</span>' +
         '<span class="dlg__tx">' + escapeHtml(d.lastText) + '</span></span>' +
         '<span class="dlg__meta">' + shortTime(d.lastAt) +
         (d.unread ? '<span class="dlg__badge">' + d.unread + '</span>' : '') +
-        '</span></button>',
-    )
+        waitMarkup(d) +
+        '</span></button>'
+      );
+    })
     .join('');
 }
 
-function renderMessages(dialog) {
+
+function renderMessages(dialog, messages) {
   $('who').textContent = dialog.contactName;
-  $('sub').textContent = 'Telegram' + (dialog.contactUsername ? ' · @' + dialog.contactUsername : '');
+  const min = waitMinutes(dialog);
+  $('sub').textContent =
+    'Telegram' + (dialog.contactUsername ? ' · @' + dialog.contactUsername : '') +
+    (min !== null ? ' · ждёт ' + humanWait(min) : '');
   $('form').hidden = false;
 
   const body = $('body');
-  body.innerHTML = dialog.messages
-    .map(
-      (m) =>
-        '<div class="msg msg-' + (m.direction === 'in' ? 'in' : 'out') + '">' +
-        escapeHtml(m.text) + '<small>' + shortTime(m.sentAt) + '</small></div>',
-    )
-    .join('');
+  body.innerHTML = messages.map(messageMarkup).join('');
+
+  // Telegram мог удалить файл, а канал — отвалиться. Битая картинка выглядит
+  // поломкой окна, поэтому подменяем её словами и ссылкой «открыть отдельно».
+  for (const img of body.querySelectorAll('img[data-zoom]')) {
+    img.addEventListener('error', () => {
+      const note = document.createElement('a');
+      note.className = 'att-file';
+      note.href = img.getAttribute('src');
+      note.target = '_blank';
+      note.rel = 'noopener';
+      note.innerHTML = '🖼 <b>Фото не открылось</b><span>попробовать ещё раз</span>';
+      img.replaceWith(note);
+    });
+  }
+
   body.scrollTop = body.scrollHeight;
 }
+
+
 
 function openDialog(id) {
   openId = id;
   document.body.dataset.view = 'chat';
   const d = byId(id);
   d.unread = 0;
-  dialogs = dialogsFromData();
-  renderMessages(d);
+  dialogs = DATA.map(withWait);
+  renderMessages(dialogs.find((x) => x.id === id), d.messages);
   renderDialogs();
   $('text').focus();
 }
@@ -263,11 +438,11 @@ function sendReply(event) {
   const text = field.value.trim();
   if (!text || !openId) return;
   const d = byId(openId);
-  d.messages.push({ direction: 'out', text, sentAt: new Date().toISOString() });
+  d.messages.push({ id: Date.now(), direction: 'out', text, sentAt: new Date().toISOString(), attachments: [] });
   field.value = '';
   field.style.height = 'auto';
-  dialogs = dialogsFromData();
-  renderMessages(d);
+  dialogs = DATA.map(withWait);
+  renderMessages(dialogs.find((x) => x.id === openId), d.messages);
   renderDialogs();
   field.focus();
 }
@@ -286,14 +461,60 @@ $('text').addEventListener('input', (e) => {
 $('text').addEventListener('keydown', (e) => {
   if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); $('form').requestSubmit(); }
 });
-$('out').addEventListener('click', () => {
-  alert('В рабочем окне здесь выход. В снимке выходить некуда.');
+
+$('chips').innerHTML = TEMPLATES
+  .map((t) => '<button type="button" data-text="' + escapeHtml(t.text) + '">' + escapeHtml(t.title) + '</button>')
+  .join('') + '<a href="#" onclick="alert(\'В рабочем окне отсюда открывается страница настройки ответов и автоответа.\'); return false">Настроить</a>';
+
+$('chips').addEventListener('click', (e) => {
+  const btn = e.target.closest('button[data-text]');
+  if (!btn) return;
+  const field = $('text');
+  field.value = field.value.trim() ? field.value.trim() + '\n' + btn.dataset.text : btn.dataset.text;
+  field.dispatchEvent(new Event('input'));
+  field.focus();
 });
+
+/* Голосовой ввод — тот же браузерный, что и в рабочем окне. */
+const Recognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+if (Recognition) {
+  $('mic').classList.add('can');
+  const recog = new Recognition();
+  recog.lang = 'ru-RU';
+  recog.interimResults = true;
+  recog.continuous = true;
+  let base = '';
+  recog.onstart = () => { base = $('text').value.trim(); $('mic').classList.add('rec'); };
+  recog.onresult = (e) => {
+    let said = '';
+    for (let i = 0; i < e.results.length; i++) said += e.results[i][0].transcript;
+    $('text').value = (base ? base + ' ' : '') + said.trim();
+    $('text').dispatchEvent(new Event('input'));
+  };
+  recog.onerror = () => $('mic').classList.remove('rec');
+  recog.onend = () => $('mic').classList.remove('rec');
+  $('mic').addEventListener('click', () => {
+    if ($('mic').classList.contains('rec')) recog.stop();
+    else try { recog.start(); } catch (e) {}
+  });
+}
+
+$('body').addEventListener('click', (e) => {
+  const img = e.target.closest('img[data-zoom]');
+  if (!img) return;
+  $('zoom-img').src = img.dataset.zoom;
+  $('zoom').classList.add('on');
+});
+$('zoom').addEventListener('click', () => $('zoom').classList.remove('on'));
+document.addEventListener('keydown', (e) => { if (e.key === 'Escape') $('zoom').classList.remove('on'); });
 
 $('ch').classList.remove('off');
 $('ch-t').innerHTML = 'Telegram: <a href="#" onclick="return false">@vetra_pilot_bot</a>';
 $('me').textContent = 'Ирина, администратор';
+$('out').addEventListener('click', () => alert('В рабочем окне здесь выход. В снимке выходить некуда.'));
+document.title = '(4) Входящие — Ветра';
 renderDialogs();
+setInterval(renderDialogs, 30000);
 </script>
 </body>
 </html>
