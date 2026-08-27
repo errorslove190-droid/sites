@@ -267,6 +267,9 @@ const showError = () => {};
 
 const WARN_MIN = 15;
 
+const LATE_MIN = 30;
+
+
 const waitMinutes = (d) =>
   d.waitingSince ? Math.max(0, Math.floor((Date.now() - new Date(d.waitingSince)) / 60000)) : null;
 
