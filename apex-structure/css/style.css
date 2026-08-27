@@ -1,9 +1,12 @@
 /* ============================================================
    Apex Structure — премиальное строительство · тёмная тема
+   Стиль: тёмный люкс + янтарная «архитектурная подсветка»,
+   editorial-приёмы (рефы: Zenrixa, ABRA, AURA, SOLTERA)
    ============================================================ */
 
 :root {
   --bg: #0c0e11;
+  --bg-deep: #07090b;
   --bg-alt: #101318;
   --panel: #151920;
   --panel-2: #1a1f27;
@@ -68,6 +71,20 @@ fieldset { border: none; }
 .btn--ghost:hover { border-color: var(--accent-line); background: var(--accent-soft); transform: translateY(-2px); }
 .btn--big { padding: 18px 32px; font-size: 16px; }
 
+/* ---------- Иконки-стрелки (inline SVG) ---------- */
+.i-arrow {
+  display: inline-block;
+  width: 15px; height: 10px;
+  vertical-align: middle;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.6;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  transition: transform 0.25s ease;
+}
+.project__tour:hover .i-arrow { transform: translateX(4px); }
+
 /* ---------- Шапка ---------- */
 .header {
   position: fixed;
@@ -119,7 +136,7 @@ fieldset { border: none; }
 }
 .header__phone:hover { color: var(--accent); }
 
-.burger { display: none; flex-direction: column; gap: 5px; padding: 10px; }
+.burger { display: none; flex-direction: column; justify-content: center; gap: 5px; width: 44px; height: 44px; padding: 10px; }
 .burger span {
   width: 22px; height: 2px;
   background: var(--text);
@@ -133,8 +150,25 @@ fieldset { border: none; }
 /* ---------- Hero ---------- */
 .hero {
   position: relative;
-  padding: 168px 0 96px;
+  padding: 176px 0 104px;
   overflow: hidden;
+}
+/* Гигантский контурный APEX за содержимым (реф: Zenrixa, Nike) */
+.hero__word {
+  position: absolute;
+  inset-inline: 0;
+  top: 64px;
+  text-align: center;
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: clamp(88px, 17vw, 236px);
+  line-height: 1;
+  letter-spacing: 0.08em;
+  white-space: nowrap;
+  color: rgba(232, 230, 225, 0.028);
+  -webkit-text-stroke: 1.5px rgba(217, 154, 78, 0.13);
+  user-select: none;
+  pointer-events: none;
 }
 .hero__grid {
   position: absolute;
@@ -150,7 +184,7 @@ fieldset { border: none; }
   position: absolute;
   width: 720px; height: 720px;
   right: -220px; top: -260px;
-  background: radial-gradient(circle, rgba(217, 154, 78, 0.14), transparent 65%);
+  background: radial-gradient(circle, rgba(217, 154, 78, 0.16), transparent 65%);
   pointer-events: none;
 }
 .hero__inner {
@@ -191,22 +225,23 @@ fieldset { border: none; }
   max-width: 46ch;
   margin-bottom: 32px;
 }
-.hero__actions { display: flex; flex-wrap: wrap; gap: 14px; margin-bottom: 44px; }
+.hero__actions { display: flex; flex-wrap: wrap; gap: 14px; margin-bottom: 48px; }
 
 .hero__stats {
   display: flex;
   gap: 40px;
   flex-wrap: wrap;
 }
+.hero__stats > div { border-top: 1px solid var(--line); padding-top: 14px; }
 .hero__stats dt {
   font-family: var(--font-display);
-  font-size: 30px;
+  font-size: 28px;
   font-weight: 600;
   color: var(--text);
 }
 .hero__stats dd { font-size: 13px; color: var(--muted); max-width: 15ch; }
 
-.hero__visual { color: #6d7683; }
+.hero__visual { color: #6d7683; position: relative; }
 .hero__house { width: 100%; height: auto; }
 .hero__house .draw path {
   stroke-dasharray: 1200;
@@ -219,18 +254,22 @@ fieldset { border: none; }
 @keyframes draw { to { stroke-dashoffset: 0; } }
 
 /* ---------- Секции ---------- */
-.section { padding: 96px 0; }
-.section--tight { padding: 64px 0; }
+.section { padding: 116px 0; }
+.section--tight { padding: 72px 0; }
 .section--alt { background: var(--bg-alt); border-block: 1px solid var(--line); }
 
 .section__tag {
+  display: flex;
+  align-items: center;
+  gap: 10px;
   font-size: 12px;
   font-weight: 700;
-  letter-spacing: 0.16em;
+  letter-spacing: 0.18em;
   text-transform: uppercase;
   color: var(--accent);
-  margin-bottom: 14px;
+  margin-bottom: 16px;
 }
+.tag-mark { font-size: 13px; opacity: 0.9; }
 .section__title {
   font-family: var(--font-display);
   font-size: clamp(24px, 3.4vw, 38px);
@@ -239,30 +278,29 @@ fieldset { border: none; }
   margin-bottom: 16px;
   max-width: 24ch;
 }
-.section__note { color: var(--muted); max-width: 62ch; margin-bottom: 48px; }
+.section__note { color: var(--muted); max-width: 62ch; margin-bottom: 56px; }
 
-/* ---------- Позиционирование ---------- */
+/* ---------- Позиционирование (editorial-колонки, реф ABRA) ---------- */
 .pillars {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  gap: 20px;
+  gap: 36px;
 }
 .pillar {
-  background: var(--panel);
-  border: 1px solid var(--line);
-  border-radius: var(--radius);
-  padding: 28px 24px;
-  transition: transform 0.3s ease, border-color 0.3s ease;
+  border-top: 1px solid var(--line);
+  padding: 22px 4px 0 0;
+  transition: border-color 0.4s ease;
 }
-.pillar:hover { transform: translateY(-4px); border-color: var(--accent-line); }
+.pillar:hover { border-top-color: var(--accent); }
 .pillar__num {
   font-family: var(--font-display);
   font-size: 13px;
   color: var(--accent);
+  letter-spacing: 0.08em;
   display: block;
-  margin-bottom: 16px;
+  margin-bottom: 18px;
 }
-.pillar h3 { font-size: 17px; font-weight: 800; margin-bottom: 10px; }
+.pillar h3 { font-size: 16px; font-weight: 800; margin-bottom: 10px; }
 .pillar p { font-size: 14px; color: var(--muted); }
 
 /* ---------- Проекты ---------- */
@@ -299,7 +337,7 @@ fieldset { border: none; }
 .project__badge {
   position: absolute;
   top: 14px; left: 14px;
-  font-size: 11px;
+  font-size: 12px;
   font-weight: 700;
   letter-spacing: 0.08em;
   text-transform: uppercase;
@@ -322,12 +360,15 @@ fieldset { border: none; }
 }
 .project__specs b { color: var(--text); font-weight: 800; }
 .project__tour {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
   font-size: 14px;
   font-weight: 700;
   color: var(--accent);
   transition: opacity 0.2s ease;
 }
-.project__tour:hover { opacity: 0.75; }
+.project__tour:hover { opacity: 0.85; }
 
 /* ---------- 3D-тур ---------- */
 .tour { margin-top: -8px; }
@@ -350,19 +391,40 @@ fieldset { border: none; }
   will-change: transform;
 }
 .tour__svg { width: 2600px; height: 100%; }
+/* Хотспот: тач-цель 44px, видимая точка 22px, пульс через transform */
 .tour__spot {
   position: absolute;
   top: 46%;
+  width: 44px; height: 44px;
+  margin: -11px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+}
+.tour__spot i {
+  position: relative;
   width: 22px; height: 22px;
   border-radius: 50%;
   background: var(--accent);
-  box-shadow: 0 0 0 6px rgba(217, 154, 78, 0.25);
-  animation: pulse 2.4s infinite;
+  box-shadow: 0 0 0 1px rgba(12, 14, 17, 0.6);
+}
+.tour__spot i::before {
+  content: "";
+  position: absolute;
+  inset: -6px;
+  border-radius: 50%;
+  border: 2px solid rgba(217, 154, 78, 0.5);
+  animation: pulse 2.4s ease-out infinite;
+}
+@keyframes pulse {
+  0%   { transform: scale(0.8); opacity: 1; }
+  70%  { transform: scale(1.5); opacity: 0; }
+  100% { transform: scale(1.5); opacity: 0; }
 }
 .tour__spot::after {
   content: attr(data-tip);
   position: absolute;
-  bottom: calc(100% + 12px);
+  bottom: calc(100% + 2px);
   left: 50%;
   transform: translateX(-50%) scale(0.9);
   background: rgba(12, 14, 17, 0.95);
@@ -377,13 +439,11 @@ fieldset { border: none; }
   pointer-events: none;
   transition: opacity 0.2s ease, transform 0.2s ease;
 }
-.tour__spot:hover::after, .tour__spot:focus-visible::after {
+.tour__spot:hover::after,
+.tour__spot:focus-visible::after,
+.tour__spot.is-active::after {
   opacity: 1;
   transform: translateX(-50%) scale(1);
-}
-@keyframes pulse {
-  0%, 100% { box-shadow: 0 0 0 6px rgba(217, 154, 78, 0.25); }
-  50% { box-shadow: 0 0 0 12px rgba(217, 154, 78, 0.08); }
 }
 .tour__hint {
   position: absolute;
@@ -402,12 +462,19 @@ fieldset { border: none; }
   pointer-events: none;
   transition: opacity 0.4s ease;
 }
-.tour__hint span { color: var(--accent); font-size: 16px; }
+.tour__hint svg {
+  width: 22px; height: 10px;
+  fill: none;
+  stroke: var(--accent);
+  stroke-width: 1.6;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
 .tour__hint.is-hidden { opacity: 0; }
 .tour__badge {
   position: absolute;
   top: 18px; right: 18px;
-  font-size: 11px;
+  font-size: 12px;
   font-weight: 700;
   letter-spacing: 0.1em;
   text-transform: uppercase;
@@ -589,11 +656,11 @@ input[type="range"]::-moz-range-thumb {
   color: var(--muted);
 }
 .calc__includes li::before {
-  content: "✓";
+  content: "";
   position: absolute;
-  left: 0;
-  color: var(--accent);
-  font-weight: 800;
+  left: 0; top: 3px;
+  width: 16px; height: 16px;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='M2.5 8.5 6.5 12.5 13.5 4' stroke='%23d99a4e' stroke-width='2' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center / contain no-repeat;
 }
 .calc__cta { width: 100%; }
 .calc__disclaimer { font-size: 12px; color: var(--muted); opacity: 0.7; margin-top: 14px; text-align: center; }
@@ -655,37 +722,83 @@ input[type="range"]::-moz-range-thumb {
   transition: border-color 0.3s ease;
 }
 .ecard:hover { border-color: var(--accent-line); }
-.ecard h4 { font-size: 15px; font-weight: 800; margin-bottom: 8px; }
+.ecard h4 { font-size: 16px; font-weight: 800; margin-bottom: 8px; }
 .ecard p { font-size: 13.5px; color: var(--muted); }
 
-/* ---------- Этапы ---------- */
+/* ---------- Манифест (чёрная полоса, реф ABRA) ---------- */
+.manifest {
+  background: var(--bg-deep);
+  border-block: 1px solid var(--line);
+  padding: 96px 0;
+  position: relative;
+  overflow: hidden;
+}
+.manifest::before {
+  content: "";
+  position: absolute;
+  width: 560px; height: 560px;
+  left: 50%; top: -380px;
+  transform: translateX(-50%);
+  background: radial-gradient(circle, rgba(217, 154, 78, 0.1), transparent 65%);
+  pointer-events: none;
+}
+.manifest__inner { position: relative; }
+.manifest__label {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 32px;
+}
+.manifest__label .tag-mark { color: var(--accent); }
+.manifest__label--right {
+  justify-content: flex-end;
+  margin: 32px 0 0;
+}
+.manifest__text {
+  font-family: var(--font-display);
+  font-size: clamp(24px, 3.8vw, 46px);
+  font-weight: 600;
+  line-height: 1.25;
+  text-align: center;
+  max-width: 22ch;
+  margin-inline: auto;
+}
+.manifest__text em {
+  font-style: normal;
+  color: var(--accent);
+}
+
+/* ---------- Этапы (контурные цифры, реф SOLTERA) ---------- */
 .steps {
   display: grid;
   grid-template-columns: repeat(5, 1fr);
-  gap: 18px;
-  counter-reset: step;
+  gap: 36px 28px;
 }
 .step {
-  position: relative;
-  background: var(--panel);
-  border: 1px solid var(--line);
-  border-radius: var(--radius);
-  padding: 26px 20px;
+  border-top: 1px solid var(--line);
+  padding-top: 20px;
+  transition: border-color 0.4s ease;
 }
+.step:hover { border-top-color: var(--accent); }
 .step__num {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 40px; height: 40px;
-  border-radius: 12px;
-  background: var(--accent-soft);
-  border: 1px solid var(--accent-line);
-  color: var(--accent);
+  display: block;
   font-family: var(--font-display);
-  font-size: 16px;
-  margin-bottom: 16px;
+  font-size: clamp(30px, 3vw, 40px);
+  font-weight: 600;
+  line-height: 1;
+  color: transparent;
+  -webkit-text-stroke: 1.2px var(--accent);
+  margin-bottom: 18px;
 }
-.step h3 { font-size: 15px; font-weight: 800; margin-bottom: 8px; }
+@supports not (-webkit-text-stroke: 1px black) {
+  .step__num { color: var(--accent); }
+}
+.step h3 { font-size: 16px; font-weight: 800; margin-bottom: 8px; }
 .step p { font-size: 13px; color: var(--muted); }
 
 /* ---------- Контакты ---------- */
@@ -738,7 +851,7 @@ input[type="range"]::-moz-range-thumb {
 }
 .footer__dev a:hover { opacity: 0.75; }
 
-/* ---------- Появление при скролле ---------- */
+/* ---------- Появление при скролле (с каскадом) ---------- */
 .reveal {
   opacity: 0;
   transform: translateY(24px);
@@ -746,11 +859,25 @@ input[type="range"]::-moz-range-thumb {
 }
 .reveal.is-visible { opacity: 1; transform: none; }
 
+/* каскад внутри групп */
+.pillars .pillar:nth-child(2),
+.projects .project:nth-child(2),
+.energy__cards .ecard:nth-child(2),
+.steps .step:nth-child(2) { transition-delay: 0.08s; }
+.pillars .pillar:nth-child(3),
+.projects .project:nth-child(3),
+.energy__cards .ecard:nth-child(3),
+.steps .step:nth-child(3) { transition-delay: 0.16s; }
+.pillars .pillar:nth-child(4),
+.energy__cards .ecard:nth-child(4),
+.steps .step:nth-child(4) { transition-delay: 0.24s; }
+.steps .step:nth-child(5) { transition-delay: 0.32s; }
+
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
   .reveal { opacity: 1; transform: none; transition: none; }
   .hero__house .draw path { animation: none; stroke-dashoffset: 0; }
-  .tour__spot { animation: none; }
+  .tour__spot i::before { animation: none; opacity: 0; }
 }
 
 /* ============================================================
@@ -767,6 +894,9 @@ input[type="range"]::-moz-range-thumb {
 }
 
 @media (max-width: 760px) {
+  /* без blur на мобильном — дешевле по производительности */
+  .header { backdrop-filter: none; -webkit-backdrop-filter: none; background: rgba(12, 14, 17, 0.96); }
+
   .nav {
     position: fixed;
     top: 72px;
@@ -797,17 +927,21 @@ input[type="range"]::-moz-range-thumb {
   .burger { display: flex; }
 
   .hero { padding: 128px 0 64px; }
+  .hero__word { top: 84px; }
   .hero__inner { grid-template-columns: 1fr; gap: 40px; }
-  .hero__stats { gap: 24px; }
-  .hero__stats dt { font-size: 24px; }
+  .hero__stats { gap: 20px; }
+  .hero__stats dt { font-size: 22px; }
 
-  .section { padding: 64px 0; }
-  .pillars { grid-template-columns: 1fr; }
+  .section { padding: 72px 0; }
+  .section--tight { padding: 56px 0; }
+  .section__note { margin-bottom: 40px; }
+  .pillars { grid-template-columns: 1fr; gap: 24px; }
   .projects { grid-template-columns: 1fr; }
   .calc__form { padding: 22px; }
   .calc__row--split { grid-template-columns: 1fr; }
   .energy__cards { grid-template-columns: 1fr; }
-  .steps { grid-template-columns: 1fr 1fr; }
+  .manifest { padding: 72px 0; }
+  .steps { grid-template-columns: 1fr 1fr; gap: 28px 20px; }
   .step:last-child { grid-column: 1 / -1; }
   .contacts { grid-template-columns: 1fr; gap: 32px; }
   .bar__fill { height: 40px; font-size: 13px; }

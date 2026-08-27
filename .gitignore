@@ -1,0 +1,4 @@
+.secrets/
+*.ftp.txt
+Thumbs.db
+desktop.ini

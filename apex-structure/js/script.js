@@ -88,7 +88,7 @@
   var priceAnim = null;
 
   function fmt(n) {
-    return Math.round(n).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ' ');
+    return Math.round(n).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ' ');
   }
 
   function calcTotal() {
@@ -144,6 +144,14 @@
   var autoDrift = true;
   var driftDir = -1;
   var lastTs = null;
+  var tourVisible = false;
+
+  /* автопрокрутка — только когда панорама видна на экране */
+  var tourObserver = new IntersectionObserver(function (entries) {
+    tourVisible = entries[0].isIntersecting;
+    if (!tourVisible) lastTs = null; // не «перепрыгивать» после возврата
+  }, { threshold: 0.1 });
+  tourObserver.observe(viewport);
 
   function maxOffset() {
     return Math.min(0, viewport.clientWidth - sceneW);
@@ -155,15 +163,17 @@
   }
 
   function loop(ts) {
-    if (autoDrift && !dragging) {
+    if (autoDrift && tourVisible && !dragging) {
       if (lastTs) {
         offset += driftDir * (ts - lastTs) * 0.018;
         if (offset <= maxOffset()) driftDir = 1;
         if (offset >= 0) driftDir = -1;
         apply();
       }
+      lastTs = ts;
+    } else {
+      lastTs = null;
     }
-    lastTs = ts;
     requestAnimationFrame(loop);
   }
   var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -178,6 +188,7 @@
     dragStartOffset = offset;
     viewport.classList.add('is-dragging');
     hint.classList.add('is-hidden');
+    closeSpots(null);
     try { viewport.setPointerCapture(e.pointerId); } catch (err) {}
   });
   viewport.addEventListener('pointermove', function (e) {
@@ -193,11 +204,19 @@
   viewport.addEventListener('pointercancel', endDrag);
   window.addEventListener('resize', apply);
 
-  /* тап по хотспоту на тач-экране — показать подсказку */
-  document.querySelectorAll('.tour__spot').forEach(function (spot) {
+  /* тап по хотспоту — показать/скрыть подсказку (работает и на таче) */
+  var spots = document.querySelectorAll('.tour__spot');
+  function closeSpots(except) {
+    spots.forEach(function (s) {
+      if (s !== except) s.classList.remove('is-active');
+    });
+  }
+  spots.forEach(function (spot) {
     spot.addEventListener('click', function (e) {
       e.stopPropagation();
-      spot.focus();
+      closeSpots(spot);
+      spot.classList.toggle('is-active');
     });
   });
+  document.addEventListener('click', function () { closeSpots(null); });
 })();

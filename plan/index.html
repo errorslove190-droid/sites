@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Маршрут — что делаем по шагам</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Golos+Text:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#0a0a0a; --paper:#ffffff; --lime:#d8f34e; --grey:#585858;
+    --line:#e6e6e6; --dark:#0a0b0d; --card:#15171c; --warm:#e4ded7;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{
+    font-family:'Golos Text',-apple-system,'Segoe UI',sans-serif;
+    background:var(--paper); color:var(--ink);
+    line-height:1.55; -webkit-font-smoothing:antialiased;
+  }
+  .wrap{max-width:760px;margin:0 auto;padding:0 20px 80px}
+
+  header{padding:44px 0 28px;border-bottom:2px solid var(--ink)}
+  .kicker{font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--grey);font-weight:600}
+  h1{font-size:clamp(30px,7vw,46px);line-height:1.05;letter-spacing:-.02em;margin:10px 0 12px;font-weight:700}
+  .lead{color:var(--grey);font-size:15px;max-width:52ch}
+
+  .bar{position:sticky;top:0;z-index:5;background:var(--paper);padding:14px 0 12px;border-bottom:1px solid var(--line);
+       display:flex;align-items:center;gap:12px;font-size:13px;font-weight:600}
+  .track{flex:1;height:8px;background:#f0f0f0;border-radius:99px;overflow:hidden}
+  .track i{display:block;height:100%;width:0;background:var(--lime);transition:width .25s ease}
+  .bar button{border:1px solid var(--line);background:none;font:inherit;font-size:12px;color:var(--grey);
+              padding:5px 10px;border-radius:99px;cursor:pointer}
+  .bar button:hover{border-color:var(--ink);color:var(--ink)}
+
+  section{margin-top:40px}
+  .head{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap;margin-bottom:6px}
+  h2{font-size:19px;font-weight:700;letter-spacing:-.01em}
+  .tag{font-size:11px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;
+       padding:3px 8px;border-radius:99px;background:var(--lime);color:var(--ink)}
+  .tag.grey{background:#f0f0f0;color:var(--grey)}
+  .note{color:var(--grey);font-size:14px;margin-bottom:16px;max-width:60ch}
+
+  .step{display:flex;gap:14px;padding:16px 0;border-bottom:1px solid var(--line);align-items:flex-start}
+  .step:last-child{border-bottom:none}
+  .box{flex:none;width:24px;height:24px;margin-top:2px;border:2px solid var(--ink);border-radius:7px;
+       cursor:pointer;position:relative;background:none;transition:background .15s}
+  .box::after{content:'';position:absolute;inset:4px 3px 6px 4px;border-left:2.5px solid var(--ink);
+              border-bottom:2.5px solid var(--ink);transform:rotate(-45deg) scale(.4);opacity:0;transition:.15s}
+  .box[aria-checked="true"]{background:var(--lime)}
+  .box[aria-checked="true"]::after{opacity:1;transform:rotate(-45deg) scale(1)}
+  .body{flex:1;min-width:0}
+  .t{font-weight:600;font-size:16px;letter-spacing:-.01em}
+  .step[data-done="1"] .t{text-decoration:line-through;color:var(--grey)}
+  .d{color:var(--grey);font-size:14px;margin-top:4px}
+  .d code{font-family:ui-monospace,Menlo,Consolas,monospace;font-size:12.5px;background:#f4f4f4;
+          padding:2px 5px;border-radius:5px;word-break:break-all}
+  .who{display:inline-block;font-size:11px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;
+       color:var(--grey);border:1px solid var(--line);border-radius:99px;padding:2px 8px;margin-top:8px}
+  .who.me{background:var(--ink);color:var(--warm);border-color:var(--ink)}
+  .who.hot{background:#ffe8e8;border-color:#ffc9c9;color:#a11}
+  a{color:var(--ink)}
+
+  .dark{background:var(--dark);color:var(--warm);border-radius:20px;padding:26px 22px;margin-top:44px}
+  .dark h2{color:var(--warm)}
+  .dark .note,.dark .d{color:#b3b3b3}
+  .dark .step{border-color:#23262e}
+  .dark .box{border-color:var(--warm)}
+  .dark .box[aria-checked="true"]{background:var(--lime);border-color:var(--lime)}
+  .dark .box::after{border-color:var(--ink)}
+  .dark .who{border-color:#2a2e36}
+  .dark a{color:var(--lime)}
+
+  footer{margin-top:56px;padding-top:22px;border-top:1px solid var(--line);color:var(--grey);font-size:13px}
+  @media(max-width:520px){ .wrap{padding:0 16px 60px} .t{font-size:15px} }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header>
+  <div class="kicker">20 августа 2026 · маршрут</div>
+  <h1>Идём по шагам<br>и закрываем хвосты</h1>
+  <p class="lead">Всё открытое из «Дела.md», разложенное по порядку: сверху то, что разблокирует
+  остальное, снизу — что ждёт других людей. Галочки сохраняются в браузере.</p>
+</header>
+
+<div class="bar">
+  <span id="cnt">0 из 0</span>
+  <span class="track"><i id="fill"></i></span>
+  <button id="reset">сбросить</button>
+</div>
+
+<section>
+  <div class="head"><h2>1. Пять минут, и дальше проще</h2><span class="tag">сначала</span></div>
+  <p class="note">Три мелочи, каждая снимает затык в чём-то большом. Делаются подряд за четверть часа.</p>
+
+  <div class="step"><span class="box" role="checkbox" tabindex="0" aria-checked="false"></span><div class="body">
+    <div class="t">Написать <code>/start</code> боту @Manager_miha_bot</div>
+    <div class="d">Пока он не знает чат, напоминания не приходят — ни дедлайны, ни «пора поесть». Одно сообщение.</div>
+    <span class="who">твои руки · 10 сек</span></div></div>
+
+  <div class="step"><span class="box" role="checkbox" tabindex="0" aria-checked="false"></span><div class="body">
+    <div class="t">Развернуть воркер трекера</div>
+    <div class="d">Запустить <code>D:\Projects\trener-worker\Развернуть трекер.cmd</code>. Один раз откроется браузер
+    для входа в Cloudflare, дальше сам: хранилище, секреты, выкладка, проверка. Потом скажи «воркер готов».</div>
+    <span class="who">твои руки · 5 мин</span></div></div>
+
+  <div class="step"><span class="box" role="checkbox" tabindex="0" aria-checked="false"></span><div class="body">
+    <div class="t">База знаний на телефон</div>
+    <div class="d">Syncthing-Fork и Obsidian из Google Play, прислать мне ID телефона. Без этого Ветру
+    с телефона не поведёшь — заметки видны только на компе.</div>
+    <span class="who">твои руки · 10 мин</span></div></div>
+</section>
+
+<section>
+  <div class="head"><h2>2. Ветра: успеть к 23 августа</h2><span class="tag" style="background:#ffe8e8">срок</span></div>
+  <p class="note">Спринт 0 закрывается 23-го. Это единственное, что реально горит, — остальное можно двигать.</p>
+
+  <div class="step"><span class="box" role="checkbox" tabindex="0" aria-checked="false"></span><div class="body">
+    <div class="t">Ответить на 11 решений Р1–Р11 по прогону gstack</div>
+    <div class="d">Сажусь и веду тебя по одному вопросу за раз кнопками: что первым отдаём пилоту, дата запуска,
+    вход паролем или кодом, первый канал, панель, очередь, WB/Ozon, «под ключ», ставить ли gstack, main без PR.
+    Скажи «пошли по решениям» — начну. <a href="https://errorslove190-droid.github.io/sites/vetra/gstack/">разбор</a></div>
+    <span class="who me">со мной · 25 мин</span></div></div>
+
+  <div class="step"><span class="box" role="checkbox" tabindex="0" aria-checked="false"></span><div class="body">
+    <div class="t">Сверить 18 вопросов Спринта 0 с Андреем</div>
+    <div class="d">Твои ответы внесены 17.08. Нужен созвон 40–60 мин: пройти расхождения, а не весь список заново.</div>
+    <span class="who">созвон с Андреем</span></div></div>
+
+  <div class="step"><span class="box" role="checkbox" tabindex="0" aria-checked="false"></span><div class="body">
+    <div class="t">Передать Андрею материалы для продаж</div>
+    <div class="d">Текст готов и лежит с 19.08: витрина макетов, <code>docs/pilot.md</code>, первое сообщение
+    владельцу, формула потерь. Скажи «отправляй Андрею» — уйдёт ботом в группу.</div>
+    <span class="who me">одно «да»</span></div></div>
+
+  <div class="step"><span class="box" role="checkbox" tabindex="0" aria-checked="false"></span><div class="body">
+    <div class="t">Посмотреть макеты — до кода</div>
+    <div class="d"><code>cd D:\Projects\vetra\mockups</code>, затем <code>python serve.py</code>. Глянуть с компа и с телефона.
+    Пока не посмотрел — код писать рано.</div>
+    <span class="who">твои руки · 15 мин</span></div></div>
+
+  <div class="step"><span class="box" role="checkbox" tabindex="0" aria-checked="false"></span><div class="body">
+    <div class="t">Node 22 LTS и Docker Desktop</div>
+    <div class="d">У тебя Node 25 — не LTS, на нём часть пакетов Ветры соберётся не так, как у Андрея.</div>
+    <span class="who">твои руки · 20 мин</span></div></div>
+</section>
+
+<section>
+  <div class="head"><h2>3. Это делаю я, тебе только «да»</h2><span class="tag grey">моя часть</span></div>
+  <p class="note">Всё разобрано и расписано, ждёт отмашки. Можно запускать пачкой, пока ты занят другим.</p>
+
+  <div class="step"><span class="box" role="checkbox" tabindex="0" aria-checked="false"></span><div class="body">
+    <div class="t">«Чиним скелет» Ветры</div>
+    <div class="d">prisma / vitest / tsup, <code>.env</code> через <code>--env-file</code>, npm вместо pnpm, убрать WhatsApp из 12 мест,
+    пересобрать <code>/dlya-andreya/</code> со старыми ценами, <code>.gitignore</code>, чистка <code>plan.md</code> §10–11.
+    Список — в <code>docs/audit-gstack-2026-08-19.md</code> §1.2.</div>
+    <span class="who me">скажи «чиним скелет»</span></div></div>
+
+  <div class="step"><span class="box" role="checkbox" tabindex="0" aria-checked="false"></span><div class="body">
+    <div class="t">Убрать с лендинга сравнение по цене</div>
+    <div class="d">«Дешевле в 2–5 раз» — неправда: Jivo бесплатно закрывает ВК, Telegram, MAX и почту до двух операторов.
+    Это прямой риск при первом же разговоре с владельцем.</div>
+    <span class="who me">скажи «убирай цену»</span></div></div>
+
+  <div class="step"><span class="box" role="checkbox" tabindex="0" aria-checked="false"></span><div class="body">
+    <div class="t">Wildberries и Ozon: вписать в план или убрать с витрины</div>
+    <div class="d">Сейчас обещаны на лендинге и на экране подключения, но их нет ни в каналах, ни в спринтах.
+    Решение на один вопрос — задам кнопками.</div>
+    <span class="who me">скажи «решаем по WB»</span></div></div>
+
+  <div class="step"><span class="box" role="checkbox" tabindex="0" aria-checked="false"></span><div class="body">
+    <div class="t">Выложить обновлённое приложение трекера</div>
+    <div class="d">Ждёт только адрес воркера из шага 1.2.</div>
+    <span class="who me">после воркера</span></div></div>
+</section>
+
+<section>
+  <div class="head"><h2>4. Жёсткие даты вне Ветры</h2><span class="tag grey">календарь</span></div>
+
+  <div class="step"><span class="box" role="checkbox" tabindex="0" aria-checked="false"></span><div class="body">
+    <div class="t">22–23 августа — фестиваль в Верхнем Услоне</div>
+    <div class="d">Текст для ведущего готов. Осталось проверить, что у Оладушек он на руках.</div>
+    <span class="who">послезавтра</span></div></div>
+
+  <div class="step"><span class="box" role="checkbox" tabindex="0" aria-checked="false"></span><div class="body">
+    <div class="t">Уведомление в Роскомнадзор — подать в августе</div>
+    <div class="d">Отдельно и раньше ИП: реестр обновляется до 30 дней, обработка данных начнётся в сентябре.
+    Штраф для ИП — до 50 000 ₽. Могу подготовить текст уведомления.</div>
+    <span class="who hot">до конца месяца</span></div></div>
+
+  <div class="step"><span class="box" role="checkbox" tabindex="0" aria-checked="false"></span><div class="body">
+    <div class="t">Воскресенье 23.08 — взвеситься утром</div>
+    <div class="d">Первая контрольная точка набора массы. Скажешь цифру — пересчитаю норму.</div>
+    <span class="who">23 августа</span></div></div>
+
+  <div class="step"><span class="box" role="checkbox" tabindex="0" aria-checked="false"></span><div class="body">
+    <div class="t">Записаться на массаж</div>
+    <div class="d">Плечо и спина болят с 19-го, а ты тянешь подтягивания с весом. Дальше будет дороже.</div>
+    <span class="who">твои руки</span></div></div>
+</section>
+
+<section>
+  <div class="head"><h2>5. Когда будет час подряд</h2><span class="tag grey">не срочно</span></div>
+
+  <div class="step"><span class="box" role="checkbox" tabindex="0" aria-checked="false"></span><div class="body">
+    <div class="t">Пройти Jivo и OkoCRM как салон</div>
+    <div class="d">Регистрация, подключить тестовое сообщество ВК, секундомер, пять отличий → <code>docs/konkurenty.md</code>.
+    Jivo — первый конкурент Ветры, и его до сих пор никто не трогал руками.</div>
+    <span class="who">твои руки · 1 час</span></div></div>
+
+  <div class="step"><span class="box" role="checkbox" tabindex="0" aria-checked="false"></span><div class="body">
+    <div class="t">Добить <code>api_id</code> на my.telegram.org</div>
+    <div class="d">Форма валится в ERROR на обоих аккаунтах. Пробовать с телефона по мобильному интернету,
+    без VPN, паузы по 15 минут, перед каждой попыткой глянуть <code>my.telegram.org/apps</code> — вдруг уже создано.</div>
+    <span class="who">твои руки · когда отпустит</span></div></div>
+
+  <div class="step"><span class="box" role="checkbox" tabindex="0" aria-checked="false"></span><div class="body">
+    <div class="t">Купить домены vetra.me и vetra-app.ru</div>
+    <div class="d">Оба сразу, плюс занять имена в Telegram, ВК и MAX. Приложение — на <code>app.vetra.me</code>.</div>
+    <span class="who">твои руки · деньги</span></div></div>
+</section>
+
+<div class="dark">
+  <div class="head"><h2>Ждёт не тебя</h2></div>
+  <p class="note">Тут ничего не делаем — просто помним, что оно висит.</p>
+
+  <div class="step"><span class="box" role="checkbox" tabindex="0" aria-checked="false"></span><div class="body">
+    <div class="t">Андрей: 10 тест-касаний в салоны Казани</div>
+    <div class="d">Срок 24 августа. Пока разговоров с рынком ноль, тексты лендинга Спринта 1 не пишем.
+    Замеры можешь снимать ты, но касания ведёт он.</div>
+    <span class="who">Андрей</span></div></div>
+
+  <div class="step"><span class="box" role="checkbox" tabindex="0" aria-checked="false"></span><div class="body">
+    <div class="t">Матвей: материалы для Прогона 3</div>
+    <div class="d">Ссылка на видео и раскадровка. Папка уже заведена, формальный срок — 24 часа от получения.</div>
+    <span class="who">Матвей</span></div></div>
+
+  <div class="step"><span class="box" role="checkbox" tabindex="0" aria-checked="false"></span><div class="body">
+    <div class="t">Суюхан: материалы для портфолио</div>
+    <div class="d">Ждём от него.</div>
+    <span class="who">Суюхан</span></div></div>
+</div>
+
+<footer>
+  Отложено до команды «возвращаем»: Apex Structure, своё портфолио, Оладушки (гравировка и выбор
+  из шести стилей), Прогон 2, разбор видео из «Входящее». Источник правды — «Дела.md» в базе.
+</footer>
+
+</div>
+
+<script>
+(function(){
+  var KEY = 'plan-20260820';
+  var steps = [].slice.call(document.querySelectorAll('.step'));
+  var saved = {};
+  try { saved = JSON.parse(localStorage.getItem(KEY) || '{}'); } catch(e){}
+
+  function paint(){
+    var done = steps.filter(function(s){ return s.dataset.done === '1'; }).length;
+    document.getElementById('cnt').textContent = done + ' из ' + steps.length;
+    document.getElementById('fill').style.width = (done / steps.length * 100) + '%';
+  }
+
+  function set(step, i, on){
+    step.dataset.done = on ? '1' : '';
+    step.querySelector('.box').setAttribute('aria-checked', on ? 'true' : 'false');
+    saved[i] = on;
+    localStorage.setItem(KEY, JSON.stringify(saved));
+    paint();
+  }
+
+  steps.forEach(function(step, i){
+    var box = step.querySelector('.box');
+    if (saved[i]) set(step, i, true);
+    box.addEventListener('click', function(){ set(step, i, step.dataset.done !== '1'); });
+    box.addEventListener('keydown', function(e){
+      if (e.key === ' ' || e.key === 'Enter'){ e.preventDefault(); box.click(); }
+    });
+  });
+
+  document.getElementById('reset').addEventListener('click', function(){
+    steps.forEach(function(step, i){ set(step, i, false); });
+  });
+
+  paint();
+})();
+</script>
+</body>
+</html>
