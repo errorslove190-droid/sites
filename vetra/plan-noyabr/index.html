@@ -5,6 +5,18 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="robots" content="noindex, nofollow">
 <title>Ветра — путь до 30 ноября</title>
+<script>
+  // класс ставится только если JS жив: иначе весь текст останется видимым,
+  // а не спрячется под opacity:0 у .rise
+  document.documentElement.className+=' js';
+  // страховка: если через 2,5 с блоки почему-то не показались (сбой обсервера,
+  // фоновая вкладка), показываем всё разом
+  addEventListener('load',()=>setTimeout(()=>{
+    document.querySelectorAll('.rise:not(.on)').forEach(el=>{
+      if(el.getBoundingClientRect().top < innerHeight*1.4) el.classList.add('on');
+    });
+  },2500));
+</script>
 <meta name="description" content="Как Ветра идёт от сегодняшнего дня к ноябрьской цифре: время, деньги, кто что делает.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -36,9 +48,9 @@ p{margin:0}
 #bar{position:fixed; inset:0 auto auto 0; height:3px; width:0%; background:var(--blue); z-index:99; transition:width .1s linear}
 
 /* появление */
-.rise{opacity:0; transform:translateY(22px); transition:opacity .62s var(--ease), transform .62s var(--ease)}
-.rise.on{opacity:1; transform:none}
-@media(prefers-reduced-motion:reduce){.rise{opacity:1;transform:none;transition:none}}
+.js .rise{opacity:0; transform:translateY(22px); transition:opacity .62s var(--ease), transform .62s var(--ease)}
+.js .rise.on{opacity:1; transform:none}
+@media(prefers-reduced-motion:reduce){.js .rise{opacity:1;transform:none;transition:none}}
 
 section{padding:clamp(56px,9vw,116px) 0; position:relative}
 .kicker{font-size:13px; font-weight:600; letter-spacing:.14em; text-transform:uppercase; color:var(--blue-press)}
