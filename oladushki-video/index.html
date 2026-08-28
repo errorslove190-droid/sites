@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex, nofollow">
+  <title>Оладушки — видео пережаты (отчёт)</title>
+  <style>
+    :root { --ink: #1a1a1a; --dim: #6b6b6b; --line: #e3ded6; --bg: #faf7f1; --accent: #b4552d; --good: #2e7d43; }
+    * { box-sizing: border-box; margin: 0; }
+    body { background: var(--bg); color: var(--ink); font: 16px/1.55 system-ui, -apple-system, "Segoe UI", sans-serif; padding: 32px 20px 64px; }
+    main { max-width: 880px; margin: 0 auto; }
+    h1 { font-size: clamp(24px, 4vw, 34px); line-height: 1.2; margin-bottom: 8px; }
+    .sub { color: var(--dim); margin-bottom: 28px; }
+    .big { display: flex; gap: 16px; flex-wrap: wrap; margin-bottom: 32px; }
+    .stat { flex: 1 1 150px; border: 1px solid var(--line); background: #fff; border-radius: 10px; padding: 14px 16px; }
+    .stat b { display: block; font-size: 26px; }
+    .stat.green b { color: var(--good); }
+    .stat span { color: var(--dim); font-size: 13px; }
+    table { width: 100%; border-collapse: collapse; background: #fff; border: 1px solid var(--line); border-radius: 10px; overflow: hidden; font-size: 14px; margin-bottom: 10px; }
+    th, td { padding: 9px 12px; text-align: left; border-top: 1px solid var(--line); white-space: nowrap; }
+    thead th { border-top: none; background: #f1ece3; font-weight: 600; }
+    td.n { text-align: right; font-variant-numeric: tabular-nums; }
+    .drop { color: var(--good); font-weight: 600; }
+    .tablewrap { overflow-x: auto; }
+    .note { color: var(--dim); font-size: 14px; margin: 6px 0 32px; }
+    h2 { font-size: 20px; margin: 36px 0 6px; }
+    .hint { color: var(--dim); font-size: 14px; margin-bottom: 16px; }
+    .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 16px; }
+    figure { background: #fff; border: 1px solid var(--line); border-radius: 10px; overflow: hidden; }
+    figure video { width: 100%; display: block; aspect-ratio: 16/9; object-fit: cover; background: #000; }
+    figcaption { padding: 8px 12px 10px; font-size: 13px; color: var(--dim); }
+    figcaption b { color: var(--ink); }
+    a { color: var(--accent); }
+    .cta { margin-top: 36px; padding: 16px 18px; background: #fff; border: 1px solid var(--line); border-radius: 10px; font-size: 15px; }
+  </style>
+</head>
+<body>
+<main>
+  <h1>Свияжские Оладушки: видео стали в 4 раза легче</h1>
+  <p class="sub">Отчёт от 28.08.2026. Пережаты все 7 роликов сайта и 4 тяжёлых постера. Код страниц не менялся ни на байт — только сами файлы.</p>
+
+  <div class="big">
+    <div class="stat"><b>27,1 МБ</b><span>ролики до</span></div>
+    <div class="stat green"><b>6,8 МБ</b><span>ролики после</span></div>
+    <div class="stat green"><b>−75%</b><span>вес видео</span></div>
+    <div class="stat"><b>SSIM ≥ 0,95</b><span>сходство с оригиналом (порог был 0,93)</span></div>
+  </div>
+
+  <h2>По файлам</h2>
+  <div class="tablewrap">
+  <table>
+    <thead><tr><th>Файл</th><th>Где на сайте</th><th class="n">Было</th><th class="n">Стало</th><th class="n">Экономия</th></tr></thead>
+    <tbody>
+      <tr><td>lavka-promo.mp4</td><td>промо-ролик лавки</td><td class="n">7,7 МБ</td><td class="n">1,0 МБ</td><td class="n drop">−87%</td></tr>
+      <tr><td>hero-flight.mp4</td><td>фон первого экрана</td><td class="n">5,8 МБ</td><td class="n">2,2 МБ</td><td class="n drop">−63%</td></tr>
+      <tr><td>derevo-full.mp4</td><td>плетёное дерево</td><td class="n">5,9 МБ</td><td class="n">0,9 МБ</td><td class="n drop">−84%</td></tr>
+      <tr><td>hero-samovar.mp4</td><td>самовары</td><td class="n">4,5 МБ</td><td class="n">0,8 МБ</td><td class="n drop">−81%</td></tr>
+      <tr><td>grani-korziny.mp4</td><td>корзины</td><td class="n">2,0 МБ</td><td class="n">0,7 МБ</td><td class="n drop">−62%</td></tr>
+      <tr><td>grani-suveniry.mp4</td><td>сувениры</td><td class="n">1,9 МБ</td><td class="n">0,8 МБ</td><td class="n drop">−60%</td></tr>
+      <tr><td>oladushki.mp4</td><td>оладушки крупно</td><td class="n">0,35 МБ</td><td class="n">0,29 МБ</td><td class="n drop">−18%</td></tr>
+      <tr><td>4 постера (jpg)</td><td>первые кадры видео</td><td class="n">1,23 МБ</td><td class="n">0,51 МБ</td><td class="n drop">−59%</td></tr>
+    </tbody>
+  </table>
+  </div>
+  <p class="note">Как жали: 1080p → 720p, h264, два прохода, без аудиодорожки (все ролики и так немые). Проверки: кодек играет в любом браузере, faststart, длительность до кадра, сходство с оригиналом по SSIM, код сайта не тронут (сверено хэшами).</p>
+
+  <h2>Смотри глазами — это уже пережатые версии</h2>
+  <p class="hint">Нажми play. Для сравнения открой <a href="https://sviyazhskie-oladushki.ru" target="_blank" rel="noopener">боевой сайт</a> — там пока лежат старые тяжёлые файлы.</p>
+  <div class="grid">
+    <figure><video src="video/hero-flight.mp4" poster="video/hero-flight-poster.jpg" controls muted loop playsinline preload="none"></video><figcaption><b>Фон первого экрана</b> · 2,2 МБ вместо 5,8</figcaption></figure>
+    <figure><video src="video/lavka-promo.mp4" poster="video/lavka-promo-poster.jpg" controls muted loop playsinline preload="none"></video><figcaption><b>Промо лавки</b> · 1,0 МБ вместо 7,7</figcaption></figure>
+    <figure><video src="video/derevo-full.mp4" poster="video/derevo-full-poster.jpg" controls muted loop playsinline preload="none"></video><figcaption><b>Плетёное дерево</b> · 0,9 МБ вместо 5,9</figcaption></figure>
+    <figure><video src="video/hero-samovar.mp4" poster="video/hero-samovar-poster.jpg" controls muted loop playsinline preload="none"></video><figcaption><b>Самовары</b> · 0,8 МБ вместо 4,5</figcaption></figure>
+    <figure><video src="video/grani-korziny.mp4" poster="video/grani-korziny-poster.jpg" controls muted loop playsinline preload="none"></video><figcaption><b>Корзины</b> · 0,7 МБ вместо 2,0</figcaption></figure>
+    <figure><video src="video/grani-suveniry.mp4" poster="video/grani-suveniry-poster.jpg" controls muted loop playsinline preload="none"></video><figcaption><b>Сувениры</b> · 0,8 МБ вместо 1,9</figcaption></figure>
+    <figure><video src="video/oladushki.mp4" poster="video/oladushki-poster.jpg" controls muted loop playsinline preload="none"></video><figcaption><b>Оладушки крупно</b> · 0,29 МБ</figcaption></figure>
+  </div>
+
+  <div class="cta">
+    <b>Что дальше:</b> если качество устраивает — говоришь «заливай», и я выкладываю на боевой sviyazhskie-oladushki.ru (только папку video/, код не трогается). Оригиналы сохранены в <code>_backup-video/</code> — откат в одну команду.
+  </div>
+</main>
+</body>
+</html>
