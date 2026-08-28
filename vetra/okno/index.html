@@ -271,7 +271,8 @@ body[data-theme="dark"] .day,body[data-theme="glass"] .day{background:rgba(255,2
 .compose textarea:focus{outline:none}
 .tools{display:flex; align-items:center; gap:2px}
 .tool{border:0; background:transparent; cursor:pointer; width:38px; height:38px; border-radius:50%;
-  display:grid; place-items:center; color:var(--muted2)}
+  display:grid; place-items:center; color:var(--muted2); position:relative}
+.tool::after{content:''; position:absolute; inset:-4px}
 .tool:hover{background:rgba(127,127,127,.16); color:var(--ink2)}
 #gap{display:none; width:auto; padding:0 13px; border-radius:var(--r-pill); gap:6px;
   grid-auto-flow:column; align-items:center; color:var(--accent); font-size:13px; font-weight:600}
@@ -749,6 +750,9 @@ let templates = [
 ];
 let nextTpl = 6;
 let openId = null, query = '', filter = 'all', signature = '';
+/* Черновики — по диалогу. Без этого текст, начатый Алине, оставался в поле
+   при открытии Марата: одно неверное нажатие — и сообщение ушло не тому клиенту. */
+const drafts = {};
 
 /* ============ Ожидание ============ */
 const WARN_MIN = 15, LATE_MIN = 30;
@@ -947,12 +951,15 @@ function renderMessages(d) {
 }
 
 function openDialog(id) {
+  if (openId && openId !== id) drafts[openId] = $('text').value;
   openId = id;
   document.body.dataset.view = 'chat';
   const d = byId(id);
   d.unread = 0;
   renderMessages(d);
   renderDialogs();
+  $('text').value = drafts[id] || '';
+  $('text').dispatchEvent(new Event('input'));
   if (innerWidth > 760) $('text').focus();
   if (Math.random() < 0.5) {
     setTimeout(() => {
@@ -1003,6 +1010,7 @@ function sendText() {
   if (signature) text += '\n' + signature;
   f.value = '';
   f.style.height = 'auto';
+  delete drafts[openId];
   syncAct();
   pushOut(text);
   f.focus();
