@@ -4,193 +4,308 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="robots" content="noindex">
-<title>Рабочее окно — Ветра</title>
+<title>Рабочее окно — три варианта — Ветра</title>
 <link rel="stylesheet" href="../maket/css/vetra.css">
 <style>
-/* Окно сотрудника. Стили макета `mockups/inbox.html`, только рабочие:
-   всё, что в макете нарисовано для вида, здесь убрано. */
+/* ============================================================
+   Витрина выбора: одно и то же окно в трёх оформлениях.
+   Данные придуманы, переключатель наверху меняет только вид.
+   Что выберет Михаил — то и переносим в рабочее окно.
+   ============================================================ */
+
+:root{
+  --bg:var(--white); --panel:#fff; --line2:var(--line); --ink2:var(--ink); --muted2:var(--muted);
+  --faint2:var(--faint); --talk:var(--page); --in:#fff; --out:var(--blue-pale); --rail:#F3F6FA;
+  --pattern:none;
+}
+/* Вариант «Спокойный»: фильтры вкладками над списком, ровный светлый фон. */
+body[data-skin="calm"]{--rail:transparent}
+/* Вариант «Как в Telegram»: узкая колонка слева, фон переписки с узором. */
+body[data-skin="tg"]{--rail:#2C3B4E; --talk:#E7EEF6;
+  --pattern:radial-gradient(circle at 12px 12px, rgba(44,120,213,.07) 2px, transparent 2px)}
+/* Вариант «Тёмный»: как Riskora — плотно и контрастно. */
+body[data-skin="dark"]{--bg:#131A22; --panel:#19222C; --line2:#26313D; --ink2:#E8EEF5;
+  --muted2:#93A3B5; --faint2:#6B7B8D; --talk:#101820; --in:#1E2833; --out:#1D3E63; --rail:#0E151C;
+  --pattern:radial-gradient(circle at 12px 12px, rgba(255,255,255,.035) 2px, transparent 2px)}
+
 html,body{height:100%}
-body{background:var(--white); margin:0}
+body{background:var(--bg); color:var(--ink2); margin:0; display:flex; flex-direction:column; overflow:hidden}
 
-.demo{background:#FFF3D6; color:#7A5A12; font-size:13px; line-height:1.45; padding:9px 16px;
-  border-bottom:1px solid #F0DFB0; flex:none}
-body{display:flex; flex-direction:column; height:100dvh; overflow:hidden}
-.work{flex:1; min-height:0; height:auto}
-.top{flex:none;}
-.top{display:flex; align-items:center; gap:14px; height:58px; padding-inline:16px;
-  background:#fff; border-bottom:1px solid var(--line)}
+/* ---------- Переключатель вариантов ---------- */
+.pick{flex:none; display:flex; align-items:center; gap:10px; flex-wrap:wrap;
+  background:#FFF3D6; color:#7A5A12; border-bottom:1px solid #F0DFB0; padding:9px 16px; font-size:13px}
+.pick b{font-weight:600}
+.pick__btns{display:flex; gap:6px; margin-left:auto}
+.pick button{border:1.5px solid #E0CB93; background:#fff; color:#7A5A12; font:inherit; font-size:13px;
+  padding:6px 13px; border-radius:var(--r-pill); cursor:pointer}
+.pick button.on{background:#7A5A12; border-color:#7A5A12; color:#fff}
+
+/* ---------- Шапка ---------- */
+.top{flex:none; display:flex; align-items:center; gap:14px; height:58px; padding-inline:16px;
+  background:var(--panel); border-bottom:1px solid var(--line2)}
 .top__nm{font-family:'Google Sans',sans-serif; font-weight:700; font-size:18px; letter-spacing:-.01em}
-.top__ch{margin-left:auto; display:flex; align-items:center; gap:8px; font-size:13px; color:var(--muted)}
+.top__ch{margin-left:auto; display:flex; align-items:center; gap:8px; font-size:13px; color:var(--muted2)}
 .top__ch i{width:8px; height:8px; border-radius:50%; background:var(--ok); flex:none}
-.top__ch.off i{background:var(--warn)}
-.top__ch a{color:var(--blue-press)}
-.top__me{font-size:13px; color:var(--muted); white-space:nowrap}
-.top__out{border:0; background:transparent; font:inherit; font-size:13px; color:var(--blue-press);
-  cursor:pointer; padding:8px 4px 8px 10px}
-/* На узком экране почта съедает шапку — оставляем только «Выйти». */
-@media (max-width:560px){ .top__me{display:none} }
+.who{position:relative}
+.who__btn{display:flex; align-items:center; gap:9px; border:0; background:transparent; font:inherit;
+  font-size:13.5px; color:var(--ink2); cursor:pointer; padding:7px 9px; border-radius:var(--r-pill)}
+.who__btn:hover{background:rgba(127,127,127,.12)}
+.who__ava{width:28px; height:28px; border-radius:50%; background:var(--blue); color:#fff; display:grid;
+  place-items:center; font-size:12.5px; font-family:'Google Sans',sans-serif; font-weight:500}
+.menu{position:absolute; right:0; top:calc(100% + 8px); width:236px; background:var(--panel);
+  border:1px solid var(--line2); border-radius:var(--r); box-shadow:0 14px 36px rgba(12,22,36,.22);
+  padding:6px; display:none; z-index:30}
+.menu.on{display:block}
+.menu button{display:flex; align-items:center; gap:11px; width:100%; border:0; background:transparent;
+  font:inherit; font-size:14.5px; color:var(--ink2); text-align:left; padding:11px 12px;
+  border-radius:10px; cursor:pointer}
+.menu button:hover{background:rgba(127,127,127,.12)}
+.menu hr{border:0; border-top:1px solid var(--line2); margin:6px 4px}
+.menu i{font-style:normal; font-size:16px; width:20px; text-align:center}
 
-.work{display:grid; grid-template-columns:330px minmax(0,1fr); height:calc(100dvh - 58px)}
+/* ---------- Раскладка ---------- */
+.work{flex:1; min-height:0; display:grid; grid-template-columns:auto 330px minmax(0,1fr)}
 .work > *{min-width:0}
 
-/* ---------- Список диалогов ---------- */
-.list{border-right:1px solid var(--line); display:flex; flex-direction:column; min-height:0}
-.list__top{padding:12px 14px; border-bottom:1px solid var(--line)}
-.search{width:100%; padding:10px 15px; border:1.5px solid var(--line); border-radius:var(--r-pill);
-  font-size:15px; font-family:inherit; background:var(--page); box-sizing:border-box}
-.search:focus{outline:none; border-color:var(--blue); background:#fff}
+/* Узкая колонка фильтров — как «Все чаты / Личные / Каналы» в Telegram. */
+.rail{width:74px; background:var(--rail); border-right:1px solid var(--line2); padding:10px 6px;
+  display:flex; flex-direction:column; gap:4px}
+body[data-skin="calm"] .rail{display:none}
+.rail button{border:0; background:transparent; color:#A9BCD2; font:inherit; cursor:pointer;
+  padding:10px 4px; border-radius:12px; display:grid; gap:3px; justify-items:center; position:relative}
+body[data-skin="dark"] .rail button{color:#7F92A6}
+.rail button i{font-style:normal; font-size:19px; line-height:1}
+.rail button span{font-size:11px; line-height:1.2; text-align:center}
+.rail button.on{background:rgba(255,255,255,.13); color:#fff}
+.rail em{position:absolute; top:4px; right:9px; font-style:normal; font-size:10.5px; font-weight:600;
+  background:var(--blue); color:#fff; border-radius:9px; padding:1px 5px; min-width:8px; text-align:center}
+.rail em.hot{background:#C4362B}
+
+/* Вкладки над списком — вариант «Спокойный». */
+.tabs{display:none; gap:6px; padding:10px 12px 0}
+body[data-skin="calm"] .tabs{display:flex}
+.tabs button{flex:1; border:1.5px solid var(--line2); background:transparent; color:var(--muted2);
+  font:inherit; font-size:13px; padding:7px 6px; border-radius:var(--r-pill); cursor:pointer;
+  white-space:nowrap}
+.tabs button.on{background:var(--blue); border-color:var(--blue); color:#fff}
+
+/* ---------- Список ---------- */
+.list{border-right:1px solid var(--line2); display:flex; flex-direction:column; min-height:0;
+  background:var(--panel)}
+.list__top{padding:12px 14px; border-bottom:1px solid var(--line2)}
+body[data-skin="calm"] .list__top{border-bottom:0; padding-bottom:8px}
+.search{width:100%; padding:10px 15px; border:1.5px solid var(--line2); border-radius:var(--r-pill);
+  font-size:15px; font-family:inherit; background:var(--bg); color:var(--ink2); box-sizing:border-box}
+.search:focus{outline:none; border-color:var(--blue)}
 .list__body{overflow-y:auto; flex:1; padding:8px; -webkit-overflow-scrolling:touch}
 
-/* Строка списка как в мессенджере: аватар · имя и превью · справа время и счётчик.
-   Две строки, ровно как привык человек, — третьей строки в столбце времени нет. */
 .dlg{display:grid; grid-template-columns:auto minmax(0,1fr) auto; gap:11px; padding:10px 12px;
   border-radius:var(--r); cursor:pointer; border:0; background:transparent; width:100%;
-  text-align:left; font:inherit; align-items:center;
+  text-align:left; font:inherit; align-items:center; color:var(--ink2);
   transition:background var(--fast) var(--ease)}
-.dlg:hover{background:var(--blue-tint)}
-.dlg.on{background:var(--blue-soft)}
-/* Средняя колонка обязана уметь сжиматься, иначе длинное превью растягивает
-   весь список и внизу страницы появляется горизонтальный скролл. */
+.dlg:hover{background:rgba(44,120,213,.09)}
+.dlg.on{background:var(--blue); color:#fff}
+.dlg.on .dlg__tx,.dlg.on .dlg__meta,.dlg.on .dlg__wait{color:rgba(255,255,255,.82)}
+.dlg.on .dlg__badge{background:#fff; color:var(--blue)}
 .dlg__mid{min-width:0}
 .dlg__ava{width:44px; height:44px; border-radius:50%; display:grid; place-items:center; color:#fff;
   font-family:'Google Sans',sans-serif; font-weight:500; flex:none; background:var(--blue)}
-/* Подпись внутри кнопки остаётся строчной и слипается с именем — поэтому block. */
 .dlg__nm{display:block; font-family:'Google Sans',sans-serif; font-weight:500; font-size:15px;
-  color:var(--ink); overflow:hidden; text-overflow:ellipsis; white-space:nowrap}
-.dlg__tx{display:block; font-size:13.5px; color:var(--muted); margin-top:2px; overflow:hidden;
+  overflow:hidden; text-overflow:ellipsis; white-space:nowrap}
+.dlg__line{display:flex; align-items:baseline; gap:8px; margin-top:2px}
+.dlg__tx{font-size:13.5px; color:var(--muted2); flex:1; min-width:0; overflow:hidden;
   text-overflow:ellipsis; white-space:nowrap}
-.dlg__meta{display:flex; flex-direction:column; align-items:flex-end; gap:5px;
-  font-size:12px; color:var(--faint); white-space:nowrap}
+.dlg__meta{display:flex; flex-direction:column; align-items:flex-end; gap:5px; font-size:12px;
+  color:var(--faint2); white-space:nowrap}
 .dlg__badge{min-width:20px; padding:2px 6px; border-radius:var(--r-pill); text-align:center;
   background:var(--blue); color:#fff; font-size:11.5px; font-weight:500}
-
-/* Сколько клиент ждёт ответа. Пороги — SLA из @vetra/shared: 15 минут «висит»,
-   30 минут «горит». Метка идёт в строке превью, а не в столбце времени: справа
-   она удлиняла строку и выталкивала список за край экрана. */
-.dlg__wait{flex:none; font-size:11.5px; font-weight:500; color:var(--muted)}
+.dlg__wait{flex:none; font-size:11.5px; font-weight:500; color:var(--muted2)}
 .dlg__wait.warn{color:#A8600C}
-.dlg__wait.late{color:#B3261E}
-.dlg__line{display:flex; align-items:baseline; gap:8px; margin-top:2px}
-.dlg__line .dlg__tx{margin-top:0; flex:1; min-width:0}
-.dlg.late{background:#FEF3F1}
-.dlg.late:hover{background:#FBE7E3}
+.dlg__wait.late{color:#C4362B}
+body[data-skin="dark"] .dlg__wait.warn{color:#E0A458}
+body[data-skin="dark"] .dlg__wait.late{color:#F08076}
+.dlg.late{background:rgba(196,54,43,.07)}
+.dlg.late.on{background:var(--blue)}
 
-.empty{padding:44px 22px; text-align:center; color:var(--muted); font-size:14.5px; line-height:1.55}
-.empty b{display:block; font-family:'Google Sans',sans-serif; font-weight:500; color:var(--ink);
+.empty{padding:40px 22px; text-align:center; color:var(--muted2); font-size:14.5px; line-height:1.55}
+.empty b{display:block; font-family:'Google Sans',sans-serif; font-weight:500; color:var(--ink2);
   font-size:16px; margin-bottom:8px}
+.empty a{color:var(--blue-press)}
 
 /* ---------- Переписка ---------- */
-.chat{display:flex; flex-direction:column; min-height:0; background:var(--page)}
-.chat__top{display:flex; align-items:center; gap:12px; padding:11px 18px; background:#fff;
-  border-bottom:1px solid var(--line)}
+.chat{display:flex; flex-direction:column; min-height:0; background:var(--talk);
+  background-image:var(--pattern); background-size:24px 24px}
+.chat__top{display:flex; align-items:center; gap:12px; padding:11px 18px; background:var(--panel);
+  border-bottom:1px solid var(--line2)}
 .chat__who{font-family:'Google Sans',sans-serif; font-weight:500}
-.chat__sub{font-size:12.5px; color:var(--muted)}
+.chat__sub{font-size:12.5px; color:var(--muted2)}
 .back{display:none; border:0; background:transparent; font:inherit; color:var(--blue-press);
   cursor:pointer; padding:6px 10px 6px 0}
-/* Сообщения прижаты к низу, как в мессенджере: короткий разговор начинается
-   у поля ответа, а не висит под шапкой с пустым полем под собой. */
-.chat__body{flex:1; overflow-y:auto; padding:18px; display:flex; flex-direction:column;
-  gap:4px; -webkit-overflow-scrolling:touch}
-/* Прижимает короткий разговор к низу. Именно отступом, а не `justify-content:flex-end`:
-   тот у длинной переписки срезает верх — до первых сообщений не доскроллить. */
+.chat__body{flex:1; overflow-y:auto; padding:18px; display:flex; flex-direction:column; gap:4px}
 .chat__body > :first-child{margin-top:auto}
 
-.msg{max-width:min(70%,560px); padding:8px 13px 7px; border-radius:16px; font-size:15px; line-height:1.42;
-  white-space:pre-wrap; overflow-wrap:anywhere; position:relative}
-/* Время в правом нижнем углу пузыря, а не отдельной строкой: столбик времени
-   под каждым сообщением растягивает переписку вдвое. */
-.msg small{float:right; font-size:11px; color:var(--faint); margin:6px -3px -2px 10px; line-height:1}
+.row{display:flex; align-items:flex-end; gap:8px; max-width:min(74%,600px)}
+.row-in{align-self:flex-start}
+.row-out{align-self:flex-end; margin-left:auto; flex-direction:row-reverse}
+/* Аватар собеседника у его сообщений — как в Telegram. Только у варианта «ТГ» и тёмного. */
+.row__ava{width:30px; height:30px; border-radius:50%; background:var(--blue); color:#fff; flex:none;
+  display:grid; place-items:center; font-size:12px; font-family:'Google Sans',sans-serif; font-weight:500}
+body[data-skin="calm"] .row__ava{display:none}
+.row-out .row__ava{visibility:hidden}
+body[data-skin="calm"] .row-out .row__ava{display:none}
+
+.msg{padding:8px 13px 7px; border-radius:16px; font-size:15px; line-height:1.42; white-space:pre-wrap;
+  overflow-wrap:anywhere; color:var(--ink2)}
+.msg-in{background:var(--in); border:1px solid var(--line2); border-bottom-left-radius:6px}
+.msg-out{background:var(--out); border-bottom-right-radius:6px}
+body[data-skin="dark"] .msg-out{color:#EAF2FC}
+.msg small{float:right; font-size:11px; color:var(--faint2); margin:6px -3px -2px 10px; line-height:1;
+  display:flex; align-items:center; gap:3px}
 .msg::after{content:''; display:block; clear:both}
-/* Подряд идущие сообщения одного собеседника жмутся друг к другу. */
-.msg + .msg{margin-top:0}
-.msg-in + .msg-out,.msg-out + .msg-in{margin-top:10px}
+.tick{color:#3E9C5A; font-size:12px}
+body[data-skin="dark"] .tick{color:#6FD08C}
 
 .day{align-self:center; margin:12px 0 6px; padding:4px 12px; border-radius:var(--r-pill);
-  background:rgba(31,45,61,.07); color:var(--muted); font-size:12.5px; font-weight:500}
-.msg-in{background:#fff; border:1px solid var(--line); border-bottom-left-radius:6px; align-self:flex-start}
-.msg-out{background:var(--blue-pale); border-bottom-right-radius:6px; align-self:flex-end}
+  background:rgba(31,45,61,.09); color:var(--muted2); font-size:12.5px; font-weight:500}
+body[data-skin="dark"] .day{background:rgba(255,255,255,.09)}
 
-/* ---------- Вложения ----------
-   Фото показываем прямо в переписке: половина обращений в салон — «хочу вот такой
-   цвет» с картинкой, и ради неё лезть в Telegram означает, что окно не одно. */
 .att{display:block; margin-top:8px}
 .msg .att:first-child{margin-top:0}
-.att img{display:block; max-width:100%; width:auto; max-height:320px; border-radius:12px; cursor:zoom-in}
-.att audio,.att video{display:block; max-width:100%; border-radius:12px}
-.att video{max-height:320px}
+.att img{display:block; max-width:100%; max-height:300px; border-radius:12px; cursor:zoom-in}
 .att-file{display:inline-flex; align-items:center; gap:8px; padding:9px 13px; border-radius:12px;
-  background:rgba(0,0,0,.045); color:var(--ink); font-size:14px; text-decoration:none}
-.att-file:hover{background:rgba(0,0,0,.075); text-decoration:none}
-.att-file b{font-weight:500}
-.att-file span{color:var(--muted); font-size:12.5px}
+  background:rgba(127,127,127,.14); color:var(--ink2); font-size:14px; text-decoration:none}
 
-/* Просмотр фото во весь экран: в списке оно ужато, а мастеру нужны детали. */
-.zoom{position:fixed; inset:0; background:rgba(12,18,28,.9); display:none; place-items:center;
-  z-index:50; padding:20px; cursor:zoom-out}
+/* ---------- Поле ответа ---------- */
+.compose{background:var(--panel); border-top:1px solid var(--line2); padding:12px 16px}
+.chips{display:flex; gap:8px; overflow-x:auto; padding-bottom:10px; scrollbar-width:none}
+.chips::-webkit-scrollbar{display:none}
+.chips button{flex:none; border:1.5px solid var(--line2); background:var(--bg); color:var(--ink2);
+  font:inherit; font-size:13.5px; padding:7px 14px; border-radius:var(--r-pill); cursor:pointer;
+  white-space:nowrap}
+.chips button:hover{border-color:var(--blue-mid)}
+.chips a{flex:none; align-self:center; font-size:13px; color:var(--muted2); white-space:nowrap; padding:0 4px}
+.compose__box{display:flex; gap:10px; align-items:flex-end}
+.compose textarea{flex:1; border:1.5px solid var(--line2); border-radius:var(--r-lg); padding:11px 14px;
+  font:inherit; font-size:15px; resize:none; max-height:140px; background:var(--panel);
+  color:var(--ink2); box-sizing:border-box}
+.compose textarea:focus{outline:none; border-color:var(--blue)}
+.mic,.clip{border:1.5px solid var(--line2); background:var(--panel); color:var(--muted2); font-size:19px;
+  line-height:1; width:46px; height:46px; border-radius:50%; cursor:pointer; flex:none; display:grid;
+  place-items:center}
+.mic{display:none}
+.mic.can{display:grid}
+.mic:hover,.clip:hover{border-color:var(--blue-mid); color:var(--blue-press)}
+.mic.rec{background:#B3261E; border-color:#B3261E; color:#fff; animation:pulse 1.1s ease-in-out infinite}
+@keyframes pulse{50%{opacity:.55}}
+.send{border:0; background:var(--blue); color:#fff; font-family:'Google Sans',sans-serif; font-weight:500;
+  font-size:15px; padding:12px 20px; border-radius:var(--r-pill); cursor:pointer; flex:none}
+
+/* ---------- Подсказки ---------- */
+.hints{max-width:430px; margin:22px auto 0; text-align:left; display:grid; gap:12px}
+.hint{display:grid; grid-template-columns:26px 1fr; gap:12px; align-items:start; font-size:14px;
+  line-height:1.5; color:var(--muted2)}
+.hint i{font-style:normal; font-size:17px; line-height:1.35; text-align:center}
+.hint b{display:block; font-weight:500; color:var(--ink2); font-size:14.5px}
+
+/* ---------- Панель настроек ---------- */
+.sheet{position:fixed; inset:0; background:rgba(10,17,26,.55); display:none; z-index:60;
+  padding:24px 16px; overflow-y:auto}
+.sheet.on{display:block}
+.sheet__box{max-width:560px; margin:0 auto; background:var(--panel); border:1px solid var(--line2);
+  border-radius:var(--r-lg); padding:22px}
+.sheet h2{font-family:'Google Sans',sans-serif; font-weight:700; font-size:20px; margin:0 0 4px}
+.sheet h3{font-family:'Google Sans',sans-serif; font-weight:700; font-size:16px; margin:22px 0 6px}
+.sheet p.lead{color:var(--muted2); font-size:14px; line-height:1.55; margin:0 0 8px}
+.sheet label{display:block; font-weight:600; font-size:14px; margin:14px 0 7px}
+.sheet input,.sheet textarea{width:100%; box-sizing:border-box; padding:11px 13px; font:inherit;
+  font-size:16px; border:1.5px solid var(--line2); border-radius:var(--r); background:var(--bg);
+  color:var(--ink2)}
+.sheet textarea{min-height:76px; resize:vertical; line-height:1.5}
+.sheet input:focus,.sheet textarea:focus{outline:none; border-color:var(--blue)}
+.sheet .go{margin-top:16px; width:100%; padding:12px 20px; font:inherit; font-size:16px; font-weight:600;
+  color:#fff; background:var(--blue); border:0; border-radius:var(--r-pill); cursor:pointer}
+.sheet .ghost{background:transparent; color:var(--blue-press); border:1.5px solid var(--line2)}
+.tpl{border:1px solid var(--line2); border-radius:var(--r); padding:12px 14px; margin-bottom:10px;
+  background:var(--bg)}
+.tpl__head{display:flex; align-items:center; gap:10px}
+.tpl__head b{font-family:'Google Sans',sans-serif; font-weight:500; font-size:15px}
+.tpl__head button{margin-left:auto; border:0; background:transparent; color:#B3261E; font:inherit;
+  font-size:13.5px; cursor:pointer; padding:6px 2px}
+.tpl p{margin:6px 0 0; color:var(--muted2); font-size:13.5px; line-height:1.5; white-space:pre-wrap}
+.check{display:flex; align-items:flex-start; gap:10px; font-size:15px; line-height:1.45; margin-top:14px}
+.check input{width:20px; height:20px; flex:none; margin-top:1px; padding:0}
+.hours{display:flex; gap:10px}
+.hours > div{flex:1}
+.note{margin-top:14px; padding:11px 14px; border-radius:var(--r); font-size:14px; line-height:1.5;
+  background:rgba(44,120,213,.1); color:var(--blue-press)}
+.sheet__close{display:flex; align-items:center; margin-bottom:14px}
+.sheet__close button{margin-left:auto; border:0; background:transparent; font:inherit; font-size:22px;
+  line-height:1; color:var(--muted2); cursor:pointer; padding:4px 8px}
+
+.zoom{position:fixed; inset:0; background:rgba(12,18,28,.9); display:none; place-items:center; z-index:70;
+  padding:20px; cursor:zoom-out}
 .zoom.on{display:grid}
 .zoom img{max-width:100%; max-height:100%; border-radius:8px}
 
-.compose{background:#fff; border-top:1px solid var(--line); padding:12px 16px;
-  padding-bottom:calc(12px + env(safe-area-inset-bottom))}
-.compose__box{display:flex; gap:10px; align-items:flex-end}
-
-/* Заготовки: частые фразы в одно нажатие. Прокрутка вбок, чтобы не съедали высоту. */
-.chips{display:flex; gap:8px; overflow-x:auto; padding-bottom:10px; scrollbar-width:none}
-.chips::-webkit-scrollbar{display:none}
-.chips button{flex:none; border:1.5px solid var(--line); background:var(--page); color:var(--ink);
-  font:inherit; font-size:13.5px; padding:7px 14px; border-radius:var(--r-pill); cursor:pointer;
-  white-space:nowrap; transition:border-color var(--fast) var(--ease), background var(--fast) var(--ease)}
-.chips button:hover{border-color:var(--blue-mid); background:var(--blue-tint)}
-.chips a{flex:none; align-self:center; font-size:13px; color:var(--muted); white-space:nowrap; padding:0 4px}
-
-/* Голосовой ввод. Кнопка появляется, только если браузер умеет распознавание. */
-.mic{border:1.5px solid var(--line); background:#fff; color:var(--muted); font-size:19px; line-height:1;
-  width:46px; height:46px; border-radius:50%; cursor:pointer; flex:none; display:none; place-items:center}
-.mic.can{display:grid}
-.mic:hover{border-color:var(--blue-mid); color:var(--blue-press)}
-.mic.rec{background:#B3261E; border-color:#B3261E; color:#fff; animation:pulse 1.1s ease-in-out infinite}
-@keyframes pulse{50%{opacity:.55}}
-.compose textarea{flex:1; border:1.5px solid var(--line); border-radius:var(--r-lg); padding:11px 14px;
-  font:inherit; font-size:15px; resize:none; max-height:140px; background:#fff; box-sizing:border-box}
-.compose textarea:focus{outline:none; border-color:var(--blue); box-shadow:0 0 0 4px rgba(44,120,213,.13)}
-.send{border:0; background:var(--blue); color:#fff; font-family:'Google Sans',sans-serif; font-weight:500;
-  font-size:15px; padding:12px 20px; border-radius:var(--r-pill); cursor:pointer; flex:none;
-  transition:background var(--fast) var(--ease)}
-.send:hover{background:var(--blue-press)}
-.send:disabled{background:var(--faint); cursor:default}
-.err{margin:0 16px 10px; padding:9px 13px; border-radius:var(--r); background:#FFF3F1;
-  border:1px solid #F3C9C2; color:#9C3B2B; font-size:13.5px}
-
-/* ---------- Телефон: одна колонка ---------- */
+/* ---------- Телефон ---------- */
 @media (max-width:760px){
   .work{grid-template-columns:1fr}
+  .rail{display:none !important}
+  .tabs{display:flex !important}
   .list{border-right:0}
   .back{display:inline-block}
   body[data-view="chat"] .list{display:none}
   body[data-view="list"] .chat{display:none}
-  .msg{max-width:82%}
+  .row{max-width:88%}
+  .pick__btns{margin-left:0; width:100%}
+  .pick button{flex:1}
 }
 </style>
 </head>
-<body data-view="list">
+<body data-view="list" data-skin="tg">
 
-<div class="demo">Снимок рабочего окна Ветры. Переписка придумана, ответы никуда не уходят — нажимать можно что угодно.</div>
+<div class="pick">
+  <b>Три варианта одного окна.</b> Переписка придумана, нажимать можно всё.
+  <span class="pick__btns">
+    <button data-skin="tg" class="on">Как в Telegram</button>
+    <button data-skin="calm">Спокойный</button>
+    <button data-skin="dark">Тёмный</button>
+  </span>
+</div>
 
 <header class="top">
   <span class="top__nm">Ветра</span>
-  <span class="top__ch off" id="ch"><i></i><span id="ch-t">канал проверяется…</span></span>
-  <span class="top__me" id="me"></span>
-  <button class="top__out" id="out" type="button">Выйти</button>
+  <span class="top__ch"><i></i><span>Telegram: @vetra_pilot_bot</span></span>
+  <span class="who">
+    <button class="who__btn" id="who-btn" type="button">
+      <span class="who__ava">И</span><span>Ирина</span><span>⌄</span>
+    </button>
+    <div class="menu" id="menu">
+      <button id="m-settings" type="button"><i>💬</i>Ответы и автоответ</button>
+      <button id="m-hints" type="button"><i>❓</i>Показать подсказки</button>
+      <hr>
+      <button id="m-exit" type="button"><i>↩</i>Выйти</button>
+    </div>
+  </span>
 </header>
 
 <div class="work">
+  <nav class="rail" id="rail">
+    <button data-filter="all" class="on" type="button"><i>💬</i><span>Все</span><em id="r-all">5</em></button>
+    <button data-filter="waiting" type="button"><i>⏱</i><span>Ждут</span><em class="hot" id="r-wait">3</em></button>
+    <button data-filter="done" type="button"><i>✓</i><span>Отвечено</span></button>
+  </nav>
+
   <aside class="list">
+    <div class="tabs" id="tabs">
+      <button data-filter="all" class="on" type="button">Все</button>
+      <button data-filter="waiting" type="button">Ждут ответа</button>
+      <button data-filter="done" type="button">Отвечено</button>
+    </div>
     <div class="list__top">
       <input class="search" id="q" type="search" placeholder="Поиск по имени или сообщению" aria-label="Поиск">
     </div>
-    <div class="list__body" id="dialogs">
-      <div class="empty"><b>Пока пусто</b>Как только клиент напишет боту, диалог появится здесь.</div>
-    </div>
+    <div class="list__body" id="dialogs"></div>
   </aside>
 
   <section class="chat">
@@ -202,12 +317,12 @@ body{display:flex; flex-direction:column; height:100dvh; overflow:hidden}
       </div>
     </div>
     <div class="chat__body" id="body"></div>
-    <div class="err" id="err" hidden></div>
     <form class="compose" id="form" hidden>
       <div class="chips" id="chips"></div>
       <div class="compose__box">
-        <button class="mic" id="mic" type="button" title="Надиктовать ответ" aria-label="Надиктовать ответ">🎙</button>
-        <textarea id="text" rows="1" placeholder="Ответ клиенту. Enter — отправить" aria-label="Ответ клиенту"></textarea>
+        <button class="clip" id="clip" type="button" title="Отправить клиенту фото или файл">📎</button>
+        <button class="mic" id="mic" type="button" title="Надиктовать ответ">🎙</button>
+        <textarea id="text" rows="1" placeholder="Ответ клиенту. Enter — отправить"></textarea>
         <button class="send" id="send" type="submit">Отправить</button>
       </div>
     </form>
@@ -216,20 +331,50 @@ body{display:flex; flex-direction:column; height:100dvh; overflow:hidden}
 
 <div class="zoom" id="zoom"><img id="zoom-img" alt="Фото от клиента"></div>
 
+<!-- Панель настроек: живая, всё сохраняется в памяти страницы -->
+<div class="sheet" id="sheet">
+  <div class="sheet__box">
+    <div class="sheet__close"><h2>Ответы и автоответ</h2><button id="sheet-x" type="button">×</button></div>
+
+    <h3>Заготовки</h3>
+    <p class="lead">Частые фразы в одно нажатие — они появляются кнопками над полем ответа.
+    Салон отвечает одно и то же по десять раз в день.</p>
+    <div id="tpl-list"></div>
+    <label for="t-title">Название кнопки</label>
+    <input id="t-title" maxlength="40" placeholder="Например: Парковка">
+    <label for="t-text">Что подставить в ответ</label>
+    <textarea id="t-text" maxlength="1000" placeholder="Парковка во дворе, въезд с улицы Баумана."></textarea>
+    <button class="go" id="t-add" type="button">Добавить заготовку</button>
+
+    <h3>Автоответ</h3>
+    <p class="lead">Уходит клиенту сам, пока администратор не подошёл. Виден в переписке как обычный
+    ответ, чтобы человек не поздоровался второй раз.</p>
+    <label class="check"><input type="checkbox" id="a-on"><span>Включить автоответ</span></label>
+    <label for="a-text">Текст</label>
+    <textarea id="a-text">Здравствуйте! Сообщение получили, администратор ответит в ближайшее время.</textarea>
+    <label class="check"><input type="checkbox" id="a-off" checked><span>Только вне рабочих часов —
+      днём клиенту отвечает живой человек</span></label>
+    <div class="hours">
+      <div><label for="a-from">Работаем с</label><input id="a-from" value="10" inputmode="numeric"></div>
+      <div><label for="a-to">до</label><input id="a-to" value="20" inputmode="numeric"></div>
+      <div><label for="a-cool">Не чаще раза в, ч</label><input id="a-cool" value="8" inputmode="numeric"></div>
+    </div>
+    <button class="go" id="a-save" type="button">Сохранить</button>
+    <div class="note" id="a-note">Выключен — клиенту отвечает только живой человек.</div>
+
+    <button class="go ghost" id="sheet-done" type="button" style="margin-top:22px">Закрыть</button>
+  </div>
+</div>
+
 <script>
 const $ = (id) => document.getElementById(id);
-let openId = null;
-let query = '';
+const escapeHtml = (s) =>
+  String(s).replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' })[c]);
 
-/* ---------- Придуманная переписка салона ----------
-   Дальше идёт код настоящего окна, слово в слово: список, метки ожидания,
-   вложения. Заменён только источник данных и отправка ответа. */
-
-const H = (h, m) => { const d = new Date(); d.setHours(h, m, 0, 0); return d.toISOString(); };
+/* ============ Придуманная переписка салона ============ */
 const AGO = (min) => new Date(Date.now() - min * 60000).toISOString();
 const Y = (h, m) => { const d = new Date(); d.setDate(d.getDate() - 1); d.setHours(h, m, 0, 0); return d.toISOString(); };
 
-/* Фото клиента: маленькая картинка прямо в файле, чтобы снимок работал без сервера. */
 const PHOTO = 'data:image/svg+xml;utf8,' + encodeURIComponent(
   '<svg xmlns="http://www.w3.org/2000/svg" width="520" height="380">' +
   '<defs><linearGradient id="g" x1="0" y1="0" x2="1" y2="1">' +
@@ -240,281 +385,240 @@ const PHOTO = 'data:image/svg+xml;utf8,' + encodeURIComponent(
   'фото от клиента</text></svg>');
 
 const DATA = [
-  { id: 'telegram:1', contactName: 'Алина Сафина', contactUsername: 'alina_sfn', unread: 2,
-    messages: [
-      { id: 1, direction: 'in', text: 'Здравствуйте! Подскажите, на субботу к Лилии есть окошко на маникюр?', sentAt: AGO(47), attachments: [] },
-      { id: 2, direction: 'in', text: 'Желательно после обеда', sentAt: AGO(45), attachments: [] },
-    ] },
-  { id: 'telegram:2', contactName: 'Гульнара', contactUsername: null, unread: 1,
-    messages: [
-      { id: 3, direction: 'in', text: 'Хочу вот такой оттенок, получится?', sentAt: AGO(18),
-        attachments: [{ kind: 'image', url: PHOTO, mime: 'image/svg+xml' }] },
-    ] },
-  { id: 'telegram:3', contactName: 'Рената Ахметова', contactUsername: 'renata_a', unread: 1,
-    messages: [
-      { id: 4, direction: 'in', text: 'А вы в воскресенье работаете?', sentAt: AGO(6), attachments: [] },
-    ] },
-  { id: 'telegram:4', contactName: 'Марат Хайруллин', contactUsername: 'marat_kzn', unread: 0,
-    messages: [
-      { id: 5, direction: 'in',  text: 'Добрый день. Можно перенести стрижку с четверга на пятницу?', sentAt: H(10, 4), attachments: [] },
-      { id: 6, direction: 'out', text: 'Здравствуйте, Марат! Да, в пятницу свободно в 15:00 и в 18:30. Какое время удобнее?', sentAt: H(10, 9), attachments: [] },
-      { id: 7, direction: 'in',  text: '18:30 подойдёт', sentAt: H(10, 12), attachments: [] },
-      { id: 8, direction: 'out', text: 'Записала вас на пятницу, 18:30, мастер Ильнур. Напомним за день.', sentAt: H(10, 13), attachments: [] },
-    ] },
-  { id: 'telegram:5', contactName: 'Ильдар', contactUsername: null, unread: 0,
-    messages: [
-      { id: 9,  direction: 'in',  text: 'Подарочный сертификат у вас есть? Хочу маме на день рождения', sentAt: Y(16, 2), attachments: [] },
-      { id: 10, direction: 'out', text: 'Есть, на любую сумму от 3 000 ₽. Оформляем в салоне или пришлём электронный.', sentAt: Y(16, 8), attachments: [] },
-    ] },
+  { id: 'd1', name: 'Алина Сафина', user: 'alina_sfn', unread: 2, messages: [
+    { dir: 'in', text: 'Здравствуйте! Подскажите, на субботу к Лилии есть окошко на маникюр?', at: AGO(47) },
+    { dir: 'in', text: 'Желательно после обеда', at: AGO(45) },
+  ] },
+  { id: 'd2', name: 'Гульнара', user: null, unread: 1, messages: [
+    { dir: 'in', text: 'Хочу вот такой оттенок, получится?', at: AGO(18), files: [{ kind: 'image', url: PHOTO }] },
+  ] },
+  { id: 'd3', name: 'Рената Ахметова', user: 'renata_a', unread: 1, messages: [
+    { dir: 'in', text: 'А вы в воскресенье работаете?', at: AGO(6) },
+  ] },
+  { id: 'd4', name: 'Марат Хайруллин', user: 'marat_kzn', unread: 0, messages: [
+    { dir: 'in',  text: 'Добрый день. Можно перенести стрижку с четверга на пятницу?', at: Y(10, 4) },
+    { dir: 'out', text: 'Здравствуйте, Марат! В пятницу свободно в 15:00 и в 18:30. Какое время удобнее?', at: Y(10, 9) },
+    { dir: 'in',  text: '18:30 подойдёт', at: Y(10, 12) },
+    { dir: 'out', text: 'Записала вас на пятницу, 18:30, мастер Ильнур. Напомним за день.', at: Y(10, 13) },
+  ] },
+  { id: 'd5', name: 'Ильдар', user: null, unread: 0, messages: [
+    { dir: 'in',  text: 'Подарочный сертификат у вас есть? Хочу маме на день рождения', at: Y(16, 2) },
+    { dir: 'out', text: 'Есть, на любую сумму от 3 000 ₽. Вот наш прайс:', at: Y(16, 8),
+      files: [{ kind: 'file', name: 'Прайс-лист.pdf', size: '240 КБ' }] },
+  ] },
 ];
 
-const TEMPLATES = [
-  { title: 'Часы работы', text: 'Мы работаем ежедневно с 10:00 до 20:00.' },
-  { title: 'Адрес', text: 'Мы находимся по адресу: ______. Ориентир — ______.' },
-  { title: 'Прайс', text: 'Пришлю цены: ______. Точную стоимость скажет мастер после осмотра.' },
-  { title: 'Записала', text: 'Записала вас на ______, мастер ______. Напомним за день до визита.' },
-  { title: 'Уточню и вернусь', text: 'Секунду, уточню у мастера и напишу вам в течение нескольких минут.' },
+let templates = [
+  { id: 1, title: 'Часы работы', text: 'Мы работаем ежедневно с 10:00 до 20:00.' },
+  { id: 2, title: 'Адрес', text: 'Мы находимся по адресу: ______. Ориентир — ______.' },
+  { id: 3, title: 'Прайс', text: 'Пришлю цены: ______. Точную стоимость скажет мастер после осмотра.' },
+  { id: 4, title: 'Записала', text: 'Записала вас на ______, мастер ______. Напомним за день до визита.' },
+  { id: 5, title: 'Уточню и вернусь', text: 'Секунду, уточню у мастера и напишу вам в течение нескольких минут.' },
 ];
+let nextTplId = 6;
 
-/* Ожидание считает сервер; в снимке — то же правило: время первого сообщения
-   после нашего последнего ответа. */
-function withWait(d) {
-  const last = d.messages[d.messages.length - 1];
-  let waitingSince = null;
-  if (last.direction === 'in') {
-    const lastOut = [...d.messages].reverse().find((m) => m.direction === 'out');
-    const first = d.messages.find((m) => m.direction === 'in' && (!lastOut || m.sentAt > lastOut.sentAt));
-    waitingSince = first ? first.sentAt : null;
-  }
-  return { id: d.id, contactName: d.contactName, contactUsername: d.contactUsername,
-           lastText: last.text || 'Фото', lastAt: last.sentAt, unread: d.unread, waitingSince };
-}
-let dialogs = DATA.map(withWait);
-const byId = (id) => DATA.find((d) => d.id === id);
-const showError = () => {};
+let openId = null;
+let query = '';
+let filter = 'all';
 
+/* ============ Ожидание ответа ============ */
 const WARN_MIN = 15;
-
 const LATE_MIN = 30;
 
-
-const waitMinutes = (d) =>
-  d.waitingSince ? Math.max(0, Math.floor((Date.now() - new Date(d.waitingSince)) / 60000)) : null;
-
+function waitingSince(d) {
+  const last = d.messages[d.messages.length - 1];
+  if (last.dir !== 'in') return null;
+  const lastOut = [...d.messages].reverse().find((m) => m.dir === 'out');
+  const first = d.messages.find((m) => m.dir === 'in' && (!lastOut || m.at > lastOut.at));
+  return first ? first.at : null;
+}
+const waitMinutes = (d) => {
+  const since = waitingSince(d);
+  return since ? Math.max(0, Math.floor((Date.now() - new Date(since)) / 60000)) : null;
+};
 
 function humanWait(min) {
   if (min < 1) return 'только что';
   if (min < 60) return min + ' мин';
-  if (min < 1440) {
-    const h = Math.floor(min / 60);
-    const m = min % 60;
-    return m ? h + ' ч ' + m + ' мин' : h + ' ч';
-  }
+  if (min < 1440) { const h = Math.floor(min / 60), m = min % 60; return m ? h + ' ч ' + m + ' мин' : h + ' ч'; }
   return 'больше суток';
 }
-
-
 function waitMarkup(d) {
   const min = waitMinutes(d);
   if (min === null) return '';
-  const cls = min >= LATE_MIN ? ' late' : min >= WARN_MIN ? ' warn' : '';
   if (min < 1) return '<span class="dlg__wait">ждёт</span>';
-  const word = min >= LATE_MIN ? 'висит ' : 'ждёт ';
-  return '<span class="dlg__wait' + cls + '">' + word + humanWait(min) + '</span>';
+  const cls = min >= LATE_MIN ? ' late' : min >= WARN_MIN ? ' warn' : '';
+  return '<span class="dlg__wait' + cls + '">' + (min >= LATE_MIN ? 'висит ' : 'ждёт ') + humanWait(min) + '</span>';
 }
-
-
 function byUrgency(a, b) {
-  const wa = waitMinutes(a);
-  const wb = waitMinutes(b);
+  const wa = waitMinutes(a), wb = waitMinutes(b);
   if (wa !== null && wb !== null) return wb - wa;
   if (wa !== null) return -1;
   if (wb !== null) return 1;
-  return new Date(b.lastAt) - new Date(a.lastAt);
+  return new Date(lastAt(b)) - new Date(lastAt(a));
 }
-
+const lastAt = (d) => d.messages[d.messages.length - 1].at;
+const lastText = (d) => {
+  const m = d.messages[d.messages.length - 1];
+  if (m.text) return m.text;
+  const f = m.files && m.files[0];
+  return f ? (f.kind === 'image' ? 'Фото' : 'Файл: ' + f.name) : '';
+};
 
 const initials = (name) =>
   String(name).split(/\s+/).filter(Boolean).slice(0, 2).map((w) => w[0].toUpperCase()).join('');
-
-
-function escapeHtml(s) {
-  return String(s).replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' })[c]);
-}
-
-
+const clock = (iso) => new Date(iso).toLocaleTimeString('ru-RU', { hour: '2-digit', minute: '2-digit' });
 function shortTime(iso) {
   const d = new Date(iso);
-  const sameDay = d.toDateString() === new Date().toDateString();
-  return sameDay
-    ? d.toLocaleTimeString('ru-RU', { hour: '2-digit', minute: '2-digit' })
+  return d.toDateString() === new Date().toDateString()
+    ? clock(iso)
     : d.toLocaleDateString('ru-RU', { day: '2-digit', month: '2-digit' });
 }
-
-
-const sizeText = (bytes) =>
-  !bytes ? '' : bytes < 1024 * 1024
-    ? Math.max(1, Math.round(bytes / 1024)) + ' КБ'
-    : (bytes / 1024 / 1024).toFixed(1).replace('.', ',') + ' МБ';
-
-
-function attachmentMarkup(messageId, file, index) {
-  const src = file.url;
-  if (file.kind === 'image' || file.kind === 'sticker') {
-    return '<span class="att"><img src="' + src + '" alt="Фото от клиента" loading="lazy" data-zoom="' + src + '"></span>';
-  }
-  if (file.kind === 'voice') {
-    return '<span class="att"><audio controls preload="none" src="' + src + '"></audio></span>';
-  }
-  if (file.kind === 'video') {
-    return '<span class="att"><video controls preload="metadata" src="' + src + '"></video></span>';
-  }
-  const name = file.name ? escapeHtml(file.name) : 'Файл';
-  const size = sizeText(file.size);
-  return (
-    '<span class="att"><a class="att-file" href="' + src + '" target="_blank" rel="noopener" download>' +
-    '📎 <b>' + name + '</b>' + (size ? '<span>' + size + '</span>' : '') + '</a></span>'
-  );
-}
-
-
-const clock = (iso) =>
-  new Date(iso).toLocaleTimeString('ru-RU', { hour: '2-digit', minute: '2-digit' });
-
-
 function dayLabel(iso) {
-  const d = new Date(iso);
-  const today = new Date();
-  const yesterday = new Date();
-  yesterday.setDate(today.getDate() - 1);
+  const d = new Date(iso), today = new Date(), y = new Date();
+  y.setDate(today.getDate() - 1);
   if (d.toDateString() === today.toDateString()) return 'Сегодня';
-  if (d.toDateString() === yesterday.toDateString()) return 'Вчера';
+  if (d.toDateString() === y.toDateString()) return 'Вчера';
   return d.toLocaleDateString('ru-RU', { day: 'numeric', month: 'long' });
 }
 
-
-function messageMarkup(m) {
-  const files = (m.attachments || [])
-    .map((f, i) => attachmentMarkup(m.id, f, i))
-    .join('');
-  const text = m.text ? escapeHtml(m.text) : '';
-  return (
-    '<div class="msg msg-' + (m.direction === 'in' ? 'in' : 'out') + '">' +
-    files + text + '<small>' + clock(m.sentAt) + '</small></div>'
-  );
+/* ============ Список ============ */
+function visible() {
+  const q = query.trim().toLowerCase();
+  return DATA.filter((d) => {
+    if (filter === 'waiting' && waitMinutes(d) === null) return false;
+    if (filter === 'done' && waitMinutes(d) !== null) return false;
+    if (q && !(d.name + ' ' + lastText(d)).toLowerCase().includes(q)) return false;
+    return true;
+  }).sort(byUrgency);
 }
 
-
-function talkMarkup(messages) {
-  let day = '';
-  return messages
-    .map((m) => {
-      const label = dayLabel(m.sentAt);
-      const head = label === day ? '' : '<div class="day">' + escapeHtml(label) + '</div>';
-      day = label;
-      return head + messageMarkup(m);
-    })
-    .join('');
+function renderCounts() {
+  const waiting = DATA.filter((d) => waitMinutes(d) !== null).length;
+  $('r-all').textContent = DATA.length;
+  $('r-wait').textContent = waiting;
+  $('r-wait').style.display = waiting ? '' : 'none';
 }
-
 
 function renderDialogs() {
   const box = $('dialogs');
-  const q = query.trim().toLowerCase();
-  const shown = (q
-    ? dialogs.filter((d) => (d.contactName + ' ' + d.lastText).toLowerCase().includes(q))
-    : dialogs.slice()
-  ).sort(byUrgency);
+  const shown = visible();
+  renderCounts();
 
   if (!shown.length) {
-    box.innerHTML = q
-      ? '<div class="empty"><b>Ничего не нашлось</b>Попробуйте другое слово.</div>'
-      : '<div class="empty"><b>Пока пусто</b>Как только клиент напишет боту, диалог появится здесь.</div>';
+    box.innerHTML = query.trim()
+      ? '<div class="empty"><b>Ничего не нашлось</b>Поиск идёт по имени клиента и последнему сообщению.</div>'
+      : filter === 'waiting'
+        ? '<div class="empty"><b>Все ответили</b>Ни один клиент не ждёт ответа. Так и должно выглядеть в конце дня.</div>'
+        : '<div class="empty"><b>Пока пусто</b>Как только клиент напишет боту, диалог появится здесь сам.</div>';
     return;
   }
 
-  box.innerHTML = shown
-    .map((d) => {
-      const min = waitMinutes(d);
-      const hot = min !== null && min >= LATE_MIN ? ' late' : '';
-      return (
-        '<button class="dlg' + (d.id === openId ? ' on' : '') + hot + '" data-id="' + escapeHtml(d.id) + '" type="button">' +
-        '<span class="dlg__ava">' + escapeHtml(initials(d.contactName)) + '</span>' +
-        '<span class="dlg__mid"><span class="dlg__nm">' + escapeHtml(d.contactName) + '</span>' +
-        '<span class="dlg__line"><span class="dlg__tx">' + escapeHtml(d.lastText) + '</span>' +
-        waitMarkup(d) + '</span></span>' +
-        '<span class="dlg__meta"><span>' + shortTime(d.lastAt) + '</span>' +
-        (d.unread ? '<span class="dlg__badge">' + d.unread + '</span>' : '') +
-        '</span></button>'
-      );
-    })
-    .join('');
+  box.innerHTML = shown.map((d) => {
+    const min = waitMinutes(d);
+    const hot = min !== null && min >= LATE_MIN ? ' late' : '';
+    return '<button class="dlg' + (d.id === openId ? ' on' : '') + hot + '" data-id="' + d.id + '" type="button">' +
+      '<span class="dlg__ava">' + escapeHtml(initials(d.name)) + '</span>' +
+      '<span class="dlg__mid"><span class="dlg__nm">' + escapeHtml(d.name) + '</span>' +
+      '<span class="dlg__line"><span class="dlg__tx">' + escapeHtml(lastText(d)) + '</span>' + waitMarkup(d) + '</span></span>' +
+      '<span class="dlg__meta"><span>' + shortTime(lastAt(d)) + '</span>' +
+      (d.unread ? '<span class="dlg__badge">' + d.unread + '</span>' : '') + '</span></button>';
+  }).join('');
 }
 
+/* ============ Переписка ============ */
+function fileMarkup(f) {
+  if (f.kind === 'image') return '<span class="att"><img src="' + f.url + '" alt="Фото" data-zoom="' + f.url + '"></span>';
+  return '<span class="att"><span class="att-file">📎 <b>' + escapeHtml(f.name) + '</b>' +
+    (f.size ? ' <span style="opacity:.7">' + f.size + '</span>' : '') + '</span></span>';
+}
 
-function renderMessages(dialog, messages) {
-  $('who').textContent = dialog.contactName;
-  const min = waitMinutes(dialog);
-  $('sub').textContent =
-    'Telegram' + (dialog.contactUsername ? ' · @' + dialog.contactUsername : '') +
-    (min !== null ? ' · ждёт ' + humanWait(min) : '');
+function messageMarkup(m, d) {
+  const files = (m.files || []).map(fileMarkup).join('');
+  const tick = m.dir === 'out' ? '<span class="tick">✓✓</span>' : '';
+  return '<div class="row row-' + m.dir + '">' +
+    '<span class="row__ava">' + escapeHtml(initials(d.name)) + '</span>' +
+    '<div class="msg msg-' + m.dir + '">' + files + escapeHtml(m.text || '') +
+    '<small>' + clock(m.at) + tick + '</small></div></div>';
+}
+
+function talkMarkup(d) {
+  let day = '';
+  return d.messages.map((m) => {
+    const label = dayLabel(m.at);
+    const head = label === day ? '' : '<div class="day">' + label + '</div>';
+    day = label;
+    return head + messageMarkup(m, d);
+  }).join('');
+}
+
+const HINTS =
+  '<div class="empty"><b>Выберите диалог слева</b>' +
+  'Сообщения клиентов приходят сюда сами — обновлять страницу не нужно.' +
+  '<div class="hints">' +
+  '<div class="hint"><i>⏱</i><span><b>Смотрите на «ждёт»</b>Через 15 минут без ответа диалог помечается «висит» и поднимается наверх. Слева есть отдельный фильтр «Ждут».</span></div>' +
+  '<div class="hint"><i>💬</i><span><b>Кнопки над полем ответа</b>Частые фразы в одно нажатие. Свои добавляются в «Ответы и автоответ» — это меню под именем справа сверху.</span></div>' +
+  '<div class="hint"><i>📎</i><span><b>Скрепка</b>Отправить клиенту фото или файл: прайс, схему проезда, пример работы мастера.</span></div>' +
+  '<div class="hint"><i>🎙</i><span><b>Микрофон</b>Надиктовать ответ голосом вместо набора. Работает в Chrome и на телефоне.</span></div>' +
+  '</div></div>';
+
+function renderMessages(d) {
+  $('who').textContent = d.name;
+  const min = waitMinutes(d);
+  $('sub').textContent = 'Telegram' + (d.user ? ' · @' + d.user : '') + (min !== null ? ' · ждёт ' + humanWait(min) : '');
   $('form').hidden = false;
-
   const body = $('body');
-  body.innerHTML = talkMarkup(messages);
-
-  // Telegram мог удалить файл, а канал — отвалиться. Битая картинка выглядит
-  // поломкой окна, поэтому подменяем её словами и ссылкой «открыть отдельно».
-  for (const img of body.querySelectorAll('img[data-zoom]')) {
-    img.addEventListener('error', () => {
-      const note = document.createElement('a');
-      note.className = 'att-file';
-      note.href = img.getAttribute('src');
-      note.target = '_blank';
-      note.rel = 'noopener';
-      note.innerHTML = '🖼 <b>Фото не открылось</b><span>попробовать ещё раз</span>';
-      img.replaceWith(note);
-    });
-  }
-
+  body.innerHTML = talkMarkup(d);
   body.scrollTop = body.scrollHeight;
 }
 
+function showHints() {
+  openId = null;
+  $('form').hidden = true;
+  $('who').textContent = 'Выберите диалог';
+  $('sub').textContent = 'Слева список того, кто написал';
+  $('body').innerHTML = HINTS;
+  renderDialogs();
+}
 
+const byId = (id) => DATA.find((d) => d.id === id);
 
 function openDialog(id) {
   openId = id;
   document.body.dataset.view = 'chat';
   const d = byId(id);
   d.unread = 0;
-  dialogs = DATA.map(withWait);
-  renderMessages(dialogs.find((x) => x.id === id), d.messages);
+  renderMessages(d);
   renderDialogs();
   $('text').focus();
 }
 
-function sendReply(event) {
-  event.preventDefault();
+/* ============ Ответ ============ */
+$('form').addEventListener('submit', (e) => {
+  e.preventDefault();
   const field = $('text');
   const text = field.value.trim();
   if (!text || !openId) return;
   const d = byId(openId);
-  d.messages.push({ id: Date.now(), direction: 'out', text, sentAt: new Date().toISOString(), attachments: [] });
+  d.messages.push({ dir: 'out', text, at: new Date().toISOString() });
   field.value = '';
   field.style.height = 'auto';
-  dialogs = DATA.map(withWait);
-  renderMessages(dialogs.find((x) => x.id === openId), d.messages);
+  renderMessages(d);
   renderDialogs();
   field.focus();
-}
-
-$('dialogs').addEventListener('click', (e) => {
-  const btn = e.target.closest('.dlg');
-  if (btn) openDialog(btn.dataset.id);
 });
-$('back').addEventListener('click', () => { document.body.dataset.view = 'list'; });
-$('q').addEventListener('input', (e) => { query = e.target.value; renderDialogs(); });
-$('form').addEventListener('submit', sendReply);
+
+$('clip').addEventListener('click', () => {
+  if (!openId) return;
+  const d = byId(openId);
+  const caption = $('text').value.trim();
+  d.messages.push({ dir: 'out', text: caption, at: new Date().toISOString(),
+    files: [{ kind: 'file', name: 'Прайс-лист.pdf', size: '240 КБ' }] });
+  $('text').value = '';
+  renderMessages(d);
+  renderDialogs();
+});
+
 $('text').addEventListener('input', (e) => {
   e.target.style.height = 'auto';
   e.target.style.height = Math.min(e.target.scrollHeight, 140) + 'px';
@@ -523,11 +627,46 @@ $('text').addEventListener('keydown', (e) => {
   if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); $('form').requestSubmit(); }
 });
 
-$('chips').innerHTML = TEMPLATES
-  .map((t) => '<button type="button" data-text="' + escapeHtml(t.text) + '">' + escapeHtml(t.title) + '</button>')
-  .join('') + '<a href="#" onclick="alert(\'В рабочем окне отсюда открывается страница настройки ответов и автоответа.\'); return false">Настроить</a>';
+$('dialogs').addEventListener('click', (e) => {
+  const btn = e.target.closest('.dlg');
+  if (btn) openDialog(btn.dataset.id);
+});
+$('back').addEventListener('click', () => { document.body.dataset.view = 'list'; });
+$('q').addEventListener('input', (e) => { query = e.target.value; renderDialogs(); });
 
+/* ============ Фильтры ============ */
+function setFilter(name) {
+  filter = name;
+  for (const b of document.querySelectorAll('#rail button, #tabs button')) {
+    b.classList.toggle('on', b.dataset.filter === name);
+  }
+  renderDialogs();
+}
+for (const box of [$('rail'), $('tabs')]) {
+  box.addEventListener('click', (e) => {
+    const b = e.target.closest('button[data-filter]');
+    if (b) setFilter(b.dataset.filter);
+  });
+}
+
+/* ============ Меню под именем ============ */
+$('who-btn').addEventListener('click', (e) => {
+  e.stopPropagation();
+  $('menu').classList.toggle('on');
+});
+document.addEventListener('click', () => $('menu').classList.remove('on'));
+$('m-settings').addEventListener('click', () => { $('sheet').classList.add('on'); });
+$('m-hints').addEventListener('click', () => { document.body.dataset.view = 'chat'; showHints(); });
+$('m-exit').addEventListener('click', () => alert('В рабочем окне здесь выход. В витрине выходить некуда.'));
+
+/* ============ Заготовки ============ */
+function renderChips() {
+  $('chips').innerHTML = templates
+    .map((t) => '<button type="button" data-text="' + escapeHtml(t.text) + '">' + escapeHtml(t.title) + '</button>')
+    .join('') + '<a href="#" id="chips-more">Настроить</a>';
+}
 $('chips').addEventListener('click', (e) => {
+  if (e.target.id === 'chips-more') { e.preventDefault(); $('sheet').classList.add('on'); return; }
   const btn = e.target.closest('button[data-text]');
   if (!btn) return;
   const field = $('text');
@@ -536,7 +675,59 @@ $('chips').addEventListener('click', (e) => {
   field.focus();
 });
 
-/* Голосовой ввод — тот же браузерный, что и в рабочем окне. */
+function renderTemplates() {
+  $('tpl-list').innerHTML = templates.map((t) =>
+    '<div class="tpl"><div class="tpl__head"><b>' + escapeHtml(t.title) + '</b>' +
+    '<button data-del="' + t.id + '" type="button">Удалить</button></div>' +
+    '<p>' + escapeHtml(t.text) + '</p></div>').join('');
+  renderChips();
+}
+$('tpl-list').addEventListener('click', (e) => {
+  const b = e.target.closest('button[data-del]');
+  if (!b) return;
+  templates = templates.filter((t) => String(t.id) !== b.dataset.del);
+  renderTemplates();
+});
+$('t-add').addEventListener('click', () => {
+  const title = $('t-title').value.trim();
+  const text = $('t-text').value.trim();
+  if (!title || !text) { alert('Нужны и короткое название, и сам текст'); return; }
+  templates.push({ id: nextTplId++, title, text });
+  $('t-title').value = '';
+  $('t-text').value = '';
+  renderTemplates();
+});
+
+/* ============ Автоответ ============ */
+$('a-save').addEventListener('click', () => {
+  const on = $('a-on').checked;
+  const off = $('a-off').checked;
+  const from = $('a-from').value;
+  const to = $('a-to').value;
+  $('a-note').textContent = !on
+    ? 'Выключен — клиенту отвечает только живой человек.'
+    : off
+      ? 'Включён: отвечает вне часов с ' + from + ':00 до ' + to + ':00.'
+      : 'Включён: отвечает на первое сообщение в любое время.';
+});
+
+$('sheet-x').addEventListener('click', () => $('sheet').classList.remove('on'));
+$('sheet-done').addEventListener('click', () => $('sheet').classList.remove('on'));
+$('sheet').addEventListener('click', (e) => { if (e.target === $('sheet')) $('sheet').classList.remove('on'); });
+
+/* ============ Фото во весь экран ============ */
+$('body').addEventListener('click', (e) => {
+  const img = e.target.closest('img[data-zoom]');
+  if (!img) return;
+  $('zoom-img').src = img.dataset.zoom;
+  $('zoom').classList.add('on');
+});
+$('zoom').addEventListener('click', () => $('zoom').classList.remove('on'));
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape') { $('zoom').classList.remove('on'); $('sheet').classList.remove('on'); }
+});
+
+/* ============ Голосовой ввод ============ */
 const Recognition = window.SpeechRecognition || window.webkitSpeechRecognition;
 if (Recognition) {
   $('mic').classList.add('can');
@@ -560,21 +751,17 @@ if (Recognition) {
   });
 }
 
-$('body').addEventListener('click', (e) => {
-  const img = e.target.closest('img[data-zoom]');
-  if (!img) return;
-  $('zoom-img').src = img.dataset.zoom;
-  $('zoom').classList.add('on');
+/* ============ Переключатель вариантов ============ */
+document.querySelector('.pick__btns').addEventListener('click', (e) => {
+  const b = e.target.closest('button[data-skin]');
+  if (!b) return;
+  document.body.dataset.skin = b.dataset.skin;
+  for (const x of document.querySelectorAll('.pick__btns button')) x.classList.toggle('on', x === b);
 });
-$('zoom').addEventListener('click', () => $('zoom').classList.remove('on'));
-document.addEventListener('keydown', (e) => { if (e.key === 'Escape') $('zoom').classList.remove('on'); });
 
-$('ch').classList.remove('off');
-$('ch-t').innerHTML = 'Telegram: <a href="#" onclick="return false">@vetra_pilot_bot</a>';
-$('me').textContent = 'Ирина, администратор';
-$('out').addEventListener('click', () => alert('В рабочем окне здесь выход. В снимке выходить некуда.'));
+renderTemplates();
+showHints();
 document.title = '(4) Входящие — Ветра';
-renderDialogs();
 setInterval(renderDialogs, 30000);
 </script>
 </body>
