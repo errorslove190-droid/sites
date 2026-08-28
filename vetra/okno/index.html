@@ -34,6 +34,34 @@ body[data-theme="night"]{--bg:#161C26; --panel:#1C2430; --line2:#2A3441; --ink2:
   --faint2:#6E7E90; --talk:#141B24; --in:#212C38; --out:#2F5D3C; --outInk:#E7F5EA; --rail:#111821;
   --railInk:#8496A9; --railOn:rgba(255,255,255,.11); --railOnInk:#fff; --tick:#8FE0A6}
 
+/* Стекло: панели полупрозрачные и размытые, сквозь них виден фон-картинка.
+   Своя фотография на фоне переписки в этой теме видна и в списке, и в шапке. */
+body[data-theme="glass"]{--bg:#0E1622; --panel:rgba(255,255,255,.13); --line2:rgba(255,255,255,.22);
+  --ink2:#F2F6FB; --muted2:#C7D4E3; --faint2:#9FB1C6; --talk:transparent; --in:rgba(255,255,255,.17);
+  --out:rgba(92,166,255,.32); --outInk:#F4F9FF; --rail:rgba(255,255,255,.1);
+  --railInk:#C7D4E3; --railOn:rgba(255,255,255,.24); --railOnInk:#fff; --tick:#8FE0A6}
+/* Картинка-фон лежит на всей странице, а не только под перепиской.
+   Своей картинки ещё нет — показываем спокойный градиент, чтобы стекло было видно. */
+body[data-theme="glass"]{
+  --glassBg:linear-gradient(140deg, #123A63 0%, #2C78D5 38%, #7E58B8 68%, #1B2440 100%);
+  background-image:var(--own, var(--glassBg)); background-size:cover;
+  background-position:center; background-attachment:fixed}
+body[data-theme="glass"] .top,
+body[data-theme="glass"] .list,
+body[data-theme="glass"] .rail,
+body[data-theme="glass"] .chat__top,
+body[data-theme="glass"] .compose,
+body[data-theme="glass"] .menu,
+body[data-theme="glass"] .sheet__box,
+body[data-theme="glass"] .msg{backdrop-filter:blur(18px) saturate(140%);
+  -webkit-backdrop-filter:blur(18px) saturate(140%)}
+body[data-theme="glass"] .chat{background-image:none}
+body[data-theme="glass"] .msg-in{border-color:rgba(255,255,255,.24)}
+body[data-theme="glass"] .day{background:rgba(255,255,255,.18)}
+body[data-theme="glass"] .search,
+body[data-theme="glass"] .compose textarea{background:rgba(255,255,255,.12); color:var(--ink2)}
+body[data-theme="glass"] .sheet{background:rgba(6,12,20,.5); backdrop-filter:blur(6px)}
+
 /* ---------- Обои переписки ---------- */
 body[data-wall="dots"]{--wall:radial-gradient(circle at 12px 12px, rgba(44,120,213,.09) 2px, transparent 2px)}
 body[data-wall="dots"][data-theme="dark"],body[data-wall="dots"][data-theme="night"]{
@@ -235,31 +263,45 @@ body[data-theme="dark"] .day,body[data-theme="night"] .day{background:rgba(255,2
   white-space:nowrap}
 .chips button:hover{border-color:var(--accent)}
 .chips a{flex:none; align-self:center; font-size:13px; color:var(--muted2); white-space:nowrap; padding:0 4px}
-/* Нижняя панель как в мессенджере: слева скрепка, дальше поле во всю оставшуюся
-   ширину, справа одна круглая кнопка. Пусто — микрофон, есть текст — отправить.
-   Так поле не зажимается тремя кнопками, а на телефоне это половина ширины. */
-.compose__box{display:flex; gap:8px; align-items:flex-end}
-.field{flex:1; min-width:0; position:relative; display:flex}
-.compose textarea{flex:1; min-width:0; border:1.5px solid var(--line2); border-radius:22px;
-  padding:11px 82px 11px 16px; font:inherit; font-size:var(--fz); resize:none; max-height:40vh;
-  background:var(--panel); color:var(--ink2); box-sizing:border-box; line-height:1.4}
-.compose textarea:focus{outline:none; border-color:var(--accent)}
-/* Кнопки внутри поля — смайлик и переход по пропускам заготовки. */
-.in{position:absolute; bottom:6px; border:0; background:transparent; cursor:pointer; font-size:19px;
-  line-height:1; width:34px; height:34px; border-radius:50%; display:grid; place-items:center;
-  color:var(--muted2)}
-.in:hover{background:rgba(127,127,127,.15); color:var(--press)}
-#smile{right:8px}
-#gap{right:42px; display:none; font-size:15px; font-weight:700; color:var(--accent)}
+/* Поле ввода одной карточкой: текст на всю ширину сверху, кнопки строкой снизу.
+   Так на телефоне под текст остаётся вся ширина, а не обрезок между кнопками. */
+.box{border:1.5px solid var(--line2); border-radius:20px; background:var(--panel); padding:6px 6px 6px 14px}
+.box:focus-within{border-color:var(--accent)}
+.compose textarea{display:block; width:100%; border:0; background:transparent; color:var(--ink2);
+  font:inherit; font-size:var(--fz); resize:none; max-height:40vh; padding:10px 8px 4px 0;
+  box-sizing:border-box; line-height:1.4}
+.compose textarea:focus{outline:none}
+.tools{display:flex; align-items:center; gap:2px; padding-top:2px}
+.tool{border:0; background:transparent; cursor:pointer; font-size:19px; line-height:1; width:38px;
+  height:38px; border-radius:50%; display:grid; place-items:center; color:var(--muted2)}
+.tool:hover{background:rgba(127,127,127,.15); color:var(--press)}
+#gap{display:none; font-size:14px; font-weight:700; color:var(--accent); width:auto; padding:0 12px;
+  border-radius:var(--r-pill)}
 #gap.on{display:grid}
-.rnd{border:1.5px solid var(--line2); background:var(--panel); color:var(--muted2); font-size:19px;
-  line-height:1; width:46px; height:46px; border-radius:50%; cursor:pointer; flex:none; display:grid;
-  place-items:center}
-.rnd:hover{border-color:var(--accent); color:var(--press)}
+.tools .count{margin-left:auto; font-size:12px; color:var(--faint2); padding-right:8px}
 /* Одна кнопка на два состояния: пока поле пустое — запись голосового. */
-#act{background:var(--accent); border-color:var(--accent); color:#fff; font-size:20px}
-#act.rec{background:#C4362B; border-color:#C4362B; animation:pulse 1.1s ease-in-out infinite}
+#act{background:var(--accent); color:#fff; font-size:19px; width:40px; height:40px; border-radius:50%;
+  border:0; cursor:pointer; display:grid; place-items:center; flex:none}
+#act.rec{background:#C4362B; animation:pulse 1.1s ease-in-out infinite}
 @keyframes pulse{50%{opacity:.55}}
+
+/* ---------- Голосовое сообщение ----------
+   Кнопка «играть», волна на всю ширину пузыря и скорость. На телефоне зоны
+   нажатия крупные: администратор слушает клиента одной рукой, на ходу. */
+.voice{display:flex; align-items:center; gap:10px; min-width:220px}
+.voice__play{border:0; background:var(--accent); color:#fff; width:42px; height:42px; border-radius:50%;
+  cursor:pointer; font-size:16px; display:grid; place-items:center; flex:none}
+.msg-in .voice__play{background:var(--accent)}
+.voice__mid{flex:1; min-width:0}
+.wave{display:flex; align-items:center; gap:2px; height:30px; cursor:pointer}
+.wave i{flex:1; min-width:2px; background:currentColor; opacity:.28; border-radius:2px;
+  transition:opacity .12s linear}
+.wave i.done{opacity:.95}
+.voice__row{display:flex; align-items:center; gap:10px; margin-top:3px; font-size:11.5px; color:var(--faint2)}
+.voice__speed{margin-left:auto; border:1px solid var(--line2); background:transparent; color:inherit;
+  font:inherit; font-size:11.5px; font-weight:600; padding:3px 9px; border-radius:var(--r-pill);
+  cursor:pointer; min-height:26px}
+.voice__speed:hover{border-color:var(--accent); color:var(--press)}
 
 .emo{position:absolute; bottom:calc(100% - 4px); left:16px; width:min(320px, calc(100% - 32px));
   background:var(--panel); border:1px solid var(--line2); border-radius:var(--r);
@@ -355,6 +397,7 @@ body[data-theme="dark"] .note,body[data-theme="night"] .note{color:#9CC5F2}
     <button data-preset="calm">Спокойный</button>
     <button data-preset="dark">Тёмный</button>
     <button data-preset="night">Ночной</button>
+    <button data-preset="glass">Стекло</button>
     <button data-preset="big">Крупный</button>
   </span>
 </div>
@@ -411,14 +454,15 @@ body[data-theme="dark"] .note,body[data-theme="night"] .note{color:#9CC5F2}
     <form class="compose" id="form" hidden>
       <div class="emo" id="emo"><div class="emo__grid" id="emo-grid"></div></div>
       <div class="chips" id="chips"></div>
-      <div class="compose__box">
-        <button class="rnd" id="clip" type="button" title="Отправить фото или файл">📎</button>
-        <div class="field">
-          <textarea id="text" rows="1" placeholder="Ответ клиенту. Enter — отправить"></textarea>
-          <button class="in" id="gap" type="button" title="К следующему пропуску (Tab)">→|</button>
-          <button class="in" id="smile" type="button" title="Эмодзи">🙂</button>
+      <div class="box">
+        <textarea id="text" rows="1" placeholder="Ответ клиенту. Enter — отправить"></textarea>
+        <div class="tools">
+          <button class="tool" id="clip" type="button" title="Отправить фото или файл">📎</button>
+          <button class="tool" id="smile" type="button" title="Эмодзи">🙂</button>
+          <button class="tool" id="gap" type="button" title="К следующему пропуску (Tab)">→ пропуск</button>
+          <span class="count" id="count"></span>
+          <button id="act" type="submit" title="Записать голосовое">🎙</button>
         </div>
-        <button class="rnd" id="act" type="submit" title="Записать голосовое">🎙</button>
       </div>
     </form>
   </section>
@@ -446,7 +490,10 @@ body[data-theme="dark"] .note,body[data-theme="night"] .note{color:#9CC5F2}
         <button data-v="tg">Как в Telegram</button>
         <button data-v="dark">Тёмная</button>
         <button data-v="night">Ночная</button>
+        <button data-v="glass">Стекло</button>
       </div>
+      <p class="lead" style="margin-top:8px">«Стекло» показывает картинку сквозь панели.
+      Своя фотография в этой теме видна на всём окне, а не только за перепиской.</p>
 
       <h3>Фон переписки</h3>
       <div class="opts" data-set="wall">
@@ -597,7 +644,10 @@ const DATA = [
       files:[{ kind:'image', url:PHOTO, name:'Фото' }] },
   ] },
   { id:'d3', name:'Рената Ахметова', user:'renata_a', color:'#3E9C5A', unread:1, messages:[
-    { dir:'in', text:'А вы в воскресенье работаете?', at:AGO(6) },
+    { dir:'in', text:'А вы в воскресенье работаете?', at:AGO(8) },
+    // Голосовое от клиента: самое частое, что администратор не может послушать
+    // из окна — и из-за чего уходит в Telegram.
+    { dir:'in', text:'', at:AGO(6), files:[{ kind:'voice', sec:14 }] },
   ] },
   { id:'d4', name:'Марат Хайруллин', user:'marat_kzn', color:'#A8600C', unread:0, messages:[
     { dir:'in',  text:'Добрый день. Можно перенести стрижку с четверга на пятницу?', at:Y(10,4) },
@@ -631,7 +681,9 @@ function lastText(d) {
   const m = lastMsg(d);
   if (m.text) return m.text;
   const f = m.files && m.files[0];
-  return f ? (f.kind === 'image' ? (f.name || 'Фото') : 'Файл: ' + f.name) : '';
+  if (!f) return '';
+  if (f.kind === 'voice') return 'Голосовое сообщение';
+  return f.kind === 'image' ? (f.name || 'Фото') : 'Файл: ' + f.name;
 }
 function waitMinutes(d) {
   const m = lastMsg(d);
@@ -716,7 +768,57 @@ function renderDialogs() {
 }
 
 /* ============ Переписка ============ */
-function fileMarkup(f) {
+/* ============ Голосовое сообщение ============
+   Звук делаем прямо в браузере: короткий WAV в памяти. Так в витрине можно
+   по-настоящему нажать «играть» и услышать разницу между 1×, 1,5× и 2×. */
+function makeVoice(seconds) {
+  const rate = 8000, n = Math.round(rate * seconds);
+  const buf = new ArrayBuffer(44 + n * 2);
+  const view = new DataView(buf);
+  const str = (at, s) => { for (let i = 0; i < s.length; i++) view.setUint8(at + i, s.charCodeAt(i)); };
+  str(0, 'RIFF'); view.setUint32(4, 36 + n * 2, true); str(8, 'WAVEfmt ');
+  view.setUint32(16, 16, true); view.setUint16(20, 1, true); view.setUint16(22, 1, true);
+  view.setUint32(24, rate, true); view.setUint32(28, rate * 2, true);
+  view.setUint16(32, 2, true); view.setUint16(34, 16, true);
+  str(36, 'data'); view.setUint32(40, n * 2, true);
+
+  // Гудение с «слогами»: на слух похоже на речь через стену, этого хватает.
+  for (let i = 0; i < n; i++) {
+    const t = i / rate;
+    const syllable = 0.5 + 0.5 * Math.sin(2 * Math.PI * 3.1 * t);
+    const tone = Math.sin(2 * Math.PI * (150 + 40 * Math.sin(2 * Math.PI * 1.7 * t)) * t);
+    view.setInt16(44 + i * 2, tone * syllable * 8000, true);
+  }
+  return URL.createObjectURL(new Blob([buf], { type: 'audio/wav' }));
+}
+
+let voiceUrl = null;
+const voiceSrc = () => (voiceUrl ||= makeVoice(9));
+
+/** Столбики волны. Рисунок постоянный для одного сообщения, а не случайный при каждой перерисовке. */
+function waveBars(seed, count = 34) {
+  let x = seed * 9301 + 49297;
+  const rnd = () => ((x = (x * 9301 + 49297) % 233280) / 233280);
+  return Array.from({ length: count }, () => {
+    const h = 20 + Math.round(rnd() * 80);
+    return '<i style="height:' + h + '%"></i>';
+  }).join('');
+}
+
+const mmss = (sec) => Math.floor(sec / 60) + ':' + String(Math.round(sec % 60)).padStart(2, '0');
+
+function voiceMarkup(f, key) {
+  return '<span class="att voice" data-voice="' + key + '">' +
+    '<button class="voice__play" type="button" title="Слушать">▶</button>' +
+    '<span class="voice__mid">' +
+    '<span class="wave">' + waveBars(key.length + (f.sec || 9)) + '</span>' +
+    '<span class="voice__row"><span class="vtime">' + mmss(f.sec || 9) + '</span>' +
+    '<button class="voice__speed" type="button" title="Скорость">1×</button></span>' +
+    '</span></span>';
+}
+
+function fileMarkup(f, key) {
+  if (f.kind === 'voice') return voiceMarkup(f, key);
   if (f.kind === 'image')
     return '<span class="att"><img src="' + f.url + '" alt="' + esc(f.name || 'Вложение') + '" data-zoom="' + f.url + '"></span>';
   return '<span class="att"><button class="att-file" data-open-file="' + esc(f.name) + '" type="button">' +
@@ -724,7 +826,7 @@ function fileMarkup(f) {
 }
 
 function messageMarkup(m, d, i) {
-  const files = (m.files || []).map(fileMarkup).join('');
+  const files = (m.files || []).map((f, k) => fileMarkup(f, d.id + ':' + i + ':' + k)).join('');
   const tick = m.dir === 'out' ? '<span class="tick">✓✓</span>' : '';
   const marks = (m.marks || []).length
     ? '<span class="marks">' + m.marks.map((e) => '<span class="mark">' + e + '</span>').join('') + '</span>' : '';
@@ -753,6 +855,7 @@ const HINTS =
   '<div class="hint"><i>💬</i><span><b>Кнопки над полем ответа</b>Частые фразы в одно нажатие. Свои добавляются в настройках — меню под именем справа сверху.</span></div>' +
   '<div class="hint"><i>📎</i><span><b>Скрепка и перетаскивание</b>Отправить клиенту фото или файл. Можно просто перетащить файл в переписку мышкой.</span></div>' +
   '<div class="hint"><i>🙂</i><span><b>Эмодзи и реакции</b>Смайлик — рядом с полем ответа. Наведите на сообщение — появятся 👍 ❤️ 🔥.</span></div>' +
+  '<div class="hint"><i>🔊</i><span><b>Голосовые слушаются на месте</b>У Ренаты есть голосовое: нажмите «играть», щёлкните по волне для перемотки, кнопкой справа поставьте 1,5× или 2×.</span></div>' +
   '<div class="hint"><i>🎨</i><span><b>Всё настраивается</b>Тема, фон переписки, размер текста, плотность списка, подпись к ответам — в «Оформлении».</span></div>' +
   '</div></div>';
 
@@ -916,6 +1019,77 @@ $('body').addEventListener('click', (e) => {
 });
 $('zoom').addEventListener('click', () => $('zoom').classList.remove('on'));
 
+/* ---------- Плеер голосовых ----------
+   Один звук на всё окно: играет только одно голосовое, второе нажатие
+   останавливает первое. Скорость помнится между сообщениями — администратор
+   один раз ставит 1,5× и слушает так всех. */
+const audio = new Audio();
+let playingBox = null;
+let speed = 1;
+const SPEEDS = [1, 1.5, 2];
+
+function paintWave(box, part) {
+  const bars = box.querySelectorAll('.wave i');
+  const upto = Math.round(bars.length * part);
+  bars.forEach((b, i) => b.classList.toggle('done', i < upto));
+}
+
+function stopVoice() {
+  audio.pause();
+  if (playingBox) {
+    playingBox.querySelector('.voice__play').textContent = '▶';
+    paintWave(playingBox, 0);
+    playingBox.querySelector('.vtime').textContent = mmss(audio.duration || 9);
+  }
+  playingBox = null;
+}
+
+audio.addEventListener('timeupdate', () => {
+  if (!playingBox || !audio.duration) return;
+  paintWave(playingBox, audio.currentTime / audio.duration);
+  playingBox.querySelector('.vtime').textContent = mmss(audio.duration - audio.currentTime);
+});
+audio.addEventListener('ended', stopVoice);
+
+$('body').addEventListener('click', (e) => {
+  const box = e.target.closest('.voice');
+  if (!box) return;
+
+  const speedBtn = e.target.closest('.voice__speed');
+  if (speedBtn) {
+    speed = SPEEDS[(SPEEDS.indexOf(speed) + 1) % SPEEDS.length];
+    audio.playbackRate = speed;
+    for (const b of document.querySelectorAll('.voice__speed'))
+      b.textContent = String(speed).replace('.', ',') + '×';
+    return;
+  }
+
+  const wave = e.target.closest('.wave');
+  const play = e.target.closest('.voice__play');
+  if (!wave && !play) return;
+
+  // Нажали на другое голосовое — прежнее останавливаем.
+  if (playingBox && playingBox !== box) stopVoice();
+
+  if (play && playingBox === box) { stopVoice(); return; }
+
+  if (playingBox !== box) {
+    audio.src = voiceSrc();
+    audio.playbackRate = speed;
+    playingBox = box;
+    box.querySelector('.voice__play').textContent = '❚❚';
+  }
+  if (wave) {
+    // Перемотка щелчком по волне — как в мессенджерах.
+    const r = wave.getBoundingClientRect();
+    const part = Math.min(1, Math.max(0, (e.clientX - r.left) / r.width));
+    const seek = () => { audio.currentTime = (audio.duration || 9) * part; };
+    if (audio.readyState > 0) seek();
+    else audio.addEventListener('loadedmetadata', seek, { once: true });
+  }
+  audio.play().catch(() => alert('Браузер не дал звук. Нажмите что-нибудь на странице и повторите.'));
+});
+
 $('dialogs').addEventListener('click', (e) => {
   const btn = e.target.closest('.dlg');
   if (btn) openDialog(btn.dataset.id);
@@ -1032,6 +1206,7 @@ const PRESETS = {
   calm:  { theme:'vetra', wall:'none',  size:'normal', dense:'normal', ava:'off', rail:'off' },
   dark:  { theme:'dark',  wall:'dots',  size:'normal', dense:'tight',  ava:'on',  rail:'on'  },
   night: { theme:'night', wall:'soft',  size:'normal', dense:'normal', ava:'on',  rail:'on'  },
+  glass: { theme:'glass', wall:'none',  size:'normal', dense:'normal', ava:'on',  rail:'on'  },
   big:   { theme:'vetra', wall:'none',  size:'big',    dense:'normal', ava:'off', rail:'off' },
 };
 function markPreset(name) {
