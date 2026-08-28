@@ -34,6 +34,12 @@
   .muted{color:var(--muted);font-size:15px}
   .step{display:flex;gap:14px;margin:0 0 16px}
   .step b{flex:0 0 30px;height:30px;border-radius:50%;background:var(--ink);color:#fff;display:grid;place-items:center;font-size:14px;font-weight:600}
+  .verdict{background:var(--ink);color:#fff;border-radius:14px;padding:24px 24px 12px;margin:0 0 26px}
+  .verdict .vlabel{font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--acid);font-weight:600;margin:0 0 10px}
+  .verdict .vtext{font-size:18px;line-height:1.45;margin:0 0 14px}
+  .verdict ol{padding-left:20px}
+  .verdict li{margin-bottom:10px}
+  .verdict .mark{color:var(--ink)}
   .tablewrap{overflow-x:auto;margin:0 0 14px;-webkit-overflow-scrolling:touch}
   table{border-collapse:collapse;width:100%;min-width:420px;font-size:15px}
   th,td{text-align:left;padding:9px 12px;border-bottom:1px solid var(--line)}
@@ -78,6 +84,16 @@
   <div class="noprint">
     <h1>Академический отпуск</h1>
     <p class="lead">Колледж КИУ (ИЭУП), очно, договор. Ниже — как подать, что приложить и на что смотреть. В конце — готовый бланк заявления по форме вуза, его можно распечатать прямо с этой страницы.</p>
+
+    <div class="verdict">
+      <p class="vlabel">Вывод по твоим вводным</p>
+      <p class="vtext">Экономика и бухучёт, очно по договору, парень 18+ не служил. <b>Заочка отпадает: она сожжёт отсрочку, и повестка придёт в ближайший призыв.</b> Экономия 40 тыс ₽ в год того не стоит.</p>
+      <ol>
+        <li><b>Сначала спроси про индивидуальный учебный план на очной форме.</b> Колледж заявляет «индивидуальную программу обучения» третьей формой. Если дадут — ты остаёшься очником (отсрочка цела), ходишь по свободному графику и работаешь, диплом не сдвигается. Это лучший исход, спроси о нём первым.</li>
+        <li><b>Не дадут — академ ровно на 12 месяцев.</b> Отсрочка сохраняется, за год <span class="mark">не платишь вообще ничего — это 110 000 ₽</span> против 40 000 ₽ экономии на заочке. Цена: диплом на год позже.</li>
+        <li><b>Заочка — только если вопрос с армией закрыт.</b> Пока не закрыт, это худший из трёх вариантов.</li>
+      </ol>
+    </div>
 
     <h2>Главное про твой случай</h2>
     <div class="card">
