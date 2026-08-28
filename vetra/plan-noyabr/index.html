@@ -1,0 +1,439 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Ветра — путь до 30 ноября</title>
+<meta name="description" content="Как Ветра идёт от сегодняшнего дня к ноябрьской цифре: время, деньги, кто что делает.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Onest:wght@400;500;600;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --page:#F5F8FC; --surface:#fff; --ink:#0F1D2E; --muted:#56687F; --faint:#8494A8;
+  --line:#DCE6F2; --line-soft:#EAF1F9;
+  --blue:#2C78D5; --blue-press:#1F63BC; --blue-mid:#81AEE6; --blue-soft:#D6E5F7; --blue-tint:#EFF5FD;
+  --navy:#0E2A4A; --navy-deep:#0A1F38;
+  --ok:#167A41; --ok-wash:#E3F2E9; --warn:#9A5A00; --warn-wash:#FBF0DE; --bad:#C62828; --bad-wash:#FBE9E7;
+  --r-s:8px; --r-m:14px; --r-l:24px; --r-xl:34px;
+  --ease:cubic-bezier(.22,.61,.36,1);
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0; background:var(--page); color:var(--ink);
+  font-family:"Onest",system-ui,"Segoe UI",Arial,sans-serif;
+  font-size:16px; line-height:1.55; -webkit-font-smoothing:antialiased;
+  overflow-x:hidden;
+}
+h1,h2,h3{margin:0; font-weight:800; letter-spacing:-.03em; line-height:1.04}
+p{margin:0}
+.wrap{width:min(1120px,100% - 40px); margin-inline:auto}
+@media(max-width:600px){.wrap{width:min(1120px,100% - 28px)}}
+
+/* полоса прогресса чтения */
+#bar{position:fixed; inset:0 auto auto 0; height:3px; width:0%; background:var(--blue); z-index:99; transition:width .1s linear}
+
+/* появление */
+.rise{opacity:0; transform:translateY(22px); transition:opacity .62s var(--ease), transform .62s var(--ease)}
+.rise.on{opacity:1; transform:none}
+@media(prefers-reduced-motion:reduce){.rise{opacity:1;transform:none;transition:none}}
+
+section{padding:clamp(56px,9vw,116px) 0; position:relative}
+.kicker{font-size:13px; font-weight:600; letter-spacing:.14em; text-transform:uppercase; color:var(--blue-press)}
+.lede{color:var(--muted); font-size:clamp(16px,2.2vw,19px); max-width:62ch; margin-top:14px}
+
+/* ── обложка ── */
+.hero{background:linear-gradient(168deg,#0A1F38 0%,#0E2A4A 58%,#15406E 100%); color:#fff; overflow:hidden; padding-block:clamp(72px,12vw,150px)}
+.hero:before{content:""; position:absolute; inset:auto -10% -60% auto; width:70vw; height:70vw; max-width:760px; max-height:760px;
+  background:radial-gradient(circle at 50% 50%,rgba(44,120,213,.55),transparent 62%); filter:blur(10px)}
+.hero .wrap{position:relative}
+.hero h1{font-size:clamp(38px,7.6vw,84px)}
+.hero h1 em{font-style:normal; color:var(--blue-mid)}
+.hero .lede{color:#B9CBE0; max-width:56ch}
+.countdown{display:flex; align-items:baseline; gap:14px; margin-top:38px; flex-wrap:wrap}
+.countdown .num{font-size:clamp(64px,17vw,168px); font-weight:800; letter-spacing:-.05em; line-height:.86; color:#fff}
+.countdown .lbl{color:#8FB3D8; font-size:clamp(15px,2.4vw,19px); max-width:20ch}
+.scroll-hint{margin-top:46px; display:inline-flex; align-items:center; gap:10px; color:#8FB3D8; font-size:14px}
+.scroll-hint span{width:26px; height:40px; border:2px solid #4E7BA8; border-radius:999px; position:relative; display:inline-block}
+.scroll-hint span:after{content:""; position:absolute; left:50%; top:8px; width:3px; height:7px; margin-left:-1.5px; border-radius:2px; background:#7FA8D0; animation:sc 1.7s infinite}
+@keyframes sc{0%{transform:translateY(0);opacity:1}70%{transform:translateY(13px);opacity:0}100%{opacity:0}}
+
+/* ── карточки цифр ── */
+.cards{display:grid; grid-template-columns:repeat(auto-fit,minmax(230px,1fr)); gap:16px; margin-top:34px}
+.card{background:var(--surface); border:1px solid var(--line); border-radius:var(--r-l); padding:26px 24px 24px; transition:transform .16s var(--ease), box-shadow .16s var(--ease)}
+.card:hover{transform:translateY(-4px); box-shadow:0 14px 34px rgba(15,29,46,.09)}
+.card .big{font-size:clamp(38px,6vw,58px); font-weight:800; letter-spacing:-.04em; line-height:1; color:var(--blue-press)}
+.card .unit{font-size:.42em; font-weight:600; color:var(--faint); letter-spacing:0}
+.card .cap{margin-top:12px; color:var(--muted); font-size:15px}
+.card.accent{background:var(--blue-press); border-color:var(--blue-press); color:#fff}
+.card.accent .big,.card.accent .cap{color:#fff}
+.card.accent .unit{color:#B7D2F0}
+
+.note{margin-top:20px; padding:18px 20px; border-left:3px solid var(--blue); background:var(--blue-tint); border-radius:0 var(--r-m) var(--r-m) 0; color:var(--muted); font-size:15px}
+.note b{color:var(--ink)}
+
+/* ── таймлайн ── */
+.tl{margin-top:44px; position:relative}
+.tl:before{content:""; position:absolute; left:19px; top:8px; bottom:8px; width:2px; background:var(--line)}
+.tl .fill{position:absolute; left:19px; top:8px; width:2px; background:var(--blue); height:0; transition:height 1.4s var(--ease)}
+.tl.on .fill{height:calc(100% - 16px)}
+.step{position:relative; padding:0 0 34px 58px}
+.step:last-child{padding-bottom:0}
+.dot{position:absolute; left:10px; top:2px; width:20px; height:20px; border-radius:50%; background:var(--surface); border:2px solid var(--blue-mid); z-index:2; transition:transform .4s var(--ease), background .4s}
+.step.hot .dot{background:var(--blue-press); border-color:var(--blue-press); box-shadow:0 0 0 6px var(--blue-soft)}
+.step .when{font-size:13px; font-weight:600; letter-spacing:.1em; text-transform:uppercase; color:var(--blue-press)}
+.step h3{font-size:clamp(19px,2.7vw,25px); margin-top:6px}
+.step p{color:var(--muted); margin-top:8px; max-width:60ch}
+.step .who{display:inline-flex; align-items:center; gap:7px; margin-top:12px; font-size:13px; font-weight:600; padding:5px 12px; border-radius:999px}
+.who.m{background:var(--blue-soft); color:var(--blue-press)}
+.who.a{background:#FFEBD9; color:#8A4B00}
+.who.both{background:var(--ok-wash); color:var(--ok)}
+
+/* ── две дорожки ── */
+.lanes{display:grid; grid-template-columns:1fr 1fr; gap:16px; margin-top:34px}
+@media(max-width:720px){.lanes{grid-template-columns:1fr}}
+.lane{border-radius:var(--r-l); padding:26px 24px; border:1px solid var(--line); background:var(--surface)}
+.lane h3{font-size:20px; display:flex; align-items:center; gap:10px}
+.lane .tag{font-size:12px; font-weight:600; padding:4px 10px; border-radius:999px; background:var(--blue-tint); color:var(--blue-press); letter-spacing:.02em}
+.lane ul{margin:16px 0 0; padding:0; list-style:none}
+.lane li{position:relative; padding-left:22px; margin-bottom:10px; color:var(--muted); font-size:15px}
+.lane li:before{content:""; position:absolute; left:0; top:9px; width:8px; height:8px; border-radius:2px; background:var(--blue-mid); transform:rotate(45deg)}
+.lane.andrey li:before{background:#E8A15C}
+
+/* ── деньги, столбики ── */
+.chart{margin-top:40px; display:grid; grid-template-columns:repeat(4,1fr); gap:clamp(10px,2.4vw,26px); align-items:end; min-height:280px}
+.col{text-align:center}
+.col .bars{display:flex; gap:5px; align-items:flex-end; justify-content:center; height:210px}
+.col .b{width:clamp(22px,6.4vw,46px); border-radius:8px 8px 3px 3px; height:0; transition:height 1.1s var(--ease); position:relative}
+.b.one{background:linear-gradient(180deg,var(--blue),var(--blue-press))}
+.b.sub{background:var(--blue-mid)}
+.col .m{margin-top:12px; font-weight:600; font-size:clamp(13px,2vw,15px)}
+.col .s{color:var(--faint); font-size:13px; margin-top:2px}
+.legend{display:flex; gap:20px; flex-wrap:wrap; margin-top:26px; font-size:14px; color:var(--muted)}
+.legend i{display:inline-block; width:12px; height:12px; border-radius:3px; margin-right:7px; vertical-align:-1px}
+
+/* ── ползунок часов ── */
+.sim{margin-top:36px; background:var(--surface); border:1px solid var(--line); border-radius:var(--r-xl); padding:clamp(22px,3.4vw,34px)}
+.sim h3{font-size:clamp(19px,2.6vw,24px)}
+.sim .row{display:flex; align-items:center; gap:16px; margin-top:22px; flex-wrap:wrap}
+.sim input[type=range]{flex:1 1 240px; accent-color:var(--blue-press); height:26px}
+.sim .val{font-weight:800; font-size:26px; min-width:2.4ch; color:var(--blue-press)}
+.split{display:flex; height:46px; border-radius:12px; overflow:hidden; margin-top:22px; border:1px solid var(--line); background:var(--blue-tint)}
+.split .part{display:flex; align-items:center; justify-content:center; font-size:13px; font-weight:600; color:#fff; transition:flex-basis .5s var(--ease); overflow:hidden; white-space:nowrap}
+.split .prod{background:var(--blue-press); flex:0 0 100%}
+.split .impl{background:#C2822F; flex:0 0 0%}
+.verdict{margin-top:18px; font-size:15px; padding:15px 18px; border-radius:var(--r-m); transition:background .3s, color .3s}
+.verdict.good{background:var(--ok-wash); color:var(--ok)}
+.verdict.warn{background:var(--warn-wash); color:var(--warn)}
+.verdict.bad{background:var(--bad-wash); color:var(--bad)}
+
+/* ── стоп-лист ── */
+.stop{display:grid; grid-template-columns:repeat(auto-fit,minmax(240px,1fr)); gap:12px; margin-top:30px}
+.stop div{background:var(--surface); border:1px dashed var(--line); border-radius:var(--r-m); padding:16px 18px; color:var(--faint); font-size:15px}
+.stop div s{color:var(--faint)}
+.stop div b{display:block; color:var(--muted); font-size:13px; font-weight:500; margin-top:5px; text-decoration:none}
+
+/* ── финал ── */
+.final{background:var(--navy-deep); color:#fff}
+.final h2{font-size:clamp(28px,5vw,52px)}
+.final .lede{color:#A9C0D8}
+.blockers{display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); gap:16px; margin-top:34px}
+.blocker{background:rgba(255,255,255,.055); border:1px solid rgba(255,255,255,.13); border-radius:var(--r-l); padding:24px}
+.blocker .n{font-size:12px; font-weight:700; letter-spacing:.16em; color:#7FA8D0; text-transform:uppercase}
+.blocker h3{font-size:19px; margin-top:10px}
+.blocker p{color:#A9C0D8; font-size:15px; margin-top:9px}
+.foot{margin-top:44px; color:#6F92B5; font-size:13px; border-top:1px solid rgba(255,255,255,.12); padding-top:20px}
+.foot a{color:#8FB3D8}
+</style>
+</head>
+<body>
+<div id="bar"></div>
+
+<!-- обложка -->
+<section class="hero">
+  <div class="wrap">
+    <p class="kicker" style="color:#7FA8D0">Ветра · план от результата</p>
+    <h1 class="rise">Не «что построим».<br><em>Что должно быть правдой</em><br>к 30 ноября.</h1>
+    <p class="lede rise">Обычно план начинают с инструментов: настроить CRM, докрутить рекламу, дописать модуль. Здесь наоборот — сначала цифра результата, потом откручиваем назад.</p>
+    <div class="countdown rise">
+      <div class="num" id="days">94</div>
+      <div class="lbl">дня от сегодня<br>до контрольной даты</div>
+    </div>
+    <div class="scroll-hint rise"><span></span> листай, тут всё по шагам</div>
+  </div>
+</section>
+
+<!-- цифра ноября -->
+<section>
+  <div class="wrap">
+    <p class="kicker rise">Шаг 1 · цифра</p>
+    <h2 class="rise" style="font-size:clamp(28px,5vw,50px);margin-top:10px">Ноябрь удался, если это правда</h2>
+    <p class="lede rise">Не «сделали фичу» и не «запустили канал». Только то, что можно посчитать.</p>
+
+    <div class="cards">
+      <div class="card rise accent">
+        <div class="big"><span class="cnt" data-to="3">0</span> <span class="unit">внедрения</span></div>
+        <div class="cap">«Под ключ», чек от 80 000 ₽. Это основные деньги.</div>
+      </div>
+      <div class="card rise">
+        <div class="big"><span class="cnt" data-to="240">0</span> <span class="unit">тыс ₽</span></div>
+        <div class="cap">Разово за внедрения, при трёх клиентах. При двух — 160.</div>
+      </div>
+      <div class="card rise">
+        <div class="big"><span class="cnt" data-to="10">0</span> <span class="unit">салонов</span></div>
+        <div class="cap">На подписке, считая тех, кто на пробном периоде.</div>
+      </div>
+      <div class="card rise">
+        <div class="big"><span class="cnt" data-to="7500">0</span> <span class="unit">₽ / мес</span></div>
+        <div class="cap">Реально платят пятеро из десяти. Это не доход, это доказательство.</div>
+      </div>
+    </div>
+
+    <div class="note rise"><b>Зачем разделять.</b> Подписка в ноябре денег почти не приносит — и не должна. Её работа: показать, что продуктом пользуются каждый день. Деньги в этот период дают внедрения.</div>
+  </div>
+</section>
+
+<!-- таймлайн -->
+<section style="background:var(--surface);border-block:1px solid var(--line)">
+  <div class="wrap">
+    <p class="kicker rise">Шаг 2 · откручиваем назад</p>
+    <h2 class="rise" style="font-size:clamp(28px,5vw,50px);margin-top:10px">Три контрольные точки</h2>
+    <p class="lede rise">От ноября к сегодняшнему дню. Каждая точка — условие следующей, а не пожелание.</p>
+
+    <div class="tl rise" id="tl">
+      <div class="fill"></div>
+
+      <div class="step">
+        <div class="dot"></div>
+        <div class="when">сейчас · конец августа</div>
+        <h3>Окно собрано, ждёт токен</h3>
+        <p>Переписка в SQLite, Telegram опросом, страница сотрудника работает. Не хватает одной строки в <code>.env</code> — бота у @BotFather.</p>
+        <span class="who m">Михаил · 10 минут</span>
+      </div>
+
+      <div class="step hot">
+        <div class="dot"></div>
+        <div class="when">21 сентября · точка выхода</div>
+        <h3>Три пилота работают</h3>
+        <p>Три салона согласились попробовать. Меньше трёх — меняем нишу, а не продолжаем строить. Это выход, а не пожелание.</p>
+        <span class="who a">Андрей · продажи</span>
+      </div>
+
+      <div class="step">
+        <div class="dot"></div>
+        <div class="when">30 сентября</div>
+        <h3>Цена названа, ИП подано</h3>
+        <p>Минимум один пилот сказал словами «готовы платить». Есть страница «что входит в 80 тысяч, а что нет». Заявление на ИП уже отправлено.</p>
+        <span class="who both">оба</span>
+      </div>
+
+      <div class="step">
+        <div class="dot"></div>
+        <div class="when">31 октября</div>
+        <h3>Первые деньги на счёте</h3>
+        <p>Одно внедрение оплачено и запущено — не обещано, а с деньгами. 3–5 салонов на подписке. Счёт и эквайринг работают.</p>
+        <span class="who a">Андрей · внедрение</span>
+      </div>
+
+      <div class="step">
+        <div class="dot"></div>
+        <div class="when">30 ноября · цель</div>
+        <h3>2–3 внедрения и десять на подписке</h3>
+        <p>160–240 тысяч разово плюс подписка. Чек-лист внедрения обкатан, Андрей делает его без Михаила.</p>
+        <span class="who both">оба</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- дорожки -->
+<section>
+  <div class="wrap">
+    <p class="kicker rise">Шаг 3 · кто чем занят</p>
+    <h2 class="rise" style="font-size:clamp(28px,5vw,50px);margin-top:10px">Две дорожки, которые не должны пересечься</h2>
+    <p class="lede rise">Услуга «под ключ» опасна одним: она незаметно съедает часы разработчика. Поэтому дорожки разведены заранее.</p>
+
+    <div class="lanes">
+      <div class="lane rise">
+        <h3>Михаил <span class="tag">6–8 часов в неделю</span></h3>
+        <ul>
+          <li>Код продукта и ревью того, что пишет Claude</li>
+          <li>Пилотное окно, потом переезд на вебхуки</li>
+          <li>Три цифры владельцу в Telegram</li>
+          <li>Подключается к внедрению только когда что-то сломалось</li>
+        </ul>
+      </div>
+      <div class="lane andrey rise">
+        <h3>Андрей <span class="tag" style="background:#FFEBD9;color:#8A4B00">продажи и внедрение</span></h3>
+        <ul>
+          <li>Тест-касания и разговоры с владельцами салонов</li>
+          <li>Пилоты: довести три салона до работающего окна</li>
+          <li>Внедрения «под ключ» по письменному чек-листу</li>
+          <li>Обучающий созвон с админами — один на клиента</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="note rise"><b>Что входит в 80 000 ₽:</b> настройка под салон, подключение канала, один обучающий созвон. Всё остальное — сопровождение по подписке. Без этой границы услуга бесконечна.</div>
+  </div>
+</section>
+
+<!-- симулятор часов -->
+<section style="background:var(--blue-tint)">
+  <div class="wrap">
+    <p class="kicker rise">Демонстрация</p>
+    <h2 class="rise" style="font-size:clamp(28px,5vw,50px);margin-top:10px">Подвигай — и увидишь, где ломается</h2>
+    <p class="lede rise">Сколько внедрений Михаил берёт на себя вместо Андрея. Одно внедрение — примерно 12 часов: настройка, созвон, две недели «а почему не пришло сообщение».</p>
+
+    <div class="sim rise">
+      <h3>Внедрений на Михаиле в месяц</h3>
+      <div class="row">
+        <input type="range" id="rng" min="0" max="3" step="1" value="0" aria-label="Сколько внедрений делает Михаил">
+        <div class="val" id="rngv">0</div>
+      </div>
+      <div class="split">
+        <div class="part prod" id="pProd">продукт</div>
+        <div class="part impl" id="pImpl"></div>
+      </div>
+      <div class="verdict good" id="verdict">Все 26–32 часа месяца уходят в продукт. Так и задумано: внедряет Андрей.</div>
+    </div>
+  </div>
+</section>
+
+<!-- деньги -->
+<section>
+  <div class="wrap">
+    <p class="kicker rise">Шаг 4 · когда приходят деньги</p>
+    <h2 class="rise" style="font-size:clamp(28px,5vw,50px);margin-top:10px">Два месяца работы без выручки</h2>
+    <p class="lede rise">Это нормально и это надо знать заранее — чтобы в октябре не решить, что «не работает».</p>
+
+    <div class="chart rise" id="chart">
+      <div class="col"><div class="bars"><div class="b one" data-h="0"></div><div class="b sub" data-h="0"></div></div><div class="m">Сентябрь</div><div class="s">0 ₽ · пилоты бесплатны</div></div>
+      <div class="col"><div class="bars"><div class="b one" data-h="70"></div><div class="b sub" data-h="4"></div></div><div class="m">Октябрь</div><div class="s">80 тыс · первое внедрение</div></div>
+      <div class="col"><div class="bars"><div class="b one" data-h="140"></div><div class="b sub" data-h="7"></div></div><div class="m">Ноябрь</div><div class="s">160–240 тыс + 7,5 тыс</div></div>
+      <div class="col"><div class="bars"><div class="b one" data-h="175"></div><div class="b sub" data-h="14"></div></div><div class="m">Дальше</div><div class="s">подписка растёт, внедрения — нет</div></div>
+    </div>
+    <div class="legend rise">
+      <span><i style="background:var(--blue-press)"></i>внедрения «под ключ», разово</span>
+      <span><i style="background:var(--blue-mid)"></i>подписка, каждый месяц</span>
+    </div>
+
+    <div class="note rise"><b>Отсюда самый ранний дедлайн.</b> Деньги приходят уже в октябре, а ИП со счётом и эквайрингом оформляется 3–6 недель. Значит подавать нужно <b>в начале сентября</b> — раньше всего остального в плане.</div>
+  </div>
+</section>
+
+<!-- стоп-лист -->
+<section style="background:var(--surface);border-block:1px solid var(--line)">
+  <div class="wrap">
+    <p class="kicker rise">Шаг 5 · чего не делаем</p>
+    <h2 class="rise" style="font-size:clamp(28px,5vw,50px);margin-top:10px">Пять дел, которые цифру не двигают</h2>
+    <p class="lede rise">Не выброшены — отложены. Разница в том, что они больше не занимают недели молча.</p>
+
+    <div class="stop">
+      <div class="rise"><s>SEO-прогон лендинга</s><b>Первые клиенты приходят от Андрея вживую, не из поиска</b></div>
+      <div class="rise"><s>Wildberries и Ozon</s><b>Ноябрьская цифра — про салоны</b></div>
+      <div class="rise"><s>Панель руководителя целиком</s><b>В MVP три цифры в Telegram</b></div>
+      <div class="rise"><s>Знак и брендинг</s><b>Заморожены до трёх пилотов</b></div>
+      <div class="rise"><s>Вторая ниша описанием</s><b>Инфраструктура вокруг работы, а не работа</b></div>
+    </div>
+  </div>
+</section>
+
+<!-- финал -->
+<section class="final">
+  <div class="wrap">
+    <p class="kicker rise" style="color:#7FA8D0">Что стоит на пути прямо сейчас</p>
+    <h2 class="rise">Два блокера. Оба решаются в сентябре.</h2>
+    <p class="lede rise">Если не сделать эти два — ноябрьская цифра не случится, сколько бы кода ни написали.</p>
+
+    <div class="blockers">
+      <div class="blocker rise">
+        <div class="n">блокер 01</div>
+        <h3>Чек-лист внедрения</h3>
+        <p>Пока его нет, «под ключ» продавать нельзя: продадите часы Михаила, а не услугу. Пишет Claude, проверяет Андрей на себе.</p>
+      </div>
+      <div class="blocker rise">
+        <div class="n">блокер 02</div>
+        <h3>ИП, счёт, эквайринг</h3>
+        <p>Подавать в начале сентября. Оформление 3–6 недель, а деньги приходят уже в октябре. Принимать 80 тысяч будет некуда.</p>
+      </div>
+      <div class="blocker rise">
+        <div class="n">и одна строка</div>
+        <h3>Токен бота в .env</h3>
+        <p>Десять минут у @BotFather. Без неё пилотного окна нет вообще, а от него зависит вся цепочка.</p>
+      </div>
+    </div>
+
+    <p class="foot">Собрано 28 августа 2026 по разбору «сначала результат, потом инструменты». Разбор целиком — <code>docs/rezultat-noyabr.md</code>. Карточки на доске: <a href="https://trello.com/c/Idg6z0QS">результат ноября</a>, <a href="https://trello.com/c/4UJtQeR6">чек-лист внедрения</a>.</p>
+  </div>
+</section>
+
+<script>
+// полоса прогресса
+const bar=document.getElementById('bar');
+addEventListener('scroll',()=>{
+  const h=document.documentElement.scrollHeight-innerHeight;
+  bar.style.width=(h>0?scrollY/h*100:0)+'%';
+},{passive:true});
+
+// дни до 30 ноября
+(function(){
+  const el=document.getElementById('days');
+  const today=new Date(); today.setHours(0,0,0,0);
+  const target=new Date(today.getFullYear(),10,30); // 30 ноября
+  const d=Math.max(0,Math.round((target-today)/86400000));
+  el.dataset.to=d; el.textContent='0';
+})();
+
+// появление + счётчики + графики
+const io=new IntersectionObserver((es)=>{
+  es.forEach(e=>{
+    if(!e.isIntersecting) return;
+    const t=e.target;
+    t.classList.add('on');
+    if(t.id==='chart'){ t.querySelectorAll('.b').forEach((b,i)=>setTimeout(()=>b.style.height=b.dataset.h+'px',i*90)); }
+    if(t.id==='days') run(t); else t.querySelectorAll('.cnt').forEach(run);
+    io.unobserve(t);
+  });
+},{threshold:.22});
+
+function run(el){
+  const to=+el.dataset.to; if(!to){el.textContent='0';return}
+  const dur=1100, t0=performance.now();
+  const fmt=n=>to>=1000?n.toLocaleString('ru-RU'):String(n);
+  (function tick(t){
+    const p=Math.min(1,(t-t0)/dur), e=1-Math.pow(1-p,3);
+    el.textContent=fmt(Math.round(to*e));
+    if(p<1) requestAnimationFrame(tick);
+  })(t0);
+}
+
+document.querySelectorAll('.rise, #chart, #tl').forEach(el=>io.observe(el));
+io.observe(document.getElementById('days'));
+
+// ползунок часов
+const rng=document.getElementById('rng'), rngv=document.getElementById('rngv'),
+      pProd=document.getElementById('pProd'), pImpl=document.getElementById('pImpl'), verdict=document.getElementById('verdict');
+const HOURS_MONTH=28, PER_IMPL=12;
+function sim(){
+  const n=+rng.value, spent=Math.min(HOURS_MONTH,n*PER_IMPL), left=HOURS_MONTH-spent;
+  rngv.textContent=n;
+  const pct=spent/HOURS_MONTH*100;
+  pImpl.style.flexBasis=pct+'%'; pProd.style.flexBasis=(100-pct)+'%';
+  pProd.textContent=left>=6?('продукт · '+left+' ч'):(left>0?left+' ч':'');
+  pImpl.textContent=spent>=6?('внедрения · '+spent+' ч'):(spent>0?spent+' ч':'');
+  const txt=[
+    ['good','Все 28 часов месяца уходят в продукт. Так и задумано: внедряет Андрей.'],
+    ['warn','Одно внедрение — минус 12 часов. На продукт остаётся 16: спринт растягивается вдвое.'],
+    ['bad','Два внедрения — 24 часа из 28. Разработка встала, продукт не движется.'],
+    ['bad','Три внедрения — месяц закончился. Кода в ноябре не будет вообще.']
+  ][n];
+  verdict.className='verdict '+txt[0];
+  verdict.textContent=txt[1];
+}
+rng.addEventListener('input',sim); sim();
+</script>
+</body>
+</html>
