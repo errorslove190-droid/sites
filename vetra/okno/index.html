@@ -615,8 +615,16 @@ const icon = (name, cls = '') =>
 /* ============ Фоны ============
    Рисуем сами: спокойные градиенты без картинок и без сторонних запросов.
    Половина светлых, половина тёмных — под обе темы. */
+/**
+ * SVG в адрес для CSS. Скобки кодируем отдельно: `encodeURIComponent` их не трогает,
+ * а внутри картинки есть `fill="url(#g)"` — вложенная скобка рвёт CSS-функцию `url()`,
+ * и фон молча не показывается.
+ */
+const svgUrl = (markup) =>
+  'data:image/svg+xml;utf8,' + encodeURIComponent(markup).replace(/\(/g, '%28').replace(/\)/g, '%29');
+
 const grad = (a, b, c) =>
-  'data:image/svg+xml;utf8,' + encodeURIComponent(
+  svgUrl(
     '<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="1000">' +
     '<defs><linearGradient id="g" x1="0" y1="0" x2="1" y2="1">' +
     '<stop offset="0" stop-color="' + a + '"/><stop offset="0.55" stop-color="' + b + '"/>' +
@@ -626,11 +634,6 @@ const grad = (a, b, c) =>
     '<stop offset="1" stop-color="#ffffff" stop-opacity="0"/></radialGradient></defs>' +
     '<rect width="1600" height="1000" fill="url(#g)"/>' +
     '<rect width="1600" height="1000" fill="url(#h)"/></svg>');
-
-const dots = (color) =>
-  'data:image/svg+xml;utf8,' + encodeURIComponent(
-    '<svg xmlns="http://www.w3.org/2000/svg" width="26" height="26">' +
-    '<circle cx="13" cy="13" r="2" fill="' + color + '"/></svg>');
 
 const WALLS = [
   { id:'none',   name:'Без фона', img:null },
@@ -649,7 +652,7 @@ function applyWall() {
   const id = document.body.dataset.wall;
   if (id === 'own') return;                       // своя картинка ставится отдельно
   const w = WALLS.find((x) => x.id === id);
-  document.body.style.setProperty('--wallImg', w && w.img ? 'url(' + w.img + ')' : 'none');
+  document.body.style.setProperty('--wallImg', w && w.img ? 'url("' + w.img + '")' : 'none');
   for (const b of document.querySelectorAll('.wallBtn')) b.classList.toggle('on', b.dataset.v === id);
 }
 
@@ -658,7 +661,7 @@ function renderWalls() {
   $('walls').innerHTML =
     WALLS.map((w) =>
       '<button class="wallBtn" type="button" data-v="' + w.id + '"' +
-      (w.img ? ' style="background-image:url(' + w.img + ')"' : '') + '>' +
+      (w.img ? ' style="background-image:url(&quot;' + w.img + '&quot;)"' : '') + '>' +
       '<span>' + w.name + '</span></button>').join('') +
     '<button class="wallBtn" type="button" data-v="own"' +
     (own ? ' style="background-image:' + own + '"' : '') + '><span>Своя</span></button>';
