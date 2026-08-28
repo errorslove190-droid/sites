@@ -13,8 +13,10 @@ html,body{height:100%}
 body{background:var(--white); margin:0}
 
 .demo{background:#FFF3D6; color:#7A5A12; font-size:13px; line-height:1.45; padding:9px 16px;
-  border-bottom:1px solid #F0DFB0}
-.work{height:calc(100dvh - 58px - 38px)}
+  border-bottom:1px solid #F0DFB0; flex:none}
+body{display:flex; flex-direction:column; height:100dvh; overflow:hidden}
+.work{flex:1; min-height:0; height:auto}
+.top{flex:none;}
 .top{display:flex; align-items:center; gap:14px; height:58px; padding-inline:16px;
   background:#fff; border-bottom:1px solid var(--line)}
 .top__nm{font-family:'Google Sans',sans-serif; font-weight:700; font-size:18px; letter-spacing:-.01em}
@@ -39,26 +41,37 @@ body{background:var(--white); margin:0}
 .search:focus{outline:none; border-color:var(--blue); background:#fff}
 .list__body{overflow-y:auto; flex:1; padding:8px; -webkit-overflow-scrolling:touch}
 
-.dlg{display:grid; grid-template-columns:auto 1fr auto; gap:11px; padding:12px; border-radius:var(--r);
-  cursor:pointer; border:0; background:transparent; width:100%; text-align:left; font:inherit;
+/* Строка списка как в мессенджере: аватар · имя и превью · справа время и счётчик.
+   Две строки, ровно как привык человек, — третьей строки в столбце времени нет. */
+.dlg{display:grid; grid-template-columns:auto minmax(0,1fr) auto; gap:11px; padding:10px 12px;
+  border-radius:var(--r); cursor:pointer; border:0; background:transparent; width:100%;
+  text-align:left; font:inherit; align-items:center;
   transition:background var(--fast) var(--ease)}
 .dlg:hover{background:var(--blue-tint)}
 .dlg.on{background:var(--blue-soft)}
-.dlg__ava{width:40px; height:40px; border-radius:50%; display:grid; place-items:center; color:#fff;
+/* Средняя колонка обязана уметь сжиматься, иначе длинное превью растягивает
+   весь список и внизу страницы появляется горизонтальный скролл. */
+.dlg__mid{min-width:0}
+.dlg__ava{width:44px; height:44px; border-radius:50%; display:grid; place-items:center; color:#fff;
   font-family:'Google Sans',sans-serif; font-weight:500; flex:none; background:var(--blue)}
 /* Подпись внутри кнопки остаётся строчной и слипается с именем — поэтому block. */
-.dlg__nm{display:block; font-family:'Google Sans',sans-serif; font-weight:500; font-size:15px; color:var(--ink)}
-.dlg__tx{display:block; font-size:13px; color:var(--muted); margin-top:2px; overflow:hidden;
+.dlg__nm{display:block; font-family:'Google Sans',sans-serif; font-weight:500; font-size:15px;
+  color:var(--ink); overflow:hidden; text-overflow:ellipsis; white-space:nowrap}
+.dlg__tx{display:block; font-size:13.5px; color:var(--muted); margin-top:2px; overflow:hidden;
   text-overflow:ellipsis; white-space:nowrap}
-.dlg__meta{text-align:right; font-size:12px; color:var(--faint); white-space:nowrap}
-.dlg__badge{display:inline-block; min-width:20px; padding:2px 6px; border-radius:var(--r-pill);
-  background:var(--blue); color:#fff; font-size:11.5px; font-weight:500; margin-top:6px}
+.dlg__meta{display:flex; flex-direction:column; align-items:flex-end; gap:5px;
+  font-size:12px; color:var(--faint); white-space:nowrap}
+.dlg__badge{min-width:20px; padding:2px 6px; border-radius:var(--r-pill); text-align:center;
+  background:var(--blue); color:#fff; font-size:11.5px; font-weight:500}
 
 /* Сколько клиент ждёт ответа. Пороги — SLA из @vetra/shared: 15 минут «висит»,
-   30 минут «горит». Диалоги без ответа поднимаются наверх списка. */
-.dlg__wait{display:block; margin-top:5px; font-size:11.5px; font-weight:500; color:var(--muted)}
+   30 минут «горит». Метка идёт в строке превью, а не в столбце времени: справа
+   она удлиняла строку и выталкивала список за край экрана. */
+.dlg__wait{flex:none; font-size:11.5px; font-weight:500; color:var(--muted)}
 .dlg__wait.warn{color:#A8600C}
 .dlg__wait.late{color:#B3261E}
+.dlg__line{display:flex; align-items:baseline; gap:8px; margin-top:2px}
+.dlg__line .dlg__tx{margin-top:0; flex:1; min-width:0}
 .dlg.late{background:#FEF3F1}
 .dlg.late:hover{background:#FBE7E3}
 
@@ -74,11 +87,26 @@ body{background:var(--white); margin:0}
 .chat__sub{font-size:12.5px; color:var(--muted)}
 .back{display:none; border:0; background:transparent; font:inherit; color:var(--blue-press);
   cursor:pointer; padding:6px 10px 6px 0}
-.chat__body{flex:1; overflow-y:auto; padding:18px; display:flex; flex-direction:column; gap:10px;
-  -webkit-overflow-scrolling:touch}
-.msg{max-width:min(66%,520px); padding:11px 15px; border-radius:18px; font-size:15px; line-height:1.45;
-  white-space:pre-wrap; overflow-wrap:anywhere}
-.msg small{display:block; font-size:11.5px; color:var(--faint); margin-top:5px}
+/* Сообщения прижаты к низу, как в мессенджере: короткий разговор начинается
+   у поля ответа, а не висит под шапкой с пустым полем под собой. */
+.chat__body{flex:1; overflow-y:auto; padding:18px; display:flex; flex-direction:column;
+  gap:4px; -webkit-overflow-scrolling:touch}
+/* Прижимает короткий разговор к низу. Именно отступом, а не `justify-content:flex-end`:
+   тот у длинной переписки срезает верх — до первых сообщений не доскроллить. */
+.chat__body > :first-child{margin-top:auto}
+
+.msg{max-width:min(70%,560px); padding:8px 13px 7px; border-radius:16px; font-size:15px; line-height:1.42;
+  white-space:pre-wrap; overflow-wrap:anywhere; position:relative}
+/* Время в правом нижнем углу пузыря, а не отдельной строкой: столбик времени
+   под каждым сообщением растягивает переписку вдвое. */
+.msg small{float:right; font-size:11px; color:var(--faint); margin:6px -3px -2px 10px; line-height:1}
+.msg::after{content:''; display:block; clear:both}
+/* Подряд идущие сообщения одного собеседника жмутся друг к другу. */
+.msg + .msg{margin-top:0}
+.msg-in + .msg-out,.msg-out + .msg-in{margin-top:10px}
+
+.day{align-self:center; margin:12px 0 6px; padding:4px 12px; border-radius:var(--r-pill);
+  background:rgba(31,45,61,.07); color:var(--muted); font-size:12.5px; font-weight:500}
 .msg-in{background:#fff; border:1px solid var(--line); border-bottom-left-radius:6px; align-self:flex-start}
 .msg-out{background:var(--blue-pale); border-bottom-right-radius:6px; align-self:flex-end}
 
@@ -275,6 +303,7 @@ const waitMinutes = (d) =>
 
 
 function humanWait(min) {
+  if (min < 1) return 'только что';
   if (min < 60) return min + ' мин';
   if (min < 1440) {
     const h = Math.floor(min / 60);
@@ -289,6 +318,7 @@ function waitMarkup(d) {
   const min = waitMinutes(d);
   if (min === null) return '';
   const cls = min >= LATE_MIN ? ' late' : min >= WARN_MIN ? ' warn' : '';
+  if (min < 1) return '<span class="dlg__wait">ждёт</span>';
   const word = min >= LATE_MIN ? 'висит ' : 'ждёт ';
   return '<span class="dlg__wait' + cls + '">' + word + humanWait(min) + '</span>';
 }
@@ -348,6 +378,21 @@ function attachmentMarkup(messageId, file, index) {
 }
 
 
+const clock = (iso) =>
+  new Date(iso).toLocaleTimeString('ru-RU', { hour: '2-digit', minute: '2-digit' });
+
+
+function dayLabel(iso) {
+  const d = new Date(iso);
+  const today = new Date();
+  const yesterday = new Date();
+  yesterday.setDate(today.getDate() - 1);
+  if (d.toDateString() === today.toDateString()) return 'Сегодня';
+  if (d.toDateString() === yesterday.toDateString()) return 'Вчера';
+  return d.toLocaleDateString('ru-RU', { day: 'numeric', month: 'long' });
+}
+
+
 function messageMarkup(m) {
   const files = (m.attachments || [])
     .map((f, i) => attachmentMarkup(m.id, f, i))
@@ -355,8 +400,21 @@ function messageMarkup(m) {
   const text = m.text ? escapeHtml(m.text) : '';
   return (
     '<div class="msg msg-' + (m.direction === 'in' ? 'in' : 'out') + '">' +
-    files + text + '<small>' + shortTime(m.sentAt) + '</small></div>'
+    files + text + '<small>' + clock(m.sentAt) + '</small></div>'
   );
+}
+
+
+function talkMarkup(messages) {
+  let day = '';
+  return messages
+    .map((m) => {
+      const label = dayLabel(m.sentAt);
+      const head = label === day ? '' : '<div class="day">' + escapeHtml(label) + '</div>';
+      day = label;
+      return head + messageMarkup(m);
+    })
+    .join('');
 }
 
 
@@ -382,11 +440,11 @@ function renderDialogs() {
       return (
         '<button class="dlg' + (d.id === openId ? ' on' : '') + hot + '" data-id="' + escapeHtml(d.id) + '" type="button">' +
         '<span class="dlg__ava">' + escapeHtml(initials(d.contactName)) + '</span>' +
-        '<span><span class="dlg__nm">' + escapeHtml(d.contactName) + '</span>' +
-        '<span class="dlg__tx">' + escapeHtml(d.lastText) + '</span></span>' +
-        '<span class="dlg__meta">' + shortTime(d.lastAt) +
+        '<span class="dlg__mid"><span class="dlg__nm">' + escapeHtml(d.contactName) + '</span>' +
+        '<span class="dlg__line"><span class="dlg__tx">' + escapeHtml(d.lastText) + '</span>' +
+        waitMarkup(d) + '</span></span>' +
+        '<span class="dlg__meta"><span>' + shortTime(d.lastAt) + '</span>' +
         (d.unread ? '<span class="dlg__badge">' + d.unread + '</span>' : '') +
-        waitMarkup(d) +
         '</span></button>'
       );
     })
@@ -403,7 +461,7 @@ function renderMessages(dialog, messages) {
   $('form').hidden = false;
 
   const body = $('body');
-  body.innerHTML = messages.map(messageMarkup).join('');
+  body.innerHTML = talkMarkup(messages);
 
   // Telegram мог удалить файл, а канал — отвалиться. Битая картинка выглядит
   // поломкой окна, поэтому подменяем её словами и ссылкой «открыть отдельно».
