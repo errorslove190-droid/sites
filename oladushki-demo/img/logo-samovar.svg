@@ -1,0 +1,58 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" role="img" aria-label="Свияжские Оладушки — остров-град">
+  <title>Свияжские Оладушки</title>
+  <defs>
+    <path id="arcTop" d="M 30 100 A 70 70 0 0 1 170 100"/>
+    <path id="arcBottom" d="M 34 100 A 66 66 0 0 0 166 100"/>
+  </defs>
+
+  <g fill="none" stroke="currentColor" stroke-width="2.4">
+    <circle cx="100" cy="100" r="94"/>
+    <circle cx="100" cy="100" r="88" stroke-width="1"/>
+  </g>
+
+  <!-- Самовар: тулово, конфорка, краник, ручки — силуэт как на выжженном знаке -->
+  <g fill="currentColor">
+    <!-- конфорка сверху -->
+    <path d="M92 44h16v5h-4v4h9c0 4-4 7-13 7s-13-3-13-7h9v-4h-4z"/>
+    <!-- крышка -->
+    <path d="M78 63h44a4 4 0 0 1 0 8H78a4 4 0 0 1 0-8z"/>
+    <!-- тулово -->
+    <path d="M84 73h32c4 10 6 20 6 29 0 12-4 22-10 27H88c-6-5-10-15-10-27 0-9 2-19 6-29z"/>
+    <!-- поддон и ножка -->
+    <path d="M88 131h24v6H88z"/>
+    <path d="M80 139h40a3 3 0 0 1 0 6H80a3 3 0 0 1 0-6z"/>
+  </g>
+
+  <!-- ручки по бокам -->
+  <g fill="none" stroke="currentColor" stroke-width="4.5" stroke-linecap="round">
+    <path d="M77 84c-8 0-12 4-12 9s4 8 11 8"/>
+    <path d="M123 84c8 0 12 4 12 9s-4 8-11 8"/>
+  </g>
+
+  <!-- краник -->
+  <g fill="currentColor">
+    <path d="M116 100h10v5h-10z"/>
+    <path d="M122 105h5v9h-5z"/>
+    <path d="M119 92h4v10h-4z" transform="rotate(-38 121 97)"/>
+  </g>
+
+  <!-- две чашки на блюдцах у основания -->
+  <g fill="currentColor">
+    <path d="M56 130c0 7 4 11 9 11s9-4 9-11z"/>
+    <path d="M74 131c4 0 6 2 6 4s-2 4-5 4"/>
+    <rect x="50" y="143" width="30" height="3.5" rx="1.7"/>
+    <path d="M126 130c0 7 4 11 9 11s9-4 9-11z"/>
+    <path d="M144 131c4 0 6 2 6 4s-2 4-5 4"/>
+    <rect x="120" y="143" width="30" height="3.5" rx="1.7"/>
+  </g>
+
+  <!-- надписи по кругу, как на выжигании -->
+  <g fill="currentColor" font-family="'Nizhegorodsky','Yeseva One',Georgia,serif">
+    <text font-size="15.5" letter-spacing="2.6" text-anchor="middle">
+      <textPath href="#arcTop" startOffset="50%">ОСТРОВ-ГРАД</textPath>
+    </text>
+    <text font-size="14" letter-spacing="1.7" text-anchor="middle">
+      <textPath href="#arcBottom" startOffset="50%">СВИЯЖСКИЕ ОЛАДУШКИ</textPath>
+    </text>
+  </g>
+</svg>
