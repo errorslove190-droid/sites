@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex, nofollow">
+  <title>Оладушки — три компоновки секции с видео</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Golos+Text:wght@400;500;600&display=swap">
+  <style>
+    @font-face {
+      font-family: 'Nizhegorodsky';
+      src: url('nizhegorodsky.woff2') format('woff2');
+      font-display: swap;
+    }
+    :root {
+      --bg: #F2E4C9; --bg-light: #F8EFDB; --card: #E8D9B5;
+      --wood: #5C3A21; --wood-deep: #3E2814;
+      --terra: #C97D3F; --vermilion: #A8331E; --gold: #C49A3A; --cream: #FBF3E2;
+      --display: 'Nizhegorodsky', Georgia, serif;
+      --body: 'Golos Text', -apple-system, 'Segoe UI', sans-serif;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { background: var(--bg); color: var(--wood-deep); font-family: var(--body); line-height: 1.7; font-size: 18px; }
+
+    /* ── служебная шапка превью ── */
+    .preview-note { background: var(--wood-deep); color: var(--cream); padding: 14px 20px; font-size: 15px; text-align: center; }
+    .preview-note b { color: var(--gold); }
+    .variant-label { max-width: 1180px; margin: 0 auto; padding: 48px 20px 0; }
+    .variant-label span { display: inline-block; background: var(--vermilion); color: var(--cream); font-weight: 600; font-size: 14px; letter-spacing: .06em; padding: 5px 14px; border-radius: 4px; }
+    .variant-label p { color: var(--wood); font-size: 15px; margin-top: 8px; max-width: 640px; }
+    hr.sep { border: none; border-top: 2px dashed var(--terra); opacity: .5; margin: 56px 0 0; }
+
+    /* ── общее для секций ── */
+    .section { padding: 44px 20px 72px; }
+    .wrap { max-width: 1180px; margin: 0 auto; }
+    .eyebrow { display: block; font-family: var(--body); font-weight: 600; font-size: 14px; letter-spacing: .18em; text-transform: uppercase; color: var(--vermilion); margin-bottom: 10px; }
+    h2 { font-family: var(--display); font-weight: normal; font-size: clamp(30px, 4.4vw, 46px); line-height: 1.15; color: var(--wood-deep); margin-bottom: 18px; }
+    .lead { color: var(--wood); max-width: 46ch; margin-bottom: 22px; }
+    .facts { font-size: 15px; color: var(--wood); border-top: 1px solid var(--terra); padding-top: 14px; max-width: 46ch; }
+    .facts b { color: var(--vermilion); }
+    .more { display: inline-block; margin-top: 18px; color: var(--vermilion); font-weight: 600; text-decoration: none; border-bottom: 2px solid var(--gold); padding-bottom: 2px; }
+    video { display: block; width: 100%; background: #2B1A0F; }
+
+    /* ── Вариант 1: разворот 50/50 ── */
+    .v1 .split { display: grid; grid-template-columns: 1fr 1.15fr; gap: 48px; align-items: center; }
+    .v1 video { aspect-ratio: 16/9; object-fit: cover; border-radius: 10px; box-shadow: 0 18px 40px rgba(62,40,20,.22); outline: 1px solid var(--gold); outline-offset: 6px; }
+    @media (max-width: 800px) { .v1 .split { grid-template-columns: 1fr; gap: 28px; } .v1 video { order: -1; } }
+
+    /* ── Вариант 2: открытка ── */
+    .v2 { background: var(--bg-light); }
+    .v2 .split { display: grid; grid-template-columns: 1.05fr 1fr; gap: 56px; align-items: center; }
+    .v2 .postcard { background: var(--cream); padding: 14px 14px 44px; border-radius: 4px; box-shadow: 0 16px 36px rgba(62,40,20,.25); transform: rotate(-2deg); position: relative; }
+    .v2 video { aspect-ratio: 4/5; object-fit: cover; border-radius: 2px; }
+    .v2 .postcard figcaption { position: absolute; left: 0; right: 0; bottom: 10px; text-align: center; font-size: 14px; color: var(--wood); }
+    .v2 .postcard::after { content: '≋'; position: absolute; top: 20px; right: 20px; width: 44px; height: 44px; border: 2px solid var(--vermilion); border-radius: 50%; color: var(--vermilion); font-size: 20px; display: grid; place-items: center; transform: rotate(12deg); opacity: .75; background: rgba(251,243,226,.6); }
+    @media (max-width: 800px) { .v2 .split { grid-template-columns: 1fr; gap: 32px; } .v2 .postcard { max-width: 420px; margin: 0 auto; } }
+
+    /* ── Вариант 3: до края ── */
+    .v3 { padding-right: 0; overflow: hidden; }
+    .v3 .split { display: grid; grid-template-columns: minmax(300px, 440px) 1fr; gap: 56px; align-items: center; max-width: none; margin-left: max(20px, calc(50vw - 590px)); }
+    .v3 video { aspect-ratio: 16/9; object-fit: cover; border-radius: 10px 0 0 10px; box-shadow: 0 18px 40px rgba(62,40,20,.22); }
+    @media (max-width: 800px) { .v3 { padding-right: 20px; } .v3 .split { grid-template-columns: 1fr; gap: 28px; margin-left: 0; } .v3 video { order: -1; border-radius: 10px; } }
+  </style>
+</head>
+<body>
+
+<div class="preview-note">Три компоновки секции «Двенадцать секунд из лавки» — вместо видео во всю ширину. Тексты настоящие, видео уже пережатое (1 МБ). <b>Скролль и выбирай.</b></div>
+
+<!-- ============ ВАРИАНТ 1 ============ -->
+<div class="variant-label" id="v1">
+  <span>Вариант 1 · Разворот</span>
+  <p>Классический сплит: текст слева, видео справа со скруглением и тонкой золотой обводкой. Спокойно и по-журнальному. На телефоне видео встаёт над текстом.</p>
+</div>
+<section class="section v1">
+  <div class="wrap split">
+    <div>
+      <span class="eyebrow">Лавка вживую</span>
+      <h2>Двенадцать секунд из лавки</h2>
+      <p class="lead">Фасад с росписью, пар над самоварами и налив чая — сняли одним майским утром, без постановки. Так лавка выглядит каждый день.</p>
+      <p class="facts">Оладушки <b>100 ₽</b> · чай из самовара <b>100 ₽</b> · ежедневно <b>10:00–18:00</b></p>
+      <a class="more" href="#">Как добраться →</a>
+    </div>
+    <video src="../oladushki-video/video/lavka-promo.mp4" poster="../oladushki-video/video/lavka-promo-poster.jpg" autoplay muted loop playsinline preload="metadata" aria-label="Видео лавки: фасад, самовары, налив чая"></video>
+  </div>
+</section>
+<hr class="sep">
+
+<!-- ============ ВАРИАНТ 2 ============ -->
+<div class="variant-label" id="v2">
+  <span>Вариант 2 · Открытка из Свияжска</span>
+  <p>Видео — вертикальная «открытка» с полями и лёгким наклоном, кадр обрезается по бокам до 4:5. Текст справа. Самый характерный, играет с сувенирной темой лавки.</p>
+</div>
+<section class="section v2">
+  <div class="wrap split">
+    <figure class="postcard">
+      <video src="../oladushki-video/video/lavka-promo.mp4" poster="../oladushki-video/video/lavka-promo-poster.jpg" autoplay muted loop playsinline preload="metadata" aria-label="Видео лавки: фасад, самовары, налив чая"></video>
+      <figcaption>Свияжск, у стен монастыря · май 2026</figcaption>
+    </figure>
+    <div>
+      <span class="eyebrow">Лавка вживую</span>
+      <h2>Двенадцать секунд из лавки</h2>
+      <p class="lead">Фасад с росписью, пар над самоварами и налив чая — сняли одним майским утром, без постановки. Так лавка выглядит каждый день.</p>
+      <p class="facts">Оладушки <b>100 ₽</b> · чай из самовара <b>100 ₽</b> · ежедневно <b>10:00–18:00</b></p>
+      <a class="more" href="#">Как добраться →</a>
+    </div>
+  </div>
+</section>
+<hr class="sep">
+
+<!-- ============ ВАРИАНТ 3 ============ -->
+<div class="variant-label" id="v3">
+  <span>Вариант 3 · До края</span>
+  <p>Асимметрия: узкая колонка текста слева, видео уезжает вправо до самого края экрана. Самый современный и «дорогой» из трёх.</p>
+</div>
+<section class="section v3">
+  <div class="split">
+    <div>
+      <span class="eyebrow">Лавка вживую</span>
+      <h2>Двенадцать секунд из лавки</h2>
+      <p class="lead">Фасад с росписью, пар над самоварами и налив чая — сняли одним майским утром, без постановки. Так лавка выглядит каждый день.</p>
+      <p class="facts">Оладушки <b>100 ₽</b> · чай из самовара <b>100 ₽</b> · ежедневно <b>10:00–18:00</b></p>
+      <a class="more" href="#">Как добраться →</a>
+    </div>
+    <video src="../oladushki-video/video/lavka-promo.mp4" poster="../oladushki-video/video/lavka-promo-poster.jpg" autoplay muted loop playsinline preload="metadata" aria-label="Видео лавки: фасад, самовары, налив чая"></video>
+  </div>
+</section>
+
+</body>
+</html>
