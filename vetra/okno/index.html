@@ -61,9 +61,12 @@ svg.i.lg{width:22px; height:22px}
 .pick button.on{background:var(--accent); border-color:var(--accent); color:#fff}
 
 /* ---------- Шапка ---------- */
+/* z-index обязателен: `backdrop-filter` у списка и переписки создаёт свой слой,
+   и без этого выпадающее меню шапки уходило ПОД них — было видно только нижнюю
+   половину меню, а первый пункт перекрывался. */
 .top{flex:none; display:flex; align-items:center; gap:12px; height:56px; padding-inline:14px;
   background:var(--panel); backdrop-filter:var(--blur); -webkit-backdrop-filter:var(--blur);
-  border-bottom:1px solid var(--line2)}
+  border-bottom:1px solid var(--line2); position:relative; z-index:50}
 .top__nm{font-family:'Google Sans',sans-serif; font-weight:700; font-size:18px; letter-spacing:-.01em}
 .top__ch{margin-left:auto; display:flex; align-items:center; gap:7px; font-size:13px; color:var(--muted2);
   white-space:nowrap; overflow:hidden; text-overflow:ellipsis}
