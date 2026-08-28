@@ -156,6 +156,15 @@ body[data-theme="dark"] .dlg__wait.late,body[data-theme="night"] .dlg__wait.late
 .chat{display:flex; flex-direction:column; min-height:0; background-color:var(--talk);
   background-image:var(--wall); background-size:26px 26px; position:relative}
 body[data-wall="soft"] .chat{background-size:cover}
+/* Своя картинка на фоне: растягиваем на всю переписку и по желанию притушиваем,
+   иначе на пёстрой фотографии не прочитать ни одного сообщения. */
+body[data-wall="own"] .chat{background-image:var(--own); background-size:cover;
+  background-position:center; background-repeat:no-repeat}
+body[data-wall="own"][data-dim="on"] .chat::before{content:''; position:absolute; inset:0;
+  background:rgba(255,255,255,.62); pointer-events:none}
+body[data-wall="own"][data-dim="on"][data-theme="dark"] .chat::before,
+body[data-wall="own"][data-dim="on"][data-theme="night"] .chat::before{background:rgba(12,18,26,.66)}
+body[data-wall="own"] .chat > *{position:relative; z-index:1}
 .chat__top{display:flex; align-items:center; gap:12px; padding:10px 18px; background:var(--panel);
   border-bottom:1px solid var(--line2)}
 .chat__who{font-family:'Google Sans',sans-serif; font-weight:500}
@@ -226,21 +235,31 @@ body[data-theme="dark"] .day,body[data-theme="night"] .day{background:rgba(255,2
   white-space:nowrap}
 .chips button:hover{border-color:var(--accent)}
 .chips a{flex:none; align-self:center; font-size:13px; color:var(--muted2); white-space:nowrap; padding:0 4px}
+/* Нижняя панель как в мессенджере: слева скрепка, дальше поле во всю оставшуюся
+   ширину, справа одна круглая кнопка. Пусто — микрофон, есть текст — отправить.
+   Так поле не зажимается тремя кнопками, а на телефоне это половина ширины. */
 .compose__box{display:flex; gap:8px; align-items:flex-end}
-.compose textarea{flex:1; border:1.5px solid var(--line2); border-radius:var(--r-lg); padding:11px 14px;
-  font:inherit; font-size:var(--fz); resize:none; max-height:140px; background:var(--panel);
-  color:var(--ink2); box-sizing:border-box}
+.field{flex:1; min-width:0; position:relative; display:flex}
+.compose textarea{flex:1; min-width:0; border:1.5px solid var(--line2); border-radius:22px;
+  padding:11px 82px 11px 16px; font:inherit; font-size:var(--fz); resize:none; max-height:40vh;
+  background:var(--panel); color:var(--ink2); box-sizing:border-box; line-height:1.4}
 .compose textarea:focus{outline:none; border-color:var(--accent)}
+/* Кнопки внутри поля — смайлик и переход по пропускам заготовки. */
+.in{position:absolute; bottom:6px; border:0; background:transparent; cursor:pointer; font-size:19px;
+  line-height:1; width:34px; height:34px; border-radius:50%; display:grid; place-items:center;
+  color:var(--muted2)}
+.in:hover{background:rgba(127,127,127,.15); color:var(--press)}
+#smile{right:8px}
+#gap{right:42px; display:none; font-size:15px; font-weight:700; color:var(--accent)}
+#gap.on{display:grid}
 .rnd{border:1.5px solid var(--line2); background:var(--panel); color:var(--muted2); font-size:19px;
-  line-height:1; width:44px; height:44px; border-radius:50%; cursor:pointer; flex:none; display:grid;
+  line-height:1; width:46px; height:46px; border-radius:50%; cursor:pointer; flex:none; display:grid;
   place-items:center}
 .rnd:hover{border-color:var(--accent); color:var(--press)}
-#mic{display:none}
-#mic.can{display:grid}
-#mic.rec{background:#B3261E; border-color:#B3261E; color:#fff; animation:pulse 1.1s ease-in-out infinite}
+/* Одна кнопка на два состояния: пока поле пустое — запись голосового. */
+#act{background:var(--accent); border-color:var(--accent); color:#fff; font-size:20px}
+#act.rec{background:#C4362B; border-color:#C4362B; animation:pulse 1.1s ease-in-out infinite}
 @keyframes pulse{50%{opacity:.55}}
-.send{border:0; background:var(--accent); color:#fff; font-family:'Google Sans',sans-serif; font-weight:500;
-  font-size:15px; padding:12px 20px; border-radius:var(--r-pill); cursor:pointer; flex:none}
 
 .emo{position:absolute; bottom:calc(100% - 4px); left:16px; width:min(320px, calc(100% - 32px));
   background:var(--panel); border:1px solid var(--line2); border-radius:var(--r);
@@ -326,7 +345,7 @@ body[data-theme="dark"] .note,body[data-theme="night"] .note{color:#9CC5F2}
 }
 </style>
 </head>
-<body data-view="list" data-theme="vetra" data-wall="dots" data-size="normal" data-dense="normal" data-ava="on" data-rail="on">
+<body data-view="list" data-theme="vetra" data-wall="dots" data-size="normal" data-dense="normal" data-ava="on" data-rail="on" data-dim="on">
 
 <div class="pick">
   <b>Шесть вариантов.</b> Переписка придумана — нажимать можно всё.
@@ -394,10 +413,12 @@ body[data-theme="dark"] .note,body[data-theme="night"] .note{color:#9CC5F2}
       <div class="chips" id="chips"></div>
       <div class="compose__box">
         <button class="rnd" id="clip" type="button" title="Отправить фото или файл">📎</button>
-        <button class="rnd" id="smile" type="button" title="Эмодзи">🙂</button>
-        <button class="rnd" id="mic" type="button" title="Надиктовать ответ">🎙</button>
-        <textarea id="text" rows="1" placeholder="Ответ клиенту. Enter — отправить"></textarea>
-        <button class="send" id="send" type="submit">Отправить</button>
+        <div class="field">
+          <textarea id="text" rows="1" placeholder="Ответ клиенту. Enter — отправить"></textarea>
+          <button class="in" id="gap" type="button" title="К следующему пропуску (Tab)">→|</button>
+          <button class="in" id="smile" type="button" title="Эмодзи">🙂</button>
+        </div>
+        <button class="rnd" id="act" type="submit" title="Записать голосовое">🎙</button>
       </div>
     </form>
   </section>
@@ -433,7 +454,13 @@ body[data-theme="dark"] .note,body[data-theme="night"] .note{color:#9CC5F2}
         <button data-v="dots" class="on">Точки</button>
         <button data-v="grid">Клетка</button>
         <button data-v="soft">Мягкий свет</button>
+        <button data-v="own" id="wall-own">Своя картинка</button>
       </div>
+      <input type="file" id="wall-file" accept="image/*" hidden>
+      <p class="lead" style="margin-top:8px">Своя картинка растягивается на всю переписку.
+      Поверх неё пузыри должны читаться — берите что-нибудь спокойное, не пёстрое.</p>
+      <label class="check"><input type="checkbox" id="wall-dim" checked><span>Притушить фон,
+        чтобы текст читался</span></label>
 
       <h3>Размер текста</h3>
       <p class="lead">Крупный удобен, когда экран стоит на стойке администратора и в него смотрят издалека.</p>
@@ -778,24 +805,74 @@ function pushOut(text, files) {
   renderDialogs();
 }
 
-$('form').addEventListener('submit', (e) => {
-  e.preventDefault();
+/* Одна правая кнопка на два состояния: пустое поле — голосовое, есть текст — отправить.
+   Ровно как в мессенджерах: кнопок меньше, поле шире. */
+function syncAct() {
+  const has = $('text').value.trim().length > 0;
+  const act = $('act');
+  act.textContent = has ? '➤' : '🎙';
+  act.title = has ? 'Отправить' : (Recognition ? 'Надиктовать ответ' : 'Записать голосовое');
+  act.type = has ? 'submit' : 'button';
+  $('gap').classList.toggle('on', GAP.test($('text').value));
+}
+
+function sendText() {
   const field = $('text');
   let text = field.value.trim();
   if (!text || !openId) return;
+  // Незаполненный пропуск клиенту отправлять нельзя — он увидит «______».
+  if (GAP.test(text) && !confirm('В ответе остались пропуски «______». Всё равно отправить?')) {
+    focusGap(0);
+    return;
+  }
   if (signature) text += '\n' + signature;
   field.value = '';
   field.style.height = 'auto';
+  syncAct();
   pushOut(text);
   field.focus();
-});
+}
+
+$('form').addEventListener('submit', (e) => { e.preventDefault(); sendText(); });
 
 $('text').addEventListener('input', (e) => {
   e.target.style.height = 'auto';
-  e.target.style.height = Math.min(e.target.scrollHeight, 140) + 'px';
+  e.target.style.height = Math.min(e.target.scrollHeight, Math.round(innerHeight * 0.4)) + 'px';
+  syncAct();
 });
 $('text').addEventListener('keydown', (e) => {
-  if (e.key === 'Enter' && !e.shiftKey && $('p-enter').checked) { e.preventDefault(); $('form').requestSubmit(); }
+  // Tab ведёт к следующему пропуску заготовки, а не уводит фокус из поля.
+  if (e.key === 'Tab' && GAP.test($('text').value)) {
+    e.preventDefault();
+    focusGap($('text').selectionEnd);
+    return;
+  }
+  if (e.key === 'Enter' && !e.shiftKey && $('p-enter').checked) { e.preventDefault(); sendText(); }
+});
+
+/* ============ Пропуски в заготовках ============
+   Заготовка «Записала вас на ______, мастер ______» бесполезна, если каждый
+   пропуск надо стирать вручную. Подставили — первый уже выделен, Tab ведёт
+   к следующему, на телефоне для этого есть кнопка «→|» внутри поля. */
+const GAP = /_{3,}/;
+
+function focusGap(from) {
+  const f = $('text');
+  const after = f.value.slice(from);
+  let m = GAP.exec(after);
+  let at = m ? from + m.index : null;
+  if (!m) { m = GAP.exec(f.value); at = m ? m.index : null; }   // дошли до конца — начинаем сначала
+  if (at === null) { f.focus(); return false; }
+  f.focus();
+  f.setSelectionRange(at, at + m[0].length);
+  return true;
+}
+
+$('gap').addEventListener('click', () => focusGap($('text').selectionEnd));
+$('act').addEventListener('click', (e) => {
+  if ($('text').value.trim()) return;          // есть текст — сработает submit
+  e.preventDefault();
+  startVoice();
 });
 
 /* Скрепка и перетаскивание — оба кладут прайс: это самое частое вложение салона. */
@@ -914,11 +991,39 @@ for (const box of document.querySelectorAll('.opts[data-set]')) {
   box.addEventListener('click', (e) => {
     const b = e.target.closest('button[data-v]');
     if (!b) return;
+    // «Своя картинка» сначала просит файл: без него ставить нечего.
+    if (b.dataset.v === 'own' && !document.body.style.getPropertyValue('--own')) {
+      $('wall-file').click();
+      return;
+    }
     document.body.dataset[box.dataset.set] = b.dataset.v;
     applyLook();
     markPreset(null);
   });
 }
+
+/* Своя картинка на фоне переписки. */
+$('wall-file').addEventListener('change', (e) => {
+  const file = e.target.files && e.target.files[0];
+  e.target.value = '';
+  if (!file) return;
+  if (!file.type.startsWith('image/')) { alert('Нужна картинка: jpg, png или webp.'); return; }
+  if (file.size > 6 * 1024 * 1024) { alert('Картинка больше 6 МБ — окно будет открываться медленно.'); return; }
+  const reader = new FileReader();
+  reader.onload = () => {
+    document.body.style.setProperty('--own', 'url(' + reader.result + ')');
+    document.body.dataset.wall = 'own';
+    document.body.dataset.dim = $('wall-dim').checked ? 'on' : 'off';
+    applyLook();
+    markPreset(null);
+  };
+  reader.onerror = () => alert('Картинка не прочиталась. Попробуйте другую.');
+  reader.readAsDataURL(file);
+});
+$('wall-own').addEventListener('dblclick', () => $('wall-file').click());
+$('wall-dim').addEventListener('change', () => {
+  document.body.dataset.dim = $('wall-dim').checked ? 'on' : 'off';
+});
 
 /* Готовые сочетания — те же переключатели, только все сразу. */
 const PRESETS = {
@@ -952,9 +1057,11 @@ $('chips').addEventListener('click', (e) => {
   const b = e.target.closest('button[data-text]');
   if (!b) return;
   const f = $('text');
-  f.value = f.value.trim() ? f.value.trim() + '\n' + b.dataset.text : b.dataset.text;
+  const before = f.value.trim();
+  f.value = before ? before + '\n' + b.dataset.text : b.dataset.text;
   f.dispatchEvent(new Event('input'));
-  f.focus();
+  // Курсор сразу в первом пропуске: человеку остаётся вписать дату и имя мастера.
+  if (!focusGap(before.length)) { f.focus(); f.setSelectionRange(f.value.length, f.value.length); }
 });
 function renderTemplates() {
   $('tpl-list').innerHTML = templates.map((t) =>
@@ -1012,26 +1119,31 @@ $('p-save').addEventListener('click', () => {
     : 'Подпись выключена.';
 });
 
-/* ============ Голосовой ввод ============ */
+/* ============ Голосовой ввод ============
+   Распознаёт сам браузер: сказанное появляется текстом в поле, и его можно
+   поправить до отправки. Где браузер не умеет — кнопка честно об этом говорит. */
 const Recognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+let recog = null;
+
 if (Recognition) {
-  $('mic').classList.add('can');
-  const recog = new Recognition();
+  recog = new Recognition();
   recog.lang = 'ru-RU'; recog.interimResults = true; recog.continuous = true;
   let base = '';
-  recog.onstart = () => { base = $('text').value.trim(); $('mic').classList.add('rec'); };
+  recog.onstart = () => { base = $('text').value.trim(); $('act').classList.add('rec'); $('act').textContent = '■'; };
   recog.onresult = (e) => {
     let said = '';
     for (let i = 0; i < e.results.length; i++) said += e.results[i][0].transcript;
     $('text').value = (base ? base + ' ' : '') + said.trim();
     $('text').dispatchEvent(new Event('input'));
   };
-  recog.onerror = () => $('mic').classList.remove('rec');
-  recog.onend = () => $('mic').classList.remove('rec');
-  $('mic').addEventListener('click', () => {
-    if ($('mic').classList.contains('rec')) recog.stop();
-    else try { recog.start(); } catch (e) {}
-  });
+  recog.onerror = () => { $('act').classList.remove('rec'); syncAct(); };
+  recog.onend = () => { $('act').classList.remove('rec'); syncAct(); $('text').focus(); };
+}
+
+function startVoice() {
+  if (!recog) { alert('Этот браузер не умеет распознавать речь. Работает в Chrome и на Android.'); return; }
+  if ($('act').classList.contains('rec')) recog.stop();
+  else try { recog.start(); } catch (e) { /* уже слушает */ }
 }
 
 /* Ctrl+K — в поиск, как во всех рабочих окнах. */
@@ -1046,6 +1158,7 @@ document.addEventListener('keydown', (e) => {
 applyLook();
 renderTemplates();
 showHints();
+syncAct();
 document.title = '(4) Входящие — Ветра';
 setInterval(renderDialogs, 30000);
 </script>
