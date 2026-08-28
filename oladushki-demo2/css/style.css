@@ -3084,9 +3084,10 @@ input, textarea { caret-color: var(--color-vermilion); }
   background: none;
   box-shadow: 0 6px 16px rgba(62, 40, 20, 0.18);
   transition: transform 0.2s, box-shadow 0.2s;
+  aspect-ratio: 16 / 10;
 }
 .pl-thumb:hover { transform: translateY(-4px); box-shadow: 0 12px 24px rgba(62, 40, 20, 0.28); }
-.pl-thumb img { display: block; width: 100%; height: auto; aspect-ratio: 16 / 10; object-fit: cover; transition: transform 0.25s; }
+.pl-thumb img { display: block; width: 100%; height: 100%; object-fit: cover; transition: transform 0.25s; }
 .pl-thumb:hover img { transform: scale(1.06); }
 .pl-thumb b {
   position: absolute;

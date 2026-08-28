@@ -856,7 +856,7 @@ document.addEventListener('DOMContentLoaded', () => {
     b.type = 'button';
     b.className = 'pl-thumb' + (i === 0 ? ' is-active' : '');
     b.setAttribute('aria-label', 'Показать ролик: ' + c.t);
-    b.innerHTML = '<img src="video/thumbs/' + c.f + '.jpg" alt="" loading="lazy" width="640" height="400"><b>' + c.t + '</b>';
+    b.innerHTML = '<img src="video/thumbs/' + c.f + '.jpg" alt="" loading="lazy"><b>' + c.t + '</b>';
     b.addEventListener('click', function () { show(i); });
     thumbsBox.appendChild(b);
   });
