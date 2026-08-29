@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Ветра — вклад и доли</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@500;700&family=Onest:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#0d0d0d; --fg:#f4f4f2; --dim:#8a8a86; --line:#2a2a28;
+  --lime:#cbff2e; --m:#cbff2e; --a:#f4f4f2;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--fg);font:16px/1.55 Onest,-apple-system,Segoe UI,sans-serif;
+  padding:32px 20px 72px;-webkit-font-smoothing:antialiased}
+.wrap{max-width:760px;margin:0 auto}
+.kicker{font-size:12px;letter-spacing:.18em;text-transform:uppercase;color:var(--dim)}
+h1{font-family:Unbounded,sans-serif;font-weight:700;font-size:clamp(28px,7vw,44px);line-height:1.05;margin:10px 0 6px}
+.sub{color:var(--dim);font-size:15px;max-width:52ch}
+section{margin-top:44px}
+h2{font-family:Unbounded,sans-serif;font-weight:500;font-size:14px;letter-spacing:.04em;
+  text-transform:uppercase;color:var(--dim);margin-bottom:18px}
+
+/* шкала */
+.bar{display:flex;height:64px;border-radius:10px;overflow:hidden;border:1px solid var(--line)}
+.bar div{display:flex;align-items:center;font-family:Unbounded,sans-serif;font-weight:700;
+  font-size:clamp(18px,4.5vw,26px);padding:0 16px;transition:flex-basis .4s}
+.bar .m{background:var(--lime);color:#0d0d0d}
+.bar .a{background:#1c1c1a;color:var(--fg);justify-content:flex-end}
+.legend{display:flex;justify-content:space-between;margin-top:10px;font-size:14px;color:var(--dim)}
+.legend b{color:var(--fg);font-weight:600}
+.delta{font-size:13px;color:var(--dim);margin-top:14px}
+
+/* карточки очков */
+.cards{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.card{border:1px solid var(--line);border-radius:10px;padding:16px}
+.card .n{font-family:Unbounded,sans-serif;font-size:34px;font-weight:700;line-height:1}
+.card .l{font-size:13px;color:var(--dim);margin-top:6px}
+.card.m .n{color:var(--lime)}
+
+/* лента */
+.row{display:grid;grid-template-columns:56px 1fr 44px;gap:12px;align-items:start;
+  padding:14px 0;border-top:1px solid var(--line)}
+.row .d{font-size:13px;color:var(--dim);white-space:nowrap}
+.row .w{font-family:Unbounded,sans-serif;font-weight:700;text-align:right;font-size:15px}
+.row .t{font-size:15px}
+.who{font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--dim);display:block;margin-bottom:2px}
+.who.m{color:var(--lime)}
+.rules li{margin:0 0 8px 18px;font-size:15px}
+.note{border-left:2px solid var(--lime);padding-left:14px;color:var(--dim);font-size:14px;margin-top:24px}
+footer{margin-top:56px;padding-top:18px;border-top:1px solid var(--line);color:var(--dim);font-size:13px}
+@media(max-width:480px){.cards{grid-template-columns:1fr}.bar{height:56px}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <p class="kicker">Ветра · внутреннее</p>
+  <h1>Вклад и доли</h1>
+  <p class="sub">По фактам, а не по обязанностям. Сделал то, что двигает проект — доля выросла. Чтобы к деньгам подойти без «я тянул больше».</p>
+
+  <section>
+    <h2>Сейчас</h2>
+    <div class="bar">
+      <div class="m" style="flex-basis:53.3%">53 %</div>
+      <div class="a" style="flex-basis:46.7%">47 %</div>
+    </div>
+    <div class="legend"><span><b>Михаил</b> · 65 очков</span><span><b>Андрей</b> · 57 очков</span></div>
+    <p class="delta">Старт был 50 / 50. Сдвиг +3 пункта — за закрытие решений Спринта 0 и пересчёт сроков 29.08.</p>
+  </section>
+
+  <section>
+    <h2>Как считается</h2>
+    <ul class="rules">
+      <li>Старт — по 50 базовых очков. Это и есть исходные 50/50.</li>
+      <li>Вес события: <b>1</b> мелочь · <b>3</b> заметное · <b>5</b> крупное · <b>10</b> переломное.</li>
+      <li>Доля = свои очки ÷ сумма. Одна запись не переворачивает картину — база держит.</li>
+      <li>Спорим о весе <b>до</b> записи, а не когда пришли деньги.</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>Лента</h2>
+
+    <div class="row"><span class="d">29.08</span>
+      <span class="t"><span class="who m">Михаил</span>Закрыты последствия решений Р4, Р6, Р7, Р8, Р11 Спринта 0</span>
+      <span class="w">+8</span></div>
+
+    <div class="row"><span class="d">29.08</span>
+      <span class="t"><span class="who m">Михаил</span>Пересчёт сроков и страница <i>sroki</i> — снят ложный ограничитель «код не успеет»</span>
+      <span class="w">+4</span></div>
+
+    <div class="row"><span class="d">29.08</span>
+      <span class="t"><span class="who m">Михаил</span>Очередь переведена на Postgres, ADR-003 — минус сервис в проде</span>
+      <span class="w">+3</span></div>
+
+    <div class="row"><span class="d">27.08</span>
+      <span class="t"><span class="who">Андрей</span>Продажи и разговоры с салонами — единственный контакт с клиентами</span>
+      <span class="w">+5</span></div>
+
+    <div class="row"><span class="d">27.08</span>
+      <span class="t"><span class="who">Андрей</span><i>strategiya.html</i> — стратегия проекта</span>
+      <span class="w">+2</span></div>
+
+    <div class="row"><span class="d">старт</span>
+      <span class="t"><span class="who">База</span>Михаил 50 · Андрей 50</span>
+      <span class="w">50</span></div>
+
+    <p class="note">Веса первых записей черновые — ставились по журналу, без Андрея. Правим при первом же несогласии: доля пересчитается сама.</p>
+  </section>
+
+  <section>
+    <h2>Что считается вкладом</h2>
+    <ul class="rules">
+      <li>Скил или инструмент, который упрощает работу обоим.</li>
+      <li>Закрытый клиент, пилот, оплата.</li>
+      <li>Снятое решение, на котором стояла стройка.</li>
+      <li>Документ, избавивший от переделки; дыра, найденная до продакшена.</li>
+    </ul>
+    <p class="note">Не считается: переделки за собой и работа, которую никто не просил и никто не использует.</p>
+  </section>
+
+  <footer>Обновлено 29.08.2026 · источник — «1. Моя папка / Проекты / Vetra — вклад и доли.md»</footer>
+</div>
+</body>
+</html>
