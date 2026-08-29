@@ -2,7 +2,6 @@
 <html lang="ru">
 <head>
 <meta charset="utf-8">
-<meta name="robots" content="noindex">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Вход в Ветра</title>
 <meta name="description" content="Вход и регистрация в Ветра — все сообщения клиентов в одном окне.">
@@ -28,12 +27,6 @@
 .social a:hover{border-color:var(--blue-mid); background:var(--blue-tint); transform:translateY(-2px); text-decoration:none}
 .social i{width:20px; height:20px; border-radius:50%; flex:none}
 .auth__foot{margin-top:26px; font-size:14.5px; color:var(--muted); text-align:center}
-.pw{position:relative}
-/* поле внутри label вместе с подписью — привязываем кнопку к низу, а не к центру */
-.pw button{position:absolute; right:8px; bottom:9px; border:0; background:transparent;
-  color:var(--muted); font-size:13.5px; cursor:pointer; padding:8px 12px; border-radius:var(--r-pill);
-  font-family:'Google Sans',sans-serif; transition:background var(--fast) var(--ease), color var(--fast) var(--ease)}
-.pw button:hover{background:var(--blue-soft); color:var(--blue-press)}
 [data-form-note]{margin-top:16px; padding:13px 16px; border-radius:var(--r); background:var(--blue-soft);
   color:var(--blue-press); font-size:14.5px}
 
@@ -65,8 +58,6 @@
 @media (max-width:680px){
   .auth__form{padding:24px 18px 40px}
   .auth__box{max-width:none}
-  /* «Показать» — текстовая кнопка внутри поля, пальцу нужна зона побольше */
-  .pw button{min-height:40px; padding-inline:14px; bottom:6px}
 }
 </style>
 </head>
@@ -91,23 +82,14 @@
         <h1 class="h-2 auth__title">С возвращением</h1>
         <p class="auth__sub">Войдите, чтобы увидеть сообщения клиентов.</p>
 
-        <form style="margin-top:28px" data-fake-form="Это макет — вход не выполняется.">
+        <form style="margin-top:28px" data-fake-form="Это макет — код не отправляется. В рабочем окне здесь появился бы второй шаг: шесть цифр из письма.">
           <label class="field">
             <span class="field__label">Почта</span>
             <input class="input" type="email" name="email" placeholder="you@company.ru" autocomplete="email" required>
-          </label>
-          <label class="field pw">
-            <span class="field__label">Пароль</span>
-            <input class="input" type="password" name="password" placeholder="Ваш пароль" autocomplete="current-password" required>
-            <button type="button" onclick="const i=this.parentElement.querySelector('input'); i.type = i.type==='password'?'text':'password'; this.textContent = i.type==='password'?'Показать':'Скрыть'">Показать</button>
+            <span class="field__hint">Пришлём код из шести цифр. Пароль не нужен.</span>
           </label>
 
-          <div style="display:flex; justify-content:space-between; align-items:center; gap:14px; margin:6px 0 24px">
-            <label class="check"><input type="checkbox" checked> Запомнить меня</label>
-            <a class="small" href="#">Забыли пароль?</a>
-          </div>
-
-          <button class="btn btn-primary btn-block" type="submit">Войти</button>
+          <button class="btn btn-primary btn-block" style="margin-top:20px" type="submit">Получить код</button>
           <p class="small" data-form-note hidden></p>
         </form>
 
@@ -138,11 +120,7 @@
           <label class="field">
             <span class="field__label">Почта</span>
             <input class="input" type="email" name="email" placeholder="you@company.ru" autocomplete="email" required>
-          </label>
-          <label class="field pw">
-            <span class="field__label">Пароль</span>
-            <input class="input" type="password" name="password" placeholder="Не короче 8 символов" autocomplete="new-password" minlength="8" required>
-            <button type="button" onclick="const i=this.parentElement.querySelector('input'); i.type = i.type==='password'?'text':'password'; this.textContent = i.type==='password'?'Показать':'Скрыть'">Показать</button>
+            <span class="field__hint">На неё придёт код для входа — пароль придумывать не нужно.</span>
           </label>
 
           <label class="check" style="margin:6px 0 24px">
