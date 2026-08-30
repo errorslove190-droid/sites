@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Эмоциональный интеллект: что работает, а что миф</title>
+<meta name="description" content="Разбор видео Ситникова про 10 приёмов ЭИ + актуальная наука: что подтверждено, что преувеличено, и рабочий протокол на 4 недели.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;700;900&family=Oswald:wght@400;600&family=Onest:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#0a0a0a;
+  --paper:#ffffff;
+  --lime:#d8f34e;
+  --grey:#6b6b6b;
+  --line:#0a0a0a;
+  --soft:#f2f2f0;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{-webkit-text-size-adjust:100%}
+body{
+  background:var(--paper);color:var(--ink);
+  font-family:'Onest',system-ui,-apple-system,'Segoe UI',sans-serif;
+  font-size:17px;line-height:1.62;
+  -webkit-font-smoothing:antialiased;
+}
+.wrap{max-width:760px;margin:0 auto;padding:0 20px}
+a{color:var(--ink)}
+
+/* ---------- шапка ---------- */
+header{border-bottom:3px solid var(--line);padding:38px 0 30px;margin-bottom:0}
+.kicker{
+  font-family:'Oswald',sans-serif;text-transform:uppercase;letter-spacing:.14em;
+  font-size:12px;color:var(--grey);margin-bottom:16px;
+}
+h1{
+  font-family:'Unbounded',sans-serif;font-weight:900;
+  font-size:clamp(30px,7.4vw,54px);line-height:1.04;letter-spacing:-.02em;
+}
+h1 em{font-style:normal;background:var(--lime);padding:0 .12em}
+.lead{margin-top:18px;font-size:clamp(16px,4vw,19px);color:#2a2a2a;max-width:56ch}
+.meta{
+  margin-top:22px;font-family:'Oswald',sans-serif;font-size:12.5px;
+  text-transform:uppercase;letter-spacing:.1em;color:var(--grey);
+}
+
+/* ---------- секции ---------- */
+section{padding:44px 0;border-bottom:1px solid #e2e2e0}
+section:last-of-type{border-bottom:0}
+.num{
+  font-family:'Oswald',sans-serif;font-size:13px;letter-spacing:.18em;
+  color:var(--grey);text-transform:uppercase;margin-bottom:12px;
+}
+h2{
+  font-family:'Unbounded',sans-serif;font-weight:700;
+  font-size:clamp(22px,5.2vw,32px);line-height:1.14;letter-spacing:-.015em;
+  margin-bottom:18px;
+}
+h3{
+  font-family:'Unbounded',sans-serif;font-weight:700;
+  font-size:clamp(17px,4.2vw,20px);line-height:1.25;margin-bottom:8px;
+}
+p{margin-bottom:14px}
+p:last-child{margin-bottom:0}
+strong{font-weight:700}
+.dim{color:var(--grey)}
+
+/* ---------- карточки ---------- */
+.card{border:2px solid var(--line);padding:22px 20px;margin:20px 0}
+.card.fill{background:var(--soft);border-color:var(--soft)}
+.card.hi{background:var(--lime);border-color:var(--lime)}
+
+.tag{
+  display:inline-block;font-family:'Oswald',sans-serif;font-size:11px;
+  text-transform:uppercase;letter-spacing:.12em;padding:3px 9px;margin-bottom:12px;
+  border:1.5px solid var(--ink);
+}
+.tag.ok{background:var(--lime);border-color:var(--lime)}
+.tag.mid{background:transparent}
+.tag.bad{background:var(--ink);color:var(--paper)}
+
+/* миф → факт */
+.myth{border-left:5px solid var(--lime);padding:4px 0 4px 18px;margin:22px 0}
+.myth .said{font-family:'Oswald',sans-serif;font-size:15px;letter-spacing:.02em;text-transform:uppercase;color:var(--grey);margin-bottom:8px}
+.myth .real{margin:0}
+
+/* приёмы */
+ol.steps{list-style:none;counter-reset:s;margin:8px 0 0}
+ol.steps li{counter-increment:s;padding:16px 0 16px 52px;position:relative;border-top:1px solid #e2e2e0}
+ol.steps li:before{
+  content:counter(s,decimal-leading-zero);position:absolute;left:0;top:16px;
+  font-family:'Oswald',sans-serif;font-size:20px;color:var(--ink);
+  border-bottom:3px solid var(--lime);line-height:1;
+}
+ol.steps li b{display:block;font-family:'Unbounded',sans-serif;font-size:16px;margin-bottom:5px;line-height:1.3}
+ol.steps li .how{color:#2a2a2a}
+ol.steps li .verdict{display:block;margin-top:7px;font-size:14px;color:var(--grey);font-family:'Oswald',sans-serif;letter-spacing:.03em}
+
+ul.plain{list-style:none;margin:10px 0}
+ul.plain li{padding-left:20px;position:relative;margin-bottom:9px}
+ul.plain li:before{content:"";position:absolute;left:0;top:.62em;width:9px;height:3px;background:var(--ink)}
+
+/* неделя */
+.week{display:grid;grid-template-columns:78px 1fr;gap:0;border-top:1px solid #e2e2e0}
+.week > div{padding:16px 0}
+.week .w{font-family:'Oswald',sans-serif;font-size:14px;text-transform:uppercase;letter-spacing:.08em;color:var(--grey)}
+
+/* шпаргалка */
+.cheat{background:var(--ink);color:var(--paper);padding:26px 22px;margin:24px 0}
+.cheat h3{color:var(--paper)}
+.cheat b{color:var(--lime)}
+.cheat ul{list-style:none}
+.cheat li{margin-bottom:12px;padding-left:18px;position:relative}
+.cheat li:before{content:"";position:absolute;left:0;top:.62em;width:9px;height:3px;background:var(--lime)}
+
+.words{display:flex;flex-wrap:wrap;gap:7px;margin-top:14px}
+.words span{
+  font-family:'Oswald',sans-serif;font-size:13px;letter-spacing:.03em;
+  border:1.5px solid var(--ink);padding:4px 10px;
+}
+
+footer{border-top:3px solid var(--line);padding:30px 0 60px;font-size:14.5px;color:var(--grey)}
+footer a{color:var(--grey);text-decoration:underline;text-underline-offset:3px;word-break:break-word}
+footer li{margin-bottom:7px;list-style:none}
+@media (max-width:420px){
+  body{font-size:16px}
+  .week{grid-template-columns:64px 1fr}
+}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap">
+    <div class="kicker">разбор видео + проверка по науке · август 2026</div>
+    <h1>Эмоциональный интеллект: <em>что работает</em>, а что просто красиво звучит</h1>
+    <p class="lead">Алексей Ситников в конце ролика даёт 10 упражнений. Часть из них — прямо в точку и подтверждена исследованиями. Часть — красивая эзотерика. Ниже: где что, и как из этого собрать привычку, которая реально меняет разговоры.</p>
+    <div class="meta">источник: «Главный навык 21 века», 16 мин · + 8 научных источников</div>
+  </div>
+</header>
+
+<div class="wrap">
+
+<section>
+  <div class="num">01 — по-простому</div>
+  <h2>Что это вообще такое</h2>
+  <p>Забудь про «быть милым». Эмоциональный интеллект — это <strong>точность</strong>. Четыре навыка, и все четыре измеримые:</p>
+  <ul class="plain">
+    <li><strong>Заметить</strong> — понять, что с тобой прямо сейчас происходит, раньше, чем ты на этом что-то сделаешь.</li>
+    <li><strong>Назвать</strong> — не «мне плохо», а «я раздражён, потому что чувствую, что меня не слышат».</li>
+    <li><strong>Понять другого</strong> — что движет человеком напротив, чего он на самом деле хочет.</li>
+    <li><strong>Выбрать действие</strong> — а не выдать первую автоматическую реакцию.</li>
+  </ul>
+  <p>Ситников говорит красивую вещь, и она правда: <em>интеллект понимает, как устроен мир, а эмоциональный интеллект — людей в этом мире</em>. Сильная часть его тезиса — что эмоция это не помеха логике, а <strong>информация</strong>. Злость, тревога, скука — это данные о том, что происходит. Игнорировать их так же глупо, как затыкать лампочку «мало бензина».</p>
+  <div class="card fill">
+    <p class="dim" style="margin-bottom:8px"><strong>Почему тема снова везде.</strong></p>
+    <p>Future of Jobs Report (WEF, 2025) держит в топ-10 нужных навыков устойчивость, гибкость, лидерство и самоосознанность. Логика простая: рутинное мышление забирает ИИ, а «договориться с человеком» — пока нет. Это не мотивационный лозунг, а то, за что платят.</p>
+  </div>
+</section>
+
+<section>
+  <div class="num">02 — фильтр</div>
+  <h2>Три вещи из видео, которые надо поправить</h2>
+  <p>Чтобы не строить привычки на песке.</p>
+
+  <div class="myth">
+    <div class="said">«80% успеха — это ЭИ, и только 20% — ум»</div>
+    <p class="real">Красивая цифра без исследования за спиной — она пошла гулять из популярных книг Гоулмана. Что показывают мета-анализы: эмоциональный интеллект <strong>действительно добавляет</strong> к прогнозу успеха сверх IQ и черт характера — но прибавка умеренная, и особенно заметна там, где работа завязана на людях (продажи, переговоры, клиенты, руководство). То есть направление верное, масштаб преувеличен раз в пять. Ум никто не отменял.</p>
+  </div>
+
+  <div class="myth">
+    <div class="said">«Слова — это только 7% информации»</div>
+    <p class="real">Самый живучий миф в мире тренингов. Исследование Мерабиана 1967 года измеряло <strong>очень узкую вещь</strong>: когда слова и тон противоречат друг другу, по чему человек судит о симпатии — «нравлюсь я ему или нет». Только про симпатию и только при конфликте сигналов. Мерабиан сам десятилетиями просил перестать это обобщать. К обычному разговору «93% невербалики» не применимо: содержание слов решает.</p>
+  </div>
+
+  <div class="myth">
+    <div class="said">«Читать людей без слов»</div>
+    <p class="real">Здесь наука за последние годы развернулась. Большой обзор Лизы Фельдман Барретт с коллегами (2019) разобрал сотни исследований и вывод жёсткий: <strong>по лицу нельзя надёжно определить эмоцию</strong>. Хмурый человек может быть зол, сосредоточен, близорук или просто голоден. Люди в разных культурах и ситуациях выражают одно и то же по-разному. «Микровыражения» как детектор — не работают.<br><br>И главный результат для практики: Эял, Штеффель и Эпли прогнали <strong>25 экспериментов</strong> — просили людей «поставить себя на место другого» и смотрели, точнее ли те угадывают его мысли и чувства. Точность не росла, а часто <em>падала</em> — зато росла уверенность в себе. Единственное, что реально повышало точность: <strong>спросить человека напрямую</strong>. Не додумывать за него, а получить ответ.</p>
+  </div>
+  <div class="card hi">
+    <p><strong>Вывод, который меняет поведение:</strong> перестань быть телепатом. Твоя догадка о том, что чувствует клиент или Андрей, — это гипотеза, а не факт. Проверяй её вопросом. Это и есть главный апгрейд из всего материала.</p>
+  </div>
+</section>
+
+<section>
+  <div class="num">03 — ядро</div>
+  <h2>Пять техник, за которыми стоят данные</h2>
+  <p>Не «10 советов», а то, что показывало эффект в контролируемых исследованиях. Хорошая новость: ЭИ <strong>тренируется</strong> — мета-анализ 2024 года по обучению эмоциональным компетенциям на работе даёт умеренный эффект (SMD ≈ 0,45), который держится больше трёх месяцев после конца обучения. Это не «характер, с которым родился».</p>
+
+  <div class="card">
+    <span class="tag ok">подтверждено фМРТ</span>
+    <h3>1. Назвать эмоцию точным словом</h3>
+    <p>Либерман (UCLA, 2007): когда человек подбирает слово для своего состояния, активность миндалины — центра тревоги — <strong>падает</strong>, а включается префронтальная кора, зона контроля. Само называние уже успокаивает.</p>
+    <p>Но есть условие: слово должно быть <strong>точным</strong>. «Всё плохо» не работает. «Я обижен и одновременно виноват» — работает. Это называется эмоциональная гранулярность, и она напрямую связана с тем, насколько человек справляется со стрессом.</p>
+    <p class="dim"><strong>Как делать:</strong> три раза в день — назови состояние двумя словами, вслух или в заметку. Не оценивай, просто назови.</p>
+  </div>
+
+  <div class="card">
+    <span class="tag ok">мета-анализ, 21 000+ человек</span>
+    <h3>2. Переосмыслить, а не подавить</h3>
+    <p>Два способа справиться с эмоцией. <strong>Подавление</strong> — сжать зубы и не показывать. <strong>Переоценка</strong> — поменять смысл ситуации: «он не хамит, он в панике из-за срока».</p>
+    <p>Разница огромная. Подавление не убирает эмоцию — тело продолжает гореть, миндалина активна, а собеседник всё равно чувствует напряжение. Переоценка гасит реакцию на входе. По мета-анализам переоценка связана с лучшим психическим здоровьем, подавление — с худшим.</p>
+    <p class="dim"><strong>Как делать:</strong> вопрос-ключ — «какая ещё есть причина, по которой нормальный человек мог бы так поступить?». Найди третью версию, не только «он козёл».</p>
+  </div>
+
+  <div class="card">
+    <span class="tag ok">25 экспериментов</span>
+    <h3>3. Спрашивать, а не догадываться</h3>
+    <p>То самое исследование Эпли. Эмпатия как <em>угадайка</em> — самообман. Эмпатия как <em>интерес</em> — рабочий инструмент.</p>
+    <p>Причём вопрос должен быть о конкретике, которую нельзя вывести логически: не «тебе нормально?», а «что тебя в этом варианте больше всего смущает?».</p>
+    <p class="dim"><strong>Как делать:</strong> в каждом рабочем разговоре — один вопрос, ответ на который ты не мог предсказать. Один. Этого хватает.</p>
+  </div>
+
+  <div class="card">
+    <span class="tag mid">классика поведенческой психологии</span>
+    <h3>4. Пауза между стимулом и реакцией</h3>
+    <p>Ситников формулирует это лучше всего в ролике: <strong>мы не всегда властны над тем, что чувствуем, но всегда властны над тем, что делаем</strong>. Тело реагирует за доли секунды, осознание приходит позже — и в этом зазоре живёт весь выбор.</p>
+    <p>Пауза работает надёжнее, если она заранее прописана как правило «если — то»: не «буду сдержаннее», а «<strong>если</strong> мне прилетает резкое сообщение, <strong>то</strong> я не отвечаю 20 минут». Такие конкретные связки срабатывают, потому что не требуют силы воли в момент — решение уже принято раньше.</p>
+    <p class="dim"><strong>Как делать:</strong> напиши три своих «если — то» под свои типичные срывы. Три, не двадцать.</p>
+  </div>
+
+  <div class="card">
+    <span class="tag ok">7 исследований</span>
+    <h3>5. Показывать уязвимость — выгодно</h3>
+    <p>Брук с коллегами (2018) назвали это «эффектом прекрасного бардака». Признать ошибку, попросить помощи, сказать «я не знаю» — <strong>изнутри</strong> ощущается как слабость, а <strong>снаружи</strong> читается как смелость и вызывает доверие. Разрыв в оценке устойчиво воспроизводится в семи исследованиях.</p>
+    <p>Практический смысл для тебя: сказать клиенту «я это не делал раньше, но разберусь и покажу через два дня» — почти всегда сильнее, чем изображать всезнайку. Второе люди считывают.</p>
+    <p class="dim"><strong>Как делать:</strong> раз в неделю — одно честное «не знаю» или «я ошибся» там, где обычно бы выкрутился.</p>
+  </div>
+</section>
+
+<section>
+  <div class="num">04 — из видео</div>
+  <h2>10 приёмов Ситникова, переписанные в действия</h2>
+  <p>С честной пометкой, что за чем стоит.</p>
+  <ol class="steps">
+    <li><b>Инвентаризация состояния</b><span class="how">Пару раз в день ловить себя: что я сейчас чувствую, почему подумал именно так, на что засмотрелся.</span><span class="verdict">→ рабочее, это база самоосознанности</span></li>
+    <li><b>Соматический резонанс</b><span class="how">Слушать тело: где зажалось, где тяжесть, где ускорился пульс. Тело замечает раньше головы.</span><span class="verdict">→ рабочее, интероцепция связана с распознаванием эмоций</span></li>
+    <li><b>Анализ цепочек</b><span class="how">Разобрать связку «сигнал → реакция»: что именно запустило, и обязана ли цепочка идти до конца.</span><span class="verdict">→ рабочее, это ядро когнитивно-поведенческой терапии</span></li>
+    <li><b>Экология проживания</b><span class="how">Разрешить себе любую эмоцию, включая злость, но найти ей безопасный выход.</span><span class="verdict">→ рабочее; главное — не путать «выход» с «вылить на человека»</span></li>
+    <li><b>Рефлексивный дневник</b><span class="how">Каждый вечер фиксировать, какие эмоции были за день и на что.</span><span class="verdict">→ самое доказанное из всех десяти, см. п.1 выше</span></li>
+    <li><b>Пауза между стимулом и реакцией</b><span class="how">Не отвечать сразу. Решение о паузе принимать заранее, а не в момент.</span><span class="verdict">→ рабочее, усиливается формулой «если — то»</span></li>
+    <li><b>Радикальное доброжелательство</b><span class="how">Заходить в разговор дружелюбно по умолчанию — это снижает настороженность собеседника.</span><span class="verdict">→ разумно; тёплый тон реально снижает защиту, хотя цифр по «радикальности» нет</span></li>
+    <li><b>Тест на эмпатию</b><span class="how">«Что сейчас чувствует человек напротив и почему он так делает?»</span><span class="verdict">→ половинчато: как догадка — не точнее монетки. Доводи до вопроса вслух</span></li>
+    <li><b>Активное слушание</b><span class="how">Слушать интонацию, паузы, позу, а не только слова.</span><span class="verdict">→ слушать стоит, но «слова = 7%» неверно. Голос и пауза — подсказка, не рентген</span></li>
+    <li><b>Эмоциональная честность</b><span class="how">Говорить прямо, признавать уязвимость, не бояться выглядеть слабым.</span><span class="verdict">→ подтверждено, «эффект прекрасного бардака»</span></li>
+  </ol>
+  <p style="margin-top:20px">Итог: восемь из десяти — по делу. Проседают ровно те два, где предлагают <strong>читать человека вместо того, чтобы с ним разговаривать</strong>.</p>
+</section>
+
+<section>
+  <div class="num">05 — практика</div>
+  <h2>Четыре недели. По 5 минут в день</h2>
+  <p>Всё сразу не берём — не удержится. По одному навыку в неделю, каждый следующий добавляется к предыдущим.</p>
+
+  <div class="week">
+    <div class="w">Неделя 1</div>
+    <div><strong>Называть.</strong> Вечером три строки: что почувствовал сегодня сильнее всего · на что именно · что сделал в ответ. Точными словами, из списка ниже. Всё, больше ничего.</div>
+  </div>
+  <div class="week">
+    <div class="w">Неделя 2</div>
+    <div><strong>Пауза.</strong> Пишешь три правила «если — то» под свои реальные ситуации. Например: «если хочется ответить на сообщение сразу и резко — то откладываю телефон на 20 минут». Дневник продолжаешь.</div>
+  </div>
+  <div class="week">
+    <div class="w">Неделя 3</div>
+    <div><strong>Спрашивать.</strong> В каждом разговоре про работу — один вопрос, ответ на который ты не мог угадать. Вечером в дневник добавляешь строку: что услышал такого, чего не ожидал.</div>
+  </div>
+  <div class="week">
+    <div class="w">Неделя 4</div>
+    <div><strong>Переоценка + честность.</strong> Когда кто-то бесит — ищешь третью версию его мотива. И один раз за неделю говоришь честное «не знаю / я ошибся» вместо того, чтобы выкрутиться.</div>
+  </div>
+
+  <div class="card fill" style="margin-top:26px">
+    <p><strong>Как понять, что работает.</strong> Не по ощущению «я стал осознаннее». По трём фактам в конце месяца:</p>
+    <ul class="plain" style="margin-top:10px">
+      <li>сколько раз ты промолчал 20 минут вместо резкого ответа;</li>
+      <li>сколько раз услышал от людей то, чего не ожидал;</li>
+      <li>стали ли записи в дневнике точнее — «бесит» превратилось в «задет, потому что…».</li>
+    </ul>
+  </div>
+
+  <p style="margin-top:26px"><strong>Словарь под руку.</strong> Главная проблема на старте — три слова на все состояния. Держи набор пошире:</p>
+  <div class="words">
+    <span>задет</span><span>раздражён</span><span>тревожно</span><span>вымотан</span><span>азарт</span><span>досада</span>
+    <span>обидно</span><span>стыдно</span><span>виноват</span><span>растерян</span><span>скучно</span><span>завидую</span>
+    <span>облегчение</span><span>гордость</span><span>благодарность</span><span>тоскливо</span><span>напряжение</span><span>предвкушение</span>
+    <span>беспомощность</span><span>злость</span><span>нежность</span><span>смущение</span><span>спокойствие</span><span>подъём</span>
+  </div>
+</section>
+
+<section>
+  <div class="num">06 — на телефон</div>
+  <h2>Шпаргалка</h2>
+  <div class="cheat">
+    <h3>Четыре фразы, которые делают всю работу</h3>
+    <ul>
+      <li><b>«Что я сейчас чувствую — двумя словами?»</b> Гасит реакцию само по себе.</li>
+      <li><b>«Какая ещё причина могла быть у нормального человека?»</b> Переоценка вместо обиды.</li>
+      <li><b>«А что тебя тут больше всего смущает?»</b> Вопрос вместо телепатии.</li>
+      <li><b>«Я не знаю, но разберусь.»</b> Читается как сила, а не как слабость.</li>
+    </ul>
+  </div>
+  <p>И одно правило поверх всего: <strong>чувство — не приказ</strong>. Между тем, что поднялось внутри, и тем, что ты сделаешь, всегда есть зазор. Весь эмоциональный интеллект живёт именно там.</p>
+</section>
+
+</div>
+
+<footer>
+  <div class="wrap">
+    <p style="margin-bottom:14px"><strong style="color:var(--ink)">Источники</strong></p>
+    <ul>
+      <li>Lieberman et al. (2007). Putting Feelings Into Words. Psychological Science — <a href="https://sanlab.psych.ucla.edu/wp-content/uploads/sites/31/2015/05/Lieberman_AL-2007.pdf">sanlab.psych.ucla.edu</a></li>
+      <li>Barrett, Adolphs, Marsella, Martinez, Pollak (2019). Emotional Expressions Reconsidered. PSPI 20(1) — <a href="https://pubmed.ncbi.nlm.nih.gov/31313636/">pubmed.ncbi.nlm.nih.gov/31313636</a></li>
+      <li>Eyal, Steffel, Epley (2018). Perspective Mistaking. JPSP — <a href="https://www.nicholasepley.com/publications">nicholasepley.com</a></li>
+      <li>Bruk, Scholl, Bless (2018). Beautiful Mess Effect. JPSP — <a href="https://www.bps.org.uk/research-digest/beautiful-mess-effect">bps.org.uk</a></li>
+      <li>Training emotional competencies at the workplace: systematic review and meta-analysis (2024). BMC Psychology — <a href="https://link.springer.com/article/10.1186/s40359-024-02198-3">springer.com</a></li>
+      <li>Мета-анализ переоценки и подавления (48 исследований, 21 000+ участников) — <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4168764/">ncbi.nlm.nih.gov</a></li>
+      <li>Разбор мифа Мерабиана — <a href="https://www.andrewquagliata.com/post/mehrabian-misrepresented">andrewquagliata.com</a></li>
+      <li>Future of Jobs Report 2025, Skills Outlook — <a href="https://www.weforum.org/publications/the-future-of-jobs-report-2025/in-full/3-skills-outlook/">weforum.org</a></li>
+    </ul>
+    <p style="margin-top:20px">Исходное видео: Алексей Ситников, «Главный навык 21 века! Как читать людей без слов» — <a href="https://youtu.be/D5HfSsF2BwQ">youtu.be/D5HfSsF2BwQ</a>. Приёмы с 13:44.</p>
+  </div>
+</footer>
+
+</body>
+</html>

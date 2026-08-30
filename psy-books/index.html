@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Шесть книг из двух роликов — выжимка и что из этого правда</title>
+<meta name="description" content="Чалдини, Хансейкер–Алессандра, Экман, Керпен, Гандапас: главные идеи, проверка по данным, похожие книги и как применить в переговорах и выступлениях.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;700;900&family=Oswald:wght@400;600&family=Onest:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#0a0a0a; --paper:#fff; --lime:#d8f34e; --grey:#6b6b6b;
+  --soft:#f2f2f0; --line:#0a0a0a;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{-webkit-text-size-adjust:100%}
+body{background:var(--paper);color:var(--ink);font-family:'Onest',system-ui,-apple-system,'Segoe UI',sans-serif;font-size:17px;line-height:1.62;-webkit-font-smoothing:antialiased}
+.wrap{max-width:780px;margin:0 auto;padding:0 20px}
+a{color:var(--ink)}
+p{margin-bottom:14px}p:last-child{margin-bottom:0}
+.dim{color:var(--grey)}
+
+header{border-bottom:3px solid var(--line);padding:38px 0 30px}
+.kicker{font-family:'Oswald',sans-serif;text-transform:uppercase;letter-spacing:.14em;font-size:12px;color:var(--grey);margin-bottom:16px}
+h1{font-family:'Unbounded',sans-serif;font-weight:900;font-size:clamp(29px,7.2vw,52px);line-height:1.05;letter-spacing:-.02em}
+h1 em{font-style:normal;background:var(--lime);padding:0 .1em}
+.lead{margin-top:18px;font-size:clamp(16px,4vw,19px);color:#2a2a2a;max-width:56ch}
+
+section{padding:46px 0;border-bottom:1px solid #e2e2e0}
+section:last-of-type{border-bottom:0}
+.num{font-family:'Oswald',sans-serif;font-size:13px;letter-spacing:.18em;color:var(--grey);text-transform:uppercase;margin-bottom:12px}
+h2{font-family:'Unbounded',sans-serif;font-weight:700;font-size:clamp(22px,5.2vw,32px);line-height:1.14;letter-spacing:-.015em;margin-bottom:18px}
+h3{font-family:'Unbounded',sans-serif;font-weight:700;font-size:clamp(17px,4.2vw,20px);line-height:1.25;margin-bottom:10px}
+h4{font-family:'Unbounded',sans-serif;font-weight:700;font-size:15.5px;margin-bottom:6px}
+
+/* книга */
+.book{border:2px solid var(--line);margin:22px 0}
+.book .top{display:flex;gap:0;border-bottom:2px solid var(--line);flex-wrap:wrap}
+.book .spine{background:var(--ink);color:var(--paper);padding:16px 14px;font-family:'Oswald',sans-serif;font-size:26px;letter-spacing:.02em;min-width:64px;display:flex;align-items:center;justify-content:center}
+.book .ttl{padding:14px 16px;flex:1;min-width:200px}
+.book .ttl b{display:block;font-family:'Unbounded',sans-serif;font-size:17px;line-height:1.25}
+.book .ttl span{font-family:'Oswald',sans-serif;font-size:13px;letter-spacing:.05em;color:var(--grey);text-transform:uppercase}
+.book .body{padding:20px 18px}
+
+.verdict{display:flex;align-items:center;gap:10px;margin-top:14px;padding-top:14px;border-top:1px solid #e2e2e0;font-size:15px}
+.dot{width:12px;height:12px;flex:none;background:var(--lime);border:1.5px solid var(--ink)}
+.dot.half{background:linear-gradient(90deg,var(--lime) 50%,#fff 50%)}
+.dot.no{background:var(--ink)}
+
+/* рычаги */
+.levers{margin-top:8px}
+.lever{border-top:1px solid #e2e2e0;padding:16px 0;display:grid;grid-template-columns:36px 1fr;gap:14px}
+.lever .n{font-family:'Oswald',sans-serif;font-size:19px;border-bottom:3px solid var(--lime);height:fit-content;line-height:1}
+.lever b{display:block;font-family:'Unbounded',sans-serif;font-size:16px;margin-bottom:5px}
+.lever .use{display:block;margin-top:7px;font-size:15px;color:#2a2a2a;border-left:3px solid var(--lime);padding-left:11px}
+
+/* шкала точности */
+.scale{margin:22px 0}
+.bar{margin-bottom:14px}
+.bar .lbl{font-family:'Oswald',sans-serif;font-size:13px;text-transform:uppercase;letter-spacing:.06em;margin-bottom:5px;display:flex;justify-content:space-between}
+.track{height:26px;background:var(--soft);position:relative}
+.fill{height:100%;background:var(--lime);border-right:2px solid var(--ink)}
+.fill.dark{background:var(--ink)}
+.fill.hatch{background:repeating-linear-gradient(45deg,#e2e2e0,#e2e2e0 6px,#fff 6px,#fff 12px)}
+
+/* матрица стилей */
+.matrix{display:grid;grid-template-columns:1fr 1fr;border:2px solid var(--line);margin:20px 0}
+.matrix > div{padding:16px 14px;border-right:1px solid #d9d9d7;border-bottom:1px solid #d9d9d7}
+.matrix > div:nth-child(2n){border-right:0}
+.matrix > div:nth-child(n+3){border-bottom:0}
+.matrix .who{font-family:'Oswald',sans-serif;font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--grey);margin-bottom:6px}
+.matrix p{font-size:15.5px;margin-bottom:0}
+.matrix .want{display:block;margin-top:9px;font-size:14.5px;background:var(--lime);padding:5px 8px}
+.axis{font-family:'Oswald',sans-serif;font-size:12px;text-transform:uppercase;letter-spacing:.1em;color:var(--grey);text-align:center;margin-bottom:8px}
+
+.card{border:2px solid var(--line);padding:20px 18px;margin:20px 0}
+.card.fill{background:var(--soft);border-color:var(--soft)}
+.card.hi{background:var(--lime);border-color:var(--lime)}
+
+ul.plain{list-style:none;margin:10px 0}
+ul.plain li{padding-left:20px;position:relative;margin-bottom:9px}
+ul.plain li:before{content:"";position:absolute;left:0;top:.62em;width:9px;height:3px;background:var(--ink)}
+
+/* похожие книги */
+.similar{border-top:1px solid #e2e2e0;padding:18px 0}
+.similar b{font-family:'Unbounded',sans-serif;font-size:16px;display:block;margin-bottom:4px}
+.similar .au{font-family:'Oswald',sans-serif;font-size:12.5px;text-transform:uppercase;letter-spacing:.07em;color:var(--grey);margin-bottom:8px}
+.similar .idea{border-left:3px solid var(--lime);padding-left:11px}
+
+/* сценарий */
+.flow{counter-reset:f;list-style:none;margin-top:10px}
+.flow li{counter-increment:f;position:relative;padding:0 0 22px 40px;border-left:2px solid #e2e2e0;margin-left:9px}
+.flow li:last-child{border-left:2px solid transparent;padding-bottom:0}
+.flow li:before{content:counter(f);position:absolute;left:-15px;top:-2px;width:28px;height:28px;background:var(--ink);color:var(--paper);font-family:'Oswald',sans-serif;font-size:14px;display:flex;align-items:center;justify-content:center}
+.flow b{display:block;font-family:'Unbounded',sans-serif;font-size:15.5px;margin-bottom:4px}
+.flow .say{background:var(--soft);padding:9px 12px;margin-top:7px;font-size:15.5px}
+
+.cheat{background:var(--ink);color:var(--paper);padding:26px 22px;margin:24px 0}
+.cheat h3{color:var(--paper)}
+.cheat b{color:var(--lime)}
+.cheat ul{list-style:none}
+.cheat li{margin-bottom:12px;padding-left:18px;position:relative}
+.cheat li:before{content:"";position:absolute;left:0;top:.62em;width:9px;height:3px;background:var(--lime)}
+
+footer{border-top:3px solid var(--line);padding:30px 0 60px;font-size:14.5px;color:var(--grey)}
+footer a{color:var(--grey);text-decoration:underline;text-underline-offset:3px;word-break:break-word}
+footer li{margin-bottom:7px;list-style:none}
+@media (max-width:430px){
+  body{font-size:16px}
+  .matrix{grid-template-columns:1fr}
+  .matrix > div{border-right:0}
+  .matrix > div:nth-child(3){border-bottom:1px solid #d9d9d7}
+}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap">
+    <div class="kicker">разбор двух шортсов о книгах по психологии · 30 августа 2026</div>
+    <h1>Шесть книг, <em>две ловушки</em> и то, что реально работает</h1>
+    <p class="lead">Первый ролик обещает: замени тонну книг этими четырьмя — и через месяц научишься читать людей. Второй: три книги сделают из тебя мастера общения. В обоих последняя книга «в телеграм-канале». Часть советов — по делу, часть держится на том, что наука уже проверила и не подтвердила. Разбираем по-честному, с примерами под твою работу.</p>
+  </div>
+</header>
+
+<div class="wrap">
+
+<section>
+  <div class="num">01 — ролик первый</div>
+  <h2>Три книги за 43 секунды</h2>
+
+  <div class="book">
+    <div class="top">
+      <div class="spine">01</div>
+      <div class="ttl"><b>Психология влияния</b><span>Роберт Чалдини · 1984, расширенное издание 2021</span></div>
+    </div>
+    <div class="body">
+      <p>Лучшая из трёх и единственная, которую стоит прочитать целиком. Чалдини три года работал под прикрытием — продавцом машин, сборщиком пожертвований, телемаркетологом — и собирал приёмы, которыми людей заставляют говорить «да» автоматически.</p>
+      <p>Главная мысль книги не «как манипулировать». Она обратная: <strong>у мозга есть кнопки быстрого согласия</strong>, и профессионалы жмут на них ежедневно. Знаешь кнопки — замечаешь, когда жмут на тебя.</p>
+      <div class="verdict"><span class="dot"></span><span><strong>Держится.</strong> В издании 2021 добавлен седьмой принцип. Эффекты в полевых условиях слабее лабораторных, но направление подтверждается.</span></div>
+    </div>
+  </div>
+
+  <div class="book">
+    <div class="top">
+      <div class="spine">02</div>
+      <div class="ttl"><b>Искусство управления людьми</b><span>Филлип Хансейкер, Энтони Алессандра · 1980-е</span></div>
+    </div>
+    <div class="body">
+      <p>Книга про «интерактивный менеджмент»: как руководителю строить доверие в команде. Ядро — идея Алессандры, известная как <strong>платиновое правило</strong>.</p>
+      <p>Золотое правило говорит: относись к людям так, как хочешь, чтобы относились к тебе. Платиновое поправляет: <strong>относись к людям так, как хочет <em>он</em>, а не ты</strong>. Тебе нужна прямота — а человеку напротив нужны гарантии и время подумать. Дашь ему свою прямоту — получишь испуг, а не сделку.</p>
+      <div class="verdict"><span class="dot half"></span><span><strong>Наполовину.</strong> Сама идея подстройки — рабочая. Типология четырёх стилей — удобная рамка, но не научная классификация: не путать с диагностикой личности.</span></div>
+    </div>
+  </div>
+
+  <div class="book">
+    <div class="top">
+      <div class="spine">03</div>
+      <div class="ttl"><b>Психология лжи</b><span>Пол Экман · 1985</span></div>
+    </div>
+    <div class="body">
+      <p>Та самая книга про микровыражения, из которой вырос сериал «Обмани меня». Именно её советуют, чтобы «читать истинные намерения». И именно здесь ролик ошибается сильнее всего.</p>
+      <p>Экман сделал полезную вещь — систему описания движений лица (FACS), ею до сих пор пользуются исследователи и аниматоры. Но обещание «научишься определять ложь по лицу» проверку не прошло.</p>
+      <div class="verdict"><span class="dot no"></span><span><strong>Основное обещание не подтвердилось.</strong> Подробности ниже — это самое важное место на странице.</span></div>
+    </div>
+  </div>
+
+  <p class="dim">Четвёртая книга «в телеграм-канале» — обычная приманка за подписку. Ниже дам пять настоящих продолжений вместо неё.</p>
+</section>
+
+<section>
+  <div class="num">02 — главное</div>
+  <h2>Почему «читать людей» не получится</h2>
+  <p>Сводка по данным, которая экономит месяцы тренировок не на том.</p>
+
+  <div class="scale">
+    <div class="bar">
+      <div class="lbl"><span>Монетка</span><span>50%</span></div>
+      <div class="track"><div class="fill hatch" style="width:50%"></div></div>
+    </div>
+    <div class="bar">
+      <div class="lbl"><span>Человек, определяющий ложь</span><span>54%</span></div>
+      <div class="track"><div class="fill" style="width:54%"></div></div>
+    </div>
+    <div class="bar">
+      <div class="lbl"><span>«Эксперты»: полиция, следователи</span><span>≈ те же 54%</span></div>
+      <div class="track"><div class="fill" style="width:55%"></div></div>
+    </div>
+    <div class="bar">
+      <div class="lbl"><span>Что обещают курсы по микровыражениям</span><span>80–90%</span></div>
+      <div class="track"><div class="fill dark" style="width:85%"></div></div>
+    </div>
+  </div>
+
+  <p>Бонд и ДеПауло свели более 200 исследований: точность определения лжи — <strong>54%</strong>. Это на четыре процента лучше подбрасывания монеты. Обученные профессионалы в тех же данных <strong>не показали преимущества</strong> над обычными людьми.</p>
+  <p>Дальше жизнь проверила это на деньгах: американская служба безопасности аэропортов построила на подходе Экмана программу поиска подозрительных пассажиров по поведению. Счётная палата США разобрала четыре мета-анализа и более 400 исследований и заключила, что научной опоры у метода нет. Программа стоила почти миллиард долларов.</p>
+  <p>И фундаментально: обзор Лизы Фельдман Барретт с коллегами (2019) показал, что <strong>по лицу нельзя надёжно вывести эмоцию</strong> — одно и то же выражение в разных ситуациях и культурах означает разное.</p>
+
+  <div class="card hi">
+    <p><strong>Что работает вместо чтения лиц.</strong> Ложь ловят не по глазам, а по нагрузке на память: попроси рассказать историю ещё раз в обратном порядке, спроси о деталях, которые не готовили заранее, сверь два рассказа между собой. У того, кто говорит правду, детали не ломаются. У того, кто сочиняет, — да.</p>
+  </div>
+  <p class="dim">Ровно об этом же был твой вчерашний разбор про эмоциональный интеллект: 25 экспериментов Эпли — угадывание чужого состояния точность снижает, вопрос повышает. Два независимых источника, один вывод.</p>
+</section>
+
+<section>
+  <div class="num">03 — выжимка</div>
+  <h2>Семь рычагов Чалдини — и как ими пользоваться тебе</h2>
+  <p>Каждый рычаг — с примером под твою работу: продажа сайтов, переговоры, Ветра.</p>
+
+  <div class="levers">
+    <div class="lever"><div class="n">1</div><div>
+      <b>Взаимный обмен</b>
+      Человек чувствует долг, когда получил первым. Работает сильнее, если подарок неожиданный и персональный.
+      <span class="use">Не «давайте обсудим сайт», а сначала прислать разбор их текущей страницы с тремя конкретными косяками. Дальше разговор идёт совсем иначе.</span>
+    </div></div>
+
+    <div class="lever"><div class="n">2</div><div>
+      <b>Симпатия</b>
+      Говорим «да» тем, кто нам нравится: похожим на нас, искренне хвалящим, с кем вместе что-то делали.
+      <span class="use">Найти общее до дела: район, тот же путь с нуля, знакомая боль. Не лесть — конкретный комплимент тому, что они и правда сделали хорошо.</span>
+    </div></div>
+
+    <div class="lever"><div class="n">3</div><div>
+      <b>Социальное доказательство</b>
+      Смотрим, как поступают другие — особенно <strong>похожие на нас</strong>. «Много людей» слабее, чем «такие же, как вы».
+      <span class="use">«Три кофейни в Казани уже так сделали» бьёт «у нас 50 клиентов». Ниша и город важнее количества.</span>
+    </div></div>
+
+    <div class="lever"><div class="n">4</div><div>
+      <b>Авторитет</b>
+      Верим тому, кто показал компетентность. Причём доверие растёт, если сначала честно назвать свой минус.
+      <span class="use">«Я делаю сайты второй год, крупный интернет-магазин не потяну. Одностраничники под заявки — потяну и покажу пять примеров.» Минус первым — и остальному верят больше.</span>
+    </div></div>
+
+    <div class="lever"><div class="n">5</div><div>
+      <b>Дефицит</b>
+      Потерять больно сильнее, чем приобрести приятно. Плюс работает эксклюзив: не только сам ресурс, но и информация о нём.
+      <span class="use">Честный дефицит: «в сентябре беру два проекта». Врать про горящие места нельзя — ловится и убивает доверие насовсем.</span>
+    </div></div>
+
+    <div class="lever"><div class="n">6</div><div>
+      <b>Последовательность</b>
+      Сделав маленький шаг, человек держится выбранной линии. Особенно если шаг добровольный, публичный и записанный.
+      <span class="use">Не проси сразу договор. Попроси прислать список услуг и три фото — маленькое «да» тянет за собой большое.</span>
+    </div></div>
+
+    <div class="lever"><div class="n">7</div><div>
+      <b>Единство <span style="font-family:Oswald;font-size:12px;letter-spacing:.08em;color:#6b6b6b">— добавлен в 2021</span></b>
+      Самый сильный. Не «мы похожи», а «мы одно». Семья, город, команда, общее дело. В эксперименте Чалдини просьба, поданная как помощь члену семьи, подняла отклик с 20% до 97%.
+      <span class="use">«Мы оба тут малый бизнес в Казани, и оба знаем, как эти площадки нас доят» — сильнее любой презентации. И приём соучастия: спрашивать <strong>совета</strong>, а не оценки — совет превращает человека в соавтора.</span>
+    </div></div>
+  </div>
+</section>
+
+<section>
+  <div class="num">04 — выжимка</div>
+  <h2>Четыре типа собеседников</h2>
+  <p>Рамка из второй книги. Не наука о личности, но полезная сортировка на первых минутах разговора: человек быстрый или медленный, и думает он про задачу или про людей.</p>
+
+  <div class="axis">↑ про задачу &nbsp;·&nbsp; ↓ про людей &nbsp;|&nbsp; ← медленно &nbsp;·&nbsp; быстро →</div>
+  <div class="matrix">
+    <div>
+      <div class="who">медленный · задача</div>
+      <h4>Аналитик</h4>
+      <p>Много вопросов, просит детали, не любит спешку и давление.</p>
+      <span class="want">Дай: цифры, сроки, письменную смету</span>
+    </div>
+    <div>
+      <div class="who">быстрый · задача</div>
+      <h4>Директор</h4>
+      <p>Перебивает, требует сути, ценит своё время выше вежливости.</p>
+      <span class="want">Дай: итог в первой фразе и цену</span>
+    </div>
+    <div>
+      <div class="who">медленный · люди</div>
+      <h4>Дружелюбный</h4>
+      <p>Боится ошибиться и подвести, тянет с решением, избегает конфликта.</p>
+      <span class="want">Дай: гарантии, спокойный темп, «можно поэтапно»</span>
+    </div>
+    <div>
+      <div class="who">быстрый · люди</div>
+      <h4>Экспрессивный</h4>
+      <p>Говорит эмоциями и картинками, любит идеи и признание.</p>
+      <span class="want">Дай: образ результата, примеры, восхищение делом</span>
+    </div>
+  </div>
+
+  <div class="card fill">
+    <p><strong>Платиновое правило одной строкой:</strong> перестань продавать так, как купил бы сам. Аналитику нужна таблица, а не вдохновение. Экспрессивному — картинка будущего сайта, а не спецификация. Ошибка стоит сделки.</p>
+  </div>
+</section>
+
+<section>
+  <div class="num">05 — дальше</div>
+  <h2>Пять книг вместо «четвёртой из телеграма»</h2>
+
+  <div class="similar">
+    <b>Никогда не идите на компромисс</b>
+    <div class="au">Крис Восс · переговорщик ФБР по заложникам</div>
+    <p class="idea">Прямое продолжение всего вышесказанного. «Тактическая эмпатия»: назвать вслух чувство собеседника («похоже, вас уже подводили с этим») и получить в ответ правду, вместо того чтобы гадать. Плюс приём «нет» вместо «да» и калиброванные вопросы «как мне это сделать?». Самая практичная книга списка.</p>
+  </div>
+
+  <div class="similar">
+    <b>Психология согласия (Pre-Suasion)</b>
+    <div class="au">Роберт Чалдини · 2016</div>
+    <p class="idea">Вторая книга Чалдини о том, что решает не сообщение, а <strong>момент до него</strong>: на чём внимание человека в секунду перед просьбой. Если ты за минуту до цены говорил про безопасность его выручки — цена слышится иначе.</p>
+  </div>
+
+  <div class="similar">
+    <b>Mindwise: как мы понимаем других</b>
+    <div class="au">Николас Эпли · Чикагский университет</div>
+    <p class="idea">Учёный, чьи 25 экспериментов разрушили миф о чтении людей, объясняет, почему мы уверены, что понимаем близких, и системно ошибаемся. Лучшее противоядие от «психологии лжи».</p>
+  </div>
+
+  <div class="similar">
+    <b>Как рождаются эмоции</b>
+    <div class="au">Лиза Фельдман Барретт</div>
+    <p class="idea">Эмоции — не универсальные кнопки, зашитые в лицо. Мозг конструирует их из ощущений тела и словаря, который у тебя есть. Отсюда и практика: чем точнее слова, тем лучше управление собой.</p>
+  </div>
+
+  <div class="similar">
+    <b>СПИН-продажи</b>
+    <div class="au">Нил Рэкхем · исследование 35 000 встреч</div>
+    <p class="idea">Единственная книга о продажах, построенная на массовом наблюдении, а не на историях автора. Вывод, который тебе пригодится сразу: в крупных сделках выигрывает не тот, кто красиво презентует, а тот, кто задаёт вопросы о последствиях проблемы. Клиент должен сам произнести, во что ему обходится текущий сайт.</p>
+  </div>
+</section>
+
+<section>
+  <div class="num">06 — применить</div>
+  <h2>Как это выглядит в одном разговоре</h2>
+  <p>Собрал всё в сценарий первого касания с бизнесом — им можно пользоваться сегодня.</p>
+
+  <ol class="flow">
+    <li><b>Дай раньше, чем попросишь</b>
+      <span class="say">«Смотрел вашу страницу — заявку с телефона отправить нельзя, форма ломается. Держите три скрина, чините хоть без меня.»</span>
+      <span class="dim" style="font-size:14.5px">рычаг: взаимный обмен</span>
+    </li>
+    <li><b>Определи тип за первые две реплики</b>
+      <span class="dim" style="font-size:14.5px">Короткие рубленые ответы — Директор, сразу к делу и цене. Расспрашивает — Аналитик, шли смету. Рассказывает историю бизнеса — Экспрессивный, покажи картинку результата.</span>
+    </li>
+    <li><b>Спроси, а не угадывай</b>
+      <span class="say">«Что вас в сайтах раньше больше всего разочаровывало?»</span>
+      <span class="dim" style="font-size:14.5px">один вопрос, ответ на который нельзя предсказать</span>
+    </li>
+    <li><b>Дай услышать цену проблемы от него</b>
+      <span class="say">«Сколько человек в неделю звонят и спрашивают то, что должно быть на сайте?»</span>
+      <span class="dim" style="font-size:14.5px">СПИН: последствия проговаривает клиент, не ты</span>
+    </li>
+    <li><b>Назови свой минус первым</b>
+      <span class="say">«Магазин на тысячу товаров я не возьму. Страницу под заявки — возьму и покажу пять таких.»</span>
+      <span class="dim" style="font-size:14.5px">рычаг: авторитет через честность</span>
+    </li>
+    <li><b>Возьми маленькое «да», а не большое</b>
+      <span class="say">«Скиньте список услуг и три фото — за вечер сделаю макет первого экрана, дальше решите.»</span>
+      <span class="dim" style="font-size:14.5px">рычаг: последовательность</span>
+    </li>
+  </ol>
+</section>
+
+<section>
+  <div class="num">07 — ролик второй</div>
+  <h2>Три книги «мастера общения»</h2>
+  <p>Второй ролик, другой канал — механика та же: три книги названы, четвёртая приманка в телеграме. Уровень книг здесь заметно ниже: это не исследования, а личный опыт авторов. Что не делает их бесполезными — просто читать нужно с другим ожиданием.</p>
+
+  <div class="book">
+    <div class="top">
+      <div class="spine">04</div>
+      <div class="ttl"><b>Гений коммуникации</b><span>Дейв Керпен · 11 навыков</span></div>
+    </div>
+    <div class="body">
+      <p>По сути современный пересказ Карнеги: слушать больше, чем говорить; помнить имена и детали; быть настоящим, а не удобным. Автор — предприниматель, а не учёный, доказательств в книге нет, зато примеры живые.</p>
+      <p>Одна идея у него сильная и совпадает с наукой: <strong>слушание — не пауза между твоими репликами</strong>, а сам инструмент влияния. Люди считают интересным того, кто интересуется.</p>
+      <div class="verdict"><span class="dot half"></span><span><strong>Наполовину.</strong> Полезная как напоминание, необязательная как книга. Если читал Карнеги — нового почти нет.</span></div>
+    </div>
+  </div>
+
+  <div class="book">
+    <div class="top">
+      <div class="spine">05</div>
+      <div class="ttl"><b>Камасутра для оратора</b><span>Радислав Гандапас · 2006</span></div>
+    </div>
+    <div class="body">
+      <p>Самая известная русская книга про публичные выступления. Метафора всей книги: выступление — это соблазнение аудитории, со своими этапами. Практично, коротко, читается за вечер: как начать, куда девать руки, как держать внимание, как заканчивать.</p>
+      <p>Это опыт тренера, а не исследование, и обещание «власти над аудиторией» — обложечный маркетинг. Но как первая книга по выступлениям — рабочая.</p>
+      <div class="verdict"><span class="dot half"></span><span><strong>Наполовину.</strong> Хорошая база для новичка, ноль эмпирики. Реально помогает не она, а то, что ниже.</span></div>
+    </div>
+  </div>
+
+  <div class="book">
+    <div class="top">
+      <div class="spine">06</div>
+      <div class="ttl"><b>«Говори уверенно»</b><span>автор не установлен</span></div>
+    </div>
+    <div class="body">
+      <p>Здесь честно: под этим названием ходит несколько разных изданий и безымянных сборников, устойчивого автора у книги нет. Искал — не нашёл того, кого можно было бы назвать.</p>
+      <p>Это, кстати, лучший признак, как собирают такие подборки: <strong>не по книгам, а по обложкам</strong>. Название звучит убедительно, значит идёт в ролик. Проверять никто не будет — ролик длится 45 секунд.</p>
+      <div class="verdict"><span class="dot no"></span><span><strong>Пропускай.</strong> Пустая позиция в списке.</span></div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="num">08 — что вместо</div>
+  <h2>Четыре вещи, которые правда меняют речь</h2>
+  <p>То, что проверялось экспериментами, а не рассказывалось на тренинге.</p>
+
+  <div class="card">
+    <h3>Не «успокойся», а «я взволнован»</h3>
+    <p>Элисон Вуд Брукс (Гарвард, 2014) сравнила две стратегии перед выступлением, пением и экзаменом. Попытка успокоиться работает плохо: тело уже разогналось, и приказ «остынь» ему противоречит. А вот сказать вслух <strong>«я взволнован»</strong> — переводит то же самое возбуждение из режима угрозы в режим возможности. Люди выступали <strong>объективно лучше</strong> по оценкам сторонних судей.</p>
+    <p class="dim">Одна фраза вслух перед звонком клиенту. Буквально работает.</p>
+  </div>
+
+  <div class="card">
+    <h3>Уточняющие вопросы вместо ярких реплик</h3>
+    <p>Хуан, Йоманс, Брукс, Эпли и Джино (2017) записали сотни живых разговоров и быстрых свиданий. Результат: <strong>кто задаёт больше вопросов — тому больше симпатизируют</strong>. Причём решают именно <em>уточняющие</em> вопросы, продолжающие ответ собеседника, — они доказывают, что ты слушал.</p>
+    <p class="dim">Приём на завтра: после ответа клиента — не переходить к своему пункту, а задать вопрос по его же словам.</p>
+  </div>
+
+  <div class="card">
+    <h3>Поза силы — миф, но выпрямиться всё равно стоит</h3>
+    <p>Знаменитый совет «постой две минуты в позе супергероя, и вырастет тестостерон» не воспроизвёлся: большая репликация Ранехилл (2015) не нашла ни гормональных, ни поведенческих эффектов, а в 2016 сама соавтор оригинальной работы <strong>публично отказалась от вывода</strong>. Осталось только субъективное «чувствую себя увереннее».</p>
+    <p class="dim">Значит: не жди от позы магии. Осанка влияет на то, как тебя видят, а не на биохимию.</p>
+  </div>
+
+  <div class="card">
+    <h3>Репетиция вслух и целиком</h3>
+    <p>Самая скучная и самая работающая вещь. Проговаривание про себя не тренирует ни дыхание, ни темп, ни те места, где ты спотыкаешься. Нужно вслух, от начала до конца, лучше на запись — и потом пересмотреть один раз.</p>
+    <p class="dim">Три прогона вслух дают больше, чем три книги про ораторство.</p>
+  </div>
+
+  <div class="card fill">
+    <p><strong>Общий вывод по обоим роликам.</strong> Оба сделаны одинаково: громкое обещание, три реальные книги для веса и четвёртая — за подписку. Полезного там на одну книгу — Чалдини. Всё остальное быстрее взять здесь.</p>
+  </div>
+</section>
+
+<section>
+  <div class="num">09 — на телефон</div>
+  <h2>Итог одним экраном</h2>
+  <div class="cheat">
+    <ul>
+      <li><b>Читать людей по лицу — нельзя.</b> 54% против 50% у монетки, эксперты не лучше новичков.</li>
+      <li><b>Спрашивать — можно.</b> Точность растёт только от прямого вопроса о конкретике.</li>
+      <li><b>Ложь ловится нагрузкой, а не взглядом.</b> Повтори историю в обратном порядке — детали посыплются.</li>
+      <li><b>Самый сильный рычаг — «мы одно».</b> Общая категория бьёт любую презентацию.</li>
+      <li><b>Продавай так, как покупает он.</b> Аналитику — таблицу, Директору — итог, Дружелюбному — гарантии, Экспрессивному — картинку.</li>
+      <li><b>Минус первым.</b> Признанная слабость поднимает доверие к остальному.</li>
+      <li><b>Перед выступлением — «я взволнован» вслух.</b> Не «успокойся»: то же возбуждение, но в режим возможности.</li>
+      <li><b>Уточняющий вопрос — сильнее удачной реплики.</b> Симпатия растёт у того, кто спрашивает, а не у того, кто блистает.</li>
+    </ul>
+  </div>
+  <p>Из шести книг двух роликов читай целиком одну — Чалдини. Из второй возьми платиновое правило, из Гандапаса — структуру выступления, третью и шестую пропусти, а вместо них поставь Восса. Месяц не понадобится: рычаги начинают работать с первого разговора.</p>
+</section>
+
+</div>
+
+<footer>
+  <div class="wrap">
+    <p style="margin-bottom:14px"><strong style="color:var(--ink)">Источники</strong></p>
+    <ul>
+      <li>Bond &amp; DePaulo (2006), мета-анализ 200+ исследований по распознаванию лжи; разбор — <a href="https://www.chronicle.com/article/the-liars-tell/">chronicle.com «The Liar's Tell»</a></li>
+      <li>Отчёт Счётной палаты США по программе TSA SPOT (4 мета-анализа, 400+ исследований) — <a href="https://www.psychologytoday.com/us/blog/living-single/201411/telling-lies-fact-fiction-and-nonsense-maria-hartwig">Hartwig, Psychology Today</a></li>
+      <li>Barrett et al. (2019). Emotional Expressions Reconsidered — <a href="https://pubmed.ncbi.nlm.nih.gov/31313636/">pubmed.ncbi.nlm.nih.gov/31313636</a></li>
+      <li>Седьмой принцип Чалдини «единство», издание 2021 — <a href="https://www.uxtigers.com/post/cialdini-influence-persuasion">uxtigers.com</a>, <a href="https://cxl.com/blog/cialdini-unity/">cxl.com</a></li>
+      <li>Хансейкер Ф., Алессандра Э. «Искусство управления людьми» — <a href="https://www.labirint.ru/books/46536/">labirint.ru</a></li>
+      <li>Eyal, Steffel, Epley (2018). Perspective Mistaking — <a href="https://www.nicholasepley.com/publications">nicholasepley.com</a></li>
+      <li>Brooks A. W. (2014). Get Excited: Reappraising Pre-Performance Anxiety as Excitement. JEP: General — <a href="https://www.apa.org/pubs/journals/releases/xge-a0035325.pdf">apa.org</a></li>
+      <li>Huang, Yeomans, Brooks, Epley, Gino (2017). Question-Asking Increases Liking. JPSP — <a href="https://www.hbs.edu/ris/Publication%20Files/Huang%20et%20al%202017_6945bc5e-3b3e-4c0a-addd-254c9e603c60.pdf">hbs.edu</a></li>
+      <li>Ranehill et al. (2015), провал репликации «позы силы»; отказ Карни (2016) — <a href="https://www.bps.org.uk/psychologist/decade-power-posing-where-do-we-stand">bps.org.uk</a></li>
+      <li>Керпен Д. «Гений коммуникации» — <a href="https://www.livelib.ru/book/270387/readpart-genij-kommunikatsii-iskusstvo-prityagivat-lyudej-i-prevraschat-ih-v-svoih-soyuznikov-dejv-kerpen">livelib.ru</a></li>
+    </ul>
+    <p style="margin-top:20px">Разборы роликов: <a href="https://youtube.com/shorts/Hvv3j4C3KQk">«Лучшие книги по психологии» (OnlyFacts)</a> и <a href="https://youtube.com/shorts/zek-jlbgwQQ">«3 книги, которые сделают из тебя мастера общения» (Secrets of Influence)</a>. Связанная страница: <a href="https://errorslove190-droid.github.io/sites/eq/">эмоциональный интеллект — что подтверждено наукой</a>.</p>
+  </div>
+</footer>
+
+</body>
+</html>
