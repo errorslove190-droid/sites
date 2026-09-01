@@ -1,0 +1,207 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Движок казино — варианты стиля Mini App</title>
+<meta name="description" content="Пять вариантов стиля игрового экрана Telegram Mini App. Выбираем один, потом собираем.">
+<meta property="og:title" content="Движок казино — варианты стиля Mini App">
+<meta property="og:description" content="Пять экранов одной игры в разных стилях. Выбрать номер.">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="ru_RU">
+<link rel="icon" href="../favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@600;800&family=JetBrains+Mono:wght@400;600&family=Oswald:wght@500;600&family=Manrope:wght@500;700&family=Cormorant:ital,wght@0,600;0,700;1,600&family=Golos+Text:wght@500;700&family=Onest:wght@500;700&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:#141517;color:#e8e8ea;font:15px/1.45 Manrope,system-ui,sans-serif;padding-bottom:70px}
+a{color:inherit}
+.top{padding:28px 20px 10px;max-width:1360px;margin:0 auto}
+.top h1{font:800 clamp(22px,3.2vw,34px)/1.1 Unbounded,sans-serif;letter-spacing:-.01em}
+.top p{color:#9a9ca3;margin:10px 0 0;max-width:720px}
+.nav{display:flex;flex-wrap:wrap;gap:8px;padding:16px 20px;max-width:1360px;margin:0 auto}
+.nav a{text-decoration:none;font:600 12px/1 "JetBrains Mono",monospace;padding:10px 14px;border:1px solid #3a3c42;border-radius:999px;color:#d5d6da}
+.nav a:hover{border-color:#e8e8ea}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(340px,1fr));gap:34px 26px;padding:14px 20px 40px;max-width:1360px;margin:0 auto}
+.s{scroll-margin-top:16px}
+.cap{margin:0 0 12px;padding:0 4px}
+.cap b{display:block;font:800 15px/1.2 Unbounded,sans-serif;margin-bottom:4px}
+.cap span{display:block;color:#9a9ca3;font-size:13px}
+.plq{position:fixed;left:50%;bottom:16px;transform:translateX(-50%);background:#e8e8ea;color:#141517;font:600 12px/1 "JetBrains Mono",monospace;padding:12px 18px;border-radius:999px;box-shadow:0 8px 30px rgba(0,0,0,.5);white-space:nowrap;z-index:9}
+
+/* каркас телефона — одинаковый для всех */
+.ph{width:100%;max-width:390px;margin:0 auto;aspect-ratio:9/18.2;border-radius:var(--phr,30px);overflow:hidden;background:var(--bg);color:var(--ink);font-family:var(--ui);display:flex;flex-direction:column;border:1px solid var(--edge,transparent);position:relative;padding:18px 16px 16px}
+.hd{display:flex;align-items:center;justify-content:space-between;gap:10px}
+.bal{display:flex;flex-direction:column;gap:2px}
+.bal small{font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--mut)}
+.bal b{font:var(--numw,700) 21px/1 var(--num);letter-spacing:-.01em}
+.bal b i{font-style:normal;font-size:12px;color:var(--mut);margin-left:6px;font-family:var(--ui);font-weight:500}
+.dep{font:700 12px/1 var(--ui);padding:10px 14px;border-radius:var(--br);background:var(--acc);color:var(--onacc);border:var(--bw,0) solid var(--line)}
+.tabs{display:flex;gap:6px;margin-top:16px;padding:4px;border-radius:calc(var(--br) + 4px);background:var(--pan);border:var(--bw,0) solid var(--line)}
+.tabs span{flex:1;text-align:center;font:600 12px/1 var(--ui);padding:9px 0;border-radius:var(--br);color:var(--mut)}
+.tabs .on{background:var(--tab);color:var(--tabink);box-shadow:var(--tabsh,none)}
+.game{margin-top:14px;padding:16px;border-radius:var(--br2);background:var(--card);border:var(--bw,0) solid var(--line);flex:1;display:flex;flex-direction:column;justify-content:space-between;position:relative;overflow:hidden}
+.game .lb{font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--mut)}
+.big{font:var(--numw,700) 58px/1 var(--num);letter-spacing:-.03em;margin-top:6px;color:var(--bigc,var(--ink))}
+.big em{font-style:normal;font-size:16px;color:var(--mut);font-family:var(--ui);font-weight:500;margin-left:4px;letter-spacing:0}
+.track{height:12px;border-radius:var(--tr,999px);background:var(--trk);margin-top:16px;position:relative;overflow:hidden}
+.track i{position:absolute;inset:0 50% 0 0;background:var(--acc)}
+.track b{position:absolute;top:-4px;left:50%;width:20px;height:20px;margin-left:-10px;border-radius:var(--tr,999px);background:var(--knob);border:2px solid var(--knobb)}
+.st{display:grid;grid-template-columns:1fr 1fr 1fr;gap:6px;margin-top:14px}
+.st div{padding:10px 8px;border-radius:var(--br);background:var(--pan);border:var(--bw,0) solid var(--line)}
+.st small{display:block;font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:var(--mut)}
+.st b{display:block;font:var(--numw,700) 15px/1.1 var(--num);margin-top:4px}
+.bet{margin-top:14px}
+.bet .row{display:flex;align-items:center;gap:6px;padding:8px 8px 8px 12px;border-radius:var(--br);background:var(--pan);border:var(--bw,1px) solid var(--line)}
+.bet .row b{flex:1;font:var(--numw,700) 15px/1 var(--num)}
+.bet .row b i{font-style:normal;font-size:11px;color:var(--mut);font-family:var(--ui);font-weight:500;margin-left:4px}
+.bet .row span{font:600 11px/1 var(--ui);padding:8px 9px;border-radius:calc(var(--br) - 2px);background:var(--chip);color:var(--chipink)}
+.go{margin-top:10px;width:100%;padding:16px;border:0;border-radius:var(--br);background:var(--acc);color:var(--onacc);font:var(--gow,800) 14px/1 var(--gof,var(--ui));letter-spacing:var(--gols,.04em);text-transform:var(--gott,uppercase);box-shadow:var(--gosh,none)}
+.hist{display:flex;gap:6px;margin-top:12px;overflow:hidden}
+.hist span{font:600 11px/1 var(--num);padding:7px 9px;border-radius:var(--br);background:var(--pan);color:var(--mut);border:var(--bw,0) solid var(--line);white-space:nowrap}
+.hist .w{color:var(--win);border-color:var(--win)}
+.pf{margin-top:10px;font:400 9.5px/1.3 "JetBrains Mono",monospace;color:var(--mut);display:flex;justify-content:space-between;gap:8px;white-space:nowrap;overflow:hidden}
+
+/* 01 · Терминал */
+.s1 .ph{--bg:#0b0d10;--ink:#eef1ec;--mut:#7c8480;--acc:#c6ff3d;--onacc:#0b0d10;--pan:#111418;--card:#0e1114;--line:#232a2c;--bw:1px;--br:2px;--br2:2px;--phr:14px;--edge:#2a3134;--tab:#eef1ec;--tabink:#0b0d10;--trk:#1a1f22;--knob:#c6ff3d;--knobb:#0b0d10;--tr:0;--chip:#1a1f22;--chipink:#eef1ec;--win:#c6ff3d;--ui:"JetBrains Mono",monospace;--num:"Unbounded",sans-serif;--numw:600;--gols:.12em}
+.s1 .game::after{content:"";position:absolute;inset:0;background:repeating-linear-gradient(0deg,transparent 0 3px,rgba(255,255,255,.018) 3px 4px);pointer-events:none}
+.s1 .big{font-size:52px}
+
+/* 02 · Сцена */
+.s2 .ph{--bg:#0e0e10;--ink:#f3ede3;--mut:#8a857c;--acc:#f3ede3;--onacc:#0e0e10;--pan:#17171a;--card:#131315;--line:#26262a;--bw:1px;--br:12px;--br2:18px;--tab:#26262a;--tabink:#f3ede3;--trk:#26262a;--knob:#f3ede3;--knobb:#0e0e10;--chip:#26262a;--chipink:#f3ede3;--win:#e0a340;--ui:Manrope,sans-serif;--num:Oswald,sans-serif;--numw:500;--gof:Oswald,sans-serif;--gow:600;--gols:.1em}
+.s2 .ph::before{content:"";position:absolute;left:50%;top:-140px;width:520px;height:420px;margin-left:-260px;background:radial-gradient(closest-side,rgba(243,232,210,.22),rgba(243,232,210,0));pointer-events:none}
+.s2 .big{font-size:64px;letter-spacing:-.01em}
+
+/* 03 · Зелёное сукно */
+.s3 .ph{--bg:#0f3d2e;--ink:#f4ead2;--mut:#9fb8a4;--acc:#d4af37;--onacc:#1a1607;--pan:#0c3226;--card:#124435;--line:#2f6a53;--bw:1px;--br:6px;--br2:10px;--edge:#d4af37;--tab:#d4af37;--tabink:#1a1607;--trk:#0c3226;--knob:#d4af37;--knobb:#f4ead2;--chip:#0c3226;--chipink:#f4ead2;--win:#d4af37;--ui:"Golos Text",sans-serif;--num:Cormorant,serif;--numw:700;--gof:Cormorant,serif;--gow:700;--gols:.08em}
+.s3 .game{box-shadow:inset 0 0 0 1px #2f6a53,inset 0 0 0 4px #124435,inset 0 0 0 5px #d4af37}
+.s3 .big{font-size:70px;font-style:italic}
+.s3 .st b{font-size:20px}
+
+/* 04 · Светлый финтех */
+.s4 .ph{--bg:#f4f5f7;--ink:#101418;--mut:#6b7280;--acc:#1652f0;--onacc:#fff;--pan:#fff;--card:#fff;--line:#e5e7eb;--bw:1px;--br:14px;--br2:22px;--edge:#e5e7eb;--tab:#101418;--tabink:#fff;--trk:#e5e7eb;--knob:#fff;--knobb:#1652f0;--chip:#f4f5f7;--chipink:#101418;--win:#12a150;--ui:Onest,sans-serif;--num:Onest,sans-serif;--numw:700;--gott:none;--gols:0;--gosh:0 10px 24px rgba(22,82,240,.28)}
+.s4 .game{box-shadow:0 8px 30px rgba(16,20,24,.06)}
+.s4 .go{font-size:15px}
+
+/* 05 · Плакат */
+.s5 .ph{--bg:#fff;--ink:#0a0a0a;--mut:#5a5a5a;--acc:#ffe600;--onacc:#0a0a0a;--pan:#fff;--card:#fff;--line:#0a0a0a;--bw:2px;--br:0;--br2:0;--phr:0;--edge:#0a0a0a;--tab:#0a0a0a;--tabink:#ffe600;--trk:#fff;--knob:#ffe600;--knobb:#0a0a0a;--tr:0;--chip:#0a0a0a;--chipink:#fff;--win:#0a0a0a;--ui:"Golos Text",sans-serif;--num:Unbounded,sans-serif;--numw:800;--gosh:5px 5px 0 #0a0a0a;--gols:.06em}
+.s5 .track{border:2px solid #0a0a0a}
+.s5 .dep{box-shadow:3px 3px 0 #0a0a0a}
+.s5 .big{font-size:60px;letter-spacing:-.05em}
+.s5 .hist .w{background:#ffe600}
+.s5 .game{box-shadow:6px 6px 0 #0a0a0a}
+</style>
+</head>
+<body>
+
+<div class="top">
+  <h1>Движок казино — варианты стиля Mini App</h1>
+  <p>Один и тот же экран игры Dice в пяти характерах. Всё кроме палитры, шрифтов и форм одинаковое, чтобы сравнивать было честно. Выбери номер или комбинацию («основа 2, кнопки из 5»).</p>
+</div>
+<nav class="nav">
+  <a href="#s1">01 · Терминал</a><a href="#s2">02 · Сцена</a><a href="#s3">03 · Сукно</a><a href="#s4">04 · Финтех</a><a href="#s5">05 · Плакат</a>
+</nav>
+
+<div class="grid">
+
+<section class="s s1" id="s1">
+  <div class="cap"><b>01 · Терминал</b><span>Графит + лайм, моноширинный шрифт, острые углы. Похоже на биржу: честность и цифры как главная фишка. Референс: семья «кислотный плакат», Cryproshadows.</span></div>
+  <div class="ph">
+    <div class="hd"><div class="bal"><small>Баланс</small><b>1 250.40<i>USDT</i></b></div><span class="dep">+ Пополнить</span></div>
+    <div class="tabs"><span class="on">Dice</span><span>Coinflip</span><span>Mines</span></div>
+    <div class="game">
+      <div><div class="lb">Бросок ниже</div><div class="big">50.00</div>
+      <div class="track"><i></i><b></b></div>
+      <div class="st"><div><small>Множитель</small><b>×1.98</b></div><div><small>Шанс</small><b>50.0 %</b></div><div><small>Выплата</small><b>19.80</b></div></div></div>
+      <div class="bet"><div class="lb">Ставка</div><div class="row" style="margin-top:6px"><b>10.00<i>USDT</i></b><span>½</span><span>×2</span><span>Max</span></div>
+      <button class="go">Сделать ставку</button>
+      <div class="hist"><span class="w">72.1</span><span>13.4</span><span class="w">88.0</span><span>41.9</span><span class="w">67.3</span></div>
+      <div class="pf"><span>sha256 7f3a…c91e</span><span>раунд #1042</span></div></div>
+    </div>
+  </div>
+</section>
+
+<section class="s s2" id="s2">
+  <div class="cap"><b>02 · Сцена</b><span>Почти чёрный, один тёплый луч сверху, узкие цифры Oswald, кремовые кнопки. Тихо и дорого, выигрыш подсвечен янтарём. Референс: семья «тёмная сцена», Lumina Studio.</span></div>
+  <div class="ph">
+    <div class="hd"><div class="bal"><small>Баланс</small><b>1 250.40<i>USDT</i></b></div><span class="dep">Пополнить</span></div>
+    <div class="tabs"><span class="on">Dice</span><span>Coinflip</span><span>Mines</span></div>
+    <div class="game">
+      <div><div class="lb">Бросок ниже</div><div class="big">50.00</div>
+      <div class="track"><i></i><b></b></div>
+      <div class="st"><div><small>Множитель</small><b>×1.98</b></div><div><small>Шанс</small><b>50.0 %</b></div><div><small>Выплата</small><b>19.80</b></div></div></div>
+      <div class="bet"><div class="lb">Ставка</div><div class="row" style="margin-top:6px"><b>10.00<i>USDT</i></b><span>½</span><span>×2</span><span>Max</span></div>
+      <button class="go">Сделать ставку</button>
+      <div class="hist"><span class="w">72.1</span><span>13.4</span><span class="w">88.0</span><span>41.9</span><span class="w">67.3</span></div>
+      <div class="pf"><span>sha256 7f3a…c91e</span><span>раунд #1042</span></div></div>
+    </div>
+  </div>
+</section>
+
+<section class="s s3" id="s3">
+  <div class="cap"><b>03 · Зелёное сукно</b><span>Классика казино: тёмно-зелёное сукно, золото, курсивный Cormorant в цифрах, двойная золотая рамка. То, что операторы ожидают увидеть первым. Референс: указатель, «дорогая темнота» (Реф 05).</span></div>
+  <div class="ph">
+    <div class="hd"><div class="bal"><small>Баланс</small><b>1 250.40<i>USDT</i></b></div><span class="dep">Пополнить</span></div>
+    <div class="tabs"><span class="on">Dice</span><span>Coinflip</span><span>Mines</span></div>
+    <div class="game">
+      <div><div class="lb">Бросок ниже</div><div class="big">50.00</div>
+      <div class="track"><i></i><b></b></div>
+      <div class="st"><div><small>Множитель</small><b>×1.98</b></div><div><small>Шанс</small><b>50.0 %</b></div><div><small>Выплата</small><b>19.80</b></div></div></div>
+      <div class="bet"><div class="lb">Ставка</div><div class="row" style="margin-top:6px"><b>10.00<i>USDT</i></b><span>½</span><span>×2</span><span>Max</span></div>
+      <button class="go">Сделать ставку</button>
+      <div class="hist"><span class="w">72.1</span><span>13.4</span><span class="w">88.0</span><span>41.9</span><span class="w">67.3</span></div>
+      <div class="pf"><span>sha256 7f3a…c91e</span><span>раунд #1042</span></div></div>
+    </div>
+  </div>
+</section>
+
+<section class="s s4" id="s4">
+  <div class="cap"><b>04 · Светлый финтех</b><span>Белый, крупные скругления, один синий, шрифт Onest. Выглядит как кошелёк, а не как казино: доверие, светлая тема Telegram. Референс: Реф 12 финтех PAYROT.</span></div>
+  <div class="ph">
+    <div class="hd"><div class="bal"><small>Баланс</small><b>1 250.40<i>USDT</i></b></div><span class="dep">Пополнить</span></div>
+    <div class="tabs"><span class="on">Dice</span><span>Coinflip</span><span>Mines</span></div>
+    <div class="game">
+      <div><div class="lb">Бросок ниже</div><div class="big">50.00</div>
+      <div class="track"><i></i><b></b></div>
+      <div class="st"><div><small>Множитель</small><b>×1.98</b></div><div><small>Шанс</small><b>50.0 %</b></div><div><small>Выплата</small><b>19.80</b></div></div></div>
+      <div class="bet"><div class="lb">Ставка</div><div class="row" style="margin-top:6px"><b>10.00<i>USDT</i></b><span>½</span><span>×2</span><span>Max</span></div>
+      <button class="go">Сделать ставку</button>
+      <div class="hist"><span class="w">72.1</span><span>13.4</span><span class="w">88.0</span><span>41.9</span><span class="w">67.3</span></div>
+      <div class="pf"><span>sha256 7f3a…c91e</span><span>раунд #1042</span></div></div>
+    </div>
+  </div>
+</section>
+
+<section class="s s5" id="s5">
+  <div class="cap"><b>05 · Плакат</b><span>Белый, чёрные рамки в два пикселя, жёсткие тени, кислотно-жёлтая кнопка, гигантские цифры Unbounded. Громко, как аркада. Референс: Реф 16 BRVND, семья «кислотный плакат».</span></div>
+  <div class="ph">
+    <div class="hd"><div class="bal"><small>Баланс</small><b>1 250.40<i>USDT</i></b></div><span class="dep">Пополнить</span></div>
+    <div class="tabs"><span class="on">Dice</span><span>Coinflip</span><span>Mines</span></div>
+    <div class="game">
+      <div><div class="lb">Бросок ниже</div><div class="big">50.00</div>
+      <div class="track"><i></i><b></b></div>
+      <div class="st"><div><small>Множитель</small><b>×1.98</b></div><div><small>Шанс</small><b>50.0 %</b></div><div><small>Выплата</small><b>19.80</b></div></div></div>
+      <div class="bet"><div class="lb">Ставка</div><div class="row" style="margin-top:6px"><b>10.00<i>USDT</i></b><span>½</span><span>×2</span><span>Max</span></div>
+      <button class="go">Сделать ставку</button>
+      <div class="hist"><span class="w">72.1</span><span>13.4</span><span class="w">88.0</span><span>41.9</span><span class="w">67.3</span></div>
+      <div class="pf"><span>sha256 7f3a…c91e</span><span>раунд #1042</span></div></div>
+    </div>
+  </div>
+</section>
+
+</div>
+
+<div class="plq" id="plq">стиль 01 · Терминал</div>
+<script>
+(function(){
+  var n={s1:'01 · Терминал',s2:'02 · Сцена',s3:'03 · Сукно',s4:'04 · Финтех',s5:'05 · Плакат'},p=document.getElementById('plq');
+  if(!('IntersectionObserver' in window))return;
+  var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting)p.textContent='стиль '+n[e.target.id];});},{threshold:.5});
+  document.querySelectorAll('.s').forEach(function(s){io.observe(s);});
+})();
+</script>
+</body>
+</html>
