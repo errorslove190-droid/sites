@@ -97,7 +97,7 @@ em{font-style:italic}
 <hr>
 <h2 id="1-общая-таблица">1. Общая таблица</h2>
 <div class="tbl"><table><thead><tr><th>Канал</th><th>Кому нужен</th><th>Есть ли API переписки</th><th>Что нужно от клиента</th><th>Что нужно нам, чтобы проверить</th><th>Цена проверки</th></tr></thead><tbody>
-<tr><td><strong>Авито</strong></td><td>салонам — да, услуги</td><td>да, Messenger API</td><td>профессиональный тариф Авито</td><td>аккаунт + приложение на <code>developers.avito.ru</code></td><td><strong>0 ₽</strong></td></tr>
+<tr><td><strong>Авито</strong></td><td>салонам — да, услуги</td><td>да, Messenger API + вебхуки</td><td>тариф «Расширенный» (Услуги) или «Максимальный» (Товары), ключ <strong>владельца</strong>, не сотрудника</td><td>ключи из личного кабинета → <code>node scripts/avito-check.mjs</code></td><td><strong>0 ₽</strong></td></tr>
 <tr><td><strong>Яндекс</strong></td><td>салонам — да, главный вход</td><td>🔴 <strong>чата в карточке нет</strong></td><td>—</td><td>карточка организации в Яндекс Бизнесе</td><td><strong>0 ₽</strong></td></tr>
 <tr><td><strong>Wildberries</strong></td><td>продавцам WB</td><td>да, «Чат с покупателем»</td><td>кабинет продавца</td><td>статус продавца WB</td><td><strong>10 000 ₽</strong> взнос + самозанятость</td></tr>
 <tr><td><strong>Ozon</strong></td><td>продавцам Ozon</td><td>да, Seller API «Чаты»</td><td>подписка <strong>Premium Plus</strong></td><td>статус продавца + Premium Plus</td><td>подписка, цена уточняется</td></tr>
@@ -105,16 +105,34 @@ em{font-style:italic}
 <hr>
 <h2 id="2-авито-самый-понятный-из-четырёх">2. Авито — самый понятный из четырёх</h2>
 <p><strong>Что это.</strong> Клиент пишет в объявление салона, сообщение попадает в мессенджер Авито. Для салона канал живой: услуги на Авито ищут.</p>
-<p><strong>Как устроено технически:</strong></p>
+<p>Всё ниже сверено 1 сентября с официальной документацией Авито (каталог API, разделы «Авторизация» и «Мессенджер»), а не по памяти. Две вещи, записанные утром, документация опровергла — они отмечены отдельно.</p>
+<p><strong>Авторизация:</strong></p>
 <ul>
-<li>Приложение регистрируется на <code>developers.avito.ru</code> → выдаются <code>client_id</code> и <code>client_secret</code>.</li>
-<li>Токен по OAuth 2.0, два режима: <code>client_credentials</code> — доступ <strong>к своей учётной записи</strong>, <code>authorization_code</code> — к учётной записи клиента. Нам нужен второй, но проверять можно первым.</li>
-<li>Права: <code>messenger:read</code> на чтение, <code>messenger:write</code> на отправку.</li>
-<li>Refresh-токен обновляется сам каждые 22 часа — клиенту переподключаться не надо. Это важное отличие от ВК, где личный ключ живёт сутки.</li>
-<li>Вебхуки есть. <strong>Это первый наш канал на вебхуках</strong> — Telegram и ВК работают опросом.</li>
+<li>Ключи <code>client_id</code> и <code>client_secret</code> берутся <strong>в личном кабинете Авито</strong>, а не на отдельном сайте для разработчиков.</li>
+<li>Адрес выдачи токена: <code>POST https://api.avito.ru/token/</code>, тело — форма (<code>application/x-www-form-urlencoded</code>). Дальше все запросы с заголовком <code>Authorization: Bearer &lt;токен&gt;</code>.</li>
+<li>Два режима: <code>client_credentials</code> — своя учётная запись (этим проверяем на себе); <code>authorization_code</code> — учётная запись клиента (этим будет подключаться салон).</li>
+<li>Права: <code>messenger:read</code> на чтение, <code>messenger:write</code> на отправку, <code>user:read</code> на профиль.</li>
 </ul>
-<p><strong>🔴 Барьер.</strong> API мессенджера открыт только на платном тарифе Авито. Показывать это на экране подключения <strong>до</strong> кнопки, иначе человек упрётся в стену и решит, что сломались мы.</p>
-<p><strong>Что проверяем на себе:</strong> регистрируем приложение бесплатно, берём токен через <code>client_credentials</code>, дёргаем метод списка чатов. Ответ <code>200</code> — API открыт, <code>403</code> — упёрлись в тариф. В обоих случаях мы узнали правду за полчаса и без денег.</p>
+<p><strong>❗ Поправка к утренней записи.</strong> Я писал, что «refresh-токен обновляется сам каждые 22 часа». Это неверно. По документации: <strong>access-токен живёт 24 часа</strong>. У <code>client_credentials</code> обновления нет вообще — просто берётся новый. У <code>authorization_code</code> есть <code>refresh_token</code>, и вот он живёт <strong>год</strong>. Для нас это хорошая новость и она важнее исходной: салон подключает Авито <strong>один раз в год</strong>, а не раз в сутки, как вышло с личным ключом ВК.</p>
+<p><strong>Методы мессенджера</strong> (пути точные, из каталога):</p>
+<div class="tbl"><table><thead><tr><th>Что</th><th>Метод и путь</th></tr></thead><tbody>
+<tr><td>Список чатов</td><td><code>GET /messenger/v2/accounts/{user_id}/chats</code></td></tr>
+<tr><td>Сообщения чата</td><td><code>GET /messenger/v3/accounts/{user_id}/chats/{chat_id}/messages/</code></td></tr>
+<tr><td>Отправить текст</td><td><code>POST /messenger/v1/accounts/{user_id}/chats/{chat_id}/messages</code></td></tr>
+<tr><td>Отправить картинку</td><td><code>POST /messenger/v1/accounts/{user_id}/uploadImages</code>, затем <code>…/messages/image</code></td></tr>
+<tr><td>Отметить прочитанным</td><td><code>POST /messenger/v1/accounts/{user_id}/chats/{chat_id}/read</code></td></tr>
+<tr><td>Голосовые</td><td><code>GET /messenger/v1/accounts/{user_id}/getVoiceFiles</code></td></tr>
+<tr><td><strong>Включить вебхук</strong></td><td><code>POST /messenger/v3/webhook</code></td></tr>
+<tr><td>Список подписок</td><td><code>POST /messenger/v1/subscriptions</code></td></tr>
+<tr><td>Отключить</td><td><code>POST /messenger/v1/webhook/unsubscribe</code></td></tr>
+</tbody></table></div>
+<p>Вебхуки подтверждены, актуальная версия — третья. <strong>Это первый наш канал на вебхуках</strong>, Telegram и ВК работают опросом.</p>
+<p><strong>🔴 Барьер уточнён — он мягче, чем считали.</strong> «Платный тариф» оказался разным по вертикалям:</p>
+<blockquote><p>В Товарах и Работе Messenger API доступен только на подписке <strong>«Максимальный»</strong>. В Услугах — на <strong>«Расширенном»</strong> и «Максимальном».</p></blockquote>
+<p><strong>Салон красоты — это Услуги</strong>, значит ему хватает «Расширенного», а не самого дорогого. На экране подключения барьер надо писать по-разному в зависимости от того, чем клиент торгует, иначе продавцу услуг мы назовём цену вдвое выше нужной.</p>
+<p><strong>🔴 Ещё один барьер, которого мы не знали: ключ сотрудника не годится.</strong> Методы работают только для <strong>основного аккаунта компании</strong>. С ключом сотрудника список чатов не вернёт беседы по объявлениям, где человек привязанный сотрудник, а не автор; просмотр чата, отправка, отметка о прочтении и картинки — вернут ошибку. Для салона с несколькими администраторами это значит, что подключать Авито должен владелец, и это надо сказать прямо на экране подключения.</p>
+<p><strong>🔴 И главное: для подключения клиента нужен публичный https-адрес.</strong> При регистрации приложения Авито требует <strong>Redirect URI</strong> — адрес по https, умеющий принимать запрос с кодом авторизации. Без домена салон свой Авито подключить не сможет: проверить на себе через <code>client_credentials</code> — да, подключить клиента — нет. Домен, отложенный сегодня утром, возвращается в список нужного, и здесь как раз годится бесплатный домен от Beget.</p>
+<p><strong>Что проверяем на себе:</strong> ключи из личного кабинета → <code>node scripts/avito-check.mjs</code>. Скрипт написан 1 сентября: берёт токен, узнаёт <code>user_id</code>, дёргает список чатов и говорит человеческим языком — <code>200</code> значит мессенджер открыт, <code>403</code> значит упёрлись в тариф. Ключи в вывод не попадают.</p>
 <hr>
 <h2 id="3-яндекс-самый-нужный-салону-и-самый-закрытый">3. Яндекс — самый нужный салону и самый закрытый</h2>
 <p>Здесь плохая новость, и лучше её знать сейчас, чем после недели кода.</p>
