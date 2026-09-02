@@ -291,9 +291,10 @@ body.all{display:block;max-width:none;min-height:100dvh;background:#141517;color
   });
   function layout(){
     ['g1','g2'].forEach(function(id){
-      var grid=document.getElementById(id),w=grid.clientWidth,cols=w>=1000?4:w>=640?3:2,gap=14;
+      var grid=document.getElementById(id),w=grid.clientWidth-36,cols=w>=1000?4:w>=640?3:2,gap=14;
       if(id==='g2'&&cols>3)cols=3;
       var s=Math.min(1,(w-gap*(cols-1))/cols/360);
+      if(id==='g1'&&w>=1000)s=Math.min(s,Math.max(.5,(innerHeight-grid.getBoundingClientRect().top-scrollY-44)/720));
       grid.style.setProperty('--s',s);grid.style.gridTemplateColumns='repeat('+cols+',1fr)';
     });
   }
