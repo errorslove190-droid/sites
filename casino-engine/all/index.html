@@ -13,10 +13,11 @@
 <link rel="icon" href="../favicon.svg" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@600;800&family=JetBrains+Mono:wght@400;600&family=Oswald:wght@500;600&family=Manrope:wght@500;700&family=Cormorant:ital,wght@0,700;1,700&family=Golos+Text:wght@500;700&family=Onest:wght@500;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@600;800&family=JetBrains+Mono:wght@400;600&family=Oswald:wght@500;600&family=Manrope:wght@500;700&family=Cormorant:ital,wght@0,700;1,700&family=Golos+Text:wght@500;700&family=Onest:wght@500;700&family=Nunito:wght@800;900&display=swap" rel="stylesheet">
 <style>
 /* Mini App движка. Четыре темы на одних и тех же токенах: .frame[data-theme]. */
 *{box-sizing:border-box;margin:0;padding:0}
+[hidden]{display:none!important}
 button,input,select{font:inherit;color:inherit}
 button{cursor:pointer;background:none;border:0}
 .frame{height:720px;overflow:hidden;display:flex;flex-direction:column;max-width:480px;margin:0 auto;padding:14px 14px 18px;background:var(--bg);color:var(--ink);font:15px/1.4 var(--ui);-webkit-font-smoothing:antialiased;position:relative;overflow-x:hidden}
@@ -109,6 +110,31 @@ dialog::backdrop{background:rgba(0,0,0,.6)}
 .frame[data-theme="fintech"]{--bg:#f4f5f7;--ink:#101418;--mut:#6b7280;--acc:#1652f0;--onacc:#fff;--pan:#f4f5f7;--card:#fff;--line:#e5e7eb;--bw:1px;--br:14px;--br2:22px;--tab:#101418;--tabink:#fff;--trk:#e5e7eb;--knob:#fff;--knobb:#1652f0;--chip:#e9ebef;--chipink:#101418;--win:#12a150;--bust:#fde2e2;--ui:Onest,sans-serif;--num:Onest,sans-serif;--numw:700;--gott:none;--gols:0;--gosh:0 10px 24px rgba(22,82,240,.28);--cardsh:0 8px 30px rgba(16,20,24,.06)}
 .frame[data-theme="fintech"] .go{font-size:15px}
 
+/* 05 · Конфета — по референсу Plinco Master (02.09): пурпур с боке, глянцевые кнопки-леденцы, монеты */
+.frame[data-theme="candy"]{--bg:#9b3fd6;--ink:#fff;--mut:rgba(255,255,255,.75);--acc:#35c2ff;--onacc:#fff;--pan:rgba(255,255,255,.16);--card:rgba(70,20,120,.38);--line:rgba(255,255,255,.35);--bw:2px;--br:16px;--br2:24px;--tab:#ff5fa8;--tabink:#fff;--trk:rgba(255,255,255,.28);--knob:#ffd23f;--knobb:#fff;--chip:rgba(255,255,255,.22);--chipink:#fff;--win:#ffd23f;--bust:#ff4d6d;--ui:Nunito,sans-serif;--num:Nunito,sans-serif;--numw:900;--gow:900;--gols:.02em;--gott:none;--gosh:0 5px 0 #0f5ea8,0 12px 22px rgba(0,0,0,.25);background:linear-gradient(165deg,#c04fe0 0%,#8d2ee0 42%,#d3459b 100%)}
+.frame[data-theme="candy"]::before{content:"";position:absolute;inset:0;pointer-events:none;background:
+  radial-gradient(circle at 12% 16%,rgba(255,255,255,.32) 0 34px,transparent 36px),
+  radial-gradient(circle at 90% 10%,#ffe066 0 20px,#f5a623 21px 26px,transparent 28px),
+  radial-gradient(circle at 82% 80%,rgba(255,255,255,.22) 0 48px,transparent 50px),
+  radial-gradient(circle at 7% 86%,#ffe066 0 15px,#f5a623 16px 20px,transparent 22px),
+  radial-gradient(circle at 58% 42%,rgba(255,255,255,.1) 0 100px,transparent 102px)}
+.frame[data-theme="candy"] .go,.frame[data-theme="candy"] .dep,.frame[data-theme="candy"] .grid .open{background:linear-gradient(180deg,#78dcff,#22a9f5 55%,#1c8fe0);border:2px solid #0f6fbf;text-shadow:0 2px 0 rgba(0,0,0,.25);box-shadow:inset 0 3px 0 rgba(255,255,255,.55),0 4px 0 #0f5ea8}
+.frame[data-theme="candy"] .tabs .on{background:linear-gradient(180deg,#ff8ec6,#ff4fa3 55%,#e03a8c);border:2px solid #a8206a;text-shadow:0 1px 0 rgba(0,0,0,.25);box-shadow:inset 0 2px 0 rgba(255,255,255,.5),0 3px 0 #8c1a5a}
+.frame[data-theme="candy"] .tabs button{border:2px solid transparent}
+.frame[data-theme="candy"] .big,.frame[data-theme="candy"] .bal b{text-shadow:0 3px 0 rgba(0,0,0,.28)}
+.frame[data-theme="candy"] .lb{color:#ffe066;font-weight:800}
+.frame[data-theme="candy"] .st b{color:#fff}
+.frame[data-theme="candy"] .hist .w{color:#ffe066;border-color:#ffe066}
+
+/* 06 · Лаки — по референсу Lucky Star (02.09): тёмно-синее приложение, синий и зелёный, вкладки внизу как в приложениях */
+.frame[data-theme="lucky"]{--bg:#0f1526;--ink:#f2f5ff;--mut:#8a93b5;--acc:#2f7cff;--onacc:#fff;--pan:#1a2138;--card:#161d31;--line:#28305a;--bw:1px;--br:12px;--br2:16px;--tab:#2f7cff;--tabink:#fff;--trk:#28305a;--knob:#fff;--knobb:#2f7cff;--chip:#28305a;--chipink:#f2f5ff;--win:#1fc36a;--bust:#4b1f2e;--ui:"Golos Text",sans-serif;--num:Unbounded,sans-serif;--numw:600;--gott:none;--gols:0;--gow:700;--gosh:0 8px 20px rgba(47,124,255,.35)}
+.frame[data-theme="lucky"] .dep{background:#1fc36a;color:#062a14;border:0}
+.frame[data-theme="lucky"] .bal b{color:#ffd23f}
+.frame[data-theme="lucky"] .game::before{content:"";position:absolute;left:0;right:0;top:0;height:4px;background:linear-gradient(90deg,#2f7cff,#7c5cff,#ffd23f)}
+.frame[data-theme="lucky"] .tabs{order:10;margin-top:12px;background:#0b1020;border-color:#1c2340;padding:6px}
+.frame[data-theme="lucky"] .tabs button{padding:12px 0;font-size:13px}
+.frame[data-theme="lucky"] .go{font-size:15px}
+
 .frame{width:360px;max-width:none;margin:0;position:relative;transform:scale(var(--s));transform-origin:0 0;pointer-events:none;user-select:none}
 .frame dialog[open]{position:absolute;top:56px;left:14px;right:14px;width:auto;max-width:none;z-index:2}
 .frame.dim::after{content:"";position:absolute;inset:0;background:rgba(0,0,0,.6);z-index:1}
@@ -134,7 +160,9 @@ body.all{display:block;max-width:none;min-height:100dvh;background:#141517;color
   <h1>Движок казино — все экраны</h1>
   <p>Настоящая вёрстка Mini App, семь экранов на одной странице. Первый ряд — экран Dice в четырёх темах, ниже — остальные экраны в теме 01. Нажми на экран, чтобы увеличить. Галерея пяти исходных стилей — <a href="../styles/">здесь</a>.</p>
 </div>
-<div class="rowt">Четыре темы · экран Dice</div>
+<div class="rowt">По референсам 02.09 · Конфета (Plinco) и Лаки (Lucky Star)</div>
+<div class="g" id="g0"></div>
+<div class="rowt">Четыре темы из галереи · экран Dice</div>
 <div class="g" id="g1"></div>
 <div class="rowt">Остальные экраны · тема 01</div>
 <div class="g" id="g2"></div>
@@ -231,6 +259,11 @@ body.all{display:block;max-width:none;min-height:100dvh;background:#141517;color
 <script>
 (function(){
   var ROWS=[
+    ['g0',[
+      {theme:'candy',title:'05 · Конфета · Dice',game:'dice'},
+      {theme:'candy',title:'05 · Конфета · Mines',game:'mines'},
+      {theme:'lucky',title:'06 · Лаки · Dice',game:'dice'},
+      {theme:'lucky',title:'06 · Лаки · Coinflip',game:'coinflip'}]],
     ['g1',[
       {theme:'terminal',title:'01 · Терминал',game:'dice'},
       {theme:'scene',title:'02 · Сцена',game:'dice'},
@@ -290,11 +323,11 @@ body.all{display:block;max-width:none;min-height:100dvh;background:#141517;color
     });
   });
   function layout(){
-    ['g1','g2'].forEach(function(id){
+    ['g0','g1','g2'].forEach(function(id){
       var grid=document.getElementById(id),w=grid.clientWidth-36,cols=w>=1000?4:w>=640?3:2,gap=14;
       if(id==='g2'&&cols>3)cols=3;
       var s=Math.min(1,(w-gap*(cols-1))/cols/360);
-      if(id==='g1'&&w>=1000)s=Math.min(s,Math.max(.5,(innerHeight-grid.getBoundingClientRect().top-scrollY-44)/720));
+      if(id==='g0'&&w>=1000)s=Math.min(s,Math.max(.5,(innerHeight-grid.getBoundingClientRect().top-scrollY-44)/720));
       grid.style.setProperty('--s',s);grid.style.gridTemplateColumns='repeat('+cols+',1fr)';
     });
   }
