@@ -314,8 +314,8 @@ body.all{display:block;max-width:none;min-height:100dvh;background:#141517;color
   <section class="screen" data-screen="home">
     <div class="promo" id="promo">
       <article class="promo-card p1"><small>Честность</small><h3>Каждый раунд можно проверить</h3><p>Хеш серверного сида показан до ставки</p></article>
-      <article class="promo-card p2"><small>Выплаты</small><h3>USDT и TON без ожидания</h3><p>Депозит и вывод через Crypto Pay</p></article>
-      <article class="promo-card p3"><small>Оператор</small><h3>Приветственный пакет</h3><p>Условия задаются в панели оператора</p></article>
+      <article class="promo-card p2"><small>Выплаты</small><h3>Пополнение и вывод в USDT и TON</h3><p>Через Crypto Pay, зачисление по факту оплаты</p></article>
+      <article class="promo-card p3"><small>Правила</small><h3>Лимиты и ответственная игра</h3><p>Условия и лимиты задаёт оператор под свою лицензию</p></article>
     </div>
     <div class="chips" id="cats">
       <button type="button" class="on" data-cat="all">Все</button>
@@ -323,7 +323,7 @@ body.all{display:block;max-width:none;min-height:100dvh;background:#141517;color
       <button type="button" data-cat="fast">Быстрые</button>
       <button type="button" data-cat="classic">Классика</button>
     </div>
-    <h2 class="h">Популярные</h2>
+    <h2 class="h">С чего начать</h2>
     <div class="row-scroll" id="popular"></div>
     <h2 class="h">Все игры <span class="cnt" id="cnt"></span></h2>
     <div class="tiles" id="tiles"></div>
@@ -453,7 +453,7 @@ body.all{display:block;max-width:none;min-height:100dvh;background:#141517;color
       <div class="wbtns"><button class="go" id="w-dep" type="button">Пополнить</button><button class="go alt" id="w-wd" type="button">Вывести</button></div>
     </div>
     <div class="chips" id="assets"><button type="button" class="on">USDT</button><button type="button">TON</button><button type="button">BTC</button><button type="button">ETH</button></div>
-    <p class="note">Депозит — инвойс Crypto Pay в выбранной монете, зачисление по вебхуку. Вывод — перевод на кошелёк игрока с защитой от двойной выплаты, крупные суммы подтверждает оператор. Подключение реальных платежей — этап 2.</p>
+    <p class="note">Пополнение — счёт на оплату в Crypto Pay в выбранной монете, баланс обновится после подтверждения оплаты. Вывод — на твой кошелёк; суммы выше лимита оператор проверяет вручную, это занимает время. В демо платежи не подключены, деньги виртуальные.</p>
     <h2 class="h">Операции</h2>
     <div class="list" id="ledger"><div class="empty">Операций пока нет</div></div>
   </section>
@@ -466,7 +466,7 @@ body.all{display:block;max-width:none;min-height:100dvh;background:#141517;color
     <div class="st">
       <div><small>Раундов</small><b id="p-rounds">0</b></div>
       <div><small>Поставлено</small><b id="p-wagered">0</b></div>
-      <div><small>Выиграно</small><b id="p-won">0</b></div>
+      <div><small>Выплачено</small><b id="p-won">0</b></div>
     </div>
     <h2 class="h">Тема оформления</h2>
     <div class="themes" id="themes"></div>

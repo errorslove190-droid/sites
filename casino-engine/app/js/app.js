@@ -447,17 +447,17 @@ function openSheet(mode) {
   const demo = st.config.devMode;
   $('#sh-title').textContent = mode === 'dep' ? 'Пополнить' : 'Вывести';
   $('#sh-text').textContent = mode === 'dep'
-    ? (demo ? 'Демо: реальные платежи не подключены, начислим 1000 USDT виртуального баланса.' : 'Создадим инвойс Crypto Pay в выбранной монете. Зачисление после оплаты, обычно за секунды.')
-    : (demo ? 'Демо: деньги виртуальные, вывод не выполняется. В продукте — перевод Crypto Pay на кошелёк игрока.' : 'Перевод Crypto Pay на кошелёк. Крупные суммы подтверждает оператор.');
+    ? (demo ? 'В демо платежи не подключены: начислим 1000 USDT виртуального баланса.' : 'Откроем счёт на оплату в Crypto Pay. Баланс обновится после подтверждения оплаты.')
+    : (demo ? 'В демо деньги виртуальные, вывод не выполняется. В продукте — перевод на твой кошелёк.' : 'Переведём на твой кошелёк через Crypto Pay. Суммы выше лимита проверяет оператор — это занимает время.');
   $('#sh-amount-l').hidden = mode === 'dep' && demo;
   $('#sh-addr-l').hidden = mode !== 'wd';
-  $('#sh-ok').textContent = mode === 'dep' ? (demo ? 'Начислить демо' : 'Создать инвойс') : 'Отправить';
+  $('#sh-ok').textContent = mode === 'dep' ? (demo ? 'Начислить демо' : 'Перейти к оплате') : 'Вывести';
   sheet.showModal();
 }
 $('#sh-ok').addEventListener('click', async () => {
   try {
     if (sheetMode === 'dep' && st.config.devMode) { const r = await api('/dev/topup', {}); setBalance(r.balance); haptic('success'); toast('Демо-баланс пополнен'); loadLedger(); }
-    else toast(sheetMode === 'dep' ? 'Инвойсы Crypto Pay подключаются на этапе 2' : 'Вывод через Crypto Pay подключается на этапе 2');
+    else toast(sheetMode === 'dep' ? 'В демо пополнение не подключено' : 'В демо вывод не подключен');
   } catch (err) { toast(err.message); }
   sheet.close();
 });

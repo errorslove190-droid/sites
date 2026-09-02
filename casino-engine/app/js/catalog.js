@@ -1,8 +1,8 @@
 // Каталог игр и тем: общие данные для приложения и страницы «все экраны».
 export const GAMES = [
-  { id: 'crash', name: 'Crash', cat: 'crash', tag: 'Хит', desc: 'Забери до краша', rtp: '99 %', short: 'CR' },
-  { id: 'plinko', name: 'Plinko', cat: 'fast', tag: 'Новое', desc: 'Шарик и лунки до ×1000', rtp: '99 %', short: 'PL' },
-  { id: 'mines', name: 'Mines', cat: 'fast', tag: 'Топ', desc: '5×5, обходи мины', rtp: '99 %', short: 'MN' },
+  { id: 'crash', name: 'Crash', cat: 'crash', tag: 'Автовывод', desc: 'Забери до краша', rtp: '99 %', short: 'CR' },
+  { id: 'plinko', name: 'Plinko', cat: 'fast', tag: 'Новое', desc: 'Шарик, лунки, три уровня риска', rtp: '97–99 %', short: 'PL' },
+  { id: 'mines', name: 'Mines', cat: 'fast', desc: '5×5, забрать в любой момент', rtp: '99 %', short: 'MN' },
   { id: 'dice', name: 'Dice', cat: 'classic', desc: 'Бросок ниже порога', rtp: '99 %', short: 'DC' },
   { id: 'limbo', name: 'Limbo', cat: 'fast', desc: 'Назови множитель', rtp: '99 %', short: 'LB' },
   { id: 'wheel', name: 'Wheel', cat: 'classic', desc: '12 секторов, до ×4.8', rtp: '99 %', short: 'WH' },
