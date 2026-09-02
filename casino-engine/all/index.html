@@ -158,13 +158,13 @@ body.all{display:block;max-width:none;min-height:100dvh;background:#141517;color
 <body class="all">
 <div class="top">
   <h1>Движок казино — все экраны</h1>
-  <p>Настоящая вёрстка Mini App, семь экранов на одной странице. Первый ряд — экран Dice в четырёх темах, ниже — остальные экраны в теме 01. Нажми на экран, чтобы увеличить. Галерея пяти исходных стилей — <a href="../styles/">здесь</a>.</p>
+  <p>Настоящая вёрстка Mini App, семь экранов на одной странице. Первый ряд — темы по референсам, второй — четыре темы из галереи, ниже — остальные экраны в основной теме 06 Лаки. Нажми на экран, чтобы увеличить. Галерея пяти исходных стилей — <a href="../styles/">здесь</a>.</p>
 </div>
 <div class="rowt">По референсам 02.09 · Конфета (Plinco) и Лаки (Lucky Star)</div>
 <div class="g" id="g0"></div>
 <div class="rowt">Четыре темы из галереи · экран Dice</div>
 <div class="g" id="g1"></div>
-<div class="rowt">Остальные экраны · тема 01</div>
+<div class="rowt">Остальные экраны · основная тема 06 Лаки</div>
 <div class="g" id="g2"></div>
 <div class="hint" id="hint">нажми на экран, чтобы увеличить</div>
 <template id="app">
@@ -270,9 +270,9 @@ body.all{display:block;max-width:none;min-height:100dvh;background:#141517;color
       {theme:'felt',title:'03 · Зелёное сукно',game:'dice'},
       {theme:'fintech',title:'04 · Светлый финтех',game:'dice'}]],
     ['g2',[
-      {theme:'terminal',title:'Coinflip · выигрыш',game:'coinflip'},
-      {theme:'terminal',title:'Mines · раунд идёт',game:'mines'},
-      {theme:'terminal',title:'Панель честности',game:'dice',fair:true}]]
+      {theme:'lucky',title:'Coinflip · выигрыш',game:'coinflip'},
+      {theme:'lucky',title:'Mines · раунд идёт',game:'mines'},
+      {theme:'lucky',title:'Панель честности',game:'dice',fair:true}]]
   ];
   var tpl=document.getElementById('app').content;
   var HIST=['72.10|w','13.40|','88.00|w','41.90|','67.30|w','Орёл|w','×1.62|w'];
