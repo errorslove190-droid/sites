@@ -5,9 +5,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="robots" content="noindex, nofollow">
 <title>Движок казино — все экраны</title>
-<meta name="description" content="Все экраны Mini App движка на одной странице: четыре темы, три игры, панель честности.">
+<meta name="description" content="Все экраны Mini App движка на одной странице: лобби, семь игр, кошелёк, профиль, шесть тем.">
 <meta property="og:title" content="Движок казино — все экраны">
-<meta property="og:description" content="Четыре темы и все экраны Mini App на одной странице. Нажми на экран, чтобы увеличить.">
+<meta property="og:description" content="Лобби, игры, кошелёк и профиль в основной теме, плюс лобби в шести темах. Нажми на экран, чтобы увеличить.">
 <meta property="og:type" content="website">
 <meta property="og:locale" content="ru_RU">
 <link rel="icon" href="../favicon.svg" type="image/svg+xml">
@@ -15,47 +15,109 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@600;800&family=JetBrains+Mono:wght@400;600&family=Oswald:wght@500;600&family=Manrope:wght@500;700&family=Cormorant:ital,wght@0,700;1,700&family=Golos+Text:wght@500;700&family=Onest:wght@500;700&family=Nunito:wght@800;900&display=swap" rel="stylesheet">
 <style>
-/* Mini App движка. Четыре темы на одних и тех же токенах: .frame[data-theme]. */
+/* Mini App движка: лобби, игры, кошелёк, профиль. Шесть тем на одних токенах: .frame[data-theme]. */
 *{box-sizing:border-box;margin:0;padding:0}
 [hidden]{display:none!important}
 button,input,select{font:inherit;color:inherit}
 button{cursor:pointer;background:none;border:0}
-.frame{height:720px;overflow:hidden;display:flex;flex-direction:column;max-width:480px;margin:0 auto;padding:14px 14px 18px;background:var(--bg);color:var(--ink);font:15px/1.4 var(--ui);-webkit-font-smoothing:antialiased;position:relative;overflow-x:hidden}
+.frame{height:780px;overflow:hidden;display:flex;flex-direction:column;max-width:480px;margin:0 auto;padding:10px 14px calc(78px + env(safe-area-inset-bottom));background:var(--bg);color:var(--ink);font:15px/1.4 var(--ui);-webkit-font-smoothing:antialiased;position:relative;overflow-x:hidden}
 .lb{font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--mut)}
 .lb b{color:var(--ink);font-family:var(--num);font-weight:var(--numw,700);letter-spacing:0;font-size:12px}
+.h{font:var(--numw,700) 15px/1.2 var(--num);margin:18px 0 10px;display:flex;align-items:baseline;gap:8px}
+.h .cnt{font:500 11px/1 var(--ui);color:var(--mut)}
+.empty{color:var(--mut);font-size:13px;padding:14px;text-align:center;border:1px dashed var(--line);border-radius:var(--br)}
+.note{font-size:12px;color:var(--mut);margin-top:12px;line-height:1.5}
+.demo-bar{font:600 10.5px/1.3 var(--ui);color:var(--onacc);background:var(--acc);padding:6px 10px;border-radius:var(--br);margin-bottom:8px;text-align:center}
 
-.hd{display:flex;align-items:center;justify-content:space-between;gap:10px}
-.hd-r{display:flex;gap:8px;align-items:center}
-.bal{display:flex;flex-direction:column;gap:2px}
-.bal small{font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--mut)}
-.bal b{font:var(--numw,700) 22px/1 var(--num);letter-spacing:-.01em}
-.bal b i{font-style:normal;font-size:12px;color:var(--mut);margin-left:6px;font-family:var(--ui);font-weight:500}
+/* шапка */
+.top{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:4px 0 2px}
+.brand{display:flex;align-items:center;gap:8px;font:800 15px/1 var(--num);letter-spacing:.06em}
+.brand .logo{width:28px;height:28px;border-radius:8px;background:var(--acc);color:var(--onacc);display:grid;place-items:center;font-size:15px}
+.top-r{display:flex;gap:8px;align-items:center}
+.balance{display:flex;flex-direction:column;align-items:flex-end;gap:1px;padding:6px 10px;border-radius:var(--br);background:var(--pan);border:var(--bw,1px) solid var(--line);text-align:right}
+.balance small{font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:var(--mut)}
+.balance b{font:var(--numw,700) 15px/1 var(--num);color:var(--balc,var(--ink))}
 .dep{font:700 12px/1 var(--ui);padding:11px 14px;border-radius:var(--br);background:var(--acc);color:var(--onacc);border:var(--bw,0) solid var(--line)}
-.ico{width:38px;height:38px;border-radius:var(--br);border:var(--bw,1px) solid var(--line);background:var(--pan);color:var(--mut);font-size:16px}
+.ico{width:38px;height:38px;border-radius:var(--br);border:var(--bw,1px) solid var(--line);background:var(--pan);color:var(--ink);font-size:20px;line-height:1;display:grid;place-items:center}
 
-.tabs{display:flex;gap:6px;margin-top:16px;padding:4px;border-radius:calc(var(--br) + 4px);background:var(--pan);border:var(--bw,0) solid var(--line)}
-.tabs button{flex:1;text-align:center;font:600 12px/1 var(--ui);padding:10px 0;border-radius:var(--br);color:var(--mut)}
-.tabs .on{background:var(--tab);color:var(--tabink)}
+/* экраны */
+.screen{display:flex;flex-direction:column;flex:1}
+.promo{display:flex;gap:10px;overflow-x:auto;scroll-snap-type:x mandatory;margin:10px -14px 0;padding:0 14px 4px;scrollbar-width:none}
+.promo::-webkit-scrollbar{display:none}
+.promo-card{flex:0 0 78%;scroll-snap-align:start;padding:16px;border-radius:var(--br2);color:#fff;min-height:118px;display:flex;flex-direction:column;justify-content:flex-end;gap:4px;position:relative;overflow:hidden}
+.promo-card small{font-size:10px;letter-spacing:.14em;text-transform:uppercase;opacity:.85}
+.promo-card h3{font:var(--numw,700) 17px/1.15 var(--num)}
+.promo-card p{font-size:12px;opacity:.85}
+.promo-card::after{content:"";position:absolute;right:-30px;top:-30px;width:120px;height:120px;border-radius:50%;background:rgba(255,255,255,.14)}
+.p1{background:linear-gradient(135deg,#2f7cff,#7c5cff)}
+.p2{background:linear-gradient(135deg,#0ca678,#12b886)}
+.p3{background:linear-gradient(135deg,#ff7a00,#ffd23f);color:#1a1200}
+.chips{display:flex;gap:6px;overflow-x:auto;margin-top:14px;scrollbar-width:none}
+.chips::-webkit-scrollbar{display:none}
+.chips button{flex:0 0 auto;font:600 12px/1 var(--ui);padding:9px 13px;border-radius:999px;background:var(--pan);color:var(--mut);border:var(--bw,1px) solid var(--line)}
+.chips button.on{background:var(--tab);color:var(--tabink);border-color:var(--tab)}
+.chips.small{margin-top:0}
+.chips.small button{padding:7px 10px;font-size:11px}
 
-.game{margin-top:14px;padding:16px;border-radius:var(--br2);background:var(--card);border:var(--bw,0) solid var(--line);flex:1;display:flex;flex-direction:column;position:relative;overflow:hidden;box-shadow:var(--cardsh,none)}
-.panel{flex:1;display:flex;flex-direction:column;justify-content:center;min-height:250px}
-.big{font:var(--numw,700) clamp(48px,16vw,64px)/1 var(--num);letter-spacing:-.03em;margin-top:6px;transition:color .2s}
+/* плитки игр */
+.tiles{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.row-scroll{display:flex;gap:10px;overflow-x:auto;margin:0 -14px;padding:0 14px 4px;scrollbar-width:none}
+.row-scroll::-webkit-scrollbar{display:none}
+.row-scroll .tile{flex:0 0 46%}
+.tile{display:block;text-align:left;border-radius:var(--br2);overflow:hidden;background:var(--card);border:var(--bw,1px) solid var(--line);box-shadow:var(--cardsh,none);transition:transform .08s}
+.tile:active{transform:scale(.97)}
+.tile .art{aspect-ratio:4/3;position:relative;display:grid;place-items:center;overflow:hidden}
+.tile .art svg{width:54%;height:54%;fill:none;stroke:#fff;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round;filter:drop-shadow(0 4px 10px rgba(0,0,0,.25))}
+.tile .art .disc{width:50%;aspect-ratio:1;border-radius:50%}
+.tile .tag{position:absolute;left:8px;top:8px;font:800 9px/1 var(--ui);letter-spacing:.1em;text-transform:uppercase;padding:5px 7px;border-radius:999px;background:rgba(0,0,0,.35);color:#fff}
+.tile .meta{padding:9px 10px 10px}
+.tile .meta b{display:block;font:var(--numw,700) 14px/1.1 var(--num)}
+.tile .meta small{display:block;font-size:11px;color:var(--mut);margin-top:3px}
+.tile .meta em{display:inline-block;font:600 9px/1 var(--ui);font-style:normal;letter-spacing:.1em;text-transform:uppercase;margin-top:6px;padding:4px 6px;border-radius:6px;background:var(--pan);color:var(--mut)}
+.art-crash{background:linear-gradient(135deg,#7c5cff,#2f7cff)}
+.art-plinko{background:linear-gradient(135deg,#ff5fa8,#ff9f43)}
+.art-mines{background:linear-gradient(135deg,#12b886,#0b7a5a)}
+.art-dice{background:linear-gradient(135deg,#2f7cff,#00c2ff)}
+.art-limbo{background:linear-gradient(135deg,#ffd23f,#ff7a00)}
+.art-wheel{background:linear-gradient(135deg,#ff4d6d,#7c5cff)}
+.art-coinflip{background:linear-gradient(135deg,#f5a623,#ffe066)}
+.search input{width:100%;padding:12px 14px;border-radius:var(--br);background:var(--pan);border:var(--bw,1px) solid var(--line);color:var(--ink);outline:0;margin-top:10px}
+.search input::placeholder{color:var(--mut)}
+
+/* списки */
+.list{display:flex;flex-direction:column;gap:6px}
+.list .row-i{display:flex;align-items:center;gap:10px;padding:10px 12px;border-radius:var(--br);background:var(--card);border:var(--bw,1px) solid var(--line)}
+.list .row-i .dot{width:34px;height:34px;border-radius:10px;display:grid;place-items:center;font:800 11px/1 var(--num);color:#fff;flex:0 0 auto}
+.list .row-i .tx{flex:1;min-width:0}
+.list .row-i .tx b{display:block;font:600 13px/1.2 var(--ui)}
+.list .row-i .tx small{display:block;font-size:11px;color:var(--mut);margin-top:2px}
+.list .row-i .amt{font:var(--numw,700) 13px/1 var(--num);white-space:nowrap}
+.list .row-i .amt.w{color:var(--win)}
+.list .row-i .amt.l{color:var(--mut)}
+
+/* экран игры */
+.gh{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-top:6px}
+.gh h1{font:var(--numw,700) 18px/1 var(--num)}
+.game{margin-top:12px;padding:16px;border-radius:var(--br2);background:var(--card);border:var(--bw,0) solid var(--line);flex:1;display:flex;flex-direction:column;position:relative;overflow:hidden;box-shadow:var(--cardsh,none)}
+.panel{flex:1;display:flex;flex-direction:column;justify-content:center;min-height:230px}
+.big{font:var(--numw,700) clamp(44px,15vw,60px)/1 var(--num);letter-spacing:-.03em;margin-top:6px;transition:color .2s}
 .big.w{color:var(--win)}
 .big.l{color:var(--mut)}
-.range{-webkit-appearance:none;appearance:none;width:100%;height:12px;border-radius:var(--tr,999px);margin-top:16px;outline:0;background:linear-gradient(90deg,var(--acc) var(--pct,50%),var(--trk) var(--pct,50%));border:var(--rngb,0) solid var(--line)}
+.range{-webkit-appearance:none;appearance:none;width:100%;height:12px;border-radius:var(--tr,999px);margin-top:16px;outline:0;background:linear-gradient(90deg,var(--acc) var(--pct,50%),var(--trk) var(--pct,50%))}
 .range::-webkit-slider-thumb{-webkit-appearance:none;width:22px;height:22px;border-radius:var(--tr,999px);background:var(--knob);border:2px solid var(--knobb)}
 .range::-moz-range-thumb{width:22px;height:22px;border-radius:var(--tr,999px);background:var(--knob);border:2px solid var(--knobb)}
 .st{display:grid;grid-template-columns:1fr 1fr 1fr;gap:6px;margin-top:14px}
-.st div{padding:10px 8px;border-radius:var(--br);background:var(--pan);border:var(--bw,0) solid var(--line)}
-.st small{display:block;font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:var(--mut)}
-.st b{display:block;font:var(--numw,700) 15px/1.1 var(--num);margin-top:4px}
-
+.st div{padding:10px 8px;border-radius:var(--br);background:var(--pan);border:var(--bw,0) solid var(--line);min-width:0}
+.st small{display:block;font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:var(--mut);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.st b{display:block;font:var(--numw,700) 15px/1.1 var(--num);margin-top:4px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.st input{width:100%;background:none;border:0;outline:0;font:var(--numw,700) 15px/1.1 var(--num);color:var(--ink);margin-top:4px;-moz-appearance:textfield}
+.st input::-webkit-outer-spin-button,.st input::-webkit-inner-spin-button{-webkit-appearance:none}
+.st input::placeholder{color:var(--mut)}
 .sides{display:flex;gap:8px;margin-top:14px}
 .side{flex:1;padding:14px;border-radius:var(--br);border:var(--bw,1px) solid var(--line);background:var(--pan);font:600 14px/1 var(--ui);color:var(--mut)}
 .side.on{background:var(--tab);color:var(--tabink);border-color:var(--tab)}
-
 .m-top{display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap}
-.m-top select{background:var(--pan);border:var(--bw,1px) solid var(--line);border-radius:var(--br);padding:4px 6px;font:600 12px/1 var(--num);color:var(--ink);margin-left:4px}
+.m-top select,.row-in{background:var(--pan);border:var(--bw,1px) solid var(--line);border-radius:var(--br);padding:4px 6px;font:600 12px/1 var(--num);color:var(--ink);margin-left:4px}
 .grid{display:grid;grid-template-columns:repeat(5,1fr);gap:6px;margin-top:12px}
 .grid button{aspect-ratio:1;border-radius:var(--br);background:var(--pan);border:var(--bw,1px) solid var(--line);font:var(--numw,700) 16px/1 var(--num);color:transparent;transition:transform .08s}
 .grid button:disabled{cursor:default}
@@ -65,6 +127,44 @@ button{cursor:pointer;background:none;border:0}
 .grid .mine{background:var(--bust);color:var(--ink);border-color:var(--bust)}
 .grid .boom{background:var(--ink);color:var(--bg);border-color:var(--ink)}
 
+/* crash */
+.crash-area{position:relative;height:190px;border-radius:var(--br);background:var(--pan);border:var(--bw,1px) solid var(--line);overflow:hidden;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px}
+.crash-area svg{position:absolute;inset:0;width:100%;height:100%}
+#cr-fill{fill:var(--acc);opacity:.18}
+#cr-path{fill:none;stroke:var(--acc);stroke-width:3;stroke-linecap:round}
+.crash-area .big{position:relative;margin:0}
+.crash-area.bust .big{color:var(--bustc,#ff4d6d)}
+.crash-area.bust #cr-path{stroke:var(--bustc,#ff4d6d)}
+.crash-area.bust #cr-fill{fill:var(--bustc,#ff4d6d)}
+.crash-area.won .big{color:var(--win)}
+.crash-status{position:relative;font-size:12px;color:var(--mut)}
+
+/* plinko */
+.board{position:relative;margin-top:10px;aspect-ratio:300/240;border-radius:var(--br);background:var(--pan);border:var(--bw,1px) solid var(--line);overflow:hidden}
+.board svg{width:100%;height:100%;display:block}
+.board circle{fill:var(--mut);opacity:.7}
+.board .ball{position:absolute;width:5.6%;aspect-ratio:1;border-radius:50%;background:var(--win);box-shadow:0 0 10px var(--win);transform:translate(-50%,-50%);transition:left .09s linear,top .09s linear;left:50%;top:3%}
+.buckets{display:flex;gap:2px;margin-top:6px}
+.buckets span{flex:1;text-align:center;font:700 8.5px/1 var(--num);padding:7px 0;border-radius:4px;background:var(--pan);color:var(--ink);border:var(--bw,1px) solid var(--line);white-space:nowrap;overflow:hidden}
+.buckets span.hi{background:var(--acc);color:var(--onacc);border-color:var(--acc)}
+.buckets span[data-v="hot"]{color:var(--win)}
+
+/* limbo */
+.row-in{display:flex;align-items:center;gap:8px;margin:12px 0 0;padding:6px 6px 6px 12px;font-size:12px;color:var(--mut)}
+.row-in input{flex:1;min-width:0;background:none;border:0;outline:0;font:var(--numw,700) 18px/1 var(--num);color:var(--ink);-moz-appearance:textfield}
+.row-in input::-webkit-outer-spin-button,.row-in input::-webkit-inner-spin-button{-webkit-appearance:none}
+.row-in i{font-style:normal;font:var(--numw,700) 14px/1 var(--num);color:var(--mut)}
+
+/* wheel */
+.wheel-wrap{position:relative;width:min(230px,70vw);aspect-ratio:1;margin:10px auto 0}
+.wheel{width:100%;height:100%;border-radius:50%;border:4px solid var(--line);transition:transform 2.4s cubic-bezier(.17,.67,.12,1);background:conic-gradient(var(--seg,#333) 0 100%)}
+.pointer{position:absolute;left:50%;top:-6px;width:0;height:0;margin-left:-9px;border-left:9px solid transparent;border-right:9px solid transparent;border-top:18px solid var(--win);z-index:2;filter:drop-shadow(0 2px 3px rgba(0,0,0,.4))}
+.wheel-center{position:absolute;left:50%;top:50%;width:38%;aspect-ratio:1;transform:translate(-50%,-50%);border-radius:50%;background:var(--card);border:var(--bw,1px) solid var(--line);display:grid;place-items:center;font:var(--numw,700) 20px/1 var(--num)}
+.wheel-center.w{color:var(--win)}
+.legend{display:flex;justify-content:center;gap:6px;flex-wrap:wrap;margin-top:12px}
+.legend span{font:700 10px/1 var(--num);padding:6px 8px;border-radius:6px;color:#fff}
+
+/* ставка и история */
 .bet{margin-top:14px}
 .bet .row{display:flex;align-items:center;gap:6px;padding:6px 6px 6px 12px;border-radius:var(--br);background:var(--pan);border:var(--bw,1px) solid var(--line);margin-top:6px}
 .bet input{flex:1;min-width:0;background:none;border:0;outline:0;font:var(--numw,700) 16px/1 var(--num);color:var(--ink);-moz-appearance:textfield}
@@ -73,12 +173,41 @@ button{cursor:pointer;background:none;border:0}
 .bet .row button{font:600 11px/1 var(--ui);padding:10px 10px;border-radius:calc(var(--br) - 2px);background:var(--chip);color:var(--chipink)}
 .go{margin-top:10px;width:100%;padding:17px;border-radius:var(--br);background:var(--acc);color:var(--onacc);font:var(--gow,800) 14px/1 var(--gof,var(--ui));letter-spacing:var(--gols,.04em);text-transform:var(--gott,uppercase);box-shadow:var(--gosh,none);transition:opacity .15s}
 .go:disabled{opacity:.55;cursor:wait}
-
+.go.alt{background:var(--pan);color:var(--ink);border:var(--bw,1px) solid var(--line);box-shadow:none}
+.go.cash{background:var(--win);color:#062a14}
 .hist{display:flex;gap:6px;margin-top:12px;overflow:hidden;min-height:28px}
 .hist span{font:600 11px/1 var(--num);padding:8px 9px;border-radius:var(--br);background:var(--pan);color:var(--mut);border:var(--bw,0) solid var(--line);white-space:nowrap}
 .hist .w{color:var(--win);border-color:var(--win)}
 .pf{margin-top:10px;width:100%;font:400 9.5px/1.3 "JetBrains Mono",monospace;color:var(--mut);display:flex;justify-content:space-between;gap:8px;white-space:nowrap;overflow:hidden;text-align:left}
 
+/* кошелёк и профиль */
+.wcard{margin-top:12px;padding:18px;border-radius:var(--br2);background:linear-gradient(135deg,var(--acc),var(--acc2,#7c5cff));color:#fff;box-shadow:var(--gosh,none)}
+.wcard small{font-size:10px;letter-spacing:.14em;text-transform:uppercase;opacity:.85}
+.wsum{display:flex;align-items:baseline;gap:8px;margin-top:4px}
+.wsum b{font:var(--numw,700) 34px/1 var(--num);letter-spacing:-.02em}
+.wsum i{font-style:normal;font-size:12px;opacity:.85}
+.wbtns{display:flex;gap:8px;margin-top:6px}
+.wbtns .go{margin-top:8px;background:#fff;color:#0f1526;box-shadow:none}
+.wbtns .go.alt{background:rgba(255,255,255,.18);color:#fff;border:1px solid rgba(255,255,255,.4)}
+.pcard{display:flex;align-items:center;gap:12px;margin-top:12px;padding:14px;border-radius:var(--br2);background:var(--card);border:var(--bw,1px) solid var(--line)}
+.ava{width:52px;height:52px;border-radius:50%;background:var(--acc);color:var(--onacc);display:grid;place-items:center;font:800 22px/1 var(--num)}
+.pinfo b{display:block;font:var(--numw,700) 16px/1.2 var(--num)}
+.pinfo small{display:block;color:var(--mut);font-size:12px;margin-top:2px}
+.themes{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.themes button{display:flex;align-items:center;gap:8px;padding:10px;border-radius:var(--br);background:var(--card);border:var(--bw,1px) solid var(--line);font:600 12px/1 var(--ui);color:var(--ink)}
+.themes button.on{border-color:var(--acc);box-shadow:inset 0 0 0 1px var(--acc)}
+.themes i{width:18px;height:18px;border-radius:50%;flex:0 0 auto;border:2px solid rgba(255,255,255,.25)}
+.menu{display:flex;flex-direction:column;gap:6px;margin-top:16px}
+.menu button{display:flex;justify-content:space-between;align-items:center;padding:14px;border-radius:var(--br);background:var(--card);border:var(--bw,1px) solid var(--line);font:600 13px/1 var(--ui);color:var(--ink);text-align:left}
+.menu button i{color:var(--mut);font-style:normal;font-size:18px}
+
+/* нижняя навигация */
+.nav{position:fixed;left:50%;bottom:0;transform:translateX(-50%);width:100%;max-width:480px;display:flex;padding:6px 8px calc(6px + env(safe-area-inset-bottom));background:var(--navbg,var(--card));border-top:var(--bw,1px) solid var(--line);z-index:8}
+.nav button{flex:1;display:flex;flex-direction:column;align-items:center;gap:3px;padding:6px 0;font:600 10px/1 var(--ui);color:var(--mut);border-radius:var(--br)}
+.nav button svg{width:22px;height:22px;fill:currentColor}
+.nav button.on{color:var(--acc)}
+
+/* диалоги и тост */
 dialog{border:0;padding:0;background:transparent;max-width:min(92vw,440px);width:100%}
 dialog::backdrop{background:rgba(0,0,0,.6)}
 .fair{background:var(--card);color:var(--ink);border:var(--bw,1px) solid var(--line);border-radius:var(--br2);padding:20px;display:flex;flex-direction:column;gap:12px;font-family:var(--ui)}
@@ -86,32 +215,34 @@ dialog::backdrop{background:rgba(0,0,0,.6)}
 .fair h3{font:600 12px/1 var(--ui);letter-spacing:.12em;text-transform:uppercase;color:var(--mut);margin-top:8px}
 .fair p{font-size:13px;color:var(--mut)}
 .fair label{display:flex;flex-direction:column;gap:4px;font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--mut)}
-.fair output,.fair input{font:400 12px/1.4 "JetBrains Mono",monospace;color:var(--ink);background:var(--pan);border:var(--bw,1px) solid var(--line);border-radius:var(--br);padding:9px 10px;word-break:break-all;letter-spacing:0;text-transform:none}
+.fair output,.fair input{font:400 12px/1.4 "JetBrains Mono",monospace;color:var(--ink);background:var(--pan);border:var(--bw,1px) solid var(--line);border-radius:var(--br);padding:9px 10px;word-break:break-all;letter-spacing:0;text-transform:none;outline:0}
 .fair .mono{font:400 11px/1.6 "JetBrains Mono",monospace;color:var(--mut);word-break:break-all}
 .fair code{font:inherit;color:var(--ink)}
-.fair a{color:var(--acc)}
 .fair .close{align-self:flex-end;font:600 12px/1 var(--ui);color:var(--mut);padding:8px 0}
-.toast{position:fixed;left:50%;bottom:24px;transform:translateX(-50%);background:var(--ink);color:var(--bg);font:600 13px/1.3 var(--ui);padding:12px 16px;border-radius:var(--br);max-width:90vw;z-index:9;text-align:center}
+.toast{position:fixed;left:50%;bottom:calc(84px + env(safe-area-inset-bottom));transform:translateX(-50%);background:var(--ink);color:var(--bg);font:600 13px/1.3 var(--ui);padding:12px 16px;border-radius:var(--br);max-width:90vw;z-index:9;text-align:center}
 
 /* 01 · Терминал */
-.frame[data-theme="terminal"]{--bg:#0b0d10;--ink:#eef1ec;--mut:#7c8480;--acc:#c6ff3d;--onacc:#0b0d10;--pan:#111418;--card:#0e1114;--line:#232a2c;--bw:1px;--br:2px;--br2:2px;--tab:#eef1ec;--tabink:#0b0d10;--trk:#1a1f22;--knob:#c6ff3d;--knobb:#0b0d10;--tr:0;--chip:#1a1f22;--chipink:#eef1ec;--win:#c6ff3d;--bust:#5a1f24;--ui:"JetBrains Mono",monospace;--num:"Unbounded",sans-serif;--numw:600;--gols:.12em}
+.frame[data-theme="terminal"]{--bg:#0b0d10;--ink:#eef1ec;--mut:#7c8480;--acc:#c6ff3d;--acc2:#5bd6a0;--onacc:#0b0d10;--pan:#111418;--card:#0e1114;--line:#232a2c;--bw:1px;--br:2px;--br2:2px;--tab:#eef1ec;--tabink:#0b0d10;--trk:#1a1f22;--knob:#c6ff3d;--knobb:#0b0d10;--tr:0;--chip:#1a1f22;--chipink:#eef1ec;--win:#c6ff3d;--bust:#5a1f24;--ui:"JetBrains Mono",monospace;--num:"Unbounded",sans-serif;--numw:600;--gols:.12em}
 .frame[data-theme="terminal"] .game::after{content:"";position:absolute;inset:0;background:repeating-linear-gradient(0deg,transparent 0 3px,rgba(255,255,255,.018) 3px 4px);pointer-events:none}
 
 /* 02 · Сцена */
-.frame[data-theme="scene"]{--bg:#0e0e10;--ink:#f3ede3;--mut:#8a857c;--acc:#f3ede3;--onacc:#0e0e10;--pan:#17171a;--card:#131315;--line:#26262a;--bw:1px;--br:12px;--br2:18px;--tab:#26262a;--tabink:#f3ede3;--trk:#26262a;--knob:#f3ede3;--knobb:#0e0e10;--chip:#26262a;--chipink:#f3ede3;--win:#e0a340;--bust:#4a2a2a;--ui:Manrope,sans-serif;--num:Oswald,sans-serif;--numw:500;--gof:Oswald,sans-serif;--gow:600;--gols:.1em}
+.frame[data-theme="scene"]{--bg:#0e0e10;--ink:#f3ede3;--mut:#8a857c;--acc:#f3ede3;--acc2:#8a857c;--onacc:#0e0e10;--pan:#17171a;--card:#131315;--line:#26262a;--bw:1px;--br:12px;--br2:18px;--tab:#26262a;--tabink:#f3ede3;--trk:#26262a;--knob:#f3ede3;--knobb:#0e0e10;--chip:#26262a;--chipink:#f3ede3;--win:#e0a340;--bust:#4a2a2a;--ui:Manrope,sans-serif;--num:Oswald,sans-serif;--numw:500;--gof:Oswald,sans-serif;--gow:600;--gols:.1em}
 .frame[data-theme="scene"]::before{content:"";position:absolute;left:0;right:0;top:-160px;height:440px;background:radial-gradient(closest-side,rgba(243,232,210,.2),rgba(243,232,210,0));pointer-events:none}
+.frame[data-theme="scene"] .wcard{color:#0e0e10}
+.frame[data-theme="scene"] .wbtns .go{background:#0e0e10;color:#f3ede3}
 
 /* 03 · Зелёное сукно */
-.frame[data-theme="felt"]{--bg:#0f3d2e;--ink:#f4ead2;--mut:#9fb8a4;--acc:#d4af37;--onacc:#1a1607;--pan:#0c3226;--card:#124435;--line:#2f6a53;--bw:1px;--br:6px;--br2:10px;--tab:#d4af37;--tabink:#1a1607;--trk:#0c3226;--knob:#d4af37;--knobb:#f4ead2;--chip:#0c3226;--chipink:#f4ead2;--win:#d4af37;--bust:#5a2a1f;--ui:"Golos Text",sans-serif;--num:Cormorant,serif;--numw:700;--gof:Cormorant,serif;--gow:700;--gols:.08em;--cardsh:inset 0 0 0 1px #2f6a53,inset 0 0 0 4px #124435,inset 0 0 0 5px #d4af37}
-.frame[data-theme="felt"] .big{font-style:italic;font-size:clamp(56px,18vw,72px)}
-.frame[data-theme="felt"] .st b{font-size:20px}
+.frame[data-theme="felt"]{--bg:#0f3d2e;--ink:#f4ead2;--mut:#9fb8a4;--acc:#d4af37;--acc2:#8a6d1f;--onacc:#1a1607;--pan:#0c3226;--card:#124435;--line:#2f6a53;--bw:1px;--br:6px;--br2:10px;--tab:#d4af37;--tabink:#1a1607;--trk:#0c3226;--knob:#d4af37;--knobb:#f4ead2;--chip:#0c3226;--chipink:#f4ead2;--win:#d4af37;--bust:#5a2a1f;--ui:"Golos Text",sans-serif;--num:Cormorant,serif;--numw:700;--gof:Cormorant,serif;--gow:700;--gols:.08em;--cardsh:inset 0 0 0 1px #2f6a53,inset 0 0 0 4px #124435,inset 0 0 0 5px #d4af37}
+.frame[data-theme="felt"] .big{font-style:italic}
+.frame[data-theme="felt"] .wcard{color:#1a1607}
 
 /* 04 · Светлый финтех */
-.frame[data-theme="fintech"]{--bg:#f4f5f7;--ink:#101418;--mut:#6b7280;--acc:#1652f0;--onacc:#fff;--pan:#f4f5f7;--card:#fff;--line:#e5e7eb;--bw:1px;--br:14px;--br2:22px;--tab:#101418;--tabink:#fff;--trk:#e5e7eb;--knob:#fff;--knobb:#1652f0;--chip:#e9ebef;--chipink:#101418;--win:#12a150;--bust:#fde2e2;--ui:Onest,sans-serif;--num:Onest,sans-serif;--numw:700;--gott:none;--gols:0;--gosh:0 10px 24px rgba(22,82,240,.28);--cardsh:0 8px 30px rgba(16,20,24,.06)}
+.frame[data-theme="fintech"]{--bg:#f4f5f7;--ink:#101418;--mut:#6b7280;--acc:#1652f0;--acc2:#00b4ff;--onacc:#fff;--pan:#f4f5f7;--card:#fff;--line:#e5e7eb;--bw:1px;--br:14px;--br2:22px;--tab:#101418;--tabink:#fff;--trk:#e5e7eb;--knob:#fff;--knobb:#1652f0;--chip:#e9ebef;--chipink:#101418;--win:#12a150;--bust:#fde2e2;--ui:Onest,sans-serif;--num:Onest,sans-serif;--numw:700;--gott:none;--gols:0;--gosh:0 10px 24px rgba(22,82,240,.28);--cardsh:0 8px 30px rgba(16,20,24,.06)}
 .frame[data-theme="fintech"] .go{font-size:15px}
+.frame[data-theme="fintech"] .board circle{opacity:.35}
 
-/* 05 · Конфета — по референсу Plinco Master (02.09): пурпур с боке, глянцевые кнопки-леденцы, монеты */
-.frame[data-theme="candy"]{--bg:#9b3fd6;--ink:#fff;--mut:rgba(255,255,255,.75);--acc:#35c2ff;--onacc:#fff;--pan:rgba(255,255,255,.16);--card:rgba(70,20,120,.38);--line:rgba(255,255,255,.35);--bw:2px;--br:16px;--br2:24px;--tab:#ff5fa8;--tabink:#fff;--trk:rgba(255,255,255,.28);--knob:#ffd23f;--knobb:#fff;--chip:rgba(255,255,255,.22);--chipink:#fff;--win:#ffd23f;--bust:#ff4d6d;--ui:Nunito,sans-serif;--num:Nunito,sans-serif;--numw:900;--gow:900;--gols:.02em;--gott:none;--gosh:0 5px 0 #0f5ea8,0 12px 22px rgba(0,0,0,.25);background:linear-gradient(165deg,#c04fe0 0%,#8d2ee0 42%,#d3459b 100%)}
+/* 05 · Конфета — по референсу Plinco Master */
+.frame[data-theme="candy"]{--bg:#9b3fd6;--ink:#fff;--mut:rgba(255,255,255,.75);--acc:#35c2ff;--acc2:#ff5fa8;--onacc:#fff;--pan:rgba(255,255,255,.16);--card:rgba(70,20,120,.38);--line:rgba(255,255,255,.35);--bw:2px;--br:16px;--br2:24px;--tab:#ff5fa8;--tabink:#fff;--trk:rgba(255,255,255,.28);--knob:#ffd23f;--knobb:#fff;--chip:rgba(255,255,255,.22);--chipink:#fff;--win:#ffd23f;--bust:#ff4d6d;--navbg:rgba(60,15,110,.85);--ui:Nunito,sans-serif;--num:Nunito,sans-serif;--numw:900;--gow:900;--gols:.02em;--gott:none;--gosh:0 5px 0 #0f5ea8,0 12px 22px rgba(0,0,0,.25);background:linear-gradient(165deg,#c04fe0 0%,#8d2ee0 42%,#d3459b 100%)}
 .frame[data-theme="candy"]::before{content:"";position:absolute;inset:0;pointer-events:none;background:
   radial-gradient(circle at 12% 16%,rgba(255,255,255,.32) 0 34px,transparent 36px),
   radial-gradient(circle at 90% 10%,#ffe066 0 20px,#f5a623 21px 26px,transparent 28px),
@@ -119,36 +250,35 @@ dialog::backdrop{background:rgba(0,0,0,.6)}
   radial-gradient(circle at 7% 86%,#ffe066 0 15px,#f5a623 16px 20px,transparent 22px),
   radial-gradient(circle at 58% 42%,rgba(255,255,255,.1) 0 100px,transparent 102px)}
 .frame[data-theme="candy"] .go,.frame[data-theme="candy"] .dep,.frame[data-theme="candy"] .grid .open{background:linear-gradient(180deg,#78dcff,#22a9f5 55%,#1c8fe0);border:2px solid #0f6fbf;text-shadow:0 2px 0 rgba(0,0,0,.25);box-shadow:inset 0 3px 0 rgba(255,255,255,.55),0 4px 0 #0f5ea8}
-.frame[data-theme="candy"] .tabs .on{background:linear-gradient(180deg,#ff8ec6,#ff4fa3 55%,#e03a8c);border:2px solid #a8206a;text-shadow:0 1px 0 rgba(0,0,0,.25);box-shadow:inset 0 2px 0 rgba(255,255,255,.5),0 3px 0 #8c1a5a}
-.frame[data-theme="candy"] .tabs button{border:2px solid transparent}
-.frame[data-theme="candy"] .big,.frame[data-theme="candy"] .bal b{text-shadow:0 3px 0 rgba(0,0,0,.28)}
+.frame[data-theme="candy"] .go.alt{background:rgba(255,255,255,.18);border-color:rgba(255,255,255,.5);box-shadow:none}
+.frame[data-theme="candy"] .chips button.on,.frame[data-theme="candy"] .side.on{background:linear-gradient(180deg,#ff8ec6,#ff4fa3 55%,#e03a8c);border:2px solid #a8206a;text-shadow:0 1px 0 rgba(0,0,0,.25);box-shadow:inset 0 2px 0 rgba(255,255,255,.5),0 3px 0 #8c1a5a}
+.frame[data-theme="candy"] .big,.frame[data-theme="candy"] .balance b{text-shadow:0 3px 0 rgba(0,0,0,.28)}
 .frame[data-theme="candy"] .lb{color:#ffe066;font-weight:800}
-.frame[data-theme="candy"] .st b{color:#fff}
 .frame[data-theme="candy"] .hist .w{color:#ffe066;border-color:#ffe066}
+.frame[data-theme="candy"] .nav{backdrop-filter:none}
 
-/* 06 · Лаки — по референсу Lucky Star (02.09): тёмно-синее приложение, синий и зелёный, вкладки внизу как в приложениях */
-.frame[data-theme="lucky"]{--bg:#0f1526;--ink:#f2f5ff;--mut:#8a93b5;--acc:#2f7cff;--onacc:#fff;--pan:#1a2138;--card:#161d31;--line:#28305a;--bw:1px;--br:12px;--br2:16px;--tab:#2f7cff;--tabink:#fff;--trk:#28305a;--knob:#fff;--knobb:#2f7cff;--chip:#28305a;--chipink:#f2f5ff;--win:#1fc36a;--bust:#4b1f2e;--ui:"Golos Text",sans-serif;--num:Unbounded,sans-serif;--numw:600;--gott:none;--gols:0;--gow:700;--gosh:0 8px 20px rgba(47,124,255,.35)}
+/* 06 · Лаки — по референсу Lucky Star, основная */
+.frame[data-theme="lucky"]{--bg:#0f1526;--ink:#f2f5ff;--mut:#8a93b5;--acc:#2f7cff;--acc2:#7c5cff;--onacc:#fff;--pan:#1a2138;--card:#161d31;--line:#28305a;--bw:1px;--br:12px;--br2:16px;--tab:#2f7cff;--tabink:#fff;--trk:#28305a;--knob:#fff;--knobb:#2f7cff;--chip:#28305a;--chipink:#f2f5ff;--win:#1fc36a;--bust:#4b1f2e;--balc:#ffd23f;--navbg:#0b1020;--ui:"Golos Text",sans-serif;--num:Unbounded,sans-serif;--numw:600;--gott:none;--gols:0;--gow:700;--gosh:0 8px 20px rgba(47,124,255,.35)}
 .frame[data-theme="lucky"] .dep{background:#1fc36a;color:#062a14;border:0}
-.frame[data-theme="lucky"] .bal b{color:#ffd23f}
 .frame[data-theme="lucky"] .game::before{content:"";position:absolute;left:0;right:0;top:0;height:4px;background:linear-gradient(90deg,#2f7cff,#7c5cff,#ffd23f)}
-.frame[data-theme="lucky"] .tabs{order:10;margin-top:12px;background:#0b1020;border-color:#1c2340;padding:6px}
-.frame[data-theme="lucky"] .tabs button{padding:12px 0;font-size:13px}
 .frame[data-theme="lucky"] .go{font-size:15px}
 
-.frame{width:360px;max-width:none;margin:0;position:relative;transform:scale(var(--s));transform-origin:0 0;pointer-events:none;user-select:none}
+.frame{width:360px;max-width:none;margin:0;position:relative;transform:scale(var(--s));transform-origin:0 0;pointer-events:none;user-select:none;padding-bottom:78px}
+.frame .nav{position:absolute;left:0;bottom:0;transform:none;max-width:none}
+.frame .demo-bar{display:none!important}
 .frame dialog[open]{position:absolute;top:56px;left:14px;right:14px;width:auto;max-width:none;z-index:2}
 .frame.dim::after{content:"";position:absolute;inset:0;background:rgba(0,0,0,.6);z-index:1}
 html,body{margin:0;padding:0}
 body.all{display:block;max-width:none;min-height:100dvh;background:#141517;color:#e8e8ea;font:15px/1.45 Manrope,system-ui,sans-serif;padding:0 0 40px;overflow-x:hidden}
-.top{padding:26px 18px 8px;max-width:1500px;margin:0 auto}
-.top h1{font:800 clamp(20px,3vw,30px)/1.1 Unbounded,sans-serif;margin:0}
-.top p{color:#9a9ca3;margin:8px 0 0;max-width:760px}
-.top a{color:#c6ff3d}
+.top-all{padding:26px 18px 8px;max-width:1500px;margin:0 auto}
+.top-all h1{font:800 clamp(20px,3vw,30px)/1.1 Unbounded,sans-serif;margin:0}
+.top-all p{color:#9a9ca3;margin:8px 0 0;max-width:780px}
+.top-all a{color:#c6ff3d}
 .rowt{padding:22px 18px 8px;max-width:1500px;margin:0 auto;font:600 11px/1 "JetBrains Mono",monospace;letter-spacing:.14em;text-transform:uppercase;color:#7c8480}
 .g{display:grid;gap:14px;padding:6px 18px 0;max-width:1500px;margin:0 auto;--s:.5}
 .cell{cursor:zoom-in}
 .cell .cap{font:600 11px/1 "JetBrains Mono",monospace;color:#9a9ca3;margin:0 0 8px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.cell .box{width:calc(360px * var(--s));height:calc(720px * var(--s));overflow:hidden;border-radius:calc(18px * var(--s));box-shadow:0 10px 30px rgba(0,0,0,.45)}
+.cell .box{width:calc(360px * var(--s));height:calc(780px * var(--s));overflow:hidden;border-radius:calc(18px * var(--s));box-shadow:0 10px 30px rgba(0,0,0,.45)}
 .cell.focus{position:fixed;inset:0;z-index:5;background:rgba(0,0,0,.9);display:flex;flex-direction:column;align-items:center;overflow:auto;padding:14px;cursor:zoom-out}
 .cell.focus .cap{color:#e8e8ea;margin-bottom:10px}
 .cell.focus .box{box-shadow:none}
@@ -156,84 +286,207 @@ body.all{display:block;max-width:none;min-height:100dvh;background:#141517;color
 </style>
 </head>
 <body class="all">
-<div class="top">
+<div class="top-all">
   <h1>Движок казино — все экраны</h1>
-  <p>Настоящая вёрстка Mini App, семь экранов на одной странице. Первый ряд — темы по референсам, второй — четыре темы из галереи, ниже — остальные экраны в основной теме 06 Лаки. Нажми на экран, чтобы увеличить. Галерея пяти исходных стилей — <a href="../styles/">здесь</a>.</p>
+  <p>Настоящая вёрстка Mini App: лобби, игры, кошелёк и профиль в основной теме «Лаки», ниже — лобби в шести темах и остальные игры. Нажми на экран, чтобы увеличить. Живое демо, в которое можно играть: <a href="../app/">открыть</a>. Галерея исходных стилей — <a href="../styles/">здесь</a>.</p>
 </div>
-<div class="rowt">По референсам 02.09 · Конфета (Plinco) и Лаки (Lucky Star)</div>
+<div class="rowt">Основная тема Лаки · экраны приложения</div>
 <div class="g" id="g0"></div>
-<div class="rowt">Четыре темы из галереи · экран Dice</div>
+<div class="rowt">Лобби в шести темах</div>
 <div class="g" id="g1"></div>
-<div class="rowt">Остальные экраны · основная тема 06 Лаки</div>
+<div class="rowt">Остальные игры · тема Лаки</div>
 <div class="g" id="g2"></div>
 <div class="hint" id="hint">нажми на экран, чтобы увеличить</div>
 <template id="app">
 
-<header class="hd">
-  <div class="bal"><small>Баланс</small><b><span id="bal">—</span><i>USDT</i></b></div>
-  <div class="hd-r">
-    <button class="ico" id="theme" type="button" aria-label="Сменить тему">◐</button>
+<div class="demo-bar" id="demo-bar" hidden>Демо без сервера: деньги виртуальные, раунды считаются в браузере тем же алгоритмом честности</div>
+
+<header class="top" id="top">
+  <div class="brand"><span class="logo">★</span><b>BRAND</b></div>
+  <div class="top-r">
+    <button class="balance" id="bal-btn" type="button"><small>USDT</small><b id="bal">—</b></button>
     <button class="dep" id="dep" type="button">Пополнить</button>
   </div>
 </header>
 
-<nav class="tabs" id="tabs">
-  <button type="button" class="on" data-game="dice">Dice</button>
-  <button type="button" data-game="coinflip">Coinflip</button>
-  <button type="button" data-game="mines">Mines</button>
-</nav>
+<main id="screens">
 
-<main class="game">
-  <section class="panel" id="g-dice">
-    <div class="lb">Бросок ниже <b id="d-tval">50</b></div>
-    <div class="big" id="d-big">50.00</div>
-    <input class="range" id="d-target" type="range" min="2" max="98" step="1" value="50" aria-label="Порог">
+  <section class="screen" data-screen="home">
+    <div class="promo" id="promo">
+      <article class="promo-card p1"><small>Честность</small><h3>Каждый раунд можно проверить</h3><p>Хеш серверного сида показан до ставки</p></article>
+      <article class="promo-card p2"><small>Выплаты</small><h3>USDT и TON без ожидания</h3><p>Депозит и вывод через Crypto Pay</p></article>
+      <article class="promo-card p3"><small>Оператор</small><h3>Приветственный пакет</h3><p>Условия задаются в панели оператора</p></article>
+    </div>
+    <div class="chips" id="cats">
+      <button type="button" class="on" data-cat="all">Все</button>
+      <button type="button" data-cat="crash">Crash</button>
+      <button type="button" data-cat="fast">Быстрые</button>
+      <button type="button" data-cat="classic">Классика</button>
+    </div>
+    <h2 class="h">Популярные</h2>
+    <div class="row-scroll" id="popular"></div>
+    <h2 class="h">Все игры <span class="cnt" id="cnt"></span></h2>
+    <div class="tiles" id="tiles"></div>
+    <h2 class="h">Последние раунды</h2>
+    <div class="list" id="recent"><div class="empty">Пока пусто — сыграй первый раунд</div></div>
+  </section>
+
+  <section class="screen" data-screen="games" hidden>
+    <div class="search"><input id="search" type="search" placeholder="Поиск игры" autocomplete="off"></div>
+    <h2 class="h">Crash-игры</h2><div class="tiles" data-cat-list="crash"></div>
+    <h2 class="h">Быстрые</h2><div class="tiles" data-cat-list="fast"></div>
+    <h2 class="h">Классика</h2><div class="tiles" data-cat-list="classic"></div>
+  </section>
+
+  <section class="screen" data-screen="game" hidden>
+    <div class="gh">
+      <button class="ico" id="back" type="button" aria-label="Назад">‹</button>
+      <h1 id="g-title">Dice</h1>
+      <button class="ico" id="pf-open" type="button" aria-label="Честность">⚖</button>
+    </div>
+    <div class="game">
+
+      <section class="panel" id="g-dice" hidden>
+        <div class="lb">Бросок ниже <b id="d-tval">50</b></div>
+        <div class="big" id="d-big">50.00</div>
+        <input class="range" id="d-target" type="range" min="2" max="98" step="1" value="50" aria-label="Порог">
+        <div class="st">
+          <div><small>Множитель</small><b id="d-mult">×1.98</b></div>
+          <div><small>Шанс</small><b id="d-chance">50 %</b></div>
+          <div><small>Выплата</small><b id="d-pay">19.80</b></div>
+        </div>
+      </section>
+
+      <section class="panel" id="g-coinflip" hidden>
+        <div class="lb">Выбери сторону</div>
+        <div class="big" id="c-big">?</div>
+        <div class="sides">
+          <button type="button" class="side on" data-side="heads">Орёл</button>
+          <button type="button" class="side" data-side="tails">Решка</button>
+        </div>
+        <div class="st">
+          <div><small>Множитель</small><b>×1.98</b></div>
+          <div><small>Шанс</small><b>50 %</b></div>
+          <div><small>Выплата</small><b id="c-pay">19.80</b></div>
+        </div>
+      </section>
+
+      <section class="panel" id="g-mines" hidden>
+        <div class="m-top">
+          <label class="lb">Мины
+            <select id="m-mines"><option value="1">1</option><option value="3" selected>3</option><option value="5">5</option><option value="10">10</option><option value="24">24</option></select>
+          </label>
+          <div class="lb">Сейчас <b id="m-mult">×1.00</b> · дальше <b id="m-next">×1.12</b></div>
+        </div>
+        <div class="grid" id="m-grid"></div>
+      </section>
+
+      <section class="panel" id="g-crash" hidden>
+        <div class="crash-area">
+          <svg id="cr-svg" viewBox="0 0 300 160" preserveAspectRatio="none" aria-hidden="true"><path id="cr-fill" d=""/><path id="cr-path" d=""/></svg>
+          <div class="big" id="cr-big">1.00×</div>
+          <div class="crash-status" id="cr-status">Сделай ставку и забери до краша</div>
+        </div>
+        <div class="st">
+          <div><small>Автовывод ×</small><input id="cr-auto" type="number" inputmode="decimal" step="0.1" min="1.01" placeholder="выкл"></div>
+          <div><small>Последний краш</small><b id="cr-last">—</b></div>
+          <div><small>Выплата</small><b id="cr-pay">—</b></div>
+        </div>
+      </section>
+
+      <section class="panel" id="g-plinko" hidden>
+        <div class="m-top">
+          <div class="chips small" id="pl-risk">
+            <button type="button" class="on" data-risk="low">Низкий</button>
+            <button type="button" data-risk="medium">Средний</button>
+            <button type="button" data-risk="high">Высокий</button>
+          </div>
+          <label class="lb">Ряды <select id="pl-rows"><option value="8">8</option><option value="12" selected>12</option><option value="16">16</option></select></label>
+        </div>
+        <div class="board" id="pl-board">
+          <svg id="pl-svg" viewBox="0 0 300 240" aria-hidden="true"></svg>
+          <div class="ball" id="pl-ball" hidden></div>
+        </div>
+        <div class="buckets" id="pl-buckets"></div>
+      </section>
+
+      <section class="panel" id="g-limbo" hidden>
+        <div class="lb">Выпадет не меньше цели — выигрыш</div>
+        <div class="big" id="lb-big">2.00×</div>
+        <div class="row-in"><span>Цель</span><input id="lb-target" type="number" inputmode="decimal" step="0.01" min="1.01" max="1000" value="2"><i>×</i></div>
+        <div class="st">
+          <div><small>Шанс</small><b id="lb-chance">49.5 %</b></div>
+          <div><small>Выплата</small><b id="lb-pay">20.00</b></div>
+          <div><small>Последний</small><b id="lb-last">—</b></div>
+        </div>
+      </section>
+
+      <section class="panel" id="g-wheel" hidden>
+        <div class="wheel-wrap">
+          <div class="pointer"></div>
+          <div class="wheel" id="wh-wheel"></div>
+          <div class="wheel-center" id="wh-res">×</div>
+        </div>
+        <div class="legend" id="wh-legend"></div>
+      </section>
+
+      <div class="bet">
+        <div class="lb">Ставка</div>
+        <div class="row">
+          <input id="bet" type="number" inputmode="decimal" min="0.1" step="0.1" value="10" aria-label="Ставка">
+          <i>USDT</i>
+          <button type="button" data-k="half">½</button>
+          <button type="button" data-k="dbl">×2</button>
+          <button type="button" data-k="max">Max</button>
+        </div>
+        <button class="go" id="go" type="button">Сделать ставку</button>
+      </div>
+      <div class="hist" id="hist"></div>
+      <button class="pf" id="pf-line" type="button"><span id="pf-hash">sha256 …</span><span id="pf-nonce">раунд #—</span></button>
+    </div>
+  </section>
+
+  <section class="screen" data-screen="wallet" hidden>
+    <div class="wcard">
+      <small>Баланс</small>
+      <div class="wsum"><b id="w-bal">—</b><i>USDT</i></div>
+      <div class="wbtns"><button class="go" id="w-dep" type="button">Пополнить</button><button class="go alt" id="w-wd" type="button">Вывести</button></div>
+    </div>
+    <div class="chips" id="assets"><button type="button" class="on">USDT</button><button type="button">TON</button><button type="button">BTC</button><button type="button">ETH</button></div>
+    <p class="note">Депозит — инвойс Crypto Pay в выбранной монете, зачисление по вебхуку. Вывод — перевод на кошелёк игрока с защитой от двойной выплаты, крупные суммы подтверждает оператор. Подключение реальных платежей — этап 2.</p>
+    <h2 class="h">Операции</h2>
+    <div class="list" id="ledger"><div class="empty">Операций пока нет</div></div>
+  </section>
+
+  <section class="screen" data-screen="profile" hidden>
+    <div class="pcard">
+      <div class="ava" id="p-ava">Д</div>
+      <div class="pinfo"><b id="p-name">Демо</b><small id="p-id">id —</small></div>
+    </div>
     <div class="st">
-      <div><small>Множитель</small><b id="d-mult">×1.98</b></div>
-      <div><small>Шанс</small><b id="d-chance">50 %</b></div>
-      <div><small>Выплата</small><b id="d-pay">19.80</b></div>
+      <div><small>Раундов</small><b id="p-rounds">0</b></div>
+      <div><small>Поставлено</small><b id="p-wagered">0</b></div>
+      <div><small>Выиграно</small><b id="p-won">0</b></div>
+    </div>
+    <h2 class="h">Тема оформления</h2>
+    <div class="themes" id="themes"></div>
+    <div class="menu">
+      <button type="button" id="m-fair"><span>Проверяемая честность</span><i>›</i></button>
+      <button type="button" data-stub="Реферальная программа: ссылка и проценты задаются оператором"><span>Реферальная программа</span><i>›</i></button>
+      <button type="button" data-stub="Лимиты ставок и самоисключение — в панели оператора"><span>Лимиты и ответственная игра</span><i>›</i></button>
+      <button type="button" data-stub="Поддержка: чат оператора в Telegram"><span>Поддержка</span><i>›</i></button>
+      <button type="button" data-stub="Правила и оферта оператора"><span>Правила</span><i>›</i></button>
     </div>
   </section>
 
-  <section class="panel" id="g-coinflip" hidden>
-    <div class="lb">Выбери сторону</div>
-    <div class="big" id="c-big">?</div>
-    <div class="sides">
-      <button type="button" class="side on" data-side="heads">Орёл</button>
-      <button type="button" class="side" data-side="tails">Решка</button>
-    </div>
-    <div class="st">
-      <div><small>Множитель</small><b>×1.98</b></div>
-      <div><small>Шанс</small><b>50 %</b></div>
-      <div><small>Выплата</small><b id="c-pay">19.80</b></div>
-    </div>
-  </section>
-
-  <section class="panel" id="g-mines" hidden>
-    <div class="m-top">
-      <label class="lb">Мины
-        <select id="m-mines"><option value="1">1</option><option value="3" selected>3</option><option value="5">5</option><option value="10">10</option><option value="24">24</option></select>
-      </label>
-      <div class="lb">Сейчас <b id="m-mult">×1.00</b> · дальше <b id="m-next">×1.12</b></div>
-    </div>
-    <div class="grid" id="m-grid"></div>
-  </section>
-
-  <div class="bet">
-    <div class="lb">Ставка</div>
-    <div class="row">
-      <input id="bet" type="number" inputmode="decimal" min="0.1" step="0.1" value="10" aria-label="Ставка">
-      <i>USDT</i>
-      <button type="button" data-k="half">½</button>
-      <button type="button" data-k="dbl">×2</button>
-      <button type="button" data-k="max">Max</button>
-    </div>
-    <button class="go" id="go" type="button">Сделать ставку</button>
-  </div>
-
-  <div class="hist" id="hist"></div>
-  <button class="pf" id="pf-open" type="button"><span id="pf-hash">sha256 …</span><span id="pf-nonce">раунд #—</span></button>
 </main>
+
+<nav class="nav" id="nav">
+  <button type="button" class="on" data-go="home"><svg viewBox="0 0 24 24"><path d="M3 11 12 3l9 8v10h-6v-6H9v6H3z"/></svg><span>Главная</span></button>
+  <button type="button" data-go="games"><svg viewBox="0 0 24 24"><path d="M3 3h8v8H3zm10 0h8v8h-8zM3 13h8v8H3zm10 0h8v8h-8z"/></svg><span>Игры</span></button>
+  <button type="button" data-go="wallet"><svg viewBox="0 0 24 24"><path d="M3 6h15a3 3 0 0 1 3 3v9a3 3 0 0 1-3 3H6a3 3 0 0 1-3-3zm13 6a2 2 0 1 0 0 4 2 2 0 0 0 0-4zM3 6a2 2 0 0 1 2-2h11v2"/></svg><span>Кошелёк</span></button>
+  <button type="button" data-go="profile"><svg viewBox="0 0 24 24"><path d="M12 12a4.5 4.5 0 1 0 0-9 4.5 4.5 0 0 0 0 9zm0 2c-5 0-8 2.5-8 5v2h16v-2c0-2.5-3-5-8-5z"/></svg><span>Профиль</span></button>
+</nav>
 
 <dialog id="fair">
   <form method="dialog" class="fair">
@@ -247,8 +500,19 @@ body.all{display:block;max-width:none;min-height:100dvh;background:#141517;color
       <h3>Раскрытый серверный сид</h3>
       <output id="f-old-seed"></output>
       <p class="mono">Хеш <span id="f-old-hash"></span><br>Клиентский сид <span id="f-old-client"></span><br>Раундов <span id="f-old-nonce"></span></p>
-      <p>Проверка: <code>HMAC-SHA256(serverSeed, "clientSeed:nonce:0")</code>, первые 4 байта ÷ 2³² → число от 0 до 1. Dice: ⌊число × 10000⌋ ÷ 100. Или готовым запросом: <a id="f-verify" href="#" target="_blank">/api/verify</a></p>
+      <p>Проверка: <code>HMAC-SHA256(serverSeed, "clientSeed:nonce:0")</code>, первые 4 байта ÷ 2³² → число от 0 до 1. Dice: ⌊число × 10000⌋ ÷ 100. Crash и Limbo: 0.99 ÷ (1 − число).</p>
     </div>
+    <button class="close" type="submit">Закрыть</button>
+  </form>
+</dialog>
+
+<dialog id="sheet">
+  <form method="dialog" class="fair">
+    <h2 id="sh-title">Пополнить</h2>
+    <p id="sh-text"></p>
+    <label id="sh-amount-l">Сумма, USDT<input id="sh-amount" type="number" inputmode="decimal" min="1" step="1" value="100"></label>
+    <label id="sh-addr-l" hidden>Адрес кошелька<input id="sh-addr" autocomplete="off" placeholder="TON или TRC-20"></label>
+    <button type="button" class="go" id="sh-ok">Продолжить</button>
     <button class="close" type="submit">Закрыть</button>
   </form>
 </dialog>
@@ -256,85 +520,111 @@ body.all{display:block;max-width:none;min-height:100dvh;background:#141517;color
 
 
 </template>
-<script>
-(function(){
-  var ROWS=[
-    ['g0',[
-      {theme:'candy',title:'05 · Конфета · Dice',game:'dice'},
-      {theme:'candy',title:'05 · Конфета · Mines',game:'mines'},
-      {theme:'lucky',title:'06 · Лаки · Dice',game:'dice'},
-      {theme:'lucky',title:'06 · Лаки · Coinflip',game:'coinflip'}]],
-    ['g1',[
-      {theme:'terminal',title:'01 · Терминал',game:'dice'},
-      {theme:'scene',title:'02 · Сцена',game:'dice'},
-      {theme:'felt',title:'03 · Зелёное сукно',game:'dice'},
-      {theme:'fintech',title:'04 · Светлый финтех',game:'dice'}]],
-    ['g2',[
-      {theme:'lucky',title:'Coinflip · выигрыш',game:'coinflip'},
-      {theme:'lucky',title:'Mines · раунд идёт',game:'mines'},
-      {theme:'lucky',title:'Панель честности',game:'dice',fair:true}]]
-  ];
-  var tpl=document.getElementById('app').content;
-  var HIST=['72.10|w','13.40|','88.00|w','41.90|','67.30|w','Орёл|w','×1.62|w'];
-  function fill(r,f){
-    var q=function(s){return r.querySelector(s)};
-    q('#bal').textContent='1 250,40';
-    q('#pf-hash').textContent='sha256 7f3a…c91e';
-    q('#pf-nonce').textContent='раунд #1042';
-    q('#hist').innerHTML=HIST.map(function(x){var p=x.split('|');return '<span class="'+p[1]+'">'+p[0]+'</span>'}).join('');
-    q('#d-target').style.setProperty('--pct','50%');
-    Array.prototype.forEach.call(q('#tabs').children,function(t){t.classList.toggle('on',t.dataset.game===f.game)});
-    ['dice','coinflip','mines'].forEach(function(g){q('#g-'+g).hidden=g!==f.game});
-    var go=q('#go');
-    if(f.game==='dice'){q('#d-big').textContent='23.10';q('#d-big').classList.add('w')}
-    if(f.game==='coinflip'){q('#c-big').textContent='Орёл';q('#c-big').classList.add('w');go.textContent='Бросить монету'}
-    if(f.game==='mines'){
-      var g=q('#m-grid');g.classList.add('live');var open=[6,7,12,18];
-      for(var i=0;i<25;i++){var b=document.createElement('button');b.type='button';if(open.indexOf(i)>=0){b.className='open';b.textContent='✓';b.disabled=true}g.appendChild(b)}
-      q('#m-mult').textContent='×1.62';q('#m-next').textContent='×1.85';q('#m-mines').disabled=true;go.textContent='Забрать 16,20';
+<script type="module">
+import { GAMES, POPULAR, THEMES, gameOf, tile, themeButtons, segColor } from '../app/js/catalog.js';
+import * as plinko from '../app/games/plinko.js';
+import * as wheel from '../app/games/wheel.js';
+import { GROWTH } from '../app/games/crash.js';
+
+const ROWS = [
+  ['g0', [
+    { theme: 'lucky', title: 'Лобби', screen: 'home' },
+    { theme: 'lucky', title: 'Crash · забрано на 2.31×', screen: 'game', game: 'crash' },
+    { theme: 'lucky', title: 'Plinko · 12 рядов', screen: 'game', game: 'plinko' },
+    { theme: 'lucky', title: 'Mines · раунд идёт', screen: 'game', game: 'mines' },
+    { theme: 'lucky', title: 'Кошелёк', screen: 'wallet' },
+    { theme: 'lucky', title: 'Профиль', screen: 'profile' }]],
+  ['g1', THEMES.map(([k, n]) => ({ theme: k, title: 'Лобби · ' + n, screen: 'home' }))],
+  ['g2', [
+    { theme: 'lucky', title: 'Dice', screen: 'game', game: 'dice' },
+    { theme: 'lucky', title: 'Coinflip', screen: 'game', game: 'coinflip' },
+    { theme: 'lucky', title: 'Limbo', screen: 'game', game: 'limbo' },
+    { theme: 'lucky', title: 'Wheel', screen: 'game', game: 'wheel' }]],
+];
+const tpl = document.getElementById('app').content;
+const HIST = { crash: ['2.31×|w', '1.56×|', '4.02×|w', '1.00×|', '1.87×|w'], plinko: ['×1.4|w', '×0.5|', '×3|w', '×1|w', '×1.6|w'], mines: ['×1.62|w', '✕|', '×2.18|w', '×1.13|w', '✕|'], dice: ['23.10|w', '77.33|', '41.90|w', '88.00|', '12.04|w'], coinflip: ['Орёл|w', 'Решка|', 'Орёл|w', 'Орёл|', 'Решка|w'], limbo: ['1.98×|w', '1.03×|', '5.40×|w', '1.21×|', '2.77×|w'], wheel: ['×1.2|w', '×0|', '×2|w', '×0|', '×1.5|w'] };
+const RECENT = [['crash', 'Crash · 2.31×', '+13,10', 'w'], ['plinko', 'Plinko · ×1.4', '+4,00', 'w'], ['mines', 'Mines · ✕', '−10,00', 'l']];
+const LEDGER = [['Выигрыш', '+23,10', 'w'], ['Ставка · Crash', '−10,00', 'l'], ['Депозит · Crypto Pay', '+250,00', 'w'], ['Вывод · TON', '−120,00', 'l']];
+const chips = (arr) => arr.map((x) => { const p = x.split('|'); return '<span class="' + p[1] + '">' + p[0] + '</span>'; }).join('');
+const row = (dotCls, dot, b, small, amt, cls) => '<div class="row-i"><div class="dot ' + dotCls + '">' + dot + '</div><div class="tx"><b>' + b + '</b><small>' + small + '</small></div><div class="amt ' + cls + '">' + amt + '</div></div>';
+
+function crashPath(q, crash, cashed) {
+  const t = Math.log(cashed) / GROWTH; const T = Math.max(8, t + 1); const M = Math.max(2, cashed + 0.4); let d = '';
+  for (let i = 0; i <= 40; i += 1) { const ti = (t * i) / 40; const mi = Math.exp(GROWTH * ti); d += (i ? ' L' : 'M') + ((ti / T) * 300).toFixed(1) + ' ' + (160 - ((mi - 1) / (M - 1)) * 140).toFixed(1); }
+  q('#cr-path').setAttribute('d', d); q('#cr-fill').setAttribute('d', d + ' L' + ((t / T) * 300).toFixed(1) + ' 160 L0 160 Z');
+}
+function fill(r, f) {
+  const q = (s) => r.querySelector(s);
+  q('#bal').textContent = '1 250,40'; q('#w-bal').textContent = '1 250,40';
+  q('#pf-hash').textContent = 'sha256 7f3a…c91e'; q('#pf-nonce').textContent = 'раунд #1042';
+  q('#tiles').innerHTML = GAMES.map(tile).join(''); q('#cnt').textContent = GAMES.length;
+  q('#popular').innerHTML = POPULAR.map((id) => tile(gameOf(id))).join('');
+  q('#recent').innerHTML = RECENT.map((x) => row('art-' + x[0], gameOf(x[0]).short, x[1], 'ставка 10,00 · 21:42', x[2], x[3])).join('');
+  q('#ledger').innerHTML = LEDGER.map((x) => row('', x[2] === 'w' ? '+' : '−', x[0], '02.09 21:40 · остаток 1 250,40', x[1], x[2])).join('');
+  q('#themes').innerHTML = themeButtons();
+  q('#themes [data-theme="' + f.theme + '"]').classList.add('on');
+  q('#p-name').textContent = 'Михаил'; q('#p-ava').textContent = 'М'; q('#p-id').textContent = 'id 184 522 617';
+  q('#p-rounds').textContent = '128'; q('#p-wagered').textContent = '1 640'; q('#p-won').textContent = '1 712';
+  r.querySelectorAll('.screen').forEach((s) => { s.hidden = s.dataset.screen !== f.screen; });
+  r.querySelectorAll('#nav button').forEach((b) => b.classList.toggle('on', b.dataset.go === f.screen));
+  if (f.screen === 'game') {
+    const g = f.game; q('#g-title').textContent = gameOf(g).name;
+    GAMES.forEach((x) => { q('#g-' + x.id).hidden = x.id !== g; });
+    q('#hist').innerHTML = chips(HIST[g]);
+    const go = q('#go');
+    if (g === 'crash') { q('.crash-area').classList.add('won'); q('#cr-big').textContent = '2.31×'; q('#cr-status').textContent = 'Забрано на 2.31×, краш был на 3.07×'; q('#cr-last').textContent = '3.07×'; q('#cr-pay').textContent = '23,10'; crashPath(q, 3.07, 2.31); go.textContent = 'Ставка'; }
+    if (g === 'plinko') {
+      const N = 12; const s = 300 / (N + 2); let h = '';
+      for (let rr = 0; rr < N; rr += 1) { const y = 18 + (rr * 200) / (N - 1); const n = rr + 3; for (let i = 0; i < n; i += 1) h += '<circle cx="' + (150 + (i - (n - 1) / 2) * s).toFixed(1) + '" cy="' + y.toFixed(1) + '" r="' + (s * 0.16).toFixed(1) + '"/>'; }
+      q('#pl-svg').innerHTML = h;
+      q('#pl-buckets').innerHTML = plinko.TABLES[12].low.map((m, i) => '<span' + (i === 7 ? ' class="hi"' : '') + (m >= 2 ? ' data-v="hot"' : '') + '>' + m + '×</span>').join('');
+      const ball = q('#pl-ball'); ball.hidden = false; ball.style.left = ((150 + (7 - 6) * s) / 3) + '%'; ball.style.top = '96%';
+      go.textContent = 'Бросить шарик';
     }
-    if(f.fair){
-      q('#fair').setAttribute('open','');
-      q('#f-hash').value='9812797c7daed30a527f5fc12c0c73857bc9482cbbb7374cbf20a0dd7d7eed0f';
-      q('#f-client').value='misha';q('#f-nonce').value='42';
-      q('#f-revealed').hidden=false;
-      q('#f-old-seed').value='b9e495df6c5ada2eda5e0baa530f0a0d049ab318cfdbf30d543ea81410834015';
-      q('#f-old-hash').textContent='9812797c7daed30a…dd7d7eed0f';q('#f-old-client').textContent='22ddd8e7fa088c78';q('#f-old-nonce').textContent='42';
-      r.classList.add('dim');
+    if (g === 'mines') { const grid = q('#m-grid'); grid.classList.add('live'); [6, 7, 12, 18].forEach(() => {}); for (let i = 0; i < 25; i += 1) { const b = document.createElement('button'); b.type = 'button'; if ([6, 7, 12, 18].includes(i)) { b.className = 'open'; b.textContent = '✓'; b.disabled = true; } grid.appendChild(b); } q('#m-mult').textContent = '×1.62'; q('#m-next').textContent = '×1.85'; q('#m-mines').disabled = true; go.textContent = 'Забрать 16,20'; go.classList.add('cash'); }
+    if (g === 'dice') { q('#d-big').textContent = '23.10'; q('#d-big').classList.add('w'); q('#d-target').style.setProperty('--pct', '50%'); }
+    if (g === 'coinflip') { q('#c-big').textContent = 'Орёл'; q('#c-big').classList.add('w'); go.textContent = 'Бросить монету'; }
+    if (g === 'limbo') { q('#lb-big').textContent = '1.98×'; q('#lb-big').classList.add('w'); q('#lb-last').textContent = '1.98×'; go.textContent = 'Играть'; }
+    if (g === 'wheel') {
+      const seg = wheel.SEGMENTS; const n = seg.length;
+      q('#wh-wheel').style.background = 'conic-gradient(' + seg.map((m, i) => segColor(m) + ' ' + (i * 360) / n + 'deg ' + ((i + 1) * 360) / n + 'deg').join(',') + ')';
+      q('#wh-wheel').style.transform = 'rotate(165deg)';
+      q('#wh-legend').innerHTML = [...new Set(seg)].sort((a, b) => a - b).map((m) => '<span style="background:' + segColor(m) + '">' + m + '×</span>').join('');
+      q('#wh-res').textContent = '2×'; q('#wh-res').classList.add('w'); go.textContent = 'Крутить';
     }
-    Array.prototype.forEach.call(r.querySelectorAll('[id]'),function(e){e.removeAttribute('id')});
   }
-  var cells=[];
-  ROWS.forEach(function(row){
-    var grid=document.getElementById(row[0]);
-    row[1].forEach(function(f){
-      var cell=document.createElement('div');cell.className='cell';
-      var cap=document.createElement('div');cap.className='cap';cap.textContent=f.title;
-      var box=document.createElement('div');box.className='box';
-      var fr=document.createElement('div');fr.className='frame';fr.dataset.theme=f.theme;fr.appendChild(tpl.cloneNode(true));
-      fill(fr,f);box.appendChild(fr);cell.appendChild(cap);cell.appendChild(box);grid.appendChild(cell);
-      cell.addEventListener('click',function(){
-        var on=cell.classList.toggle('focus');
-        cells.forEach(function(c){if(c!==cell)c.classList.remove('focus')});
-        cell.style.setProperty('--s',on?Math.min(1,(innerWidth-28)/360):'');
-        document.getElementById('hint').textContent=on?'нажми ещё раз, чтобы закрыть':'нажми на экран, чтобы увеличить';
-      });
-      cells.push(cell);
+  r.querySelectorAll('[id]').forEach((e) => e.removeAttribute('id'));
+}
+const cells = [];
+ROWS.forEach(([id, list]) => {
+  const grid = document.getElementById(id);
+  list.forEach((f) => {
+    const cell = document.createElement('div'); cell.className = 'cell';
+    const cap = document.createElement('div'); cap.className = 'cap'; cap.textContent = f.title;
+    const box = document.createElement('div'); box.className = 'box';
+    const fr = document.createElement('div'); fr.className = 'frame'; fr.dataset.theme = f.theme; fr.appendChild(tpl.cloneNode(true));
+    fill(fr, f); box.appendChild(fr); cell.appendChild(cap); cell.appendChild(box); grid.appendChild(cell);
+    cell.addEventListener('click', () => {
+      const on = cell.classList.toggle('focus');
+      cells.forEach((c) => { if (c !== cell) c.classList.remove('focus'); });
+      cell.style.setProperty('--s', on ? Math.min(1, (innerWidth - 28) / 360) : '');
+      document.getElementById('hint').textContent = on ? 'нажми ещё раз, чтобы закрыть' : 'нажми на экран, чтобы увеличить';
     });
+    cells.push(cell);
   });
-  function layout(){
-    ['g0','g1','g2'].forEach(function(id){
-      var grid=document.getElementById(id),w=grid.clientWidth-36,cols=w>=1000?4:w>=640?3:2,gap=14;
-      if(id==='g2'&&cols>3)cols=3;
-      var s=Math.min(1,(w-gap*(cols-1))/cols/360);
-      if(id==='g0'&&w>=1000)s=Math.min(s,Math.max(.5,(innerHeight-grid.getBoundingClientRect().top-scrollY-44)/720));
-      grid.style.setProperty('--s',s);grid.style.gridTemplateColumns='repeat('+cols+',1fr)';
-    });
-  }
-  addEventListener('resize',layout);addEventListener('load',layout);
-  if('ResizeObserver' in window)new ResizeObserver(layout).observe(document.body);
-  layout();
-})();
+});
+function layout() {
+  ['g0', 'g1', 'g2'].forEach((id) => {
+    const grid = document.getElementById(id); const w = grid.clientWidth - 36; let cols = w >= 1000 ? 4 : w >= 640 ? 3 : 2; const gap = 14;
+    if (id === 'g1' && w >= 1000) cols = 6;
+    let s = Math.min(1, (w - gap * (cols - 1)) / cols / 360);
+    if (id === 'g0' && w >= 1000) s = Math.min(s, Math.max(.5, (innerHeight - grid.getBoundingClientRect().top - scrollY - 44) / 780));
+    grid.style.setProperty('--s', s); grid.style.gridTemplateColumns = 'repeat(' + cols + ',1fr)';
+  });
+}
+addEventListener('resize', layout); addEventListener('load', layout);
+if ('ResizeObserver' in window) new ResizeObserver(layout).observe(document.body);
+layout();
 </script>
 </body>
 </html>
