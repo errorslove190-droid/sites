@@ -297,7 +297,9 @@ body.all{display:block;max-width:none;min-height:100dvh;background:#141517;color
       grid.style.setProperty('--s',s);grid.style.gridTemplateColumns='repeat('+cols+',1fr)';
     });
   }
-  addEventListener('resize',layout);layout();
+  addEventListener('resize',layout);addEventListener('load',layout);
+  if('ResizeObserver' in window)new ResizeObserver(layout).observe(document.body);
+  layout();
 })();
 </script>
 </body>
