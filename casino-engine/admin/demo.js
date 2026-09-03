@@ -273,7 +273,8 @@ window.fetch = async (input, init = {}) => {
 
   if (path === '/login') return json({ admin: { login: 'owner', role: 'owner' } });
   if (path === '/logout') return json({ ok: true });
-  if (path === '/me') return json({ admin: { id: 1, login: 'демо', role: 'owner' }, periods: Object.entries(PERIODS).map(([key, label]) => ({ key, label })) });
+  // Логин совпадает с первой строкой списка администраторов: себя выключить нельзя, кнопки у своей строки нет.
+  if (path === '/me') return json({ admin: { id: 1, login: 'owner', role: 'owner' }, periods: Object.entries(PERIODS).map(([key, label]) => ({ key, label })) });
   if (path === '/overview') return json(overview(period));
   if (path === '/games') return json(games(period));
   if (path === '/daily') return json(daily());
