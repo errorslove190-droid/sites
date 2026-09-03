@@ -1,0 +1,185 @@
+/* Панель оператора: back-office на палитре темы «Лаки» (style.md).
+   Сначала телефон: таблицы разворачиваются в карточки, вкладки уезжают в нижнюю панель. */
+:root{
+  --bg:#0f1526; --card:#161d31; --pan:#1b2340; --ink:#e9edf7; --mut:#8a95b5;
+  --line:#28305a; --acc:#2f7cff; --win:#1fc36a; --bad:#ff5c5c; --warn:#ffd23f;
+  --br:12px; --ui:"Golos Text",system-ui,Segoe UI,sans-serif; --num:"JetBrains Mono",ui-monospace,monospace;
+  --nav:64px; /* высота нижней панели вкладок на телефоне */
+}
+*{box-sizing:border-box;margin:0;padding:0}
+[hidden]{display:none!important}
+html{-webkit-text-size-adjust:100%}
+body{min-height:100dvh;background:var(--bg);color:var(--ink);font:15px/1.45 var(--ui);-webkit-font-smoothing:antialiased;
+  padding-bottom:calc(var(--nav) + env(safe-area-inset-bottom))}
+button,input,select{font:inherit;color:inherit}
+button{cursor:pointer;background:none;border:0}
+a{color:var(--acc)}
+code{font:12px var(--num);color:var(--warn)}
+h2{font:600 13px/1.25 var(--ui);letter-spacing:.02em;margin-bottom:12px;display:flex;align-items:baseline;gap:8px;flex-wrap:wrap}
+h2 small{font:400 11.5px var(--ui);color:var(--mut)}
+.panel > h2 ~ h2{margin-top:20px} /* второй заголовок внутри панели не липнет к тексту выше */
+.note{font-size:12.5px;color:var(--mut);margin-top:12px;line-height:1.55}
+.err{color:var(--bad);font-size:13px}
+.err.bar{margin:12px;padding:11px 13px;border:1px solid var(--bad);border-radius:var(--br);background:#2a1420}
+
+/* поля и кнопки — палец 44px, шрифт 16px, чтобы iOS не зумил страницу при вводе */
+.fld{display:flex;flex-direction:column;gap:6px}
+.fld span{font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--mut)}
+.fld input,.fld select,.search input{background:var(--pan);border:1px solid var(--line);border-radius:var(--br);
+  padding:12px 13px;font-size:16px;width:100%;min-height:46px}
+.fld input:focus,.fld select:focus,.search input:focus{outline:2px solid var(--acc);outline-offset:-1px}
+.go{background:var(--acc);color:#fff;font-weight:700;padding:14px;border-radius:var(--br);width:100%;min-height:48px}
+.go:active{filter:brightness(.92)}
+.ghost{border:1px solid var(--line);border-radius:10px;padding:10px 13px;font-size:13px;color:var(--ink);
+  background:var(--pan);text-decoration:none;display:inline-flex;align-items:center;justify-content:center;min-height:42px}
+.ico{width:42px;height:42px;border-radius:10px;border:1px solid var(--line);background:var(--pan);
+  display:grid;place-items:center;font-size:17px;line-height:1;flex:0 0 auto}
+.stack{display:flex;flex-direction:column;gap:12px;margin-top:20px;padding-top:18px;border-top:1px solid var(--line)}
+.stack.first{margin-top:0;padding-top:0;border-top:0}
+.hint{font-size:12px;color:var(--mut);line-height:1.55}
+
+/* вход */
+.gate{min-height:100dvh;display:grid;place-items:center;padding:20px}
+.gate-card{width:100%;max-width:360px;background:var(--card);border:1px solid var(--line);border-radius:16px;
+  padding:22px;display:flex;flex-direction:column;gap:14px}
+.gate-head{display:flex;align-items:center;gap:9px;font:700 16px var(--ui);margin-bottom:2px}
+.logo{width:28px;height:28px;border-radius:9px;background:var(--acc);color:#fff;display:grid;place-items:center;font-size:15px;flex:0 0 auto}
+
+/* полоса демо */
+.demo-bar{font:600 11.5px/1.4 var(--ui);color:#1a1200;background:var(--warn);padding:8px 14px;text-align:center}
+
+/* шапка */
+.top{position:sticky;top:0;z-index:10;display:flex;align-items:center;justify-content:space-between;gap:12px;
+  padding:10px 14px;background:var(--card);border-bottom:1px solid var(--line)}
+.brand{display:flex;align-items:center;gap:9px;font:700 15px var(--ui);min-width:0}
+.brand b{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.top-r{display:flex;align-items:center;gap:8px}
+.who{font-size:12px;color:var(--mut);white-space:nowrap}
+#period{background:var(--pan);border:1px solid var(--line);border-radius:10px;padding:0 8px;font-size:13px;min-height:42px}
+
+/* вкладки: на телефоне — нижняя панель под большой палец */
+.tabs{position:fixed;left:0;right:0;bottom:0;z-index:20;display:grid;grid-template-columns:repeat(6,1fr);
+  background:var(--card);border-top:1px solid var(--line);padding:5px 4px calc(5px + env(safe-area-inset-bottom))}
+.tabs button{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;position:relative;
+  padding:5px 1px;border-radius:10px;color:var(--mut);font-weight:600;font-size:10.5px;min-height:52px}
+.tabs button i{font-style:normal;font-size:16px;line-height:1}
+.tabs button.on{color:var(--ink);background:var(--pan)}
+.badge{position:absolute;top:2px;right:calc(50% - 22px);font:600 9.5px/1 var(--num);font-style:normal;
+  background:var(--warn);color:#1a1200;border-radius:20px;padding:3px 5px}
+
+main{padding:14px;max-width:1360px;margin:0 auto}
+.panel{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:15px;margin-bottom:14px}
+.two{display:grid;grid-template-columns:1fr;gap:14px;align-items:start}
+.row-btn{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px}
+.row-btn.dl{display:grid;grid-template-columns:1fr;gap:8px}
+.search{margin-bottom:12px}
+
+/* переключатель списка заявок — сегменты во всю ширину */
+.seg{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;background:var(--pan);border:1px solid var(--line);
+  border-radius:12px;padding:4px}
+.seg button{border-radius:9px;padding:9px 4px;font-size:12.5px;color:var(--mut);min-height:40px}
+.seg button.on{color:var(--ink);background:var(--card);box-shadow:0 1px 0 var(--line)}
+
+/* карточки сводки */
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;margin-bottom:14px}
+.kpi{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:13px}
+.kpi small{display:block;font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--mut);margin-bottom:7px}
+.kpi b{font:600 20px/1 var(--num);letter-spacing:-.01em;word-break:break-word}
+.kpi i{display:block;font-style:normal;font-size:11.5px;color:var(--mut);margin-top:6px;line-height:1.4}
+.kpi.good b{color:var(--win)} .kpi.bad b{color:var(--bad)} .kpi.warn b{color:var(--warn)}
+
+/* столбики дохода по дням */
+.chart{display:flex;align-items:flex-end;gap:2px;height:120px;padding-top:6px}
+.chart .col{flex:1;min-width:3px;display:flex;flex-direction:column;justify-content:flex-end;height:100%}
+.chart .bar{background:var(--acc);border-radius:2px 2px 0 0;min-height:2px}
+.chart .bar.neg{background:var(--bad)}
+.chart .bar.zero{background:var(--line)} /* день без ставок — тонкая серая засечка, а не пустота */
+.ico svg{display:block}
+
+/* окно вопроса: на телефоне — лист снизу */
+dialog{border:1px solid var(--line);background:var(--card);color:var(--ink);padding:18px 16px calc(18px + env(safe-area-inset-bottom));
+  width:100%;max-width:100%;margin:auto auto 0;border-radius:18px 18px 0 0}
+dialog::backdrop{background:rgba(8,11,20,.72)}
+.ask-form{display:flex;flex-direction:column;gap:14px}
+.ask-form .row-btn{margin:0;display:grid;grid-template-columns:1fr;gap:8px}
+.ask-form .ghost{width:100%}
+
+/* таблицы: на телефоне каждая строка — карточка «подпись → значение» */
+table{width:100%;border-collapse:collapse;font-size:13.5px}
+thead{display:none}
+tbody tr{display:block;background:var(--pan);border:1px solid var(--line);border-radius:14px;padding:6px 12px;margin-bottom:10px}
+tbody tr:last-child{margin-bottom:0}
+td{display:flex;align-items:baseline;justify-content:space-between;gap:14px;padding:7px 0;text-align:right;
+  border-top:1px solid var(--line)}
+td:first-child{border-top:0}
+td::before{content:attr(data-label);color:var(--mut);font:600 10.5px/1.5 var(--ui);letter-spacing:.1em;
+  text-transform:uppercase;text-align:left;flex:0 0 auto;padding-top:2px}
+td[data-label=""]::before{content:none}
+td.n{font-family:var(--num);font-size:13px}
+td.wide{word-break:break-all;font-family:var(--num);font-size:12px;color:var(--mut)}
+td.act-cell{display:grid;grid-template-columns:1fr 1fr;gap:8px;padding:10px 0 8px}
+td.act-cell::before{display:none}
+td.act-cell:only-child{border-top:0}
+.act{border:1px solid var(--line);border-radius:10px;padding:10px;font-size:13px;background:var(--card);min-height:42px}
+.act.danger{color:var(--bad);border-color:#4a2230}
+.pos{color:var(--win)} .neg{color:var(--bad)} .mut{color:var(--mut)}
+.tag{font:600 10px/1 var(--ui);letter-spacing:.08em;text-transform:uppercase;padding:5px 8px;border-radius:7px;
+  background:var(--card);border:1px solid var(--line);color:var(--mut);display:inline-block}
+.tag.pending{color:var(--warn);border-color:#5a4a1a}
+.tag.sent{color:var(--win);border-color:#1a5a38}
+.tag.rejected,.tag.blocked{color:var(--bad);border-color:#5a2020}
+.empty{color:var(--mut);font-size:13px;padding:18px;text-align:center;border:1px dashed var(--line);border-radius:var(--br);display:block}
+.empty::before{display:none}
+
+/* карточка игрока */
+.pc-head{display:flex;align-items:flex-start;justify-content:space-between;gap:12px}
+.pc-sub{display:grid;gap:14px}
+
+/* ── планшет и десктоп: вкладки возвращаются в шапку, таблицы становятся таблицами ── */
+@media (min-width:820px){
+  :root{--nav:0px}
+  body{padding-bottom:0;font-size:14px}
+  .top{gap:16px;padding:11px 20px}
+  .tabs{position:static;display:flex;gap:2px;flex:1;order:2;background:none;border:0;padding:0}
+  .tabs button{flex-direction:row;gap:7px;font-size:13px;padding:8px 12px;min-height:38px}
+  .tabs button i{display:none}
+  .tabs button.on{box-shadow:inset 0 -2px 0 var(--acc)}
+  .badge{position:static;padding:3px 6px;font-size:10px}
+  .top-r{order:3}
+  main{padding:20px}
+  .two{grid-template-columns:1fr 1fr;gap:16px}
+  .row-btn.dl{display:flex}
+  .seg{display:inline-flex;gap:4px}
+  .seg button{padding:8px 13px}
+  .cards{grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:12px}
+  .search input{max-width:340px}
+
+  .scroll{overflow-x:auto}
+  thead{display:table-header-group}
+  th{text-align:left;font:600 10px/1 var(--ui);letter-spacing:.12em;text-transform:uppercase;color:var(--mut);
+    padding:0 10px 9px;white-space:nowrap}
+  th.n{text-align:right}
+  tbody tr{display:table-row;background:none;border:0;border-radius:0;padding:0;margin:0}
+  tbody tr:hover{background:var(--pan)}
+  tr.sel{background:var(--pan)}
+  td{display:table-cell;padding:9px 10px;border-top:1px solid var(--line);text-align:left;white-space:nowrap;vertical-align:middle}
+  td::before{display:none}
+  td.n{text-align:right;font-size:12.5px}
+  td.wide{white-space:normal;font-size:11.5px}
+  td.act-cell{display:table-cell;padding:6px 10px}
+  .act{padding:6px 10px;font-size:12px;min-height:34px;background:var(--pan)}
+  .act.danger{color:var(--ink);border-color:var(--line)}
+  .act:hover{border-color:var(--acc)}
+  .act.danger:hover{border-color:var(--bad);color:var(--bad)}
+  .empty{display:table-cell}
+
+  dialog{width:min(430px,92vw);margin:auto;border-radius:16px;padding:20px}
+  .ask-form .row-btn{display:flex}
+  .ask-form .go{width:auto;padding:11px 20px}
+  .ask-form .ghost{width:auto}
+}
+
+@media (max-width:520px){
+  .brand b{display:none}
+  .who{display:none}
+}
