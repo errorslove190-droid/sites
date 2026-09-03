@@ -68,8 +68,14 @@ const table = (head, rows, empty = 'Пусто') => (rows.length
   : `<tbody><tr><td class="empty" colspan="${head.length}">${empty}</td></tr></tbody>`);
 
 // Вопрос оператору вместо prompt(): деньги и блокировки подтверждаются в своём окне.
+// Ответ ловим и по событию close, и по отправке формы: часть встроенных браузеров close не присылает.
+// Если <dialog> в браузере нет вовсе (Safari до 15.4), спрашиваем системным окном — лишь бы кнопка работала.
 function ask({ title, label, note = '', value = '', required = false }) {
   const dlg = $('#ask');
+  if (typeof dlg?.showModal !== 'function') {
+    const v = prompt(`${title}. ${label}:`, value);
+    return Promise.resolve(v === null ? null : v.trim());
+  }
   $('#ask-title').textContent = title;
   $('#ask-label').textContent = label;
   $('#ask-note').textContent = note;
@@ -78,7 +84,9 @@ function ask({ title, label, note = '', value = '', required = false }) {
   input.required = required;
   dlg.showModal();
   return new Promise((resolve) => {
-    dlg.addEventListener('close', () => resolve(dlg.returnValue === 'ok' ? input.value.trim() : null), { once: true });
+    const done = () => resolve(dlg.returnValue === 'ok' ? input.value.trim() : null);
+    dlg.addEventListener('close', done, { once: true });
+    dlg.querySelector('form').addEventListener('submit', () => setTimeout(() => { if (!dlg.open) done(); }), { once: true });
   });
 }
 
