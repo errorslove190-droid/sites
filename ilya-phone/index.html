@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Телефон Ильи — план настройки</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;600;800&family=Oswald:wght@400;600&family=Manrope:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#0a0a0a; --paper:#ffffff; --lime:#d8f34e;
+  --grey:#6b6b6b; --line:#e4e4e4; --soft:#f5f5f5;
+  --f-display:'Unbounded',system-ui,sans-serif;
+  --f-cond:'Oswald',system-ui,sans-serif;
+  --f-text:'Manrope',system-ui,sans-serif;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--paper);color:var(--ink);font-family:var(--f-text);font-size:16px;line-height:1.6;-webkit-font-smoothing:antialiased}
+.wrap{max-width:920px;margin:0 auto;padding:0 20px}
+
+/* ── шапка ── */
+header{border-bottom:2px solid var(--ink);padding:48px 0 28px}
+.kicker{font-family:var(--f-cond);text-transform:uppercase;letter-spacing:.18em;font-size:12px;color:var(--grey)}
+h1{font-family:var(--f-display);font-weight:800;font-size:clamp(30px,7vw,54px);line-height:1.05;letter-spacing:-.02em;margin:14px 0 16px}
+h1 mark{background:var(--lime);color:var(--ink);padding:0 .12em}
+.lead{font-size:17px;max-width:56ch;color:#222}
+.meta{margin-top:20px;display:flex;flex-wrap:wrap;gap:8px}
+.tag{font-family:var(--f-cond);text-transform:uppercase;letter-spacing:.1em;font-size:11px;border:1px solid var(--ink);padding:5px 10px}
+.tag.fill{background:var(--ink);color:var(--paper)}
+
+section{padding:44px 0;border-bottom:1px solid var(--line)}
+h2{font-family:var(--f-display);font-weight:600;font-size:clamp(21px,4.4vw,30px);letter-spacing:-.01em;margin-bottom:8px}
+h3{font-family:var(--f-cond);font-weight:600;text-transform:uppercase;letter-spacing:.06em;font-size:15px;margin-bottom:8px}
+.sub{color:var(--grey);max-width:62ch;margin-bottom:24px}
+p+p{margin-top:12px}
+ul{list-style:none}
+li{padding-left:20px;position:relative;margin-bottom:8px}
+li::before{content:"";position:absolute;left:0;top:11px;width:8px;height:2px;background:var(--ink)}
+li.no::before{background:#c9c9c9}
+strong{font-weight:700}
+a{color:var(--ink)}
+
+/* ── факт-блок ── */
+.note{border-left:4px solid var(--lime);background:var(--soft);padding:18px 20px;margin:20px 0}
+.note .h{font-family:var(--f-cond);text-transform:uppercase;letter-spacing:.08em;font-size:13px;margin-bottom:6px}
+
+/* ── варианты ── */
+.variants{display:grid;gap:34px;grid-template-columns:1fr}
+@media(min-width:760px){.variants{grid-template-columns:repeat(3,1fr);gap:24px}}
+.variant{border:1px solid var(--line);display:flex;flex-direction:column}
+.variant .head{padding:16px 18px;border-bottom:1px solid var(--line);display:flex;align-items:baseline;gap:10px}
+.variant .num{font-family:var(--f-display);font-weight:800;font-size:22px}
+.variant .name{font-family:var(--f-cond);text-transform:uppercase;letter-spacing:.06em;font-size:15px}
+.variant .body{padding:18px;flex:1}
+.variant .body p{font-size:14.5px;color:#333}
+.spec{margin-top:14px;border-top:1px solid var(--line);padding-top:12px;font-size:13.5px}
+.spec div{display:flex;gap:10px;padding:3px 0}
+.spec b{font-family:var(--f-cond);text-transform:uppercase;letter-spacing:.05em;font-weight:400;color:var(--grey);min-width:78px;font-size:12px;padding-top:2px}
+
+/* ── мокапы телефона ── */
+.screens{display:flex;gap:10px;justify-content:center;padding:20px 12px;background:var(--soft)}
+.phone{width:126px;height:262px;border-radius:18px;overflow:hidden;position:relative;box-shadow:0 6px 18px rgba(0,0,0,.18);border:3px solid #111;flex:none}
+.phone .notch{position:absolute;top:6px;left:50%;transform:translateX(-50%);width:34px;height:4px;border-radius:3px;background:rgba(255,255,255,.5);z-index:3}
+.stat{position:absolute;top:8px;left:0;right:0;display:flex;justify-content:space-between;padding:0 9px;font-size:6.5px;font-family:var(--f-text);font-weight:700;z-index:2;opacity:.85}
+.clock{position:absolute;left:0;right:0;text-align:center;z-index:2}
+.clock .t{font-weight:300;line-height:1}
+.clock .d{font-size:7px;letter-spacing:.08em;text-transform:uppercase;margin-top:4px;opacity:.8}
+.grid{position:absolute;left:0;right:0;bottom:26px;display:grid;grid-template-columns:repeat(4,1fr);gap:9px 6px;padding:0 10px;z-index:2}
+.ic{aspect-ratio:1;border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:700}
+.dock{position:absolute;bottom:6px;left:10px;right:10px;height:16px;border-radius:8px;z-index:2}
+.wgt{position:absolute;z-index:2;left:10px;right:10px;border-radius:10px;padding:7px 9px}
+.wgt .big{font-size:15px;font-weight:700;line-height:1}
+.wgt .sm{font-size:6.5px;opacity:.75;margin-top:3px;text-transform:uppercase;letter-spacing:.06em}
+.cap{text-align:center;font-family:var(--f-cond);text-transform:uppercase;letter-spacing:.1em;font-size:10px;color:var(--grey);padding:0 0 14px;background:var(--soft)}
+
+/* V1 тихий чёрный */
+.v1{background:#0c0c0e;color:#eaeaea}
+.v1 .clock{top:52px}.v1 .clock .t{font-size:40px;font-family:var(--f-text);letter-spacing:-.03em}
+.v1 .list{position:absolute;left:12px;bottom:26px;z-index:2;font-size:9.5px;line-height:2;font-weight:500}
+.v1 .list span{opacity:.45}
+.v1 .dot{position:absolute;right:12px;bottom:30px;width:3px;height:3px;border-radius:50%;background:#eaeaea;opacity:.5;z-index:2}
+.v1 .ic{background:rgba(255,255,255,.07);color:#dcdcdc;border:1px solid rgba(255,255,255,.09)}
+.v1 .dock{background:rgba(255,255,255,.06)}
+
+/* V2 one-ui-подобный */
+.v2{background:linear-gradient(165deg,#2b4a8f 0%,#4a6fc4 45%,#8aa4de 100%);color:#fff}
+.v2 .clock{top:44px}.v2 .clock .t{font-size:36px;font-family:var(--f-text);font-weight:300}
+.v2 .wgt{top:118px;background:rgba(255,255,255,.16);backdrop-filter:blur(4px)}
+.v2 .ic{background:rgba(255,255,255,.9);color:#2b4a8f;border-radius:50%}
+.v2 .dock{background:rgba(255,255,255,.22)}
+.v2 .grid{bottom:28px}
+
+/* V3 яркий */
+.v3{background:#111;color:#fff}
+.v3::after{content:"";position:absolute;inset:0;background:radial-gradient(120px 160px at 70% 12%,#d8f34e55,transparent 70%),radial-gradient(140px 140px at 15% 85%,#39d0ff44,transparent 70%);z-index:1}
+.v3 .clock{top:40px}.v3 .clock .t{font-size:34px;font-family:var(--f-cond);font-weight:600;letter-spacing:-.01em}
+.v3 .wgt{top:112px;background:rgba(255,255,255,.08);border:1px solid rgba(216,243,78,.35)}
+.v3 .wgt .big{color:var(--lime)}
+.v3 .ic{background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.14);border-radius:12px}
+.v3 .dock{background:rgba(255,255,255,.1)}
+
+/* ── шаги ── */
+.steps{counter-reset:s;display:grid;gap:14px}
+.step{border:1px solid var(--line);padding:16px 18px;position:relative;counter-increment:s}
+.step::before{content:counter(s);position:absolute;top:14px;right:16px;font-family:var(--f-display);font-weight:800;font-size:26px;color:var(--line)}
+.step h3{margin-bottom:4px;padding-right:34px}
+.step p{font-size:14.5px;color:#333}
+
+/* ── таблица «что можно / что нельзя» ── */
+.two{display:grid;gap:20px;grid-template-columns:1fr}
+@media(min-width:700px){.two{grid-template-columns:1fr 1fr;gap:28px}}
+.box{border:1px solid var(--line);padding:18px}
+.box.good{border-color:var(--ink);border-width:2px}
+.box h3{margin-bottom:10px}
+.box.good h3 span{background:var(--lime);padding:1px 6px}
+
+footer{padding:40px 0 60px}
+.ask{border:2px solid var(--ink);padding:22px}
+.ask h2{margin-bottom:12px}
+.ask ol{padding-left:20px}
+.ask li{padding-left:6px}
+.ask li::before{display:none}
+.stamp{margin-top:22px;font-family:var(--f-cond);text-transform:uppercase;letter-spacing:.14em;font-size:11px;color:var(--grey)}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap">
+    <div class="kicker">Личное · сентябрь 2026</div>
+    <h1>Телефон Ильи:<br>делаем <mark>красиво</mark> и чётко</h1>
+    <p class="lead">Новый Honor. Три варианта оформления — экран блокировки и рабочий стол. Выбери один, дальше я распишу настройку по шагам и соберу обои под палитру.</p>
+    <div class="meta">
+      <span class="tag fill">Honor · MagicOS</span>
+      <span class="tag">Без root</span>
+      <span class="tag">Без прошивки</span>
+      <span class="tag">Всё бесплатно</span>
+    </div>
+  </div>
+</header>
+
+<section>
+  <div class="wrap">
+    <h2>Сначала честно про «поставить ОС от Samsung»</h2>
+    <p class="sub">Это единственное из твоего списка, что сделать нельзя — и лучше узнать сейчас, чем после кирпича.</p>
+    <div class="note">
+      <div class="h">Так не получится</div>
+      <p>One UI (оболочка Samsung) собрана под железо Samsung: их процессоры, драйверы, камера, модем. На Honor она не встанет — загрузчик закрыт, а если и вскрыть, работать будет нечему. Попытка прошить чужую систему = мёртвый телефон без гарантии.</p>
+    </div>
+    <div class="note">
+      <div class="h">Так получится</div>
+      <p>Внешний вид One UI повторяется поверх MagicOS за 20 минут: лаунчер + набор иконок + обои + виджеты. Визуально это ровно тот эффект, ради которого люди хотят «самсунговскую ОС» — вариант <strong>№2</strong> ниже про это. Система остаётся родная, гарантия цела, откатить можно в один тап.</p>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <h2>Три варианта</h2>
+    <p class="sub">Левый экран — блокировка, правый — рабочий стол. Мокапы приблизительные: показывают настроение и композицию, а не пиксель в пиксель.</p>
+
+    <div class="variants">
+
+      <!-- ВАРИАНТ 1 -->
+      <article class="variant">
+        <div class="head"><span class="num">01</span><span class="name">Тихий чёрный</span></div>
+        <div class="screens">
+          <div class="phone v1">
+            <div class="notch"></div>
+            <div class="stat"><span>09:41</span><span>▮▮ 86%</span></div>
+            <div class="clock"><div class="t">9:41</div><div class="d">чт, 4 сентября</div></div>
+            <div class="list" style="bottom:auto;top:150px">Музыка<br>2 сообщения<br><span>Заряд 86%</span></div>
+          </div>
+          <div class="phone v1">
+            <div class="notch"></div>
+            <div class="stat"><span>9:41</span><span>▮▮ 86%</span></div>
+            <div class="list" style="top:44px">A<br>B<br>D<br>G<br>M<br>T<br>V<br>Y</div>
+            <div class="dot"></div>
+            <div class="grid" style="grid-template-columns:1fr;gap:10px;left:44px;bottom:34px;padding:0">
+              <div class="ic" style="aspect-ratio:auto;height:14px;justify-content:flex-start;background:none;border:none;font-weight:500;font-size:10px">Телефон</div>
+              <div class="ic" style="aspect-ratio:auto;height:14px;justify-content:flex-start;background:none;border:none;font-weight:500;font-size:10px">Telegram</div>
+              <div class="ic" style="aspect-ratio:auto;height:14px;justify-content:flex-start;background:none;border:none;font-weight:500;font-size:10px">Камера</div>
+              <div class="ic" style="aspect-ratio:auto;height:14px;justify-content:flex-start;background:none;border:none;font-weight:500;font-size:10px">YouTube</div>
+            </div>
+          </div>
+        </div>
+        <div class="cap">блокировка · рабочий стол</div>
+        <div class="body">
+          <p>Никаких сеток иконок. Список приложений буквами сбоку, всё монохромное, обои — чёрный с еле заметным градиентом. Выглядит дорого и взросло, телефон перестаёт мигать.</p>
+          <div class="spec">
+            <div><b>Лаунчер</b><span>Niagara Launcher</span></div>
+            <div><b>Иконки</b><span>Arcticons (белые контуры)</span></div>
+            <div><b>Обои</b><span>чистый чёрный / тёмный градиент</span></div>
+            <div><b>Плюс</b><span>экономит батарею на OLED</span></div>
+            <div><b>Минус</b><span>непривычно первые пару дней</span></div>
+          </div>
+        </div>
+      </article>
+
+      <!-- ВАРИАНТ 2 -->
+      <article class="variant">
+        <div class="head"><span class="num">02</span><span class="name">Как Samsung</span></div>
+        <div class="screens">
+          <div class="phone v2">
+            <div class="notch"></div>
+            <div class="stat"><span>09:41</span><span>▮▮ 86%</span></div>
+            <div class="clock"><div class="t">9:41</div><div class="d">чт, 4 сентября</div></div>
+            <div class="wgt" style="top:150px"><div class="big">+18°</div><div class="sm">Ясно · Сокол</div></div>
+          </div>
+          <div class="phone v2">
+            <div class="notch"></div>
+            <div class="stat"><span>9:41</span><span>▮▮ 86%</span></div>
+            <div class="wgt" style="top:26px"><div class="big">9:41</div><div class="sm">чт · +18° · ясно</div></div>
+            <div class="grid">
+              <div class="ic">☎</div><div class="ic">✉</div><div class="ic">◉</div><div class="ic">♫</div>
+              <div class="ic">▤</div><div class="ic">☑</div><div class="ic">◈</div><div class="ic">⚙</div>
+            </div>
+            <div class="dock"></div>
+          </div>
+        </div>
+        <div class="cap">блокировка · рабочий стол</div>
+        <div class="body">
+          <p>То, что ты имел в виду под «ОС от Samsung»: круглые иконки, синий градиент, крупные часы, мягкие карточки виджетов. Родной MagicOS остаётся под низом, а сверху — вид One UI.</p>
+          <div class="spec">
+            <div><b>Лаунчер</b><span>Nova Launcher</span></div>
+            <div><b>Иконки</b><span>круглый набор в стиле One UI</span></div>
+            <div><b>Обои</b><span>сине-фиолетовый градиент</span></div>
+            <div><b>Плюс</b><span>привычно, ничего учить не надо</span></div>
+            <div><b>Минус</b><span>это косплей, а не настоящий One UI</span></div>
+          </div>
+        </div>
+      </article>
+
+      <!-- ВАРИАНТ 3 -->
+      <article class="variant">
+        <div class="head"><span class="num">03</span><span class="name">Свой стиль</span></div>
+        <div class="screens">
+          <div class="phone v3">
+            <div class="notch"></div>
+            <div class="stat"><span>09:41</span><span>▮▮ 86%</span></div>
+            <div class="clock"><div class="t">09:41</div><div class="d">чт, 4 сентября</div></div>
+            <div class="wgt" style="top:152px"><div class="big">86%</div><div class="sm">Заряд · 2 уведомления</div></div>
+          </div>
+          <div class="phone v3">
+            <div class="notch"></div>
+            <div class="stat"><span>9:41</span><span>▮▮ 86%</span></div>
+            <div class="wgt" style="top:24px"><div class="big">09:41</div><div class="sm">Илья · четверг</div></div>
+            <div class="grid">
+              <div class="ic">☎</div><div class="ic">✈</div><div class="ic">◉</div><div class="ic">♫</div>
+              <div class="ic">▶</div><div class="ic">▤</div><div class="ic">◈</div><div class="ic">⚙</div>
+            </div>
+            <div class="dock"></div>
+          </div>
+        </div>
+        <div class="cap">блокировка · рабочий стол</div>
+        <div class="body">
+          <p>Тёмная база, один кислотный акцент, крупный виджет с именем и часами. Не как у всех, но и не пёстро. Обои под этот вариант я сгенерирую отдельно — под имя и цвет.</p>
+          <div class="spec">
+            <div><b>Лаунчер</b><span>Nova или Smart Launcher</span></div>
+            <div><b>Иконки</b><span>единый контурный набор</span></div>
+            <div><b>Обои</b><span>генерим свои, 2–3 штуки</span></div>
+            <div><b>Плюс</b><span>телефон выглядит личным</span></div>
+            <div><b>Минус</b><span>дольше собирать, нужны обои</span></div>
+          </div>
+        </div>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <h2>Экран блокировки на Honor: что реально можно</h2>
+    <p class="sub">Отдельный разговор, потому что тут Android ограничивает сильнее, чем на рабочем столе. Сторонние «приложения-локскрины» ставить не будем: на новых Android они конфликтуют с системным и роняют разблокировку.</p>
+    <div class="two">
+      <div class="box good">
+        <h3><span>Можно штатно</span></h3>
+        <ul>
+          <li>Свои обои блокировки, отдельные от рабочего стола</li>
+          <li>Стиль и размер часов — в «Темы» → «Экран блокировки»</li>
+          <li>Подпись на экране (имя, «Илья», что угодно)</li>
+          <li>Always-On Display, если экран OLED — свои часы и картинка</li>
+          <li>Отключить «Разблокировку журналом» (реклама Honor на локскрине)</li>
+          <li>Скрыть текст уведомлений до разблокировки</li>
+          <li>Ярлыки-шорткаты снизу (камера, фонарик)</li>
+        </ul>
+      </div>
+      <div class="box">
+        <h3>Нельзя / не стоит</h3>
+        <ul>
+          <li class="no">Поставить локскрин от Samsung или iPhone</li>
+          <li class="no">Виджеты iOS-стиля на экране блокировки</li>
+          <li class="no">Свой шрифт часов без темы или root</li>
+          <li class="no">Сторонние приложения-локскрины из Play — ломают отпечаток и Face Unlock</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <h2>Чистка перед красотой</h2>
+    <p class="sub">Новый Honor приезжает с предустановленным мусором и рекламой внутри системных приложений. Оформление поверх мусора смысла не имеет — сначала это, 15 минут.</p>
+    <div class="steps">
+      <div class="step">
+        <h3>Убрать рекламу Honor</h3>
+        <p>Настройки → Honor ID / Конфиденциальность → выключить рекомендации и персонализированную рекламу. Плюс в «Темы», «Музыка», «Игры» — внутри каждого свой переключатель рекламы.</p>
+      </div>
+      <div class="step">
+        <h3>Снести предустановленное</h3>
+        <p>Долгое нажатие → «Удалить». Что не удаляется — отключить в Настройки → Приложения. Кандидаты: игры-однодневки, Booking, AliExpress, «Кошелёк», собственный браузер, если ставим Chrome.</p>
+      </div>
+      <div class="step">
+        <h3>Запретить уведомления от всего лишнего</h3>
+        <p>Настройки → Уведомления → пройтись списком и оставить только людей: звонки, мессенджеры, будильник. Игры и магазины — выключить. Половина «неприятности» телефона именно тут.</p>
+      </div>
+      <div class="step">
+        <h3>Экономию батареи — на ручной режим</h3>
+        <p>MagicOS агрессивно выгружает приложения, из-за этого не приходят сообщения. Мессенджерам и будильнику ставим «Запуск вручную: все разрешения включены».</p>
+      </div>
+      <div class="step">
+        <h3>Базовая безопасность</h3>
+        <p>Google-аккаунт, отпечаток, автобэкап фото, пароль на блокировку не 1111. Пять минут сейчас — спасённые фотографии потом.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="ask">
+      <h2>Что нужно от тебя</h2>
+      <ol>
+        <li><strong>Выбери вариант:</strong> 01 тихий чёрный, 02 как Samsung или 03 свой стиль. Можно смешать — скажи что откуда.</li>
+        <li><strong>Назови точную модель</strong> — Настройки → О телефоне (например «Honor X9c, MagicOS 9.0»). От этого зависят названия пунктов меню в инструкции.</li>
+        <li><strong>Скажи, есть ли на телефоне Google Play</strong> — открывается ли приложение Play Маркет. Если только AppGallery, набор приложений будет другой.</li>
+      </ol>
+      <p style="margin-top:14px">После этого я соберу пошаговую инструкцию под конкретный экран (что нажать, в каком порядке) и, если возьмём 03, сгенерирую обои — про стоимость генерации спрошу заранее.</p>
+      <div class="stamp">Страница личная · noindex · обновляется по ходу</div>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
