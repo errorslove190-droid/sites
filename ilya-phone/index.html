@@ -4,328 +4,524 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="robots" content="noindex, nofollow">
-<title>Телефон Ильи — план настройки</title>
+<title>Телефон Ильи — чистка и стили</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;600;800&family=Oswald:wght@400;600&family=Manrope:wght@400;500;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;600;800&family=Oswald:wght@300;400;600;700&family=Manrope:wght@400;500;700;800&family=Cormorant:ital,wght@0,300;0,600;1,300&display=swap" rel="stylesheet">
 <style>
 :root{
-  --ink:#0a0a0a; --paper:#ffffff; --lime:#d8f34e;
-  --grey:#6b6b6b; --line:#e4e4e4; --soft:#f5f5f5;
+  --ink:#0a0a0a; --paper:#fff; --lime:#d8f34e;
+  --grey:#6b6b6b; --line:#e4e4e4; --soft:#f6f6f6;
   --f-display:'Unbounded',system-ui,sans-serif;
   --f-cond:'Oswald',system-ui,sans-serif;
   --f-text:'Manrope',system-ui,sans-serif;
+  --f-serif:'Cormorant',Georgia,serif;
 }
 *{box-sizing:border-box;margin:0;padding:0}
-body{background:var(--paper);color:var(--ink);font-family:var(--f-text);font-size:16px;line-height:1.6;-webkit-font-smoothing:antialiased}
-.wrap{max-width:920px;margin:0 auto;padding:0 20px}
+body{background:var(--paper);color:var(--ink);font-family:var(--f-text);font-size:16px;line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+.wrap{max-width:1080px;margin:0 auto;padding:0 20px}
 
-/* ── шапка ── */
-header{border-bottom:2px solid var(--ink);padding:48px 0 28px}
+header{border-bottom:2px solid var(--ink);padding:44px 0 26px}
 .kicker{font-family:var(--f-cond);text-transform:uppercase;letter-spacing:.18em;font-size:12px;color:var(--grey)}
-h1{font-family:var(--f-display);font-weight:800;font-size:clamp(30px,7vw,54px);line-height:1.05;letter-spacing:-.02em;margin:14px 0 16px}
+h1{font-family:var(--f-display);font-weight:800;font-size:clamp(28px,7vw,52px);line-height:1.05;letter-spacing:-.02em;margin:14px 0 14px}
 h1 mark{background:var(--lime);color:var(--ink);padding:0 .12em}
-.lead{font-size:17px;max-width:56ch;color:#222}
-.meta{margin-top:20px;display:flex;flex-wrap:wrap;gap:8px}
+.lead{font-size:17px;max-width:58ch;color:#222}
+.meta{margin-top:18px;display:flex;flex-wrap:wrap;gap:8px}
 .tag{font-family:var(--f-cond);text-transform:uppercase;letter-spacing:.1em;font-size:11px;border:1px solid var(--ink);padding:5px 10px}
 .tag.fill{background:var(--ink);color:var(--paper)}
 
 section{padding:44px 0;border-bottom:1px solid var(--line)}
 h2{font-family:var(--f-display);font-weight:600;font-size:clamp(21px,4.4vw,30px);letter-spacing:-.01em;margin-bottom:8px}
-h3{font-family:var(--f-cond);font-weight:600;text-transform:uppercase;letter-spacing:.06em;font-size:15px;margin-bottom:8px}
-.sub{color:var(--grey);max-width:62ch;margin-bottom:24px}
-p+p{margin-top:12px}
-ul{list-style:none}
-li{padding-left:20px;position:relative;margin-bottom:8px}
-li::before{content:"";position:absolute;left:0;top:11px;width:8px;height:2px;background:var(--ink)}
-li.no::before{background:#c9c9c9}
+.sub{color:var(--grey);max-width:64ch;margin-bottom:26px}
 strong{font-weight:700}
-a{color:var(--ink)}
 
-/* ── факт-блок ── */
-.note{border-left:4px solid var(--lime);background:var(--soft);padding:18px 20px;margin:20px 0}
-.note .h{font-family:var(--f-cond);text-transform:uppercase;letter-spacing:.08em;font-size:13px;margin-bottom:6px}
+/* ── список приложений ── */
+.grp{margin-bottom:30px}
+.grp-h{display:flex;align-items:center;gap:12px;margin-bottom:4px}
+.grp-h .n{font-family:var(--f-display);font-weight:800;font-size:15px;background:var(--ink);color:#fff;width:26px;height:26px;display:flex;align-items:center;justify-content:center;flex:none}
+.grp-h h3{font-family:var(--f-cond);text-transform:uppercase;letter-spacing:.06em;font-size:16px;font-weight:600}
+.grp .hint{color:var(--grey);font-size:14px;margin:0 0 14px 38px}
+@media(max-width:620px){.grp .hint{margin-left:0}}
+.apps{display:grid;gap:1px;background:var(--line);border:1px solid var(--line)}
+.app{background:#fff;display:grid;grid-template-columns:150px 1fr;gap:14px;padding:11px 14px;align-items:baseline}
+.app code{font-family:ui-monospace,Menlo,Consolas,monospace;font-size:12px;color:#444;word-break:break-all}
+.app .d{font-size:14.5px}
+.app .d b{font-weight:700}
+@media(max-width:620px){.app{grid-template-columns:1fr;gap:3px}.app code{font-size:11.5px}}
+.grp.keep .app{background:#fcfcfc}
+.grp.keep .app .d{color:#555}
+.warn{border-left:4px solid var(--lime);background:var(--soft);padding:14px 16px;margin-top:16px;font-size:14.5px}
 
-/* ── варианты ── */
-.variants{display:grid;gap:34px;grid-template-columns:1fr}
-@media(min-width:760px){.variants{grid-template-columns:repeat(3,1fr);gap:24px}}
-.variant{border:1px solid var(--line);display:flex;flex-direction:column}
-.variant .head{padding:16px 18px;border-bottom:1px solid var(--line);display:flex;align-items:baseline;gap:10px}
-.variant .num{font-family:var(--f-display);font-weight:800;font-size:22px}
-.variant .name{font-family:var(--f-cond);text-transform:uppercase;letter-spacing:.06em;font-size:15px}
-.variant .body{padding:18px;flex:1}
-.variant .body p{font-size:14.5px;color:#333}
-.spec{margin-top:14px;border-top:1px solid var(--line);padding-top:12px;font-size:13.5px}
-.spec div{display:flex;gap:10px;padding:3px 0}
-.spec b{font-family:var(--f-cond);text-transform:uppercase;letter-spacing:.05em;font-weight:400;color:var(--grey);min-width:78px;font-size:12px;padding-top:2px}
+/* ── стили ── */
+.styles{display:grid;gap:26px;grid-template-columns:1fr}
+@media(min-width:640px){.styles{grid-template-columns:repeat(2,1fr)}}
+@media(min-width:980px){.styles{grid-template-columns:repeat(4,1fr);gap:20px}}
+.st{border:1px solid var(--line);display:flex;flex-direction:column}
+.st-h{padding:14px 16px 12px;border-bottom:1px solid var(--line)}
+.st-h .num{font-family:var(--f-display);font-weight:800;font-size:12px;color:var(--grey);letter-spacing:.04em}
+.st-h .nm{font-family:var(--f-cond);text-transform:uppercase;letter-spacing:.05em;font-size:17px;font-weight:600;margin-top:2px}
+.st-h .ref{font-size:11.5px;color:var(--grey);margin-top:3px}
+.st-b{padding:14px 16px;flex:1}
+.st-b p{font-size:14px;color:#333}
+.st-b .kit{margin-top:11px;padding-top:10px;border-top:1px solid var(--line);font-size:12.5px;color:#444}
+.st-b .kit span{display:block;padding:1.5px 0}
+.st-b .kit i{font-style:normal;color:var(--grey);display:inline-block;min-width:62px}
 
-/* ── мокапы телефона ── */
-.screens{display:flex;gap:10px;justify-content:center;padding:20px 12px;background:var(--soft)}
-.phone{width:126px;height:262px;border-radius:18px;overflow:hidden;position:relative;box-shadow:0 6px 18px rgba(0,0,0,.18);border:3px solid #111;flex:none}
-.phone .notch{position:absolute;top:6px;left:50%;transform:translateX(-50%);width:34px;height:4px;border-radius:3px;background:rgba(255,255,255,.5);z-index:3}
-.stat{position:absolute;top:8px;left:0;right:0;display:flex;justify-content:space-between;padding:0 9px;font-size:6.5px;font-family:var(--f-text);font-weight:700;z-index:2;opacity:.85}
-.clock{position:absolute;left:0;right:0;text-align:center;z-index:2}
-.clock .t{font-weight:300;line-height:1}
-.clock .d{font-size:7px;letter-spacing:.08em;text-transform:uppercase;margin-top:4px;opacity:.8}
-.grid{position:absolute;left:0;right:0;bottom:26px;display:grid;grid-template-columns:repeat(4,1fr);gap:9px 6px;padding:0 10px;z-index:2}
-.ic{aspect-ratio:1;border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:700}
-.dock{position:absolute;bottom:6px;left:10px;right:10px;height:16px;border-radius:8px;z-index:2}
-.wgt{position:absolute;z-index:2;left:10px;right:10px;border-radius:10px;padding:7px 9px}
-.wgt .big{font-size:15px;font-weight:700;line-height:1}
-.wgt .sm{font-size:6.5px;opacity:.75;margin-top:3px;text-transform:uppercase;letter-spacing:.06em}
-.cap{text-align:center;font-family:var(--f-cond);text-transform:uppercase;letter-spacing:.1em;font-size:10px;color:var(--grey);padding:0 0 14px;background:var(--soft)}
+.duo{display:flex;gap:8px;justify-content:center;padding:18px 10px;background:#fafafa}
 
-/* V1 тихий чёрный */
-.v1{background:#0c0c0e;color:#eaeaea}
-.v1 .clock{top:52px}.v1 .clock .t{font-size:40px;font-family:var(--f-text);letter-spacing:-.03em}
-.v1 .list{position:absolute;left:12px;bottom:26px;z-index:2;font-size:9.5px;line-height:2;font-weight:500}
-.v1 .list span{opacity:.45}
-.v1 .dot{position:absolute;right:12px;bottom:30px;width:3px;height:3px;border-radius:50%;background:#eaeaea;opacity:.5;z-index:2}
-.v1 .ic{background:rgba(255,255,255,.07);color:#dcdcdc;border:1px solid rgba(255,255,255,.09)}
-.v1 .dock{background:rgba(255,255,255,.06)}
+/* ═══ КАРКАС ТЕЛЕФОНА ═══ */
+.ph{width:120px;height:258px;border-radius:17px;overflow:hidden;position:relative;border:3px solid #0d0d0d;box-shadow:0 8px 20px rgba(0,0,0,.22);flex:none;isolation:isolate}
+.ph .bar{position:absolute;top:7px;left:0;right:0;display:flex;justify-content:space-between;padding:0 9px;font-size:6px;font-weight:800;z-index:6;letter-spacing:.02em}
+.ph .pill{position:absolute;top:6px;left:50%;transform:translateX(-50%);width:26px;height:4px;border-radius:3px;background:#0007;z-index:7}
+.lay{position:absolute;inset:0;z-index:1}
+.z{position:absolute;z-index:5}
+.clk{left:0;right:0;text-align:center}
+.clk .t{line-height:.92}
+.clk .d{font-size:6.5px;letter-spacing:.1em;text-transform:uppercase;margin-top:5px;opacity:.7}
+.gr{position:absolute;left:9px;right:9px;bottom:30px;display:grid;grid-template-columns:repeat(4,1fr);gap:8px 5px;z-index:5}
+.i{aspect-ratio:1;display:flex;align-items:center;justify-content:center;font-size:8px;line-height:1}
+.dk{position:absolute;left:9px;right:9px;bottom:7px;height:19px;z-index:5;display:grid;grid-template-columns:repeat(4,1fr);gap:5px;align-items:center;padding:0 4px}
+.dk .i{font-size:8px}
+.wg{position:absolute;left:9px;right:9px;z-index:5;padding:7px 9px}
+.wg .b{font-size:14px;line-height:1;font-weight:800}
+.wg .s{font-size:6px;margin-top:4px;text-transform:uppercase;letter-spacing:.08em;opacity:.72}
+.cap{background:#fafafa;text-align:center;font-family:var(--f-cond);text-transform:uppercase;letter-spacing:.12em;font-size:9.5px;color:var(--grey);padding-bottom:12px}
 
-/* V2 one-ui-подобный */
-.v2{background:linear-gradient(165deg,#2b4a8f 0%,#4a6fc4 45%,#8aa4de 100%);color:#fff}
-.v2 .clock{top:44px}.v2 .clock .t{font-size:36px;font-family:var(--f-text);font-weight:300}
-.v2 .wgt{top:118px;background:rgba(255,255,255,.16);backdrop-filter:blur(4px)}
-.v2 .ic{background:rgba(255,255,255,.9);color:#2b4a8f;border-radius:50%}
-.v2 .dock{background:rgba(255,255,255,.22)}
-.v2 .grid{bottom:28px}
+/* ── 01 ХРОМ ── */
+.s1{background:#140f1e;color:#fff}
+.s1 .lay{background:
+  radial-gradient(58px 78px at 72% 30%, #ff5ec788 0%, transparent 68%),
+  radial-gradient(66px 66px at 30% 62%, #4ad9ff77 0%, transparent 70%),
+  radial-gradient(90px 80px at 55% 45%, #b98bff99 0%, transparent 72%),
+  linear-gradient(165deg,#1b1229,#0e0a17)}
+.s1 .blob{position:absolute;left:50%;top:44%;transform:translate(-50%,-50%);width:74px;height:74px;border-radius:52% 48% 44% 56%/48% 56% 44% 52%;z-index:2;
+  background:conic-gradient(from 40deg,#fff,#ffb3f0,#8ad9ff,#c9a6ff,#fff2c9,#fff);
+  filter:blur(.3px);box-shadow:0 0 22px #b98bffaa,inset 0 -6px 12px #0006}
+.s1 .clk{top:34px}.s1 .clk .t{font-size:33px;font-family:var(--f-text);font-weight:300;letter-spacing:-.03em}
+.s1 .wg{background:#ffffff1f;border:1px solid #ffffff33;border-radius:11px;backdrop-filter:blur(3px)}
+.s1 .i{background:#ffffff17;border:1px solid #ffffff2b;border-radius:11px;color:#f2e9ff}
+.s1 .dk{background:#ffffff14;border-radius:11px}
 
-/* V3 яркий */
-.v3{background:#111;color:#fff}
-.v3::after{content:"";position:absolute;inset:0;background:radial-gradient(120px 160px at 70% 12%,#d8f34e55,transparent 70%),radial-gradient(140px 140px at 15% 85%,#39d0ff44,transparent 70%);z-index:1}
-.v3 .clock{top:40px}.v3 .clock .t{font-size:34px;font-family:var(--f-cond);font-weight:600;letter-spacing:-.01em}
-.v3 .wgt{top:112px;background:rgba(255,255,255,.08);border:1px solid rgba(216,243,78,.35)}
-.v3 .wgt .big{color:var(--lime)}
-.v3 .ic{background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.14);border-radius:12px}
-.v3 .dock{background:rgba(255,255,255,.1)}
+/* ── 02 КИСЛОТА ── */
+.s2{background:#080808;color:#fff}
+.s2 .lay{background:radial-gradient(84px 96px at 50% 104%, #c8ff2e 0%, #7fd117 32%, #1d3a00 62%, transparent 78%),#080808}
+.s2 .noise{position:absolute;inset:0;z-index:2;opacity:.16;background-image:repeating-linear-gradient(0deg,#fff0 0 1px,#fff2 1px 2px)}
+.s2 .clk{top:30px}.s2 .clk .t{font-size:31px;font-family:var(--f-cond);font-weight:700;letter-spacing:-.02em}
+.s2 .big{position:absolute;left:0;right:0;bottom:78px;text-align:center;font-family:var(--f-cond);font-weight:700;font-size:15px;letter-spacing:-.02em;color:#0a0a0a;z-index:5}
+.s2 .wg{background:#c8ff2e;color:#080808;border-radius:2px}
+.s2 .wg .s{opacity:.65}
+.s2 .i{background:#0f0f0f;border:1px solid #c8ff2e55;border-radius:3px;color:#c8ff2e}
+.s2 .dk{background:#0f0f0fcc;border:1px solid #ffffff17;border-radius:3px}
 
-/* ── шаги ── */
-.steps{counter-reset:s;display:grid;gap:14px}
-.step{border:1px solid var(--line);padding:16px 18px;position:relative;counter-increment:s}
-.step::before{content:counter(s);position:absolute;top:14px;right:16px;font-family:var(--f-display);font-weight:800;font-size:26px;color:var(--line)}
-.step h3{margin-bottom:4px;padding-right:34px}
-.step p{font-size:14.5px;color:#333}
+/* ── 03 СЦЕНА ── */
+.s3{background:#070707;color:#efece6}
+.s3 .lay{background:radial-gradient(70px 130px at 50% -14%, #fff6e0 0%, #fff6e055 24%, #3a3226 46%, transparent 68%),#070707}
+.s3 .clk{top:96px}.s3 .clk .t{font-size:36px;font-family:var(--f-cond);font-weight:300;letter-spacing:.01em}
+.s3 .clk .d{opacity:.5}
+.s3 .wg{background:#ffffff0d;border-top:1px solid #ffffff26;border-bottom:1px solid #ffffff12}
+.s3 .i{background:#ffffff09;border:1px solid #ffffff1a;border-radius:2px;color:#d8d2c6}
+.s3 .dk{background:#ffffff08;border-radius:2px}
 
-/* ── таблица «что можно / что нельзя» ── */
-.two{display:grid;gap:20px;grid-template-columns:1fr}
-@media(min-width:700px){.two{grid-template-columns:1fr 1fr;gap:28px}}
-.box{border:1px solid var(--line);padding:18px}
-.box.good{border-color:var(--ink);border-width:2px}
-.box h3{margin-bottom:10px}
-.box.good h3 span{background:var(--lime);padding:1px 6px}
+/* ── 04 МЕТАЛЛ ── */
+.s4{background:#1a1d21;color:#e8ecf0}
+.s4 .lay{background:
+  linear-gradient(112deg,#3a4048 0%,#6a727c 22%,#2b3138 38%,#7d858f 58%,#31373e 74%,#5b636d 100%)}
+.s4 .grid{position:absolute;inset:0;z-index:2;opacity:.28;
+  background-image:linear-gradient(#ffffff22 1px,transparent 1px),linear-gradient(90deg,#ffffff22 1px,transparent 1px);background-size:14px 14px}
+.s4 .clk{top:30px}.s4 .clk .t{font-size:27px;font-family:var(--f-cond);font-weight:600;letter-spacing:.06em}
+.s4 .lbl{position:absolute;z-index:5;font-size:5.5px;letter-spacing:.16em;text-transform:uppercase;opacity:.75;font-weight:700}
+.s4 .wg{background:#0e1114cc;border:1px solid #2b6bff;border-radius:0}
+.s4 .wg .b{color:#5b8dff}
+.s4 .i{background:#0e1114b8;border:1px solid #ffffff2e;border-radius:0;color:#cfd8e3}
+.s4 .dk{background:#0e1114b8;border:1px solid #2b6bff66;border-radius:0}
 
-footer{padding:40px 0 60px}
+/* ── 05 АЛЫЙ ── */
+.s5{background:#eceae6;color:#141414}
+.s5 .lay{background:linear-gradient(180deg,#f4f2ee 0%,#dedad4 100%)}
+.s5 .sc{position:absolute;left:50%;top:46%;transform:translate(-50%,-50%);width:56px;height:82px;z-index:2;
+  background:radial-gradient(28px 44px at 50% 42%,#e0301e,#a81205 72%,transparent 74%);filter:blur(.4px)}
+.s5 .clk{top:26px}.s5 .clk .t{font-size:38px;font-family:var(--f-serif);font-weight:300;letter-spacing:-.01em}
+.s5 .clk .d{opacity:.55}
+.s5 .wg{background:#e0301e;color:#fff;border-radius:0}
+.s5 .i{background:#fffffff2;border:1px solid #0000001a;border-radius:0;color:#1a1a1a}
+.s5 .dk{background:#ffffffcc;border:1px solid #0000000f;border-radius:0}
+.s5 .bar,.s5 .pill{color:#141414}
+.s5 .pill{background:#0002}
+
+/* ── 06 БУМАГА ── */
+.s6{background:#ddd3c0;color:#1c1a17}
+.s6 .lay{background:
+  radial-gradient(60px 60px at 20% 18%,#ffffff70,transparent 70%),
+  radial-gradient(70px 70px at 82% 76%,#00000012,transparent 72%),
+  linear-gradient(160deg,#e6dcc9,#cfc3ad)}
+.s6 .tape{position:absolute;z-index:3;background:#f0e9a866;border-left:1px dashed #0002;border-right:1px dashed #0002}
+.s6 .card{position:absolute;z-index:4;background:#fbf8f1;box-shadow:2px 3px 0 #0000001f}
+.s6 .clk{top:38px}.s6 .clk .t{font-size:34px;font-family:var(--f-cond);font-weight:700;letter-spacing:-.02em}
+.s6 .clk .d{opacity:.6}
+.s6 .wg{background:#fbf8f1;box-shadow:2px 3px 0 #00000022;border-radius:0}
+.s6 .i{background:#fbf8f1;box-shadow:1.5px 2px 0 #00000022;border-radius:0;color:#1c1a17}
+.s6 .dk{background:#fbf8f1cc;border-radius:0}
+.s6 .bar,.s6 .pill{color:#1c1a17}
+.s6 .pill{background:#0002}
+
+/* ── 07 SAMSUNG ── */
+.s7{background:#2c4a8e;color:#fff}
+.s7 .lay{background:linear-gradient(168deg,#223d7d 0%,#4a6fc4 46%,#9db3e4 100%)}
+.s7 .clk{top:32px}.s7 .clk .t{font-size:32px;font-family:var(--f-text);font-weight:300;letter-spacing:-.02em}
+.s7 .wg{background:#ffffff29;border-radius:14px;backdrop-filter:blur(3px)}
+.s7 .i{background:#fffffff0;border-radius:50%;color:#2c4a8e}
+.s7 .dk{background:#ffffff2e;border-radius:14px}
+
+/* ── 08 ТИХИЙ ── */
+.s8{background:#080808;color:#e6e6e6}
+.s8 .lay{background:linear-gradient(200deg,#121212,#050505)}
+.s8 .clk{top:44px}.s8 .clk .t{font-size:36px;font-family:var(--f-text);font-weight:200;letter-spacing:-.04em}
+.s8 .clk .d{opacity:.45}
+.s8 .ls{position:absolute;left:11px;z-index:5;font-size:8.5px;line-height:2.05;font-weight:500}
+.s8 .ls u{text-decoration:none;opacity:.35}
+.s8 .az{position:absolute;right:9px;z-index:5;font-size:5.5px;line-height:1.85;text-align:center;opacity:.4;font-weight:700}
+.s8 .i{background:#ffffff0a;border:1px solid #ffffff12;border-radius:8px;color:#d0d0d0}
+.s8 .dk{background:#ffffff08;border-radius:8px}
+
+/* footer */
+footer{padding:38px 0 60px}
 .ask{border:2px solid var(--ink);padding:22px}
-.ask h2{margin-bottom:12px}
+.ask h2{margin-bottom:10px}
 .ask ol{padding-left:20px}
-.ask li{padding-left:6px}
-.ask li::before{display:none}
-.stamp{margin-top:22px;font-family:var(--f-cond);text-transform:uppercase;letter-spacing:.14em;font-size:11px;color:var(--grey)}
+.ask li{padding:3px 0}
+.stamp{margin-top:18px;font-family:var(--f-cond);text-transform:uppercase;letter-spacing:.14em;font-size:11px;color:var(--grey)}
 </style>
 </head>
 <body>
 
 <header>
   <div class="wrap">
-    <div class="kicker">Личное · сентябрь 2026</div>
-    <h1>Телефон Ильи:<br>делаем <mark>красиво</mark> и чётко</h1>
-    <p class="lead">Новый Honor. Три варианта оформления — экран блокировки и рабочий стол. Выбери один, дальше я распишу настройку по шагам и соберу обои под палитру.</p>
+    <div class="kicker">HONOR X7d · MagicOS 9 · Android 15 · 4 сентября</div>
+    <h1>Чистим и делаем<br><mark>красиво</mark></h1>
+    <p class="lead">Телефон подключён, я вижу экран и управляю им с компа. Ниже — что предлагаю снести (по твоему «пожёстче») и восемь стилей оформления, собранных из твоей библиотеки вкуса.</p>
     <div class="meta">
-      <span class="tag fill">Honor · MagicOS</span>
+      <span class="tag fill">Удаление обратимо</span>
       <span class="tag">Без root</span>
-      <span class="tag">Без прошивки</span>
-      <span class="tag">Всё бесплатно</span>
+      <span class="tag">Гарантия цела</span>
+      <span class="tag">Заряд 30% — держи на кабеле</span>
     </div>
   </div>
 </header>
 
 <section>
   <div class="wrap">
-    <h2>Сначала честно про «поставить ОС от Samsung»</h2>
-    <p class="sub">Это единственное из твоего списка, что сделать нельзя — и лучше узнать сейчас, чем после кирпича.</p>
-    <div class="note">
-      <div class="h">Так не получится</div>
-      <p>One UI (оболочка Samsung) собрана под железо Samsung: их процессоры, драйверы, камера, модем. На Honor она не встанет — загрузчик закрыт, а если и вскрыть, работать будет нечему. Попытка прошить чужую систему = мёртвый телефон без гарантии.</p>
+    <h2>Что удаляем</h2>
+    <p class="sub">Команда <code>pm uninstall --user 0</code> убирает приложение у пользователя, не трогая раздел системы. Любое возвращается назад одной строкой, а сброс к заводским возвращает всё сразу. Ничего не удаляю, пока не скажешь «да».</p>
+
+    <div class="grp">
+      <div class="grp-h"><span class="n">1</span><h3>Реклама и то, что само ставит приложения</h3></div>
+      <p class="hint">Главные виновники того, что новый телефон «сам обрастает» играми и баннерами.</p>
+      <div class="apps">
+        <div class="app"><code>com.aura.oobe.honor</code><div class="d"><b>Aura</b> — сервис, который после первого включения сам докачивает рекламные приложения и игры. Скорее всего именно он привёз половину игр на телефоне.</div></div>
+        <div class="app"><code>com.hihonor.popularapps</code><div class="d"><b>«Популярные приложения»</b> — витрина рекламы внутри системы.</div></div>
+        <div class="app"><code>com.hihonor.magazine</code><div class="d"><b>Журнальная разблокировка</b> — картинки с рекламой на экране блокировки. Мы всё равно ставим свои обои.</div></div>
+        <div class="app"><code>com.hihonor.autoinstallapkfrommcc</code><div class="d">Автоустановка приложений по коду оператора — ещё один канал доставки мусора.</div></div>
+        <div class="app"><code>android.autoinstalls.config.honor.device</code><div class="d">Конфиг того же автоустановщика.</div></div>
+      </div>
     </div>
-    <div class="note">
-      <div class="h">Так получится</div>
-      <p>Внешний вид One UI повторяется поверх MagicOS за 20 минут: лаунчер + набор иконок + обои + виджеты. Визуально это ровно тот эффект, ради которого люди хотят «самсунговскую ОС» — вариант <strong>№2</strong> ниже про это. Система остаётся родная, гарантия цела, откатить можно в один тап.</p>
+
+    <div class="grp">
+      <div class="grp-h"><span class="n">2</span><h3>Facebook в четырёх пакетах</h3></div>
+      <p class="hint">Приложения нет в списке, но три служебных пакета живут в системе и работают в фоне: собирают данные и умеют молча доустановить основное приложение.</p>
+      <div class="apps">
+        <div class="app"><code>com.facebook.katana</code><div class="d">Само приложение Facebook.</div></div>
+        <div class="app"><code>com.facebook.appmanager</code><div class="d">Установщик — тот, кто возвращает Facebook после удаления.</div></div>
+        <div class="app"><code>com.facebook.services</code><div class="d">Фоновая служба.</div></div>
+        <div class="app"><code>com.facebook.system</code><div class="d">Системная прослойка.</div></div>
+      </div>
     </div>
-  </div>
-</section>
 
-<section>
-  <div class="wrap">
-    <h2>Три варианта</h2>
-    <p class="sub">Левый экран — блокировка, правый — рабочий стол. Мокапы приблизительные: показывают настроение и композицию, а не пиксель в пиксель.</p>
+    <div class="grp">
+      <div class="grp-h"><span class="n">3</span><h3>Дубли того, что уже есть</h3></div>
+      <p class="hint">На телефоне два браузера, две почты, два магазина. Оставляем по одному — Chrome, Gmail, Google Play.</p>
+      <div class="apps">
+        <div class="app"><code>com.honor.browser</code><div class="d">Браузер Honor. Остаётся Chrome.</div></div>
+        <div class="app"><code>com.hihonor.browserhomepage</code><div class="d">Стартовая страница этого браузера с новостной лентой.</div></div>
+        <div class="app"><code>com.hihonor.email</code><div class="d">Почта Honor. Остаётся Gmail.</div></div>
+        <div class="app"><code>com.preff.kb.hr</code><div class="d"><b>Клавиатура Facemoji</b> — сторонняя клавиатура, видит весь ввод. Остаётся SwiftKey или Gboard.</div></div>
+        <div class="app"><code>com.hihonor.gamecenter</code><div class="d">Игровой центр Honor — витрина игр с рекламой.</div></div>
+        <div class="app"><code>com.hihonor.gameassistant</code><div class="d">Игровой ассистент — оверлей во время игр.</div></div>
+        <div class="app"><code>com.hihonor.game.kitserver</code><div class="d">Служба игрового центра.</div></div>
+        <div class="app"><code>com.yandex.preinstallsatellite</code><div class="d">Яндекс-преинсталл: ставит ярлыки сервисов Яндекса.</div></div>
+        <div class="app"><code>com.microsoft.appmanager</code><div class="d">«Связь с Windows». На этом компе не используется.</div></div>
+        <div class="app"><code>com.microsoftsdk.crossdeviceservicebroker</code><div class="d">Служба к нему же.</div></div>
+        <div class="app"><code>com.hihonor.prayerassistant</code><div class="d">Ассистент молитв — регион не тот, приложение просто висит.</div></div>
+      </div>
+    </div>
 
-    <div class="variants">
+    <div class="grp">
+      <div class="grp-h"><span class="n">4</span><h3>Google, чем никто не пользуется</h3></div>
+      <p class="hint">Это уже «пожёстче». Если что-то из списка нужно — скажи, оставлю.</p>
+      <div class="apps">
+        <div class="app"><code>com.google.android.apps.tachyon</code><div class="d">Google Meet.</div></div>
+        <div class="app"><code>com.google.android.videos</code><div class="d">Google TV / Фильмы.</div></div>
+        <div class="app"><code>com.google.android.projection.gearhead</code><div class="d">Android Auto — нужен только в машине с поддержкой.</div></div>
+        <div class="app"><code>com.google.android.apps.docs</code><div class="d">Google Диск.</div></div>
+        <div class="app"><code>com.google.android.apps.bard</code><div class="d">Gemini.</div></div>
+      </div>
+    </div>
 
-      <!-- ВАРИАНТ 1 -->
-      <article class="variant">
-        <div class="head"><span class="num">01</span><span class="name">Тихий чёрный</span></div>
-        <div class="screens">
-          <div class="phone v1">
-            <div class="notch"></div>
-            <div class="stat"><span>09:41</span><span>▮▮ 86%</span></div>
-            <div class="clock"><div class="t">9:41</div><div class="d">чт, 4 сентября</div></div>
-            <div class="list" style="bottom:auto;top:150px">Музыка<br>2 сообщения<br><span>Заряд 86%</span></div>
-          </div>
-          <div class="phone v1">
-            <div class="notch"></div>
-            <div class="stat"><span>9:41</span><span>▮▮ 86%</span></div>
-            <div class="list" style="top:44px">A<br>B<br>D<br>G<br>M<br>T<br>V<br>Y</div>
-            <div class="dot"></div>
-            <div class="grid" style="grid-template-columns:1fr;gap:10px;left:44px;bottom:34px;padding:0">
-              <div class="ic" style="aspect-ratio:auto;height:14px;justify-content:flex-start;background:none;border:none;font-weight:500;font-size:10px">Телефон</div>
-              <div class="ic" style="aspect-ratio:auto;height:14px;justify-content:flex-start;background:none;border:none;font-weight:500;font-size:10px">Telegram</div>
-              <div class="ic" style="aspect-ratio:auto;height:14px;justify-content:flex-start;background:none;border:none;font-weight:500;font-size:10px">Камера</div>
-              <div class="ic" style="aspect-ratio:auto;height:14px;justify-content:flex-start;background:none;border:none;font-weight:500;font-size:10px">YouTube</div>
-            </div>
-          </div>
-        </div>
-        <div class="cap">блокировка · рабочий стол</div>
-        <div class="body">
-          <p>Никаких сеток иконок. Список приложений буквами сбоку, всё монохромное, обои — чёрный с еле заметным градиентом. Выглядит дорого и взросло, телефон перестаёт мигать.</p>
-          <div class="spec">
-            <div><b>Лаунчер</b><span>Niagara Launcher</span></div>
-            <div><b>Иконки</b><span>Arcticons (белые контуры)</span></div>
-            <div><b>Обои</b><span>чистый чёрный / тёмный градиент</span></div>
-            <div><b>Плюс</b><span>экономит батарею на OLED</span></div>
-            <div><b>Минус</b><span>непривычно первые пару дней</span></div>
-          </div>
-        </div>
-      </article>
-
-      <!-- ВАРИАНТ 2 -->
-      <article class="variant">
-        <div class="head"><span class="num">02</span><span class="name">Как Samsung</span></div>
-        <div class="screens">
-          <div class="phone v2">
-            <div class="notch"></div>
-            <div class="stat"><span>09:41</span><span>▮▮ 86%</span></div>
-            <div class="clock"><div class="t">9:41</div><div class="d">чт, 4 сентября</div></div>
-            <div class="wgt" style="top:150px"><div class="big">+18°</div><div class="sm">Ясно · Сокол</div></div>
-          </div>
-          <div class="phone v2">
-            <div class="notch"></div>
-            <div class="stat"><span>9:41</span><span>▮▮ 86%</span></div>
-            <div class="wgt" style="top:26px"><div class="big">9:41</div><div class="sm">чт · +18° · ясно</div></div>
-            <div class="grid">
-              <div class="ic">☎</div><div class="ic">✉</div><div class="ic">◉</div><div class="ic">♫</div>
-              <div class="ic">▤</div><div class="ic">☑</div><div class="ic">◈</div><div class="ic">⚙</div>
-            </div>
-            <div class="dock"></div>
-          </div>
-        </div>
-        <div class="cap">блокировка · рабочий стол</div>
-        <div class="body">
-          <p>То, что ты имел в виду под «ОС от Samsung»: круглые иконки, синий градиент, крупные часы, мягкие карточки виджетов. Родной MagicOS остаётся под низом, а сверху — вид One UI.</p>
-          <div class="spec">
-            <div><b>Лаунчер</b><span>Nova Launcher</span></div>
-            <div><b>Иконки</b><span>круглый набор в стиле One UI</span></div>
-            <div><b>Обои</b><span>сине-фиолетовый градиент</span></div>
-            <div><b>Плюс</b><span>привычно, ничего учить не надо</span></div>
-            <div><b>Минус</b><span>это косплей, а не настоящий One UI</span></div>
-          </div>
-        </div>
-      </article>
-
-      <!-- ВАРИАНТ 3 -->
-      <article class="variant">
-        <div class="head"><span class="num">03</span><span class="name">Свой стиль</span></div>
-        <div class="screens">
-          <div class="phone v3">
-            <div class="notch"></div>
-            <div class="stat"><span>09:41</span><span>▮▮ 86%</span></div>
-            <div class="clock"><div class="t">09:41</div><div class="d">чт, 4 сентября</div></div>
-            <div class="wgt" style="top:152px"><div class="big">86%</div><div class="sm">Заряд · 2 уведомления</div></div>
-          </div>
-          <div class="phone v3">
-            <div class="notch"></div>
-            <div class="stat"><span>9:41</span><span>▮▮ 86%</span></div>
-            <div class="wgt" style="top:24px"><div class="big">09:41</div><div class="sm">Илья · четверг</div></div>
-            <div class="grid">
-              <div class="ic">☎</div><div class="ic">✈</div><div class="ic">◉</div><div class="ic">♫</div>
-              <div class="ic">▶</div><div class="ic">▤</div><div class="ic">◈</div><div class="ic">⚙</div>
-            </div>
-            <div class="dock"></div>
-          </div>
-        </div>
-        <div class="cap">блокировка · рабочий стол</div>
-        <div class="body">
-          <p>Тёмная база, один кислотный акцент, крупный виджет с именем и часами. Не как у всех, но и не пёстро. Обои под этот вариант я сгенерирую отдельно — под имя и цвет.</p>
-          <div class="spec">
-            <div><b>Лаунчер</b><span>Nova или Smart Launcher</span></div>
-            <div><b>Иконки</b><span>единый контурный набор</span></div>
-            <div><b>Обои</b><span>генерим свои, 2–3 штуки</span></div>
-            <div><b>Плюс</b><span>телефон выглядит личным</span></div>
-            <div><b>Минус</b><span>дольше собирать, нужны обои</span></div>
-          </div>
-        </div>
-      </article>
-
+    <div class="grp keep">
+      <div class="grp-h"><span class="n">5</span><h3>Не трогаю — это выбор Ильи</h3></div>
+      <p class="hint">Установлено пользователем. Часть игр может быть привезена той же Aura — спроси Илью, играет ли он в них, и я снесу заодно.</p>
+      <div class="apps">
+        <div class="app"><code>org.telegram.messenger · ru.oneme.app · com.vkontakte.android</code><div class="d">Мессенджеры — Telegram, MAX, ВК.</div></div>
+        <div class="app"><code>com.zhiliaoapp.musically</code><div class="d">TikTok.</div></div>
+        <div class="app"><code>ru.dublgis.dgismobile · ru.yandex.yandexnavi</code><div class="d">2ГИС и Навигатор.</div></div>
+        <div class="app"><code>ru.vk.store · com.deepseek.chat · online.vpnnaruzhu.client.android</code><div class="d">RuStore, DeepSeek, VPN.</div></div>
+        <div class="app"><code>com.innersloth.spacemafia · com.unept.leveldevil · com.ChillyRoom.DungeonShooter · com.kumobius.android.walljumper</code><div class="d"><b>Игры:</b> Among Us, Level Devil, Soul Knight, Wall Jumper. Похожи на подарок от Aura — уточни у Ильи.</div></div>
+        <div class="app"><code>pedometer.steptracker.calorieburner.stepcounter</code><div class="d">Шагомер. Такие приложения обычно набиты рекламой — но решает Илья.</div></div>
+      </div>
+      <div class="warn"><strong>Что точно не трогаю:</strong> лаунчер Honor, «Темы», Honor ID, диспетчер системы, камера, галерея, телефон, сообщения, магазин приложений Honor. Через магазин обновляются системные приложения — сносить его нельзя, но я выключу его уведомления, чтобы значок «9 обновлений» не мозолил глаза.</div>
     </div>
   </div>
 </section>
 
 <section>
   <div class="wrap">
-    <h2>Экран блокировки на Honor: что реально можно</h2>
-    <p class="sub">Отдельный разговор, потому что тут Android ограничивает сильнее, чем на рабочем столе. Сторонние «приложения-локскрины» ставить не будем: на новых Android они конфликтуют с системным и роняют разблокировку.</p>
-    <div class="two">
-      <div class="box good">
-        <h3><span>Можно штатно</span></h3>
-        <ul>
-          <li>Свои обои блокировки, отдельные от рабочего стола</li>
-          <li>Стиль и размер часов — в «Темы» → «Экран блокировки»</li>
-          <li>Подпись на экране (имя, «Илья», что угодно)</li>
-          <li>Always-On Display, если экран OLED — свои часы и картинка</li>
-          <li>Отключить «Разблокировку журналом» (реклама Honor на локскрине)</li>
-          <li>Скрыть текст уведомлений до разблокировки</li>
-          <li>Ярлыки-шорткаты снизу (камера, фонарик)</li>
-        </ul>
-      </div>
-      <div class="box">
-        <h3>Нельзя / не стоит</h3>
-        <ul>
-          <li class="no">Поставить локскрин от Samsung или iPhone</li>
-          <li class="no">Виджеты iOS-стиля на экране блокировки</li>
-          <li class="no">Свой шрифт часов без темы или root</li>
-          <li class="no">Сторонние приложения-локскрины из Play — ломают отпечаток и Face Unlock</li>
-        </ul>
-      </div>
-    </div>
-  </div>
-</section>
+    <h2>Восемь стилей</h2>
+    <p class="sub">Шесть из твоей библиотеки вкуса, переложенные на телефон, плюс два «спокойных» на случай, если Илье не зайдёт громкое. Левый экран — блокировка, правый — рабочий стол.</p>
 
-<section>
-  <div class="wrap">
-    <h2>Чистка перед красотой</h2>
-    <p class="sub">Новый Honor приезжает с предустановленным мусором и рекламой внутри системных приложений. Оформление поверх мусора смысла не имеет — сначала это, 15 минут.</p>
-    <div class="steps">
-      <div class="step">
-        <h3>Убрать рекламу Honor</h3>
-        <p>Настройки → Honor ID / Конфиденциальность → выключить рекомендации и персонализированную рекламу. Плюс в «Темы», «Музыка», «Игры» — внутри каждого свой переключатель рекламы.</p>
-      </div>
-      <div class="step">
-        <h3>Снести предустановленное</h3>
-        <p>Долгое нажатие → «Удалить». Что не удаляется — отключить в Настройки → Приложения. Кандидаты: игры-однодневки, Booking, AliExpress, «Кошелёк», собственный браузер, если ставим Chrome.</p>
-      </div>
-      <div class="step">
-        <h3>Запретить уведомления от всего лишнего</h3>
-        <p>Настройки → Уведомления → пройтись списком и оставить только людей: звонки, мессенджеры, будильник. Игры и магазины — выключить. Половина «неприятности» телефона именно тут.</p>
-      </div>
-      <div class="step">
-        <h3>Экономию батареи — на ручной режим</h3>
-        <p>MagicOS агрессивно выгружает приложения, из-за этого не приходят сообщения. Мессенджерам и будильнику ставим «Запуск вручную: все разрешения включены».</p>
-      </div>
-      <div class="step">
-        <h3>Базовая безопасность</h3>
-        <p>Google-аккаунт, отпечаток, автобэкап фото, пароль на блокировку не 1111. Пять минут сейчас — спасённые фотографии потом.</p>
-      </div>
+    <div class="styles">
+
+      <!-- 01 ХРОМ -->
+      <article class="st">
+        <div class="st-h"><div class="num">01</div><div class="nm">Хром</div><div class="ref">семья «глянец и хром» · реф. «Дизайн. Технологии. Будущее»</div></div>
+        <div class="duo">
+          <div class="ph s1"><span class="pill"></span><div class="lay"></div>
+            <div class="bar"><span>9:41</span><span>▮ 86</span></div>
+            <div class="blob"></div>
+            <div class="z clk" style="top:34px"><div class="t">9:41</div><div class="d">чт, 4 сентября</div></div>
+            <div class="wg" style="bottom:22px"><div class="b">+18°</div><div class="s">Ясно · 2 уведомления</div></div>
+          </div>
+          <div class="ph s1"><span class="pill"></span><div class="lay"></div>
+            <div class="bar"><span>9:41</span><span>▮ 86</span></div>
+            <div class="blob" style="top:30%;width:52px;height:52px"></div>
+            <div class="wg" style="top:96px"><div class="b">09:41</div><div class="s">четверг · +18°</div></div>
+            <div class="gr"><div class="i">☎</div><div class="i">✈</div><div class="i">◉</div><div class="i">♪</div><div class="i">▶</div><div class="i">▤</div><div class="i">◈</div><div class="i">⚙</div></div>
+            <div class="dk"><div class="i">☎</div><div class="i">✈</div><div class="i">◉</div><div class="i">☰</div></div>
+          </div>
+        </div>
+        <div class="cap">блокировка · рабочий стол</div>
+        <div class="st-b">
+          <p>Жидкий хром с бензиновыми переливами на тёмно-фиолетовом, стеклянные полупрозрачные плашки. Самый «дорогой» и самый заметный из восьми.</p>
+          <div class="kit">
+            <span><i>Лаунчер</i>Nova</span>
+            <span><i>Иконки</i>стеклянные, круглые</span>
+            <span><i>Обои</i>генерим 3D-хром</span>
+            <span><i>Кому</i>если хочется вау</span>
+          </div>
+        </div>
+      </article>
+
+      <!-- 02 КИСЛОТА -->
+      <article class="st">
+        <div class="st-h"><div class="num">02</div><div class="nm">Кислота</div><div class="ref">семья «кислотный плакат» · реф. Cryproshadows, Jax Morgan</div></div>
+        <div class="duo">
+          <div class="ph s2"><span class="pill"></span><div class="lay"></div><div class="noise"></div>
+            <div class="bar"><span>9:41</span><span>▮ 86</span></div>
+            <div class="z clk" style="top:30px"><div class="t">09:41</div><div class="d">чт, 4 сентября</div></div>
+            <div class="big">ИЛЬЯ</div>
+          </div>
+          <div class="ph s2"><span class="pill"></span><div class="lay" style="background:radial-gradient(70px 80px at 50% 112%,#c8ff2e 0%,#7fd117 34%,#162d00 64%,transparent 80%),#080808"></div><div class="noise"></div>
+            <div class="bar"><span>9:41</span><span>▮ 86</span></div>
+            <div class="wg" style="top:26px"><div class="b">09:41</div><div class="s">чт · +18° · ясно</div></div>
+            <div class="gr"><div class="i">☎</div><div class="i">✈</div><div class="i">◉</div><div class="i">♪</div><div class="i">▶</div><div class="i">▤</div><div class="i">◈</div><div class="i">⚙</div></div>
+            <div class="dk"><div class="i">☎</div><div class="i">✈</div><div class="i">◉</div><div class="i">☰</div></div>
+          </div>
+        </div>
+        <div class="cap">блокировка · рабочий стол</div>
+        <div class="st-b">
+          <p>Кислотно-лаймовое свечение снизу на чёрном, плакатный гротеск, зерно как на ксероксе. Читается как афиша рейва — самый подростковый вариант.</p>
+          <div class="kit">
+            <span><i>Лаунчер</i>Nova</span>
+            <span><i>Иконки</i>контур лаймом</span>
+            <span><i>Обои</i>генерим свечение</span>
+            <span><i>Кому</i>если нужен характер</span>
+          </div>
+        </div>
+      </article>
+
+      <!-- 03 СЦЕНА -->
+      <article class="st">
+        <div class="st-h"><div class="num">03</div><div class="nm">Сцена</div><div class="ref">семья «тёмная сцена» · реф. Lumina Studio</div></div>
+        <div class="duo">
+          <div class="ph s3"><span class="pill"></span><div class="lay"></div>
+            <div class="bar"><span>9:41</span><span>▮ 86</span></div>
+            <div class="z clk" style="top:96px"><div class="t">9:41</div><div class="d">чт, 4 сентября</div></div>
+            <div class="wg" style="bottom:24px"><div class="b" style="font-family:var(--f-cond);font-weight:300;font-size:11px">2 уведомления</div><div class="s">Telegram · Будильник</div></div>
+          </div>
+          <div class="ph s3"><span class="pill"></span><div class="lay"></div>
+            <div class="bar"><span>9:41</span><span>▮ 86</span></div>
+            <div class="wg" style="top:38px"><div class="b" style="font-family:var(--f-cond);font-weight:300;font-size:19px;letter-spacing:.02em">09:41</div><div class="s">четверг, 4 сентября</div></div>
+            <div class="gr"><div class="i">☎</div><div class="i">✈</div><div class="i">◉</div><div class="i">♪</div><div class="i">▶</div><div class="i">▤</div><div class="i">◈</div><div class="i">⚙</div></div>
+            <div class="dk"><div class="i">☎</div><div class="i">✈</div><div class="i">◉</div><div class="i">☰</div></div>
+          </div>
+        </div>
+        <div class="cap">блокировка · рабочий стол</div>
+        <div class="st-b">
+          <p>Один луч тёплого света сверху на чёрном, узкий гротеск, много пустоты. Спокойный, но не пустой — работает светом, а не украшениями.</p>
+          <div class="kit">
+            <span><i>Лаунчер</i>Nova или Niagara</span>
+            <span><i>Иконки</i>тонкий контур</span>
+            <span><i>Обои</i>генерим прожектор</span>
+            <span><i>Кому</i>золотая середина</span>
+          </div>
+        </div>
+      </article>
+
+      <!-- 04 МЕТАЛЛ -->
+      <article class="st">
+        <div class="st-h"><div class="num">04</div><div class="nm">Металл</div><div class="ref">семья «металл и электрик» · реф. Neutra, Refract</div></div>
+        <div class="duo">
+          <div class="ph s4"><span class="pill"></span><div class="lay"></div><div class="grid"></div>
+            <div class="bar"><span>9:41</span><span>▮ 86</span></div>
+            <div class="z clk" style="top:30px"><div class="t">09:41</div><div class="d">04 / 09 / 26</div></div>
+            <div class="lbl" style="left:9px;bottom:60px">LGN-LX1</div>
+            <div class="lbl" style="right:9px;bottom:60px">BAT 86%</div>
+            <div class="wg" style="bottom:22px"><div class="b">18°</div><div class="s">Ясно · ветер 3 м/с</div></div>
+          </div>
+          <div class="ph s4"><span class="pill"></span><div class="lay"></div><div class="grid"></div>
+            <div class="bar"><span>9:41</span><span>▮ 86</span></div>
+            <div class="wg" style="top:26px"><div class="b">09:41</div><div class="s">04.09 · чт · 18°</div></div>
+            <div class="gr"><div class="i">☎</div><div class="i">✈</div><div class="i">◉</div><div class="i">♪</div><div class="i">▶</div><div class="i">▤</div><div class="i">◈</div><div class="i">⚙</div></div>
+            <div class="dk"><div class="i">☎</div><div class="i">✈</div><div class="i">◉</div><div class="i">☰</div></div>
+          </div>
+        </div>
+        <div class="cap">блокировка · рабочий стол</div>
+        <div class="st-b">
+          <p>Жидкий металл, техническая сетка, электрик-синий как сигнал и мелкие подписи-маркировки. Телефон выглядит как прибор, а не как игрушка.</p>
+          <div class="kit">
+            <span><i>Лаунчер</i>Nova (сетка 4×6)</span>
+            <span><i>Иконки</i>квадрат, без скруглений</span>
+            <span><i>Обои</i>генерим металл</span>
+            <span><i>Кому</i>если нравится техника</span>
+          </div>
+        </div>
+      </article>
+
+      <!-- 05 АЛЫЙ -->
+      <article class="st">
+        <div class="st-h"><div class="num">05</div><div class="nm">Алый</div><div class="ref">семья «алый акцент» · реф. Solasind, Stretkat</div></div>
+        <div class="duo">
+          <div class="ph s5"><span class="pill"></span><div class="lay"></div>
+            <div class="bar"><span>9:41</span><span>▮ 86</span></div>
+            <div class="sc"></div>
+            <div class="z clk" style="top:26px"><div class="t">9:41</div><div class="d">чт, 4 сентября</div></div>
+            <div class="wg" style="bottom:22px"><div class="b" style="font-size:11px">2 уведомления</div><div class="s">Telegram · Будильник</div></div>
+          </div>
+          <div class="ph s5"><span class="pill"></span><div class="lay"></div>
+            <div class="bar"><span>9:41</span><span>▮ 86</span></div>
+            <div class="wg" style="top:26px"><div class="b">09:41</div><div class="s">четверг · 4 сентября</div></div>
+            <div class="gr"><div class="i">☎</div><div class="i">✈</div><div class="i">◉</div><div class="i">♪</div><div class="i">▶</div><div class="i">▤</div><div class="i">◈</div><div class="i">⚙</div></div>
+            <div class="dk"><div class="i">☎</div><div class="i">✈</div><div class="i">◉</div><div class="i">☰</div></div>
+          </div>
+        </div>
+        <div class="cap">блокировка · рабочий стол</div>
+        <div class="st-b">
+          <p>Единственный светлый вариант: тёплая бумага, тонкий сериф в часах и одно алое пятно. Днём на солнце читается лучше всех тёмных.</p>
+          <div class="kit">
+            <span><i>Лаунчер</i>Nova (светлая тема)</span>
+            <span><i>Иконки</i>белые, квадрат</span>
+            <span><i>Обои</i>генерим алый объект</span>
+            <span><i>Кому</i>если надоела темнота</span>
+          </div>
+        </div>
+      </article>
+
+      <!-- 06 БУМАГА -->
+      <article class="st">
+        <div class="st-h"><div class="num">06</div><div class="nm">Бумага</div><div class="ref">семья «бумажный коллаж» · реф. Travis Scott, Smircs</div></div>
+        <div class="duo">
+          <div class="ph s6"><span class="pill"></span><div class="lay"></div>
+            <div class="bar"><span>9:41</span><span>▮ 86</span></div>
+            <div class="tape" style="left:16px;top:66px;width:44px;height:11px;transform:rotate(-7deg)"></div>
+            <div class="card" style="left:22px;top:96px;width:64px;height:52px;transform:rotate(3deg)"></div>
+            <div class="tape" style="right:20px;top:150px;width:36px;height:10px;transform:rotate(6deg)"></div>
+            <div class="z clk" style="top:26px"><div class="t">09:41</div><div class="d">чт, 4 сентября</div></div>
+            <div class="wg" style="bottom:20px;transform:rotate(-1.5deg)"><div class="b" style="font-size:11px">ИЛЬЯ</div><div class="s">2 уведомления · 18°</div></div>
+          </div>
+          <div class="ph s6"><span class="pill"></span><div class="lay"></div>
+            <div class="bar"><span>9:41</span><span>▮ 86</span></div>
+            <div class="tape" style="left:34px;top:20px;width:52px;height:10px;transform:rotate(-4deg);z-index:6"></div>
+            <div class="wg" style="top:26px;transform:rotate(1deg)"><div class="b">09:41</div><div class="s">четверг · 4 сентября</div></div>
+            <div class="gr"><div class="i" style="transform:rotate(-2deg)">☎</div><div class="i" style="transform:rotate(1.5deg)">✈</div><div class="i" style="transform:rotate(-1deg)">◉</div><div class="i" style="transform:rotate(2deg)">♪</div><div class="i" style="transform:rotate(1deg)">▶</div><div class="i" style="transform:rotate(-2deg)">▤</div><div class="i" style="transform:rotate(1.5deg)">◈</div><div class="i" style="transform:rotate(-1deg)">⚙</div></div>
+            <div class="dk"><div class="i">☎</div><div class="i">✈</div><div class="i">◉</div><div class="i">☰</div></div>
+          </div>
+        </div>
+        <div class="cap">блокировка · рабочий стол</div>
+        <div class="st-b">
+          <p>Крафт-бумага, скотч, карточки с тенью и лёгкими наклонами — как скрапбук. Самый «человеческий» и самый не-как-у-всех вариант.</p>
+          <div class="kit">
+            <span><i>Лаунчер</i>Nova</span>
+            <span><i>Иконки</i>бумажные квадраты</span>
+            <span><i>Обои</i>генерим коллаж</span>
+            <span><i>Кому</i>если хочется тепла</span>
+          </div>
+        </div>
+      </article>
+
+      <!-- 07 SAMSUNG -->
+      <article class="st">
+        <div class="st-h"><div class="num">07</div><div class="nm">Как Samsung</div><div class="ref">то, что ты просил изначально · вид One UI</div></div>
+        <div class="duo">
+          <div class="ph s7"><span class="pill"></span><div class="lay"></div>
+            <div class="bar"><span>9:41</span><span>▮ 86</span></div>
+            <div class="z clk" style="top:32px"><div class="t">9:41</div><div class="d">чт, 4 сентября</div></div>
+            <div class="wg" style="bottom:22px"><div class="b">+18°</div><div class="s">Ясно · Сокол</div></div>
+          </div>
+          <div class="ph s7"><span class="pill"></span><div class="lay"></div>
+            <div class="bar"><span>9:41</span><span>▮ 86</span></div>
+            <div class="wg" style="top:26px"><div class="b">09:41</div><div class="s">чт · +18° · ясно</div></div>
+            <div class="gr"><div class="i">☎</div><div class="i">✈</div><div class="i">◉</div><div class="i">♪</div><div class="i">▶</div><div class="i">▤</div><div class="i">◈</div><div class="i">⚙</div></div>
+            <div class="dk"><div class="i">☎</div><div class="i">✈</div><div class="i">◉</div><div class="i">☰</div></div>
+          </div>
+        </div>
+        <div class="cap">блокировка · рабочий стол</div>
+        <div class="st-b">
+          <p>Круглые иконки, синий градиент, крупные тонкие часы. Настоящий One UI на Honor не встанет — загрузчик закрыт, но внешне это он.</p>
+          <div class="kit">
+            <span><i>Лаунчер</i>Nova</span>
+            <span><i>Иконки</i>круглые, One UI</span>
+            <span><i>Обои</i>готовые градиенты</span>
+            <span><i>Кому</i>привычно, без риска</span>
+          </div>
+        </div>
+      </article>
+
+      <!-- 08 ТИХИЙ -->
+      <article class="st">
+        <div class="st-h"><div class="num">08</div><div class="nm">Тихий</div><div class="ref">минимализм · без сетки иконок</div></div>
+        <div class="duo">
+          <div class="ph s8"><span class="pill"></span><div class="lay"></div>
+            <div class="bar"><span>9:41</span><span>▮ 86</span></div>
+            <div class="z clk" style="top:44px"><div class="t">9:41</div><div class="d">чт, 4 сентября</div></div>
+            <div class="ls" style="top:132px">Telegram<br><u>2 сообщения</u><br>Будильник 7:30</div>
+          </div>
+          <div class="ph s8"><span class="pill"></span><div class="lay"></div>
+            <div class="bar"><span>9:41</span><span>▮ 86</span></div>
+            <div class="ls" style="top:40px">Телефон<br>Telegram<br>Камера<br>YouTube<br>Музыка<br><u>Настройки</u></div>
+            <div class="az" style="top:44px">A<br>B<br>D<br>G<br>M<br>T<br>V<br>Y</div>
+            <div class="dk"><div class="i">☎</div><div class="i">✈</div><div class="i">◉</div><div class="i">☰</div></div>
+          </div>
+        </div>
+        <div class="cap">блокировка · рабочий стол</div>
+        <div class="st-b">
+          <p>Никаких иконок: список приложений и буквенный указатель справа. Чистый чёрный экономит батарею на любом экране и убирает соблазн залипать.</p>
+          <div class="kit">
+            <span><i>Лаунчер</i>Niagara</span>
+            <span><i>Иконки</i>Arcticons, белые</span>
+            <span><i>Обои</i>чёрный, без генерации</span>
+            <span><i>Кому</i>меньше отвлекаться</span>
+          </div>
+        </div>
+      </article>
+
     </div>
   </div>
 </section>
@@ -333,14 +529,14 @@ footer{padding:40px 0 60px}
 <footer>
   <div class="wrap">
     <div class="ask">
-      <h2>Что нужно от тебя</h2>
+      <h2>Что дальше</h2>
       <ol>
-        <li><strong>Выбери вариант:</strong> 01 тихий чёрный, 02 как Samsung или 03 свой стиль. Можно смешать — скажи что откуда.</li>
-        <li><strong>Назови точную модель</strong> — Настройки → О телефоне (например «Honor X9c, MagicOS 9.0»). От этого зависят названия пунктов меню в инструкции.</li>
-        <li><strong>Скажи, есть ли на телефоне Google Play</strong> — открывается ли приложение Play Маркет. Если только AppGallery, набор приложений будет другой.</li>
+        <li>Скажи <strong>«сношу»</strong> — и я убираю группы 1–4. Пять минут, всё обратимо.</li>
+        <li>Выбери <strong>стиль по номеру</strong> (можно смешать: например, обои из 02, а раскладка из 08).</li>
+        <li>Спроси Илью про <strong>игры и шагомер</strong> из группы 5 — если это подарок от Aura, снесу заодно.</li>
       </ol>
-      <p style="margin-top:14px">После этого я соберу пошаговую инструкцию под конкретный экран (что нажать, в каком порядке) и, если возьмём 03, сгенерирую обои — про стоимость генерации спрошу заранее.</p>
-      <div class="stamp">Страница личная · noindex · обновляется по ходу</div>
+      <p style="margin-top:12px">Обои под выбранный стиль генерируются платно — назову цену до запуска. Для стилей 07 и 08 генерация не нужна.</p>
+      <div class="stamp">Личная страница · noindex · HONOR X7d · MagicOS 9.0.0</div>
     </div>
   </div>
 </footer>
