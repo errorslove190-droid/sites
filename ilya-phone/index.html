@@ -268,6 +268,52 @@ strong{font-weight:700}
 .recipe .r span{font-size:14.5px}
 @media(max-width:560px){.recipe .r{grid-template-columns:1fr;gap:2px}}
 
+/* ═══ РАЗБОР S23 ═══ */
+.anat{display:grid;gap:26px;grid-template-columns:1fr;align-items:start}
+@media(min-width:820px){.anat{grid-template-columns:auto 1fr;gap:38px}}
+.pts{counter-reset:pt;display:grid;gap:0}
+.pt{display:grid;grid-template-columns:30px 1fr;gap:12px;padding:11px 0;border-bottom:1px solid var(--line);align-items:start;counter-increment:pt}
+.pt::before{content:counter(pt);font-family:var(--f-display);font-weight:800;font-size:13px;background:var(--ink);color:#fff;width:24px;height:24px;display:flex;align-items:center;justify-content:center}
+.pt b{display:block;font-family:var(--f-cond);text-transform:uppercase;letter-spacing:.06em;font-size:13px;font-weight:600;margin-bottom:2px}
+.pt span{font-size:14px;color:#333}
+.pt code{font-family:ui-monospace,Consolas,monospace;font-size:12px;background:var(--soft);padding:1px 5px}
+.sw{display:inline-block;width:11px;height:11px;border-radius:3px;vertical-align:-1px;margin-right:4px;border:1px solid #0002}
+
+.trio{display:grid;gap:22px;grid-template-columns:1fr}
+@media(min-width:640px){.trio{grid-template-columns:repeat(3,1fr);gap:18px}}
+.tr{border:1px solid var(--line);display:flex;flex-direction:column}
+.tr.pick{border-color:var(--ink);box-shadow:inset 0 0 0 1px var(--ink)}
+.tr .solo{display:flex;justify-content:center;padding:18px 10px;background:#fafafa}
+.tr .ly-t .nm{font-size:16px}
+.mid-ph{width:150px;height:322px;border-radius:22px;overflow:hidden;position:relative;border:3px solid #0d0d0d;box-shadow:0 10px 26px rgba(0,0,0,.25);isolation:isolate}
+.mid-ph .bar{position:absolute;top:8px;left:0;right:0;display:flex;justify-content:space-between;padding:0 11px;font-size:6.5px;font-weight:800;z-index:6;color:#f2f4ef}
+.mid-ph .hills::before{top:52%;height:26%}
+.mid-ph .hills::after{top:66%;height:34%}
+.mg{position:absolute;left:9px;right:9px;top:36px;display:grid;grid-template-columns:repeat(6,1fr);gap:9px 4px;z-index:5}
+.mg .ti{aspect-ratio:1;display:flex;align-items:center;justify-content:center;font-size:7px;line-height:1}
+.mg .fold{display:grid;grid-template-columns:1fr 1fr;grid-template-rows:1fr 1fr;gap:1.5px;padding:2.5px}
+.mg .fold b{display:block;border-radius:1.5px}
+.mdk{position:absolute;left:9px;right:9px;bottom:10px;z-index:5;display:grid;grid-template-columns:repeat(5,1fr);gap:5px}
+.mdk .ti{aspect-ratio:1;display:flex;align-items:center;justify-content:center;font-size:7.5px}
+.mwg{position:absolute;left:9px;right:9px;bottom:44px;z-index:5;background:#262626aa;border-radius:10px;padding:7px 9px;display:flex;align-items:center;gap:7px}
+.mwg .dot{width:15px;height:15px;border-radius:50%;background:#f0703a;flex:none}
+.mwg .tx{font-size:6px;color:#e9e9e9}
+/* A: плашки в тон обоев */
+.va .ti{border-radius:34%;background:#93a183;color:#1e2519;font-weight:700}
+.va .ti.color{color:#fff}
+.va .fold{background:#39432f}
+.va .fold b{background:#93a18399}
+/* B: только контур */
+.vb .ti{background:none;color:#eef2ea;font-weight:300;font-size:9px;text-shadow:0 1px 2px #0008}
+.vb .ti.color{color:#eef2ea}
+.vb .fold{background:#ffffff14;border-radius:34%}
+.vb .fold b{background:none;border:1px solid #eef2eacc;border-radius:50%}
+/* C: заливка без плашки */
+.vc .ti{background:none;color:#f4f6f1;font-weight:800;font-size:9px;text-shadow:0 1px 3px #000a}
+.vc .ti.color{color:#f4f6f1}
+.vc .fold{background:#00000033;border-radius:34%}
+.vc .fold b{background:#f4f6f1cc;border-radius:50%}
+
 footer{padding:38px 0 60px}
 .ask{border:2px solid var(--ink);padding:22px}
 .ask h2{margin-bottom:10px}
@@ -294,23 +340,39 @@ footer{padding:38px 0 60px}
 
 <section id="target">
   <div class="wrap">
-    <h2>Цель: как на твоём S23</h2>
-    <p class="sub">Посмотрел твой рабочий стол и разобрал, из чего он собран. Это не «стиль обоев» — это система: иконки перекрашены в цвет обоев, подписей нет, всё разложено по папкам. Такое повторяется на Honor один в один, лаунчером поверх MagicOS.</p>
-    <div class="target">
-      <div class="tgt-ph"><div class="big-ph"><div class="hills"></div><div class="haze"></div><div class="bar"><span>22:45</span><span>4G+ ▮ 46</span></div><div class="tg-grid"><div class="ti fold"><b></b><b></b><b></b><b></b></div><div class="ti fold"><b></b><b></b><b></b><b></b></div><div class="ti">◀</div><div class="ti color" style="background:#e0182d">М</div><div class="ti color" style="background:#ffcc00">m</div><div class="ti color" style="background:#2f9fd8">♪</div><div class="ti fold"><b></b><b></b><b></b><b></b></div><div class="ti fold"><b></b><b></b><b></b><b></b></div><div class="ti">2</div><div class="ti fold"><b></b><b></b><b></b><b></b></div><div class="ti fold"><b></b><b></b><b></b><b></b></div><div class="ti fold"><b></b><b></b><b></b><b></b></div><div class="ti fold"><b></b><b></b><b></b><b></b></div><div class="ti">▷</div><div class="ti">◆</div><div class="ti color" style="background:#3b5bdb">✈</div><div class="ti color" style="background:#e8e8e8">■</div><div class="ti">●</div><div class="ti">▤</div><div class="ti fold"><b></b><b></b><b></b><b></b></div><div class="ti fold"><b></b><b></b><b></b><b></b></div><div class="ti">P</div><div class="ti">☁</div><div class="ti color" style="background:#1e1e1e">M</div><div class="ti">G</div><div class="ti color" style="background:#7a5ce0">✿</div><div class="ti">✓</div></div><div class="tg-wg"><span class="dot"></span><span class="tx">Подъезд №14</span></div><div class="tg-num">30151</div><div class="tg-dots"><i></i><i></i><i class="on"></i><i></i><i></i><i></i></div><div class="tg-dock"><div class="ti">⚙</div><div class="ti">◴</div><div class="ti">☎</div><div class="ti">◉</div><div class="ti">❀</div></div></div></div>
-      <div>
-        <div class="recipe">
-          <div class="r"><b>Обои</b><span>Приглушённый пейзаж: светлая дымка сверху, тёмная земля снизу. Тёмный низ нужен, чтобы белые часы и виджеты читались.</span></div>
-          <div class="r"><b>Иконки</b><span>Главный приём. Все приложения перекрашены в один оливковый тон обоев, глиф внутри тёмный. Цветными остаются только те, кто тему не поддерживает.</span></div>
-          <div class="r"><b>Сетка</b><span>Шесть столбцов вместо четырёх, иконки мелкие, подписей нет совсем. За счёт этого на экран влезает вчетверо больше.</span></div>
-          <div class="r"><b>Папки</b><span>Почти всё сложено в папки по смыслу, на экране лежат контейнеры, а не отдельные приложения.</span></div>
-          <div class="r"><b>Виджеты</b><span>Одна тёмная карточка внизу с тем, что нужно каждый день. Не ряд виджетов, а один.</span></div>
-          <div class="r"><b>Док</b><span>Пять иконок, в том же оливковом тоне, без подписей.</span></div>
-        </div>
-        <div class="warn" style="margin-top:18px"><strong>Что понадобится на Honor:</strong> Nova Launcher из Play Маркета, монохромный набор иконок и заливка плашки под цвет обоев, сетка 6×5 с выключенными подписями. Родной лаунчер Honor остаётся на месте — если не понравится, возврат в два тапа.</div>
-        <div class="warn"><strong>Мне нужен разблокированный телефон.</strong> Экран блокировки я обойти не могу. Разблокируй Honor и оставь на кабеле — дальше я поставлю лаунчер, обои и иконки сам, через зеркало экрана.</div>
+    <h2>Разбор твоего экрана</h2>
+    <p class="sub">Взял скриншот рабочего стола с твоего S23 (он в галерее с пометкой One UI Home) и разобрал по деталям — вот из чего это собрано и что именно повторяем на Honor.</p>
+    <div class="anat">
+      <div class="tgt-ph"><div class="big-ph"><div class="hills"></div><div class="haze"></div><div class="bar"><span>22:45</span><span>4G+ ▮ 46</span></div><div class="tg-grid"><div class="ti fold"><b></b><b></b><b></b><b></b></div><div class="ti fold"><b></b><b></b><b></b><b></b></div><div class="ti">◀</div><div class="ti color" style="background:#e0182d">М</div><div class="ti color" style="background:#ffcc00">m</div><div class="ti color" style="background:#2f9fd8">♪</div><div class="ti fold"><b></b><b></b><b></b><b></b></div><div class="ti fold"><b></b><b></b><b></b><b></b></div><div class="ti">2</div><div class="ti fold"><b></b><b></b><b></b><b></b></div><div class="ti fold"><b></b><b></b><b></b><b></b></div><div class="ti fold"><b></b><b></b><b></b><b></b></div><div class="ti fold"><b></b><b></b><b></b><b></b></div><div class="ti">▷</div><div class="ti">◆</div><div class="ti color" style="background:#3b5bdb">✈</div><div class="ti color" style="background:#e8e8e8">■</div><div class="ti">●</div><div class="ti">▤</div><div class="ti fold"><b></b><b></b><b></b><b></b></div><div class="ti fold"><b></b><b></b><b></b><b></b></div><div class="ti">P</div><div class="ti">☁</div><div class="ti color" style="background:#1e1e1e">M</div><div class="ti">G</div><div class="ti color" style="background:#7a5ce0">✿</div><div class="ti">✓</div></div><div class="tg-wg"><span class="dot"></span><span class="tx">Подъезд №14</span></div><div class="tg-num">30151</div><div class="tg-dots"><i></i><i></i><i class="on"></i><i></i><i></i><i></i></div><div class="tg-dock"><div class="ti">⚙</div><div class="ti">◴</div><div class="ti">☎</div><div class="ti">◉</div><div class="ti">❀</div></div></div>
+      <div class="pts">
+        <div class="pt"><div><b>Обои</b><span>Фотопейзаж: горы в дымке сверху <i class="sw" style="background:#aab6ac"></i>, шалфейная середина <i class="sw" style="background:#7d8f7a"></i>, тёмно-зелёные холмы снизу <i class="sw" style="background:#22301e"></i>. Низ тёмный не случайно — на нём белый текст виджетов и точки страниц.</span></div></div>
+        <div class="pt"><div><b>Иконки в тон обоев</b><span>Samsung берёт цвет из обоев и перекрашивает глиф каждого приложения: плашка оливковая <i class="sw" style="background:#93a183"></i>, знак почти чёрный <i class="sw" style="background:#1e2519"></i>. Форма — сквиркл One UI, с лёгкой объёмной кромкой (видно на доке). Это системная функция «Тематические значки».</span></div></div>
+        <div class="pt"><div><b>Цветные исключения</b><span>МТС, maxim, Smule, Яндекс, ПДД, MAX остались фирменных цветов — у них нет монохромного варианта, система их не трогает. На Honor будет то же самое с теми же приложениями.</span></div></div>
+        <div class="pt"><div><b>Сетка 6×5, без подписей</b><span>Шесть столбцов, подписи выключены совсем. Иконки маленькие, промежутки широкие, поэтому даже 30 штук на экране не выглядят кашей.</span></div></div>
+        <div class="pt"><div><b>Папки как контейнеры</b><span>Половина ячеек — папки: плашка темнее иконок <i class="sw" style="background:#39432f"></i>, внутри превью 2×2 или 3×3, и мини-иконки тоже в тон. Сгруппировано по смыслу: соцсети, музыка, магазины, транспорт.</span></div></div>
+        <div class="pt"><div><b>Один виджет</b><span>Тёмная карточка <i class="sw" style="background:#2a2a2a"></i> с оранжевым кружком (домофон) и крупная белая цифра рядом — это два разных виджета на прозрачном фоне. Не ряд виджетов, а один блок с тем, что нужно ежедневно.</span></div></div>
+        <div class="pt"><div><b>Док на пять</b><span>Настройки, часы, телефон, камера, галерея — тоже в тон, без подписей. Шесть страниц, домашняя помечена «домиком» в точках.</span></div></div>
+        <div class="pt"><div><b>Что это даёт</b><span>Экран читается как одна поверхность: обои и приложения одного цвета, глаз цепляется только за цветные исключения и виджет. Именно это ощущение «чисто» — не пустота, а единый тон.</span></div></div>
       </div>
     </div>
+
+    <h2 style="margin-top:40px">Иконки без рамок: три варианта</h2>
+    <p class="sub">Ты написал «главное, чтобы иконки были без рамок». На Honor сейчас каждая иконка в тёмном квадрате — это и есть рамка, её убираем в любом случае. Дальше три пути, на одних и тех же обоях и той же сетке 6×5.</p>
+    <div class="trio">
+      <article class="tr pick">
+        <div class="solo"><div class="mid-ph va"><div class="hills"></div><div class="haze"></div><div class="bar"><span>22:45</span><span>4G+ ▮ 46</span></div><div class="mg"><div class="ti fold"><b></b><b></b><b></b><b></b></div><div class="ti fold"><b></b><b></b><b></b><b></b></div><div class="ti">◀</div><div class="ti color" style="background:#e0182d">М</div><div class="ti color" style="background:#ffcc00">m</div><div class="ti color" style="background:#2f9fd8">♪</div><div class="ti fold"><b></b><b></b><b></b><b></b></div><div class="ti fold"><b></b><b></b><b></b><b></b></div><div class="ti">2</div><div class="ti fold"><b></b><b></b><b></b><b></b></div><div class="ti fold"><b></b><b></b><b></b><b></b></div><div class="ti fold"><b></b><b></b><b></b><b></b></div><div class="ti fold"><b></b><b></b><b></b><b></b></div><div class="ti">▷</div><div class="ti">◆</div><div class="ti color" style="background:#3b5bdb">✈</div><div class="ti color" style="background:#e8e8e8">▤</div><div class="ti">●</div><div class="ti">P</div><div class="ti fold"><b></b><b></b><b></b><b></b></div><div class="ti fold"><b></b><b></b><b></b><b></b></div><div class="ti">☁</div><div class="ti">G</div><div class="ti color" style="background:#1e1e1e">M</div><div class="ti">✓</div></div><div class="mwg"><span class="dot"></span><span class="tx">Подъезд №14</span></div><div class="mdk"><div class="ti">⚙</div><div class="ti">◴</div><div class="ti">☎</div><div class="ti">◉</div><div class="ti">❀</div></div></div></div>
+        <div class="ly-t"><div class="num">A</div><div class="nm">Как у тебя: плашка в тон</div><p>Плашка есть, но она цвета обоев — сливается с фоном и рамкой не читается. Глиф тёмный. Один в один твой S23.</p><div class="fit">Nova Launcher → «Тематические значки: всегда». Цвет берётся из обоев автоматически.</div></div>
+      </article>
+      <article class="tr">
+        <div class="solo"><div class="mid-ph vb"><div class="hills"></div><div class="haze"></div><div class="bar"><span>22:45</span><span>4G+ ▮ 46</span></div><div class="mg"><div class="ti fold"><b></b><b></b><b></b><b></b></div><div class="ti fold"><b></b><b></b><b></b><b></b></div><div class="ti">◁</div><div class="ti color">М</div><div class="ti color">m</div><div class="ti color">♪</div><div class="ti fold"><b></b><b></b><b></b><b></b></div><div class="ti fold"><b></b><b></b><b></b><b></b></div><div class="ti">△</div><div class="ti fold"><b></b><b></b><b></b><b></b></div><div class="ti fold"><b></b><b></b><b></b><b></b></div><div class="ti fold"><b></b><b></b><b></b><b></b></div><div class="ti fold"><b></b><b></b><b></b><b></b></div><div class="ti">▷</div><div class="ti">◇</div><div class="ti color">✈</div><div class="ti color">□</div><div class="ti">♡</div><div class="ti">○</div><div class="ti fold"><b></b><b></b><b></b><b></b></div><div class="ti fold"><b></b><b></b><b></b><b></b></div><div class="ti">☁</div><div class="ti">☆</div><div class="ti color">⌂</div><div class="ti">✓</div></div><div class="mwg"><span class="dot"></span><span class="tx">Подъезд №14</span></div><div class="mdk"><div class="ti">⚙</div><div class="ti">◴</div><div class="ti">☎</div><div class="ti">◉</div><div class="ti">❀</div></div></div></div>
+        <div class="ly-t"><div class="num">B</div><div class="nm">Только контур</div><p>Плашек нет вообще: тонкие белые линии прямо на обоях. Самый воздушный вариант, обои видно целиком.</p><div class="fit">Nova Launcher + набор Arcticons (бесплатный, 10 000+ иконок, кириллица не нужна).</div></div>
+      </article>
+      <article class="tr">
+        <div class="solo"><div class="mid-ph vc"><div class="hills"></div><div class="haze"></div><div class="bar"><span>22:45</span><span>4G+ ▮ 46</span></div><div class="mg"><div class="ti fold"><b></b><b></b><b></b><b></b></div><div class="ti fold"><b></b><b></b><b></b><b></b></div><div class="ti">◀</div><div class="ti color">М</div><div class="ti color">m</div><div class="ti color">♪</div><div class="ti fold"><b></b><b></b><b></b><b></b></div><div class="ti fold"><b></b><b></b><b></b><b></b></div><div class="ti">▲</div><div class="ti fold"><b></b><b></b><b></b><b></b></div><div class="ti fold"><b></b><b></b><b></b><b></b></div><div class="ti fold"><b></b><b></b><b></b><b></b></div><div class="ti fold"><b></b><b></b><b></b><b></b></div><div class="ti">▶</div><div class="ti">◆</div><div class="ti color">✈</div><div class="ti color">■</div><div class="ti">♥</div><div class="ti">●</div><div class="ti fold"><b></b><b></b><b></b><b></b></div><div class="ti fold"><b></b><b></b><b></b><b></b></div><div class="ti">☁</div><div class="ti">★</div><div class="ti color">⌂</div><div class="ti">✓</div></div><div class="mwg"><span class="dot"></span><span class="tx">Подъезд №14</span></div><div class="mdk"><div class="ti">⚙</div><div class="ti">◴</div><div class="ti">☎</div><div class="ti">◉</div><div class="ti">❀</div></div></div></div>
+        <div class="ly-t"><div class="num">C</div><div class="nm">Только заливка</div><p>Плашек нет, глифы белые и жирные. Читается лучше контурных на светлом верху обоев.</p><div class="fit">Nova Launcher + набор Whicons (бесплатный). Цветные исключения тоже станут белыми.</div></div>
+      </article>
+    </div>
+    <div class="warn" style="margin-top:22px"><strong>Во всех трёх:</strong> сетка 6×5, подписи выключены, папки по смыслу, док на пять, один тёмный виджет внизу, пейзажные обои с тёмным низом. Родной лаунчер Honor не удаляется — возврат в два тапа.</div>
   </div>
 </section>
 
