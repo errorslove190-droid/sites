@@ -314,6 +314,25 @@ strong{font-weight:700}
 .vc .fold{background:#00000033;border-radius:34%}
 .vc .fold b{background:#f4f6f1cc;border-radius:50%}
 
+/* ═══ ПЛАН НАСТРОЙКИ ═══ */
+.plan{display:grid;gap:18px;grid-template-columns:1fr}
+@media(min-width:760px){.plan{grid-template-columns:1fr 1fr;gap:22px}}
+.pl{border:1px solid var(--line);padding:16px 18px}
+.pl h3{font-family:var(--f-cond);text-transform:uppercase;letter-spacing:.06em;font-size:14px;font-weight:600;margin-bottom:8px}
+.pl p{font-size:14px;color:#333}
+.pl ul{margin-top:6px}
+.pl li{font-size:13.5px;margin-bottom:5px}
+.cats{display:grid;gap:12px;grid-template-columns:repeat(2,1fr)}
+@media(min-width:640px){.cats{grid-template-columns:repeat(3,1fr)}}
+@media(min-width:980px){.cats{grid-template-columns:repeat(4,1fr)}}
+.cat{border:1px solid var(--line);padding:12px 14px}
+.cat b{display:block;font-family:var(--f-cond);text-transform:uppercase;letter-spacing:.06em;font-size:13px;font-weight:600;margin-bottom:6px;padding-bottom:6px;border-bottom:1px solid var(--line)}
+.cat span{display:block;font-size:13px;color:#333;line-height:1.5}
+.cat.dock{border-color:var(--ink);box-shadow:inset 0 0 0 1px var(--ink)}
+.wallprev{display:flex;gap:16px;align-items:center;margin-top:10px}
+.wallprev .sw2{width:56px;height:118px;border-radius:10px;flex:none;background:linear-gradient(180deg,#a8b6ac 0%,#96a698 28%,#70826c 48%,#4a5f42 64%,#2c3b26 80%,#182216 100%);border:2px solid #0d0d0d}
+.wallprev p{font-size:13.5px;color:#333}
+
 footer{padding:38px 0 60px}
 .ask{border:2px solid var(--ink);padding:22px}
 .ask h2{margin-bottom:10px}
@@ -790,16 +809,42 @@ footer{padding:38px 0 60px}
   </div>
 </section>
 
+<section id="plan">
+  <div class="wrap">
+    <h2>Что именно настраиваю</h2>
+    <p class="sub">По твоим правкам: без отдельного меню приложений, всё на страницах; свайпы вместо кнопок снизу; приложения по категориям, чтобы не терялся; обои пока нейтральные — свои Илья выберет сам.</p>
+    <div class="plan">
+      <div class="pl"><h3>Иконки</h3><p>Беру вариант <strong>A</strong> — плашка в тон обоев, как у тебя: рамки не видно, а читается лучше голых глифов. Если Honor не отдаст цвет обоев лаунчеру, откатываюсь на <strong>C</strong> — белые глифы без плашек. Подписи выключены, сетка 6×5.</p></div>
+      <div class="pl"><h3>Без меню приложений</h3><p>Свайп вверх ничего не открывает, все приложения лежат на двух страницах. Новое приложение само появляется на столе, а не прячется в списке.</p></div>
+      <div class="pl"><h3>Свайпы вместо кнопок</h3><p>Три кнопки снизу убираю, включаю жестовую навигацию MagicOS: свайп снизу — домой, свайп с края — назад, свайп снизу с задержкой — недавние. Флажок уже записан, проверю, как только экран разблокируют.</p></div>
+      <div class="pl"><h3>Обои</h3><div class="wallprev"><div class="sw2"></div><p>Пока — спокойный градиент, который я нарисовал сам: светлая дымка сверху, тёмная земля снизу, без картинок и без генерации (бесплатно). Уже лежит на телефоне в Pictures/Wallpapers. Когда Илья решит, что хочет, — заменим на его или сгенерим под его вкус.</p></div></div>
+    </div>
+
+    <h3 style="margin-top:30px;font-family:var(--f-cond);text-transform:uppercase;letter-spacing:.06em;font-size:15px">Две страницы и док</h3>
+    <p class="sub" style="margin-bottom:14px">Страница 1 — то, чем пользуются каждый день, без папок. Страница 2 — папки по категориям, всё остальное. Больше страниц не делаю: чем меньше листать, тем меньше теряться.</p>
+    <div class="cats">
+      <div class="cat dock"><b>Док (всегда снизу)</b><span>Телефон · Сообщения · Камера · Галерея · Настройки</span></div>
+      <div class="cat"><b>Страница 1 — каждый день</b><span>Telegram · MAX · ВК · TikTok · YouTube · Chrome · Google · 2ГИС · Погода · Калькулятор · Часы · Play Маркет + виджет часов и погоды</span></div>
+      <div class="cat"><b>Папка «Связь»</b><span>Контакты · Gmail · Сообщения Google</span></div>
+      <div class="cat"><b>Папка «Медиа»</b><span>YouTube Music · Google Фото · Видео · Диктофон</span></div>
+      <div class="cat"><b>Папка «Карты»</b><span>Google Карты · Навигатор · 2ГИС (дубль)</span></div>
+      <div class="cat"><b>Папка «Инструменты»</b><span>Календарь · Файлы · Компас · Переводчик · DeepSeek · Фонарик</span></div>
+      <div class="cat"><b>Папка «Игры»</b><span>Among Us · Level Devil · Soul Knight · Wall Jumper — ставлю заново из Play</span></div>
+      <div class="cat"><b>Папка «Магазины и система»</b><span>RuStore · Магазин Honor · Темы · Диспетчер · Обновления · Поддержка · VPN · SwiftKey</span></div>
+    </div>
+    <div class="warn" style="margin-top:22px"><strong>Прячу совсем</strong> (не удаляю): SIM-меню оператора, «Клонирование телефона», «Документы», Voice Access, MagicHome — их ярлыки только мешают.</div>
+  </div>
+</section>
+
 <footer>
   <div class="wrap">
     <div class="ask">
-      <h2>Что дальше</h2>
+      <h2>Что нужно от тебя</h2>
       <ol>
-        <li>Скажи <strong>«сношу»</strong> — и я убираю группы 1–4. Пять минут, всё обратимо.</li>
-        <li>Выбери <strong>стиль по номеру</strong> (можно смешать: например, обои из 02, а раскладка из 08).</li>
-        <li>Спроси Илью про <strong>игры и шагомер</strong> из группы 5 — если это подарок от Aura, снесу заодно.</li>
+        <li><strong>Разблокируй Honor</strong> и оставь на кабеле с включённым экраном — экран блокировки я не прохожу, а всё остальное делаю сам.</li>
+        <li>Пока я ставлю — ничего не трогай на телефоне, иначе мы будем нажимать в одно место вдвоём.</li>
+        <li>Когда закончу, пришлю скриншоты: главная, вторая страница, папка. Правки — как всегда, словами.</li>
       </ol>
-      <p style="margin-top:12px">Обои под выбранный стиль генерируются платно — назову цену до запуска. Для стилей 07 и 08 генерация не нужна.</p>
       <div class="stamp">Личная страница · noindex · HONOR X7d · MagicOS 9.0.0</div>
     </div>
   </div>
