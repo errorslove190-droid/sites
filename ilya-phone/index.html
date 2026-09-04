@@ -233,6 +233,41 @@ strong{font-weight:700}
 .arc .core{position:absolute;left:50%;top:56%;transform:translate(-50%,-50%);width:40px;height:40px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:9px}
 .s3 .arc .core{background:#ffffff12;border:1px solid #ffffff26}
 
+/* ═══ ЦЕЛЬ: ТОН В ТОН ═══ */
+.target{display:grid;gap:26px;grid-template-columns:1fr;align-items:start}
+@media(min-width:820px){.target{grid-template-columns:auto 1fr;gap:38px}}
+.tgt-ph{justify-self:center}
+.big-ph{width:186px;height:400px;border-radius:26px;overflow:hidden;position:relative;border:4px solid #0d0d0d;box-shadow:0 14px 34px rgba(0,0,0,.28);isolation:isolate}
+.big-ph .bar{position:absolute;top:10px;left:0;right:0;display:flex;justify-content:space-between;padding:0 13px;font-size:8px;font-weight:800;z-index:6;color:#f2f4ef}
+.hills{position:absolute;inset:0;z-index:1;background:
+  linear-gradient(180deg,#aab6ac 0%,#9fae9f 26%,#8b9d87 44%,#5f7358 60%,#3d4f37 76%,#22301e 100%)}
+.hills::before{content:"";position:absolute;left:-12%;right:-12%;top:52%;height:26%;
+  background:#4a5f42;border-radius:56% 44% 0 0/100% 100% 0 0}
+.hills::after{content:"";position:absolute;left:-18%;right:-4%;top:66%;height:34%;
+  background:#2c3b26;border-radius:48% 52% 0 0/100% 100% 0 0}
+.haze{position:absolute;left:0;right:0;top:0;height:34%;z-index:2;
+  background:linear-gradient(180deg,#cfd8ccaa,transparent)}
+.tg-grid{position:absolute;left:11px;right:11px;top:44px;display:grid;grid-template-columns:repeat(6,1fr);gap:11px 5px;z-index:5}
+.tg-grid .ti{aspect-ratio:1;border-radius:34%;background:#93a183;display:flex;align-items:center;justify-content:center;font-size:8px;color:#222b1d;font-weight:700}
+.tg-grid .ti.fold{background:#39432f;display:grid;grid-template-columns:1fr 1fr;grid-template-rows:1fr 1fr;gap:1.5px;padding:3px}
+.tg-grid .ti.fold b{display:block;border-radius:1.5px;background:#93a18399}
+.tg-grid .ti.color{color:#fff;font-size:7px}
+.tg-wg{position:absolute;left:11px;right:52px;bottom:56px;z-index:5;background:#26262699;backdrop-filter:blur(2px);border-radius:12px;padding:9px 11px;display:flex;align-items:center;gap:8px}
+.tg-wg .dot{width:20px;height:20px;border-radius:50%;background:#f0703a;flex:none}
+.tg-wg .tx{font-size:7px;color:#e9e9e9;letter-spacing:.02em}
+.tg-num{position:absolute;right:11px;bottom:56px;z-index:5;color:#fff;font-weight:800;font-size:13px}
+.tg-dots{position:absolute;left:0;right:0;bottom:42px;z-index:5;display:flex;gap:5px;justify-content:center}
+.tg-dots i{width:4px;height:4px;border-radius:50%;background:#ffffff66}
+.tg-dots i.on{background:#fff}
+.tg-dock{position:absolute;left:11px;right:11px;bottom:12px;z-index:5;display:grid;grid-template-columns:repeat(5,1fr);gap:6px}
+.tg-dock .ti{aspect-ratio:1;border-radius:34%;background:#93a183;display:flex;align-items:center;justify-content:center;font-size:9px;color:#222b1d}
+
+.recipe{border-top:2px solid var(--ink);padding-top:16px}
+.recipe .r{display:grid;grid-template-columns:118px 1fr;gap:14px;padding:9px 0;border-bottom:1px solid var(--line);align-items:baseline}
+.recipe .r b{font-family:var(--f-cond);text-transform:uppercase;letter-spacing:.06em;font-size:12px;font-weight:600;color:var(--grey)}
+.recipe .r span{font-size:14.5px}
+@media(max-width:560px){.recipe .r{grid-template-columns:1fr;gap:2px}}
+
 footer{padding:38px 0 60px}
 .ask{border:2px solid var(--ink);padding:22px}
 .ask h2{margin-bottom:10px}
@@ -256,6 +291,29 @@ footer{padding:38px 0 60px}
     </div>
   </div>
 </header>
+
+<section id="target">
+  <div class="wrap">
+    <h2>Цель: как на твоём S23</h2>
+    <p class="sub">Посмотрел твой рабочий стол и разобрал, из чего он собран. Это не «стиль обоев» — это система: иконки перекрашены в цвет обоев, подписей нет, всё разложено по папкам. Такое повторяется на Honor один в один, лаунчером поверх MagicOS.</p>
+    <div class="target">
+      <div class="tgt-ph"><div class="big-ph"><div class="hills"></div><div class="haze"></div><div class="bar"><span>22:45</span><span>4G+ ▮ 46</span></div><div class="tg-grid"><div class="ti fold"><b></b><b></b><b></b><b></b></div><div class="ti fold"><b></b><b></b><b></b><b></b></div><div class="ti">◀</div><div class="ti color" style="background:#e0182d">М</div><div class="ti color" style="background:#ffcc00">m</div><div class="ti color" style="background:#2f9fd8">♪</div><div class="ti fold"><b></b><b></b><b></b><b></b></div><div class="ti fold"><b></b><b></b><b></b><b></b></div><div class="ti">2</div><div class="ti fold"><b></b><b></b><b></b><b></b></div><div class="ti fold"><b></b><b></b><b></b><b></b></div><div class="ti fold"><b></b><b></b><b></b><b></b></div><div class="ti fold"><b></b><b></b><b></b><b></b></div><div class="ti">▷</div><div class="ti">◆</div><div class="ti color" style="background:#3b5bdb">✈</div><div class="ti color" style="background:#e8e8e8">■</div><div class="ti">●</div><div class="ti">▤</div><div class="ti fold"><b></b><b></b><b></b><b></b></div><div class="ti fold"><b></b><b></b><b></b><b></b></div><div class="ti">P</div><div class="ti">☁</div><div class="ti color" style="background:#1e1e1e">M</div><div class="ti">G</div><div class="ti color" style="background:#7a5ce0">✿</div><div class="ti">✓</div></div><div class="tg-wg"><span class="dot"></span><span class="tx">Подъезд №14</span></div><div class="tg-num">30151</div><div class="tg-dots"><i></i><i></i><i class="on"></i><i></i><i></i><i></i></div><div class="tg-dock"><div class="ti">⚙</div><div class="ti">◴</div><div class="ti">☎</div><div class="ti">◉</div><div class="ti">❀</div></div></div></div>
+      <div>
+        <div class="recipe">
+          <div class="r"><b>Обои</b><span>Приглушённый пейзаж: светлая дымка сверху, тёмная земля снизу. Тёмный низ нужен, чтобы белые часы и виджеты читались.</span></div>
+          <div class="r"><b>Иконки</b><span>Главный приём. Все приложения перекрашены в один оливковый тон обоев, глиф внутри тёмный. Цветными остаются только те, кто тему не поддерживает.</span></div>
+          <div class="r"><b>Сетка</b><span>Шесть столбцов вместо четырёх, иконки мелкие, подписей нет совсем. За счёт этого на экран влезает вчетверо больше.</span></div>
+          <div class="r"><b>Папки</b><span>Почти всё сложено в папки по смыслу, на экране лежат контейнеры, а не отдельные приложения.</span></div>
+          <div class="r"><b>Виджеты</b><span>Одна тёмная карточка внизу с тем, что нужно каждый день. Не ряд виджетов, а один.</span></div>
+          <div class="r"><b>Док</b><span>Пять иконок, в том же оливковом тоне, без подписей.</span></div>
+        </div>
+        <div class="warn" style="margin-top:18px"><strong>Что понадобится на Honor:</strong> Nova Launcher из Play Маркета, монохромный набор иконок и заливка плашки под цвет обоев, сетка 6×5 с выключенными подписями. Родной лаунчер Honor остаётся на месте — если не понравится, возврат в два тапа.</div>
+        <div class="warn"><strong>Мне нужен разблокированный телефон.</strong> Экран блокировки я обойти не могу. Разблокируй Honor и оставь на кабеле — дальше я поставлю лаунчер, обои и иконки сам, через зеркало экрана.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
 
 <section>
   <div class="wrap">
