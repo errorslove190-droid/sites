@@ -55,7 +55,8 @@ strong{font-weight:700}
 /* ── стили ── */
 .styles{display:grid;gap:26px;grid-template-columns:1fr}
 @media(min-width:640px){.styles{grid-template-columns:repeat(2,1fr)}}
-@media(min-width:980px){.styles{grid-template-columns:repeat(4,1fr);gap:20px}}
+@media(min-width:980px){.styles{grid-template-columns:repeat(3,1fr);gap:20px}}
+@media(min-width:1320px){.styles{grid-template-columns:repeat(4,1fr)}}
 .st{border:1px solid var(--line);display:flex;flex-direction:column}
 .st-h{padding:14px 16px 12px;border-bottom:1px solid var(--line)}
 .st-h .num{font-family:var(--f-display);font-weight:800;font-size:12px;color:var(--grey);letter-spacing:.04em}
@@ -184,6 +185,54 @@ strong{font-weight:700}
 .s8 .dk{background:#ffffff08;border-radius:8px}
 
 /* footer */
+/* ═══ ИНТЕРФЕЙСЫ (раскладки) ═══ */
+.st.liked{border-color:var(--ink);box-shadow:inset 0 0 0 1px var(--ink)}
+.st.liked .st-h{position:relative}
+.st.liked .st-h::after{content:"нравится";position:absolute;top:12px;right:14px;background:var(--lime);font-family:var(--f-cond);text-transform:uppercase;letter-spacing:.08em;font-size:9.5px;padding:2px 6px}
+
+.lays{display:grid;gap:22px;grid-template-columns:repeat(2,1fr)}
+@media(min-width:640px){.lays{grid-template-columns:repeat(3,1fr)}}
+@media(min-width:980px){.lays{grid-template-columns:repeat(4,1fr);gap:18px}}
+.ly{border:1px solid var(--line);display:flex;flex-direction:column}
+.ly .solo{display:flex;justify-content:center;padding:18px 10px;background:#fafafa}
+.ly .ph{width:132px;height:284px}
+.ly-t{padding:12px 14px 14px}
+.ly-t .num{font-family:var(--f-display);font-weight:800;font-size:11px;color:var(--grey)}
+.ly-t .nm{font-family:var(--f-cond);text-transform:uppercase;letter-spacing:.05em;font-size:16px;font-weight:600;margin-top:1px}
+.ly-t p{font-size:13.5px;color:#333;margin-top:6px}
+.ly-t .fit{margin-top:9px;padding-top:8px;border-top:1px solid var(--line);font-size:12px;color:var(--grey)}
+
+/* иконки с подписями */
+.gr.lbl-on{bottom:34px;gap:14px 5px}
+.gr.lbl-on .i{position:relative}
+.gr.lbl-on .i::after{content:attr(data-l);position:absolute;top:calc(100% + 3px);left:-4px;right:-4px;text-align:center;font-size:4.6px;letter-spacing:.02em;opacity:.72;font-weight:600}
+/* плотная сетка без подписей */
+.gr.dense{grid-template-columns:repeat(5,1fr);gap:6px 4px;bottom:32px}
+.gr.dense .i{font-size:7px}
+/* нижняя половина */
+.gr.thumb{bottom:32px;top:auto}
+/* папки */
+.folders{position:absolute;left:11px;right:11px;bottom:34px;display:grid;grid-template-columns:1fr 1fr;gap:9px;z-index:5}
+.fd{aspect-ratio:1;border-radius:9px;padding:6px;display:grid;grid-template-columns:1fr 1fr;grid-template-rows:1fr 1fr;gap:3px;align-content:center;position:relative}
+.fd i{border-radius:3px;display:block}
+.fd::after{content:attr(data-l);position:absolute;top:calc(100% + 3px);left:0;right:0;text-align:center;font-size:5px;letter-spacing:.04em;opacity:.7;font-weight:600}
+.s3 .fd{background:#ffffff0d;border:1px solid #ffffff1c}
+.s3 .fd i{background:#ffffff2e}
+/* бенто */
+.bento{position:absolute;left:9px;right:9px;bottom:30px;display:grid;grid-template-columns:1fr 1fr;gap:6px;z-index:5}
+.bt{border-radius:8px;padding:6px 7px;min-height:34px;display:flex;flex-direction:column;justify-content:center}
+.s3 .bt{background:#ffffff0d;border:1px solid #ffffff1c}
+.bt .b{font-size:12px;font-weight:800;line-height:1}
+.bt .s{font-size:5.2px;text-transform:uppercase;letter-spacing:.08em;opacity:.66;margin-top:3px}
+.bt.wide{grid-column:1/-1}
+.bt.row{flex-direction:row;align-items:center;gap:5px;justify-content:space-around}
+.bt.row span{font-size:8px}
+/* дуга */
+.arc{position:absolute;inset:0;z-index:5}
+.arc .i{position:absolute;width:23px;height:23px;border-radius:50%}
+.arc .core{position:absolute;left:50%;top:56%;transform:translate(-50%,-50%);width:40px;height:40px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:9px}
+.s3 .arc .core{background:#ffffff12;border:1px solid #ffffff26}
+
 footer{padding:38px 0 60px}
 .ask{border:2px solid var(--ink);padding:22px}
 .ask h2{margin-bottom:10px}
@@ -348,7 +397,7 @@ footer{padding:38px 0 60px}
       </article>
 
       <!-- 03 СЦЕНА -->
-      <article class="st">
+      <article class="st liked">
         <div class="st-h"><div class="num">03</div><div class="nm">Сцена</div><div class="ref">семья «тёмная сцена» · реф. Lumina Studio</div></div>
         <div class="duo">
           <div class="ph s3"><span class="pill"></span><div class="lay"></div>
@@ -376,7 +425,7 @@ footer{padding:38px 0 60px}
       </article>
 
       <!-- 04 МЕТАЛЛ -->
-      <article class="st">
+      <article class="st liked">
         <div class="st-h"><div class="num">04</div><div class="nm">Металл</div><div class="ref">семья «металл и электрик» · реф. Neutra, Refract</div></div>
         <div class="duo">
           <div class="ph s4"><span class="pill"></span><div class="lay"></div><div class="grid"></div>
@@ -495,7 +544,7 @@ footer{padding:38px 0 60px}
       </article>
 
       <!-- 08 ТИХИЙ -->
-      <article class="st">
+      <article class="st liked">
         <div class="st-h"><div class="num">08</div><div class="nm">Тихий</div><div class="ref">минимализм · без сетки иконок</div></div>
         <div class="duo">
           <div class="ph s8"><span class="pill"></span><div class="lay"></div>
@@ -523,6 +572,101 @@ footer{padding:38px 0 60px}
       </article>
 
     </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <h2>Восемь интерфейсов</h2>
+    <p class="sub">Тебе зашли <strong>«Сцена»</strong>, <strong>«Металл»</strong> и <strong>«Тихий»</strong> — это про цвет и обои. Раскладка экрана — отдельный выбор: любую из восьми ниже можно надеть на любой из трёх стилей. Здесь все восемь показаны в «Сцене», чтобы сравнивать именно устройство экрана, а не картинку.</p>
+    <div class="lays">
+      <article class="ly">
+        <div class="solo"><div class="ph s3"><span class="pill"></span><div class="lay"></div><div class="bar"><span>9:41</span><span>▮ 86</span></div><div class="wg" style="top:26px"><div class="b" style="font-family:var(--f-cond);font-weight:300;font-size:19px;letter-spacing:.02em">09:41</div><div class="s">четверг, 4 сентября</div></div><div class="gr lbl-on"><div class="i" data-l="Телефон">☎</div><div class="i" data-l="Telegram">✈</div><div class="i" data-l="Камера">◉</div><div class="i" data-l="Музыка">♪</div><div class="i" data-l="YouTube">▶</div><div class="i" data-l="Заметки">▤</div><div class="i" data-l="Карты">◈</div><div class="i" data-l="Настройки">⚙</div></div><div class="dk"><div class="i">☎</div><div class="i">✈</div><div class="i">◉</div><div class="i">☰</div></div></div></div>
+        <div class="ly-t">
+          <div class="num">01</div>
+          <div class="nm">Сетка с подписями</div>
+          <p>Классика: иконки в четыре столбца, под каждой название, снизу док из четырёх постоянных. Так телефон устроен прямо сейчас.</p>
+          <div class="fit">Ничего учить не надо. Минус — экран быстро зарастает.</div>
+        </div>
+      </article>
+      <article class="ly">
+        <div class="solo"><div class="ph s3"><span class="pill"></span><div class="lay"></div><div class="bar"><span>9:41</span><span>▮ 86</span></div><div class="z clk" style="top:26px"><div class="t" style="font-size:26px;font-family:var(--f-cond);font-weight:300">09:41</div></div><div style="position:absolute;left:12px;top:84px;z-index:5;font-size:9px;line-height:2.1;font-weight:500">Телефон<br>Telegram<br>Камера<br>YouTube<br>Музыка<br><span style="opacity:.35">Настройки</span></div><div style="position:absolute;right:10px;top:88px;z-index:5;font-size:5.5px;line-height:1.9;text-align:center;opacity:.4;font-weight:700">A<br>B<br>D<br>G<br>M<br>T<br>V<br>Y</div><div class="dk"><div class="i">☎</div><div class="i">✈</div><div class="i">◉</div><div class="i">☰</div></div></div></div>
+        <div class="ly-t">
+          <div class="num">02</div>
+          <div class="nm">Список</div>
+          <p>Иконок нет вообще. Слева столбик избранных приложений текстом, справа буквенный указатель — тап по букве открывает всё на неё.</p>
+          <div class="fit">Лаунчер Niagara. Самый спокойный и самый быстрый в одну руку.</div>
+        </div>
+      </article>
+      <article class="ly">
+        <div class="solo"><div class="ph s3"><span class="pill"></span><div class="lay"></div><div class="bar"><span>9:41</span><span>▮ 86</span></div><div class="z clk" style="top:88px"><div class="t" style="font-size:40px;font-family:var(--f-cond);font-weight:300;letter-spacing:.01em">9:41</div><div class="d">чт, 4 сентября</div></div><div class="dk"><div class="i">☎</div><div class="i">✈</div><div class="i">◉</div><div class="i">☰</div></div></div></div>
+        <div class="ly-t">
+          <div class="num">03</div>
+          <div class="nm">Пустой стол</div>
+          <p>На рабочем столе только крупные часы и док. Всё остальное — свайпом вверх в общий список приложений.</p>
+          <div class="fit">Обои видно целиком. Открывать что-то — лишний жест.</div>
+        </div>
+      </article>
+      <article class="ly">
+        <div class="solo"><div class="ph s3"><span class="pill"></span><div class="lay"></div><div class="bar"><span>9:41</span><span>▮ 86</span></div><div class="bento"><div class="bt wide"><div class="b">09:41</div><div class="s">четверг, 4 сентября</div></div><div class="bt"><div class="b">18°</div><div class="s">Ясно</div></div><div class="bt"><div class="b">86%</div><div class="s">Заряд</div></div><div class="bt wide row"><span>◀</span><span>▶</span><span>▶▶</span><span style="font-size:5px;opacity:.7">Сейчас играет</span></div><div class="bt wide"><div class="b" style="font-size:9px">2 события</div><div class="s">Школа 8:30 · Тренировка 18:00</div></div></div><div class="dk"><div class="i">☎</div><div class="i">✈</div><div class="i">◉</div><div class="i">☰</div></div></div></div>
+        <div class="ly-t">
+          <div class="num">04</div>
+          <div class="nm">Бенто</div>
+          <p>Мозаика карточек разного размера: часы, погода, музыка, календарь. Иконки — только в доке.</p>
+          <div class="fit">Информация видна без открывания приложений. Собирается виджетами KWGT.</div>
+        </div>
+      </article>
+      <article class="ly">
+        <div class="solo"><div class="ph s3"><span class="pill"></span><div class="lay"></div><div class="bar"><span>9:41</span><span>▮ 86</span></div><div class="z clk" style="top:34px"><div class="t" style="font-size:30px;font-family:var(--f-cond);font-weight:300">09:41</div><div class="d">чт, 4 сентября</div></div><div class="gr thumb"><div class="i">☎</div><div class="i">✈</div><div class="i">◉</div><div class="i">♪</div><div class="i">▶</div><div class="i">▤</div><div class="i">◈</div><div class="i">⚙</div><div class="i">✉</div><div class="i">⚑</div><div class="i">☁</div><div class="i">★</div></div><div class="dk"><div class="i">☎</div><div class="i">✈</div><div class="i">◉</div><div class="i">☰</div></div></div></div>
+        <div class="ly-t">
+          <div class="num">05</div>
+          <div class="nm">Большой палец</div>
+          <p>Верхняя половина экрана пустая, все иконки собраны внизу — до любой дотягиваешься одной рукой, не перехватывая телефон.</p>
+          <div class="fit">Удобно на большом экране. Часы уезжают наверх.</div>
+        </div>
+      </article>
+      <article class="ly">
+        <div class="solo"><div class="ph s3"><span class="pill"></span><div class="lay"></div><div class="bar"><span>9:41</span><span>▮ 86</span></div><div class="wg" style="top:26px"><div class="b" style="font-family:var(--f-cond);font-weight:300;font-size:19px;letter-spacing:.02em">09:41</div><div class="s">четверг, 4 сентября</div></div><div class="folders"><div class="fd" data-l="Связь"><i></i><i></i><i></i><i></i></div><div class="fd" data-l="Медиа"><i></i><i></i><i></i><i></i></div><div class="fd" data-l="Дела"><i></i><i></i><i></i><i></i></div><div class="fd" data-l="Игры"><i></i><i></i><i></i><i></i></div></div><div class="dk"><div class="i">☎</div><div class="i">✈</div><div class="i">◉</div><div class="i">☰</div></div></div></div>
+        <div class="ly-t">
+          <div class="num">06</div>
+          <div class="nm">Четыре папки</div>
+          <p>Вместо десятков иконок — четыре крупные папки по смыслу: связь, медиа, дела, игры. Внутри каждой всё остальное.</p>
+          <div class="fit">Экран не зарастает никогда. Минус — лишний тап до приложения.</div>
+        </div>
+      </article>
+      <article class="ly">
+        <div class="solo"><div class="ph s3"><span class="pill"></span><div class="lay"></div><div class="bar"><span>9:41</span><span>▮ 86</span></div><div class="z clk" style="top:24px"><div class="t" style="font-size:22px;font-family:var(--f-cond);font-weight:300">09:41</div></div><div class="gr dense"><div class="i">☎</div><div class="i">✈</div><div class="i">◉</div><div class="i">♪</div><div class="i">▶</div><div class="i">▤</div><div class="i">◈</div><div class="i">⚙</div><div class="i">✉</div><div class="i">⚑</div><div class="i">☁</div><div class="i">★</div><div class="i">♫</div><div class="i">◐</div><div class="i">⌘</div></div><div class="dk"><div class="i">☎</div><div class="i">✈</div><div class="i">◉</div><div class="i">☰</div></div></div></div>
+        <div class="ly-t">
+          <div class="num">07</div>
+          <div class="nm">Плотная сетка</div>
+          <p>Пять столбцов, подписей нет, иконки мельче. На один экран помещается всё, листать не нужно.</p>
+          <div class="fit">Для тех, кто узнаёт приложения по картинке. Нужен единый набор иконок.</div>
+        </div>
+      </article>
+      <article class="ly">
+        <div class="solo"><div class="ph s3"><span class="pill"></span><div class="lay"></div><div class="bar"><span>9:41</span><span>▮ 86</span></div><div class="z clk" style="top:24px"><div class="t" style="font-size:22px;font-family:var(--f-cond);font-weight:300">09:41</div></div><div class="arc"><div class="i" style="left:51.5px;top:102.5px;background:#ffffff12;border:1px solid #ffffff26;color:#d8d2c6">☎</div><div class="i" style="left:84px;top:116px;background:#ffffff12;border:1px solid #ffffff26;color:#d8d2c6">✈</div><div class="i" style="left:97.5px;top:148.5px;background:#ffffff12;border:1px solid #ffffff26;color:#d8d2c6">◉</div><div class="i" style="left:84px;top:181px;background:#ffffff12;border:1px solid #ffffff26;color:#d8d2c6">♪</div><div class="i" style="left:51.5px;top:194.5px;background:#ffffff12;border:1px solid #ffffff26;color:#d8d2c6">▶</div><div class="i" style="left:19px;top:181px;background:#ffffff12;border:1px solid #ffffff26;color:#d8d2c6">▤</div><div class="i" style="left:5.5px;top:148.5px;background:#ffffff12;border:1px solid #ffffff26;color:#d8d2c6">◈</div><div class="i" style="left:19px;top:116px;background:#ffffff12;border:1px solid #ffffff26;color:#d8d2c6">⚙</div><div class="core" style="left:43px;top:140px;transform:none">⌘</div></div></div></div>
+        <div class="ly-t">
+          <div class="num">08</div>
+          <div class="nm">Круг</div>
+          <p>Иконки по кругу вокруг центральной кнопки — раскрываются от большого пальца. Нестандартно и заметно.</p>
+          <div class="fit">Лаунчер Smart Launcher. Красиво, но привыкать дольше всего.</div>
+        </div>
+      </article>
+    </div>
+    <div class="warn" style="margin-top:26px"><strong>Как выбирать:</strong> назови пару — стиль и номер интерфейса. Например «Металл + 04» или «Тихий + 02». Всё это делает сторонний лаунчер поверх MagicOS: родная система остаётся на месте, откат — в два тапа.</div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <h2>Кнопка питания и Gemini</h2>
+    <p class="sub">Ты про долгое нажатие кнопки выключения, которое открывает ассистента вместо меню выключения. На Android 15 это настраивается, вариантов ровно три.</p>
+    <div class="apps">
+      <div class="app"><code>Ассистент</code><div class="d"><b>Оставляем как есть</b> — долгое нажатие вызывает Gemini. Меню выключения тогда открывается двумя кнопками сразу: питание + громкость вверх.</div></div>
+      <div class="app"><code>Меню выключения</code><div class="d"><b>Возвращаем по-старому</b> — долгое нажатие снова показывает «Выключить / Перезагрузить». Gemini остаётся на свайпе из нижнего угла.</div></div>
+      <div class="app"><code>Свой ассистент</code><div class="d"><b>Меняем, кого зовёт кнопка</b> — вместо Gemini можно повесить другой ассистент, если Илье он нужнее.</div></div>
+    </div>
+    <div class="warn"><strong>Проверю на самом телефоне, когда воткнёшь кабель.</strong> Названия пунктов в MagicOS 9 отличаются от чистого Android, гадать по памяти не буду — посмотрю настройку через adb и переключу как скажешь.</div>
   </div>
 </section>
 
