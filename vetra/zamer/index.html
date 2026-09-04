@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Ветра — лист замера, понедельник 7 сентября</title>
+<style>
+  :root{
+    --bg:#0e0e0e; --card:#171717; --line:#2a2a2a;
+    --ink:#f2f2f2; --dim:#9a9a9a; --lime:#c6f24e;
+  }
+  *{box-sizing:border-box}
+  body{
+    margin:0; padding:20px 16px 64px;
+    background:var(--bg); color:var(--ink);
+    font:16px/1.5 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+    -webkit-text-size-adjust:100%;
+  }
+  .wrap{max-width:620px;margin:0 auto}
+  h1{font-size:26px;line-height:1.15;margin:0 0 6px;letter-spacing:-.02em}
+  .sub{color:var(--dim);font-size:14px;margin:0 0 22px}
+  .rules{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:14px 16px;margin-bottom:24px}
+  .rules b{color:var(--lime)}
+  .rules ul{margin:8px 0 0;padding-left:18px}
+  .rules li{margin:5px 0;font-size:14px;color:#d8d8d8}
+  .txt{background:#111;border:1px dashed var(--line);border-radius:10px;padding:12px;margin:10px 0;font-size:15px}
+  .copy{display:inline-block;margin-top:8px;background:var(--lime);color:#0e0e0e;border:0;border-radius:999px;
+        padding:9px 18px;font-size:14px;font-weight:600;cursor:pointer}
+  h2{font-size:13px;text-transform:uppercase;letter-spacing:.12em;color:var(--dim);margin:30px 0 12px}
+  .salon{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px;margin-bottom:14px}
+  .salon.done{opacity:.5}
+  .name{font-size:18px;font-weight:600;margin:0 0 2px}
+  .addr{color:var(--dim);font-size:13px;margin:0 0 10px}
+  .note{font-size:13px;color:#e8c96a;margin:0 0 12px}
+  .ch{display:flex;align-items:center;gap:10px;margin:9px 0;flex-wrap:wrap}
+  .ch a{flex:1 1 auto;min-width:150px;display:inline-block;background:#202020;border:1px solid var(--line);
+        border-radius:10px;padding:11px 14px;color:var(--ink);text-decoration:none;font-size:15px}
+  .ch a:active{background:#2b2b2b}
+  .ch a.skip{opacity:.45;pointer-events:none;border-style:dashed}
+  .ch input{width:110px;background:#0e0e0e;border:1px solid var(--line);border-radius:8px;
+            padding:10px;color:var(--lime);font-size:15px;font-family:inherit}
+  .fin{display:flex;align-items:center;gap:8px;margin-top:12px;padding-top:12px;border-top:1px solid var(--line);font-size:14px;color:var(--dim)}
+  .fin input[type=checkbox]{width:20px;height:20px;accent-color:var(--lime)}
+  footer{margin-top:34px;color:var(--dim);font-size:13px;border-top:1px solid var(--line);padding-top:16px}
+  footer b{color:var(--ink)}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<h1>Лист замера</h1>
+<p class="sub">Понедельник 7 сентября, 11:00–12:00 · пишем как клиент, засекаем ответ</p>
+
+<div class="rules">
+  <b>Правила, чтобы цифры сравнились</b>
+  <ul>
+    <li>Все каналы одного салона — <b>в течение 5 минут</b>.</li>
+    <li>Засекаем до первого <b>живого</b> ответа. Автоответ не считается.</li>
+    <li>Ждём сутки. Не ответили — пишем «нет».</li>
+    <li>Спросят имя — отвечать честно. Дошло до записи — сказать «перезвоню».</li>
+  </ul>
+  <div class="txt" id="t-salon">Здравствуйте, можно завтра записаться на окрашивание? Во сколько есть места?</div>
+  <button class="copy" data-copy="t-salon">Копировать текст для салона</button>
+  <div class="txt" id="t-auto">Здравствуйте, нужна замена масла. Завтра к вам можно подъехать и сколько выйдет?</div>
+  <button class="copy" data-copy="t-auto">Копировать текст для автосервиса</button>
+</div>
+
+<h2>Салоны — шесть</h2>
+
+<div class="salon" data-id="s1">
+  <p class="name">1. Sахар</p><p class="addr">Баумана, 82 · три разных канала</p>
+  <div class="ch"><a href="https://vk.com/saxap_kzn" target="_blank" rel="noopener">ВКонтакте</a><input placeholder="ответ" data-k="s1vk"></div>
+  <div class="ch"><a href="https://t.me/saxap_kazan" target="_blank" rel="noopener">Telegram</a><input placeholder="ответ" data-k="s1tg"></div>
+  <div class="ch"><a href="https://wa.me/79600485400?text=%D0%97%D0%B4%D1%80%D0%B0%D0%B2%D1%81%D1%82%D0%B2%D1%83%D0%B9%D1%82%D0%B5%2C%20%D0%BC%D0%BE%D0%B6%D0%BD%D0%BE%20%D0%B7%D0%B0%D0%B2%D1%82%D1%80%D0%B0%20%D0%B7%D0%B0%D0%BF%D0%B8%D1%81%D0%B0%D1%82%D1%8C%D1%81%D1%8F%20%D0%BD%D0%B0%20%D0%BE%D0%BA%D1%80%D0%B0%D1%88%D0%B8%D0%B2%D0%B0%D0%BD%D0%B8%D0%B5%3F%20%D0%92%D0%BE%20%D1%81%D0%BA%D0%BE%D0%BB%D1%8C%D0%BA%D0%BE%20%D0%B5%D1%81%D1%82%D1%8C%20%D0%BC%D0%B5%D1%81%D1%82%D0%B0%3F" target="_blank" rel="noopener">WhatsApp · текст готов</a><input placeholder="ответ" data-k="s1wa"></div>
+  <label class="fin"><input type="checkbox" data-k="s1done"> все каналы отправлены</label>
+</div>
+
+<div class="salon" data-id="s2">
+  <p class="name">2. Эрма</p><p class="addr">Камалеева, 34а · Telegram настоящий канал</p>
+  <div class="ch"><a href="https://vk.com/erma_kzn" target="_blank" rel="noopener">ВКонтакте</a><input placeholder="ответ" data-k="s2vk"></div>
+  <div class="ch"><a href="https://t.me/erma_kzn" target="_blank" rel="noopener">Telegram</a><input placeholder="ответ" data-k="s2tg"></div>
+  <div class="ch"><a href="https://wa.me/79270393533?text=%D0%97%D0%B4%D1%80%D0%B0%D0%B2%D1%81%D1%82%D0%B2%D1%83%D0%B9%D1%82%D0%B5%2C%20%D0%BC%D0%BE%D0%B6%D0%BD%D0%BE%20%D0%B7%D0%B0%D0%B2%D1%82%D1%80%D0%B0%20%D0%B7%D0%B0%D0%BF%D0%B8%D1%81%D0%B0%D1%82%D1%8C%D1%81%D1%8F%20%D0%BD%D0%B0%20%D0%BE%D0%BA%D1%80%D0%B0%D1%88%D0%B8%D0%B2%D0%B0%D0%BD%D0%B8%D0%B5%3F%20%D0%92%D0%BE%20%D1%81%D0%BA%D0%BE%D0%BB%D1%8C%D0%BA%D0%BE%20%D0%B5%D1%81%D1%82%D1%8C%20%D0%BC%D0%B5%D1%81%D1%82%D0%B0%3F" target="_blank" rel="noopener">WhatsApp · текст готов</a><input placeholder="ответ" data-k="s2wa"></div>
+  <label class="fin"><input type="checkbox" data-k="s2done"> все каналы отправлены</label>
+</div>
+
+<div class="salon" data-id="s3">
+  <p class="name">3. Shine</p><p class="addr">проезд Созидателей, 13 · три разных канала</p>
+  <div class="ch"><a href="https://vk.com/shine_kzn" target="_blank" rel="noopener">ВКонтакте</a><input placeholder="ответ" data-k="s3vk"></div>
+  <div class="ch"><a href="https://t.me/kzn_shine" target="_blank" rel="noopener">Telegram</a><input placeholder="ответ" data-k="s3tg"></div>
+  <div class="ch"><a href="https://wa.me/79196353621?text=%D0%97%D0%B4%D1%80%D0%B0%D0%B2%D1%81%D1%82%D0%B2%D1%83%D0%B9%D1%82%D0%B5%2C%20%D0%BC%D0%BE%D0%B6%D0%BD%D0%BE%20%D0%B7%D0%B0%D0%B2%D1%82%D1%80%D0%B0%20%D0%B7%D0%B0%D0%BF%D0%B8%D1%81%D0%B0%D1%82%D1%8C%D1%81%D1%8F%20%D0%BD%D0%B0%20%D0%BE%D0%BA%D1%80%D0%B0%D1%88%D0%B8%D0%B2%D0%B0%D0%BD%D0%B8%D0%B5%3F%20%D0%92%D0%BE%20%D1%81%D0%BA%D0%BE%D0%BB%D1%8C%D0%BA%D0%BE%20%D0%B5%D1%81%D1%82%D1%8C%20%D0%BC%D0%B5%D1%81%D1%82%D0%B0%3F" target="_blank" rel="noopener">WhatsApp · текст готов</a><input placeholder="ответ" data-k="s3wa"></div>
+  <label class="fin"><input type="checkbox" data-k="s3done"> все каналы отправлены</label>
+</div>
+
+<div class="salon" data-id="s4">
+  <p class="name">4. Искусство</p><p class="addr">Чистопольская, 74 · в карточке два TG, пишем только в основной</p>
+  <div class="ch"><a href="https://vk.com/iskusstvo.studio" target="_blank" rel="noopener">ВКонтакте</a><input placeholder="ответ" data-k="s4vk"></div>
+  <div class="ch"><a href="https://t.me/iskusstvokzn" target="_blank" rel="noopener">Telegram</a><input placeholder="ответ" data-k="s4tg"></div>
+  <div class="ch"><a href="https://wa.me/79600647474?text=%D0%97%D0%B4%D1%80%D0%B0%D0%B2%D1%81%D1%82%D0%B2%D1%83%D0%B9%D1%82%D0%B5%2C%20%D0%BC%D0%BE%D0%B6%D0%BD%D0%BE%20%D0%B7%D0%B0%D0%B2%D1%82%D1%80%D0%B0%20%D0%B7%D0%B0%D0%BF%D0%B8%D1%81%D0%B0%D1%82%D1%8C%D1%81%D1%8F%20%D0%BD%D0%B0%20%D0%BE%D0%BA%D1%80%D0%B0%D1%88%D0%B8%D0%B2%D0%B0%D0%BD%D0%B8%D0%B5%3F%20%D0%92%D0%BE%20%D1%81%D0%BA%D0%BE%D0%BB%D1%8C%D0%BA%D0%BE%20%D0%B5%D1%81%D1%82%D1%8C%20%D0%BC%D0%B5%D1%81%D1%82%D0%B0%3F" target="_blank" rel="noopener">WhatsApp · текст готов</a><input placeholder="ответ" data-k="s4wa"></div>
+  <label class="fin"><input type="checkbox" data-k="s4done"> все каналы отправлены</label>
+</div>
+
+<div class="salon" data-id="s5">
+  <p class="name">5. Пятый элемент</p><p class="addr">Гоголя, 11а</p>
+  <p class="note">⚠️ Сначала открой карточку 2ГИС и глянь Telegram: если это <b>канал</b> @beautyland_kzn — меряем как третий канал. Если <b>личный номер</b> +7 987 270-07-77 — пропускаем, он тот же, что WhatsApp.</p>
+  <div class="ch"><a href="https://2gis.ru/kazan/firm/70000001069002632" target="_blank" rel="noopener">Проверить в 2ГИС</a></div>
+  <div class="ch"><a href="https://vk.com/beauty_land_kazan" target="_blank" rel="noopener">ВКонтакте</a><input placeholder="ответ" data-k="s5vk"></div>
+  <div class="ch"><a href="https://t.me/beautyland_kzn" target="_blank" rel="noopener">Telegram · по проверке</a><input placeholder="ответ" data-k="s5tg"></div>
+  <div class="ch"><a href="https://wa.me/79872700777?text=%D0%97%D0%B4%D1%80%D0%B0%D0%B2%D1%81%D1%82%D0%B2%D1%83%D0%B9%D1%82%D0%B5%2C%20%D0%BC%D0%BE%D0%B6%D0%BD%D0%BE%20%D0%B7%D0%B0%D0%B2%D1%82%D1%80%D0%B0%20%D0%B7%D0%B0%D0%BF%D0%B8%D1%81%D0%B0%D1%82%D1%8C%D1%81%D1%8F%20%D0%BD%D0%B0%20%D0%BE%D0%BA%D1%80%D0%B0%D1%88%D0%B8%D0%B2%D0%B0%D0%BD%D0%B8%D0%B5%3F%20%D0%92%D0%BE%20%D1%81%D0%BA%D0%BE%D0%BB%D1%8C%D0%BA%D0%BE%20%D0%B5%D1%81%D1%82%D1%8C%20%D0%BC%D0%B5%D1%81%D1%82%D0%B0%3F" target="_blank" rel="noopener">WhatsApp · текст готов</a><input placeholder="ответ" data-k="s5wa"></div>
+  <label class="fin"><input type="checkbox" data-k="s5done"> все каналы отправлены</label>
+</div>
+
+<div class="salon" data-id="s6">
+  <p class="name">6. Всегда опрятно</p><p class="addr">Тэцевская, 4 · TG и WA на одном номере</p>
+  <div class="ch"><a href="https://vk.com/always_neat" target="_blank" rel="noopener">ВКонтакте</a><input placeholder="ответ" data-k="s6vk"></div>
+  <div class="ch"><a class="skip">Telegram — пропускаем, тот же номер</a></div>
+  <div class="ch"><a href="https://wa.me/79869195661?text=%D0%97%D0%B4%D1%80%D0%B0%D0%B2%D1%81%D1%82%D0%B2%D1%83%D0%B9%D1%82%D0%B5%2C%20%D0%BC%D0%BE%D0%B6%D0%BD%D0%BE%20%D0%B7%D0%B0%D0%B2%D1%82%D1%80%D0%B0%20%D0%B7%D0%B0%D0%BF%D0%B8%D1%81%D0%B0%D1%82%D1%8C%D1%81%D1%8F%20%D0%BD%D0%B0%20%D0%BE%D0%BA%D1%80%D0%B0%D1%88%D0%B8%D0%B2%D0%B0%D0%BD%D0%B8%D0%B5%3F%20%D0%92%D0%BE%20%D1%81%D0%BA%D0%BE%D0%BB%D1%8C%D0%BA%D0%BE%20%D0%B5%D1%81%D1%82%D1%8C%20%D0%BC%D0%B5%D1%81%D1%82%D0%B0%3F" target="_blank" rel="noopener">WhatsApp · текст готов</a><input placeholder="ответ" data-k="s6wa"></div>
+  <label class="fin"><input type="checkbox" data-k="s6done"> все каналы отправлены</label>
+</div>
+
+<h2>Автосервисы — три</h2>
+
+<div class="salon" data-id="s7">
+  <p class="name">7. Motorhood</p><p class="addr">Советский · TG и WA разные номера, меряем оба</p>
+  <div class="ch"><a href="https://t.me/+79047636145" target="_blank" rel="noopener">Telegram</a><input placeholder="ответ" data-k="s7tg"></div>
+  <div class="ch"><a href="https://wa.me/79179109180?text=%D0%97%D0%B4%D1%80%D0%B0%D0%B2%D1%81%D1%82%D0%B2%D1%83%D0%B9%D1%82%D0%B5%2C%20%D0%BD%D1%83%D0%B6%D0%BD%D0%B0%20%D0%B7%D0%B0%D0%BC%D0%B5%D0%BD%D0%B0%20%D0%BC%D0%B0%D1%81%D0%BB%D0%B0.%20%D0%97%D0%B0%D0%B2%D1%82%D1%80%D0%B0%20%D0%BA%20%D0%B2%D0%B0%D0%BC%20%D0%BC%D0%BE%D0%B6%D0%BD%D0%BE%20%D0%BF%D0%BE%D0%B4%D1%8A%D0%B5%D1%85%D0%B0%D1%82%D1%8C%20%D0%B8%20%D1%81%D0%BA%D0%BE%D0%BB%D1%8C%D0%BA%D0%BE%20%D0%B2%D1%8B%D0%B9%D0%B4%D0%B5%D1%82%3F" target="_blank" rel="noopener">WhatsApp · текст готов</a><input placeholder="ответ" data-k="s7wa"></div>
+  <label class="fin"><input type="checkbox" data-k="s7done"> все каналы отправлены</label>
+</div>
+
+<div class="salon" data-id="s8">
+  <p class="name">8. Авто-аю</p><p class="addr">автотехцентр · TG и WA на одном номере</p>
+  <div class="ch"><a href="https://vk.com/atc_mantis_kzn" target="_blank" rel="noopener">ВКонтакте</a><input placeholder="ответ" data-k="s8vk"></div>
+  <div class="ch"><a class="skip">Telegram — пропускаем, тот же номер</a></div>
+  <div class="ch"><a href="https://wa.me/79872909267?text=%D0%97%D0%B4%D1%80%D0%B0%D0%B2%D1%81%D1%82%D0%B2%D1%83%D0%B9%D1%82%D0%B5%2C%20%D0%BD%D1%83%D0%B6%D0%BD%D0%B0%20%D0%B7%D0%B0%D0%BC%D0%B5%D0%BD%D0%B0%20%D0%BC%D0%B0%D1%81%D0%BB%D0%B0.%20%D0%97%D0%B0%D0%B2%D1%82%D1%80%D0%B0%20%D0%BA%20%D0%B2%D0%B0%D0%BC%20%D0%BC%D0%BE%D0%B6%D0%BD%D0%BE%20%D0%BF%D0%BE%D0%B4%D1%8A%D0%B5%D1%85%D0%B0%D1%82%D1%8C%20%D0%B8%20%D1%81%D0%BA%D0%BE%D0%BB%D1%8C%D0%BA%D0%BE%20%D0%B2%D1%8B%D0%B9%D0%B4%D0%B5%D1%82%3F" target="_blank" rel="noopener">WhatsApp · текст готов</a><input placeholder="ответ" data-k="s8wa"></div>
+  <label class="fin"><input type="checkbox" data-k="s8done"> все каналы отправлены</label>
+</div>
+
+<div class="salon" data-id="s9">
+  <p class="name">9. Блюзмобиль</p><p class="addr">Советский · WhatsApp в карточке нет</p>
+  <div class="ch"><a href="https://vk.com/bluesmobil" target="_blank" rel="noopener">ВКонтакте</a><input placeholder="ответ" data-k="s9vk"></div>
+  <div class="ch"><a href="https://t.me/+79397335001" target="_blank" rel="noopener">Telegram</a><input placeholder="ответ" data-k="s9tg"></div>
+  <label class="fin"><input type="checkbox" data-k="s9done"> все каналы отправлены</label>
+</div>
+
+<h2>Десятый — продавец Wildberries</h2>
+
+<div class="salon" data-id="s10">
+  <p class="name">10. Замер глазами, писать не нужно</p>
+  <p class="addr">Открыть категорию, где продаёт малый бизнес (товары для дома, одежда локальных марок) → карточка → «Вопросы» → найти продавца, у которого вопросы висят без ответа больше суток. Записать название, ссылку, сколько вопросов и с какой даты. Десять минут, выходной не мешает.</p>
+  <div class="ch"><input placeholder="кто и сколько вопросов" data-k="s10wb" style="width:100%"></div>
+  <label class="fin"><input type="checkbox" data-k="s10done"> найден</label>
+</div>
+
+<footer>
+  <b>Что делать с цифрами на следующий день.</b> Вписать время в <code>pilot.md</code> в формате «ВК 40 мин · TG нет · WA 5 мин». Открыть <code>kasaniya-teksty.md</code>, заменить первую фразу на его цифру: «вчера писал вам как клиент — в ВК ответили через 40 минут, в Telegram не ответили совсем». Отправить владельцу руками, по одному, из личного аккаунта — не в тот канал, где мерили. Ответов меньше 10% — переписываем текст, а не нишу и не цену.
+  <p>Всё, что впишешь на этой странице, сохраняется в самом телефоне. Скажи мне цифры — перенесу в файлы проекта.</p>
+</footer>
+
+</div>
+<script>
+(function(){
+  var K='vetra-zamer-0709';
+  var st={};
+  try{ st=JSON.parse(localStorage.getItem(K)||'{}'); }catch(e){ st={}; }
+
+  function save(){ try{ localStorage.setItem(K,JSON.stringify(st)); }catch(e){} }
+  function paint(){
+    document.querySelectorAll('.salon').forEach(function(s){
+      var cb=s.querySelector('input[type=checkbox]');
+      s.classList.toggle('done', !!(cb&&cb.checked));
+    });
+  }
+
+  document.querySelectorAll('[data-k]').forEach(function(el){
+    var k=el.dataset.k;
+    if(el.type==='checkbox'){
+      el.checked=!!st[k];
+      el.addEventListener('change',function(){ st[k]=el.checked; save(); paint(); });
+    }else{
+      el.value=st[k]||'';
+      el.addEventListener('input',function(){ st[k]=el.value; save(); });
+    }
+  });
+
+  document.querySelectorAll('.copy').forEach(function(b){
+    b.addEventListener('click',function(){
+      var t=document.getElementById(b.dataset.copy).textContent.trim();
+      navigator.clipboard.writeText(t).then(function(){
+        var old=b.textContent; b.textContent='Скопировано';
+        setTimeout(function(){ b.textContent=old; },1400);
+      });
+    });
+  });
+
+  paint();
+})();
+</script>
+</body>
+</html>
