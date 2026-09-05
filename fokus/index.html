@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Одиночество и фокус: что сказал Арсен — и что именно я поставлю</title>
+<meta name="description" content="Разбор ролика Арсена Маркаряна про одиночество и концентрацию: его указания с таймкодами, проверка по науке и точный план установки — что изменится на компьютере, в телефоне и в напоминаниях.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;700;900&family=Oswald:wght@400;600&family=Onest:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{--ink:#0a0a0a;--paper:#ffffff;--lime:#d8f34e;--grey:#6b6b6b;--line:#0a0a0a;--soft:#f2f2f0}
+*{box-sizing:border-box;margin:0;padding:0}
+html{-webkit-text-size-adjust:100%}
+body{background:var(--paper);color:var(--ink);font-family:'Onest',system-ui,-apple-system,'Segoe UI',sans-serif;font-size:17px;line-height:1.62;-webkit-font-smoothing:antialiased}
+.wrap{max-width:760px;margin:0 auto;padding:0 20px}
+a{color:var(--ink)}
+header{border-bottom:3px solid var(--line);padding:38px 0 30px}
+.kicker{font-family:'Oswald',sans-serif;text-transform:uppercase;letter-spacing:.14em;font-size:12px;color:var(--grey);margin-bottom:16px}
+h1{font-family:'Unbounded',sans-serif;font-weight:900;font-size:clamp(28px,7vw,50px);line-height:1.04;letter-spacing:-.02em}
+h1 em{font-style:normal;background:var(--lime);padding:0 .12em}
+.lead{margin-top:18px;font-size:clamp(16px,4vw,19px);color:#2a2a2a;max-width:56ch}
+.meta{margin-top:22px;font-family:'Oswald',sans-serif;font-size:12.5px;text-transform:uppercase;letter-spacing:.1em;color:var(--grey)}
+section{padding:44px 0;border-bottom:1px solid #e2e2e0}
+section:last-of-type{border-bottom:0}
+.num{font-family:'Oswald',sans-serif;font-size:13px;letter-spacing:.18em;color:var(--grey);text-transform:uppercase;margin-bottom:12px}
+h2{font-family:'Unbounded',sans-serif;font-weight:700;font-size:clamp(22px,5.2vw,32px);line-height:1.14;letter-spacing:-.015em;margin-bottom:18px}
+h3{font-family:'Unbounded',sans-serif;font-weight:700;font-size:clamp(17px,4.2vw,20px);line-height:1.25;margin-bottom:8px}
+p{margin-bottom:14px}p:last-child{margin-bottom:0}
+strong{font-weight:700}.dim{color:var(--grey)}
+.card{border:2px solid var(--line);padding:22px 20px;margin:20px 0}
+.card.fill{background:var(--soft);border-color:var(--soft)}
+.card.hi{background:var(--lime);border-color:var(--lime)}
+.tag{display:inline-block;font-family:'Oswald',sans-serif;font-size:11px;text-transform:uppercase;letter-spacing:.12em;padding:3px 9px;margin-bottom:12px;border:1.5px solid var(--ink)}
+.tag.ok{background:var(--lime);border-color:var(--lime)}
+.tag.mid{background:transparent}
+.tag.bad{background:var(--ink);color:var(--paper)}
+.myth{border-left:5px solid var(--lime);padding:4px 0 4px 18px;margin:22px 0}
+.myth .said{font-family:'Oswald',sans-serif;font-size:15px;letter-spacing:.02em;text-transform:uppercase;color:var(--grey);margin-bottom:8px}
+.myth .real{margin:0}
+ol.steps{list-style:none;counter-reset:s;margin:8px 0 0}
+ol.steps li{counter-increment:s;padding:16px 0 16px 52px;position:relative;border-top:1px solid #e2e2e0}
+ol.steps li:before{content:counter(s,decimal-leading-zero);position:absolute;left:0;top:16px;font-family:'Oswald',sans-serif;font-size:20px;color:var(--ink);border-bottom:3px solid var(--lime);line-height:1}
+ol.steps li b{display:block;font-family:'Unbounded',sans-serif;font-size:16px;margin-bottom:5px;line-height:1.3}
+ol.steps li .tc{display:inline-block;font-family:'Oswald',sans-serif;font-size:12px;letter-spacing:.08em;color:var(--grey);margin-left:6px}
+ul.plain{list-style:none;margin:10px 0}
+ul.plain li{padding-left:20px;position:relative;margin-bottom:9px}
+ul.plain li:before{content:"";position:absolute;left:0;top:.62em;width:9px;height:3px;background:var(--ink)}
+.kv{display:grid;grid-template-columns:96px 1fr;gap:6px 14px;margin:12px 0;font-size:15.5px}
+.kv .k{font-family:'Oswald',sans-serif;text-transform:uppercase;letter-spacing:.08em;font-size:12px;color:var(--grey);padding-top:4px}
+code,pre{font-family:ui-monospace,Consolas,'Courier New',monospace}
+code{font-size:.9em;background:var(--soft);padding:1px 5px}
+pre{background:var(--ink);color:#e8e8e8;padding:16px 18px;margin:12px 0;font-size:13.5px;line-height:1.5;overflow-x:auto;white-space:pre}
+pre b{color:var(--lime);font-weight:400}
+/* стол */
+.desk{background:#1f2a3a;padding:18px 14px;margin:14px 0;display:grid;grid-template-columns:repeat(auto-fill,minmax(84px,1fr));gap:12px 6px}
+.desk .ic{display:flex;flex-direction:column;align-items:center;text-align:center;color:#fff;font-size:11.5px;line-height:1.2}
+.desk .ic i{display:block;width:34px;height:34px;border:2px solid #fff;margin-bottom:6px;border-radius:4px}
+.desk .ic i.f{background:var(--lime);border-color:var(--lime)}
+.desk .ic i.w{background:#fff}
+.desk.before{grid-template-columns:repeat(auto-fill,minmax(40px,1fr));gap:8px 4px;padding:12px 10px}
+.desk.before .ic i{width:22px;height:22px;margin:0}
+/* телефон */
+.phones{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:14px 0}
+.ph{border:2px solid var(--ink);border-radius:14px;padding:10px 8px;min-height:190px;display:flex;flex-direction:column;background:#fafafa}
+.ph .t{font-family:'Oswald',sans-serif;font-size:11px;text-transform:uppercase;letter-spacing:.08em;color:var(--grey);margin-bottom:8px;text-align:center}
+.ph .grid{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;flex:1;align-content:start}
+.ph .grid i{display:block;aspect-ratio:1;border:1.5px solid var(--ink);border-radius:5px}
+.ph .grid i.fold{background:repeating-linear-gradient(45deg,#fff 0 3px,#0a0a0a 3px 4px)}
+.ph .dock{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;border-top:1px solid #ccc;padding-top:8px;margin-top:8px}
+.ph .dock i{display:block;aspect-ratio:1;background:var(--lime);border-radius:5px}
+.ph .cap{font-size:11.5px;color:var(--grey);text-align:center;margin-top:6px;line-height:1.3}
+table{width:100%;border-collapse:collapse;margin:14px 0;font-size:15px}
+th,td{text-align:left;padding:10px 8px;border-top:1px solid #e2e2e0;vertical-align:top}
+th{font-family:'Oswald',sans-serif;font-size:12px;text-transform:uppercase;letter-spacing:.1em;color:var(--grey);border-top:0}
+.tbl{overflow-x:auto}
+.cheat{background:var(--ink);color:var(--paper);padding:26px 22px;margin:24px 0}
+.cheat h3{color:var(--paper)}
+.cheat b{color:var(--lime)}
+.cheat ul{list-style:none}
+.cheat li{margin-bottom:12px;padding-left:18px;position:relative}
+.cheat li:before{content:"";position:absolute;left:0;top:.62em;width:9px;height:3px;background:var(--lime)}
+footer{border-top:3px solid var(--line);padding:30px 0 60px;font-size:14.5px;color:var(--grey)}
+footer a{color:var(--grey);text-decoration:underline;text-underline-offset:3px;word-break:break-word}
+footer li{margin-bottom:7px;list-style:none}
+@media (max-width:420px){body{font-size:16px}.kv{grid-template-columns:1fr;gap:2px 0}.phones{gap:6px}.ph{padding:8px 5px;min-height:160px}}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap">
+    <div class="kicker">разбор видео + план установки · сентябрь 2026 · показ, ничего не сделано</div>
+    <h1>Одиночество и фокус: <em>что сказал Арсен</em> — и что именно я поставлю</h1>
+    <p class="lead">Ролик — половина эфира про концентрацию: убрать раздражители, вычистить пространство, смотреть на себя без вранья и не давать помехам себя утащить. Ниже его указания с таймкодами, проверка по науке и точный план: что изменится, как это будет выглядеть после и что можно сделать только руками.</p>
+    <div class="meta">источник: «Как одиночество превращает тебя в мужчину?», 24 мин · расшифровано локально · 05.09.2026</div>
+  </div>
+</header>
+
+<div class="wrap">
+
+<div class="card hi" style="margin-top:28px">
+  <p><strong>Статус: показ.</strong> Ни один файл не перемещён, ни одно напоминание не поставлено, настройки не тронуты. Установка начнётся после «да» в чате — кнопками, по пунктам. Каждый пункт можно поставить или пропустить отдельно.</p>
+</div>
+
+<section>
+  <div class="num">01 — суть за минуту</div>
+  <h2>О чём ролик</h2>
+  <ul class="plain">
+    <li><strong>Фокус — луч, а не лампочка на 360°.</strong> Каждый раздражитель (уведомление, звонок, бессмысленный план) размазывает луч в тусклый свет. <span class="dim">0:28</span></li>
+    <li><strong>Один на один с собой → врать некому.</strong> Видишь себя как есть, и жалость к себе исчезает: она рождается из отвлечений и оправданий. <span class="dim">1:37–2:27</span></li>
+    <li><strong>Цена тебе — ровно то, что ты сегодня не смог преодолеть.</strong> Не «клиент не тот», а «я не умею продавать». Не «организм устал», а «моя лень сильнее меня». <span class="dim">3:37–4:34</span></li>
+    <li><strong>Жильё — храм концентрации, а не супермаркет.</strong> Мозг бессознательно считает пользу каждого предмета в поле зрения; отсюда «глаза разбегаются». <span class="dim">4:55–5:47</span></li>
+    <li><strong>Польза — не «вау, интересно».</strong> Польза — «прочитал → сделал → стал влиятельнее, счастливее, здоровее». Всё остальное — время в никуда. <span class="dim">9:09–9:39</span></li>
+    <li><strong>Помехи гасят намерение, как равные силы в физике.</strong> Но нет помех, которые выключают тебя, — есть неумение с ними справляться. Главная ошибка: думать, что проблема в конкретной помехе. <span class="dim">15:03–20:08</span></li>
+    <li><strong>Дисциплина не нужна, если дело по нутру.</strong> Проблемы с фокусом — не «сломанный дофамин», а неинтересное дело. <span class="dim">21:44–22:50</span></li>
+  </ul>
+  <p class="dim" style="margin-top:14px">Это половина эфира: полная версия только в закрытом канале автора. Разобрано то, что в открытом доступе.</p>
+</section>
+
+<section>
+  <div class="num">02 — указания</div>
+  <h2>Восемь вещей, которые он велел сделать</h2>
+  <ol class="steps">
+    <li><b>Отключить все уведомления <span class="tc">0:57</span></b>Звонить могут два-три человека, телефон на беззвучном. «Никакая информация не может проникнуть в меня против моей воли».</li>
+    <li><b>Вычистить жильё беспощадно <span class="tc">5:47</span></b>Чем не пользуешься — отдать, продать, выкинуть. Без сожалений.</li>
+    <li><b>Стол всегда чистый <span class="tc">6:05</span></b>«Стол — проекция оперативки в голове». Чем больше забит стол и экран телефона, тем меньше ресурса на новые задачи.</li>
+    <li><b>Удалить всё старое <span class="tc">6:29–8:02</span></b>Переписки, фотографии, заметки. Если жалко — на отдельный носитель, подальше от компьютера и телефона. «Но лучше удалять».</li>
+    <li><b>Экран телефона по слоям <span class="tc">8:07–8:51</span></b>Первый лист пустой, четыре самых частых внизу. Второй лист — то, что открываешь пару раз в неделю. Третий — папки с тем, что нужно раз в месяц или в год.</li>
+    <li><b>Ревизия того, что читаешь <span class="tc">9:24–9:39</span></b>За каждый паблик и канал три вопроса: применил хоть раз? какой был результат? стоило времени?</li>
+    <li><b>Памятные вещи — дистанцировать <span class="tc">10:44–11:05</span></b>Дневник на дачу, детский альбом родителям. Чтобы не было в поле зрения.</li>
+    <li><b>Сегодня вечером — пакет <span class="tc">13:06–13:42</span></b>Обычный продуктовый пакет, пройти по квартире, набрать хлам (треснувшая чашка, мёртвая зажигалка, сломанная соковыжималка), вынести. «Не ложитесь спать, пока пакет не полон».</li>
+  </ol>
+  <div class="card fill">
+    <p><strong>Плюс правило помех</strong> <span class="dim">18:18–20:08</span>. Когда прилетает проблема, вопрос не «как решить эту», а «почему я не умею справляться с такими». Не интегрировать помеху в реальность («ну, теперь живу с этим»). Аналогия: дверь без замка и грабители каждую неделю — ловить конкретных грабителей бесполезно, чинить надо замок.</p>
+  </div>
+</section>
+
+<section>
+  <div class="num">03 — фильтр</div>
+  <h2>Что подтверждено, а что нет</h2>
+  <p>Чтобы ставить привычки не на песок. Пять тезисов из семи держатся на данных, два надо поправить.</p>
+
+  <div class="myth">
+    <span class="tag ok">подтверждено</span>
+    <div class="said">«Уведомления и раздражители размазывают фокус»</div>
+    <p class="real">Уорд и коллеги (2017): само присутствие своего телефона на столе снижает доступную рабочую память, даже если он лежит экраном вниз. Стотхарт (2015): уведомление, на которое ты <em>не</em> ответил, портит внимание так же, как если бы ответил. Марк (2008): после прерывания к задаче возвращаются в среднем через 23 минуты. <strong>Делаем как сказано.</strong></p>
+  </div>
+
+  <div class="myth">
+    <span class="tag ok">подтверждено, с оговоркой</span>
+    <div class="said">«Чистый стол = свободная оперативка»</div>
+    <p class="real">Макмейнс и Кастнер (2011): предметы в поле зрения конкурируют за обработку в зрительной коре, беспорядок реально съедает ресурс. Оговорка от Вос (2013): беспорядок на столе усиливает творческие ответы, порядок — «правильные» и здоровые выборы. <strong>Для исполнения — чистый стол. Для мозгового штурма беспорядок не страшен.</strong></p>
+  </div>
+
+  <div class="myth">
+    <span class="tag bad">не подтверждено</span>
+    <div class="said">«Удали всё старое, иначе стареешь телом и душой»</div>
+    <p class="real">За «старением от старых фотографий» ничего нет. Наоборот: исследования ностальгии (Седикидес, Уилдшут, 2008) показывают, что воспоминания повышают ощущение смысла и связи с собой. Вредна не память, а <strong>руминация</strong> — прокручивание одного и того же по кругу (Нолен-Хоксема, 2008). Его же запасной вариант «на отдельный носитель» — и есть разумная версия. <strong>Ставим её: не удаляем, убираем с глаз на диск D:.</strong></p>
+  </div>
+
+  <div class="myth">
+    <span class="tag bad">противоречит данным</span>
+    <div class="said">«Возненавидь себя, чтобы полюбить»</div>
+    <p class="real">Брайнс и Чен (2012): после неудачи сострадание к себе повышает мотивацию исправиться сильнее, чем самокритика. Самокритика связана с прокрастинацией (Сируа, 2014). Что оставляем: <strong>ответственность</strong> («не клиент, а я не умею») — внутренний локус контроля действительно связан с результатами. Что убираем: ненависть. <strong>Формула: «не смог — вот что делаю завтра», без приговора.</strong></p>
+  </div>
+
+  <div class="myth">
+    <span class="tag mid">наполовину</span>
+    <div class="said">«Дисциплина не нужна, если дело по нутру. Таблетки — никогда»</div>
+    <p class="real">Интерес правда держит внимание (Хиди и Реннингер, 2006). Но самое сильное подтверждение — его же метод: Милявская и Инцлихт (2017) — цели достигают не те, кто сопротивляется соблазнам, а те, у кого их меньше. Дакворт, Гендлер и Гросс (2016): убрать раздражитель эффективнее, чем терпеть его силой воли. <strong>«Таблетки никогда» — не медицинский совет.</strong> Это решает врач, а не блогер.</p>
+  </div>
+
+  <div class="myth">
+    <span class="tag ok">подтверждено как рамка</span>
+    <div class="said">«Не помеха, а неумение справляться»</div>
+    <p class="real">Лазарус и Фолкман (1984): исход стресса определяет не событие, а оценка и способ совладания. Перебор: есть помехи, которые валят любого, — его собственная история в ролике тому пример. <strong>Рабочая версия: в каждой помехе искать системную дыру, а не только тушить пожар.</strong></p>
+  </div>
+
+  <div class="card hi">
+    <p><strong>Итог фильтра:</strong> восемьдесят процентов ролика можно ставить как есть. Поправить два места: не удалять, а убирать с глаз; не ненавидеть себя, а отвечать за результат.</p>
+  </div>
+</section>
+
+<section>
+  <div class="num">04 — план установки</div>
+  <h2>Что именно я сделаю. По пунктам, с картинкой «после»</h2>
+  <p>По каждому: что сейчас → что будет → чьи руки. Ничего из этого ещё не сделано.</p>
+
+  <div class="card">
+    <span class="tag ok">мои руки</span>
+    <h3>А. Рабочий стол Windows <span class="dim">(указание 03)</span></h3>
+    <div class="kv">
+      <div class="k">сейчас</div><div><strong>51 объект</strong>: 31 ярлык и запускалка, 11 папок, 9 файлов. Среди них два одинаковых архива по 88 МБ (<code>1.7.06 (пароль 123)</code> в .rar и .zip) и ещё одна их копия внутри «Новая папка».</div>
+      <div class="k">будет</div><div><strong>8 объектов.</strong> Шесть ежедневных ярлыков, рабочая папка и одна папка со всем остальным.</div>
+    </div>
+    <p class="dim" style="font-size:14px">Сейчас (51):</p>
+    <div class="desk before">
+      <div class="ic"><i></i></div><div class="ic"><i></i></div><div class="ic"><i></i></div><div class="ic"><i></i></div><div class="ic"><i></i></div><div class="ic"><i></i></div><div class="ic"><i></i></div><div class="ic"><i></i></div><div class="ic"><i></i></div><div class="ic"><i></i></div>
+      <div class="ic"><i></i></div><div class="ic"><i></i></div><div class="ic"><i></i></div><div class="ic"><i></i></div><div class="ic"><i></i></div><div class="ic"><i></i></div><div class="ic"><i></i></div><div class="ic"><i></i></div><div class="ic"><i></i></div><div class="ic"><i></i></div>
+      <div class="ic"><i></i></div><div class="ic"><i></i></div><div class="ic"><i></i></div><div class="ic"><i></i></div><div class="ic"><i></i></div><div class="ic"><i></i></div><div class="ic"><i></i></div><div class="ic"><i></i></div><div class="ic"><i></i></div><div class="ic"><i></i></div>
+      <div class="ic"><i></i></div><div class="ic"><i class="w"></i></div><div class="ic"><i class="w"></i></div><div class="ic"><i class="w"></i></div><div class="ic"><i class="w"></i></div><div class="ic"><i class="w"></i></div><div class="ic"><i class="w"></i></div><div class="ic"><i class="w"></i></div><div class="ic"><i class="w"></i></div><div class="ic"><i class="w"></i></div>
+      <div class="ic"><i class="w"></i></div><div class="ic"><i class="f"></i></div><div class="ic"><i class="f"></i></div><div class="ic"><i class="f"></i></div><div class="ic"><i class="f"></i></div><div class="ic"><i class="f"></i></div><div class="ic"><i class="f"></i></div><div class="ic"><i class="f"></i></div><div class="ic"><i class="f"></i></div><div class="ic"><i class="f"></i></div>
+      <div class="ic"><i class="f"></i></div>
+    </div>
+    <p class="dim" style="font-size:14px">Будет (8):</p>
+    <div class="desk">
+      <div class="ic"><i></i>Claude</div>
+      <div class="ic"><i></i>Claude на телефон</div>
+      <div class="ic"><i></i>Obsidian</div>
+      <div class="ic"><i></i>Telegram</div>
+      <div class="ic"><i></i>Миша — Chrome</div>
+      <div class="ic"><i></i>Запуск ботов</div>
+      <div class="ic"><i class="w"></i>clod code</div>
+      <div class="ic"><i class="f"></i>Раз в неделю</div>
+    </div>
+    <p><strong>Куда денется остальное:</strong></p>
+    <ul class="plain">
+      <li><strong>В папку «Раз в неделю» на столе</strong> — 25 ярлыков: десять пронумерованных (Цех, Оладушки, ostrov, mishaabro, stydia, llm-wiki, АРХИВ, Программы, Монтаж, Референсы), VS Code, Antigravity, OpenCode, ZCode, Node.js, Discord, Soundpad, WinSCP, Yandex, Parser2GIS, PC Health Check, три VPN (Amnezia, VPNNaruzhu, v2rayN) и <code>Claude бесплатный.cmd</code>. Это второй «лист» по Арсену.</li>
+      <li><strong>В <code>D:\Archive\Desktop-2026-09\</code></strong> (третий «лист», его же запасной вариант — не удалять, а убрать с глаз): три архива Оладушек (сайт сдан), «Прогон 3» и «Прогон design-genius» с zip (закрыты решением 25.08), «ceh-для-ярика» (75 МБ, копия — рабочий код живёт в <code>D:\Projects\ceh</code>), «Скан договора», «апизапера», «Life OS», «logs», mhtml с рекомендациями, docx «Проверка_Вариант_6», один экземпляр архива 1.7.06.</li>
+      <li><strong>Удалю совсем</strong> только пустой «Новый текстовый документ.txt» (0 байт) и «Новая папка» (внутри одна копия того же архива 1.7.06, который едет в D:).</li>
+      <li><strong>Не трогаю:</strong> «clod code» — на неё завязаны все пути, память и настройки.</li>
+    </ul>
+    <div class="card fill">
+      <p><strong>Два вопроса к тебе перед переносом:</strong> «Прогон antislop» (162 МБ) — это отдельный рабочий контур, прогоны закрыты 25.08, но контур в памяти как самостоятельный. И папка «Оладушки-макеты» (не архив) — вдруг нужна для гравировки. Оба по умолчанию поедут в D:\Archive, если не скажешь оставить.</p>
+    </div>
+    <p class="dim">Откат — обратно из <code>D:\Archive\Desktop-2026-09\</code>, список перемещённого запишу в журнал. Windows не умеет «пустой первый экран» как iPhone, поэтому ближайший аналог — стол с шестью ярлыками и всё остальное в одной папке.</p>
+  </div>
+
+  <div class="card">
+    <span class="tag mid">твои руки · 40 секунд</span>
+    <h3>Б. Уведомления Windows <span class="dim">(указание 01)</span></h3>
+    <div class="kv">
+      <div class="k">сейчас</div><div>Включены глобально (ключ в реестре не задан, значит по умолчанию «вкл»).</div>
+      <div class="k">будет</div><div>Выключены полностью, кроме Telegram — там бот-ассистент и Андрей. Арсен разрешает два-три канала.</div>
+    </div>
+    <p>Системные настройки по правилам не трогаю. Путь: <strong>Win + I → Система → Уведомления и действия</strong> → выключить «Получать уведомления от приложений и других отправителей», затем ниже включить обратно только Telegram. Рядом «Фокусировка внимания» → «Только приоритет», в приоритете оставить Telegram.</p>
+  </div>
+
+  <div class="card">
+    <span class="tag mid">по проводу — мои, руками — твои</span>
+    <h3>В. Телефон <span class="dim">(указания 01 и 05)</span></h3>
+    <div class="kv">
+      <div class="k">сейчас</div><div>Модель и раскладку не знаю.</div>
+      <div class="k">будет</div><div>Три экрана по его схеме плюс тишина.</div>
+    </div>
+    <div class="phones">
+      <div class="ph"><div class="t">экран 1</div><div class="grid"></div><div class="dock"><i></i><i></i><i></i><i></i></div><div class="cap">пусто; в доке 4 ежедневных</div></div>
+      <div class="ph"><div class="t">экран 2</div><div class="grid"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div><div class="dock"><i></i><i></i><i></i><i></i></div><div class="cap">пару раз в неделю</div></div>
+      <div class="ph"><div class="t">экран 3</div><div class="grid"><i class="fold"></i><i class="fold"></i><i class="fold"></i><i class="fold"></i></div><div class="dock"><i></i><i></i><i></i><i></i></div><div class="cap">папки: раз в месяц, раз в год</div></div>
+    </div>
+    <ul class="plain">
+      <li><strong>Док (4):</strong> Телефон, Telegram, Chrome, Obsidian — или четыре, которые назовёшь ты.</li>
+      <li><strong>Экран 2:</strong> банк, карты и 2ГИС, камера, YouTube, календарь, заметки, такси, музыка — то, что открываешь пару раз в неделю.</li>
+      <li><strong>Экран 3:</strong> папки «Магазины», «Госуслуги и документы», «Редкое», «Игры».</li>
+      <li><strong>Тишина:</strong> уведомления выключить у всех приложений, кроме звонков и Telegram-бота. «Не беспокоить» включить постоянно, исключение — «Избранные» (два-три контакта): их звонок пробивает тишину.</li>
+    </ul>
+    <p>Если Android — соберу по проводу через adb, как делал телефон Ильи: нужен телефон у компьютера и 15 минут, всё обратимо (резервная копия раскладки перед стартом). Если iPhone — только руками, дам пошаговку на две минуты.</p>
+  </div>
+
+  <div class="card">
+    <span class="tag ok">напоминание — мои, пакет — твои</span>
+    <h3>Г. Пакет хлама сегодня вечером <span class="dim">(указание 08)</span></h3>
+    <p>Одно разовое напоминание бота <strong>@Manager_miha_bot</strong>. В <code>reminders.json</code> появится ровно эта запись:</p>
+<pre>{
+  <b>"at"</b>: "2026-09-05 21:30",
+  <b>"text"</b>: "Пакет Арсена: пройти по квартире, набрать полный пакет хлама
+           (сломанное, нерабочее, ненужное) и вынести. Спать — после."
+}</pre>
+    <p>В 21:30 в Telegram приходит «⏰ Пакет Арсена: …». Дальше — ты, пакет и квартира. Ответишь боту «вынес» — он отметит в журнале.</p>
+  </div>
+
+  <div class="card">
+    <span class="tag ok">мои руки · перезапуск бота</span>
+    <h3>Д. Вечерняя строка честности <span class="dim">(«один на один» и «цена тебе»)</span></h3>
+    <div class="kv">
+      <div class="k">сейчас</div><div>С 30.08 идёт практика по эмоциональному интеллекту: три строки вечером (что почувствовал · на что · что сделал).</div>
+      <div class="k">будет</div><div>Четвёртая строка, каждый вечер в 22:00 бот спрашивает: <strong>«Что сегодня не смог — и что делаешь с этим завтра?»</strong> Одна строка в ответ, без оценок. Именно так, а не «возненавидь себя»: по данным ответственность без самобичевания работает лучше (см. фильтр).</div>
+    </div>
+    <p>В <code>schedule.json</code> бота добавится регулярная задача:</p>
+<pre>{
+  <b>"key"</b>: "chestnost",
+  <b>"name"</b>: "строка честности",
+  <b>"time"</b>: "22:00",
+  <b>"enabled"</b>: true,
+  <b>"prompt"</b>: "Вечер. Спроси одной строкой: «Что сегодня не смог — и что делаешь
+             с этим завтра?» Ответ Михаила занеси в журнал одной строкой, без оценок."
+}</pre>
+    <p class="dim">Расписание бот читает при старте, поэтому после правки перезапущу окно «Manager bot» — пять секунд. Посмотреть список: команда <code>/расписание</code> в чате с ботом; выключить в любой момент — там же кнопкой.</p>
+  </div>
+
+  <div class="card">
+    <span class="tag mid">только по твоему списку</span>
+    <h3>Е. Старые переписки, фото, заметки <span class="dim">(указание 04)</span></h3>
+    <p>Сам по личным фото и перепискам не хожу и ничего не удаляю. По его запасному варианту — не удалить, а убрать с глаз: назови папки на C: (скачанные фото, экспорт переписок, старые заметки), и я перенесу их в <code>D:\Archive</code> с датой. Чаты в мессенджерах — только ты.</p>
+  </div>
+
+  <div class="card">
+    <span class="tag mid">твои руки · одна задача в Делах</span>
+    <h3>Ж. Ревизия того, что читаешь <span class="dim">(указание 06)</span></h3>
+    <p>Задача на выходные в <code>Дела.md</code>. Открываешь подписки в Telegram, YouTube и ВК, и по каждой — три вопроса Арсена: <strong>применил хоть раз за год? что вышло? стоило времени?</strong> Два «нет» — отписка. Присылаешь мне две цифры: было / стало. Я запишу в журнал.</p>
+  </div>
+
+  <div class="card fill">
+    <h3>З. Правило помех и памятные вещи</h3>
+    <p>Правило помех не «устанавливается» — это вопрос при каждой проблеме: <strong>«это конкретная помеха или дыра в системе? чиню дыру»</strong>. Вписываю в шпаргалку и в заметку базы. Памятные вещи (указание 07) — руками и только если захочешь; в план не ставлю.</p>
+  </div>
+
+  <div class="tbl">
+  <table>
+    <tr><th>Пункт</th><th>Кто</th><th>Что нужно от тебя</th></tr>
+    <tr><td>А. Стол Windows</td><td>я</td><td>«да» + решение по «Прогон antislop» и «Оладушки-макеты»</td></tr>
+    <tr><td>Б. Уведомления Windows</td><td>ты</td><td>40 секунд по пути выше</td></tr>
+    <tr><td>В. Телефон</td><td>я по проводу / ты руками</td><td>модель телефона; четыре приложения для дока</td></tr>
+    <tr><td>Г. Пакет в 21:30</td><td>я ставлю, ты выносишь</td><td>«да»</td></tr>
+    <tr><td>Д. Строка честности 22:00</td><td>я</td><td>«да»</td></tr>
+    <tr><td>Е. Старые файлы</td><td>я по списку</td><td>названия папок</td></tr>
+    <tr><td>Ж. Ревизия подписок</td><td>ты</td><td>выходные, две цифры мне</td></tr>
+  </table>
+  </div>
+</section>
+
+<section>
+  <div class="num">05 — на телефон</div>
+  <h2>Шпаргалка</h2>
+  <div class="cheat">
+    <h3>Пять фраз, которые делают всю работу</h3>
+    <ul>
+      <li><b>«Луч, не лампочка.»</b> Каждый раздражитель — минус к лучу. Убрать источник проще, чем терпеть.</li>
+      <li><b>«Не смог — вот что делаю завтра.»</b> Ответственность без приговора.</li>
+      <li><b>«Применил? Что вышло?»</b> Два вопроса к любому каналу, книге, ролику. Включая этот.</li>
+      <li><b>«Помеха или дыра?»</b> Чиню систему, а не тушу пожар.</li>
+      <li><b>«Пакет.»</b> Если в голове каша — один пакет хлама из дома, сегодня.</li>
+    </ul>
+  </div>
+</section>
+
+<section>
+  <div class="num">06 — дальше</div>
+  <h2>Что нужно от тебя</h2>
+  <p>В чате будут кнопки по пунктам А, Г, Д и В. Можно нажать «всё», можно по одному. Пункты Б, Е и Ж — твои руки, я только напомню и запишу результат.</p>
+</section>
+
+</div>
+
+<footer>
+  <div class="wrap">
+    <p style="margin-bottom:14px"><strong style="color:var(--ink)">Источники проверки</strong></p>
+    <ul>
+      <li>Ward, Duke, Gneezy, Bos (2017). Brain Drain: The Mere Presence of One's Own Smartphone Reduces Available Cognitive Capacity — <a href="https://doi.org/10.1086/691462">doi.org/10.1086/691462</a></li>
+      <li>Stothart, Mitchum, Yehnert (2015). The attentional cost of receiving a cell phone notification — <a href="https://doi.org/10.1037/xhp0000100">doi.org/10.1037/xhp0000100</a></li>
+      <li>Mark, Gudith, Klocke (2008). The Cost of Interrupted Work — <a href="https://ics.uci.edu/~gmark/chi08-mark.pdf">ics.uci.edu</a></li>
+      <li>McMains, Kastner (2011). Interactions of top-down and bottom-up mechanisms in human visual cortex — <a href="https://doi.org/10.1523/JNEUROSCI.3766-10.2011">doi.org/10.1523/JNEUROSCI.3766-10.2011</a></li>
+      <li>Vohs, Redden, Rahinel (2013). Physical Order Produces Healthy Choices, Generosity, and Conventionality, Whereas Disorder Produces Creativity — <a href="https://doi.org/10.1177/0956797613480186">doi.org/10.1177/0956797613480186</a></li>
+      <li>Sedikides, Wildschut, Arndt, Routledge (2008). Nostalgia: Past, Present, and Future — <a href="https://doi.org/10.1111/j.1467-8721.2008.00595.x">doi.org/10.1111/j.1467-8721.2008.00595.x</a></li>
+      <li>Nolen-Hoeksema, Wisco, Lyubomirsky (2008). Rethinking Rumination — <a href="https://doi.org/10.1111/j.1745-6924.2008.00088.x">doi.org/10.1111/j.1745-6924.2008.00088.x</a></li>
+      <li>Breines, Chen (2012). Self-Compassion Increases Self-Improvement Motivation — <a href="https://doi.org/10.1177/0146167212445599">doi.org/10.1177/0146167212445599</a></li>
+      <li>Sirois (2014). Procrastination and stress: exploring the role of self-compassion — <a href="https://doi.org/10.1080/15298868.2013.763404">doi.org/10.1080/15298868.2013.763404</a></li>
+      <li>Milyavskaya, Inzlicht (2017). What's So Great About Self-Control? — <a href="https://doi.org/10.1177/1948550616679237">doi.org/10.1177/1948550616679237</a></li>
+      <li>Duckworth, Gendler, Gross (2016). Situational Strategies for Self-Control — <a href="https://doi.org/10.1177/1745691615623247">doi.org/10.1177/1745691615623247</a></li>
+      <li>Hidi, Renninger (2006). The Four-Phase Model of Interest Development — <a href="https://doi.org/10.1207/s15326985ep4102_4">doi.org/10.1207/s15326985ep4102_4</a></li>
+      <li>Lazarus, Folkman (1984). Stress, Appraisal, and Coping. Springer.</li>
+    </ul>
+    <p style="margin-top:20px">Исходное видео: Арсен Маркарян, «Как одиночество превращает тебя в мужчину?» (канал «База», 29.11.2025) — <a href="https://youtu.be/_ubgGrRodRE">youtu.be/_ubgGrRodRE</a>. Субтитры YouTube не отдал, аудио расшифровано локально (faster-whisper), полный текст лежит в базе во «Входящем».</p>
+  </div>
+</footer>
+
+</body>
+</html>
