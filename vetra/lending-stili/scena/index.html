@@ -1,0 +1,182 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Ветра — направление «Тёмная сцена»</title>
+<style>
+@font-face{font-family:'Google Sans';font-style:normal;font-weight:400 700;font-display:swap;
+  src:url('../../maket/fonts/google-sans-cyrillic-400-700.woff2') format('woff2');
+  unicode-range:U+0301,U+0400-045F,U+0490-0491,U+04B0-04B1,U+2116;}
+@font-face{font-family:'Google Sans';font-style:normal;font-weight:400 700;font-display:swap;
+  src:url('../../maket/fonts/google-sans-latin-400-700.woff2') format('woff2');
+  unicode-range:U+0000-00FF,U+2000-206F,U+20AC,U+2122,U+2212,U+FEFF,U+FFFD;}
+@font-face{font-family:'Google Sans Text';font-style:normal;font-weight:400;font-display:swap;
+  src:url('../../maket/fonts/google-sans-text-cyrillic-400.woff2') format('woff2');
+  unicode-range:U+0301,U+0400-045F,U+0490-0491,U+04B0-04B1,U+2116;}
+@font-face{font-family:'Google Sans Text';font-style:normal;font-weight:500;font-display:swap;
+  src:url('../../maket/fonts/google-sans-text-cyrillic-500.woff2') format('woff2');
+  unicode-range:U+0301,U+0400-045F,U+0490-0491,U+04B0-04B1,U+2116;}
+
+:root{
+  --blue:#2C78D5; --blue-mid:#81AEE6; --blue-soft:#D6E5F7;
+  --night:#0A1F38; --night-2:#0E2A4A;
+  --dim:#8FA2B8;
+}
+*{box-sizing:border-box}
+html,body{margin:0;padding:0}
+body{
+  background:var(--night); color:#fff;
+  font-family:'Google Sans Text','Google Sans',system-ui,sans-serif;
+  -webkit-font-smoothing:antialiased; overflow-x:hidden;
+}
+.wrap{max-width:1180px;margin:0 auto;padding:0 24px;position:relative;z-index:2}
+
+/* зерно поверх тёмного — вместо плоской заливки */
+.grain{position:fixed;inset:0;pointer-events:none;z-index:1;opacity:.5;
+  mix-blend-mode:overlay}
+/* луч прожектора — единственный источник света */
+.beam{position:absolute;inset:0;pointer-events:none;z-index:0;
+  background:radial-gradient(58% 46% at 50% 8%,rgba(129,174,230,.20),transparent 72%)}
+
+.top{display:flex;align-items:center;justify-content:space-between;padding:24px 0}
+.logo{font-family:'Google Sans';font-weight:700;font-size:26px;letter-spacing:-.04em;
+  display:flex;align-items:baseline;gap:5px;color:#fff}
+.logo i{width:7px;height:7px;border-radius:999px;background:var(--blue-mid);display:block;
+  transform:translateY(-2px)}
+.nav{display:flex;gap:26px;font-size:13px;letter-spacing:.06em;text-transform:uppercase}
+.nav a{color:var(--dim);text-decoration:none}
+.nav a:hover{color:#fff}
+
+.hero{padding:82px 0 96px;text-align:center;position:relative}
+.kicker{font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--blue-mid);
+  margin-bottom:30px}
+h1{font-family:'Google Sans';font-weight:700;letter-spacing:-.045em;line-height:.94;
+  font-size:clamp(44px,7.6vw,112px);margin:0}
+h1 .was{display:block;font-size:.40em;font-weight:400;color:var(--dim);
+  text-decoration:line-through;text-decoration-thickness:.05em;letter-spacing:-.02em;
+  margin-bottom:14px}
+h1 .now{color:var(--blue-mid)}
+.sub{max-width:56ch;margin:28px auto 0;font-size:17.5px;line-height:1.55;color:var(--dim)}
+
+.facts{display:grid;grid-template-columns:repeat(3,auto);justify-content:center;gap:0;margin:48px auto 0}
+.fact{padding:0 40px;border-left:1px solid rgba(255,255,255,.14)}
+.fact:first-child{border-left:0}
+.fact b{display:block;font-family:'Google Sans';font-weight:700;
+  font-size:clamp(28px,3.6vw,42px);letter-spacing:-.04em;line-height:1}
+.fact span{display:block;font-size:13px;color:var(--dim);margin-top:7px}
+
+.cta{display:flex;align-items:center;justify-content:center;gap:24px;margin:44px 0 0;
+  flex-wrap:wrap}
+.btn{background:var(--blue);color:#fff;border:0;border-radius:999px;padding:18px 38px;
+  font-family:'Google Sans';font-weight:700;font-size:16px;cursor:pointer;
+  box-shadow:0 0 0 0 rgba(129,174,230,.35);transition:box-shadow .18s,transform .16s,background .16s}
+.btn:hover{background:#3A87E4;transform:translateY(-3px);box-shadow:0 0 44px 0 rgba(129,174,230,.35)}
+.seal{width:104px;height:104px;flex:0 0 104px}
+.seal text{font-size:10.2px;letter-spacing:.08em;fill:var(--dim);
+  font-family:'Google Sans Text',sans-serif}
+.seal g{transform-origin:52px 52px;animation:spin 26s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+.seal .dot{fill:var(--blue-mid)}
+
+/* окно как единственный освещённый предмет на сцене */
+.stage{margin:76px auto 0;max-width:760px;border-radius:18px;overflow:hidden;
+  background:#fff;color:#0F1D2E;text-align:left;
+  box-shadow:0 40px 120px -30px rgba(0,0,0,.75),0 0 0 1px rgba(255,255,255,.09)}
+.stage .bar{display:flex;align-items:center;gap:9px;padding:13px 18px;
+  border-bottom:1px solid #E4EBF4;background:#F7FAFE}
+.stage .bar .lg{font-family:'Google Sans';font-weight:700;font-size:16px;letter-spacing:-.04em;
+  display:flex;align-items:baseline;gap:4px;color:#0F1D2E}
+.stage .bar .lg i{width:5px;height:5px;border-radius:999px;background:var(--blue);display:block;
+  transform:translateY(-1px)}
+.row{display:flex;align-items:center;gap:13px;padding:14px 18px;border-bottom:1px solid #EEF3F9}
+.row:last-child{border-bottom:0}
+.row.hot{background:#FDF1EF}
+.av{width:38px;height:38px;border-radius:999px;background:var(--blue);color:#fff;flex:0 0 38px;
+  display:flex;align-items:center;justify-content:center;font-weight:700;font-size:13px;
+  font-family:'Google Sans';position:relative}
+.av s{position:absolute;right:-1px;bottom:-1px;width:12px;height:12px;border-radius:999px;
+  border:2px solid #fff;display:block}
+.tg{background:#2AABEE}.vk{background:#0077FF}
+.txt{min-width:0;flex:1}
+.txt b{display:block;font-size:14.5px;font-family:'Google Sans';letter-spacing:-.01em}
+.txt span{display:block;font-size:13px;color:#56687F;overflow:hidden;text-overflow:ellipsis;
+  white-space:nowrap}
+.wait{font-size:12.5px;font-weight:500;color:#C62828;white-space:nowrap}
+.ok{font-size:12.5px;color:#8494A8;white-space:nowrap}
+
+@media (max-width:860px){
+  .nav{display:none}
+  .fact{padding:0 14px}
+  .fact span{font-size:12px}
+  .hero{padding:52px 0 64px}
+  .stage{margin-top:52px}
+}
+@media (prefers-reduced-motion:reduce){.seal g{animation:none}}
+</style>
+</head>
+<body>
+
+<svg class="grain" xmlns="http://www.w3.org/2000/svg">
+  <filter id="n"><feTurbulence type="fractalNoise" baseFrequency="0.85" numOctaves="3"/>
+    <feColorMatrix type="saturate" values="0"/></filter>
+  <rect width="100%" height="100%" filter="url(#n)" opacity="0.16"/>
+</svg>
+
+<div class="beam"></div>
+
+<div class="wrap">
+  <header class="top">
+    <div class="logo">Ветра<i></i></div>
+    <nav class="nav"><a href="#">Как работает</a><a href="#">Цена</a><a href="#">Вопросы</a></nav>
+  </header>
+
+  <section class="hero">
+    <div class="kicker">Для салонов красоты и сервисов</div>
+    <h1>
+      <span class="was">Шесть вкладок</span>
+      Одно <span class="now">окно</span><br>для всех клиентов
+    </h1>
+    <p class="sub">Ветра собирает сообщения клиентов из разных каналов в одном окне
+      и позволяет отвечать из него без переключения между мессенджерами.</p>
+
+    <div class="facts">
+      <div class="fact"><b>6</b><span>каналов в одном списке</span></div>
+      <div class="fact"><b>3 мин</b><span>подключить первый канал</span></div>
+      <div class="fact"><b>0 ₽</b><span>первые 14 дней</span></div>
+    </div>
+
+    <div class="cta">
+      <button class="btn">Посмотреть окно</button>
+      <svg class="seal" viewBox="0 0 104 104" aria-label="14 дней, без карты, без договора">
+        <defs><path id="c" d="M52,52 m-38,0 a38,38 0 1,1 76,0 a38,38 0 1,1 -76,0"/></defs>
+        <g><text><textPath href="#c">14 дней · без карты · без договора · </textPath></text></g>
+        <circle class="dot" cx="52" cy="52" r="4"/>
+      </svg>
+    </div>
+
+    <div class="stage">
+      <div class="bar"><span class="lg">Ветра<i></i></span></div>
+      <div class="row hot">
+        <div class="av">АК<s class="vk"></s></div>
+        <div class="txt"><b>Алина Кузнецова</b><span>И сколько будет стоить, волосы ниже лопаток</span></div>
+        <div class="wait">висит 42 мин</div>
+      </div>
+      <div class="row">
+        <div class="av">О<s class="tg"></s></div>
+        <div class="txt"><b>Ольга</b><span>Давайте четверг</span></div>
+        <div class="wait">ждёт 7 мин</div>
+      </div>
+      <div class="row">
+        <div class="av">ДС<s class="vk"></s></div>
+        <div class="txt"><b>Дарья Соловьёва</b><span>Хорошо, будем ждать</span></div>
+        <div class="ok">21:06</div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<div style="height:60px"></div>
+</body>
+</html>

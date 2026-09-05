@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Ветра — три направления лендинга</title>
+<style>
+@font-face{font-family:'Google Sans';font-style:normal;font-weight:400 700;font-display:swap;
+  src:url('../maket/fonts/google-sans-cyrillic-400-700.woff2') format('woff2');
+  unicode-range:U+0301,U+0400-045F,U+0490-0491,U+04B0-04B1,U+2116;}
+@font-face{font-family:'Google Sans';font-style:normal;font-weight:400 700;font-display:swap;
+  src:url('../maket/fonts/google-sans-latin-400-700.woff2') format('woff2');
+  unicode-range:U+0000-00FF,U+2000-206F,U+20AC,U+2122,U+2212,U+FEFF,U+FFFD;}
+@font-face{font-family:'Google Sans Text';font-style:normal;font-weight:400;font-display:swap;
+  src:url('../maket/fonts/google-sans-text-cyrillic-400.woff2') format('woff2');
+  unicode-range:U+0301,U+0400-045F,U+0490-0491,U+04B0-04B1,U+2116;}
+:root{--blue:#2C78D5;--ink:#0F1D2E;--muted:#56687F;--line:#DCE6F2;--page:#F7FAFE}
+*{box-sizing:border-box}
+body{margin:0;background:var(--page);color:var(--ink);
+  font-family:'Google Sans Text','Google Sans',system-ui,sans-serif;-webkit-font-smoothing:antialiased}
+.wrap{max-width:1180px;margin:0 auto;padding:36px 20px 80px}
+h1{font-family:'Google Sans';font-weight:700;letter-spacing:-.04em;font-size:clamp(28px,4vw,44px);
+  margin:0 0 8px;line-height:1.05}
+.lead{color:var(--muted);font-size:16px;line-height:1.5;max-width:64ch;margin:0 0 34px}
+.card{background:#fff;border:1px solid var(--line);border-radius:18px;overflow:hidden;margin-bottom:26px}
+.head{display:flex;gap:18px;align-items:flex-start;justify-content:space-between;
+  padding:20px 22px 16px;flex-wrap:wrap}
+.head h2{font-family:'Google Sans';font-weight:700;font-size:22px;letter-spacing:-.03em;margin:0 0 6px}
+.head p{margin:0;color:var(--muted);font-size:14.5px;line-height:1.5;max-width:70ch}
+.tag{font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--blue);font-weight:500}
+.open{flex:0 0 auto;background:var(--blue);color:#fff;text-decoration:none;border-radius:999px;
+  padding:11px 18px;font-family:'Google Sans';font-weight:700;font-size:14px}
+.open:hover{background:#1F63BC}
+.frame{position:relative;height:640px;border-top:1px solid var(--line);background:#EEF3F9}
+.frame iframe{width:100%;height:100%;border:0;display:block}
+.for{padding:14px 22px 18px;display:grid;grid-template-columns:1fr 1fr;gap:14px;font-size:13.5px;
+  line-height:1.5;border-top:1px solid var(--line)}
+.for b{display:block;font-size:11.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);
+  margin-bottom:4px;font-weight:500}
+@media (max-width:760px){.frame{height:560px}.for{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>Лендинг Ветры: три направления</h1>
+  <p class="lead">Первый экран собран трижды — на одном тексте, шрифте и фирменном синем из паспорта стиля.
+    Отличается только характер. Каждое окно живое: прокрутите внутри или откройте на весь экран.
+    Выбрать одно — дальше по нему собираю весь лендинг.</p>
+
+  <div class="card">
+    <div class="head">
+      <div><div class="tag">Направление 1</div><h2>«Каталог»</h2>
+        <p>Кремовая бумага вместо белого, электрик-синий плашками, каталожные рамки в одну линию,
+          номера разделов, бегущая лента каналов. Тёплый и дорогой, не похож на SaaS-шаблон.
+          Из библиотеки вкуса: реф. 17 (кремовая бумага + синий) и реф. 5 (модульные блоки).</p></div>
+      <a class="open" href="katalog/" target="_blank">Открыть на весь экран</a>
+    </div>
+    <div class="frame"><iframe src="katalog/" title="Каталог" loading="lazy"></iframe></div>
+    <div class="for">
+      <div><b>За</b>Держится на типографике и линиях — картинок не нужно. Тепло бумаги подходит салонам.</div>
+      <div><b>Против</b>Кремовый фон — редкость в интерфейсах; окно продукта останется белым, стык надо продумать.</div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="head">
+      <div><div class="tag">Направление 2</div><h2>«Тёмная сцена»</h2>
+        <p>Тёмно-синяя ночь из палитры, зерно вместо плоской заливки, один луч света сверху —
+          и окно продукта как единственный освещённый предмет. Дорогое ощущение строится светом
+          и паузами. Из библиотеки: реф. 7 и 8 (тёмная сцена, луч прожектора).</p></div>
+      <a class="open" href="scena/" target="_blank">Открыть на весь экран</a>
+    </div>
+    <div class="frame"><iframe src="scena/" title="Тёмная сцена" loading="lazy"></iframe></div>
+    <div class="for">
+      <div><b>За</b>Само окно становится главной картинкой и светится. Тёмная секция руководителю уже в плане — ляжет без швов.</div>
+      <div><b>Против</b>Весь лендинг тёмный — длинные тексты и тарифы читаются тяжелее; светлые вставки понадобятся.</div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="head">
+      <div><div class="tag">Направление 3</div><h2>«Спецификация»</h2>
+        <p>Стальной серо-голубой фон, рамка-визир с уголками, подписи в разрядку, характеристики
+          таблицей, модульная сетка. Страница как техпаспорт: всё по полочкам, цифры на виду.
+          Из библиотеки: реф. 13 (рамки-визиры, каталожная сетка) и реф. 5.</p></div>
+      <a class="open" href="specifikaciya/" target="_blank">Открыть на весь экран</a>
+    </div>
+    <div class="frame"><iframe src="specifikaciya/" title="Спецификация" loading="lazy"></iframe></div>
+    <div class="for">
+      <div><b>За</b>Цифры-факты — родной элемент: таблица характеристик читается за секунду. Строго и надёжно.</div>
+      <div><b>Против</b>Холоднее двух других; для владелицы салона может выглядеть «как для завода».</div>
+    </div>
+  </div>
+</div>
+</body>
+</html>

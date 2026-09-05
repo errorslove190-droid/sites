@@ -1,0 +1,186 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Ветра — направление «Каталог»</title>
+<style>
+@font-face{font-family:'Google Sans';font-style:normal;font-weight:400 700;font-display:swap;
+  src:url('../../maket/fonts/google-sans-cyrillic-400-700.woff2') format('woff2');
+  unicode-range:U+0301,U+0400-045F,U+0490-0491,U+04B0-04B1,U+2116;}
+@font-face{font-family:'Google Sans';font-style:normal;font-weight:400 700;font-display:swap;
+  src:url('../../maket/fonts/google-sans-latin-400-700.woff2') format('woff2');
+  unicode-range:U+0000-00FF,U+2000-206F,U+20AC,U+2122,U+2212,U+FEFF,U+FFFD;}
+@font-face{font-family:'Google Sans Text';font-style:normal;font-weight:400;font-display:swap;
+  src:url('../../maket/fonts/google-sans-text-cyrillic-400.woff2') format('woff2');
+  unicode-range:U+0301,U+0400-045F,U+0490-0491,U+04B0-04B1,U+2116;}
+@font-face{font-family:'Google Sans Text';font-style:normal;font-weight:500;font-display:swap;
+  src:url('../../maket/fonts/google-sans-text-cyrillic-500.woff2') format('woff2');
+  unicode-range:U+0301,U+0400-045F,U+0490-0491,U+04B0-04B1,U+2116;}
+
+:root{
+  --blue:#2C78D5; --blue-press:#1F63BC; --ink:#12181F;
+  --paper:#F2EFE6;      /* кремовая бумага вместо белого — от реф. 17 */
+  --paper-2:#E9E5D9;
+  --line:#12181F;
+  --muted:#5A6472;
+}
+*{box-sizing:border-box}
+html,body{margin:0;padding:0}
+body{
+  background:var(--paper); color:var(--ink);
+  font-family:'Google Sans Text','Google Sans',system-ui,sans-serif;
+  -webkit-font-smoothing:antialiased;
+  overflow-x:hidden;
+}
+.wrap{max-width:1240px;margin:0 auto;padding:0 24px}
+
+/* ---------- шапка ---------- */
+.top{display:flex;align-items:center;justify-content:space-between;
+  padding:22px 0;border-bottom:1.5px solid var(--line)}
+.logo{font-family:'Google Sans';font-weight:700;font-size:26px;letter-spacing:-.04em;
+  display:flex;align-items:baseline;gap:5px}
+.logo i{width:7px;height:7px;border-radius:999px;background:var(--blue);display:block;
+  transform:translateY(-2px)}
+.nav{display:flex;gap:26px;font-size:13px;letter-spacing:.06em;text-transform:uppercase}
+.nav a{color:var(--ink);text-decoration:none}
+.nav a:hover{color:var(--blue)}
+
+/* ---------- первый экран ---------- */
+.hero{padding:64px 0 0;position:relative}
+.kicker{font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);
+  display:flex;gap:14px;align-items:center;margin-bottom:26px}
+.kicker::after{content:'';flex:1;height:1px;background:var(--line);opacity:.25}
+
+h1{font-family:'Google Sans';font-weight:700;letter-spacing:-.045em;line-height:.92;
+  font-size:clamp(46px,8.4vw,124px);margin:0 0 4px}
+h1 .was{color:var(--muted);text-decoration:line-through;text-decoration-thickness:.055em;
+  display:block;font-size:.44em;letter-spacing:-.03em;margin-bottom:10px;font-weight:400}
+h1 .now{color:var(--blue)}
+
+.sub{max-width:52ch;margin:26px 0 0;font-size:17px;line-height:1.5;color:var(--muted)}
+
+/* цифры-факты — три числа вместо абзаца */
+.facts{display:grid;grid-template-columns:repeat(3,1fr);gap:0;margin:44px 0 0;
+  border:1.5px solid var(--line);border-right:0}
+.fact{padding:20px 22px;border-right:1.5px solid var(--line);min-width:0}
+.fact b{display:block;font-family:'Google Sans';font-weight:700;font-size:clamp(30px,4vw,46px);
+  letter-spacing:-.04em;line-height:1}
+.fact span{display:block;font-size:13px;color:var(--muted);margin-top:6px}
+
+.cta{display:flex;align-items:center;gap:22px;margin:34px 0 0;flex-wrap:wrap}
+.btn{background:var(--blue);color:#fff;border:0;border-radius:999px;
+  padding:17px 34px;font-family:'Google Sans';font-weight:700;font-size:16px;cursor:pointer;
+  transition:background .16s,transform .16s}
+.btn:hover{background:var(--blue-press);transform:translateY(-3px)}
+.seal{width:104px;height:104px;flex:0 0 104px}
+.seal text{font-size:10.2px;letter-spacing:.08em;fill:var(--muted);
+  font-family:'Google Sans Text',sans-serif}
+.seal g{transform-origin:52px 52px;animation:spin 26s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+.seal .dot{fill:var(--blue)}
+
+/* ---------- лента ---------- */
+.tape{margin-top:58px;background:var(--blue);color:#fff;overflow:hidden;
+  border-top:1.5px solid var(--line);border-bottom:1.5px solid var(--line);
+  transform:rotate(-1.1deg) scale(1.04)}
+.tape ul{display:flex;gap:0;margin:0;padding:0;list-style:none;width:max-content;
+  animation:run 34s linear infinite}
+.tape li{font-family:'Google Sans';font-weight:700;font-size:19px;letter-spacing:-.02em;
+  padding:13px 26px;white-space:nowrap;display:flex;align-items:center;gap:26px}
+.tape li::after{content:'';width:6px;height:6px;border-radius:999px;background:#fff;opacity:.6}
+@keyframes run{to{transform:translateX(-50%)}}
+
+/* ---------- каталожная сетка (второй блок) ---------- */
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:0;margin:0;
+  border:1.5px solid var(--line);border-top:0}
+.cell{padding:30px 26px 34px;border-right:1.5px solid var(--line);min-width:0}
+.cell:last-child{border-right:0}
+.cell .num{font-size:12px;letter-spacing:.14em;color:var(--blue);font-weight:500}
+.cell h3{font-family:'Google Sans';font-weight:700;font-size:23px;letter-spacing:-.03em;
+  margin:12px 0 8px;line-height:1.1}
+.cell p{margin:0;font-size:15px;line-height:1.5;color:var(--muted)}
+.section-space{padding:70px 0 0}
+
+@media (max-width:860px){
+  .facts,.grid{grid-template-columns:1fr;border-right:1.5px solid var(--line)}
+  .fact,.cell{border-right:0;border-bottom:1.5px solid var(--line)}
+  .fact:last-child,.cell:last-child{border-bottom:0}
+  .nav{display:none}
+  .hero{padding-top:40px}
+}
+@media (prefers-reduced-motion:reduce){
+  .tape ul,.seal g{animation:none}
+}
+</style>
+</head>
+<body>
+
+<div class="wrap">
+  <header class="top">
+    <div class="logo">Ветра<i></i></div>
+    <nav class="nav">
+      <a href="#">Как работает</a><a href="#">Цена</a><a href="#">Вопросы</a>
+    </nav>
+  </header>
+
+  <section class="hero">
+    <div class="kicker">Для салонов красоты и сервисов</div>
+    <h1>
+      <span class="was">Шесть вкладок</span>
+      Одно <span class="now">окно</span><br>для всех клиентов
+    </h1>
+    <p class="sub">Ветра собирает сообщения клиентов из разных каналов в одном окне
+      и позволяет отвечать из него без переключения между мессенджерами.</p>
+
+    <div class="facts">
+      <div class="fact"><b>6</b><span>каналов в одном списке</span></div>
+      <div class="fact"><b>3 мин</b><span>подключить первый канал</span></div>
+      <div class="fact"><b>0 ₽</b><span>первые 14 дней</span></div>
+    </div>
+
+    <div class="cta">
+      <button class="btn">Посмотреть окно</button>
+      <svg class="seal" viewBox="0 0 104 104" aria-label="14 дней, без карты, без договора">
+        <defs><path id="c" d="M52,52 m-38,0 a38,38 0 1,1 76,0 a38,38 0 1,1 -76,0"/></defs>
+        <g><text><textPath href="#c">14 дней · без карты · без договора · </textPath></text></g>
+        <circle class="dot" cx="52" cy="52" r="4"/>
+      </svg>
+    </div>
+  </section>
+</div>
+
+<div class="tape">
+  <ul>
+    <li>Telegram</li><li>ВКонтакте</li><li>MAX</li><li>Авито</li><li>Почта</li><li>Ozon</li>
+    <li>Telegram</li><li>ВКонтакте</li><li>MAX</li><li>Авито</li><li>Почта</li><li>Ozon</li>
+  </ul>
+</div>
+
+<div class="wrap section-space">
+  <div class="grid">
+    <div class="cell">
+      <div class="num">01</div>
+      <h3>Кто ждёт дольше — тот выше</h3>
+      <p>Через 15 минут без ответа диалог краснеет и поднимается наверх. Это главная цифра,
+        за которую платит салон.</p>
+    </div>
+    <div class="cell">
+      <div class="num">02</div>
+      <h3>Ответ в одно нажатие</h3>
+      <p>Адрес, часы, прайс лежат заготовками над полем ответа. Уходят в тот канал,
+        откуда пришёл вопрос.</p>
+    </div>
+    <div class="cell">
+      <div class="num">03</div>
+      <h3>Владелец видит три цифры</h3>
+      <p>Вечером в Telegram: сколько обращений, сколько без ответа, за сколько отвечали.
+        Без отчётов и таблиц.</p>
+    </div>
+  </div>
+</div>
+
+<div style="height:70px"></div>
+</body>
+</html>

@@ -1,0 +1,159 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Ветра — направление «Спецификация»</title>
+<style>
+@font-face{font-family:'Google Sans';font-style:normal;font-weight:400 700;font-display:swap;
+  src:url('../../maket/fonts/google-sans-cyrillic-400-700.woff2') format('woff2');
+  unicode-range:U+0301,U+0400-045F,U+0490-0491,U+04B0-04B1,U+2116;}
+@font-face{font-family:'Google Sans';font-style:normal;font-weight:400 700;font-display:swap;
+  src:url('../../maket/fonts/google-sans-latin-400-700.woff2') format('woff2');
+  unicode-range:U+0000-00FF,U+2000-206F,U+20AC,U+2122,U+2212,U+FEFF,U+FFFD;}
+@font-face{font-family:'Google Sans Text';font-style:normal;font-weight:400;font-display:swap;
+  src:url('../../maket/fonts/google-sans-text-cyrillic-400.woff2') format('woff2');
+  unicode-range:U+0301,U+0400-045F,U+0490-0491,U+04B0-04B1,U+2116;}
+@font-face{font-family:'Google Sans Text';font-style:normal;font-weight:500;font-display:swap;
+  src:url('../../maket/fonts/google-sans-text-cyrillic-500.woff2') format('woff2');
+  unicode-range:U+0301,U+0400-045F,U+0490-0491,U+04B0-04B1,U+2116;}
+
+:root{
+  --blue:#2C78D5; --blue-press:#1F63BC;
+  --steel:#DCE4EC;      /* стальной серо-голубой — от реф. 13 */
+  --steel-2:#CDD7E1;
+  --ink:#0F1D2E; --muted:#56687F; --faint:#8494A8;
+  --frame:rgba(15,29,46,.34);
+}
+*{box-sizing:border-box}
+html,body{margin:0;padding:0}
+body{
+  background:linear-gradient(180deg,var(--steel) 0%,var(--steel-2) 100%);
+  color:var(--ink);
+  font-family:'Google Sans Text','Google Sans',system-ui,sans-serif;
+  -webkit-font-smoothing:antialiased;overflow-x:hidden;min-height:100vh;
+}
+.wrap{max-width:1200px;margin:0 auto;padding:0 24px}
+
+.top{display:flex;align-items:center;justify-content:space-between;padding:22px 0}
+.logo{font-family:'Google Sans';font-weight:700;font-size:26px;letter-spacing:-.04em;
+  display:flex;align-items:baseline;gap:5px}
+.logo i{width:7px;height:7px;border-radius:999px;background:var(--blue);display:block;
+  transform:translateY(-2px)}
+.nav{display:flex;gap:26px;font-size:12px;letter-spacing:.14em;text-transform:uppercase}
+.nav a{color:var(--muted);text-decoration:none}
+.nav a:hover{color:var(--ink)}
+
+/* рамка-визир: тонкая линия и квадратные уголки */
+.frame{position:relative;border:1px solid var(--frame);padding:54px 56px 58px;margin-top:22px}
+.frame::before,.frame::after,.frame > .k::before,.frame > .k::after{
+  content:'';position:absolute;width:9px;height:9px;background:var(--ink)}
+.frame::before{left:-5px;top:-5px}.frame::after{right:-5px;top:-5px}
+.frame > .k::before{left:-5px;bottom:-5px}.frame > .k::after{right:-5px;bottom:-5px}
+.meta{position:absolute;font-size:11px;letter-spacing:.16em;text-transform:uppercase;
+  color:var(--muted)}
+.meta.tl{left:18px;top:-7px;background:var(--steel);padding:0 8px}
+.meta.tr{right:18px;top:-7px;background:var(--steel);padding:0 8px}
+.meta.bl{left:18px;bottom:-7px;background:var(--steel-2);padding:0 8px}
+.meta.br{right:18px;bottom:-7px;background:var(--steel-2);padding:0 8px}
+
+.hero{display:grid;grid-template-columns:1.25fr .9fr;gap:48px;align-items:end}
+h1{font-family:'Google Sans';font-weight:700;letter-spacing:-.04em;line-height:.95;
+  font-size:clamp(42px,6.4vw,92px);margin:0}
+h1 .was{display:block;font-size:.42em;font-weight:400;color:var(--muted);
+  text-decoration:line-through;text-decoration-thickness:.05em;letter-spacing:.02em;
+  margin-bottom:12px;text-transform:uppercase;font-size:.26em;letter-spacing:.14em}
+h1 .now{color:var(--blue)}
+.sub{max-width:48ch;margin:24px 0 0;font-size:16.5px;line-height:1.55;color:var(--muted)}
+
+.cta{display:flex;align-items:center;gap:22px;margin:34px 0 0;flex-wrap:wrap}
+.btn{background:var(--blue);color:#fff;border:0;border-radius:6px;padding:16px 30px;
+  font-family:'Google Sans';font-weight:700;font-size:15px;letter-spacing:.02em;cursor:pointer;
+  transition:background .16s,transform .16s}
+.btn:hover{background:var(--blue-press);transform:translateY(-3px)}
+.ghost{font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+
+/* спецификация — таблица характеристик */
+.spec{border-top:1px solid var(--frame);font-size:13.5px}
+.spec div{display:grid;grid-template-columns:1fr auto;gap:18px;padding:12px 0;
+  border-bottom:1px solid var(--frame)}
+.spec span{color:var(--muted);letter-spacing:.06em;text-transform:uppercase;font-size:11px;
+  padding-top:3px}
+.spec b{font-family:'Google Sans';font-weight:700;font-size:22px;letter-spacing:-.03em;
+  text-align:right}
+.spec b small{font-size:12px;color:var(--muted);font-family:'Google Sans Text';font-weight:400;
+  letter-spacing:0;margin-left:6px}
+
+/* модульная сетка второго блока */
+.mods{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--frame);
+  border:1px solid var(--frame);margin-top:40px}
+.mod{background:var(--steel);padding:22px 20px 26px;min-width:0;min-height:170px;
+  display:flex;flex-direction:column;justify-content:space-between}
+.mod .n{font-size:11px;letter-spacing:.16em;color:var(--blue);font-weight:500}
+.mod h3{font-family:'Google Sans';font-weight:700;font-size:19px;letter-spacing:-.02em;
+  margin:16px 0 6px;line-height:1.15}
+.mod p{margin:0;font-size:13.5px;line-height:1.5;color:var(--muted)}
+
+@media (max-width:900px){
+  .nav{display:none}
+  .frame{padding:36px 22px 40px}
+  .hero{grid-template-columns:1fr;gap:34px}
+  .mods{grid-template-columns:1fr 1fr}
+}
+@media (max-width:520px){.mods{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+
+<div class="wrap">
+  <header class="top">
+    <div class="logo">Ветра<i></i></div>
+    <nav class="nav"><a href="#">Как работает</a><a href="#">Цена</a><a href="#">Вопросы</a></nav>
+  </header>
+
+  <section class="frame">
+    <span class="k"></span>
+    <span class="meta tl">Ветра · окно 01</span>
+    <span class="meta tr">салоны и сервисы</span>
+    <span class="meta bl">14 дней · без карты</span>
+    <span class="meta br">4 000 ₽ / мес за салон</span>
+
+    <div class="hero">
+      <div>
+        <h1>
+          <span class="was">Было: шесть вкладок</span>
+          Одно <span class="now">окно</span><br>для всех клиентов
+        </h1>
+        <p class="sub">Ветра собирает сообщения клиентов из разных каналов в одном окне
+          и позволяет отвечать из него без переключения между мессенджерами.</p>
+        <div class="cta">
+          <button class="btn">Посмотреть окно</button>
+          <span class="ghost">без договора · без карты</span>
+        </div>
+      </div>
+
+      <div class="spec">
+        <div><span>Каналов в одном списке</span><b>6</b></div>
+        <div><span>Подключить первый канал</span><b>3<small>мин</small></b></div>
+        <div><span>Первые 14 дней</span><b>0<small>₽</small></b></div>
+        <div><span>Диалог краснеет без ответа</span><b>15<small>мин</small></b></div>
+      </div>
+    </div>
+  </section>
+
+  <div class="mods">
+    <div class="mod"><div class="n">01</div><div><h3>Кто ждёт дольше — тот выше</h3>
+      <p>Через 15 минут без ответа диалог поднимается наверх.</p></div></div>
+    <div class="mod"><div class="n">02</div><div><h3>Ответ в одно нажатие</h3>
+      <p>Заготовки над полем ответа: адрес, часы, прайс.</p></div></div>
+    <div class="mod"><div class="n">03</div><div><h3>Файл и голос</h3>
+      <p>Фото клиенту и ответ голосом — из того же окна.</p></div></div>
+    <div class="mod"><div class="n">04</div><div><h3>Три цифры владельцу</h3>
+      <p>Вечером в Telegram: обращений · без ответа · за сколько отвечали.</p></div></div>
+  </div>
+</div>
+
+<div style="height:70px"></div>
+</body>
+</html>
