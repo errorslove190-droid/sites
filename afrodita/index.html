@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta name="robots" content="noindex, nofollow">
+<meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Салон красоты "Афродита" | Патрики</title>
+    <meta name="description" content="Безупречный образ за 1.5 часа. VIP-сервис «в 4 руки» на Патриках. Маникюр и педикюр одновременно с премиум-материалами.">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <!-- Header -->
+    <header class="header">
+        <div class="container header-inner">
+            <div class="logo">APHRODITE</div>
+            <nav class="nav">
+                <a href="#services">Услуги</a>
+                <a href="#benefits">Преимущества</a>
+                <a href="#booking" class="btn-outline">Онлайн-запись</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-overlay"></div>
+        <div class="container hero-content animate-on-scroll">
+            <h1 class="hero-title">Безупречный образ<br>за 1.5 часа</h1>
+            <p class="hero-subtitle">VIP-сервис «в 4 руки» на Патриках. Экономьте время, не жертвуя качеством. Маникюр и педикюр одновременно с бокалом игристого.</p>
+            <a href="#booking" class="btn-primary">Записаться онлайн</a>
+        </div>
+    </section>
+
+    <!-- Benefits Section -->
+    <section id="benefits" class="benefits section">
+        <div class="container">
+            <h2 class="section-title animate-on-scroll">Ваше время — это роскошь</h2>
+            <p class="section-subtitle animate-on-scroll">Мы создали пространство, где вам не нужно выбирать между расписанием и красотой.</p>
+            
+            <div class="benefits-grid">
+                <div class="benefit-card animate-on-scroll">
+                    <div class="benefit-icon">⏱</div>
+                    <h3>Экономия времени</h3>
+                    <p>Услуга «в 4 руки» позволяет сделать маникюр и педикюр одновременно всего за 1.5 часа.</p>
+                </div>
+                <div class="benefit-card animate-on-scroll" style="transition-delay: 0.2s;">
+                    <div class="benefit-icon">✨</div>
+                    <h3>Премиум материалы</h3>
+                    <p>Работаем исключительно с лучшими брендами мира: Luxio, Dyson, Davines.</p>
+                </div>
+                <div class="benefit-card animate-on-scroll" style="transition-delay: 0.4s;">
+                    <div class="benefit-icon">🥂</div>
+                    <h3>Vogue атмосфера</h3>
+                    <p>Приватность, спешелти-кофе и бесплатное шампанское для наших гостей.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Booking Section -->
+    <section id="booking" class="booking section">
+        <div class="container booking-inner animate-on-scroll">
+            <div class="booking-content">
+                <h2 class="section-title">Оставьте звонки в прошлом</h2>
+                <p>Забронируйте свой визит за пару кликов. Выберите удобное время, мастеров и наслаждайтесь идеальным сервисом.</p>
+                
+                <form class="booking-form" onsubmit="event.preventDefault(); alert('Виджет онлайн-записи успешно открыт!');">
+                    <div class="form-group">
+                        <input type="text" placeholder="Ваше имя" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="tel" placeholder="Телефон" required>
+                    </div>
+                    <button type="submit" class="btn-primary btn-block">Перейти к выбору времени</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container footer-inner">
+            <div class="footer-col">
+                <div class="logo">APHRODITE</div>
+                <p>Салон красоты премиум-класса</p>
+            </div>
+            <div class="footer-col">
+                <h3>Контакты</h3>
+                <p>Москва, Патриаршие пруды</p>
+                <p><a href="tel:+79990000000" class="gold-text">+7 999 000 00 00</a></p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
