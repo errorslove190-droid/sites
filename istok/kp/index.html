@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta name="robots" content="noindex, nofollow">
+<meta charset="UTF-8">
+<title>КП — Единый портал сети клубов «ИСТОК»</title>
+<style>
+  :root{
+    --teal:#00AEB8; --purple:#92278F; --navy:#2E3192; --ink:#1c2033; --muted:#5a607a; --bg:#ffffff; --soft:#f2f7f8;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{font-family:'Segoe UI',system-ui,-apple-system,Arial,sans-serif;color:var(--ink);background:#e9ecf2;}
+  .page{width:210mm;height:296mm;margin:0 auto;background:var(--bg);padding:9mm 12mm;position:relative;overflow:hidden}
+  @media print{
+    body{background:#fff}
+    .page{margin:0}
+    @page{size:A4;margin:0}
+  }
+  .blob{position:absolute;border-radius:50% 60% 55% 45%/55% 45% 60% 50%;opacity:.9;z-index:0}
+  .b1{width:220px;height:170px;background:var(--teal);top:-70px;right:-60px}
+  .b2{width:140px;height:120px;background:var(--purple);top:60px;right:-80px}
+  .b3{width:180px;height:150px;background:var(--navy);bottom:-90px;left:-90px}
+  .content{position:relative;z-index:1}
+  header{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:5mm}
+  .brand{font-weight:800;font-size:30px;letter-spacing:4px;color:var(--navy)}
+  .brand small{display:block;letter-spacing:0;font-size:11px;font-weight:600;color:var(--muted);margin-top:2px}
+  .doc-type{text-align:right;font-size:12px;color:var(--muted);padding-top:6px}
+  .doc-type b{display:block;font-size:15px;color:var(--purple);text-transform:uppercase;letter-spacing:1px}
+  h1{font-size:21px;line-height:1.25;color:var(--navy);margin-bottom:3mm}
+  h1 span{color:var(--teal)}
+  .lead{font-size:12px;line-height:1.45;color:var(--muted);margin-bottom:4mm;max-width:165mm}
+  .stats{display:flex;gap:4mm;margin-bottom:4mm}
+  .stat{flex:1;background:var(--soft);border-radius:10px;padding:3mm;text-align:center}
+  .stat b{display:block;font-size:20px;color:var(--purple)}
+  .stat span{font-size:10px;color:var(--muted);line-height:1.3;display:block;margin-top:1mm}
+  h2{font-size:12px;text-transform:uppercase;letter-spacing:1.5px;color:var(--teal);margin:4mm 0 2.5mm;border-bottom:2px solid var(--teal);display:inline-block;padding-bottom:1mm}
+  .two-col{display:flex;gap:6mm}
+  .col{flex:1}
+  ul.checks{list-style:none;font-size:11px;line-height:1.45}
+  ul.checks li{padding-left:5.5mm;position:relative;margin-bottom:1.4mm}
+  ul.checks li::before{content:"✔";position:absolute;left:0;color:var(--teal);font-weight:700}
+  ul.checks.pain li::before{content:"✖";color:var(--purple)}
+  table.packages{width:100%;border-collapse:separate;border-spacing:3mm 0;margin-top:2mm}
+  table.packages td{vertical-align:top;width:33.3%;border:1.5px solid #dfe3ee;border-radius:12px;padding:3mm;font-size:10.5px;line-height:1.4}
+  td.featured{border:2.5px solid var(--purple);background:#faf4fa;position:relative}
+  .tag{position:absolute;top:-3.5mm;left:50%;transform:translateX(-50%);background:var(--purple);color:#fff;font-size:9px;font-weight:700;letter-spacing:1px;padding:1mm 3mm;border-radius:20px;white-space:nowrap}
+  .pk-name{font-weight:800;font-size:12.5px;color:var(--navy);margin-bottom:.5mm}
+  .pk-price{font-size:18px;font-weight:800;color:var(--purple);margin-bottom:2mm}
+  .pk-price small{font-size:10px;color:var(--muted);font-weight:400}
+  .pk-list{list-style:none}
+  .pk-list li{padding-left:4.5mm;position:relative;margin-bottom:1.2mm;color:#333a52}
+  .pk-list li::before{content:"—";position:absolute;left:0;color:var(--teal);font-weight:700}
+  .support{margin-top:3mm;background:var(--navy);color:#fff;border-radius:10px;padding:2.5mm 5mm;font-size:11px;text-align:center}
+  .support b{white-space:nowrap}
+  .support b{color:#7fe3e9}
+  .timeline{display:flex;gap:2mm;margin-top:2mm}
+  .step{flex:1;background:var(--soft);border-radius:8px;padding:2mm;text-align:center;font-size:9px;line-height:1.3;color:var(--ink)}
+  .step b{display:block;color:var(--purple);font-size:10px;margin-bottom:.5mm}
+  footer{margin-top:4mm;padding-top:2.5mm;border-top:1.5px solid #dfe3ee;display:flex;justify-content:space-between;font-size:10px;color:var(--muted);line-height:1.45}
+</style>
+</head>
+<body>
+<div class="page">
+  <div class="blob b1"></div><div class="blob b2"></div><div class="blob b3"></div>
+  <div class="content">
+    <header>
+      <div class="brand">ИСТОК<small>сеть молодёжных клубов · Зеленодольский район</small></div>
+      <div class="doc-type"><b>Коммерческое предложение</b>Официальный сайт-портал сети клубов<br>июль 2026</div>
+    </header>
+
+    <h1>20 клубов и лагерь — <span>одна точка входа</span> для каждого родителя района</h1>
+    <p class="lead">Сегодня информация о клубах «Исток» распределена по 15+ отдельным группам ВКонтакте. Родителю сложно найти клуб рядом с домом, узнать расписание секций и записать ребёнка. Сайт-портал собирает всю сеть в одном месте — и работает как круглосуточная приёмная.</p>
+
+    <div class="stats">
+      <div class="stat"><b>20</b><span>клубов на одной карте — от Зеленодольска до Кугеево</span></div>
+      <div class="stat"><b>24/7</b><span>онлайн-запись в секции и заявки в лагерь</span></div>
+      <div class="stat"><b>100%</b><span>соответствие требованиям к сайтам гос. учреждений</span></div>
+    </div>
+
+    <div class="two-col">
+      <div class="col">
+        <h2>Проблема сейчас</h2>
+        <ul class="checks pain">
+          <li>15+ разрозненных групп ВК — нет единой витрины сети</li>
+          <li>Запись — звонки и личные сообщения, заявки теряются</li>
+          <li>Организацию не найти в Яндексе по запросу «секции Зеленодольск»</li>
+          <li>Нет версии для слабовидящих и оформленной обработки персональных данных — требования к гос. сайтам</li>
+        </ul>
+      </div>
+      <div class="col">
+        <h2>Что даёт портал</h2>
+        <ul class="checks">
+          <li>Карта всех 20 клубов + фильтр секций по месту и возрасту</li>
+          <li>Онлайн-запись: заявки приходят сразу ответственному</li>
+          <li>Страница лагеря: смены, программа, заявка на путёвку</li>
+          <li>Новости подтягиваются из ВК автоматически — сайт живёт сам</li>
+          <li>Версия для слабовидящих, 152-ФЗ, хостинг в РФ</li>
+        </ul>
+      </div>
+    </div>
+
+    <h2>Варианты</h2>
+    <table class="packages"><tr>
+      <td>
+        <div class="pk-name">Базовый</div>
+        <div class="pk-price">90 000 ₽</div>
+        <ul class="pk-list">
+          <li>Главная, о нас, контакты</li>
+          <li>Список клубов с адресами</li>
+          <li>Единая форма записи</li>
+          <li>Версия для слабовидящих</li>
+          <li>Срок: 3 недели</li>
+        </ul>
+      </td>
+      <td class="featured">
+        <div class="tag">РЕКОМЕНДУЕМ</div>
+        <div class="pk-name">Портал</div>
+        <div class="pk-price">180 000 ₽</div>
+        <ul class="pk-list">
+          <li>Всё из «Базового»</li>
+          <li>Страница каждого из 20 клубов + карта района</li>
+          <li>Каталог секций с фильтрами</li>
+          <li>Лендинг лагеря с заявкой на путёвку</li>
+          <li>Афиша, новости, галерея достижений</li>
+          <li>Обучение сотрудника работе с сайтом</li>
+          <li>Срок: 6–7 недель</li>
+        </ul>
+      </td>
+      <td>
+        <div class="pk-name">Портал+</div>
+        <div class="pk-price">280 000 ₽</div>
+        <ul class="pk-list">
+          <li>Всё из «Портала»</li>
+          <li>Автоимпорт новостей из групп ВК</li>
+          <li>Заявки в Telegram-бот</li>
+          <li>Подготовка и обработка фотоконтента</li>
+          <li>SEO-настройка и запуск в Яндексе</li>
+          <li>Срок: 8 недель</li>
+        </ul>
+      </td>
+    </tr></table>
+
+    <div class="support">Техническая поддержка, обновления и дежурство по сайту — <b>от 10 000 ₽/мес</b>&nbsp;&nbsp;·&nbsp;&nbsp;первый месяц после запуска — бесплатно</div>
+
+    <h2>Как идёт работа</h2>
+    <div class="timeline">
+      <div class="step"><b>1. Прототип</b>структура и макет главной</div>
+      <div class="step"><b>2. Дизайн</b>по фирменному стилю «Исток»</div>
+      <div class="step"><b>3. Сборка</b>сайт, формы, карта, интеграции</div>
+      <div class="step"><b>4. Наполнение</b>20 клубов, секции, лагерь</div>
+      <div class="step"><b>5. Запуск</b>тесты, обучение, передача</div>
+    </div>
+
+    <footer>
+      <div>Условия: договор, предоплата 50%, закрытие по акту.<br>Работаем официально (самозанятый / договор с учреждением).</div>
+      <div style="text-align:right"><b style="color:var(--navy)">Михаил · веб-разработка</b><br>телефон / почта — по договорённости</div>
+    </footer>
+  </div>
+</div>
+</body>
+</html>
