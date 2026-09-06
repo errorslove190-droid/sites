@@ -4,124 +4,190 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="robots" content="noindex, nofollow">
-<title>ИСТОК — портал сети молодёжных клубов</title>
-<meta name="description" content="Предпродажная работа июля 2026: аудит, структура портала, план, КП">
+<title>ИСТОК — кейс: портал сети из 21 клуба</title>
+<meta name="description" content="Как готовилось предложение для государственной сети молодёжных клубов: разведка, структура, документы">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Golos+Text:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Golos+Text:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
-  :root{--ink:#1c2033;--paper:#fff;--teal:#00aeb8;--purple:#92278f;--navy:#2e3192;--grey:#5a607a;--line:#e3e7ef;--soft:#f2f7f8}
+  :root{--ink:#141829;--paper:#fff;--teal:#00aeb8;--purple:#92278f;--navy:#2e3192;--grey:#5a607a;--line:#e3e7ef;--soft:#f4f8f9}
   *{box-sizing:border-box;margin:0;padding:0}
   body{font-family:'Golos Text',-apple-system,'Segoe UI',sans-serif;background:var(--paper);color:var(--ink);line-height:1.55;-webkit-font-smoothing:antialiased}
-  .wrap{max-width:780px;margin:0 auto;padding:0 20px 80px}
-  header{padding:44px 0 26px;border-bottom:3px solid var(--navy)}
-  .kicker{font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--teal);font-weight:700}
-  h1{font-size:clamp(28px,6.5vw,42px);line-height:1.06;letter-spacing:-.02em;margin:10px 0 12px;font-weight:700;color:var(--navy)}
-  h1 span{color:var(--teal)}
-  .lead{color:var(--grey);font-size:15px;max-width:58ch}
-  .status{margin-top:16px;background:#fff7e6;border:1px solid #ffd699;border-radius:12px;padding:12px 14px;font-size:14px}
-  .status b{color:#8a5b00}
-  section{margin-top:38px}
-  h2{font-size:20px;font-weight:700;letter-spacing:-.01em;color:var(--navy)}
-  h2 small{font-size:12px;color:var(--teal);font-weight:700;letter-spacing:.08em;text-transform:uppercase;display:block;margin-bottom:4px}
-  .note{color:var(--grey);font-size:14px;margin:8px 0 14px;max-width:64ch}
-  ul{padding-left:20px;margin:8px 0}
-  li{margin:6px 0;font-size:14.5px}
-  .stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:10px;margin-top:14px}
-  .stat{background:var(--soft);border-radius:12px;padding:14px;text-align:center}
-  .stat b{display:block;font-size:24px;color:var(--purple);font-weight:700;line-height:1.1}
-  .stat span{font-size:12px;color:var(--grey);display:block;margin-top:5px;line-height:1.35}
-  .pk{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:12px;margin-top:14px}
-  .pk div{border:1.5px solid var(--line);border-radius:14px;padding:14px}
-  .pk div.hot{border:2.5px solid var(--purple);background:#faf4fa}
-  .pk b{display:block;font-size:15px;color:var(--navy)}
-  .pk .p{font-size:20px;font-weight:700;color:var(--purple);margin:4px 0 8px}
-  .pk small{font-size:12.5px;color:var(--grey);display:block;line-height:1.45}
-  .links{margin-top:14px;display:flex;gap:8px;flex-wrap:wrap}
-  .links a{font-size:13.5px;font-weight:600;text-decoration:none;border:1.5px solid var(--navy);border-radius:99px;padding:7px 14px;color:var(--navy)}
+  .wrap{max-width:840px;margin:0 auto;padding:0 20px 90px}
+
+  .hero{padding:52px 0 34px}
+  .kicker{font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--teal);font-weight:700}
+  h1{font-size:clamp(32px,7.5vw,54px);line-height:1.03;letter-spacing:-.025em;margin:12px 0 16px;font-weight:800;color:var(--navy)}
+  h1 em{font-style:normal;color:var(--teal)}
+  .lead{color:var(--grey);font-size:16px;max-width:60ch}
+  .rule{height:5px;background:linear-gradient(90deg,var(--teal) 0 33%,var(--purple) 33% 66%,var(--navy) 66%);border-radius:3px;margin-top:26px}
+
+  section{margin-top:46px}
+  h2{font-size:23px;font-weight:800;letter-spacing:-.015em;color:var(--navy);line-height:1.15}
+  h2 small{display:block;font-size:11.5px;color:var(--teal);font-weight:700;letter-spacing:.14em;text-transform:uppercase;margin-bottom:6px}
+  h3{font-size:16px;font-weight:700;margin:22px 0 4px}
+  .note{color:var(--grey);font-size:14.5px;margin:10px 0 0;max-width:66ch}
+  p{margin:10px 0;font-size:15px}
+  ul{padding-left:20px;margin:10px 0}
+  li{margin:7px 0;font-size:14.5px}
+  b,strong{font-weight:600}
+
+  .nums{display:grid;grid-template-columns:repeat(auto-fit,minmax(122px,1fr));gap:10px;margin-top:18px}
+  .num{background:var(--soft);border-radius:14px;padding:16px 12px;text-align:center}
+  .num b{display:block;font-size:27px;color:var(--purple);font-weight:800;line-height:1.05;letter-spacing:-.02em}
+  .num span{font-size:12px;color:var(--grey);display:block;margin-top:6px;line-height:1.35}
+
+  .find{border-left:4px solid var(--teal);padding:2px 0 2px 16px;margin-top:20px}
+  .find h3{margin-top:0;color:var(--navy)}
+  .find p{color:var(--grey);font-size:14.5px;margin:5px 0 0}
+  .find p.hit{color:var(--ink);font-weight:600;margin-top:7px}
+
+  .work{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px;margin-top:16px}
+  .work div{border:1.5px solid var(--line);border-radius:14px;padding:14px 16px}
+  .work b{display:block;font-size:14.5px;color:var(--navy);margin-bottom:3px}
+  .work span{font-size:13.5px;color:var(--grey);line-height:1.45}
+
+  .docs{margin-top:18px;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,240px);gap:20px;align-items:start}
+  .docs img{width:100%;border:1px solid var(--line);border-radius:10px;display:block}
+  .links{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
+  .links a{font-size:13.5px;font-weight:600;text-decoration:none;border:1.5px solid var(--navy);border-radius:99px;padding:8px 15px;color:var(--navy)}
   .links a:hover{background:var(--navy);color:#fff}
   .links a.sec{border-color:var(--line);color:var(--grey);font-weight:500}
-  .slides{border-left:3px solid var(--teal);padding-left:14px;margin-top:12px}
-  .slides p{font-size:14px;margin:7px 0;color:var(--grey)}
-  .slides p b{color:var(--ink);font-weight:600}
-  footer{margin-top:46px;padding-top:20px;border-top:1px solid var(--line);color:var(--grey);font-size:13px}
-  @media(max-width:520px){.wrap{padding:0 16px 60px}}
+  .links a.sec:hover{background:none;border-color:var(--navy);color:var(--navy)}
+
+  table{width:100%;border-collapse:collapse;font-size:14.5px;margin-top:14px}
+  th,td{text-align:left;padding:11px 8px;border-bottom:1px solid var(--line)}
+  th{font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--teal);font-weight:700}
+  tr.hot td{background:#faf4fa}
+  td b{color:var(--purple);font-weight:700}
+
+  .end{background:var(--ink);color:#e8ecf5;border-radius:22px;padding:28px 24px;margin-top:50px}
+  .end h2{color:#fff}
+  .end h2 small{color:var(--teal)}
+  .end p,.end li{color:#b9c0d4;font-size:14.5px}
+  .end strong{color:#fff}
+  footer{margin-top:40px;padding-top:20px;border-top:1px solid var(--line);color:var(--grey);font-size:13px}
+  @media(max-width:640px){.docs{grid-template-columns:1fr}.wrap{padding:0 16px 70px}}
 </style>
 </head>
 <body>
 <div class="wrap">
 
-<header>
-  <div class="kicker">июль 2026 · предпродажная работа</div>
-  <h1>ИСТОК — портал<br><span>сети молодёжных клубов</span></h1>
-  <p class="lead">Объединение молодёжных клубов Зеленодольского района: 21 клуб и детский лагерь, семь населённых пунктов. Обратился директор. Сайта нет, вся жизнь сети — в полутора десятках разрозненных групп ВКонтакте.</p>
-  <div class="status"><b>Статус неизвестен.</b> В базе знаний записей по этому проекту нет, материалы лежали только в загрузках. Скажи, чем закончилось — продали, отказали или зависло, — и я занесу проект в базу правильно.</div>
-</header>
+<div class="hero">
+  <div class="kicker">кейс · июль 2026 · государственный заказчик</div>
+  <h1>21 клуб, семь посёлков<br>и <em>ни одного сайта</em></h1>
+  <p class="lead">Объединение молодёжных клубов «Исток» Зеленодольского района. Обратился директор всех клубов. Ниже — что было сделано до первой встречи: разведка, структура портала, план, смета и документы для защиты бюджета.</p>
+  <div class="rule"></div>
+</div>
 
 <section>
-  <h2><small>Что за клиент</small>Государственное учреждение, решает один человек</h2>
-  <p class="note">Это меняет разговор: бюджетному учреждению сайт нужен не «для красоты», а чтобы выполнить требования и не получить замечание сверху.</p>
-  <div class="stats">
-    <div class="stat"><b>21</b><span>клуб от Зеленодольска до Кугеево</span></div>
-    <div class="stat"><b>15+</b><span>групп ВК вместо одной витрины</span></div>
-    <div class="stat"><b>7</b><span>населённых пунктов района</span></div>
-    <div class="stat"><b>44-ФЗ</b><span>закупка до 600 тыс. без тендера</span></div>
+  <h2><small>Точка отсчёта</small>Сеть живёт в полутора десятках групп ВК</h2>
+  <p class="note">Цифры собраны вручную: изучены главное сообщество и все группы клубов по отдельности.</p>
+  <div class="nums">
+    <div class="num"><b>21</b><span>клуб по месту жительства</span></div>
+    <div class="num"><b>15+</b><span>отдельных групп ВК вместо витрины</span></div>
+    <div class="num"><b>7</b><span>населённых пунктов района</span></div>
+    <div class="num"><b>887</b><span>подписчиков у главного сообщества</span></div>
+    <div class="num"><b>38–540</b><span>подписчиков у клубов — разброс в 14 раз</span></div>
+    <div class="num"><b>5</b><span>шагов, чтобы записать ребёнка</span></div>
   </div>
+</section>
+
+<section>
+  <h2><small>Разведка</small>Пять находок, которые изменили разговор</h2>
+  <p class="note">Каждая — результат чтения открытых материалов, а не догадка. Именно они превратили «предлагаю сделать сайт» в «вот решение вашей задачи».</p>
+
+  <div class="find">
+    <h3>1. У заказчика уже написано, что ему нужно</h3>
+    <p>В опубликованной концепции объединения задача номер один — свести клубы в единую информационную структуру, а второй этап прямо называется запуском цифровой платформы.</p>
+    <p class="hit">Разговор меняется: мы не продаём сайт, мы делаем этап их собственного документа. Против своей же концепции возражать не станут.</p>
+  </div>
+
+  <div class="find">
+    <h3>2. Занятия бесплатные — значит продаём не абонементы</h3>
+    <p>Клубы работают бесплатно, деньги есть только в лагере. Сайт должен приносить набор, посещаемость и репутацию, а не продажи секций.</p>
+    <p class="hit">Без этой находки предложили бы онлайн-оплату, которая учреждению не нужна, и выглядели бы чужими.</p>
+  </div>
+
+  <div class="find">
+    <h3>3. Запись устроена как в 2005 году</h3>
+    <p>Чтобы записать ребёнка, родитель должен найти нужную группу, скачать файл заявления, распечатать его дома, заполнить от руки и принести в клуб в рабочие часы.</p>
+    <p class="hit">Онлайн-форма против бумажного заявления продаёт себя сама, объяснять ничего не нужно.</p>
+  </div>
+
+  <div class="find">
+    <h3>4. Достижения не работают на репутацию</h3>
+    <p>В одном из клубов поставлен рекорд России по жиму лёжа среди юношей до 18 лет — 240 кг. Группа этого клуба не обновлялась больше года, и о рекорде знает только сам клуб.</p>
+    <p class="hit">Раздел достижений перестаёт быть украшением и становится доводом: район не видит собственных побед.</p>
+  </div>
+
+  <div class="find">
+    <h3>5. Требования к сайтам госучреждений не выполнены</h3>
+    <p>Версия для слабовидящих по ГОСТ Р 52872 обязательна, обработка персональных данных должна идти по 152-ФЗ с согласием и хранением в России. Сейчас ничего этого нет — просто потому что нет сайта.</p>
+    <p class="hit">Продаём не «сайтик», а правильный сайт, за который директору не прилетит проверка.</p>
+  </div>
+
+  <p class="note" style="margin-top:20px">Побочная находка: у сети нашёлся двадцать первый клуб, которого нет на официальной афише. На встрече это сразу показывает, что материалы изучены всерьёз.</p>
+</section>
+
+<section>
+  <h2><small>Объём работы</small>Что было готово до первой встречи</h2>
+  <p class="note">Всё сделано заранее, без предоплаты и без обещаний со стороны заказчика.</p>
+  <div class="work">
+    <div><b>Аудит цифрового присутствия</b><span>Главное сообщество и все группы клубов: контент, активность, подписчики, где теряются заявки.</span></div>
+    <div><b>Реестр сети</b><span>Полный список клубов с адресами, направлениями и руководителями, включая тот, что не попал на афишу.</span></div>
+    <div><b>Разбор их документов</b><span>Концепция объединения и материалы по фирменному стилю: слоган, метафора бренда, статус бренд-бука.</span></div>
+    <div><b>Карта сайта</b><span>Десять разделов под реальные вопросы родителя: карта клубов, каталог секций с фильтрами, запись, лагерь, афиша, достижения.</span></div>
+    <div><b>Календарный план</b><span>Пять этапов, запуск за 4–5 недель, дизайн главной показываем уже на первой неделе.</span></div>
+    <div><b>Две презентации</b><span>«Видение» на 10 слайдов и «План проекта» на 8 — чтобы директору было что показать наверх.</span></div>
+    <div><b>Коммерческое предложение</b><span>Три пакета, сроки, состав работ, условия договора — в фирменных цветах заказчика.</span></div>
+    <div><b>Сценарий встречи</b><span>Пять шагов разговора и заготовки под возражения, включая вопрос оплаты по 44-ФЗ.</span></div>
+  </div>
+</section>
+
+<section>
+  <h2><small>Предложение</small>Три пакета и сроки</h2>
+  <table>
+    <tr><th>Пакет</th><th>Что входит</th><th>Цена</th><th>Срок</th></tr>
+    <tr><td><b>Базовый</b></td><td>Главная, о нас, контакты, список клубов, единая форма записи, версия для слабовидящих</td><td>90 000 ₽</td><td>3 недели</td></tr>
+    <tr class="hot"><td><b>Портал</b></td><td>Страница каждого клуба и карта района, каталог секций с фильтрами, лендинг лагеря, афиша, новости, достижения, обучение сотрудника</td><td>180 000 ₽</td><td>6–7 недель</td></tr>
+    <tr><td><b>Портал+</b></td><td>Автоимпорт новостей из ВК, заявки в Telegram-бот, обработка фотоконтента, SEO и запуск в Яндексе</td><td>280 000 ₽</td><td>8 недель</td></tr>
+  </table>
+  <p class="note">Плюс поддержка от 10 000 ₽ в месяц, первый месяц после запуска бесплатно. Оплата по договору как самозанятый: для учреждения это малая закупка у единственного поставщика, без тендера.</p>
+</section>
+
+<section>
+  <h2><small>Документы</small>Всё, что уходило заказчику</h2>
+  <div class="docs">
+    <div>
+      <p>Коммерческое предложение собрано в фирменных цветах «Истока» и умещается на один лист А4: проблема, что даёт портал, три пакета, этапы работы, условия. Такой документ директор распечатывает и несёт на согласование, не пересказывая своими словами.</p>
+      <p>Презентации закрывают два разных разговора: «Видение» объясняет, зачем это району, «План проекта» — что и когда происходит по неделям.</p>
+      <div class="links">
+        <a href="kp/">Открыть КП</a>
+        <a class="sec" href="files/ISTOK_videnie.pptx">Презентация «Видение»</a>
+        <a class="sec" href="files/ISTOK_plan_proekta.pptx">Презентация «План проекта»</a>
+        <a class="sec" href="files/ISTOK_kp.pdf">КП в PDF</a>
+        <a class="sec" href="files/ISTOK_price.pdf">Прайс</a>
+      </div>
+    </div>
+    <a href="kp/"><img src="kp-preview.png" alt="Коммерческое предложение для сети клубов «Исток» на одном листе"></a>
+  </div>
+</section>
+
+<div class="end">
+  <h2><small>Чем закончилось</small>Предложение не приняли</h2>
+  <p>Заказчик отказался. Работа осталась в портфеле целиком: разведка, структура, документы, сценарий разговора — всё это лежит готовым и переносится на следующего клиента такого же типа.</p>
+  <p><strong>Что этот кейс показывает про подход:</strong></p>
   <ul>
-    <li>Подписчики групп клубов — от 38 до 540: узнаваемость зависит от энтузиазма конкретного педагога.</li>
-    <li>Запись устроена как в 2005 году: найти группу, скачать заявление, распечатать, заполнить от руки, принести лично.</li>
-    <li>Рекорд России по жиму лёжа среди юношей до 18 лет — 240 кг, а группа клуба молчит с марта 2025.</li>
-    <li>Нет версии для слабовидящих (ГОСТ Р 52872) и оформленной обработки персональных данных (152-ФЗ) — для сайта госучреждения это обязательно.</li>
+    <li>К встрече готовятся заранее и бесплатно: изучают открытые материалы клиента и приходят с решением, а не с прайсом.</li>
+    <li>Предложение строится на документах самого заказчика, а не на общих словах про «современный сайт».</li>
+    <li>Учитываются требования, о которых клиент часто не думает: доступность, персональные данные, порядок оплаты у бюджетного учреждения.</li>
+    <li>Клиент получает не «сайт», а набор документов, с которыми можно идти к тем, кто утверждает бюджет.</li>
   </ul>
-</section>
+  <p>Так же готовится любой следующий проект — с сетью филиалов, франшизой или учреждением, где решение принимает один человек, а платит организация.</p>
+</div>
 
-<section>
-  <h2><small>Что было сделано до продажи</small>Аналитика, структура, план, документы</h2>
-  <p class="note">Заходили не с «давайте сделаем сайт», а с готовой работой: аудит проведён, реестр собран, структура нарисована, сроки посчитаны.</p>
-  <ul>
-    <li><b>Аудит цифрового присутствия:</b> главное сообщество и все 15 групп клубов — контент, активность, подписчики, где теряются заявки.</li>
-    <li><b>Реестр сети:</b> полный список из 21 клуба с адресами и направлениями.</li>
-    <li><b>Карта сайта:</b> 10 разделов под вопросы родителя — карта клубов, каталог секций с фильтрами, онлайн-запись с согласием по 152-ФЗ, лагерь, афиша, достижения.</li>
-    <li><b>Календарный план:</b> запуск за 4–5 недель, дизайн главной показываем на первой неделе.</li>
-    <li><b>Две презентации и коммерческое предложение</b> — чтобы директору было что показать наверх.</li>
-  </ul>
-  <div class="links">
-    <a href="kp/">Открыть КП</a>
-    <a class="sec" href="files/ISTOK_videnie.pptx">Презентация «Видение» (10 слайдов)</a>
-    <a class="sec" href="files/ISTOK_plan_proekta.pptx">Презентация «План проекта» (8 слайдов)</a>
-    <a class="sec" href="files/ISTOK_kp.pdf">КП в PDF</a>
-    <a class="sec" href="files/ISTOK_price.pdf">Прайс в PDF</a>
-  </div>
-</section>
-
-<section>
-  <h2><small>Деньги</small>Три пакета — самый крупный чек за всё время</h2>
-  <p class="note">В КП июля: 90 / 180 / 280 тыс. В презентации «План проекта» пакеты подняты до 120 / 240 тыс. Для сравнения: в портфолио сайт компании стоит от 45 тыс.</p>
-  <div class="pk">
-    <div><b>Базовый</b><div class="p">90–120 тыс ₽</div><small>Главная, о нас, контакты, список клубов, единая форма записи, версия для слабовидящих. 2–3 недели.</small></div>
-    <div class="hot"><b>Портал · рекомендуем</b><div class="p">180–240 тыс ₽</div><small>Страница каждого из 21 клуба, карта района, каталог секций с фильтрами, лендинг лагеря, афиша, новости, обучение сотрудника. 6–7 недель.</small></div>
-    <div><b>Портал+</b><div class="p">280 тыс ₽</div><small>Автоимпорт новостей из ВК, заявки в Telegram-бот, обработка фотоконтента, SEO и запуск в Яндексе. 8 недель.</small></div>
-  </div>
-  <p class="note" style="margin-top:12px">Плюс поддержка от 10 тыс ₽ в месяц, первый месяц бесплатно. Условия: договор, предоплата 50%, закрытие по акту, работа как самозанятый.</p>
-</section>
-
-<section>
-  <h2><small>Презентация «Видение»</small>О чём говорим с директором, по слайдам</h2>
-  <div class="slides">
-    <p><b>1. Обложка.</b> «Выбери свой клуб» — теперь по-настоящему: онлайн, с картой и записью за 2 минуты.</p>
-    <p><b>2. Точка отсчёта.</b> Сеть живая и большая: 21 клуб, 7 посёлков, 100+ юнармейцев на сборах.</p>
-    <p><b>3. Проблема 1.</b> Родителю негде увидеть сеть целиком: 15+ групп вместо витрины, нет карты клубов.</p>
-    <p><b>4. Проблема 2.</b> Запись как в 2005: пять шагов и поход в клуб в рабочие часы.</p>
-    <p><b>5. Проблема 3.</b> Достижения не работают на репутацию: рекорд России есть, а знает о нём только сам клуб.</p>
-    <p><b>6. Проблема 4.</b> Требования к сайтам госучреждений не выполнены, потому что сайта нет.</p>
-    <p><b>7. Решение.</b> Единый портал: карта 21 клуба, каталог направлений с фильтром по возрасту.</p>
-    <p><b>8. Как это работает.</b> Родителю просто, учреждению управляемо: заявки приходят ответственному, видна статистика.</p>
-    <p><b>9. Планы развития.</b> Этап 1 — портал, дальше цифровая экосистема молодёжной политики района.</p>
-    <p><b>10. Финал.</b> Выбираем пакет сегодня, договор на этой неделе, запуск через 4–5 недель.</p>
-  </div>
-</section>
-
-<footer>Материалы лежали в загрузках, датированы 16 и 30 июля 2026. Опубликовано 6 сентября со скрытием от поиска. Заметка в базе: «Проекты / ИСТОК — портал сети клубов».</footer>
+<footer>Материалы датированы июлем 2026. Опубликовано 6 сентября 2026 со скрытием от поисковиков. Заметка в базе: «Проекты / ИСТОК — портал сети молодёжных клубов».</footer>
 </div>
 </body>
 </html>
