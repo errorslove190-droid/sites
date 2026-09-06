@@ -239,18 +239,15 @@ function collect(){
   var all=boxes();
   var sel=all.filter(function(b){return b.checked});
   var off=all.filter(function(b){return !b.checked});
+  var NL=String.fromCharCode(10);
   var t;
   if(!sel.length){t='УДАЛЯТЬ: ничего';}
   else if(!off.length){t='УДАЛЯТЬ ВСЁ ИЗ СПИСКА — все 105';}
   else if(off.length<=25){
-    t='УДАЛЯТЬ ВСЁ ИЗ СПИСКА ('+sel.length+' шт), КРОМЕ:
-'+off.map(function(b){return '- '+b.dataset.name;}).join('
-');
+    t='УДАЛЯТЬ ВСЁ ИЗ СПИСКА ('+sel.length+' шт), КРОМЕ:'+NL+off.map(function(b){return '- '+b.dataset.name;}).join(NL);
   }
   else{
-    t='УДАЛЯТЬ ('+sel.length+'):
-'+sel.map(function(b){return '- '+b.dataset.name;}).join('
-');
+    t='УДАЛЯТЬ ('+sel.length+'):'+NL+sel.map(function(b){return '- '+b.dataset.name;}).join(NL);
   }
   var ta=document.getElementById('ta');
   ta.value=t;
