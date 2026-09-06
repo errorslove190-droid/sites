@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta name="robots" content="noindex, nofollow">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>MASTODONT Ventures — 5 directions</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root{--bg:#111110;--bar:#1a1a18;--line:#33322e;--fg:#eceae4;--dim:#83807a;--on:#e0632c;}
+  *{box-sizing:border-box;}
+  html,body{height:100%;}
+  body{margin:0;background:var(--bg);color:var(--fg);
+    font-family:'JetBrains Mono',ui-monospace,monospace;font-size:15px;overflow:hidden;}
+  .bar{height:50px;display:flex;align-items:center;gap:1rem;padding:0 .9rem;
+    background:var(--bar);border-bottom:1px solid var(--line);}
+  .bar .t{font-size:20px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;margin-right:auto;white-space:nowrap;}
+  .bar .m{font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(--dim);white-space:nowrap;}
+  .bar a{color:var(--fg);text-decoration:none;font-size:9px;font-weight:700;letter-spacing:.13em;
+    text-transform:uppercase;padding:.45rem .8rem;border:1px solid var(--line);white-space:nowrap;}
+  .bar a:hover{background:var(--on);border-color:var(--on);color:#111110;}
+  .bar a:focus-visible{outline:2px solid var(--fg);outline-offset:2px;}
+
+  .grid{display:grid;grid-template-columns:repeat(5,1fr);height:calc(100% - 50px);}
+  .cell{display:flex;flex-direction:column;min-width:0;border-right:1px solid var(--line);}
+  .cell:last-child{border-right:0;}
+  .cell .cap{display:flex;align-items:baseline;gap:.5rem;padding:.42rem .6rem;
+    background:var(--bar);border-bottom:1px solid var(--line);}
+  .cell .cap i{font-style:normal;font-size:9px;font-weight:700;letter-spacing:.1em;color:var(--on);}
+  .cell .cap b{font-size:9px;font-weight:400;letter-spacing:.09em;text-transform:uppercase;color:var(--dim);
+    white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+  .cell iframe{flex:1 1 auto;width:100%;border:0;background:#fff;display:block;}
+  @media (max-width:1100px){
+    body{overflow:auto;}
+    .grid{grid-template-columns:1fr;height:auto;}
+    .cell{border-right:0;border-bottom:1px solid var(--line);height:82vh;}
+  }
+</style>
+</head>
+<body>
+<div class="bar">
+  <a href="final/index.html" style="text-decoration:none;white-space:nowrap;font-size:9px;font-weight:700;letter-spacing:.13em;text-transform:uppercase;color:#9b8f80;padding:.45rem .7rem;border:1px solid currentColor;margin-right:.6rem;">← Index</a><span class="t">Mastodont · 5 directions</span>
+  <span class="m">Families from the taste library</span>
+  <a href="v1/index.html">Open V1</a>
+  <span class="m">Keys 1-5</span>
+</div>
+<div class="grid" id="g"></div>
+<script>
+(function(){
+  var V=[['v1','Paper Collage'],['v2','Acid Poster'],['v3','Dark Stage'],
+         ['v4','Metal &amp; Electric'],['v5','Scarlet Accent']];
+  document.getElementById('g').innerHTML = V.map(function(v,i){
+    return '<div class="cell"><div class="cap"><i>V'+(i+1)+'</i><b>'+v[1]+'</b></div>'+
+           '<iframe title="'+v[1]+'" src="'+v[0]+'/index.html?embed=1"></iframe></div>';
+  }).join('');
+  window.addEventListener('keydown',function(e){
+    if(e.metaKey||e.ctrlKey||e.altKey) return;
+    var i=parseInt(e.key,10);
+    if(i>=1&&i<=5){ e.preventDefault(); location.href=V[i-1][0]+'/index.html'; }
+  });
+})();
+</script>
+</body>
+</html>

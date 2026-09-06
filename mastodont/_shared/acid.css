@@ -1,0 +1,110 @@
+/* ACID POSTER · the world shared by v2 and its three body formats.
+   Family "кислотный плакат" from the operator's taste library.
+   Nothing in here may differ between the variants: the aesthetic is fixed,
+   only the format of the page body changes. */
+:root{
+  --black:#0a0a08; --black-2:#131310; --acid:#e8e83c; --fg:#efefe6;
+  --fg-58:#9b9b90; --fg-38:#67675e; --line:#2a2a24;
+  --p-bg:#0a0a08; --p-line:#2a2a24; --p-fg:#efefe6; --p-dim:#67675e;
+  --p-on:#e8e83c; --p-onfg:#0a0a08; --p-hover:#1c1c17;
+  --p-font:'Archivo',system-ui,sans-serif;
+  --slot-fill:#15150f; --slot-note:rgba(239,239,230,.42);
+}
+*{box-sizing:border-box;}
+body{
+  margin:0;background:var(--black);color:var(--fg);
+  font-family:'Archivo',system-ui,sans-serif;
+  font-size:clamp(1rem,.96rem + .2vw,1.06rem);line-height:1.6;
+  -webkit-font-smoothing:antialiased;
+}
+/* real photocopy grain, not a tiled dot rule: fractal noise rendered once */
+body::before{content:"";position:fixed;inset:0;pointer-events:none;z-index:1;opacity:.42;
+  mix-blend-mode:screen;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.82' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='220' height='220' filter='url(%23g)' opacity='0.5'/%3E%3C/svg%3E");}
+a{color:inherit;} main{position:relative;z-index:2;}
+.wrap{max-width:1240px;margin:0 auto;padding:0 clamp(1rem,4vw,3rem);}
+.lbl{font-size:.63rem;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:var(--fg-38);}
+
+/* ---- hero: identical in all four, this is the fixed part ---- */
+.hero{padding:clamp(1.5rem,4vw,2.75rem) 0 clamp(2rem,5vw,3.5rem);}
+.top{display:flex;flex-wrap:wrap;gap:.5rem 1.4rem;align-items:center;padding-bottom:.75rem;border-bottom:3px solid var(--acid);margin-bottom:clamp(1.25rem,3.5vw,2.25rem);}
+.wordmark{font-family:'Anton',system-ui,sans-serif;font-size:1.05rem;letter-spacing:.1em;text-transform:uppercase;margin-right:auto;}
+.hero-grid{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,1fr);gap:clamp(1.4rem,4vw,3rem);align-items:end;}
+h1{margin:0 0 1rem;font-family:'Anton',system-ui,sans-serif;font-weight:400;
+   font-size:clamp(2.6rem,8.5vw,6rem);line-height:.86;letter-spacing:-.015em;text-transform:uppercase;max-width:11ch;}
+h1 em{font-style:normal;color:var(--acid);}
+.lede{margin:0 0 1.6rem;max-width:38ch;color:var(--fg-58);font-size:clamp(1.02rem,.96rem + .32vw,1.16rem);}
+.cta{display:inline-block;padding:.85rem 1.6rem;background:var(--acid);color:var(--black);
+  font-weight:800;font-size:.84rem;letter-spacing:.07em;text-transform:uppercase;text-decoration:none;
+  border:2px solid var(--acid);transition:background .14s linear,color .14s linear;}
+.cta:hover{background:transparent;color:var(--acid);}
+.cta:focus-visible{outline:2px solid var(--fg);outline-offset:4px;}
+.cta-sub{margin:.8rem 0 0;}
+
+/* HERO SLOT · 3:4, right column, hard-cropped by an acid rule. */
+.slotwrap{position:relative;min-width:0;}
+.slot{aspect-ratio:3/4;border:2px solid var(--acid);
+  background-image:
+    repeating-linear-gradient(180deg, rgba(232,232,60,.09) 0 3px, transparent 3px 12px),
+    linear-gradient(200deg, #1c1c14 0%, #101009 62%, #0a0a08 100%);
+  background-color:var(--slot-fill);}
+.ast{position:absolute;left:-1.1rem;top:-1.6rem;font-family:'Anton',system-ui,sans-serif;
+  font-size:clamp(3rem,7vw,5.5rem);line-height:.7;color:var(--acid);}
+.nums{position:absolute;right:.5rem;bottom:.5rem;display:flex;gap:.3rem;}
+.nums span{background:var(--acid);color:var(--black);padding:.1rem .38rem;font-weight:800;font-size:.6rem;letter-spacing:.06em;}
+
+/* ---- shared body atoms ---- */
+section{padding:clamp(2.5rem,6vw,4.5rem) 0;border-top:1px solid var(--line);}
+h2{margin:0 0 1.5rem;font-family:'Anton',system-ui,sans-serif;font-weight:400;
+   font-size:clamp(1.6rem,3.6vw,2.6rem);line-height:1;letter-spacing:.004em;text-transform:uppercase;max-width:20ch;}
+p{margin:0 0 1.05rem;max-width:66ch;color:var(--fg-58);}
+p.lead{color:var(--fg);}
+.two{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,20rem),1fr));gap:clamp(1.25rem,3.5vw,3rem);}
+
+.log{border:2px solid var(--acid);}
+.log .head{display:flex;flex-wrap:wrap;gap:.5rem 1.5rem;justify-content:space-between;padding:.6rem .9rem;background:var(--acid);color:var(--black);}
+.log .head .lbl{color:var(--black);}
+.log .body{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.15fr);gap:clamp(1.1rem,3vw,2.5rem);padding:clamp(1.1rem,3vw,2rem) .9rem;background:var(--black-2);}
+.log .asked blockquote{margin:.5rem 0 0;font-family:'Anton',system-ui,sans-serif;font-weight:400;
+  font-size:clamp(1.2rem,2.8vw,1.75rem);line-height:1.08;letter-spacing:.004em;text-transform:uppercase;color:var(--fg);}
+.log .ret dl{margin:.5rem 0 0;display:grid;gap:.42rem;font-size:.88rem;}
+.log .ret dl div{display:flex;gap:.6rem;flex-wrap:wrap;}
+.log .ret dt{margin:0;color:var(--fg-38);text-transform:uppercase;letter-spacing:.08em;font-size:.7rem;font-weight:800;min-width:11.5rem;}
+.log .ret dd{margin:0;color:var(--fg);}
+.log .ret b{color:var(--acid);}
+
+.cards{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1px;background:var(--line);border:1px solid var(--line);}
+.cards > div{background:var(--black);padding:clamp(1rem,2.4vw,1.5rem);min-width:0;}
+.cards .v{display:block;font-family:'Anton',system-ui,sans-serif;font-size:clamp(2rem,4.4vw,3rem);line-height:1;text-transform:uppercase;color:var(--acid);}
+.cards .k{display:block;margin:.5rem 0 .28rem;font-weight:800;font-size:.8rem;letter-spacing:.06em;text-transform:uppercase;color:var(--fg);}
+.cards p{margin:0;font-size:.88rem;max-width:30ch;}
+
+.no{margin:0;padding:0;list-style:none;max-width:66ch;}
+.no li{display:flex;gap:.8rem;padding:.7rem 0;border-bottom:1px solid var(--line);color:var(--fg-58);}
+.no li b{flex:0 0 auto;color:var(--acid);font-weight:800;}
+.no li:last-child{border-bottom:0;}
+
+.close{border-top:3px solid var(--acid);}
+.close .row{display:flex;flex-wrap:wrap;align-items:center;gap:1.2rem;}
+footer{padding:1.3rem 0 2.4rem;border-top:1px solid var(--line);}
+footer .in{display:flex;flex-wrap:wrap;gap:.5rem 1.5rem;}
+
+@media (max-width:880px){
+  /* the action has to be reachable without scrolling on a 812-tall phone,
+     so the first screen is tightened rather than left to overflow it */
+  .hero{padding-top:1rem;padding-bottom:1.25rem;}
+  .top{padding-bottom:.55rem;margin-bottom:1rem;}
+  h1{font-size:clamp(2.2rem,10vw,3.4rem);}
+  .lede{margin-bottom:1.1rem;}
+  .hero-grid{gap:1rem;}
+  .hero-grid{grid-template-columns:minmax(0,1fr);}
+  .slotwrap{order:-1;}
+  .slot{aspect-ratio:16/10;}
+  .ast{left:auto;right:.4rem;top:-1.3rem;}
+  .log .body{grid-template-columns:minmax(0,1fr);}
+}
+@media (prefers-reduced-motion:reduce){*{transition-duration:.001ms !important;}}
+
+/* four cards, four cells: never an orphan tile on the second row */
+@media (min-width:1000px){ .cards{grid-template-columns:repeat(4,minmax(0,1fr));} }
+@media (max-width:560px){ .cards{grid-template-columns:minmax(0,1fr);} }

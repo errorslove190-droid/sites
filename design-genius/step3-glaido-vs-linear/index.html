@@ -1,0 +1,469 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta name="robots" content="noindex, nofollow">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Glaido measured against Linear's design system</title>
+<meta name="description" content="A ruthless, number-level comparison of glaido.com against Linear's design system. Live DOM metrics, not vibes.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --void: #08090a;
+    --carbon: #0f1011;
+    --obsidian: #161718;
+    --graphite: #23252a;
+    --smoke: #383b3f;
+    --ash: #62666d;
+    --fog: #8a8f98;
+    --mist: #d0d6e0;
+    --paper: #ffffff;
+    --lime: #bff549;        /* Glaido's lime */
+    --acid: #e4f222;        /* Linear's lime */
+    --mono: 'JetBrains Mono', ui-monospace, monospace;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    background: var(--void);
+    color: var(--mist);
+    font-family: 'Inter', ui-sans-serif, system-ui, sans-serif;
+    font-size: 16px;
+    line-height: 1.5;
+    letter-spacing: -0.011em;
+    -webkit-font-smoothing: antialiased;
+  }
+  /* scroll progress — the green line from the donor video */
+  #progress {
+    position: fixed; top: 0; left: 0; height: 2px; width: 0;
+    background: var(--lime); z-index: 100;
+  }
+  .wrap { max-width: 1080px; margin: 0 auto; padding: 0 32px; }
+  section { padding: 96px 0; border-top: 1px solid var(--graphite); }
+  section:first-of-type { border-top: none; }
+
+  .eyebrow {
+    font-family: var(--mono); font-size: 12px; letter-spacing: 0.08em;
+    text-transform: uppercase; color: var(--ash);
+  }
+  h1 {
+    margin-top: 16px;
+    font-size: clamp(36px, 6vw, 64px);
+    line-height: 1.02;
+    letter-spacing: -0.022em;
+    font-weight: 510;
+    font-variation-settings: "wght" 510;
+    color: var(--paper);
+    max-width: 18ch;
+  }
+  .lede { margin-top: 20px; color: var(--fog); max-width: 58ch; }
+  h2 {
+    font-size: clamp(24px, 3.4vw, 32px);
+    letter-spacing: -0.022em;
+    font-weight: 510;
+    color: var(--paper);
+  }
+  .h2-num { color: var(--lime); font-family: var(--mono); font-size: 14px; margin-right: 10px; }
+  h3 { font-size: 17px; font-weight: 510; color: var(--paper); }
+  .note { font-size: 13px; color: var(--ash); margin-top: 10px; }
+  .lime { color: var(--lime); }
+
+  /* header metrics */
+  .metrics { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-top: 56px; }
+  .metric {
+    background: var(--carbon); border: 1px solid var(--graphite);
+    border-radius: 12px; padding: 20px;
+  }
+  .metric .pair { font-family: var(--mono); font-size: 24px; color: var(--paper); }
+  .metric .pair .to { color: var(--lime); }
+  .metric .label { margin-top: 8px; font-size: 13px; color: var(--fog); }
+
+  /* gaps */
+  .gaps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-top: 40px; }
+  .gap {
+    background: var(--carbon); border: 1px solid var(--graphite);
+    border-radius: 12px; padding: 24px;
+  }
+  .gap .idx { font-family: var(--mono); font-size: 12px; color: var(--lime); }
+  .gap h3 { margin-top: 10px; }
+  .gap p { margin-top: 10px; font-size: 14px; color: var(--fog); }
+
+  /* slider */
+  .lab {
+    margin-top: 40px; background: var(--carbon);
+    border: 1px solid var(--graphite); border-radius: 12px; padding: 40px 32px;
+  }
+  #specimen {
+    font-size: clamp(34px, 6.4vw, 68px);
+    line-height: 1.0;
+    font-weight: 400;
+    color: var(--paper);
+    letter-spacing: -0.76px;
+    transition: letter-spacing 0.08s linear;
+    white-space: nowrap; overflow: hidden;
+  }
+  .slider-row { margin-top: 36px; }
+  input[type="range"] {
+    -webkit-appearance: none; appearance: none;
+    width: 100%; height: 2px; border-radius: 2px;
+    background: linear-gradient(90deg, var(--smoke), var(--lime));
+    outline: none;
+  }
+  input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none; appearance: none;
+    width: 18px; height: 18px; border-radius: 50%;
+    background: var(--lime); border: 3px solid var(--void);
+    box-shadow: 0 0 0 1px var(--lime); cursor: grab;
+  }
+  input[type="range"]::-moz-range-thumb {
+    width: 18px; height: 18px; border-radius: 50%;
+    background: var(--lime); border: 3px solid var(--void);
+    box-shadow: 0 0 0 1px var(--lime); cursor: grab;
+  }
+  .slider-marks { display: flex; justify-content: space-between; margin-top: 12px; font-family: var(--mono); font-size: 12px; color: var(--fog); }
+  .slider-marks .end { color: var(--lime); }
+  #readout { margin-top: 18px; font-family: var(--mono); font-size: 14px; color: var(--paper); }
+  #readout .zone { color: var(--lime); }
+
+  /* elevation */
+  .duo { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 40px; }
+  .panel {
+    background: var(--carbon); border: 1px solid var(--graphite);
+    border-radius: 12px; padding: 24px;
+  }
+  .panel .who { font-family: var(--mono); font-size: 12px; color: var(--fog); text-transform: uppercase; letter-spacing: 0.08em; }
+  .stack { margin-top: 18px; display: flex; flex-direction: column; gap: 10px; }
+  .step {
+    border-radius: 8px; padding: 12px 14px;
+    font-family: var(--mono); font-size: 12px; color: var(--fog);
+  }
+  .panel p.expl { margin-top: 14px; font-size: 14px; color: var(--fog); }
+
+  /* accent frequency */
+  .dots { margin-top: 18px; display: flex; flex-wrap: wrap; gap: 5px; }
+  .dot { width: 9px; height: 9px; border-radius: 50%; background: var(--lime); }
+  .dot.one { background: var(--acid); width: 22px; height: 22px; }
+  .freq-count { font-family: var(--mono); font-size: 28px; color: var(--paper); margin-top: 16px; }
+
+  /* radius vocabulary */
+  .chips { margin-top: 18px; display: flex; flex-wrap: wrap; gap: 10px; }
+  .chip {
+    border: 1px solid var(--smoke); color: var(--mist);
+    font-family: var(--mono); font-size: 12px; padding: 10px 14px;
+  }
+
+  /* table */
+  table { width: 100%; margin-top: 40px; border-collapse: collapse; font-size: 14px; }
+  th, td { text-align: left; padding: 14px 16px; border-bottom: 1px solid var(--graphite); }
+  th { font-family: var(--mono); font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ash); font-weight: 400; }
+  td:first-child { color: var(--fog); }
+  td { font-family: var(--mono); color: var(--paper); }
+  td .better { color: var(--lime); }
+  tr:hover td { background: rgba(255,255,255,0.02); }
+
+  /* palette */
+  .swatches { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 12px; margin-top: 40px; }
+  .swatch {
+    border: 1px solid var(--graphite); border-radius: 12px; overflow: hidden;
+    cursor: pointer; background: var(--carbon); transition: transform .12s ease;
+  }
+  .swatch:hover { transform: translateY(-2px); }
+  .swatch .color { height: 84px; }
+  .swatch .hex {
+    padding: 10px 12px; font-family: var(--mono); font-size: 12px; color: var(--mist);
+    display: flex; justify-content: space-between; align-items: center;
+  }
+  .swatch .hex small { color: var(--ash); font-size: 10px; }
+
+  /* decisions */
+  .decision {
+    margin-top: 24px; background: var(--carbon); border: 1px solid var(--graphite);
+    border-radius: 12px; padding: 24px; display: grid; grid-template-columns: 24px 1fr 1fr; gap: 20px;
+  }
+  .decision .idx { font-family: var(--mono); font-size: 12px; color: var(--lime); }
+  .decision .col .tag { font-family: var(--mono); font-size: 11px; letter-spacing: 0.08em; color: var(--ash); text-transform: uppercase; }
+  .decision .col p { margin-top: 8px; font-size: 14px; color: var(--mist); }
+  .decision .col.now p { color: var(--fog); }
+
+  footer { padding: 48px 0 64px; border-top: 1px solid var(--graphite); font-size: 13px; color: var(--ash); }
+  footer .wrap { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 8px; }
+
+  #toast {
+    position: fixed; bottom: 24px; left: 50%; transform: translateX(-50%) translateY(80px);
+    background: var(--obsidian); border: 1px solid var(--smoke); color: var(--paper);
+    font-family: var(--mono); font-size: 13px; padding: 10px 18px; border-radius: 6px;
+    transition: transform .2s ease; z-index: 90;
+  }
+  #toast.show { transform: translateX(-50%) translateY(0); }
+
+  @media (max-width: 860px) {
+    .metrics { grid-template-columns: repeat(2, 1fr); }
+    .gaps, .duo { grid-template-columns: 1fr; }
+    .decision { grid-template-columns: 1fr; gap: 12px; }
+    section { padding: 64px 0; }
+    #specimen { white-space: normal; }
+  }
+</style>
+</head>
+<body>
+
+<div id="progress"></div>
+
+<section>
+  <div class="wrap">
+    <p class="eyebrow">glaido.com · measured live · linear design system via styles.refero.design</p>
+    <h1>Glaido measured against Linear's design system</h1>
+    <p class="lede">Every number below was read from the two systems directly — computed styles on glaido.com, tokens from Linear's published reference. Same dark canvas, same lime accent family. The gap is discipline, not taste.</p>
+    <div class="metrics">
+      <div class="metric"><div class="pair">8 <span class="to">→ 3</span></div><div class="label">border radii in the vocabulary</div></div>
+      <div class="metric"><div class="pair">117 <span class="to">→ 1</span></div><div class="label">accent-colored elements per view</div></div>
+      <div class="metric"><div class="pair">1 <span class="to">→ 3</span></div><div class="label">usable elevation steps</div></div>
+      <div class="metric"><div class="pair">0.010 <span class="to">→ 0.022</span></div><div class="label">display letter-spacing (em, negative)</div></div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <h2><span class="h2-num">#1</span>The three largest gaps</h2>
+    <div class="gaps">
+      <div class="gap">
+        <p class="idx">GAP 01</p>
+        <h3>Letter spacing is too loose</h3>
+        <p>Glaido's display line sits at −0.76px on 76px type (−0.010em). Linear tracks −0.022em at display sizes — that's −1.67px on the same type. Loose tracking is why the hero reads airy instead of engineered.</p>
+      </div>
+      <div class="gap">
+        <p class="idx">GAP 02</p>
+        <h3>There is no elevation ladder</h3>
+        <p>Glaido builds panels from white washes — rgba(255,255,255,.03/.05/.1) on one canvas. Linear climbs a real ladder: #08090a → #0f1011 → #161718 → #23252a, edged with 0.5px hairlines. Surfaces need addresses, not opacity.</p>
+      </div>
+      <div class="gap">
+        <p class="idx">GAP 03</p>
+        <h3>The accent is everywhere</h3>
+        <p>Lime appears on 117 elements of the Glaido homepage — text, chips, fills. Linear allows its acid lime exactly one filled action per view. When everything signals, nothing does.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <h2><span class="h2-num">#2</span>Letter spacing, felt</h2>
+    <p class="lede">Drag between the two systems. The specimen is Glaido's real hero line at display weight.</p>
+    <div class="lab">
+      <p id="specimen">The voice layer for every app</p>
+      <div class="slider-row">
+        <input type="range" id="tracking" min="-1.67" max="-0.76" step="0.01" value="-0.76" aria-label="Letter spacing between Glaido and Linear values">
+        <div class="slider-marks">
+          <span>Glaido today · −0.76px</span>
+          <span class="end">Linear's discipline · −1.67px</span>
+        </div>
+        <p id="readout">letter-spacing: <span id="val">−0.76px</span> · <span class="zone" id="zone">this is where Glaido ships</span></p>
+      </div>
+    </div>
+    <p class="note">Values normalized to Glaido's 76px display size. Linear publishes −0.022em for 48px+; 76 × −0.022 = −1.67px.</p>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <h2><span class="h2-num">#3</span>Surface elevation</h2>
+    <div class="duo">
+      <div class="panel">
+        <p class="who">Glaido now</p>
+        <div class="stack">
+          <div class="step" style="background:#0d0d0d; border:1px solid #23252a;">#0d0d0d · canvas</div>
+          <div class="step" style="background:rgba(255,255,255,0.03);">rgba(255,255,255,.03) · panel</div>
+          <div class="step" style="background:rgba(255,255,255,0.05);">rgba(255,255,255,.05) · panel, again</div>
+          <div class="step" style="background:rgba(255,255,255,0.10);">rgba(255,255,255,.10) · hover, sometimes</div>
+        </div>
+        <p class="expl">Washes of the same white. Adjacent panels blur into one plane; nothing says which layer you're on.</p>
+      </div>
+      <div class="panel">
+        <p class="who">Linear</p>
+        <div class="stack">
+          <div class="step" style="background:#08090a; border:1px solid #23252a;">#08090a · void</div>
+          <div class="step" style="background:#0f1011; box-shadow:inset 0 0 0 1px #23252a;">#0f1011 · carbon — cards</div>
+          <div class="step" style="background:#161718; box-shadow:inset 0 0 0 1px #23252a;">#161718 · obsidian — elevated</div>
+          <div class="step" style="background:#23252a;">#23252a · graphite — edges &amp; tints</div>
+        </div>
+        <p class="expl">A named ladder plus 0.5px hairlines. Elevation comes from borders and surface steps — shadows barely exist.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <h2><span class="h2-num">#4</span>Accent frequency</h2>
+    <div class="duo">
+      <div class="panel">
+        <p class="who">Glaido now · #BFF549</p>
+        <div class="dots" id="glaidodots"></div>
+        <p class="freq-count">117 <span style="font-size:13px;color:var(--fog)">lime elements on one page</span></p>
+        <p class="expl">89 text nodes + 28 fills. The accent is the wallpaper.</p>
+      </div>
+      <div class="panel">
+        <p class="who">Linear · #E4F222</p>
+        <div class="dots"><span class="dot one"></span></div>
+        <p class="freq-count">1 <span style="font-size:13px;color:var(--fog)">filled action per view</span></p>
+        <p class="expl">"A functional flashlight — small, high-contrast, used sparingly to signal action." Everything else stays grey.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <h2><span class="h2-num">#5</span>Border radius vocabulary</h2>
+    <div class="duo">
+      <div class="panel">
+        <p class="who">Glaido now · 8 values</p>
+        <div class="chips">
+          <span class="chip" style="border-radius:2px">2px</span>
+          <span class="chip" style="border-radius:4px">4px</span>
+          <span class="chip" style="border-radius:6px">6px</span>
+          <span class="chip" style="border-radius:8px">8px</span>
+          <span class="chip" style="border-radius:9px">9px</span>
+          <span class="chip" style="border-radius:16px">16px</span>
+          <span class="chip" style="border-radius:999px">9999px</span>
+          <span class="chip" style="border-radius:999px">3.4e7px</span>
+        </div>
+        <p class="expl">Eight radii, including a 33,554,400px one. A vocabulary this wide is no vocabulary.</p>
+      </div>
+      <div class="panel">
+        <p class="who">Linear · 3 values</p>
+        <div class="chips">
+          <span class="chip" style="border-radius:6px">6px · buttons, inputs</span>
+          <span class="chip" style="border-radius:12px">12px · cards</span>
+          <span class="chip" style="border-radius:999px">9999px · pills</span>
+        </div>
+        <p class="expl">"Three radii is the entire radius vocabulary." Corners become a signature instead of noise.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <h2><span class="h2-num">#6</span>Values side by side</h2>
+    <table>
+      <thead><tr><th>Token</th><th>Glaido (measured)</th><th>Linear (published)</th></tr></thead>
+      <tbody>
+        <tr><td>Canvas</td><td>#0D0D0D</td><td>#08090A</td></tr>
+        <tr><td>Display size / weight</td><td>76px / 400</td><td>72px / <span class="better">510</span> (caps at 590)</td></tr>
+        <tr><td>Display tracking</td><td>−0.010em</td><td><span class="better">−0.022em</span></td></tr>
+        <tr><td>Display line-height</td><td>1.0</td><td>1.0 · matched</td></tr>
+        <tr><td>UI typeface</td><td>Aspekta</td><td>Inter Variable + cv01 ss03 zero</td></tr>
+        <tr><td>Mono typeface</td><td>Geist Mono</td><td>Berkeley Mono</td></tr>
+        <tr><td>Accent</td><td>#BFF549 · 117 uses</td><td>#E4F222 · <span class="better">1 use</span></td></tr>
+        <tr><td>CTA shape</td><td>2px radius / 400</td><td><span class="better">6px radius / 510 / −0.011em</span></td></tr>
+        <tr><td>Card surface</td><td>rgba(255,255,255,.03)</td><td>#0F1011 + 1px inset #23252A</td></tr>
+        <tr><td>Elevation model</td><td>opacity washes</td><td><span class="better">surface ladder + 0.5px hairlines</span></td></tr>
+        <tr><td>Section rhythm</td><td>ad-hoc</td><td>96px gaps · 8px element grid</td></tr>
+      </tbody>
+    </table>
+    <p class="note">Glaido column: computed styles read from glaido.com on 14 Aug 2026. Linear column: styles.refero.design reference.</p>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <h2><span class="h2-num">#7</span>Glaido's palette, cleaned</h2>
+    <p class="lede">Click any card to copy the hex. This is the palette Glaido already owns — it needs fewer jobs per color, not new colors.</p>
+    <div class="swatches" id="palette"></div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <h2><span class="h2-num">#8</span>Design decisions</h2>
+    <div class="decision">
+      <span class="idx">01</span>
+      <div class="col now"><p class="tag">Glaido now</p><p>Lime lives on 117 elements — headings, links, chips, fills — so the eye stops ranking it.</p></div>
+      <div class="col"><p class="tag">Change to</p><p>One filled lime CTA per view. Demote every other lime to grey text (#8A8F98) or a neutral pill rgba(255,255,255,.05).</p></div>
+    </div>
+    <div class="decision">
+      <span class="idx">02</span>
+      <div class="col now"><p class="tag">Glaido now</p><p>Display type at weight 400, −0.010em. The headline floats loose above the fold.</p></div>
+      <div class="col"><p class="tag">Change to</p><p>Track display type to −0.022em and lift weight into the 510–590 band. Tight and mid-weight reads engineered, not shouted.</p></div>
+    </div>
+    <div class="decision">
+      <span class="idx">03</span>
+      <div class="col now"><p class="tag">Glaido now</p><p>Panels are white washes (.03/.05/.10) on one canvas — no addressable layers.</p></div>
+      <div class="col"><p class="tag">Change to</p><p>Adopt a named ladder — #0D0D0D → #141516 → #1B1C1E — and edge cards with 1px inset #23252A instead of opacity.</p></div>
+    </div>
+    <div class="decision">
+      <span class="idx">04</span>
+      <div class="col now"><p class="tag">Glaido now</p><p>Eight border radii from 2px to 33,554,400px across buttons, chips and cards.</p></div>
+      <div class="col"><p class="tag">Change to</p><p>Cut to three: 6px controls, 12px cards, 9999px pills. Refactor every corner to the nearest of the three.</p></div>
+    </div>
+    <div class="decision">
+      <span class="idx">05</span>
+      <div class="col now"><p class="tag">Glaido now</p><p>CTA is a lime rectangle at 2px radius, weight 400 — the sharpest and loudest object on the page.</p></div>
+      <div class="col"><p class="tag">Change to</p><p>6px radius, weight 510, −0.011em, padding 10×16 — Linear's exact button recipe, in Glaido's own lime.</p></div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <span>Glaido × Linear · measured 14 Aug 2026</span>
+    <span>Sources: glaido.com computed styles · styles.refero.design/style/90ce5883 (Linear)</span>
+  </div>
+</footer>
+
+<div id="toast">copied</div>
+
+<script>
+  // scroll progress line
+  const bar = document.getElementById('progress');
+  addEventListener('scroll', () => {
+    const h = document.documentElement;
+    bar.style.width = (h.scrollTop / (h.scrollHeight - h.clientHeight) * 100) + '%';
+  }, { passive: true });
+
+  // tracking slider
+  const specimen = document.getElementById('specimen');
+  const slider = document.getElementById('tracking');
+  const val = document.getElementById('val');
+  const zone = document.getElementById('zone');
+  slider.addEventListener('input', () => {
+    const v = parseFloat(slider.value);
+    specimen.style.letterSpacing = v + 'px';
+    val.textContent = '−' + Math.abs(v).toFixed(2) + 'px';
+    zone.textContent = v > -0.95 ? 'this is where Glaido ships' : v < -1.45 ? 'this is Linear territory' : 'in between — already reads tighter';
+  });
+
+  // accent dots
+  const dots = document.getElementById('glaidodots');
+  for (let i = 0; i < 117; i++) dots.appendChild(Object.assign(document.createElement('span'), { className: 'dot' }));
+
+  // palette
+  const colors = [
+    ['#0D0D0D', 'canvas'], ['#070809', 'deep panel'], ['#BFF549', 'lime accent'],
+    ['#FFFFFF', 'primary text'], ['#B3B3B3', '70% text'], ['#6B6B6B', '42% text'],
+    ['#141516', 'proposed surface 1'], ['#1B1C1E', 'proposed surface 2']
+  ];
+  const pal = document.getElementById('palette');
+  const toast = document.getElementById('toast');
+  colors.forEach(([hex, role]) => {
+    const d = document.createElement('div');
+    d.className = 'swatch';
+    d.innerHTML = '<div class="color" style="background:' + hex + '"></div><div class="hex"><span>' + hex + '</span><small>' + role + '</small></div>';
+    d.addEventListener('click', async () => {
+      try { await navigator.clipboard.writeText(hex); } catch (e) {
+        const t = document.createElement('textarea'); t.value = hex; document.body.appendChild(t); t.select();
+        document.execCommand('copy'); t.remove();
+      }
+      toast.textContent = hex + ' copied';
+      toast.classList.add('show');
+      setTimeout(() => toast.classList.remove('show'), 1400);
+    });
+    pal.appendChild(d);
+  });
+</script>
+
+</body>
+</html>

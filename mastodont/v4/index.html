@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta name="robots" content="noindex, nofollow">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>MASTODONT Ventures — V4 Metal &amp; Electric</title>
+<meta name="description" content="MASTODONT Ventures backs AI startups at the earliest stage. A reply in 72 hours, one meeting, a decision in 21 days, and a written no with reasons.">
+<meta property="og:title" content="MASTODONT Ventures">
+<meta property="og:description" content="Reply in 72 hours. One meeting. A decision in 21 days. No deck required.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23c9ccd1'/%3E%3Crect x='4' y='12' width='24' height='8' fill='%231b3ff5'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Saira+Condensed:wght@400;600;800&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../_shared/panel.css">
+<style>
+  :root{
+    --steel:#c9ccd1; --steel-2:#dcdee1; --dark:#15171b; --electric:#1b3ff5;
+    --ink-64:#474b52; --ink-42:#6f747c; --line:#a9adb4;
+    --p-bg:#15171b; --p-line:#31353c; --p-fg:#e8eaed; --p-dim:#7d828a;
+    --p-on:#1b3ff5; --p-onfg:#ffffff; --p-hover:#20242a;
+    --p-font:'JetBrains Mono',ui-monospace,monospace;
+    --slot-fill:#b9bdc4; --slot-note:rgba(21,23,27,.5);
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0;background:var(--steel);color:var(--dark);
+    font-family:'Saira Condensed',system-ui,sans-serif;
+    font-size:clamp(1.05rem,1rem + .24vw,1.14rem);line-height:1.54;
+    -webkit-font-smoothing:antialiased;
+  }
+  a{color:inherit;}
+  .wrap{max-width:1260px;margin:0 auto;padding:0 clamp(1rem,3.5vw,2.75rem);}
+  .mono{font-family:'JetBrains Mono',ui-monospace,monospace;font-size:.63rem;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-42);}
+
+  .hero{padding:clamp(1.5rem,4vw,2.75rem) 0 clamp(2rem,5vw,3.5rem);}
+  .top{display:flex;flex-wrap:wrap;gap:.5rem 1.4rem;align-items:center;padding-bottom:.7rem;border-bottom:1px solid var(--line);margin-bottom:clamp(1.25rem,3.5vw,2.25rem);}
+  .wordmark{font-weight:800;font-size:1.05rem;letter-spacing:.1em;text-transform:uppercase;margin-right:auto;}
+  .hero-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.06fr);gap:clamp(1.4rem,3.5vw,2.75rem);align-items:stretch;}
+  .hero-copy{display:flex;flex-direction:column;justify-content:center;}
+  h1{margin:0 0 1rem;font-weight:800;font-size:clamp(2.3rem,6.6vw,5rem);line-height:.92;letter-spacing:-.02em;text-transform:uppercase;max-width:13ch;}
+  h1 em{font-style:normal;color:var(--electric);}
+  .lede{margin:0 0 1.6rem;max-width:40ch;color:var(--ink-64);font-size:clamp(1.05rem,1rem + .3vw,1.18rem);}
+  .cta{display:inline-block;align-self:flex-start;padding:.8rem 1.55rem;background:var(--electric);color:#fff;
+    font-weight:800;font-size:.84rem;letter-spacing:.08em;text-transform:uppercase;text-decoration:none;
+    border:1px solid var(--electric);transition:background .16s ease,color .16s ease;}
+  .cta:hover{background:var(--dark);border-color:var(--dark);}
+  .cta:focus-visible{outline:2px solid var(--dark);outline-offset:3px;}
+  .cta-sub{margin:.8rem 0 0;}
+
+  /* HERO SLOT · 16:10 · right half, flush to the module grid. */
+  .slotwrap{position:relative;min-width:0;display:flex;flex-direction:column;gap:.5rem;}
+  .slot{aspect-ratio:16/10;border:1px solid var(--line);flex:1 1 auto;
+    background-image:
+      linear-gradient(118deg, rgba(27,63,245,.30) 0%, rgba(27,63,245,0) 34%),
+      linear-gradient(200deg, #eceef0 0%, #b6bac1 40%, #7d828a 62%, #d3d6da 100%);
+    background-color:var(--slot-fill);}
+  .ticks{display:flex;justify-content:space-between;gap:.6rem;flex-wrap:wrap;}
+
+  section{padding:clamp(2.5rem,6vw,4.25rem) 0;border-top:1px solid var(--line);}
+  h2{margin:0 0 1.4rem;font-weight:800;font-size:clamp(1.5rem,3.4vw,2.4rem);line-height:1.02;letter-spacing:-.014em;text-transform:uppercase;max-width:22ch;}
+  p{margin:0 0 1rem;max-width:64ch;color:var(--ink-64);}
+  p.lead{color:var(--dark);}
+  .two{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,20rem),1fr));gap:clamp(1.25rem,3.5vw,3rem);}
+
+  .log{border:1px solid var(--dark);background:var(--steel-2);}
+  .log .head{display:flex;flex-wrap:wrap;gap:.5rem 1.5rem;justify-content:space-between;padding:.55rem .9rem;background:var(--dark);}
+  .log .head .mono{color:#a7acb4;}
+  .log .body{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.12fr);gap:clamp(1.1rem,3vw,2.4rem);padding:clamp(1.1rem,2.8vw,1.9rem) .9rem;}
+  .log .asked blockquote{margin:.5rem 0 0;font-weight:600;font-size:clamp(1.15rem,2.6vw,1.6rem);line-height:1.18;letter-spacing:-.012em;color:var(--dark);}
+  .log .ret dl{margin:.5rem 0 0;display:grid;gap:.36rem;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:.82rem;}
+  .log .ret dl div{display:flex;gap:.6rem;flex-wrap:wrap;}
+  .log .ret dt{margin:0;color:var(--ink-42);text-transform:uppercase;letter-spacing:.05em;font-size:.68rem;min-width:11.5rem;}
+  .log .ret dd{margin:0;color:var(--dark);}
+  .log .ret b{color:var(--electric);}
+
+  .cards{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1px;background:var(--line);border:1px solid var(--line);}
+  .cards > div{background:var(--steel);padding:clamp(1rem,2.4vw,1.5rem);min-width:0;}
+  .cards .v{display:block;font-weight:800;font-size:clamp(2rem,4.4vw,3rem);line-height:1;letter-spacing:-.03em;text-transform:uppercase;color:var(--electric);}
+  .cards .k{display:block;margin:.45rem 0 .28rem;font-weight:800;font-size:.85rem;letter-spacing:.06em;text-transform:uppercase;}
+  .cards p{margin:0;font-size:.95rem;max-width:30ch;}
+
+  .no{margin:0;padding:0;list-style:none;max-width:64ch;}
+  .no li{padding:.68rem 0;border-bottom:1px solid var(--line);color:var(--ink-64);}
+  .no li:last-child{border-bottom:0;}
+
+  .close{border-top:4px solid var(--electric);}
+  .close .row{display:flex;flex-wrap:wrap;align-items:center;gap:1.2rem;}
+  footer{padding:1.3rem 0 2.4rem;border-top:1px solid var(--line);}
+  footer .in{display:flex;flex-wrap:wrap;gap:.5rem 1.5rem;}
+
+  @media (max-width:880px){
+    .hero-grid{grid-template-columns:minmax(0,1fr);}
+    .slotwrap{order:-1;}
+    .log .body{grid-template-columns:minmax(0,1fr);}
+  }
+  @media (prefers-reduced-motion:reduce){*{transition-duration:.001ms !important;}}
+
+/* four cards, four cells: never an orphan tile on the second row */
+@media (min-width:1000px){ .cards{grid-template-columns:repeat(4,minmax(0,1fr));} }
+@media (max-width:560px){ .cards{grid-template-columns:minmax(0,1fr);} }
+</style>
+</head>
+<body>
+<!--
+IMPECCABLE DIRECTION CONTRACT · v4
+THESIS: A fund built like industrial equipment, told in brushed steel with one electric current running through it. It refuses the friendly-startup arrangement of rounded cards, pastel tints and illustration.
+OWN-WORLD: Family "металл и электрик" from the operator's taste library. Brushed steel ground (#c9ccd1), machine-dark (#15171b), one electric blue (#1b3ff5) as the only chromatic event, used on one headline word, the action, the readout figures and one heavy closing rule. Saira Condensed 800 for display, JetBrains Mono for every label. Modular blocks, flush edges, small print at the margins.
+STORY: A founder reads a spec plate, sees one real unedited intake in the machine's own log format, and writes without preparing anything.
+FIRST VIEWPORT: A module grid. Left carries the H1 in condensed caps with one electric word, the lede and the electric action. Right is the RESERVED HERO SLOT at 16:10, flush to the grid, with mono ticks under it. Action above the fold at 375px.
+FORM: Industrial spec plate, direction pinned by the operator's library, so concept-seed.mjs was not rolled (skill rule: a brief-pinned direction beats the roll, always).
+FINISH: unreviewed and undocumented is unfinished; this build ends with the finish review, the verdict, and DESIGN.md
+-->
+<script src="../_shared/panel.js" data-v="v4"></script>
+
+<main>
+  <header class="hero">
+    <div class="wrap">
+      <div class="top">
+        <span class="wordmark">Mastodont Ventures</span>
+        <span class="mono">Pre-seed · AI</span>
+        <span class="mono">Unit 01 · intake</span>
+      </div>
+
+      <div class="hero-grid">
+        <div class="hero-copy">
+          <h1>Capital that moves at <em>current</em> speed.</h1>
+          <p class="lede">We fund AI companies at the earliest stage, before the category has a name, a chart or a crowd agreeing with you.</p>
+          <a class="cta" href="#send">Send us your project</a>
+          <p class="cta-sub mono">No deck · a reply in 72 hours</p>
+        </div>
+
+        <div class="slotwrap">
+          <!-- HERO SLOT · 16:10 · right half, flush to the module grid.
+               Step 10 sets a background-image here. No other rule changes. -->
+          <div class="slot" role="img" aria-label="Reserved for the hero image: a macro of liquid metal with an electric blue reflection.">
+            <span class="slot-note">Hero slot · 16:10 · image pending</span>
+          </div>
+          <div class="ticks">
+            <span class="mono">Frame 16:10</span>
+            <span class="mono">Ref MV-0412</span>
+            <span class="mono">Rev 03</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <section>
+    <div class="wrap">
+      <h2>Agreement is a lagging indicator.</h2>
+      <div class="two">
+        <p class="lead">By the time a market agrees that something matters, the return has already gone to whoever moved while it was still arguable.</p>
+        <p>So we read the work itself: the repository, the demo, the thing that half runs on your laptop. If you are still explaining what category you are in, you are talking to the right people.</p>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <h2>One intake, reproduced exactly.</h2>
+      <p style="margin-bottom:1.5rem;">Not a testimonial. The message a founder sent us and the answer that went back, with the timings attached.</p>
+      <div class="log">
+        <div class="head">
+          <span class="mono">Intake MV-0412</span>
+          <span class="mono">Unedited exchange</span>
+          <span class="mono">Elapsed 61:20</span>
+        </div>
+        <div class="body">
+          <div class="asked">
+            <span class="mono">Founder sent</span>
+            <blockquote>“Two of us, no company yet. We built a router that picks the cheapest model that still passes our evals. Repo attached. Is this too early for you?”</blockquote>
+          </div>
+          <div class="ret">
+            <span class="mono">Mastodont returned</span>
+            <dl>
+              <div><dt>Read by</dt><dd>Partner, not an analyst</dd></div>
+              <div><dt>Reply sent</dt><dd><b>61 h 20 m</b> after intake</dd></div>
+              <div><dt>Meetings held</dt><dd><b>1</b></dd></div>
+              <div><dt>Decision dated</dt><dd><b>19 days</b> after intake</dd></div>
+              <div><dt>Deck requested</dt><dd><b>none</b></dd></div>
+              <div><dt>Verdict</dt><dd>Funded, pre-incorporation</dd></div>
+            </dl>
+          </div>
+        </div>
+      </div>
+      <p class="mono" style="margin-top:.8rem;">Example intake, authored for this page. The fund is fictional.</p>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <h2>What we commit to.</h2>
+      <div class="cards">
+        <div><span class="v">72 h</span><span class="k">You write, we answer</span><p>A partner reads it, not an analyst filtering a queue.</p></div>
+        <div><span class="v">One</span><span class="k">Conversation</span><p>Not a sequence of screens with a new face each time.</p></div>
+        <div><span class="v">21 d</span><span class="k">A dated decision</span><p>Three weeks, not three quarters. You can plan around it.</p></div>
+        <div><span class="v">Zero</span><span class="k">Slides required</span><p>A no arrives in writing, with the reasons.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <div class="two">
+        <div><h2>Things we do not ask for.</h2><p>Every item below is a filter other funds use and we do not.</p></div>
+        <ul class="no">
+          <li>A warm introduction. Cold email lands in the same inbox.</li>
+          <li>Revenue. At this stage it usually means you built the safe version.</li>
+          <li>A market size slide reverse engineered to reach a billion.</li>
+          <li>Three months of process. You have a company to build.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="close" id="send">
+    <div class="wrap">
+      <h2>Send us your project.</h2>
+      <p>A paragraph on what you are building and a link to the thing itself. That is the whole submission.</p>
+      <div class="row">
+        <a class="cta" href="mailto:first@mastodont.vc">Send us your project</a>
+        <span class="mono">first@mastodont.vc · reply in 72 hours</span>
+      </div>
+    </div>
+  </section>
+
+  <footer><div class="wrap"><div class="in">
+    <span class="mono">Mastodont Ventures · pre-seed · AI</span>
+    <span class="mono">Fictional fund, built as a design example. Inbox is a placeholder.</span>
+  </div></div></footer>
+</main>
+</body>
+</html>

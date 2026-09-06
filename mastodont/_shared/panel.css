@@ -1,0 +1,126 @@
+/* Version panel chrome. Every direction restyles the colours through the
+   --p-* variables it declares; the structure stays identical so the panel
+   reads as one control across all five. */
+.versions{
+  position:sticky;top:0;z-index:60;
+  display:flex;align-items:stretch;overflow-x:auto;
+  background:var(--p-bg,#111);border-bottom:1px solid var(--p-line,#333);
+  scrollbar-width:none;
+  font-family:var(--p-font,ui-monospace,monospace);
+}
+.versions::-webkit-scrollbar{display:none;}
+.versions a,.versions span{flex:0 0 auto;}
+
+.versions .vhome{
+  display:flex;align-items:center;gap:.5rem;
+  padding:.5rem .9rem;text-decoration:none;white-space:nowrap;
+  color:var(--p-fg,#fff);
+  font-size:.62rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;
+  border-right:1px solid var(--p-line,#333);
+}
+.versions .vhome b{font-weight:400;color:var(--p-dim,#8a8a8a);letter-spacing:.1em;}
+
+.versions a:not(.vhome):not(.vall){
+  display:flex;flex-direction:column;justify-content:center;gap:.12rem;
+  padding:.42rem .85rem;text-decoration:none;white-space:nowrap;
+  border-right:1px solid var(--p-line,#333);
+  color:var(--p-dim,#8a8a8a);
+  transition:background .14s linear,color .14s linear;
+}
+.versions a:not(.vhome):not(.vall) span{
+  font-size:.62rem;font-weight:700;letter-spacing:.1em;color:var(--p-fg,#fff);
+}
+.versions a:not(.vhome):not(.vall) b{
+  font-size:.53rem;font-weight:400;letter-spacing:.11em;text-transform:uppercase;
+}
+.versions a:hover{background:var(--p-hover,#1e1e1e);}
+.versions a[aria-current="page"]{background:var(--p-on,#e0632c);}
+.versions a[aria-current="page"] span,
+.versions a[aria-current="page"] b{color:var(--p-onfg,#111);}
+.versions a:focus-visible{outline:2px solid var(--p-fg,#fff);outline-offset:-2px;}
+
+.versions .vspacer{flex:1 1 auto;min-width:.5rem;}
+.versions .vall{
+  display:flex;align-items:center;padding:.5rem .9rem;text-decoration:none;
+  white-space:nowrap;color:var(--p-fg,#fff);
+  font-size:.58rem;font-weight:700;letter-spacing:.13em;text-transform:uppercase;
+  border-left:1px solid var(--p-line,#333);
+}
+.versions .vkeys{
+  display:flex;align-items:center;padding:.5rem .9rem;white-space:nowrap;
+  color:var(--p-dim,#8a8a8a);
+  font-size:.58rem;font-weight:400;letter-spacing:.13em;text-transform:uppercase;
+  border-left:1px solid var(--p-line,#333);
+}
+
+html.embed .versions{display:none;}
+
+/* ---- reserved hero slot ----------------------------------------------
+   The real photograph drops into .slot as a background image at step 10.
+   Nothing else may change: the aspect ratio, the position and the type
+   scale around it are already final. */
+.slot{position:relative;overflow:hidden;background:var(--slot-fill,#222);}
+.slot > .slot-note{
+  position:absolute;left:0;bottom:0;padding:.35rem .6rem;
+  font-family:var(--p-font,ui-monospace,monospace);
+  font-size:.55rem;letter-spacing:.1em;text-transform:uppercase;
+  color:var(--slot-note,rgba(255,255,255,.42));
+}
+@media (max-width:880px){
+  /* Stacked layout: the slot is cropped, never shrunk.
+     aspect-ratio together with max-height shrinks the whole box instead of
+     cropping it, because the ratio then drives width from the capped height:
+     a 3:4 slot capped at 276px became 207px wide on a phone. Dropping the
+     ratio and fixing the height keeps the full width and lets the image crop. */
+  /* .hero .slot beats the per-version `.slot` rules on specificity, so the
+     ratio each direction sets for desktop cannot come back and drive the
+     width from the fixed height, which is what pushed the box past the
+     container and produced 6-31px of overflow on a phone. */
+  .hero .slot{
+    aspect-ratio:auto;
+    width:100%;
+    height:30svh;
+    max-height:none;
+    background-size:cover;
+    background-position:center;
+  }
+}
+@media (max-width:560px){
+  .versions .vkeys{display:none;}
+}
+
+/* sub-versions sit in the same header, marked by an acid tick so it is
+   obvious they belong to the direction on their left */
+.versions a.vsub{position:relative;padding-left:1.15rem;}
+.versions a.vsub::before{
+  content:"";position:absolute;left:.5rem;top:50%;width:4px;height:4px;
+  transform:translateY(-50%);background:var(--p-on,#e0632c);
+}
+.versions a.vsub[aria-current="page"]::before{background:var(--p-onfg,#111);}
+.versions a.vsub b{opacity:.9;}
+
+/* the finished build is not another variant, so its tick is filled */
+.versions a.vsub.vdone::before{
+  width:6px;height:6px;border-radius:50%;
+  background:var(--p-fg,#fff);
+}
+.versions a.vsub.vdone[aria-current="page"]::before{background:var(--p-onfg,#111);}
+
+/* the finished build is always reachable, so it is marked, not hidden */
+.versions a.vfinal{
+  color:var(--p-on,#e0632c);
+  border-left:1px solid var(--p-line,#333);
+}
+.versions a.vfinal[aria-current="page"]{
+  background:var(--p-on,#e0632c);color:var(--p-onfg,#111);
+}
+
+/* back to the catalogue: quiet, but present on every page */
+.versions .vback{
+  display:flex;align-items:center;padding:.5rem .8rem;text-decoration:none;
+  white-space:nowrap;color:var(--p-dim,#8a8a8a);
+  font-size:.58rem;font-weight:700;letter-spacing:.13em;text-transform:uppercase;
+  border-right:1px solid var(--p-line,#333);
+}
+.versions .vback:hover{color:var(--p-fg,#fff);background:var(--p-hover,#1e1e1e);}
+.versions .vback:focus-visible{outline:2px solid var(--p-fg,#fff);outline-offset:-2px;}

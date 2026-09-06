@@ -1,0 +1,547 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta name="robots" content="noindex, nofollow">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MASTODONT Skynet vs Linear design teardown</title>
+<meta name="description" content="MASTODONT Skynet measured against Linear's design system. Every value read from live computed CSS.">
+<style>
+  :root {
+    --void: #08090a;
+    --carbon: #0f1011;
+    --obsidian: #161718;
+    --graphite: #23252a;
+    --smoke: #383b3f;
+    --ash: #62666d;
+    --fog: #8a8f98;
+    --mist: #d0d6e0;
+    --paper: #ffffff;
+
+    --accent: #ffb454;      /* the subject's own brand colour */
+    --red: #eb5757;
+    --green: #27a644;
+    --amber: #f5b23e;
+
+    --sans: -apple-system, BlinkMacSystemFont, "Inter", "Segoe UI", sans-serif;
+    --mono: ui-monospace, "SF Mono", Menlo, monospace;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    background: var(--void);
+    color: var(--fog);
+    font-family: var(--sans);
+    font-size: 15px;
+    line-height: 1.6;
+    letter-spacing: -0.011em;
+    -webkit-font-smoothing: antialiased;
+  }
+  h1, h2, h3 { color: var(--paper); }
+  h1 { font-size: 54px; line-height: 1.04; font-weight: 600; letter-spacing: -0.022em; }
+  h2 { font-size: 30px; line-height: 1.12; font-weight: 600; letter-spacing: -0.022em; }
+  h3 { font-size: 17px; line-height: 1.3; font-weight: 600; letter-spacing: -0.016em; }
+  .lede { font-size: 19px; line-height: 1.5; letter-spacing: -0.014em; color: var(--mist); }
+  .dim { font-size: 14px; color: var(--ash); }
+  .eyebrow {
+    font-family: var(--mono); font-size: 10.5px; line-height: 1.4;
+    letter-spacing: 0.14em; text-transform: uppercase; color: var(--ash);
+  }
+  .ro { font-family: var(--mono); font-size: 12.5px; line-height: 1.4; letter-spacing: -0.013em; }
+  b, strong { color: var(--mist); font-weight: 600; }
+
+  /* ── top bar ── */
+  .bar {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 60;
+    background: rgba(8, 9, 10, 0.86); backdrop-filter: blur(12px);
+    box-shadow: inset 0 -1px 0 0 var(--graphite);
+  }
+  .bar-in {
+    max-width: 1220px; margin: 0 auto; padding: 0 32px;
+    height: 52px; display: flex; align-items: center; justify-content: space-between; gap: 20px;
+  }
+  .brands { display: flex; align-items: center; gap: 12px; }
+  .brand { font-family: var(--mono); font-size: 12.5px; color: var(--mist); display: flex; align-items: center; gap: 7px; }
+  .brand .sq { width: 9px; height: 9px; border-radius: 2px; }
+  .vs { color: var(--ash); font-size: 12.5px; font-family: var(--mono); }
+  #prog { position: absolute; left: 0; bottom: 0; height: 2px; width: 0; background: var(--accent); }
+  .toggle {
+    font-family: var(--mono); font-size: 12.5px; color: var(--mist);
+    background: transparent; border: 1px solid var(--graphite); border-radius: 6px;
+    padding: 6px 12px; cursor: pointer; transition: .2s cubic-bezier(.22,.61,.36,1);
+  }
+  .toggle:hover { background: var(--obsidian); }
+  .toggle:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+  .toggle[aria-pressed="true"] { color: var(--void); background: var(--accent); border-color: var(--accent); }
+  .toggle kbd { font-family: var(--mono); opacity: .6; margin-left: 6px; }
+
+  /* ── shell ── */
+  .shell { max-width: 1220px; margin: 0 auto; padding: 96px 32px 120px; display: grid; grid-template-columns: 190px 1fr; gap: 56px; align-items: start; }
+  .rail { position: sticky; top: 84px; display: flex; flex-direction: column; gap: 2px; }
+  .rail a {
+    font-size: 13px; color: var(--ash); text-decoration: none;
+    padding: 6px 10px; border-radius: 4px; border-left: 1px solid var(--graphite);
+    transition: .2s cubic-bezier(.22,.61,.36,1);
+  }
+  .rail a:hover { color: var(--mist); }
+  .rail a.on { color: var(--accent); border-left-color: var(--accent); }
+  main { min-width: 0; }
+  section { padding: 76px 0; box-shadow: inset 0 -1px 0 0 var(--graphite); }
+  section:first-child { padding-top: 0; }
+  section:last-child { box-shadow: none; }
+
+  .rv { opacity: 0; transform: translateY(14px); transition: opacity .45s cubic-bezier(.22,.61,.36,1), transform .45s cubic-bezier(.22,.61,.36,1); }
+  .rv.in { opacity: 1; transform: none; }
+
+  /* ── hero ── */
+  .hero .eyebrow { display: flex; align-items: center; gap: 8px; }
+  .hero .eyebrow .dot { width: 6px; height: 6px; border-radius: 50%; background: var(--accent); }
+  .hero h1 { margin-top: 18px; max-width: 16ch; }
+  .hero .lede { margin-top: 20px; max-width: 62ch; }
+  .stats { margin-top: 40px; display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; }
+  .stat { background: var(--carbon); border-radius: 12px; box-shadow: inset 0 0 0 1px var(--graphite); padding: 18px; }
+  .stat .v { font-family: var(--mono); font-size: 21px; color: var(--paper); }
+  .stat .v .to { color: var(--green); }
+  .stat .k { margin-top: 6px; font-size: 13px; color: var(--ash); }
+
+  /* ── gaps ── */
+  .gaps { margin-top: 32px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+  .gap { background: var(--carbon); border-radius: 12px; box-shadow: inset 0 0 0 1px var(--graphite); padding: 22px; }
+  .gap .n { font-family: var(--mono); font-size: 12.5px; color: var(--accent); }
+  .gap h3 { margin: 10px 0 8px; }
+  .gap p { font-size: 14px; }
+
+  /* ── demos ── */
+  .demo { margin-top: 28px; background: var(--carbon); border-radius: 12px; box-shadow: inset 0 0 0 1px var(--graphite); padding: 28px; }
+  .demo-head { display: flex; justify-content: space-between; align-items: baseline; gap: 16px; flex-wrap: wrap; }
+  #spec { font-size: 46px; line-height: 1.05; font-weight: 600; color: var(--paper); letter-spacing: -0.005em; white-space: nowrap; overflow: hidden; }
+  input[type=range] { -webkit-appearance: none; appearance: none; width: 100%; height: 2px; border-radius: 2px; background: var(--smoke); margin-top: 26px; }
+  input[type=range]::-webkit-slider-thumb { -webkit-appearance: none; width: 16px; height: 16px; border-radius: 50%; background: var(--accent); cursor: grab; }
+  input[type=range]::-moz-range-thumb { width: 16px; height: 16px; border: 0; border-radius: 50%; background: var(--accent); cursor: grab; }
+  input[type=range]:focus-visible { outline: 2px solid var(--accent); outline-offset: 4px; }
+  .ends { display: flex; justify-content: space-between; margin-top: 10px; }
+  .verdict { margin-top: 16px; }
+  .verdict.bad { color: var(--red); }
+  .verdict.mid { color: var(--amber); }
+  .verdict.good { color: var(--green); }
+
+  .ladder { display: flex; flex-direction: column; gap: 8px; margin-top: 20px; }
+  .rung { border-radius: 6px; padding: 12px 14px; font-family: var(--mono); font-size: 12.5px; color: var(--fog); transition: .3s cubic-bezier(.22,.61,.36,1); }
+  .two { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  .col-head { font-family: var(--mono); font-size: 10.5px; letter-spacing: .14em; text-transform: uppercase; color: var(--ash); margin-bottom: 14px; }
+
+  .dots { display: flex; flex-wrap: wrap; gap: 5px; margin-top: 18px; min-height: 24px; }
+  .d { width: 9px; height: 9px; border-radius: 50%; background: var(--accent); }
+  .count { font-family: var(--mono); font-size: 30px; color: var(--paper); margin-top: 16px; }
+
+  .chips { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 20px; }
+  .chip { font-family: var(--mono); font-size: 12.5px; color: var(--mist); padding: 9px 13px; box-shadow: inset 0 0 0 1px var(--smoke); transition: .3s cubic-bezier(.22,.61,.36,1); }
+  .chip.die { opacity: .18; }
+
+  /* ── table ── */
+  .scroller { overflow-x: auto; margin-top: 28px; }
+  table { width: 100%; border-collapse: collapse; font-size: 14px; min-width: 620px; }
+  th, td { text-align: left; padding: 13px 14px; box-shadow: inset 0 -1px 0 0 var(--graphite); }
+  th { font-family: var(--mono); font-size: 10.5px; letter-spacing: .14em; text-transform: uppercase; color: var(--ash); font-weight: 400; }
+  td { font-family: var(--mono); font-size: 12.5px; color: var(--mist); }
+  td:first-child { font-family: var(--sans); font-size: 14px; color: var(--fog); }
+  td.worse { color: var(--red); }
+  td.ref { color: var(--green); }
+
+  /* ── swatches ── */
+  .sw { display: grid; grid-template-columns: repeat(auto-fill, minmax(132px, 1fr)); gap: 10px; margin-top: 24px; }
+  .swatch { border-radius: 6px; box-shadow: inset 0 0 0 1px var(--graphite); overflow: hidden; cursor: pointer; background: var(--carbon); }
+  .swatch:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+  .swatch .c { height: 54px; }
+  .swatch .h { padding: 8px 10px; font-family: var(--mono); font-size: 12.5px; color: var(--mist); }
+
+  /* ── notes / patch / order ── */
+  .note { background: var(--carbon); border-radius: 12px; box-shadow: inset 0 0 0 1px var(--graphite); padding: 22px; margin-top: 12px; }
+  .note .tag { font-family: var(--mono); font-size: 10.5px; letter-spacing: .14em; text-transform: uppercase; color: var(--accent); }
+  .note h3 { margin: 10px 0 8px; }
+  .note p { font-size: 14px; }
+  pre {
+    margin-top: 20px; background: var(--carbon); border-radius: 12px; box-shadow: inset 0 0 0 1px var(--graphite);
+    padding: 22px; overflow-x: auto; font-family: var(--mono); font-size: 12.5px; line-height: 1.7; color: var(--mist);
+  }
+  .copy {
+    margin-top: 14px; font-family: var(--mono); font-size: 12.5px; color: var(--mist);
+    background: transparent; box-shadow: inset 0 0 0 1px var(--graphite); border: 0; border-radius: 6px;
+    padding: 8px 14px; cursor: pointer;
+  }
+  .copy:hover { background: var(--obsidian); }
+  .copy:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+  ol.fixes { list-style: none; margin-top: 24px; }
+  ol.fixes li { display: grid; grid-template-columns: 26px 1fr auto; gap: 14px; align-items: start; padding: 16px 0; box-shadow: inset 0 -1px 0 0 var(--graphite); }
+  ol.fixes .box {
+    width: 18px; height: 18px; border-radius: 4px; box-shadow: inset 0 0 0 1px var(--smoke);
+    background: transparent; cursor: pointer; padding: 0; margin-top: 2px;
+  }
+  ol.fixes .box[aria-pressed="true"] { background: var(--green); box-shadow: none; }
+  ol.fixes .box:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+  ol.fixes .what b { display: block; }
+  ol.fixes .what span { font-size: 14px; }
+  ol.fixes .cost { font-family: var(--mono); font-size: 12.5px; color: var(--ash); white-space: nowrap; }
+  .kind { font-family: var(--mono); font-size: 10.5px; letter-spacing: .14em; text-transform: uppercase; }
+  .kind.mech { color: var(--green); }
+  .kind.call { color: var(--amber); }
+  #done { font-family: var(--mono); font-size: 12.5px; color: var(--ash); margin-top: 18px; }
+
+  footer { max-width: 1220px; margin: 0 auto; padding: 0 32px 80px; font-size: 13px; color: var(--ash); }
+
+  @media (max-width: 940px) {
+    .shell { grid-template-columns: 1fr; gap: 32px; padding-top: 84px; }
+    .rail { display: none; }
+    .stats { grid-template-columns: repeat(2, 1fr); }
+    .gaps, .two { grid-template-columns: 1fr; }
+    h1 { font-size: 38px; }
+    #spec { white-space: normal; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    *, *:before, *:after { animation-duration: .01ms !important; transition-duration: .01ms !important; }
+    .rv { opacity: 1; transform: none; }
+  }
+</style>
+</head>
+<body>
+
+<div class="bar">
+  <div class="bar-in">
+    <div class="brands">
+      <span class="brand"><span class="sq" style="background:#ffb454"></span>MASTODONT Skynet</span>
+      <span class="vs">vs</span>
+      <span class="brand"><span class="sq" style="background:#e4f222"></span>Linear</span>
+    </div>
+    <button class="toggle" id="master" aria-pressed="false">Before / after <kbd>B</kbd></button>
+  </div>
+  <div id="prog"></div>
+</div>
+
+<div class="shell">
+  <nav class="rail" aria-label="Sections">
+    <a href="#summary" class="on">Three largest gaps</a>
+    <a href="#tracking">Letter spacing</a>
+    <a href="#surfaces">Surface elevation</a>
+    <a href="#elevation">Shadow treatment</a>
+    <a href="#accent">Accent frequency</a>
+    <a href="#radii">Radius vocabulary</a>
+    <a href="#tokens">Values side by side</a>
+    <a href="#notes">Needs a call</a>
+    <a href="#patch">Token patch</a>
+    <a href="#order">Ordered fixes</a>
+  </nav>
+
+  <main>
+    <section class="hero rv" id="summary">
+      <p class="eyebrow"><span class="dot"></span>Measured 14 August 2026 · 1280 × 720</p>
+      <h1>MASTODONT Skynet measured against Linear's design system</h1>
+      <p class="lede">Every value below was read from live computed CSS on both sites, after each page was scrolled end to end so nothing lazy loaded stayed hidden. Nothing here is recalled from memory. Where a value could not be measured it is marked as such.</p>
+
+      <div class="stats">
+        <div class="stat"><p class="v">-0.005 <span class="to">→ -0.022</span></p><p class="k">display tracking, em</p></div>
+        <div class="stat"><p class="v">6 <span class="to">→ 0</span></p><p class="k">accent uses above the fold</p></div>
+        <div class="stat"><p class="v">3 <span class="to">→ 4</span></p><p class="k">real surface levels</p></div>
+        <div class="stat"><p class="v">0 <span class="to">→ 3</span></p><p class="k">inset hairline shadows</p></div>
+      </div>
+
+      <h2 style="margin-top:64px">The three largest gaps</h2>
+      <div class="gaps">
+        <div class="gap">
+          <p class="n">01</p>
+          <h3>Headlines are barely tracked</h3>
+          <p>Our display type sits at -0.005em. Linear holds -0.022em at every size above 32px, without exception. That is a gap of four and a half times, and it is the single reason our headlines read soft next to theirs.</p>
+        </div>
+        <div class="gap">
+          <p class="n">02</p>
+          <h3>The accent is doing too many jobs</h3>
+          <p>Amber appears six times in the first screen and is the most common text colour on the whole page, 39 uses. Linear shows zero saturated colour above the fold. Their accent works because it is rationed.</p>
+        </div>
+        <div class="gap">
+          <p class="n">03</p>
+          <h3>Borders instead of an elevation ladder</h3>
+          <p>We draw a solid 1px ivory border 19 times and ship no shadows at all. Linear separates surfaces with 5 percent hairlines and inset shadows, climbing four named levels from canvas to tint.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="rv" id="tracking">
+      <p class="eyebrow">01 · Letter spacing</p>
+      <h2>Letter spacing</h2>
+      <p class="lede" style="margin-top:14px">Drag between the two measured values. The specimen is our own hero line at display size.</p>
+      <div class="demo">
+        <p id="spec">Indistinguishable. By design.</p>
+        <input type="range" id="tr" min="-0.022" max="-0.005" step="0.001" value="-0.005" aria-label="Letter spacing between our measured value and Linear's">
+        <div class="ends">
+          <span class="ro">Linear · -0.022em</span>
+          <span class="ro" style="color:var(--accent)">us today · -0.005em</span>
+        </div>
+        <p class="verdict ro bad" id="verd">-0.005em · this is what we ship. At 92px that is -0.46px of correction where Linear would apply -2.02px.</p>
+      </div>
+      <p class="dim" style="margin-top:16px">Body copy is worse in kind: 72 text nodes ship with no tracking at all, where Linear runs -0.011em through the whole body scale.</p>
+    </section>
+
+    <section class="rv" id="surfaces">
+      <p class="eyebrow">02 · Surfaces</p>
+      <h2>Surface elevation</h2>
+      <div class="demo two">
+        <div>
+          <p class="col-head">Ours, measured</p>
+          <div class="ladder">
+            <div class="rung" style="background:#0b0c0e; box-shadow:inset 0 0 0 1px #23252a">#0b0c0e · canvas</div>
+            <div class="rung" style="background:rgba(255,255,255,.03)">rgba(255,255,255,.03) · card</div>
+            <div class="rung" style="background:rgba(255,255,255,.04)">rgba(255,255,255,.04) · card again</div>
+            <div class="rung" style="background:#101216">#101216 · band</div>
+          </div>
+          <p class="dim" style="margin-top:14px">Two of the four are the same wash one percent apart. In practice this is three surfaces, not four, and two of them are indistinguishable on a laptop screen.</p>
+        </div>
+        <div>
+          <p class="col-head">Linear, measured</p>
+          <div class="ladder">
+            <div class="rung" style="background:#08090a; box-shadow:inset 0 0 0 1px #23252a">#08090a · void</div>
+            <div class="rung" style="background:#0f1011; box-shadow:inset 0 0 0 1px #23252a">#0f1011 · carbon, cards</div>
+            <div class="rung" style="background:#161718; box-shadow:inset 0 0 0 1px #23252a">#161718 · obsidian, elevated</div>
+            <div class="rung" style="background:#23252a">#23252a · graphite, tint and edges</div>
+          </div>
+          <p class="dim" style="margin-top:14px">Four named opaque levels, each one step of real lightness apart, every card edged with a one pixel inset hairline rather than an outer glow.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="rv" id="elevation">
+      <p class="eyebrow">03 · Elevation</p>
+      <h2>Shadow treatment</h2>
+      <div class="demo two">
+        <div>
+          <p class="col-head">Ours · no shadows measured</p>
+          <div class="rung" style="background:rgba(255,255,255,.03); padding:26px; border-radius:12px; border:1px solid #f2efe8">
+            solid 1px ivory border, used 19 times
+          </div>
+          <p class="dim" style="margin-top:14px">A fully opaque light border is the loudest way to draw an edge. It reads as a box around content rather than a change of surface.</p>
+        </div>
+        <div>
+          <p class="col-head">Linear · 8 shadows, 3 inset</p>
+          <div class="rung" style="background:#0f1011; padding:26px; border-radius:12px; box-shadow:inset 0 0 0 1px #23252a, rgba(0,0,0,.4) 0 2px 4px">
+            inset 0 0 0 1px #23252a
+          </div>
+          <p class="dim" style="margin-top:14px">The edge sits inside the card and shares the family of the canvas. Elevation comes from the surface step, not from the outline.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="rv" id="accent">
+      <p class="eyebrow">04 · Accent</p>
+      <h2>Accent frequency</h2>
+      <div class="demo two">
+        <div>
+          <p class="col-head">Ours · first screen</p>
+          <div class="dots" id="ourdots"></div>
+          <p class="count">6</p>
+          <p class="dim">Six saturated objects before a single scroll: kicker, logo, nav button, hero italic, two buttons. Across the page amber is used 39 times as text, more than any neutral.</p>
+        </div>
+        <div>
+          <p class="col-head">Linear · first screen</p>
+          <div class="dots"></div>
+          <p class="count">0</p>
+          <p class="dim">Not one saturated colour above the fold. Their acid lime exists, but it is held back for a single filled action further down. Restraint is what gives it force when it finally appears.</p>
+        </div>
+      </div>
+      <p class="dim" style="margin-top:16px">Keep the colour. It is a strong, ownable amber and it is ours. The change is how often it is allowed to speak, not what it is.</p>
+    </section>
+
+    <section class="rv" id="radii">
+      <p class="eyebrow">05 · Radii</p>
+      <h2>Border radius vocabulary</h2>
+      <p class="lede" style="margin-top:14px">Six distinct radii shipped, all within ten pixels of one another. The differences are invisible; the inconsistency is not.</p>
+      <div class="chips" id="chips">
+        <span class="chip" style="border-radius:8px" data-keep="0">8px</span>
+        <span class="chip" style="border-radius:10px" data-keep="0">10px</span>
+        <span class="chip" style="border-radius:12px" data-keep="1">12px</span>
+        <span class="chip" style="border-radius:14px" data-keep="0">14px</span>
+        <span class="chip" style="border-radius:18px" data-keep="0">18px</span>
+        <span class="chip" style="border-radius:24px" data-keep="0">24px</span>
+      </div>
+      <p class="dim" style="margin-top:18px">Linear ships five and they are far apart on purpose: 2px, 4px, 6px, 12px, pill. Cards are always 12. Collapse ours to 6 for controls, 12 for cards, pill for chips, and the vocabulary becomes readable.</p>
+    </section>
+
+    <section class="rv" id="tokens">
+      <p class="eyebrow">06 · Diff</p>
+      <h2>Values side by side</h2>
+      <div class="scroller">
+        <table>
+          <thead><tr><th>Token</th><th>MASTODONT Skynet</th><th>Linear</th></tr></thead>
+          <tbody>
+            <tr><td>Canvas</td><td>#0b0c0e</td><td class="ref">#08090a</td></tr>
+            <tr><td>Surface levels</td><td class="worse">3 real, 2 duplicated</td><td class="ref">4 named, opaque</td></tr>
+            <tr><td>Hairline</td><td class="worse">1px #f2efe8 solid, ×19</td><td class="ref">1px rgba(255,255,255,.05)</td></tr>
+            <tr><td>Text roles</td><td>5</td><td class="ref">16, led by #62666d</td></tr>
+            <tr><td>Display tracking</td><td class="worse">-0.005em</td><td class="ref">-0.022em</td></tr>
+            <tr><td>Body tracking</td><td class="worse">normal (0em), 72 nodes</td><td class="ref">-0.011em</td></tr>
+            <tr><td>Accent above the fold</td><td class="worse">6</td><td class="ref">0</td></tr>
+            <tr><td>Accent as text colour</td><td class="worse">39 uses, most common</td><td class="ref">held for one filled action</td></tr>
+            <tr><td>Type sizes</td><td>12</td><td>14</td></tr>
+            <tr><td>Weights</td><td>300 / 400 / 500 / 600</td><td class="ref">300 / 400 / 510 / 590</td></tr>
+            <tr><td>Radii</td><td class="worse">6, all within 10px</td><td class="ref">5, deliberately far apart</td></tr>
+            <tr><td>Shadows</td><td class="worse">none</td><td class="ref">8, of which 3 inset</td></tr>
+            <tr><td>Container</td><td>1180px</td><td>1364px</td></tr>
+            <tr><td>Section rhythm</td><td>104px / 104px</td><td class="ref">128px / 128px</td></tr>
+            <tr><td>Type families</td><td>Fraunces + IBM Plex Mono</td><td>Inter Variable + Berkeley Mono</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="sw" id="sw"></div>
+      <p class="dim" style="margin-top:16px">Click a swatch to copy the hex. Nothing here reproduces Linear's copy, marks or product imagery. Their system is used as a standard to measure against, not as a source to copy.</p>
+    </section>
+
+    <section class="rv" id="notes">
+      <p class="eyebrow">07 · Judgment</p>
+      <h2>Two changes that need a call from you</h2>
+      <div class="note">
+        <p class="tag">Needs a decision</p>
+        <h3>The serif is carrying the brand alone</h3>
+        <p>Fraunces at weight 300 is the only thing separating this from a generic dark product page, and it is also the reason tracking looks soft: a light serif at 92px needs tighter tracking than a grotesque, not looser. Either commit to the serif and tighten it hard, or move display type to the grotesque and keep the serif for one pull quote. Both are defensible. Doing neither is what reads as unfinished.</p>
+      </div>
+      <div class="note">
+        <p class="tag">Needs a decision</p>
+        <h3>Amber is both the brand and the interface</h3>
+        <p>The same amber marks the logo, every section kicker, every link and both buttons. Rationing it to one filled action per screen will make the page calmer and the buttons louder, but it also makes the page less obviously ours at a glance. The call is whether brand recognition or hierarchy matters more on the first screen.</p>
+      </div>
+    </section>
+
+    <section class="rv" id="patch">
+      <p class="eyebrow">08 · Patch</p>
+      <h2>Values to swap in your token file</h2>
+      <pre id="patchcode">:root {
+  /* surfaces: four named levels, opaque, no washes */
+  --surface-0: #0b0c0e;   /* canvas, unchanged        */
+  --surface-1: #131518;   /* cards, was rgba(255,255,255,.03) */
+  --surface-2: #1a1d21;   /* elevated, was .04        */
+  --surface-3: #23252a;   /* tint and edges           */
+
+  /* edges: hairline, not a solid outline */
+  --hairline:  rgba(242, 239, 232, 0.06);  /* was #f2efe8 solid */
+  --edge-card: inset 0 0 0 1px rgba(242, 239, 232, 0.06);
+
+  /* type: tracking is the single highest leverage change */
+  --track-display: -0.022em;  /* was -0.005em */
+  --track-body:    -0.011em;  /* was normal   */
+
+  /* radii: three values, far apart */
+  --r-control: 6px;
+  --r-card:    12px;
+  --r-pill:    9999px;
+
+  /* rhythm */
+  --container:  1280px;   /* was 1180px */
+  --section-y:  128px;    /* was 104px  */
+}</pre>
+      <button class="copy" id="copybtn">Copy token patch</button>
+    </section>
+
+    <section class="rv" id="order">
+      <p class="eyebrow">09 · Order</p>
+      <h2>Ordered by visible effect per hour</h2>
+      <ol class="fixes" id="fixes">
+        <li><button class="box" aria-pressed="false" aria-label="Done"></button><span class="what"><b>Set display tracking to -0.022em</b><span class="kind mech">Mechanical</span> <span>One variable, every heading on every page.</span></span><span class="cost">20 min</span></li>
+        <li><button class="box" aria-pressed="false" aria-label="Done"></button><span class="what"><b>Set body tracking to -0.011em</b><span class="kind mech">Mechanical</span> <span>72 nodes currently ship with none.</span></span><span class="cost">10 min</span></li>
+        <li><button class="box" aria-pressed="false" aria-label="Done"></button><span class="what"><b>Replace the solid ivory border with a 6 percent hairline</b><span class="kind mech">Mechanical</span> <span>Find and replace across 19 uses.</span></span><span class="cost">30 min</span></li>
+        <li><button class="box" aria-pressed="false" aria-label="Done"></button><span class="what"><b>Collapse six radii to three</b><span class="kind mech">Mechanical</span> <span>6 for controls, 12 for cards, pill for chips.</span></span><span class="cost">40 min</span></li>
+        <li><button class="box" aria-pressed="false" aria-label="Done"></button><span class="what"><b>Give surfaces four opaque levels</b><span class="kind mech">Mechanical</span> <span>Kills the two washes that look identical.</span></span><span class="cost">1 hr</span></li>
+        <li><button class="box" aria-pressed="false" aria-label="Done"></button><span class="what"><b>Ration the accent to one filled action per screen</b><span class="kind call">Needs a call</span> <span>Demote kickers and links to neutral text.</span></span><span class="cost">2 hr</span></li>
+        <li><button class="box" aria-pressed="false" aria-label="Done"></button><span class="what"><b>Decide the display face: tightened serif or grotesque</b><span class="kind call">Needs a call</span> <span>The one change that alters the brand, not just the craft.</span></span><span class="cost">half a day</span></li>
+      </ol>
+      <p id="done">0 of 7 done</p>
+    </section>
+  </main>
+</div>
+
+<footer>Measured from live computed CSS on 14 August 2026 at 1280 × 720, both pages scrolled end to end before reading. Linear is used as a standard, not a source: no copy, marks or product imagery are reproduced.</footer>
+
+<script>
+  // scroll progress
+  const prog = document.getElementById('prog');
+  addEventListener('scroll', () => {
+    const h = document.documentElement;
+    prog.style.width = (h.scrollTop / (h.scrollHeight - h.clientHeight) * 100) + '%';
+  }, { passive: true });
+
+  // reveal on scroll
+  const io = new IntersectionObserver((es) => es.forEach(e => { if (e.isIntersecting) e.target.classList.add('in'); }), { threshold: .08 });
+  document.querySelectorAll('.rv').forEach(el => io.observe(el));
+
+  // section rail scroll spy
+  const links = [...document.querySelectorAll('.rail a')];
+  const spy = new IntersectionObserver((es) => {
+    es.forEach(e => {
+      if (!e.isIntersecting) return;
+      links.forEach(a => a.classList.toggle('on', a.getAttribute('href') === '#' + e.target.id));
+    });
+  }, { rootMargin: '-45% 0px -50% 0px' });
+  document.querySelectorAll('section[id]').forEach(s => spy.observe(s));
+
+  // tracking slider
+  const spec = document.getElementById('spec'), tr = document.getElementById('tr'), verd = document.getElementById('verd');
+  const setTrack = (v) => {
+    spec.style.letterSpacing = v + 'em';
+    const px = (92 * v).toFixed(2);
+    verd.textContent = v + 'em · at 92px that is ' + px + 'px of correction.';
+    verd.className = 'verdict ro ' + (v > -0.012 ? 'bad' : v > -0.019 ? 'mid' : 'good');
+    if (v <= -0.022) verd.textContent = v + 'em · this is where Linear holds every display size.';
+    if (v >= -0.005) verd.textContent = '-0.005em · this is what we ship. At 92px that is -0.46px of correction where Linear would apply -2.02px.';
+  };
+  tr.addEventListener('input', () => setTrack(parseFloat(tr.value)));
+
+  // accent dots
+  const od = document.getElementById('ourdots');
+  for (let i = 0; i < 6; i++) od.appendChild(Object.assign(document.createElement('span'), { className: 'd' }));
+
+  // master before/after toggle, bound to B
+  const master = document.getElementById('master');
+  let after = false;
+  const apply = () => {
+    master.setAttribute('aria-pressed', String(after));
+    tr.value = after ? -0.022 : -0.005;
+    setTrack(parseFloat(tr.value));
+    document.querySelectorAll('#chips .chip').forEach(c => c.classList.toggle('die', after && c.dataset.keep === '0'));
+    od.querySelectorAll('.d').forEach((d, i) => d.style.display = after && i > 0 ? 'none' : '');
+    document.querySelectorAll('#accent .count')[0].textContent = after ? '1' : '6';
+  };
+  master.addEventListener('click', () => { after = !after; apply(); });
+  addEventListener('keydown', (e) => {
+    if (e.key.toLowerCase() === 'b' && !/input|textarea/i.test(e.target.tagName)) { after = !after; apply(); }
+  });
+
+  // swatches
+  const colours = [
+    ['#0b0c0e', 'canvas'], ['#131518', 'surface 1'], ['#1a1d21', 'surface 2'], ['#23252a', 'edges'],
+    ['#ffb454', 'accent, ours'], ['#f2efe8', 'ink'], ['#8a8f98', 'body'], ['#62666d', 'muted']
+  ];
+  const sw = document.getElementById('sw');
+  const copy = async (text, el, label) => {
+    try { await navigator.clipboard.writeText(text); }
+    catch (e) { const t = document.createElement('textarea'); t.value = text; document.body.appendChild(t); t.select(); document.execCommand('copy'); t.remove(); }
+    const old = el.textContent; el.textContent = label; setTimeout(() => { el.textContent = old; }, 1200);
+  };
+  colours.forEach(([hex, role]) => {
+    const b = document.createElement('button');
+    b.className = 'swatch'; b.type = 'button'; b.setAttribute('aria-label', 'Copy ' + hex);
+    b.innerHTML = '<span class="c" style="display:block;background:' + hex + '"></span><span class="h">' + hex + ' · ' + role + '</span>';
+    b.addEventListener('click', () => copy(hex, b.querySelector('.h'), 'copied'));
+    sw.appendChild(b);
+  });
+
+  // token patch copy
+  const cb = document.getElementById('copybtn');
+  cb.addEventListener('click', () => copy(document.getElementById('patchcode').textContent, cb, 'Copied'));
+
+  // checklist
+  const done = document.getElementById('done');
+  const boxes = [...document.querySelectorAll('#fixes .box')];
+  boxes.forEach(b => b.addEventListener('click', () => {
+    b.setAttribute('aria-pressed', b.getAttribute('aria-pressed') === 'true' ? 'false' : 'true');
+    done.textContent = boxes.filter(x => x.getAttribute('aria-pressed') === 'true').length + ' of ' + boxes.length + ' done';
+  }));
+</script>
+
+</body>
+</html>

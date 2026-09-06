@@ -1,0 +1,87 @@
+/* TWEAK PANEL · lives over the dev server, never ships with the page.
+   Every control writes a --tw-* custom property on :root, so the page
+   repaints instantly instead of being rebuilt. */
+
+#tweak-open{
+  position:fixed;right:18px;bottom:18px;z-index:9998;
+  padding:.7rem 1.1rem;
+  background:#e8e83c;color:#0a0a08;border:2px solid #0a0a08;
+  font-family:'Archivo',system-ui,sans-serif;
+  font-weight:800;font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;
+  cursor:pointer;box-shadow:4px 4px 0 rgba(0,0,0,.55);
+}
+#tweak-open:hover{background:#0a0a08;color:#e8e83c;border-color:#e8e83c;}
+#tweak-open:focus-visible{outline:2px solid #fff;outline-offset:3px;}
+
+#tweak{
+  position:fixed;top:0;right:0;bottom:0;z-index:9999;
+  width:min(370px,92vw);
+  display:flex;flex-direction:column;
+  background:#0d0d0b;color:#efefe6;
+  border-left:2px solid #e8e83c;
+  font-family:'Archivo',system-ui,sans-serif;font-size:13px;
+  transform:translateX(101%);transition:transform .28s cubic-bezier(.16,1,.3,1);
+}
+#tweak.on{transform:none;}
+@media (prefers-reduced-motion:reduce){ #tweak{transition:none;} }
+
+#tweak header{
+  flex:0 0 auto;display:flex;align-items:center;gap:.6rem;
+  padding:.85rem 1rem;border-bottom:1px solid #2a2a24;background:#141410;
+}
+#tweak header b{font-size:.78rem;font-weight:800;letter-spacing:.16em;text-transform:uppercase;margin-right:auto;}
+#tweak header button{
+  background:transparent;border:1px solid #2a2a24;color:#efefe6;
+  font-family:inherit;font-size:.6rem;font-weight:800;letter-spacing:.1em;
+  text-transform:uppercase;padding:.35rem .6rem;cursor:pointer;
+}
+#tweak header button:hover{background:#e8e83c;border-color:#e8e83c;color:#0a0a08;}
+
+#tweak .body{flex:1 1 auto;overflow-y:auto;overscroll-behavior:contain;}
+
+#tweak details{border-bottom:1px solid #2a2a24;}
+#tweak summary{
+  padding:.7rem 1rem;cursor:pointer;list-style:none;
+  font-size:.66rem;font-weight:800;letter-spacing:.16em;text-transform:uppercase;
+  color:#e8e83c;display:flex;align-items:center;gap:.5rem;
+}
+#tweak summary::-webkit-details-marker{display:none;}
+#tweak summary::after{content:"+";margin-left:auto;font-weight:400;color:#7d7a70;}
+#tweak details[open] summary::after{content:"–";}
+#tweak details > div{padding:.2rem 1rem 1rem;display:grid;gap:.75rem;}
+
+#tweak .ctl{display:grid;gap:.3rem;}
+#tweak .ctl > label{
+  display:flex;gap:.5rem;align-items:baseline;
+  font-size:.6rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#9b9b90;
+}
+#tweak .ctl > label output{margin-left:auto;color:#efefe6;font-weight:800;font-variant-numeric:tabular-nums;}
+#tweak input[type=range]{width:100%;accent-color:#e8e83c;margin:0;}
+#tweak select{
+  width:100%;background:#161612;color:#efefe6;border:1px solid #2a2a24;
+  font-family:inherit;font-size:12px;padding:.4rem .5rem;
+}
+#tweak input[type=color]{
+  width:100%;height:30px;background:#161612;border:1px solid #2a2a24;padding:2px;cursor:pointer;
+}
+#tweak .swap{display:flex;align-items:center;gap:.55rem;}
+#tweak .swap input{accent-color:#e8e83c;width:16px;height:16px;}
+#tweak .swap span{font-size:.62rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#9b9b90;}
+#tweak .pair{display:grid;grid-template-columns:1fr 1fr;gap:.6rem;}
+
+#tweak footer{
+  flex:0 0 auto;display:grid;grid-template-columns:1fr auto;gap:.5rem;
+  padding:.8rem 1rem;border-top:1px solid #2a2a24;background:#141410;
+}
+#tweak footer button{
+  font-family:inherit;font-size:.66rem;font-weight:800;letter-spacing:.12em;
+  text-transform:uppercase;padding:.6rem .8rem;cursor:pointer;
+  background:#e8e83c;color:#0a0a08;border:1px solid #e8e83c;
+}
+#tweak footer button.ghost{background:transparent;color:#efefe6;border-color:#2a2a24;}
+#tweak footer button:hover{opacity:.85;}
+#tweak footer button:focus-visible{outline:2px solid #fff;outline-offset:2px;}
+#tweak .said{
+  grid-column:1 / -1;font-size:.6rem;letter-spacing:.08em;text-transform:uppercase;
+  color:#e8e83c;min-height:1em;
+}
