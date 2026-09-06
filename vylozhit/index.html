@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="ru"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="robots" content="noindex, nofollow">
+<title>Выложить — пришёл, вставил, опубликовал</title>
+<link href="https://fonts.googleapis.com/css2?family=Golos+Text:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Golos Text',system-ui,sans-serif;background:#fff;color:#0a0a0a;line-height:1.55;-webkit-text-size-adjust:100%}
+.wrap{max-width:660px;margin:0 auto;padding:0 18px 90px}
+header{padding:38px 0 20px;border-bottom:2px solid #0a0a0a}
+.k{font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:#585858;font-weight:600}
+h1{font-size:31px;line-height:1.06;margin:8px 0 10px}
+.lead{color:#585858;font-size:15px}
+.pl{margin-top:26px;border:1.5px solid #e6e6e6;border-radius:16px;padding:18px;scroll-margin-top:14px}
+.pl.done{opacity:.45}
+.pl h2{font-size:20px;display:flex;justify-content:space-between;align-items:baseline;gap:10px;flex-wrap:wrap}
+.t{font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;background:#d8f34e;padding:4px 9px;border-radius:99px}
+.t.grey{background:#f0f0f0;color:#585858}
+.go{display:inline-block;margin:12px 0 4px;background:#0a0a0a;color:#e4ded7;text-decoration:none;font-size:14px;font-weight:600;padding:11px 18px;border-radius:99px}
+.path{font-size:13.5px;color:#585858;margin-top:8px}
+.f{margin-top:14px;border-top:1px solid #eee;padding-top:12px}
+.f .lbl{font-size:12px;letter-spacing:.07em;text-transform:uppercase;color:#585858;font-weight:600}
+pre{white-space:pre-wrap;font:inherit;font-size:14px;background:#f7f7f7;border-radius:10px;padding:12px;margin-top:7px;line-height:1.45}
+.one{background:#f7f7f7;border-radius:10px;padding:10px 12px;margin-top:7px;font-size:14.5px;font-weight:600}
+.btn{border:1px solid #0a0a0a;background:#0a0a0a;color:#e4ded7;font:inherit;font-size:13px;font-weight:600;padding:7px 13px;border-radius:99px;cursor:pointer;margin-top:8px}
+.sel{font-size:14px;margin-top:10px;padding-left:18px}
+.sel li{margin:4px 0}
+.warn{background:#fff6e5;border-radius:10px;padding:10px 12px;margin-top:10px;font-size:14px}
+.chk{display:flex;align-items:center;gap:9px;margin-top:14px;padding-top:12px;border-top:1px solid #eee;font-size:14px;color:#585858;cursor:pointer}
+.chk input{width:19px;height:19px;accent-color:#0a0a0a}
+.plan{background:#0a0b0d;color:#e4ded7;border-radius:18px;padding:22px;margin-top:36px}
+.plan h2{font-size:20px;margin-bottom:8px}.plan li{color:#c2c2c2;font-size:14px;margin:6px 0}.plan ol{padding-left:20px}.plan a{color:#d8f34e}
+.toast{position:fixed;left:50%;bottom:24px;transform:translate(-50%,20px);background:#0a0a0a;color:#e4ded7;padding:10px 16px;border-radius:99px;font-size:13px;opacity:0;transition:.2s;pointer-events:none}
+.toast.on{opacity:1;transform:translate(-50%,0)}
+</style></head><body><div class="wrap">
+
+<header><div class="k">6 сентября 2026 · публикация</div>
+<h1>Пришёл, вставил, опубликовал</h1>
+<p class="lead">Только бесплатные площадки. У каждой — кнопка «открыть», путь кликами и готовые поля: заголовок, описание, цена. Ничего придумывать не надо, всё копируется кнопкой. Отмечай галочкой, что уже выложил, — сохраняется в телефоне.</p></header>
+
+<div class="pl" data-id="p1"><h2>1. Авито · Резюме <span class="t">бесплатно</span></h2>
+<a class="go" href="https://www.avito.ru/additem" target="_blank" rel="noopener">Открыть форму Авито</a>
+<p class="path">Категория: <b>Работа → Резюме</b>. Именно резюме — в «Услугах» размещение платное.</p>
+<ul class="sel"><li>Должность: <b>Веб-разработчик</b></li><li>Зарплата: <b>по договорённости</b></li><li>График: удалённая работа, частичная занятость</li><li>Опыт: указать колледж и практику в ФНС</li></ul>
+<div class="f"><div class="lbl">Название резюме</div>
+<div class="one" id="a1t">Веб-разработчик: сайты, боты, автоматизация</div>
+<button class="btn" data-copy="a1t">Скопировать</button></div>
+<div class="f"><div class="lbl">Описание</div>
+<pre id="a1d">Веб-разработчик. Делаю сайты под ключ и автоматизирую рутину: боты, скрипты, мини-приложения.
+
+САЙТЫ И ВЁРСТКА
+— лендинги, визитки, многостраничные сайты: HTML, CSS, JavaScript, без конструкторов;
+— адаптив (мобильные, планшет, десктоп), скорость, SEO-база, доступность;
+— формы заявок с отправкой в Telegram, на почту, в Google-таблицу;
+— редизайн устаревших сайтов, калькуляторы стоимости, каталоги из таблицы.
+
+АВТОМАТИЗАЦИЯ
+— Telegram-боты на Python и Node: уведомления, задачи, напоминания, обработка медиа;
+— автоматизация браузера на Selenium: вход в личные кабинеты, заполнение форм по данным из Excel;
+— мини-приложения внутри Telegram с хранением данных без своего сервера;
+— мониторинг Telegram-чатов по ключевым словам.
+
+ЧТО СДЕЛАНО
+— сайт лавки «Свияжские Оладушки» (sviyazhskie-oladushki.ru) — живой проект с доменом;
+— сайт-портфолио для видеомонтажёра, демо для строительной компании с калькулятором;
+— бот-конвейер: слушает чат стрима, нарезает вертикальные клипы, отдаёт в Telegram;
+— скрипт для личного кабинета ФНС (Python, Selenium) — сделан во время практики в налоговой;
+— трекер питания и тренировок как приложение внутри Telegram;
+— проект портала для сети из 21 молодёжного клуба: аудит, структура, план, смета.
+
+Образование: колледж, направление экономики и налогообложения; практика в межрайонной инспекции ФНС.
+Формат: проектная работа или частичная занятость, удалённо, Казань.
+Первый шаг: за 2 дня бесплатно показываю черновик под вашу задачу.
+Портфолио: errorslove190-droid.github.io/sites/portfolio
+Telegram: @Miha0o0</pre>
+<button class="btn" data-copy="a1d">Скопировать описание</button></div>
+<label class="chk"><input type="checkbox" data-k="p1"> выложил</label></div>
+
+<div class="pl" data-id="p2"><h2>2. hh.ru · Резюме <span class="t">бесплатно</span></h2>
+<a class="go" href="https://hh.ru/applicant/resumes/new" target="_blank" rel="noopener">Создать резюме на hh</a>
+<p class="path">Ссылка ведёт прямо на форму создания. Текст берём тот же, что для Авито, — кнопка выше.</p>
+<div class="warn"><b>Важно.</b> Занятость ставь <b>«проектная работа»</b> и <b>«частичная занятость»</b>, график — <b>«удалённая работа»</b>. Если оставить «полная занятость», неделю будут звонить рекрутёры с офисом на 5/2.</div>
+<ul class="sel"><li>Желаемая должность: <b>Веб-разработчик</b></li><li>Зарплата: оставить пустой либо 60 000 ₽</li><li>Город: Казань, готов к удалённой работе</li><li>Ключевые навыки: HTML, CSS, JavaScript, Python, Telegram Bot API, Selenium, адаптивная вёрстка, SEO</li></ul>
+<div class="f"><div class="lbl">Блок «О себе» — короткая версия</div>
+<pre id="hh1">Делаю сайты под ключ и автоматизирую рутину. Лендинги и многостраничные сайты на HTML, CSS, JavaScript без конструкторов: адаптив, скорость, SEO-база, формы заявок в Telegram, на почту и в таблицу. Автоматизация: Telegram-боты на Python и Node, роботы для личных кабинетов на Selenium, мини-приложения внутри Telegram.
+
+Живые работы: сайт лавки «Свияжские Оладушки» (sviyazhskie-oladushki.ru), бот-нарезчик клипов из стрима, скрипт для кабинета ФНС со времён практики в налоговой, трекер питания в Telegram, проект портала для сети из 21 клуба.
+
+Формат: проектная работа или частичная занятость, удалённо. Портфолио: errorslove190-droid.github.io/sites/portfolio</pre>
+<button class="btn" data-copy="hh1">Скопировать «О себе»</button></div>
+<label class="chk"><input type="checkbox" data-k="p2"> выложил</label></div>
+
+<div class="pl" data-id="p3"><h2>3. Kwork · три кворка <span class="t">бесплатно · комиссия с заказа</span></h2>
+<a class="go" href="https://kwork.ru/" target="_blank" rel="noopener">Открыть Kwork</a>
+<p class="path">Прямой ссылки на форму нет — она открывается только после входа. Путь: зарегистрироваться как продавец → в меню профиля <b>«Мои кворки» → «Создать кворк»</b>.</p>
+<div class="warn"><b>Про цену.</b> Комиссия с нового заказчика 20%, плюс вывод 3%. Базовый пакет 15 000 ₽ принесёт на руки около 11 600 ₽. Поэтому здесь цены выше, чем в прямых продажах, — так и задумано, не снижай.</div>
+<div class="f"><div class="lbl">Кворк 1 · заголовок</div>
+<div class="one" id="k1t">Сделаю лендинг для бизнеса за 5–7 дней</div>
+<button class="btn" data-copy="k1t">Скопировать</button>
+<div class="lbl" style="margin-top:12px">Цена базового пакета</div>
+<div class="one" id="k1p">15 000 ₽ · срок 7 дней</div>
+<div class="lbl" style="margin-top:12px">Описание</div>
+<pre id="k1d">Сделаю лендинг за 5–7 дней: HTML/CSS/JS без конструкторов, мобильная версия, форма заявок в Telegram, почту и таблицу.
+
+Что входит в базовый пакет: одна страница до 6 блоков по вашему брифу, адаптив под телефон и десктоп, SEO-база (title, описание, Open Graph), подключение формы заявок, размещение на вашем хостинге.
+
+Как работаем: вы присылаете название бизнеса, чем занимаетесь и 3 сайта, которые нравятся → за 2 дня показываю черновик главной → правки → сдача.
+
+Живой пример: сайт лавки «Свияжские Оладушки» — работает с доменом, делал сам от макета до заливки.
+
+Опции: дополнительная страница, калькулятор стоимости, редизайн существующего сайта, каталог из вашей таблицы.</pre>
+<button class="btn" data-copy="k1d">Скопировать описание</button></div>
+<div class="f"><div class="lbl">Кворк 2 · заголовок</div>
+<div class="one" id="k2t">Подключу форму заявок в Telegram и таблицу</div>
+<button class="btn" data-copy="k2t">Скопировать</button>
+<div class="lbl" style="margin-top:12px">Цена базового пакета</div>
+<div class="one" id="k2p">5 000 ₽ · срок 2 дня</div>
+<div class="lbl" style="margin-top:12px">Описание</div>
+<pre id="k2d">Заявки с вашего сайта перестанут теряться: подключу форму так, чтобы каждое обращение сразу падало в Telegram, на почту и в Google-таблицу.
+
+Что входит в базовый пакет: форма на одну страницу вашего сайта, проверка полей, защита от спама, отправка в Telegram и на почту, запись в таблицу, сообщение «спасибо» после отправки.
+
+Работает на любом статическом сайте — своего сервера и платных сервисов не нужно.
+
+Как работаем: даёте доступ к файлам сайта или присылаете архив → делаю за 1–2 дня → показываю тестовую заявку, которая пришла вам в Telegram.
+
+Опции: несколько форм, квиз в 2–3 шага, калькулятор стоимости, автоответ клиенту на почту.</pre>
+<button class="btn" data-copy="k2d">Скопировать описание</button></div>
+<div class="f"><div class="lbl">Кворк 3 · заголовок</div>
+<div class="one" id="k3t">Напишу Telegram-бота под вашу задачу</div>
+<button class="btn" data-copy="k3t">Скопировать</button>
+<div class="lbl" style="margin-top:12px">Цена базового пакета</div>
+<div class="one" id="k3p">7 500 ₽ · срок 3 дня</div>
+<div class="lbl" style="margin-top:12px">Описание</div>
+<pre id="k3d">Напишу Telegram-бота, который снимет с вас рутину: приём заявок, запись, уведомления, напоминания, отчёты, рассылка своим клиентам.
+
+Что входит в базовый пакет: бот до 5 экранов по вашему сценарию, кнопки, приём заявок в чат владельцу, запись в Google-таблицу, запуск на хостинге и инструкция.
+
+Что уже делал: бот-конвейер для стримера — слушает чат эфира, сам нарезает вертикальные клипы и присылает в Telegram. Трекер питания и тренировок как мини-приложение внутри Telegram. Робот для личного кабинета ФНС на Selenium.
+
+Как работаем: описываете задачу словами → предлагаю сценарий → согласовали → пишу и отдаю с инструкцией.
+
+Опции: мини-приложение внутри Telegram, оплата, ИИ-ответы клиентам, интеграция с вашей CRM.</pre>
+<button class="btn" data-copy="k3d">Скопировать описание</button></div>
+<label class="chk"><input type="checkbox" data-k="p3"> выложил</label></div>
+
+<div class="pl" data-id="p4"><h2>4. Профи.ру · анкета <span class="t">анкета бесплатно</span></h2>
+<a class="go" href="https://profi.ru/backoffice/" target="_blank" rel="noopener">Кабинет специалиста</a>
+<p class="path">Регистрируешься как специалист, выбираешь услуги: создание сайтов, лендинг, редизайн, Telegram-бот, автоматизация.</p>
+<div class="warn"><b>Деньги.</b> Анкета бесплатна, но <b>каждый отклик платный</b> и списывается сразу — даже если заказчик не ответил ни слова. Клади маленький баланс и откликайся только там, где задача описана внятно и назван бюджет.</div>
+<ul class="sel"><li>Фото — <b>живое лицо</b>, без логотипов и коллажей. Без него анкету почти не открывают.</li><li>Портфолио: 6 карточек со <a href="../foto/">страницы карточек</a>, под каждой — одно предложение, что решали.</li><li>Цены: лендинг 30–45 тыс, сайт 45–70 тыс, бот от 15 тыс.</li><li>На приглашение отвечать в первые 10 минут — площадка ранжирует по скорости.</li></ul>
+<div class="f"><div class="lbl">Блок «О себе»</div>
+<pre id="pr1">Делаю сайты для малого бизнеса и автоматизирую рутину: заявки в Telegram, боты, ИИ-ответчики, скрипты для личных кабинетов.
+
+Сначала показываю, потом беру деньги: черновик главной страницы за 2 дня бесплатно — если не понравится, ничего не должны. Работаю по договору как самозанятый, фикс-цена, предоплата 50%.
+
+Живой сайт с доменом: лавка «Свияжские Оладушки». Готовил проект портала для сети из 21 молодёжного клуба — аудит, структура, смета. Бот для стримера сам режет клипы из эфира и присылает в Telegram.
+
+Напишите название бизнеса, город и что болит — разберу задачу бесплатно и скажу честно, нужен вам сайт или хватит формы заявок.</pre>
+<button class="btn" data-copy="pr1">Скопировать «О себе»</button></div>
+<label class="chk"><input type="checkbox" data-k="p4"> выложил</label></div>
+
+<div class="pl" data-id="p5"><h2>5. Яндекс Услуги <span class="t">бесплатно</span></h2>
+<a class="go" href="https://uslugi.yandex.ru/" target="_blank" rel="noopener">Открыть Яндекс Услуги</a>
+<p class="path">Войти Яндекс-аккаунтом → «Стать исполнителем» → категория <b>«Разработка сайтов»</b>. Профиль попадает в Поиск и на Карты по запросу «сделать сайт Казань».</p>
+<ul class="sel"><li>Услуги и цены — те же, что на Профи.</li><li>«О себе» — тот же текст, кнопка в блоке Профи выше.</li><li>Примеры работ — те же 6 карточек.</li></ul>
+<label class="chk"><input type="checkbox" data-k="p5"> выложил</label></div>
+
+<div class="pl" data-id="p6"><h2>6. ВКонтакте <span class="t">бесплатно</span></h2>
+<a class="go" href="https://vk.com/feed" target="_blank" rel="noopener">Открыть ВК</a>
+<p class="path">Три места: статус на личной странице · раздел «Услуги» в сообществе · посты в городских группах («Услуги Казань», «Барахолка Казань», «Бизнес Казань»). Картинка — квадрат 1080×1080 со <a href="../foto/">страницы карточек</a>.</p>
+<div class="f"><div class="lbl">Статус на личной странице</div>
+<div class="one" id="v1t">Делаю сайты и Telegram-ботов для бизнеса · Казань</div>
+<button class="btn" data-copy="v1t">Скопировать</button></div>
+<div class="f"><div class="lbl">Пост в городскую группу</div>
+<pre id="v1d">Сайт за 5–7 дней + боты, которые убирают рутину. Казань.
+
+— Черновик главной страницы бесплатно за 2 дня, потом решаете
+— Заявки с сайта сразу в Telegram, на почту и в таблицу
+— Telegram-боты, ИИ-ответчик для Авито и мессенджеров, автоматизация на n8n
+— Лендинг от 30 000 ₽, редизайн от 20 000 ₽, форма заявок от 10 000 ₽
+
+Живой сайт: sviyazhskie-oladushki.ru. Пишите в личку — задачу разберу бесплатно.</pre>
+<button class="btn" data-copy="v1d">Скопировать пост</button></div>
+<label class="chk"><input type="checkbox" data-k="p6"> выложил</label></div>
+
+<div class="pl" data-id="p7"><h2>7. FL.ru <span class="t grey">профиль бесплатно</span></h2>
+<a class="go" href="https://www.fl.ru/registration/" target="_blank" rel="noopener">Зарегистрироваться на FL</a>
+<p class="path">Профиль бесплатный, откликаться можно на проекты «для всех». Pro-аккаунт от 4 500 ₽/мес <b>не берём</b>, пока нет отзывов.</p>
+<ul class="sel"><li>Специализация: «Сайты» → «Вёрстка», «Разработка сайтов»; вторая — «Программирование» → «Боты».</li><li>«О себе» — текст Профи, кнопка выше.</li><li>Ставка: от 30 000 ₽ за лендинг.</li></ul>
+<label class="chk"><input type="checkbox" data-k="p7"> выложил</label></div>
+
+<div class="pl" data-id="p8"><h2>8. Юла <span class="t grey">бесплатно, но слабо</span></h2>
+<a class="go" href="https://youla.ru/" target="_blank" rel="noopener">Открыть Юлу</a>
+<p class="path">Механика как у Авито, трафика в услугах в разы меньше. Просто перепост: заголовок и текст с <a href="../avito/">страницы Авито</a>, картинки — оттуда же. Десять минут, заявок не жди.</p>
+<label class="chk"><input type="checkbox" data-k="p8"> выложил</label></div>
+
+<div class="pl" data-id="p9"><h2>9. Workspace.ru <span class="t">профиль бесплатно</span></h2>
+<a class="go" href="https://workspace.ru/tenders/" target="_blank" rel="noopener">Тендеры Workspace</a>
+<p class="path">Тендерная площадка под digital: 7–10 тендеров в день, бюджеты нормальные. Заводим профиль исполнителя и сами добавляем работы в базу — по ним находят.</p>
+<div class="warn">Идти сюда <b>после первых отзывов</b> на Kwork и Профи: без них первые тендеры проигрываются, а заявка тратится.</div>
+<label class="chk"><input type="checkbox" data-k="p9"> выложил</label></div>
+
+<div class="pl" data-id="p10"><h2>10. Telegram-чаты Казани <span class="t">бесплатно</span></h2>
+<p class="path">Не сегодня. Сначала <b>неделю участвовать</b> и давать бесплатные мини-разборы чужих сайтов — иначе прилетит бан за рекламу с порога. Список чатов соберём слушалкой, когда добьём ключи Telegram.</p>
+<div class="f"><div class="lbl">Сообщение — через неделю участия</div>
+<pre id="tg1">Делаю сайты и ботов для бизнеса в Казани. Могу за 2 дня бесплатно показать черновик главной под ваш бизнес — если не зайдёт, ничего не должны. Лендинг от 30 000 ₽, форма заявок в Telegram от 10 000 ₽, боты и ИИ-ответчики по задаче. Пишите в личку.</pre>
+<button class="btn" data-copy="tg1">Скопировать</button></div>
+<label class="chk"><input type="checkbox" data-k="p10"> выложил</label></div>
+
+<div class="plan"><h2>Порядок, если делать подряд</h2>
+<ol>
+<li><b>Авито Резюме</b> — 10 минут, текст готов.</li>
+<li><b>hh.ru</b> — 10 минут, тот же текст.</li>
+<li><b>Kwork</b>, три кворка — 40 минут, обложки лежат на <a href="../foto/">странице карточек</a>.</li>
+<li><b>Профи + Яндекс Услуги</b> — час на двоих, нужно живое фото лица.</li>
+<li><b>ВК</b>: статус, «Услуги», два поста — 30 минут.</li>
+<li><b>FL.ru и Юла</b> — по 10 минут, добиваем остатки.</li>
+<li><b>Workspace</b> и <b>Telegram-чаты</b> — позже, после отзывов и недели участия.</li>
+</ol>
+<p style="margin-top:10px;font-size:14px;color:#c2c2c2">Платное объявление в «Услугах» Авито — на <a href="../avito/">странице Авито</a>. Разбор площадок и нюансы — на <a href="../ploshchadki/">странице площадок</a>.</p></div>
+
+</div>
+<div class="toast" id="toast">Скопировано</div>
+<script>
+(function(){
+  var K='vylozhit-0609', st={};
+  try{ st=JSON.parse(localStorage.getItem(K)||'{}'); }catch(e){}
+  function save(){ try{ localStorage.setItem(K,JSON.stringify(st)); }catch(e){} }
+  function paint(){ document.querySelectorAll('.pl').forEach(function(p){
+    var c=p.querySelector('input[type=checkbox]'); p.classList.toggle('done', !!(c&&c.checked)); }); }
+  document.querySelectorAll('input[type=checkbox][data-k]').forEach(function(c){
+    c.checked=!!st[c.dataset.k];
+    c.addEventListener('change',function(){ st[c.dataset.k]=c.checked; save(); paint(); });
+  });
+  function done(){ var s=document.getElementById('toast'); s.classList.add('on'); setTimeout(function(){s.classList.remove('on')},1400); }
+  function fb(t){ var a=document.createElement('textarea'); a.value=t; document.body.appendChild(a); a.select(); try{document.execCommand('copy')}catch(e){} document.body.removeChild(a); }
+  document.querySelectorAll('[data-copy]').forEach(function(b){
+    b.addEventListener('click',function(){
+      var t=document.getElementById(b.dataset.copy).innerText;
+      if(navigator.clipboard&&navigator.clipboard.writeText){ navigator.clipboard.writeText(t).then(done,function(){fb(t);done()}); }
+      else { fb(t); done(); }
+    });
+  });
+  paint();
+})();
+</script>
+</body></html>
