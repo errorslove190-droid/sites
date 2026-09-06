@@ -35,13 +35,15 @@
   .t{font-weight:600;font-size:16px;letter-spacing:-.01em;display:flex;gap:8px;align-items:baseline;flex-wrap:wrap}
   .date{font-size:12px;color:var(--grey);font-weight:500}
   .d{color:var(--grey);font-size:14px;margin-top:3px}
-  .links{margin-top:6px;display:flex;gap:6px;flex-wrap:wrap}
-  .links a,.pill{font-size:12px;font-weight:600;text-decoration:none;border:1px solid var(--line);border-radius:99px;padding:3px 9px;color:var(--ink)}
-  .links a:hover{border-color:var(--ink)}
-  .pill{border:none;background:#f0f0f0;color:var(--grey)}
+  .links{margin-top:8px;display:flex;gap:6px;flex-wrap:wrap;align-items:center}
+  .links a{font-size:13px;font-weight:600;text-decoration:none;border:1px solid var(--ink);border-radius:99px;padding:5px 12px;color:var(--ink)}
+  .links a:hover{background:var(--lime)}
+  .links a.sec{border-color:var(--line);font-weight:500;color:var(--grey)}
+  .links a.sec:hover{border-color:var(--ink);color:var(--ink);background:none}
+  .pill{font-size:12px;font-weight:600;border-radius:99px;padding:3px 9px;background:#f0f0f0;color:var(--grey)}
   .pill.live{background:var(--lime);color:var(--ink)}
-  .pill.loc{background:#eee}
   .pill.arc{background:#fff3e0;color:#8a4b00}
+  .nolink{font-size:13px;color:var(--grey);margin-top:8px;border-left:3px solid var(--line);padding-left:9px}
   .why{font-size:12.5px;margin-top:6px;color:var(--ink)}
   .why b{font-weight:600;color:var(--grey)}
   .lost{border:2px dashed #e08080;border-radius:14px;padding:16px;margin-top:20px;background:#fff7f7}
@@ -65,7 +67,7 @@
 <header>
   <div class="kicker">6 сентября 2026 · инвентарь</div>
   <h1>Все наработки<br>за лето</h1>
-  <p class="lead">Всё, что найдено в папках, репозитории и архиве с мая по сентябрь: 30 штук. Отметь галочкой, что показываем в объявлении на Авито и в резюме, потом нажми «Скопировать выбранное» и пришли мне список. Галочки сохраняются в браузере.</p>
+  <p class="lead">31 штука, найдено в папках, репозитории и архиве с мая по сентябрь. У всего, что можно открыть глазами, стоит кнопка со ссылкой. Где ссылки нет — это код бота или скрипта, показывать нечего, так и написано. Отметь галочкой, что берём в объявление, нажми «Скопировать выбранное» и пришли мне список.</p>
 </header>
 
 <div class="bar">
@@ -76,32 +78,48 @@
 
 <section>
   <h2>Сайты для бизнеса <small>то, что продаём</small></h2>
-  <p class="note">Прямая витрина для Авито. Один боевой сайт с доменом, остальное — демо и черновики конвейера лидов.</p>
+  <p class="note">Прямая витрина для Авито. Один боевой сайт с доменом, остальное — демо и черновики конвейера лидов. МОНОЛИТ, MA Studio, «Афродита» и «Строй-Мастер» опубликованы сегодня, раньше лежали только на компьютере.</p>
 
   <div class="card" data-id="oladushki"><button class="box" role="checkbox" aria-checked="false"></button><div>
     <div class="t">Свияжские Оладушки <span class="date">июль–сентябрь</span> <span class="pill live">боевой</span></div>
-    <div class="d">Единственный сданный сайт с живым доменом: лавка оладий на острове Свияжск. Главная, меню, экскурсии, страница фестиваля, видео-плейлист «Лавка вживую», аудит починен с 48 до 73 баллов. Плюс бренд-бук для лазерной гравировки бирок.</div>
-    <div class="links"><a href="https://sviyazhskie-oladushki.ru">Сайт</a><a href="https://sviyazhskie-oladushki.ru/sokolka.html">Фестиваль</a><a href="https://errorslove190-droid.github.io/sites/oladushki-promo/">Варианты видео-секции</a><a href="https://errorslove190-droid.github.io/sites/oladushki-sokolka/">Истории для Карт</a></div>
-    <div class="why"><b>Для Авито:</b> главный кейс — реальный клиент, домен, отзыв можно попросить.</div>
+    <div class="d">Единственный сданный сайт с живым доменом: лавка оладий на острове Свияжск. Главная, меню, экскурсии, страница фестиваля, видео-плейлист «Лавка вживую», аудит починен с 48 до 73 баллов.</div>
+    <div class="links"><a href="https://sviyazhskie-oladushki.ru">Открыть сайт</a><a class="sec" href="https://sviyazhskie-oladushki.ru/sokolka.html">Фестиваль</a><a class="sec" href="https://errorslove190-droid.github.io/sites/oladushki-promo/">Варианты видео-секции</a><a class="sec" href="https://errorslove190-droid.github.io/sites/oladushki-sokolka/">Истории для Карт</a></div>
+    <div class="why"><b>Для Авито:</b> главный кейс — реальный клиент, домен, можно попросить отзыв.</div>
+  </div></div>
+
+  <div class="card" data-id="monolit"><button class="box" role="checkbox" aria-checked="false"></button><div>
+    <div class="t">МОНОЛИТ — дома под ключ <span class="date">август</span> <span class="pill live">опубликован сегодня</span></div>
+    <div class="d">Строительство загородных домов под ключ в Казани: проекты, этапы, расчёт. Лежал в лаборатории, теперь открывается по ссылке.</div>
+    <div class="links"><a href="https://errorslove190-droid.github.io/sites/monolit/">Открыть сайт</a></div>
+    <div class="why"><b>Для Авито:</b> строительная ниша, чек выше среднего.</div>
+  </div></div>
+
+  <div class="card" data-id="stroymaster"><button class="box" role="checkbox" aria-checked="false"></button><div>
+    <div class="t">Строй-Мастер — капитальный ремонт <span class="date">май</span> <span class="pill live">опубликован сегодня</span></div>
+    <div class="d">Ранняя работа на React: капремонт объектов, фиксированная смета, тарифы за квадрат, СРО и страхование, партнёры KNAUF и Ceresit. Собранная версия нашлась в архиве.</div>
+    <div class="links"><a href="https://errorslove190-droid.github.io/sites/stroy-master/">Открыть сайт</a></div>
+    <div class="why"><b>Для Авито:</b> ремонт квартир — ниша №1 из нашей же заметки по поиску клиентов.</div>
+  </div></div>
+
+  <div class="card" data-id="afrodita"><button class="box" role="checkbox" aria-checked="false"></button><div>
+    <div class="t">Салон красоты «Афродита» <span class="date">май</span> <span class="pill live">опубликован сегодня</span></div>
+    <div class="d">Первый сайт салона: услуги, преимущества, онлайн-запись. Простой, но ровно та ниша, в которую сейчас идём с Ветрой.</div>
+    <div class="links"><a href="https://errorslove190-droid.github.io/sites/afrodita/">Открыть сайт</a></div>
+    <div class="why"><b>Для Авито:</b> показать салону «вот такой сайт у вас может быть» вместе с окном Ветры.</div>
   </div></div>
 
   <div class="card" data-id="apex"><button class="box" role="checkbox" aria-checked="false"></button><div>
     <div class="t">Apex Structure <span class="date">июль–август</span> <span class="pill">демо</span></div>
-    <div class="d">Строительство премиальных домов хай-тек и барнхаус: калькулятор стоимости, объекты, сроки, смета. Основа ниши «строительство и недвижимость».</div>
-    <div class="links"><a href="https://errorslove190-droid.github.io/sites/apex-structure/">Открыть</a></div>
-    <div class="why"><b>Для Авито:</b> ты сказал «Апекс не нужно» — оставлен в списке для полноты.</div>
-  </div></div>
-
-  <div class="card" data-id="monolit"><button class="box" role="checkbox" aria-checked="false"></button><div>
-    <div class="t">МОНОЛИТ <span class="date">август</span> <span class="pill loc">локально</span></div>
-    <div class="d">Строительство загородных домов под ключ в Казани — вариант в редизайн-лаборатории, не опубликован.</div>
-    <div class="why"><b>Для Авито:</b> можно опубликовать за 10 минут, если нужен второй строительный пример.</div>
+    <div class="d">Строительство премиальных домов хай-тек и барнхаус: калькулятор стоимости, объекты, сроки, смета.</div>
+    <div class="links"><a href="https://errorslove190-droid.github.io/sites/apex-structure/">Открыть сайт</a></div>
+    <div class="why"><b>Для Авито:</b> ты сказал «Апекс не нужно» — оставил, чтобы видел весь список.</div>
   </div></div>
 
   <div class="card" data-id="mastudio"><button class="box" role="checkbox" aria-checked="false"></button><div>
-    <div class="t">MA Studio <span class="date">август</span> <span class="pill loc">локально</span></div>
-    <div class="d">Сайт собственного агентства «приём заявок под ключ за неделю»: позиционирование, тексты, маркетинговый аудит, архитектура единого окна заявок. Прародитель Ветры.</div>
-    <div class="why"><b>Для Авито:</b> текстовая база для объявления, как страница не опубликован.</div>
+    <div class="t">MA Studio — своё агентство <span class="date">август</span> <span class="pill live">опубликован сегодня</span></div>
+    <div class="d">Сайт «приём заявок под ключ за неделю»: позиционирование, тексты, форма заявок, политика. Прародитель Ветры. Рядом — галерея шести направлений стиля, из которой выбирали.</div>
+    <div class="links"><a href="https://errorslove190-droid.github.io/sites/ma-studio/">Открыть сайт</a><a class="sec" href="https://errorslove190-droid.github.io/sites/ma-studio/styles.html">6 направлений стиля</a></div>
+    <div class="why"><b>Для Авито:</b> готовый пример «сайт + форма заявок», о котором пишем в объявлении.</div>
   </div></div>
 
   <div class="card" data-id="aldente"><button class="box" role="checkbox" aria-checked="false"></button><div>
@@ -112,17 +130,17 @@
   </div></div>
 
   <div class="card" data-id="suyukhan"><button class="box" role="checkbox" aria-checked="false"></button><div>
-    <div class="t">Суюхан — монтаж и моушен-дизайн <span class="date">август</span> <span class="pill live">опубликован</span></div>
+    <div class="t">Суюхан — монтаж и моушен <span class="date">август</span> <span class="pill live">опубликован</span></div>
     <div class="d">Портфолио монтажёра: тёмный editorial, работы, контакты.</div>
-    <div class="links"><a href="https://errorslove190-droid.github.io/sites/suyukhan/">Открыть</a></div>
+    <div class="links"><a href="https://errorslove190-droid.github.io/sites/suyukhan/">Открыть сайт</a></div>
     <div class="why"><b>Для Авито:</b> пример сайта для частного специалиста.</div>
   </div></div>
 
   <div class="card" data-id="portfolio"><button class="box" role="checkbox" aria-checked="false"></button><div>
     <div class="t">Портфолио Михаила <span class="date">июль</span> <span class="pill live">опубликован</span></div>
     <div class="d">Визитка «сайты для бизнеса под ключ за 5–7 дней» в фирменном стиле: ч/б editorial и кислотный лайм. Цены 20/30/45/70 тыс.</div>
-    <div class="links"><a href="https://errorslove190-droid.github.io/sites/portfolio/">Открыть</a></div>
-    <div class="why"><b>Для Авито:</b> ссылка в профиле и в резюме. Нужен og:image.</div>
+    <div class="links"><a href="https://errorslove190-droid.github.io/sites/portfolio/">Открыть сайт</a></div>
+    <div class="why"><b>Для Авито:</b> ссылка в профиле и в резюме.</div>
   </div></div>
 
   <div class="card" data-id="ilya"><button class="box" role="checkbox" aria-checked="false"></button><div>
@@ -130,118 +148,132 @@
     <div class="d">Интерфейс телефона: варианты чистки и оформления.</div>
     <div class="links"><a href="https://errorslove190-droid.github.io/sites/ilya-phone/">Открыть</a></div>
   </div></div>
-
-  <div class="card" data-id="mishaabro"><button class="box" role="checkbox" aria-checked="false"></button><div>
-    <div class="t">Первый сайт Оладушек на React <span class="date">май</span> <span class="pill arc">архив</span></div>
-    <div class="d">Самая первая версия: React + Vite, hero, лавка, экскурсии, кнопки «Забронировать» и «Заказать». Отсюда всё началось.</div>
-    <div class="why"><b>Для Авито:</b> история «было — стало» рядом с боевым сайтом.</div>
-  </div></div>
 </section>
 
 <section>
   <h2>Продукты и автоматизация <small>то, что делает бизнес быстрее</small></h2>
-  <p class="note">Аргумент для второй половины объявления: не только сайты, но и заявки, боты, окна.</p>
+  <p class="note">Вторая половина объявления: не только сайты, но и заявки, боты, окна. У ботов и скриптов страницы нет — там код, а не сайт.</p>
 
   <div class="card" data-id="vetra"><button class="box" role="checkbox" aria-checked="false"></button><div>
     <div class="t">Ветра — все мессенджеры в одном окне <span class="date">август–сентябрь</span> <span class="pill live">в разработке</span></div>
-    <div class="d">Мини-SaaS с Андреем для салонов: сообщения из Telegram, ВК, MAX, почты и Авито в одном списке, вечерняя сводка владельцу (обращений · без ответа · скорость). Postgres, API, Telegram-канал, бот-«бортовой компьютер» в группе, бренд-бук, тарифы, путь клиента, спринты.</div>
-    <div class="links"><a href="https://errorslove190-droid.github.io/sites/vetra/maket/">Визитка</a><a href="https://errorslove190-droid.github.io/sites/vetra/okno-demo/">Окно (демо)</a><a href="https://errorslove190-droid.github.io/sites/vetra/put-klienta/">Путь салона</a><a href="https://errorslove190-droid.github.io/sites/vetra/brandbook/">Бренд-бук</a><a href="https://errorslove190-droid.github.io/sites/vetra/">Все макеты</a></div>
-    <div class="why"><b>Для Авито:</b> объявление №3 для салонов; в резюме — как «разрабатываю продукт для салонов красоты».</div>
+    <div class="d">Мини-SaaS с Андреем для салонов: сообщения из Telegram, ВК, MAX, почты и Авито в одном списке, вечерняя сводка владельцу. Postgres, API, бот-«бортовой компьютер», бренд-бук, тарифы, спринты.</div>
+    <div class="links"><a href="https://errorslove190-droid.github.io/sites/vetra/okno-demo/">Посмотреть окно</a><a class="sec" href="https://errorslove190-droid.github.io/sites/vetra/maket/">Визитка</a><a class="sec" href="https://errorslove190-droid.github.io/sites/vetra/put-klienta/">Путь салона</a><a class="sec" href="https://errorslove190-droid.github.io/sites/vetra/brandbook/">Бренд-бук</a><a class="sec" href="https://errorslove190-droid.github.io/sites/vetra/">Все макеты</a></div>
+    <div class="why"><b>Для Авито:</b> объявление №3 для салонов; в резюме — «разрабатываю продукт для салонов красоты».</div>
   </div></div>
 
   <div class="card" data-id="casino"><button class="box" role="checkbox" aria-checked="false"></button><div>
     <div class="t">Движок Telegram-казино <span class="date">сентябрь</span> <span class="pill">пауза</span></div>
-    <div class="d">Бот, Mini App с лобби и семью играми, кошельки с журналом, проверяемая честность, админка. Для лицензированных операторов, без игроков из РФ. Этап 1 готов, партнёр молчит.</div>
-    <div class="links"><a href="https://errorslove190-droid.github.io/sites/casino-engine/app/">Демо приложения</a><a href="https://errorslove190-droid.github.io/sites/casino-engine/bot/">Переписка бота</a><a href="https://errorslove190-droid.github.io/sites/casino-engine/">Обзор</a></div>
-    <div class="why"><b>Для Авито:</b> в объявление не ставим (тема), в резюме — «Telegram Mini App с платежами и кошельками» без слова казино.</div>
+    <div class="d">Бот, Mini App с лобби и семью играми, кошельки с журналом, проверяемая честность, админка. Для лицензированных операторов. Этап 1 готов, партнёр молчит.</div>
+    <div class="links"><a href="https://errorslove190-droid.github.io/sites/casino-engine/app/">Демо приложения</a><a class="sec" href="https://errorslove190-droid.github.io/sites/casino-engine/bot/">Переписка бота</a><a class="sec" href="https://errorslove190-droid.github.io/sites/casino-engine/">Обзор проекта</a></div>
+    <div class="why"><b>Для Авито:</b> в объявление не ставим, в резюме — «Mini App с платежами и кошельками» без слова казино.</div>
   </div></div>
 
   <div class="card" data-id="trener"><button class="box" role="checkbox" aria-checked="false"></button><div>
     <div class="t">Трекер еды и тренировок <span class="date">август</span> <span class="pill live">работает</span></div>
-    <div class="d">Telegram Mini App: КБЖУ за день по фото и тексту, программа тренировок, напоминания. Данные в CloudStorage Telegram, воркер на Cloudflare, без своего сервера.</div>
-    <div class="links"><a href="https://errorslove190-droid.github.io/sites/trener/app/">Приложение</a><a href="https://errorslove190-droid.github.io/sites/trener/">Программа</a></div>
-    <div class="why"><b>Для Авито:</b> пример мини-приложения внутри Telegram — то, что можно продать фитнес-клубу или салону как «запись и напоминания».</div>
+    <div class="d">Telegram Mini App: КБЖУ за день, программа тренировок, напоминания. Данные в CloudStorage Telegram, воркер на Cloudflare, без своего сервера.</div>
+    <div class="links"><a href="https://errorslove190-droid.github.io/sites/trener/app/">Открыть приложение</a><a class="sec" href="https://errorslove190-droid.github.io/sites/trener/">Программа тренировок</a></div>
+    <div class="why"><b>Для Авито:</b> пример мини-приложения в Telegram — можно продать фитнес-клубу или салону как запись и напоминания.</div>
+  </div></div>
+
+  <div class="card" data-id="leadform"><button class="box" role="checkbox" aria-checked="false"></button><div>
+    <div class="t">Форма заявок без сервера <span class="date">август</span> <span class="pill live">готовый скил</span></div>
+    <div class="d">Заявка со статического сайта падает в Google Таблицу, на почту и в Telegram через Apps Script. Бесплатно, своего сервера не нужно.</div>
+    <div class="links"><a href="https://errorslove190-droid.github.io/sites/ma-studio/#lead">Посмотреть форму на MA Studio</a></div>
+    <div class="why"><b>Для Авито:</b> это и есть «заявки не теряются» из текста объявления, цена от 10 тыс.</div>
+  </div></div>
+
+  <div class="card" data-id="parser"><button class="box" role="checkbox" aria-checked="false"></button><div>
+    <div class="t">Парсер лидов из 2ГИС <span class="date">июль–август</span> <span class="pill live">работает</span></div>
+    <div class="d">Сбор фирм по нише и городу с телефонами, ВК, WhatsApp, Telegram; сортировка по числу каналов связи. 32 салона Казани собраны за один прогон.</div>
+    <div class="links"><a href="https://errorslove190-droid.github.io/sites/vetra/klienty/">Как из этого получаются клиенты</a></div>
+    <div class="why"><b>Для Авито:</b> продаётся как «соберу базу клиентов или поставщиков по вашей нише».</div>
   </div></div>
 
   <div class="card" data-id="ceh"><button class="box" role="checkbox" aria-checked="false"></button><div>
     <div class="t">Цех — конвейер клипов для стримера <span class="date">июль–август</span> <span class="pill live">в бою</span></div>
-    <div class="d">Слушает чат Twitch, ловит всплески и команду «!клип», режет запись стрима на вертикальные ролики и отдаёт в Telegram. Node, без токенов Twitch.</div>
+    <div class="d">Слушает чат Twitch, ловит всплески и команду «!клип», режет запись стрима на вертикальные ролики и отдаёт в Telegram.</div>
+    <div class="nolink">Ссылки нет: это бот, работает в Telegram у Ярика. Показывать — только видео экрана.</div>
     <div class="why"><b>Для Авито:</b> «Telegram-бот, который работает вместо человека» — живой кейс автоматизации.</div>
   </div></div>
 
   <div class="card" data-id="manager"><button class="box" role="checkbox" aria-checked="false"></button><div>
     <div class="t">Личный ассистент в Telegram <span class="date">август–сентябрь</span> <span class="pill live">работает</span></div>
-    <div class="d">Бот, который ведёт список дел, напоминания по расписанию, утренний бриф и вечернюю сводку, принимает фото и голос; под капотом Claude Code в базе знаний. Второй такой же бот — для Ветры, отвечает в группу.</div>
+    <div class="d">Бот ведёт список дел, напоминания по расписанию, утренний бриф и вечернюю сводку, принимает фото и голос. Второй такой же — для Ветры, отвечает в группу.</div>
+    <div class="nolink">Ссылки нет: бот в личном чате. Показывать — скриншотом переписки.</div>
     <div class="why"><b>Для Авито:</b> «ассистент-бот для владельца: задачи, напоминания, сводки».</div>
   </div></div>
 
   <div class="card" data-id="fns"><button class="box" role="checkbox" aria-checked="false"></button><div>
-    <div class="t">Бот ФНС — автоматизация личного кабинета налоговой <span class="date">июнь</span> <span class="pill arc">архив</span></div>
-    <div class="d">Python + Selenium: заходит в личный кабинет nalog.ru, прогоняет обучение и формы по списку из Excel в несколько потоков, диагностический скрипт для разбора страницы входа. Сделан во время практики в инспекции ФНС.</div>
-    <div class="why"><b>Для Авито:</b> «автоматизирую рутину в браузере: заполнение форм, кабинеты, отчёты» — редкий и понятный бухгалтерам аргумент.</div>
-  </div></div>
-
-  <div class="card" data-id="parser"><button class="box" role="checkbox" aria-checked="false"></button><div>
-    <div class="t">Парсер лидов из 2ГИС и конвейер черновиков <span class="date">июль–август</span> <span class="pill live">работает</span></div>
-    <div class="d">Сбор фирм по нише и городу с телефонами, ВК, WhatsApp, Telegram; сортировка по числу каналов связи; 32 салона Казани для Ветры. Дальше — черновик сайта до звонка, скрипт звонка, таблица обзвона.</div>
-    <div class="why"><b>Для Авито:</b> продаётся как «соберу базу клиентов или поставщиков по вашей нише».</div>
+    <div class="t">Бот ФНС — автоматизация личного кабинета <span class="date">июнь</span> <span class="pill arc">архив</span></div>
+    <div class="d">Python и Selenium: заходит в личный кабинет nalog.ru, прогоняет обучение и формы по списку из Excel в несколько потоков. Сделан во время практики в налоговой инспекции.</div>
+    <div class="nolink">Ссылки нет: скрипт запускается на компьютере и открывает браузер сам.</div>
+    <div class="why"><b>Для Авито:</b> «автоматизирую рутину в браузере: заполнение форм, кабинеты, отчёты» — понятный бухгалтерам аргумент.</div>
   </div></div>
 
   <div class="card" data-id="tgleads"><button class="box" role="checkbox" aria-checked="false"></button><div>
-    <div class="t">Слушалка групп Telegram <span class="date">август</span> <span class="pill loc">ждёт ключей</span></div>
+    <div class="t">Слушалка групп Telegram <span class="date">август</span> <span class="pill">ждёт ключей</span></div>
     <div class="d">Пробный аккаунт сидит в чатах предпринимателей и ловит «нужен сайт», кандидатов складывает в файл и шлёт в личку. Упёрлось в создание приложения на my.telegram.org.</div>
+    <div class="nolink">Ссылки нет: скрипт, работает в фоне.</div>
     <div class="why"><b>Для Авито:</b> «мониторинг упоминаний в Telegram-чатах» — можно предложить как услугу.</div>
-  </div></div>
-
-  <div class="card" data-id="leadform"><button class="box" role="checkbox" aria-checked="false"></button><div>
-    <div class="t">Форма заявок без сервера <span class="date">август</span> <span class="pill live">готовый скил</span></div>
-    <div class="d">Заявка со статического сайта падает в Google Таблицу, на почту и в Telegram через Apps Script, бесплатно. Пошаговая инструкция для MA Studio.</div>
-    <div class="why"><b>Для Авито:</b> это и есть «заявки не теряются» из текста объявления, цена от 10 тыс.</div>
   </div></div>
 
   <div class="card" data-id="stydia"><button class="box" role="checkbox" aria-checked="false"></button><div>
     <div class="t">Stydia — Android-приложение бюджета <span class="date">июнь</span> <span class="pill arc">архив</span></div>
-    <div class="d">Kotlin, Gradle, пакет com.stydia.budget — учебное мобильное приложение для учёта бюджета.</div>
+    <div class="d">Kotlin и Gradle, учебное мобильное приложение для учёта бюджета.</div>
+    <div class="nolink">Ссылки нет: приложение под Android, нужен apk и телефон.</div>
     <div class="why"><b>Для Авито:</b> в резюме одной строкой «есть опыт Android на Kotlin».</div>
   </div></div>
 </section>
 
 <section>
   <h2>Дизайн и генерация <small>почему сайты не выглядят как шаблон</small></h2>
+  <p class="note">Работы для заказчика Матвея опубликованы сегодня — раньше лежали в архиве на диске D.</p>
+
+  <div class="card" data-id="mastodont"><button class="box" role="checkbox" aria-checked="false"></button><div>
+    <div class="t">MASTODONT Ventures — 5 версий лендинга <span class="date">июль–август</span> <span class="pill live">опубликовано сегодня</span></div>
+    <div class="d">Первый оплачиваемый прогон для Матвея: один и тот же венчурный фонд в пяти разных направлениях дизайна, рядом на одном экране, плюс финальная версия с hero и панелью настройки прямо на странице.</div>
+    <div class="links"><a href="https://errorslove190-droid.github.io/sites/mastodont/">5 версий рядом</a><a class="sec" href="https://errorslove190-droid.github.io/sites/mastodont/final/">Финальная версия</a></div>
+    <div class="why"><b>Для Авито:</b> сильнейший аргумент — «покажу 5 вариантов дизайна до сборки», и это можно открыть одной ссылкой.</div>
+  </div></div>
+
+  <div class="card" data-id="genius"><button class="box" role="checkbox" aria-checked="false"></button><div>
+    <div class="t">Прогон design-genius — 5 страниц шагов <span class="date">август</span> <span class="pill live">опубликовано сегодня</span></div>
+    <div class="d">Второй прогон: продуктовая страница титанового шейкера, лендинг робототехники, письмо, два разбора страниц по дизайн-системе Linear.</div>
+    <div class="links"><a href="https://errorslove190-droid.github.io/sites/design-genius/">Открыть список</a></div>
+    <div class="why"><b>Для Авито:</b> показывает диапазон — товар, продукт, письмо, разбор.</div>
+  </div></div>
 
   <div class="card" data-id="taste"><button class="box" role="checkbox" aria-checked="false"></button><div>
     <div class="t">Библиотека вкуса <span class="date">август</span> <span class="pill live">опубликована</span></div>
     <div class="d">Каталог референсов из скриншотов: семьи стилей, теги, рецепты, готовые брифы для сборки. Стартовая точка любого сайта.</div>
-    <div class="links"><a href="https://errorslove190-droid.github.io/sites/taste/">Открыть</a></div>
+    <div class="links"><a href="https://errorslove190-droid.github.io/sites/taste/">Открыть каталог</a></div>
   </div></div>
 
   <div class="card" data-id="lab"><button class="box" role="checkbox" aria-checked="false"></button><div>
-    <div class="t">Редизайн-лаборатория и панель Tweaks <span class="date">июль–август</span> <span class="pill loc">локально</span></div>
-    <div class="d">Пять стилей на каждый сайт рядом, переключатель, ползунки для правки шрифтов и отступов без лимитов. Галереи стилей для Оладушек, Apex, портфолио.</div>
-    <div class="why"><b>Для Авито:</b> «покажу 3–5 вариантов дизайна до сборки» — сильный пункт в объявлении.</div>
+    <div class="t">Лаборатория стилей и панель настройки <span class="date">июль–август</span> <span class="pill live">видно на страницах</span></div>
+    <div class="d">Несколько стилей на каждый сайт рядом с переключателем, плюс ползунки для правки шрифтов и отступов прямо на странице, без переписки и лимитов.</div>
+    <div class="links"><a href="https://errorslove190-droid.github.io/sites/ma-studio/styles.html">6 направлений MA Studio</a><a class="sec" href="https://errorslove190-droid.github.io/sites/mastodont/final/">Панель настройки в работе</a></div>
+    <div class="why"><b>Для Авито:</b> «покажу 3–5 вариантов дизайна до сборки» — сильный пункт объявления.</div>
   </div></div>
 
   <div class="card" data-id="gen"><button class="box" role="checkbox" aria-checked="false"></button><div>
-    <div class="t">Генерация картинок и видео через API <span class="date">август</span> <span class="pill live">обкатано</span></div>
-    <div class="d">Скил generate поверх kie.ai: hero-картинки, дрон-облёт лавки, самовар, ролики для видео-секции Оладушек, промпты из разбора внешности по фото. Оплата за штуку, без подписки.</div>
+    <div class="t">Генерация картинок и видео <span class="date">август</span> <span class="pill live">обкатано</span></div>
+    <div class="d">Скил поверх kie.ai: hero-картинки, дрон-облёт лавки, самовар, ролики для видео-секции Оладушек. Оплата за штуку, без подписки.</div>
+    <div class="links"><a href="https://errorslove190-droid.github.io/sites/oladushki-promo/">Ролики на странице Оладушек</a><a class="sec" href="https://errorslove190-droid.github.io/sites/oladushki-video/">Отчёт по видео</a></div>
     <div class="why"><b>Для Авито:</b> «картинки и видео для сайта делаю сам, стоки не нужны».</div>
   </div></div>
 
-  <div class="card" data-id="montage"><button class="box" role="checkbox" aria-checked="false"></button><div>
-    <div class="t">Монтаж видео кодом (HyperFrames) <span class="date">август</span> <span class="pill loc">окно</span></div>
-    <div class="d">Отдельный проект для анимаций и роликов из HTML: композиции, таймлайны, рендер. Пока учебное окно, наработки для Цеха и сайтов.</div>
-  </div></div>
-
-  <div class="card" data-id="progony"><button class="box" role="checkbox" aria-checked="false"></button><div>
-    <div class="t">Прогоны для Матвея: MASTODONT Ventures и design-genius <span class="date">июль–август</span> <span class="pill arc">сданы</span></div>
-    <div class="d">Первая оплачиваемая работа: пройти сценарий видео целиком и отдать промпты, протокол и результаты. Пять версий лендинга венчурного фонда, финал с hero и панелью твиков, библиотека вкуса офлайн; второй прогон — шаги Kore, Glaido против Linear, письма, Skynet.</div>
-    <div class="why"><b>Для Авито:</b> «5 версий одного лендинга за прогон» — можно показать скриншотами, сами файлы в архиве.</div>
-  </div></div>
-
   <div class="card" data-id="engraving"><button class="box" role="checkbox" aria-checked="false"></button><div>
-    <div class="t">Фото → вектор для лазерной гравировки <span class="date">август</span> <span class="pill arc">сделано</span></div>
+    <div class="t">Фото → вектор для лазерной гравировки <span class="date">август</span> <span class="pill arc">файлы</span></div>
     <div class="d">Бирки и медальоны для Оладушек: трассировка, лайн-арт, церковнославянский полуустав, PNG и SVG под станок.</div>
+    <div class="nolink">Ссылки нет: это файлы для станка, лежат на рабочем столе в папке «Оладушки-макеты».</div>
     <div class="why"><b>Для Авито:</b> смежная услуга для мастерских и сувенирки.</div>
+  </div></div>
+
+  <div class="card" data-id="montage"><button class="box" role="checkbox" aria-checked="false"></button><div>
+    <div class="t">Монтаж видео кодом <span class="date">август</span> <span class="pill">учебное окно</span></div>
+    <div class="d">Отдельный проект для анимаций и роликов из HTML: композиции, таймлайны, рендер.</div>
+    <div class="nolink">Ссылки нет: пока учебные композиции на компьютере, готового ролика для показа нет.</div>
   </div></div>
 </section>
 
@@ -250,46 +282,47 @@
   <p class="note">В объявление не идёт, но в резюме это «умею строить рабочие процессы».</p>
 
   <div class="card" data-id="center"><button class="box" role="checkbox" aria-checked="false"></button><div>
-    <div class="t">Командный центр и роутеры базы <span class="date">август</span> <span class="pill live">опубликован</span></div>
-    <div class="d">Одна страница со состоянием всей работы: что горит, скилы, опубликованные страницы, сайты в работе; роутеры разделов собираются скриптом.</div>
+    <div class="t">Командный центр <span class="date">август</span> <span class="pill live">опубликован</span></div>
+    <div class="d">Одна страница со состоянием всей работы: что горит, скилы, опубликованные страницы, сайты в работе.</div>
     <div class="links"><a href="https://errorslove190-droid.github.io/sites/mk-panel-4f2a/">Открыть</a></div>
   </div></div>
 
-  <div class="card" data-id="kit"><button class="box" role="checkbox" aria-checked="false"></button><div>
-    <div class="t">Набор для Андрея <span class="date">сентябрь</span> <span class="pill live">приватный репо</span></div>
-    <div class="d">Передаваемый комплект: скилы, бот, ярлыки, база; плейсхолдеры подставляет установочный скрипт. Чтобы партнёр начал работать с той же средой за час.</div>
-  </div></div>
-
   <div class="card" data-id="video"><button class="box" role="checkbox" aria-checked="false"></button><div>
-    <div class="t">Разбор видео: субтитры, кадры, выжимки <span class="date">август</span> <span class="pill live">работает</span></div>
-    <div class="d">yt-dlp и расшифровка, разбор с кадрами, выжимки книг и роликов на страницы: Мориарти, психология, эмоциональный интеллект, фокус, практика.</div>
-    <div class="links"><a href="https://errorslove190-droid.github.io/sites/knigi-moriarti/">Книги</a><a href="https://errorslove190-droid.github.io/sites/psy-books/">Психология</a><a href="https://errorslove190-droid.github.io/sites/eq/">EQ</a><a href="https://errorslove190-droid.github.io/sites/fokus/">Фокус</a></div>
+    <div class="t">Разбор видео и выжимки книг <span class="date">август–сентябрь</span> <span class="pill live">опубликовано</span></div>
+    <div class="d">Расшифровка роликов с субтитрами и кадрами, из этого — страницы-выжимки: книги Мориарти, психология, эмоциональный интеллект, фокус.</div>
+    <div class="links"><a href="https://errorslove190-droid.github.io/sites/knigi-moriarti/">Книги</a><a class="sec" href="https://errorslove190-droid.github.io/sites/psy-books/">Психология</a><a class="sec" href="https://errorslove190-droid.github.io/sites/eq/">EQ</a><a class="sec" href="https://errorslove190-droid.github.io/sites/fokus/">Фокус</a></div>
   </div></div>
 
   <div class="card" data-id="skills"><button class="box" role="checkbox" aria-checked="false"></button><div>
     <div class="t">Свои скилы для Claude Code <span class="date">июль–сентябрь</span> <span class="pill live">в работе</span></div>
-    <div class="d">style-lab (галерея стилей → сборка), lead-form, generate, invoice (счёт под печать), refs, taste-library, vetra, конвейер лидов. Плюс каталог RampStack из 103 скилов.</div>
-    <div class="links"><a href="https://errorslove190-droid.github.io/sites/rampstack-katalog/">RampStack</a></div>
+    <div class="d">Галерея стилей и сборка, форма заявок, генерация, счёт на оплату, референсы, библиотека вкуса, конвейер лидов. Плюс разобранный каталог из 103 чужих скилов.</div>
+    <div class="links"><a href="https://errorslove190-droid.github.io/sites/rampstack-katalog/">Каталог 103 скилов</a></div>
   </div></div>
 
   <div class="card" data-id="pages"><button class="box" role="checkbox" aria-checked="false"></button><div>
-    <div class="t">Страницы-планы на GitHub Pages <span class="date">август–сентябрь</span> <span class="pill live">опубликованы</span></div>
-    <div class="d">Маршрут дел, академ, практика для Сёмы, план Авито — формат «показать с телефона кому угодно».</div>
-    <div class="links"><a href="https://errorslove190-droid.github.io/sites/plan/">Маршрут</a><a href="https://errorslove190-droid.github.io/sites/avito/">Авито</a><a href="https://errorslove190-droid.github.io/sites/praktika/">Практика</a></div>
+    <div class="t">Страницы-планы <span class="date">август–сентябрь</span> <span class="pill live">опубликованы</span></div>
+    <div class="d">Формат «показать с телефона кому угодно»: маршрут дел, академ, практика для Сёмы, план по Авито.</div>
+    <div class="links"><a href="https://errorslove190-droid.github.io/sites/avito/">Авито</a><a class="sec" href="https://errorslove190-droid.github.io/sites/plan/">Маршрут</a><a class="sec" href="https://errorslove190-droid.github.io/sites/praktika/">Практика</a><a class="sec" href="https://errorslove190-droid.github.io/sites/akadem/">Академ</a></div>
+  </div></div>
+
+  <div class="card" data-id="kit"><button class="box" role="checkbox" aria-checked="false"></button><div>
+    <div class="t">Набор для Андрея <span class="date">сентябрь</span> <span class="pill">приватный репозиторий</span></div>
+    <div class="d">Передаваемый комплект: скилы, бот, ярлыки, база; установочный скрипт подставляет пути. Чтобы партнёр начал работать с той же средой за час.</div>
+    <div class="nolink">Ссылка только для своих: репозиторий приватный, доступ Андрею ещё не выдан.</div>
   </div></div>
 </section>
 
 <div class="lost">
   <h3>Не нашёл: «магазин одежды» и «исток кейс»</h3>
-  <p>Искал по базе, журналу, всем папкам D:\Projects, архиву D:\Archive, старому рабочему столу и по всем прошлым сессиям Claude — таких слов нигде нет. Возможно, это другое название чего-то из списка, работа в другой папке или на другом устройстве. Скажи, где лежит или как называлось по-другому, и я добавлю.</p>
+  <p>Искал по базе, журналу, всем папкам на дисках C и D, архиву и по всем прошлым сессиям — таких слов нигде нет. Возможно, это другое название чего-то из списка, работа в другой папке или на другом устройстве. Скажи, где лежит или как называлось, и добавлю.</p>
 </div>
 
 <div class="dark">
   <h2>Что дальше</h2>
   <ol>
-    <li>Отмечаешь галочками, что идёт в объявление и в резюме, жмёшь «Скопировать выбранное» и присылаешь список в чат.</li>
-    <li>По выбранному делаю скриншоты для Авито (телефон + ноутбук) и вписываю кейсы в тексты объявлений на странице <a href="https://errorslove190-droid.github.io/sites/avito/">Авито</a>.</li>
-    <li>МОНОЛИТ и MA Studio при желании публикую на Pages за 10 минут — тогда ссылки появятся и здесь.</li>
+    <li>Отмечаешь галочками, что идёт в объявление и в резюме, жмёшь «Скопировать выбранное» и присылаешь список.</li>
+    <li>По выбранному делаю скриншоты для Авито и вписываю кейсы в тексты объявлений на странице <a href="https://errorslove190-droid.github.io/sites/avito/">Авито</a>.</li>
+    <li>Что закрыто ссылкой «только код» — при желании снимаю на видео экрана или собираю страницу-показ, как сделали для бота казино.</li>
   </ol>
 </div>
 
