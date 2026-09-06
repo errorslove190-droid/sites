@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Авито и бесплатный таргет — план запуска</title>
+<meta name="description" content="Тексты объявлений, пакеты услуг и бесплатные каналы заявок">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Golos+Text:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{--ink:#0a0a0a;--paper:#fff;--lime:#d8f34e;--grey:#585858;--line:#e6e6e6;--dark:#0a0b0d;--warm:#e4ded7}
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:'Golos Text',-apple-system,'Segoe UI',sans-serif;background:var(--paper);color:var(--ink);line-height:1.55;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:760px;margin:0 auto;padding:0 20px 80px}
+  header{padding:44px 0 28px;border-bottom:2px solid var(--ink)}
+  .kicker{font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--grey);font-weight:600}
+  h1{font-size:clamp(30px,7vw,46px);line-height:1.05;letter-spacing:-.02em;margin:10px 0 12px;font-weight:700}
+  .lead{color:var(--grey);font-size:15px;max-width:56ch}
+  nav.toc{display:flex;flex-wrap:wrap;gap:8px;margin-top:18px}
+  nav.toc a{font-size:12px;font-weight:600;text-decoration:none;border:1px solid var(--line);border-radius:99px;padding:5px 11px;color:var(--ink)}
+  nav.toc a:hover{border-color:var(--ink)}
+  section{margin-top:44px}
+  .head{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap;margin-bottom:6px}
+  h2{font-size:21px;font-weight:700;letter-spacing:-.01em}
+  h3{font-size:16px;font-weight:700;margin:22px 0 6px}
+  .tag{font-size:11px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;padding:3px 8px;border-radius:99px;background:var(--lime);color:var(--ink)}
+  .tag.grey{background:#f0f0f0;color:var(--grey)}
+  .tag.red{background:#ffe8e8;color:#a11}
+  .note{color:var(--grey);font-size:14px;margin-bottom:14px;max-width:62ch}
+  p{margin:8px 0}
+  ul,ol{padding-left:22px;margin:8px 0}
+  li{margin:6px 0}
+  .d{color:var(--grey);font-size:14px}
+  a{color:var(--ink)}
+  strong{font-weight:600}
+
+  .ad{border:2px solid var(--ink);border-radius:16px;padding:18px 18px 14px;margin-top:16px;position:relative}
+  .ad .where{font-size:12px;color:var(--grey);font-weight:600;letter-spacing:.06em;text-transform:uppercase}
+  .ad .title{font-size:18px;font-weight:700;margin:6px 0 10px;letter-spacing:-.01em}
+  .ad pre{white-space:pre-wrap;font:inherit;font-size:14.5px;line-height:1.5;background:#f7f7f7;border-radius:10px;padding:14px}
+  .ad .row{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin-top:10px}
+  .btn{border:1px solid var(--ink);background:var(--ink);color:var(--warm);font:inherit;font-size:13px;font-weight:600;padding:8px 14px;border-radius:99px;cursor:pointer}
+  .btn:active{transform:translateY(1px)}
+  .hint{font-size:12.5px;color:var(--grey)}
+
+  table{width:100%;border-collapse:collapse;font-size:14px;margin-top:12px}
+  th,td{text-align:left;padding:10px 8px;border-bottom:1px solid var(--line);vertical-align:top}
+  th{font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--grey);font-weight:600}
+  td b{font-weight:600}
+  .tbl{overflow-x:auto}
+
+  .flow{display:grid;gap:10px;margin-top:14px}
+  .flow div{border:1px solid var(--line);border-radius:12px;padding:12px 14px;font-size:14px}
+  .flow div b{display:block;font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--grey);margin-bottom:4px}
+  .flow .hot{border-color:var(--ink);background:var(--lime)}
+  .flow .hot b{color:var(--ink)}
+
+  .dark{background:var(--dark);color:var(--warm);border-radius:20px;padding:26px 22px;margin-top:44px}
+  .dark h2{color:var(--warm)}
+  .dark .note,.dark .d{color:#b3b3b3}
+  .dark a{color:var(--lime)}
+  .dark li{border-bottom:1px solid #23262e;padding-bottom:8px}
+  .dark li:last-child{border-bottom:none}
+  footer{margin-top:56px;padding-top:22px;border-top:1px solid var(--line);color:var(--grey);font-size:13px}
+  .toast{position:fixed;left:50%;bottom:24px;transform:translate(-50%,20px);background:var(--ink);color:var(--warm);padding:10px 16px;border-radius:99px;font-size:13px;opacity:0;transition:.2s;pointer-events:none}
+  .toast.on{opacity:1;transform:translate(-50%,0)}
+  @media(max-width:520px){.wrap{padding:0 16px 60px}.ad{padding:14px}}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header>
+  <div class="kicker">6 сентября 2026 · продажи</div>
+  <h1>Авито, заявки<br>и бесплатный таргет</h1>
+  <p class="lead">Что вешаем на Авито, что мы вообще продаём бизнесу, как получать заказы и параллельно набирать салоны для Ветры — и какой «таргет» бывает бесплатным на самом деле. Тексты под копипаст, кнопка «Скопировать» под каждым.</p>
+  <nav class="toc">
+    <a href="#avito">Правда про Авито</a><a href="#ads">Объявления</a><a href="#offer">Что продаём</a><a href="#free">Бесплатный таргет</a><a href="#funnel">Одна воронка</a><a href="#todo">Что от Михаила</a>
+  </nav>
+</header>
+
+<section id="avito">
+  <div class="head"><h2>1. Правда про Авито</h2><span class="tag grey">проверено 06.09</span></div>
+  <p class="note">Чтобы не ждать чуда от площадки и повесить объявление туда, где оно реально покажется.</p>
+  <ul>
+    <li><strong>Категория «Услуги» — платная почти сразу.</strong> Бесплатные лимиты Авито считает по категории и городу, и в коммерческих нишах (услуги, авто, недвижимость) размещение платное с первого-второго объявления. Остаток лимита показывается прямо при публикации — смотрим там, а не гадаем. <span class="d">Источники: <a href="https://vc.ru/marketing/2804958-limity-na-avito-v-2026-godu">vc.ru</a>, <a href="https://bidline.ru/blog/limity-besplatnyh-obyavleniy-avito-2026">Bidline</a>, <a href="https://vk.ru/@scale_quality-mozhno-li-na-avito-prodavat-besplatno-pravda-2026-goda-i-kak">VK</a>.</span></li>
+    <li><strong>Бесплатная дверь — «Работа → Резюме».</strong> Резюме соискатели размещают бесплатно, а малый бизнес там реально ищет «человека на сайт». Это и есть «объявление на работу»: вешаем резюме веб-разработчика с портфолио.</li>
+    <li><strong>Одно платное объявление в «Услугах» — допустимая трата,</strong> если текст цепляет. Но заметка «Стратегии поиска клиентов» по-прежнему права: в нише сайтов на Авито сидят конторы с бюджетами, без продвижения объявление быстро уходит вниз. Поэтому Авито — один из каналов, а не главный.</li>
+    <li><strong>Отклики приходят в чат Авито.</strong> Ответ должен быть готов заранее: ссылка на портфолио + «пришлю черновик главной за 2 дня бесплатно». Это наш козырь из Конвейера лидов — у конкурентов его нет.</li>
+    <li><strong>Фото обязательны.</strong> Авито без картинок не показывает. Берём скриншоты Оладушек (живой сайт), Apex Structure, портфолио — телефон + ноутбук в кадре.</li>
+  </ul>
+</section>
+
+<section id="ads">
+  <div class="head"><h2>2. Тексты объявлений</h2><span class="tag">копипаст</span></div>
+  <p class="note">Три штуки под три двери. Заголовок Авито — до 50 знаков, текст — до 3000. Цены взяты из живого портфолио, пометка ⚠ — подтвердить.</p>
+
+  <div class="ad">
+    <div class="where">Услуги → IT, интернет → Создание сайтов · платное</div>
+    <div class="title">Сайт для бизнеса за 5–7 дней. Черновик бесплатно</div>
+<pre id="ad1">Сделаю сайт, который приводит заявки, а не просто «висит». Лендинг, сайт-визитка, многостраничный сайт, редизайн старого.
+
+Чем отличаюсь:
+— Сначала показываю, потом беру деньги. За 2 дня делаю черновик главной страницы под ваш бизнес бесплатно. Понравилось — продолжаем, нет — расходимся без обид.
+— Заявки не теряются: форма на сайте сразу пишет вам в Telegram, на почту и в таблицу. Никаких пропущенных клиентов.
+— Мобильная версия — обязательно. 7 из 10 ваших клиентов зайдут с телефона.
+— Быстро: лендинг 5–7 дней, сайт компании — 2 недели.
+— Без конструкторов и ежемесячной аренды: сайт ваш, код ваш, хостинг от 300 ₽/мес.
+
+Что ещё делаю:
+— калькулятор стоимости прямо на сайте (клиент считает сам, вы получаете готовую заявку);
+— Telegram-бот для записи, заявок и уведомлений;
+— каталог или прайс, который обновляется из Google-таблицы;
+— картинки и короткое видео для сайта.
+
+Цены:
+Редизайн и доработка — от 20 000 ₽
+Лендинг — от 30 000 ₽
+Сайт-визитка — от 45 000 ₽
+Многостраничный сайт — от 70 000 ₽
+Форма заявок «под ключ» на готовый сайт — от 10 000 ₽
+
+Живые работы: сайт «Свияжские Оладушки» sviyazhskie-oladushki.ru и портфолио — ссылка в профиле.
+Казань и вся Россия — работаю онлайн. Пишите в чат или в Telegram @Miha0o0: пришлите название бизнеса и город, через два дня получите черновик.</pre>
+    <div class="row"><button class="btn" data-copy="ad1">Скопировать текст</button><span class="hint">⚠ «от 10 000 ₽» за форму заявок — новая цена, в портфолио её нет. Убрать или подтвердить.</span></div>
+  </div>
+
+  <div class="ad">
+    <div class="where">Работа → Резюме · бесплатно</div>
+    <div class="title">Веб-разработчик: сайты и автоматизация заявок</div>
+<pre id="ad2">Делаю сайты для малого и среднего бизнеса под ключ и настраиваю, чтобы заявки с них не терялись.
+
+Что умею:
+— лендинги, сайты-визитки, многостраничные сайты: HTML, CSS, JavaScript, без конструкторов;
+— адаптивная вёрстка (мобильные, планшет, десктоп), скорость, SEO-база;
+— формы заявок с отправкой в Telegram, на почту, в Google-таблицу и CRM;
+— Telegram-боты: запись, уведомления, отчёты;
+— калькуляторы стоимости, каталоги с обновлением из таблицы;
+— картинки и видео для сайта, редизайн устаревших страниц.
+
+Опыт: живой сайт для лавки «Свияжские Оладушки» (sviyazhskie-oladushki.ru), демо-сайты для строительной компании и заведений, Telegram-бот для видеопроизводства.
+
+Формат: проектная работа или частичная занятость, удалённо, Казань. Первый шаг — за 2 дня показываю черновик под вашу задачу бесплатно.
+Портфолио: errorslove190-droid.github.io/sites/portfolio
+Telegram: @Miha0o0</pre>
+    <div class="row"><button class="btn" data-copy="ad2">Скопировать текст</button><span class="hint">Должность в резюме: «Веб-разработчик (сайты под ключ)». Зарплату ставить «по договорённости».</span></div>
+  </div>
+
+  <div class="ad">
+    <div class="where">Услуги → Салонам красоты · для поиска пилотов Ветры</div>
+    <div class="title">Салону красоты: все мессенджеры в одном окне. Пилот бесплатно</div>
+<pre id="ad3">Клиенты пишут вам в WhatsApp, Telegram, ВК, на Авито и на сайт — а администратор один, и часть сообщений теряется или ждёт ответа часами. Каждое такое сообщение — потерянная запись.
+
+Мы делаем окно, где все переписки салона собираются в один список: видно, кто написал, откуда и сколько ждёт ответа. Вечером владельцу приходит короткая сводка: сколько обращений, сколько без ответа, как быстро отвечали.
+
+Сейчас набираем 3 салона в Казани на бесплатный пилот на месяц. Взамен — честная обратная связь.
+
+Бонус: сайт-визитка для салона со скидкой участникам пилота.
+
+Пишите в чат или в Telegram @Miha0o0 — за день подключим и покажем.</pre>
+    <div class="row"><button class="btn" data-copy="ad3">Скопировать текст</button><span class="tag red">Согласовать с Андреем до публикации: Ветра — общий проект</span></div>
+  </div>
+</section>
+
+<section id="offer">
+  <div class="head"><h2>3. Что мы умеем — и как это звучит для бизнеса</h2></div>
+  <p class="note">Бизнес не покупает «сайт» или «бота». Он покупает «заявки перестали теряться». Левая колонка — наша, вторая — как говорим клиенту.</p>
+  <div class="tbl"><table>
+    <tr><th>Что умеем</th><th>Что это даёт бизнесу</th><th>Цена</th><th>Чем делаем</th></tr>
+    <tr><td><b>Лендинг / сайт-визитка</b></td><td>Есть куда вести клиента из Авито, карт, рекламы. Открывается с телефона, не стыдно показать</td><td>30–45 тыс ₽, 5–7 дней</td><td>HTML/CSS/JS, style-lab, Impeccable</td></tr>
+    <tr><td><b>Редизайн старого сайта</b></td><td>Сайт 2015 года перестаёт отпугивать; появляется мобильная версия</td><td>от 20 тыс ₽</td><td>тот же стек</td></tr>
+    <tr><td><b>Форма заявок → Telegram + почта + таблица</b></td><td>Ни одна заявка не пропадает, владелец видит её за минуту</td><td>10–15 тыс ₽ ⚠</td><td>скил lead-form, без сервера</td></tr>
+    <tr><td><b>Калькулятор на сайте</b></td><td>Клиент сам считает цену и оставляет готовую заявку; меньше пустых звонков</td><td>от 15 тыс ₽ ⚠</td><td>JS, демо Apex</td></tr>
+    <tr><td><b>Telegram-бот</b></td><td>Запись, уведомления, отчёты без человека на телефоне</td><td>от 30 тыс ₽ ⚠</td><td>Node/Python, бот «Цеха» в бою</td></tr>
+    <tr><td><b>Каталог/прайс из Google-таблицы</b></td><td>Владелец меняет цену в таблице — на сайте обновилось</td><td>от 15 тыс ₽ ⚠</td><td>статика + Sheets</td></tr>
+    <tr><td><b>Картинки и видео</b></td><td>Сайт с живой картинкой вместо стоков</td><td>в цене сайта</td><td>скил generate, HyperFrames</td></tr>
+    <tr><td><b>Окно для всех мессенджеров</b></td><td>Салон отвечает из одного места, владелец видит цифры</td><td>пилот бесплатно</td><td>Ветра (с Андреем)</td></tr>
+    <tr><td><b>База контактов из 2ГИС</b></td><td>Для нас: кому писать. Для клиента: можно продать как «список поставщиков/партнёров»</td><td>—</td><td>парсер 2ГИС</td></tr>
+  </table></div>
+  <p class="note" style="margin-top:12px">⚠ — цены черновые, в портфолио их нет. В заметке «Агентство — сайты и автоматизация» вилки в 2–3 раза выше (лендинг 60–120 тыс), но для Авито и первых кейсов держим уровень портфолио: сначала кейсы, потом чек.</p>
+</section>
+
+<section id="free">
+  <div class="head"><h2>4. «Бесплатный таргет» — что это на самом деле</h2></div>
+  <p class="note">Настоящего бесплатного таргета не существует: ВК и Яндекс берут деньги за каждый показ. Но задача таргета — показать оффер ровно тем, кому он нужен. Это можно сделать руками и без бюджета, платя временем: час в день.</p>
+
+  <h3>А. Ручной таргет по базе из 2ГИС — главный канал</h3>
+  <ul>
+    <li><strong>Аудитория выбрана точнее любого рекламного кабинета:</strong> парсер уже собирает салоны, бригады, автосервисы по запросу и городу, с телефонами и ссылками на мессенджеры. Список из 32 салонов Казани лежит в базе.</li>
+    <li><strong>Оффер персональный, а не «купите сайт»:</strong> «Посмотрел вашу страницу в 2ГИС — у вас 5 каналов связи и нет сайта. Собрал черновик главной, вот ссылка. Если не нужно — просто не отвечайте». Черновик делаем до контакта — это стоит нам 20 минут, а конкурентам недоступно.</li>
+    <li><strong>Норма: 10 сообщений в день, вручную, по одному,</strong> в будни 11–17. Не рассылкой и не скриптом — за массовые сообщения WhatsApp и Telegram банят, а нам нужен этот аккаунт живым.</li>
+    <li><strong>Учёт — в одной таблице обзвона</strong> (уже есть в базе): кому написали, что ответили, когда напомнить. Напоминание через 3 дня — это и есть «бесплатный ретаргетинг».</li>
+  </ul>
+
+  <h3>Б. Бесплатные площадки, где бизнес ищет исполнителя</h3>
+  <ul>
+    <li><strong>Авито → Резюме</strong> — бесплатно, текст выше.</li>
+    <li><strong>Kwork</strong> — размещение услуг бесплатно, платформа берёт комиссию с заказа. Выставить 3 кворка: «лендинг за 5 дней», «форма заявок в Telegram на ваш сайт», «редизайн главной».</li>
+    <li><strong>Яндекс Услуги, FL.ru</strong> — профиль исполнителя бесплатный; отклики на FL частично бесплатные. Профи.ру и YouDo берут деньги за отклик — туда не идём, пока нет отзывов. <span class="d">Источники: <a href="https://www.fl.ru/">FL.ru</a>, <a href="https://vc.ru/opinions/2695081-luchshie-frilans-birzhi-dlya-zarabotka">vc.ru</a>, <a href="https://dtf.ru/topovo/4832529-top-frilans-birzh-2026-luchshie-platformy-dlya-rabotyi-frilanseram">DTF</a>.</span></li>
+    <li><strong>Telegram-чаты предпринимателей Казани</strong> — по плану из заметки «Стратегии поиска клиентов»: неделю участвовать, давать бесплатные мини-разборы сайтов, продавать в личке. Слушалка групп, когда добьём api_id, будет ловить «нужен сайт» автоматически.</li>
+    <li><strong>ВК</strong> — личная страница с описанием «делаю сайты для бизнеса, Казань» + посты в городских группах объявлений «услуги Казань». Бесплатно, отдача низкая, но 10 минут в неделю.</li>
+    <li><strong>Карточка в Яндекс Бизнесе и 2ГИС</strong> — бесплатная, ловит запросы «заказать сайт Казань» прямо на картах. Нужна самозанятость или ИП и адрес, хотя бы «выезд к клиенту».</li>
+  </ul>
+
+  <h3>В. Партнёры и сарафан</h3>
+  <ul>
+    <li><strong>Партнёрская сетка Казани</strong> — заметка готова: таргетологи и директологи, которым некуда вести трафик без сайта. 10–15% с заказа. Это единственный «таргет», где рекламный бюджет тратит не Михаил, а партнёр.</li>
+    <li><strong>Отзыв от Оладушек</strong> — попросить сейчас: один живой отзыв со ссылкой на сайт закрывает половину возражений и на Авито, и в чатах.</li>
+    <li><strong>Знакомые с бизнесом</strong> — выписать всех, написать каждому лично. Самый быстрый первый заказ.</li>
+  </ul>
+</section>
+
+<section id="funnel">
+  <div class="head"><h2>5. Одна воронка на заказы и на салоны</h2></div>
+  <p class="note">Заказы на сайты и пилоты Ветры не конкурируют — это одна база и один разговор. Салон, которому мы предложили черновик сайта, одновременно кандидат в пилот, и наоборот.</p>
+  <div class="flow">
+    <div><b>1 · База</b>Парсер 2ГИС → таблица: салоны, бригады, автосервисы Казани. Колонка «сколько каналов связи» — сортируем по ней, как в списке салонов для Ветры.</div>
+    <div><b>2 · Черновик до контакта</b>По каждому салону из топ-10: черновик главной (20 минут, конвейер лидов). Для салонов с 4+ каналами — ещё скриншот «вот ваши пять окон» для разговора о Ветре.</div>
+    <div class="hot"><b>3 · Одно сообщение — два оффера</b>«Собрал вам черновик сайта — вот ссылка. И заметил, что вы отвечаете из пяти мессенджеров: мы делаем окно, где они все вместе, набираем 3 салона на бесплатный пилот». Салон выбирает сам, что ему больнее.</div>
+    <div><b>4 · Параллельно — входящие</b>Авито (резюме + услуга), Kwork, чаты. Ответ один и тот же: портфолио + черновик за 2 дня. Все входящие — в ту же таблицу.</div>
+    <div><b>5 · Учёт</b>Таблица обзвона: дата, канал, ответ, следующий шаг. Раз в 3 дня — напоминание тем, кто молчит. Для Ветры отдельно считаем замеры: во сколько каналов написали, где ответили.</div>
+    <div><b>6 · Сделка</b>Сайт — предоплата 50%, черновик становится боевым за 5–7 дней. Салон — подключаем окно за день, через месяц — разговор о цене.</div>
+  </div>
+  <p class="note" style="margin-top:14px">Почему это лучше «просто повесить объявление»: Авито даёт 0–2 отклика в неделю, а 10 персональных сообщений в день с готовым черновиком — это 50 касаний в неделю с людьми, которых мы выбрали сами. И каждое касание ещё и замер для Ветры.</p>
+</section>
+
+<div class="dark" id="todo">
+  <div class="head"><h2>6. Что нужно от Михаила</h2></div>
+  <p class="note">Без этих пяти пунктов запускать нечего.</p>
+  <ul>
+    <li><strong>Подтвердить цены</strong> для Авито: оставить уровень портфолио (20/30/45/70 тыс) или поднять. И решить по пометкам ⚠ (форма 10–15 тыс, калькулятор от 15, бот от 30).</li>
+    <li><strong>Выбрать, что вешаем первым:</strong> бесплатное резюме, платное объявление в «Услугах» или оба.</li>
+    <li><strong>Фото для Авито:</strong> 3–5 скриншотов сайтов с телефона и ноутбука. Могу собрать сам — скажи «да».</li>
+    <li><strong>Согласовать с Андреем</strong> объявление про пилот Ветры и текст «одно сообщение — два оффера».</li>
+    <li><strong>Написать Ольге и Софье</strong> за отзывом об Оладушках — текст под копипаст сделаю.</li>
+  </ul>
+</div>
+
+<footer>Источник: заметка «Продажи / Авито и бесплатный таргет — план запуска» в базе. Связано: Стратегии поиска клиентов · Конвейер лидов · Партнёрская сетка — Казань · Салоны Казани — список для Ветры.</footer>
+</div>
+<div class="toast" id="toast">Скопировано</div>
+<script>
+function fallback(t){var a=document.createElement('textarea');a.value=t;document.body.appendChild(a);a.select();try{document.execCommand('copy')}catch(e){}document.body.removeChild(a)}
+function done(){var s=document.getElementById('toast');s.classList.add('on');setTimeout(function(){s.classList.remove('on')},1400)}
+document.querySelectorAll('[data-copy]').forEach(function(b){
+  b.addEventListener('click',function(){
+    var t=document.getElementById(b.dataset.copy).innerText;
+    if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(t).then(done,function(){fallback(t);done()})}else{fallback(t);done()}
+  });
+});
+</script>
+</body>
+</html>
