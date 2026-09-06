@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Все наработки — май–сентябрь 2026</title>
+<meta name="description" content="Витрина всего, что сделано за лето: сайты, боты, продукты, инструменты. Отметь галочками, что пойдёт в объявление">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Golos+Text:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{--ink:#0a0a0a;--paper:#fff;--lime:#d8f34e;--grey:#585858;--line:#e6e6e6;--dark:#0a0b0d;--warm:#e4ded7}
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:'Golos Text',-apple-system,'Segoe UI',sans-serif;background:var(--paper);color:var(--ink);line-height:1.5;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:820px;margin:0 auto;padding:0 20px 90px}
+  header{padding:44px 0 24px;border-bottom:2px solid var(--ink)}
+  .kicker{font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--grey);font-weight:600}
+  h1{font-size:clamp(30px,7vw,46px);line-height:1.05;letter-spacing:-.02em;margin:10px 0 12px;font-weight:700}
+  .lead{color:var(--grey);font-size:15px;max-width:60ch}
+  .bar{position:sticky;top:0;z-index:5;background:var(--paper);padding:12px 0;border-bottom:1px solid var(--line);display:flex;gap:10px;align-items:center;flex-wrap:wrap;font-size:13px;font-weight:600}
+  .bar .n{background:var(--lime);border-radius:99px;padding:3px 10px}
+  .btn{border:1px solid var(--ink);background:var(--ink);color:var(--warm);font:inherit;font-size:13px;font-weight:600;padding:7px 13px;border-radius:99px;cursor:pointer}
+  .btn.ghost{background:none;color:var(--ink)}
+  section{margin-top:40px}
+  h2{font-size:20px;font-weight:700;letter-spacing:-.01em;display:flex;gap:10px;align-items:baseline;flex-wrap:wrap}
+  h2 small{font-size:12px;color:var(--grey);font-weight:600;letter-spacing:.08em;text-transform:uppercase}
+  .note{color:var(--grey);font-size:14px;margin:6px 0 14px;max-width:64ch}
+  .card{display:grid;grid-template-columns:28px 1fr;gap:12px;padding:14px 0;border-bottom:1px solid var(--line);align-items:start}
+  .card:last-child{border-bottom:none}
+  .box{width:24px;height:24px;margin-top:2px;border:2px solid var(--ink);border-radius:7px;cursor:pointer;position:relative;background:none}
+  .box::after{content:'';position:absolute;inset:4px 3px 6px 4px;border-left:2.5px solid var(--ink);border-bottom:2.5px solid var(--ink);transform:rotate(-45deg) scale(.4);opacity:0;transition:.15s}
+  .box[aria-checked="true"]{background:var(--lime)}
+  .box[aria-checked="true"]::after{opacity:1;transform:rotate(-45deg) scale(1)}
+  .t{font-weight:600;font-size:16px;letter-spacing:-.01em;display:flex;gap:8px;align-items:baseline;flex-wrap:wrap}
+  .date{font-size:12px;color:var(--grey);font-weight:500}
+  .d{color:var(--grey);font-size:14px;margin-top:3px}
+  .links{margin-top:6px;display:flex;gap:6px;flex-wrap:wrap}
+  .links a,.pill{font-size:12px;font-weight:600;text-decoration:none;border:1px solid var(--line);border-radius:99px;padding:3px 9px;color:var(--ink)}
+  .links a:hover{border-color:var(--ink)}
+  .pill{border:none;background:#f0f0f0;color:var(--grey)}
+  .pill.live{background:var(--lime);color:var(--ink)}
+  .pill.loc{background:#eee}
+  .pill.arc{background:#fff3e0;color:#8a4b00}
+  .why{font-size:12.5px;margin-top:6px;color:var(--ink)}
+  .why b{font-weight:600;color:var(--grey)}
+  .lost{border:2px dashed #e08080;border-radius:14px;padding:16px;margin-top:20px;background:#fff7f7}
+  .lost h3{font-size:15px;margin-bottom:6px}
+  .lost p{font-size:14px;color:var(--grey)}
+  .dark{background:var(--dark);color:var(--warm);border-radius:20px;padding:24px 22px;margin-top:44px}
+  .dark h2{color:var(--warm)}
+  .dark p,.dark li{font-size:14px;color:#c9c9c9}
+  .dark ol{padding-left:20px}
+  .dark li{margin:6px 0}
+  .dark a{color:var(--lime)}
+  footer{margin-top:50px;padding-top:20px;border-top:1px solid var(--line);color:var(--grey);font-size:13px}
+  .toast{position:fixed;left:50%;bottom:24px;transform:translate(-50%,20px);background:var(--ink);color:var(--warm);padding:10px 16px;border-radius:99px;font-size:13px;opacity:0;transition:.2s;pointer-events:none}
+  .toast.on{opacity:1;transform:translate(-50%,0)}
+  @media(max-width:520px){.wrap{padding:0 16px 70px}.t{font-size:15px}}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header>
+  <div class="kicker">6 сентября 2026 · инвентарь</div>
+  <h1>Все наработки<br>за лето</h1>
+  <p class="lead">Всё, что найдено в папках, репозитории и архиве с мая по сентябрь: 30 штук. Отметь галочкой, что показываем в объявлении на Авито и в резюме, потом нажми «Скопировать выбранное» и пришли мне список. Галочки сохраняются в браузере.</p>
+</header>
+
+<div class="bar">
+  <span>Выбрано: <span class="n" id="cnt">0</span></span>
+  <button class="btn" id="copy">Скопировать выбранное</button>
+  <button class="btn ghost" id="clear">Сбросить</button>
+</div>
+
+<section>
+  <h2>Сайты для бизнеса <small>то, что продаём</small></h2>
+  <p class="note">Прямая витрина для Авито. Один боевой сайт с доменом, остальное — демо и черновики конвейера лидов.</p>
+
+  <div class="card" data-id="oladushki"><button class="box" role="checkbox" aria-checked="false"></button><div>
+    <div class="t">Свияжские Оладушки <span class="date">июль–сентябрь</span> <span class="pill live">боевой</span></div>
+    <div class="d">Единственный сданный сайт с живым доменом: лавка оладий на острове Свияжск. Главная, меню, экскурсии, страница фестиваля, видео-плейлист «Лавка вживую», аудит починен с 48 до 73 баллов. Плюс бренд-бук для лазерной гравировки бирок.</div>
+    <div class="links"><a href="https://sviyazhskie-oladushki.ru">Сайт</a><a href="https://sviyazhskie-oladushki.ru/sokolka.html">Фестиваль</a><a href="https://errorslove190-droid.github.io/sites/oladushki-promo/">Варианты видео-секции</a><a href="https://errorslove190-droid.github.io/sites/oladushki-sokolka/">Истории для Карт</a></div>
+    <div class="why"><b>Для Авито:</b> главный кейс — реальный клиент, домен, отзыв можно попросить.</div>
+  </div></div>
+
+  <div class="card" data-id="apex"><button class="box" role="checkbox" aria-checked="false"></button><div>
+    <div class="t">Apex Structure <span class="date">июль–август</span> <span class="pill">демо</span></div>
+    <div class="d">Строительство премиальных домов хай-тек и барнхаус: калькулятор стоимости, объекты, сроки, смета. Основа ниши «строительство и недвижимость».</div>
+    <div class="links"><a href="https://errorslove190-droid.github.io/sites/apex-structure/">Открыть</a></div>
+    <div class="why"><b>Для Авито:</b> ты сказал «Апекс не нужно» — оставлен в списке для полноты.</div>
+  </div></div>
+
+  <div class="card" data-id="monolit"><button class="box" role="checkbox" aria-checked="false"></button><div>
+    <div class="t">МОНОЛИТ <span class="date">август</span> <span class="pill loc">локально</span></div>
+    <div class="d">Строительство загородных домов под ключ в Казани — вариант в редизайн-лаборатории, не опубликован.</div>
+    <div class="why"><b>Для Авито:</b> можно опубликовать за 10 минут, если нужен второй строительный пример.</div>
+  </div></div>
+
+  <div class="card" data-id="mastudio"><button class="box" role="checkbox" aria-checked="false"></button><div>
+    <div class="t">MA Studio <span class="date">август</span> <span class="pill loc">локально</span></div>
+    <div class="d">Сайт собственного агентства «приём заявок под ключ за неделю»: позиционирование, тексты, маркетинговый аудит, архитектура единого окна заявок. Прародитель Ветры.</div>
+    <div class="why"><b>Для Авито:</b> текстовая база для объявления, как страница не опубликован.</div>
+  </div></div>
+
+  <div class="card" data-id="aldente"><button class="box" role="checkbox" aria-checked="false"></button><div>
+    <div class="t">Aldente-Fusion и 108 Гастробар <span class="date">июль</span> <span class="pill">демо</span></div>
+    <div class="d">Два черновика конвейера лидов для ресторанов Казани и Иннополиса — сделаны до звонка, чтобы показать владельцу готовое.</div>
+    <div class="links"><a href="https://errorslove190-droid.github.io/sites/aldente-fusion/">Aldente</a><a href="https://errorslove190-droid.github.io/sites/bar-108/">108</a></div>
+    <div class="why"><b>Для Авито:</b> показывают приём «черновик до оплаты» в действии.</div>
+  </div></div>
+
+  <div class="card" data-id="suyukhan"><button class="box" role="checkbox" aria-checked="false"></button><div>
+    <div class="t">Суюхан — монтаж и моушен-дизайн <span class="date">август</span> <span class="pill live">опубликован</span></div>
+    <div class="d">Портфолио монтажёра: тёмный editorial, работы, контакты.</div>
+    <div class="links"><a href="https://errorslove190-droid.github.io/sites/suyukhan/">Открыть</a></div>
+    <div class="why"><b>Для Авито:</b> пример сайта для частного специалиста.</div>
+  </div></div>
+
+  <div class="card" data-id="portfolio"><button class="box" role="checkbox" aria-checked="false"></button><div>
+    <div class="t">Портфолио Михаила <span class="date">июль</span> <span class="pill live">опубликован</span></div>
+    <div class="d">Визитка «сайты для бизнеса под ключ за 5–7 дней» в фирменном стиле: ч/б editorial и кислотный лайм. Цены 20/30/45/70 тыс.</div>
+    <div class="links"><a href="https://errorslove190-droid.github.io/sites/portfolio/">Открыть</a></div>
+    <div class="why"><b>Для Авито:</b> ссылка в профиле и в резюме. Нужен og:image.</div>
+  </div></div>
+
+  <div class="card" data-id="ilya"><button class="box" role="checkbox" aria-checked="false"></button><div>
+    <div class="t">Телефон Ильи — чистка и стили <span class="date">сентябрь</span> <span class="pill live">опубликован</span></div>
+    <div class="d">Интерфейс телефона: варианты чистки и оформления.</div>
+    <div class="links"><a href="https://errorslove190-droid.github.io/sites/ilya-phone/">Открыть</a></div>
+  </div></div>
+
+  <div class="card" data-id="mishaabro"><button class="box" role="checkbox" aria-checked="false"></button><div>
+    <div class="t">Первый сайт Оладушек на React <span class="date">май</span> <span class="pill arc">архив</span></div>
+    <div class="d">Самая первая версия: React + Vite, hero, лавка, экскурсии, кнопки «Забронировать» и «Заказать». Отсюда всё началось.</div>
+    <div class="why"><b>Для Авито:</b> история «было — стало» рядом с боевым сайтом.</div>
+  </div></div>
+</section>
+
+<section>
+  <h2>Продукты и автоматизация <small>то, что делает бизнес быстрее</small></h2>
+  <p class="note">Аргумент для второй половины объявления: не только сайты, но и заявки, боты, окна.</p>
+
+  <div class="card" data-id="vetra"><button class="box" role="checkbox" aria-checked="false"></button><div>
+    <div class="t">Ветра — все мессенджеры в одном окне <span class="date">август–сентябрь</span> <span class="pill live">в разработке</span></div>
+    <div class="d">Мини-SaaS с Андреем для салонов: сообщения из Telegram, ВК, MAX, почты и Авито в одном списке, вечерняя сводка владельцу (обращений · без ответа · скорость). Postgres, API, Telegram-канал, бот-«бортовой компьютер» в группе, бренд-бук, тарифы, путь клиента, спринты.</div>
+    <div class="links"><a href="https://errorslove190-droid.github.io/sites/vetra/maket/">Визитка</a><a href="https://errorslove190-droid.github.io/sites/vetra/okno-demo/">Окно (демо)</a><a href="https://errorslove190-droid.github.io/sites/vetra/put-klienta/">Путь салона</a><a href="https://errorslove190-droid.github.io/sites/vetra/brandbook/">Бренд-бук</a><a href="https://errorslove190-droid.github.io/sites/vetra/">Все макеты</a></div>
+    <div class="why"><b>Для Авито:</b> объявление №3 для салонов; в резюме — как «разрабатываю продукт для салонов красоты».</div>
+  </div></div>
+
+  <div class="card" data-id="casino"><button class="box" role="checkbox" aria-checked="false"></button><div>
+    <div class="t">Движок Telegram-казино <span class="date">сентябрь</span> <span class="pill">пауза</span></div>
+    <div class="d">Бот, Mini App с лобби и семью играми, кошельки с журналом, проверяемая честность, админка. Для лицензированных операторов, без игроков из РФ. Этап 1 готов, партнёр молчит.</div>
+    <div class="links"><a href="https://errorslove190-droid.github.io/sites/casino-engine/app/">Демо приложения</a><a href="https://errorslove190-droid.github.io/sites/casino-engine/bot/">Переписка бота</a><a href="https://errorslove190-droid.github.io/sites/casino-engine/">Обзор</a></div>
+    <div class="why"><b>Для Авито:</b> в объявление не ставим (тема), в резюме — «Telegram Mini App с платежами и кошельками» без слова казино.</div>
+  </div></div>
+
+  <div class="card" data-id="trener"><button class="box" role="checkbox" aria-checked="false"></button><div>
+    <div class="t">Трекер еды и тренировок <span class="date">август</span> <span class="pill live">работает</span></div>
+    <div class="d">Telegram Mini App: КБЖУ за день по фото и тексту, программа тренировок, напоминания. Данные в CloudStorage Telegram, воркер на Cloudflare, без своего сервера.</div>
+    <div class="links"><a href="https://errorslove190-droid.github.io/sites/trener/app/">Приложение</a><a href="https://errorslove190-droid.github.io/sites/trener/">Программа</a></div>
+    <div class="why"><b>Для Авито:</b> пример мини-приложения внутри Telegram — то, что можно продать фитнес-клубу или салону как «запись и напоминания».</div>
+  </div></div>
+
+  <div class="card" data-id="ceh"><button class="box" role="checkbox" aria-checked="false"></button><div>
+    <div class="t">Цех — конвейер клипов для стримера <span class="date">июль–август</span> <span class="pill live">в бою</span></div>
+    <div class="d">Слушает чат Twitch, ловит всплески и команду «!клип», режет запись стрима на вертикальные ролики и отдаёт в Telegram. Node, без токенов Twitch.</div>
+    <div class="why"><b>Для Авито:</b> «Telegram-бот, который работает вместо человека» — живой кейс автоматизации.</div>
+  </div></div>
+
+  <div class="card" data-id="manager"><button class="box" role="checkbox" aria-checked="false"></button><div>
+    <div class="t">Личный ассистент в Telegram <span class="date">август–сентябрь</span> <span class="pill live">работает</span></div>
+    <div class="d">Бот, который ведёт список дел, напоминания по расписанию, утренний бриф и вечернюю сводку, принимает фото и голос; под капотом Claude Code в базе знаний. Второй такой же бот — для Ветры, отвечает в группу.</div>
+    <div class="why"><b>Для Авито:</b> «ассистент-бот для владельца: задачи, напоминания, сводки».</div>
+  </div></div>
+
+  <div class="card" data-id="fns"><button class="box" role="checkbox" aria-checked="false"></button><div>
+    <div class="t">Бот ФНС — автоматизация личного кабинета налоговой <span class="date">июнь</span> <span class="pill arc">архив</span></div>
+    <div class="d">Python + Selenium: заходит в личный кабинет nalog.ru, прогоняет обучение и формы по списку из Excel в несколько потоков, диагностический скрипт для разбора страницы входа. Сделан во время практики в инспекции ФНС.</div>
+    <div class="why"><b>Для Авито:</b> «автоматизирую рутину в браузере: заполнение форм, кабинеты, отчёты» — редкий и понятный бухгалтерам аргумент.</div>
+  </div></div>
+
+  <div class="card" data-id="parser"><button class="box" role="checkbox" aria-checked="false"></button><div>
+    <div class="t">Парсер лидов из 2ГИС и конвейер черновиков <span class="date">июль–август</span> <span class="pill live">работает</span></div>
+    <div class="d">Сбор фирм по нише и городу с телефонами, ВК, WhatsApp, Telegram; сортировка по числу каналов связи; 32 салона Казани для Ветры. Дальше — черновик сайта до звонка, скрипт звонка, таблица обзвона.</div>
+    <div class="why"><b>Для Авито:</b> продаётся как «соберу базу клиентов или поставщиков по вашей нише».</div>
+  </div></div>
+
+  <div class="card" data-id="tgleads"><button class="box" role="checkbox" aria-checked="false"></button><div>
+    <div class="t">Слушалка групп Telegram <span class="date">август</span> <span class="pill loc">ждёт ключей</span></div>
+    <div class="d">Пробный аккаунт сидит в чатах предпринимателей и ловит «нужен сайт», кандидатов складывает в файл и шлёт в личку. Упёрлось в создание приложения на my.telegram.org.</div>
+    <div class="why"><b>Для Авито:</b> «мониторинг упоминаний в Telegram-чатах» — можно предложить как услугу.</div>
+  </div></div>
+
+  <div class="card" data-id="leadform"><button class="box" role="checkbox" aria-checked="false"></button><div>
+    <div class="t">Форма заявок без сервера <span class="date">август</span> <span class="pill live">готовый скил</span></div>
+    <div class="d">Заявка со статического сайта падает в Google Таблицу, на почту и в Telegram через Apps Script, бесплатно. Пошаговая инструкция для MA Studio.</div>
+    <div class="why"><b>Для Авито:</b> это и есть «заявки не теряются» из текста объявления, цена от 10 тыс.</div>
+  </div></div>
+
+  <div class="card" data-id="stydia"><button class="box" role="checkbox" aria-checked="false"></button><div>
+    <div class="t">Stydia — Android-приложение бюджета <span class="date">июнь</span> <span class="pill arc">архив</span></div>
+    <div class="d">Kotlin, Gradle, пакет com.stydia.budget — учебное мобильное приложение для учёта бюджета.</div>
+    <div class="why"><b>Для Авито:</b> в резюме одной строкой «есть опыт Android на Kotlin».</div>
+  </div></div>
+</section>
+
+<section>
+  <h2>Дизайн и генерация <small>почему сайты не выглядят как шаблон</small></h2>
+
+  <div class="card" data-id="taste"><button class="box" role="checkbox" aria-checked="false"></button><div>
+    <div class="t">Библиотека вкуса <span class="date">август</span> <span class="pill live">опубликована</span></div>
+    <div class="d">Каталог референсов из скриншотов: семьи стилей, теги, рецепты, готовые брифы для сборки. Стартовая точка любого сайта.</div>
+    <div class="links"><a href="https://errorslove190-droid.github.io/sites/taste/">Открыть</a></div>
+  </div></div>
+
+  <div class="card" data-id="lab"><button class="box" role="checkbox" aria-checked="false"></button><div>
+    <div class="t">Редизайн-лаборатория и панель Tweaks <span class="date">июль–август</span> <span class="pill loc">локально</span></div>
+    <div class="d">Пять стилей на каждый сайт рядом, переключатель, ползунки для правки шрифтов и отступов без лимитов. Галереи стилей для Оладушек, Apex, портфолио.</div>
+    <div class="why"><b>Для Авито:</b> «покажу 3–5 вариантов дизайна до сборки» — сильный пункт в объявлении.</div>
+  </div></div>
+
+  <div class="card" data-id="gen"><button class="box" role="checkbox" aria-checked="false"></button><div>
+    <div class="t">Генерация картинок и видео через API <span class="date">август</span> <span class="pill live">обкатано</span></div>
+    <div class="d">Скил generate поверх kie.ai: hero-картинки, дрон-облёт лавки, самовар, ролики для видео-секции Оладушек, промпты из разбора внешности по фото. Оплата за штуку, без подписки.</div>
+    <div class="why"><b>Для Авито:</b> «картинки и видео для сайта делаю сам, стоки не нужны».</div>
+  </div></div>
+
+  <div class="card" data-id="montage"><button class="box" role="checkbox" aria-checked="false"></button><div>
+    <div class="t">Монтаж видео кодом (HyperFrames) <span class="date">август</span> <span class="pill loc">окно</span></div>
+    <div class="d">Отдельный проект для анимаций и роликов из HTML: композиции, таймлайны, рендер. Пока учебное окно, наработки для Цеха и сайтов.</div>
+  </div></div>
+
+  <div class="card" data-id="progony"><button class="box" role="checkbox" aria-checked="false"></button><div>
+    <div class="t">Прогоны для Матвея: MASTODONT Ventures и design-genius <span class="date">июль–август</span> <span class="pill arc">сданы</span></div>
+    <div class="d">Первая оплачиваемая работа: пройти сценарий видео целиком и отдать промпты, протокол и результаты. Пять версий лендинга венчурного фонда, финал с hero и панелью твиков, библиотека вкуса офлайн; второй прогон — шаги Kore, Glaido против Linear, письма, Skynet.</div>
+    <div class="why"><b>Для Авито:</b> «5 версий одного лендинга за прогон» — можно показать скриншотами, сами файлы в архиве.</div>
+  </div></div>
+
+  <div class="card" data-id="engraving"><button class="box" role="checkbox" aria-checked="false"></button><div>
+    <div class="t">Фото → вектор для лазерной гравировки <span class="date">август</span> <span class="pill arc">сделано</span></div>
+    <div class="d">Бирки и медальоны для Оладушек: трассировка, лайн-арт, церковнославянский полуустав, PNG и SVG под станок.</div>
+    <div class="why"><b>Для Авито:</b> смежная услуга для мастерских и сувенирки.</div>
+  </div></div>
+</section>
+
+<section>
+  <h2>Инструменты для себя <small>то, что ускоряет работу</small></h2>
+  <p class="note">В объявление не идёт, но в резюме это «умею строить рабочие процессы».</p>
+
+  <div class="card" data-id="center"><button class="box" role="checkbox" aria-checked="false"></button><div>
+    <div class="t">Командный центр и роутеры базы <span class="date">август</span> <span class="pill live">опубликован</span></div>
+    <div class="d">Одна страница со состоянием всей работы: что горит, скилы, опубликованные страницы, сайты в работе; роутеры разделов собираются скриптом.</div>
+    <div class="links"><a href="https://errorslove190-droid.github.io/sites/mk-panel-4f2a/">Открыть</a></div>
+  </div></div>
+
+  <div class="card" data-id="kit"><button class="box" role="checkbox" aria-checked="false"></button><div>
+    <div class="t">Набор для Андрея <span class="date">сентябрь</span> <span class="pill live">приватный репо</span></div>
+    <div class="d">Передаваемый комплект: скилы, бот, ярлыки, база; плейсхолдеры подставляет установочный скрипт. Чтобы партнёр начал работать с той же средой за час.</div>
+  </div></div>
+
+  <div class="card" data-id="video"><button class="box" role="checkbox" aria-checked="false"></button><div>
+    <div class="t">Разбор видео: субтитры, кадры, выжимки <span class="date">август</span> <span class="pill live">работает</span></div>
+    <div class="d">yt-dlp и расшифровка, разбор с кадрами, выжимки книг и роликов на страницы: Мориарти, психология, эмоциональный интеллект, фокус, практика.</div>
+    <div class="links"><a href="https://errorslove190-droid.github.io/sites/knigi-moriarti/">Книги</a><a href="https://errorslove190-droid.github.io/sites/psy-books/">Психология</a><a href="https://errorslove190-droid.github.io/sites/eq/">EQ</a><a href="https://errorslove190-droid.github.io/sites/fokus/">Фокус</a></div>
+  </div></div>
+
+  <div class="card" data-id="skills"><button class="box" role="checkbox" aria-checked="false"></button><div>
+    <div class="t">Свои скилы для Claude Code <span class="date">июль–сентябрь</span> <span class="pill live">в работе</span></div>
+    <div class="d">style-lab (галерея стилей → сборка), lead-form, generate, invoice (счёт под печать), refs, taste-library, vetra, конвейер лидов. Плюс каталог RampStack из 103 скилов.</div>
+    <div class="links"><a href="https://errorslove190-droid.github.io/sites/rampstack-katalog/">RampStack</a></div>
+  </div></div>
+
+  <div class="card" data-id="pages"><button class="box" role="checkbox" aria-checked="false"></button><div>
+    <div class="t">Страницы-планы на GitHub Pages <span class="date">август–сентябрь</span> <span class="pill live">опубликованы</span></div>
+    <div class="d">Маршрут дел, академ, практика для Сёмы, план Авито — формат «показать с телефона кому угодно».</div>
+    <div class="links"><a href="https://errorslove190-droid.github.io/sites/plan/">Маршрут</a><a href="https://errorslove190-droid.github.io/sites/avito/">Авито</a><a href="https://errorslove190-droid.github.io/sites/praktika/">Практика</a></div>
+  </div></div>
+</section>
+
+<div class="lost">
+  <h3>Не нашёл: «магазин одежды» и «исток кейс»</h3>
+  <p>Искал по базе, журналу, всем папкам D:\Projects, архиву D:\Archive, старому рабочему столу и по всем прошлым сессиям Claude — таких слов нигде нет. Возможно, это другое название чего-то из списка, работа в другой папке или на другом устройстве. Скажи, где лежит или как называлось по-другому, и я добавлю.</p>
+</div>
+
+<div class="dark">
+  <h2>Что дальше</h2>
+  <ol>
+    <li>Отмечаешь галочками, что идёт в объявление и в резюме, жмёшь «Скопировать выбранное» и присылаешь список в чат.</li>
+    <li>По выбранному делаю скриншоты для Авито (телефон + ноутбук) и вписываю кейсы в тексты объявлений на странице <a href="https://errorslove190-droid.github.io/sites/avito/">Авито</a>.</li>
+    <li>МОНОЛИТ и MA Studio при желании публикую на Pages за 10 минут — тогда ссылки появятся и здесь.</li>
+  </ol>
+</div>
+
+<footer>Источник: заметка «Проекты / Все наработки — инвентарь 2026-09» в базе. Даты — по коммитам и файлам.</footer>
+</div>
+<div class="toast" id="toast">Скопировано</div>
+<script>
+var KEY='vsyo-picks';
+function load(){try{return JSON.parse(localStorage.getItem(KEY)||'{}')}catch(e){return {}}}
+function save(o){try{localStorage.setItem(KEY,JSON.stringify(o))}catch(e){}}
+var picks=load();
+var cards=document.querySelectorAll('.card');
+function render(){var n=0;cards.forEach(function(c){var on=!!picks[c.dataset.id];c.querySelector('.box').setAttribute('aria-checked',on?'true':'false');if(on)n++});document.getElementById('cnt').textContent=n}
+cards.forEach(function(c){c.querySelector('.box').addEventListener('click',function(){picks[c.dataset.id]=!picks[c.dataset.id];if(!picks[c.dataset.id])delete picks[c.dataset.id];save(picks);render()})});
+function toast(){var s=document.getElementById('toast');s.classList.add('on');setTimeout(function(){s.classList.remove('on')},1400)}
+function fallback(t){var a=document.createElement('textarea');a.value=t;document.body.appendChild(a);a.select();try{document.execCommand('copy')}catch(e){}document.body.removeChild(a)}
+document.getElementById('copy').addEventListener('click',function(){
+  var list=[];cards.forEach(function(c){if(picks[c.dataset.id]){var t=c.querySelector('.t').childNodes[0].textContent.trim();list.push('- '+t)}});
+  var txt=list.length?'Для Авито беру:\n'+list.join('\n'):'Ничего не выбрано';
+  if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(txt).then(toast,function(){fallback(txt);toast()})}else{fallback(txt);toast()}
+});
+document.getElementById('clear').addEventListener('click',function(){picks={};save(picks);render()});
+render();
+</script>
+</body>
+</html>
