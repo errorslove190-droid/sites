@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Телефон: что удалить и как настроить</title>
+<meta name="description" content="Разбор Galaxy S23 Ultra: 197 приложений, 150 из них открывались меньше часа за десять месяцев. Что удалять, что чистить, как разложить экраны и выключить лишний шум.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;700;900&family=Oswald:wght@400;600&family=Onest:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{--ink:#0a0a0a;--paper:#ffffff;--lime:#d8f34e;--grey:#6b6b6b;--line:#0a0a0a;--soft:#f2f2f0}
+*{box-sizing:border-box;margin:0;padding:0}
+html{-webkit-text-size-adjust:100%}
+body{background:var(--paper);color:var(--ink);font-family:'Onest',system-ui,-apple-system,'Segoe UI',sans-serif;font-size:17px;line-height:1.62;-webkit-font-smoothing:antialiased}
+.wrap{max-width:760px;margin:0 auto;padding:0 20px}
+a{color:var(--ink)}
+header{border-bottom:3px solid var(--line);padding:38px 0 30px}
+.kicker{font-family:'Oswald',sans-serif;text-transform:uppercase;letter-spacing:.14em;font-size:12px;color:var(--grey);margin-bottom:16px}
+h1{font-family:'Unbounded',sans-serif;font-weight:900;font-size:clamp(28px,7vw,50px);line-height:1.04;letter-spacing:-.02em}
+h1 em{font-style:normal;background:var(--lime);padding:0 .12em}
+.lead{margin-top:18px;font-size:clamp(16px,4vw,19px);color:#2a2a2a;max-width:56ch}
+.meta{margin-top:22px;font-family:'Oswald',sans-serif;font-size:12.5px;text-transform:uppercase;letter-spacing:.1em;color:var(--grey)}
+section{padding:44px 0;border-bottom:1px solid #e2e2e0}
+section:last-of-type{border-bottom:0}
+.num{font-family:'Oswald',sans-serif;font-size:13px;letter-spacing:.18em;color:var(--grey);text-transform:uppercase;margin-bottom:12px}
+h2{font-family:'Unbounded',sans-serif;font-weight:700;font-size:clamp(22px,5.2vw,32px);line-height:1.14;letter-spacing:-.015em;margin-bottom:18px}
+h3{font-family:'Unbounded',sans-serif;font-weight:700;font-size:clamp(17px,4.2vw,20px);line-height:1.25;margin-bottom:8px}
+p{margin-bottom:14px}p:last-child{margin-bottom:0}
+strong{font-weight:700}.dim{color:var(--grey)}
+.card{border:2px solid var(--line);padding:22px 20px;margin:20px 0}
+.card.fill{background:var(--soft);border-color:var(--soft)}
+.card.hi{background:var(--lime);border-color:var(--lime)}
+.tag{display:inline-block;font-family:'Oswald',sans-serif;font-size:11px;text-transform:uppercase;letter-spacing:.12em;padding:3px 9px;margin-bottom:12px;border:1.5px solid var(--ink)}
+.tag.ok{background:var(--lime);border-color:var(--lime)}
+.tag.mid{background:transparent}
+.tag.bad{background:var(--ink);color:var(--paper)}
+ul.plain{list-style:none;margin:10px 0}
+ul.plain li{padding-left:20px;position:relative;margin-bottom:9px}
+ul.plain li:before{content:"";position:absolute;left:0;top:.62em;width:9px;height:3px;background:var(--ink)}
+code{font-family:ui-monospace,Consolas,'Courier New',monospace;font-size:.88em;background:var(--soft);padding:1px 5px}
+/* цифры */
+.nums{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:2px;margin:18px 0;background:var(--line)}
+.nums div{background:var(--paper);padding:16px 14px}
+.nums b{display:block;font-family:'Unbounded',sans-serif;font-size:clamp(24px,6vw,34px);line-height:1;margin-bottom:6px}
+.nums span{font-family:'Oswald',sans-serif;font-size:11.5px;text-transform:uppercase;letter-spacing:.08em;color:var(--grey);line-height:1.35;display:block}
+/* полоса времени */
+.bars{margin:16px 0}
+.bar{display:grid;grid-template-columns:1fr 62px;gap:10px;align-items:center;margin-bottom:8px;font-size:15px}
+.bar .n{position:relative;background:var(--soft);height:26px;display:flex;align-items:center;padding-left:10px;overflow:hidden}
+.bar .n i{position:absolute;left:0;top:0;bottom:0;background:var(--lime);z-index:0}
+.bar .n span{position:relative;z-index:1;font-size:14px}
+.bar .v{font-family:'Oswald',sans-serif;font-size:14px;text-align:right;color:var(--grey)}
+.bar.top .n i{background:#0a0a0a}
+.bar.top .n span{color:#fff}
+/* группы удаления */
+.grp{border-top:1px solid #e2e2e0;padding:16px 0}
+.grp:first-of-type{border-top:0}
+.grp h4{font-family:'Unbounded',sans-serif;font-size:16px;margin-bottom:4px;line-height:1.3}
+.grp .cnt{font-family:'Oswald',sans-serif;font-size:12px;text-transform:uppercase;letter-spacing:.08em;color:var(--grey);margin-bottom:8px}
+.apps{font-size:14.5px;color:#2a2a2a;line-height:1.7}
+.apps b{font-weight:600}
+/* телефон */
+.phones{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:16px 0}
+.ph{border:2px solid var(--ink);border-radius:14px;padding:10px 8px;min-height:210px;display:flex;flex-direction:column;background:#fafafa}
+.ph .t{font-family:'Oswald',sans-serif;font-size:11px;text-transform:uppercase;letter-spacing:.08em;color:var(--grey);margin-bottom:8px;text-align:center}
+.ph .grid{display:grid;grid-template-columns:repeat(4,1fr);gap:5px;flex:1;align-content:start}
+.ph .grid i{display:block;aspect-ratio:1;border:1.5px solid var(--ink);border-radius:5px}
+.ph .grid i.fold{background:repeating-linear-gradient(45deg,#fff 0 3px,#0a0a0a 3px 4px)}
+.ph .dock{display:grid;grid-template-columns:repeat(4,1fr);gap:5px;border-top:1px solid #ccc;padding-top:8px;margin-top:8px}
+.ph .dock i{display:block;aspect-ratio:1;background:var(--lime);border-radius:5px}
+.ph .cap{font-size:11.5px;color:var(--grey);text-align:center;margin-top:6px;line-height:1.3}
+table{width:100%;border-collapse:collapse;margin:14px 0;font-size:15px}
+th,td{text-align:left;padding:10px 8px;border-top:1px solid #e2e2e0;vertical-align:top}
+th{font-family:'Oswald',sans-serif;font-size:12px;text-transform:uppercase;letter-spacing:.1em;color:var(--grey);border-top:0}
+td.r{font-family:'Oswald',sans-serif;white-space:nowrap}
+.tbl{overflow-x:auto}
+.cheat{background:var(--ink);color:var(--paper);padding:26px 22px;margin:24px 0}
+.cheat h3{color:var(--paper)}
+.cheat b{color:var(--lime)}
+.cheat ul{list-style:none}
+.cheat li{margin-bottom:12px;padding-left:18px;position:relative}
+.cheat li:before{content:"";position:absolute;left:0;top:.62em;width:9px;height:3px;background:var(--lime)}
+footer{border-top:3px solid var(--line);padding:30px 0 60px;font-size:14.5px;color:var(--grey)}
+@media (max-width:420px){body{font-size:16px}.phones{gap:6px}.ph{padding:8px 5px;min-height:170px}.bar{grid-template-columns:1fr 54px}}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap">
+    <div class="kicker">разбор телефона · 06.09.2026 · ничего не удалено</div>
+    <h1>Телефон: <em>что удалить</em> и как настроить</h1>
+    <p class="lead">Galaxy S23 Ultra подключён по проводу, я снял полную картину: сколько приложений, чем ты реально пользуешься, что лежит мёртвым грузом и куда ушли 187 гигабайт. Ниже списки и план. Ни одно приложение не удалено, ни одна настройка не тронута.</p>
+    <div class="meta">SM-S918B · Android 16 · статистика за 10 месяцев (с 9 ноября 2025)</div>
+  </div>
+</header>
+
+<div class="wrap">
+
+<div class="card hi" style="margin-top:28px">
+  <p><strong>Главное одной строкой.</strong> Из 197 установленных приложений <strong>150 ты открывал меньше часа за десять месяцев</strong>, а 41 не открывал ни разу. Место кончается: свободно 35 ГБ из 222, и почти четверть занятого — кэш одного мессенджера.</p>
+</div>
+
+<section>
+  <div class="num">01 — цифры</div>
+  <h2>Что показал телефон</h2>
+  <div class="nums">
+    <div><b>197</b><span>сторонних приложений установлено</span></div>
+    <div><b>150</b><span>из них меньше часа за 10 месяцев</span></div>
+    <div><b>41</b><span>не открывал ни разу</span></div>
+    <div><b>35 ГБ</b><span>свободно из 222</span></div>
+    <div><b>156</b><span>уведомлений за сутки от одного приложения</span></div>
+    <div><b>899 ч</b><span>всего в телефоне за 10 месяцев — почти 3 часа в день</span></div>
+  </div>
+  <p>Режим «Не беспокоить» сейчас <strong>выключен</strong>. Уведомления приходят от всех подряд.</p>
+</section>
+
+<section>
+  <div class="num">02 — время</div>
+  <h2>Куда уходят часы</h2>
+  <p>Экранное время за десять месяцев. Первая строка — не опечатка.</p>
+  <div class="bars">
+    <div class="bar top"><div class="n"><i style="width:100%"></i><span>AyuGram (Telegram)</span></div><div class="v">543 ч</div></div>
+    <div class="bar"><div class="n"><i style="width:16.3%"></i><span>Clash Royale</span></div><div class="v">88 ч</div></div>
+    <div class="bar"><div class="n"><i style="width:3.9%"></i><span>VK Видео</span></div><div class="v">21 ч</div></div>
+    <div class="bar"><div class="n"><i style="width:3.8%"></i><span>Brawl Stars</span></div><div class="v">21 ч</div></div>
+    <div class="bar"><div class="n"><i style="width:2.6%"></i><span>MAX</span></div><div class="v">14 ч</div></div>
+    <div class="bar"><div class="n"><i style="width:2.6%"></i><span>Black Temple</span></div><div class="v">14 ч</div></div>
+    <div class="bar"><div class="n"><i style="width:2.4%"></i><span>Яндекс Карты</span></div><div class="v">13 ч</div></div>
+    <div class="bar"><div class="n"><i style="width:2.2%"></i><span>ВКонтакте</span></div><div class="v">12 ч</div></div>
+    <div class="bar"><div class="n"><i style="width:1.3%"></i><span>Telegram (обычный)</span></div><div class="v">7 ч</div></div>
+  </div>
+  <div class="card fill">
+    <p><strong>543 часа — это 22 полных суток за десять месяцев,</strong> примерно 1 час 48 минут каждый день, и 21 686 запусков приложения. Плюс 156 уведомлений в сутки оттуда же. Это ровно то, что Арсен называет «лампочкой вместо луча»: не одно долгое чтение, а сотни коротких выдёргиваний.</p>
+    <p>Clash Royale — вторая строка: 88 часов и 1399 запусков.</p>
+  </div>
+</section>
+
+<section>
+  <div class="num">03 — место</div>
+  <h2>Куда ушли 187 гигабайт</h2>
+  <div class="tbl">
+  <table>
+    <tr><th>Что</th><th>Размер</th><th>Что с этим делать</th></tr>
+    <tr><td><strong>Камера</strong> — 7 781 файл</td><td class="r">56 ГБ</td><td>Выгрузить на компьютер и на диск D:, потом освободить телефон</td></tr>
+    <tr><td><strong>Кэш AyuGram</strong></td><td class="r">16 ГБ</td><td>Чистится изнутри приложения, переписка не теряется</td></tr>
+    <tr><td><strong>Загрузки AyuGram</strong> в папке Download</td><td class="r">17 ГБ</td><td>Скачанные картинки и видео из чатов, дубли того, что уже в чатах</td></tr>
+    <tr><td><strong>Музыка ВК</strong> (кэш)</td><td class="r">4,4 ГБ</td><td>Скачанные треки, перекачиваются заново</td></tr>
+    <tr><td><strong>Кэш Telegram</strong></td><td class="r">3,7 ГБ</td><td>То же самое</td></tr>
+    <tr><td><strong>Остальное в Download</strong> — 31 644 файла</td><td class="r">5 ГБ</td><td>Старые установщики приложений, дубли по два-три раза</td></tr>
+  </table>
+  </div>
+  <p>В папке загрузок лежат, например, три версии установщика AyuGram, два одинаковых <code>clockface.apk</code>, установщик Terraria на 173 МБ и <code>IMG_7638.mov</code> на 647 МБ. Установщики после установки не нужны вообще.</p>
+  <div class="card hi">
+    <p><strong>Быстрая победа: около 45 ГБ</strong> — кэши трёх приложений и папка загрузок. Это без единого удалённого приложения и без потери переписок.</p>
+  </div>
+</section>
+
+<section>
+  <div class="num">04 — удалять</div>
+  <h2>97 приложений под удаление</h2>
+  <p>Разбил по группам, чтобы решать пачками, а не по одному. В скобках — сколько дней назад открывал последний раз.</p>
+
+  <div class="grp">
+    <h4>1. Модули Samsung Good Lock</h4>
+    <div class="cnt">18 штук · не трогал 4–6 месяцев или ни разу</div>
+    <p class="apps">Good Lock, Home Up, KeysCafe, LockStar, Navillera, NotiStar, QuickStar, MultiStar, Theme Park, One Hand Operation+, Pentastic, ClockFace, Wonderland, EdgeTouch, EdgeLighting+, Routines+, Galaxy Registry, Samsung Tips. <b>Это надстройки для украшения интерфейса</b> — ты поставил их, покрутил и забыл. Удаление ничего не сломает.</p>
+  </div>
+
+  <div class="grp">
+    <h4>2. Bixby и голосовые пакеты</h4>
+    <div class="cnt">7 штук · ни разу</div>
+    <p class="apps">Bixby на русском, английском и арабском, два голосовых движка Samsung, два языковых пакета перевода. Ассистентом Samsung ты не пользуешься совсем.</p>
+  </div>
+
+  <div class="grp">
+    <h4>3. Шрифты и детские приложения</h4>
+    <div class="cnt">6 штук · ни разу</div>
+    <p class="apps">Четыре шрифта Monotype (Chococooky, Galaxy Gameplays, Rosemary, Samsung Sans) и два детских — Kids Browser, Kids Talk.</p>
+  </div>
+
+  <div class="grp">
+    <h4>4. Маркетплейсы и магазины</h4>
+    <div class="cnt">10 штук · от 2 месяцев до 8</div>
+    <p class="apps">AliExpress (238 дн), Яндекс Маркет (229), Taobao Idlefish (191), Alibaba (189), Pinduoduo (161), Золотое Яблоко (192), Лэтуаль (151), Ostin (111), Huawei AppGallery (251), Uptodown (61). <b>Wildberries, Ozon, Авито оставляем</b> — ими пользуешься каждую неделю.</p>
+  </div>
+
+  <div class="grp">
+    <h4>5. Авто</h4>
+    <div class="cnt">3 штуки · 7–10 месяцев</div>
+    <p class="apps">Дром Фильтр (298 дн), Авто.ру (236), Дром Номера (213). <b>ПДД-экзамен оставить</b> — 11,7 часа за год, явно готовился.</p>
+  </div>
+
+  <div class="grp">
+    <h4>6. Музыка, видео, развлечения</h4>
+    <div class="cnt">9 штук · 3–9 месяцев</div>
+    <p class="apps">Songsterr (273 дн), YouTube Music (247), Google Фильмы (195), Spotify (104), ivi (132), Zona (97), RUTUBE Студия (115), AMDM аккорды (100), CapCut (124). <b>Кинопоиск и Rutube оставить</b> — открывал полтора-два месяца назад.</p>
+  </div>
+
+  <div class="grp">
+    <h4>7. Всё прочее без дела</h4>
+    <div class="cnt">44 штуки · от 3 месяцев или ни разу</div>
+    <p class="apps">DeepSeek (143 дн), Locket (140), пульт для телевизора (132), уровень (182), фоторедактор-коллаж (180), таймер приложений (138), кредитный сервис (162), запись к врачу (181), Госуслуги Культура (180), Таттелеком (100), Яндекс Директ (100), Bybit (97), JumpJump VPN (116), две клавиатуры — арабская и Яндекс (127 и 201), AnyDesk, автокликер, чистилка динамика, Samsung AR Doodle, AR Emoji, помощник камеры, два живых обоя MIUI, Adobe Fill&amp;Sign, ещё один калькулятор, Aviasales, Яндекс Путешествия, Bery Заряд, Vanilla, стикмен-игра и другие. Полный список у меня, показать по первому слову.</p>
+  </div>
+
+  <p class="dim">После удаления освободится ещё несколько гигабайт, но главное не место, а то, что список приложений станет коротким и в нём можно будет что-то найти.</p>
+</section>
+
+<section>
+  <div class="num">05 — спросить</div>
+  <h2>Шесть штук, которые я сам трогать не буду</h2>
+  <p>Формально попадают в «не открывал», но удалять вслепую нельзя.</p>
+  <ul class="plain">
+    <li><strong>Calculator Vault</strong> — выглядит как калькулятор, внутри скрытое хранилище файлов. Ни разу не открывал за десять месяцев, но если там что-то лежит — оно исчезнет вместе с приложением. Сначала открой и посмотри.</li>
+    <li><strong>Signal</strong> — мессенджер, ни разу за десять месяцев. Если там есть переписки, они удалятся вместе с ним.</li>
+    <li><strong>Госключ и Госуслуги Биометрия</strong> (112 и 105 дней) — нужны раз в год, но именно в тот момент, когда срочно. Я бы оставил.</li>
+    <li><strong>Google Ассистент, SafetyCore, Contact Keys</strong> — служебные компоненты Google. Не игры, лучше не трогать.</li>
+    <li><strong>Ак Барс Банк</strong> (82 дня) — банк, не удаляем, просто убираем с первого экрана.</li>
+    <li><strong>Samsung Watch Manager</strong> (195 дней) — если часы ещё в ходу, оставить.</li>
+  </ul>
+</section>
+
+<section>
+  <div class="num">06 — настроить</div>
+  <h2>Как разложить и как заткнуть шум</h2>
+
+  <h3>Три экрана</h3>
+  <div class="phones">
+    <div class="ph"><div class="t">экран 1</div><div class="grid"></div><div class="dock"><i></i><i></i><i></i><i></i></div><div class="cap">пусто; док как сейчас</div></div>
+    <div class="ph"><div class="t">экран 2</div><div class="grid"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div><div class="cap">банки, карты, маркетплейсы, такси</div></div>
+    <div class="ph"><div class="t">экран 3</div><div class="grid"><i class="fold"></i><i class="fold"></i><i class="fold"></i><i class="fold"></i></div><div class="cap">папки: госуслуги, покупки, редкое, игры</div></div>
+  </div>
+  <p>По данным телефона на второй экран заслуженно идут: ВТБ, Тинькофф, Mir Pay, Ozon Финанс, Wildberries, Авито, Яндекс Карты, Яндекс Такси, Переводчик, Часы, Заметки. Всё остальное — в папки на третий.</p>
+
+  <h3>Тишина</h3>
+  <ul class="plain">
+    <li><strong>Уведомления выключить у всех</strong>, кроме звонков, СМС и Telegram. По цифрам главный источник — AyuGram: 156 уведомлений за сутки против 8 у Твиттера и 4 у ВК.</li>
+    <li><strong>«Не беспокоить» включить постоянно</strong>, в исключения добавить «Избранные» — их звонок пробивает тишину. Сейчас режим выключен совсем.</li>
+    <li><strong>Внутри AyuGram</strong> отключить уведомления всех каналов и групп, оставить только личные сообщения. Это уберёт большую часть из 156.</li>
+  </ul>
+
+  <div class="card fill">
+    <p><strong>Отдельный разговор — две игры.</strong> Clash Royale и Brawl Stars вместе съели 109 часов. Удалять их я не предлагаю: это твой отдых, а не мусор. Но если хочется вернуть время, это первое место, где оно лежит.</p>
+  </div>
+</section>
+
+<section>
+  <div class="num">07 — порядок</div>
+  <h2>В каком порядке я это сделаю</h2>
+  <p>Всё по проводу, с моего компьютера. Каждый шаг отдельно, любой можно пропустить.</p>
+  <div class="tbl">
+  <table>
+    <tr><th>Шаг</th><th>Время</th><th>Результат</th></tr>
+    <tr><td>1. Резервная копия списка приложений и раскладки</td><td class="r">1 мин</td><td>можно вернуть всё как было</td></tr>
+    <tr><td>2. Удалить группы 1–7 (97 приложений)</td><td class="r">5 мин</td><td>197 → 100 приложений</td></tr>
+    <tr><td>3. Почистить папку загрузок от установщиков и дублей</td><td class="r">3 мин</td><td>плюс 20 ГБ</td></tr>
+    <tr><td>4. Кэши AyuGram, Telegram, Музыки ВК</td><td class="r">2 мин</td><td>плюс 24 ГБ, переписки целы</td></tr>
+    <tr><td>5. Выгрузить фото и видео на компьютер</td><td class="r">40–60 мин</td><td>56 ГБ в безопасности, потом можно освободить телефон</td></tr>
+    <tr><td>6. Разложить три экрана</td><td class="r">20 мин</td><td>первый экран пустой</td></tr>
+    <tr><td>7. Уведомления и «Не беспокоить»</td><td class="r">5 мин</td><td>тишина, кроме звонков и Telegram</td></tr>
+  </table>
+  </div>
+  <p>Пункты 1–4 и 7 делаю сам. Пункт 5 запускается и идёт фоном. Пункт 6 — тоже сам, но телефон должен лежать подключённым и не блокироваться.</p>
+</section>
+
+<section>
+  <div class="num">08 — дальше</div>
+  <h2>Что нужно от тебя</h2>
+  <ul class="plain">
+    <li>Сказать «да» на шаги, которые делаем. Можно все, можно по одному.</li>
+    <li>Открыть <strong>Calculator Vault</strong> и посмотреть, есть ли внутри файлы — до удаления.</li>
+    <li>Сказать, нужен ли <strong>Signal</strong> и <strong>Samsung Watch Manager</strong>.</li>
+  </ul>
+</section>
+
+</div>
+
+<footer>
+  <div class="wrap">
+    <p>Данные сняты 6 сентября 2026 напрямую с телефона по USB: список пакетов, статистика использования за 10 месяцев, размеры папок, журнал уведомлений за сутки, состояние режима «Не беспокоить». Ничего не изменено. Разбор ролика, из которого выросла эта уборка: <a href="https://errorslove190-droid.github.io/sites/fokus/">одиночество и фокус</a>.</p>
+  </div>
+</footer>
+
+</body>
+</html>
