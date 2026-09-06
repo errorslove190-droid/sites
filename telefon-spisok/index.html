@@ -236,11 +236,21 @@ function load(){
   }catch(e){}
 }
 function collect(){
-  var sel=boxes().filter(function(b){return b.checked});
+  var all=boxes();
+  var sel=all.filter(function(b){return b.checked});
+  var off=all.filter(function(b){return !b.checked});
   var t;
   if(!sel.length){t='УДАЛЯТЬ: ничего';}
+  else if(!off.length){t='УДАЛЯТЬ ВСЁ ИЗ СПИСКА — все 105';}
+  else if(off.length<=25){
+    t='УДАЛЯТЬ ВСЁ ИЗ СПИСКА ('+sel.length+' шт), КРОМЕ:
+'+off.map(function(b){return '- '+b.dataset.name;}).join('
+');
+  }
   else{
-    t='УДАЛЯТЬ ('+sel.length+'):\n'+sel.map(function(b){return b.dataset.name+' — '+b.dataset.pkg}).join('\n');
+    t='УДАЛЯТЬ ('+sel.length+'):
+'+sel.map(function(b){return '- '+b.dataset.name;}).join('
+');
   }
   var ta=document.getElementById('ta');
   ta.value=t;
