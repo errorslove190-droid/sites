@@ -1,0 +1,679 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Ветра — редизайн на зелёном: исследование знака и четыре системы</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Golos+Text:wght@400;500;600;700&family=Unbounded:wght@400;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --g:#0E9F63;          /* фирменный зелёный: знак, плашки, крупное */
+  --g-press:#0A7A4C;    /* кнопки и ссылки — только он под белый мелкий текст */
+  --g-acid:#00C46A;
+  --g-deep:#1A6B4B;
+  --g-soft:#D9F0E4;
+  --g-tint:#F1FAF5;
+  --ink:#0D1A14;
+  --muted:#5A6B62;
+  --faint:#8B9A92;
+  --line:#E1E8E4;
+  --page:#FAFBFA;
+  --white:#fff;
+  --mono:'JetBrains Mono',ui-monospace,Consolas,monospace;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--page);color:var(--ink);
+  font-family:'Golos Text',system-ui,-apple-system,'Segoe UI',sans-serif;
+  font-size:16px;line-height:1.6;-webkit-font-smoothing:antialiased}
+.wrap{max-width:1120px;margin:0 auto;padding:0 20px}
+h1,h2,h3,h4{font-family:'Unbounded',system-ui,sans-serif;font-weight:600;letter-spacing:-.02em;line-height:1.12;margin:0}
+h1{font-size:clamp(30px,5.2vw,58px);letter-spacing:-.035em}
+h2{font-size:clamp(23px,3.4vw,36px);margin-bottom:10px}
+h3{font-size:clamp(17px,2.1vw,21px);margin-bottom:8px}
+h4{font-family:'Golos Text',sans-serif;font-size:15px;font-weight:600;letter-spacing:0}
+p{margin:0 0 14px}
+a{color:var(--g-press)}
+code{font-family:var(--mono);font-size:.88em;background:var(--g-tint);border:1px solid var(--line);
+  border-radius:6px;padding:1px 6px}
+
+/* ---------- шапка ---------- */
+header{background:var(--white);border-bottom:1px solid var(--line);padding:54px 0 44px}
+.kicker{font-family:var(--mono);font-size:12px;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--g-press);margin-bottom:16px}
+.lead{font-size:clamp(17px,2.1vw,20px);color:var(--muted);max-width:760px;margin-top:20px}
+nav.toc{display:flex;flex-wrap:wrap;gap:8px;margin-top:28px}
+nav.toc a{display:inline-block;padding:7px 14px;border:1px solid var(--line);border-radius:999px;
+  background:var(--white);text-decoration:none;color:var(--ink);font-size:14px}
+nav.toc a:hover{border-color:var(--g);color:var(--g-press)}
+
+section{padding:56px 0;border-bottom:1px solid var(--line)}
+.snum{font-family:var(--mono);font-size:12px;color:var(--faint);letter-spacing:.1em;margin-bottom:10px}
+.sub{color:var(--muted);max-width:780px;margin-bottom:30px}
+
+/* ---------- сетки ---------- */
+.grid{display:grid;gap:16px}
+.g2{grid-template-columns:repeat(2,1fr)}
+.g3{grid-template-columns:repeat(3,1fr)}
+.g4{grid-template-columns:repeat(4,1fr)}
+@media(max-width:900px){.g3,.g4{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:560px){.g2,.g3,.g4{grid-template-columns:1fr}}
+
+.card{background:var(--white);border:1px solid var(--line);border-radius:16px;padding:20px;
+  transition:border-color .16s,transform .16s}
+.card:hover{border-color:var(--g);transform:translateY(-3px)}
+.card .art{height:132px;display:grid;place-items:center;background:var(--g-tint);
+  border-radius:12px;margin-bottom:14px}
+.card p{font-size:14px;color:var(--muted);margin:0}
+.tag{display:inline-block;font-family:var(--mono);font-size:11px;letter-spacing:.06em;
+  color:var(--g-press);background:var(--g-soft);border-radius:999px;padding:3px 9px;margin-bottom:8px}
+.verdict{font-size:13px;margin-top:10px;padding-top:10px;border-top:1px dashed var(--line);color:var(--ink)}
+.verdict b{color:var(--g-press)}
+
+.note{background:#FFF8E6;border:1px solid #F0DFAE;border-left:3px solid #D9A400;
+  border-radius:12px;padding:16px 18px;margin:22px 0}
+.note b{color:#8A6500}
+.bad{background:#FFF1F1;border-color:#F3D3D3;border-left-color:#C62828}
+.bad b{color:#C62828}
+.ok{background:var(--g-tint);border-color:var(--g-soft);border-left-color:var(--g)}
+.ok b{color:var(--g-press)}
+
+table{width:100%;border-collapse:collapse;font-size:14px;margin:8px 0 18px}
+th,td{text-align:left;padding:10px 12px;border-bottom:1px solid var(--line);vertical-align:top}
+th{font-size:12px;text-transform:uppercase;letter-spacing:.08em;color:var(--faint);font-weight:500}
+td.mono{font-family:var(--mono);font-size:13px}
+.chip{display:inline-block;width:15px;height:15px;border-radius:4px;vertical-align:-2px;margin-right:7px;
+  border:1px solid rgba(0,0,0,.12)}
+
+ul.clean{margin:0 0 14px;padding-left:20px}
+ul.clean li{margin-bottom:7px}
+
+/* ---------- образцы цвета ---------- */
+.swatch{border:1px solid var(--line);border-radius:14px;overflow:hidden;background:var(--white)}
+.swatch .fill{height:96px;display:flex}
+.swatch .fill div{flex:1;display:grid;place-items:center;font-size:13px;font-weight:600}
+.swatch .meta{padding:12px 14px}
+.swatch .meta b{display:block;font-size:15px}
+.swatch .meta span{font-family:var(--mono);font-size:12px;color:var(--faint)}
+
+/* ---------- превью систем ---------- */
+.sys{border:1px solid var(--line);border-radius:20px;overflow:hidden;margin-bottom:26px;background:var(--white)}
+.sys > header{background:var(--white);border:0;border-bottom:1px solid var(--line);padding:18px 22px;
+  display:flex;flex-wrap:wrap;gap:12px;align-items:baseline;justify-content:space-between}
+.sys > header h3{margin:0}
+.sys > header .who{font-size:13px;color:var(--muted)}
+.demo{padding:34px 30px;min-height:330px}
+.sys .foot{padding:16px 22px;border-top:1px solid var(--line);font-size:13.5px;color:var(--muted);
+  display:grid;gap:6px}
+.sys .foot b{color:var(--ink)}
+
+/* демо-скелет первого экрана */
+.d-nav{display:flex;align-items:center;justify-content:space-between;margin-bottom:34px;font-size:13px}
+.d-brand{display:flex;align-items:center;gap:9px;font-weight:700;font-size:17px;letter-spacing:-.02em}
+.d-h1{font-size:clamp(26px,4.2vw,44px);line-height:1.04;letter-spacing:-.035em;font-weight:700;margin:0 0 14px;
+  font-family:'Unbounded',sans-serif}
+.d-p{font-size:15px;max-width:430px;margin:0 0 22px;line-height:1.55}
+.d-btns{display:flex;gap:10px;flex-wrap:wrap}
+.d-btn{padding:11px 22px;border-radius:999px;font-size:14px;font-weight:600;border:1px solid transparent}
+.d-btn2{background:transparent}
+.d-cols{display:grid;grid-template-columns:1.05fr .95fr;gap:26px;align-items:center}
+@media(max-width:760px){.d-cols{grid-template-columns:1fr}}
+.d-win{border-radius:14px;overflow:hidden;font-size:11.5px}
+.d-win .bar{padding:9px 12px;display:flex;gap:6px;align-items:center;font-weight:600}
+.d-win .row{padding:9px 12px;display:flex;gap:9px;align-items:center}
+.d-dot{width:8px;height:8px;border-radius:50%;flex:none}
+.d-av{width:22px;height:22px;border-radius:50%;flex:none;display:grid;place-items:center;font-size:10px;font-weight:700}
+.d-stats{display:flex;gap:26px;margin-top:26px;font-size:12px}
+.d-stats b{display:block;font-size:26px;font-family:'Unbounded',sans-serif;letter-spacing:-.03em;line-height:1}
+
+/* система А — Поле */
+.sA{background:#FBFAF6;color:#14231B}
+.sA .d-btn{background:#0A7A4C;color:#fff}
+.sA .d-btn2{background:transparent;border-color:#CFD8D2;color:#14231B}
+.sA .d-win{background:#fff;border:1px solid #E4E9E5;box-shadow:0 12px 30px rgba(20,35,27,.07)}
+.sA .d-win .bar{background:#F3F6F3;border-bottom:1px solid #E4E9E5}
+.sA .d-win .row{border-bottom:1px solid #F0F3F0}
+.sA .d-av{background:#D9F0E4;color:#0A7A4C}
+.sA .d-stats b{color:#0E9F63}
+/* система Б — Ночная смена */
+.sB{background:#07100C;color:#E8F2EC}
+.sB .d-btn{background:#00C46A;color:#04170E}
+.sB .d-btn2{border-color:#28382F;color:#E8F2EC}
+.sB .d-win{background:#0C1712;border:1px solid #1E2C25}
+.sB .d-win .bar{background:#111E18;border-bottom:1px solid #1E2C25}
+.sB .d-win .row{border-bottom:1px solid #16221C}
+.sB .d-av{background:#16302340;color:#00C46A;border:1px solid #24463A}
+.sB .d-stats b{color:#00C46A}
+.sB .d-p{color:#9DB3A8}
+/* система В — Спецификация */
+.sV{background:#EDEFEC;color:#131714;
+  background-image:linear-gradient(#00000008 1px,transparent 1px),linear-gradient(90deg,#00000008 1px,transparent 1px);
+  background-size:28px 28px}
+.sV .d-h1{font-family:'Golos Text',sans-serif;font-weight:700}
+.sV .d-btn{background:#131714;color:#fff;border-radius:4px}
+.sV .d-btn2{border-color:#C3C9C4;color:#131714;border-radius:4px}
+.sV .d-win{background:#fff;border:1px solid #131714;border-radius:4px}
+.sV .d-win .bar{background:#131714;color:#fff}
+.sV .d-win .row{border-bottom:1px solid #E2E6E2}
+.sV .d-av{background:#0E9F63;color:#fff;border-radius:3px}
+.sV .d-stats b{color:#0E9F63;font-family:var(--mono);font-weight:500}
+.sV .d-nav,.sV .d-stats{font-family:var(--mono)}
+/* система Г — Знак */
+.sG{background:#fff;color:#0B0B0B}
+.sG .d-h1{font-size:clamp(34px,7vw,74px);letter-spacing:-.05em}
+.sG .d-btn{background:#0E9F63;color:#06210F}
+.sG .d-btn2{border-color:#DDD;color:#0B0B0B}
+.sG .d-win{background:#fff;border:1px solid #E6E6E6}
+.sG .d-win .bar{background:#0E9F63;color:#fff}
+.sG .d-win .row{border-bottom:1px solid #F0F0F0}
+.sG .d-av{background:#0E9F63;color:#fff}
+.sG .d-stats b{color:#0E9F63}
+
+.foot-final{padding:50px 0 70px;color:var(--muted);font-size:14px}
+.q{background:var(--white);border:1px solid var(--line);border-radius:14px;padding:16px 18px;margin-bottom:12px}
+.q b{display:block;margin-bottom:4px}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap">
+    <div class="kicker">Ветра · редизайн · 7 сентября 2026</div>
+    <h1>Зелёный и клевер:<br>как строится знак и что меняется вокруг него</h1>
+    <p class="lead">Разбор восьми конструкций логотипа и инженерии знака, честный тест клевера на смысл, пересчитанная зелёная палитра с числами контраста и четыре собранные системы редизайна с живыми первыми экранами.</p>
+    <nav class="toc">
+      <a href="#konstrukcii">1 · Восемь конструкций</a>
+      <a href="#inzheneriya">2 · Инженерия знака</a>
+      <a href="#klever">3 · Клевер под микроскопом</a>
+      <a href="#zelenyj">4 · Зелёный с числами</a>
+      <a href="#sistemy">5 · Четыре системы</a>
+      <a href="#reshit">6 · Что решить</a>
+    </nav>
+  </div>
+</header>
+
+<!-- ============ 1 ============ -->
+<section id="konstrukcii">
+  <div class="wrap">
+    <div class="snum">ЧАСТЬ 1</div>
+    <h2>Восемь конструкций логотипа</h2>
+    <p class="sub">Знак — не картинка, а конструкция. Их всего восемь, и каждая решает свою задачу. Ниже — что это, где работает, и приговор для Ветры.</p>
+
+    <div class="grid g4">
+
+      <div class="card">
+        <div class="art">
+          <svg width="150" height="46" viewBox="0 0 150 46"><text x="75" y="32" text-anchor="middle" font-family="Unbounded,sans-serif" font-size="27" font-weight="700" letter-spacing="-1.4" fill="#0D1A14">ветра<tspan fill="#0E9F63">.</tspan></text></svg>
+        </div>
+        <span class="tag">wordmark</span>
+        <h3>Слово</h3>
+        <p>Логотип — само название, нарисованное шрифтом. Google, Zara, Мегамаркет. Дёшево, читается всегда, но не живёт отдельно от слова.</p>
+        <div class="verdict"><b>Ветре:</b> это текущее решение из <code>style.md</code>. Не влезает в иконку 32 px и в аватар бота.</div>
+      </div>
+
+      <div class="card">
+        <div class="art">
+          <svg width="76" height="76" viewBox="0 0 76 76"><rect x="8" y="8" width="60" height="60" rx="17" fill="#0E9F63"/><text x="38" y="52" text-anchor="middle" font-family="Unbounded,sans-serif" font-size="34" font-weight="700" fill="#fff">В</text></svg>
+        </div>
+        <span class="tag">lettermark</span>
+        <h3>Буква</h3>
+        <p>Первая буква в контейнере. Так делают почти все SaaS, потому что дёшево и сразу даёт иконку.</p>
+        <div class="verdict"><b>Ветре:</b> честный запасной вариант, но «В» в плашке — самое банальное, что бывает. Отличий от соседа ноль.</div>
+      </div>
+
+      <div class="card">
+        <div class="art">
+          <svg width="76" height="76" viewBox="0 0 76 76"><g stroke="#0E9F63" stroke-width="4" fill="none"><path d="M22 50V26l16 24 16-24v24"/></g></svg>
+        </div>
+        <span class="tag">монограмма</span>
+        <h3>Монограмма</h3>
+        <p>Две-три буквы сплетены в одну форму. Классика люкса (Chanel, LV) и части студий из твоей подборки.</p>
+        <div class="verdict"><b>Ветре:</b> мимо. Название одно, сплетать нечего, а люксовый код салону не нужен.</div>
+      </div>
+
+      <div class="card">
+        <div class="art">
+          <svg width="76" height="76" viewBox="0 0 76 76"><g fill="#0E9F63"><path d="M38 12c7 0 12 5 12 11s-5 11-12 11"/><circle cx="38" cy="26" r="11"/><circle cx="38" cy="50" r="11"/><circle cx="26" cy="38" r="11"/><circle cx="50" cy="38" r="11"/></g></svg>
+        </div>
+        <span class="tag">пиктограмма</span>
+        <h3>Предмет</h3>
+        <p>Узнаваемая вещь: яблоко, птица, клевер. Читается мгновенно и без объяснений — но тащит за собой чужие смыслы.</p>
+        <div class="verdict"><b>Ветре:</b> это и есть клевер. Сильная, но требует проверки на смысл — см. часть 3.</div>
+      </div>
+
+      <div class="card">
+        <div class="art">
+          <svg width="76" height="76" viewBox="0 0 76 76"><g fill="none" stroke="#0E9F63" stroke-width="5" stroke-linecap="round"><path d="M20 46c0-14 8-22 18-22s18 8 18 22"/><path d="M20 46h36"/></g></svg>
+        </div>
+        <span class="tag">абстракция</span>
+        <h3>Абстрактный знак</h3>
+        <p>Форма без предмета: свисток Nike, круги Mastercard, лепестки Xovio. Смысл вкладываешь ты, а не словарь.</p>
+        <div class="verdict"><b>Ветре:</b> самый безопасный путь. Ничего не обещает лишнего, но требует времени, чтобы его запомнили.</div>
+      </div>
+
+      <div class="card">
+        <div class="art">
+          <svg width="76" height="76" viewBox="0 0 76 76"><circle cx="38" cy="38" r="27" fill="none" stroke="#0E9F63" stroke-width="3"/><circle cx="38" cy="38" r="9" fill="#0E9F63"/><text x="38" y="16" text-anchor="middle" font-size="7" font-family="JetBrains Mono,monospace" fill="#5A6B62">ВЕТРА</text></svg>
+        </div>
+        <span class="tag">эмблема</span>
+        <h3>Эмблема</h3>
+        <p>Слово внутри формы: Starbucks, BMW, любая печать. Красиво крупно — и превращается в кашу на 24 px.</p>
+        <div class="verdict"><b>Ветре:</b> нет. У нас знак живёт в фавиконе, в шапке приложения и в аватарке бота — везде мелко.</div>
+      </div>
+
+      <div class="card">
+        <div class="art">
+          <svg width="150" height="46" viewBox="0 0 150 46"><g transform="translate(14,11)" fill="#0E9F63"><circle cx="12" cy="6" r="6"/><circle cx="12" cy="18" r="6"/><circle cx="6" cy="12" r="6"/><circle cx="18" cy="12" r="6"/></g><text x="52" y="31" font-family="Unbounded,sans-serif" font-size="21" font-weight="600" letter-spacing="-.8" fill="#0D1A14">ветра</text></svg>
+        </div>
+        <span class="tag">комбинированный</span>
+        <h3>Знак + слово</h3>
+        <p>Символ слева, название справа. Так устроены 80 % живых брендов, потому что можно отрывать символ и ставить его отдельно.</p>
+        <div class="verdict"><b>Ветре:</b> <b>рабочий вариант.</b> Ровно так собраны Xovio и Streamline из твоих референсов.</div>
+      </div>
+
+      <div class="card">
+        <div class="art">
+          <svg width="120" height="60" viewBox="0 0 120 60"><g fill="#0E9F63"><circle cx="22" cy="30" r="9"/><circle cx="46" cy="22" r="9" opacity=".75"/><circle cx="46" cy="38" r="9" opacity=".5"/><circle cx="70" cy="30" r="9" opacity=".3"/><circle cx="94" cy="30" r="9" opacity=".15"/></g></svg>
+        </div>
+        <span class="tag">динамический</span>
+        <h3>Живая система</h3>
+        <p>Не один знак, а правило: форма меняется от данных или контекста (MIT Media Lab, Nordkyn). Модно, дорого в поддержке.</p>
+        <div class="verdict"><b>Ветре:</b> заманчиво — лепесток может гореть на канале, где ждут ответа. Но это уже уровень интерфейса, не логотипа.</div>
+      </div>
+
+    </div>
+
+    <div class="note ok" style="margin-top:26px">
+      <b>Вывод части 1.</b> Из восьми конструкций Ветре подходят две: <b>предмет</b> (клевер) и <b>абстрактный знак</b>, обе — в связке «знак + слово». Всё остальное либо не масштабируется, либо не отличает нас ни от кого.
+    </div>
+  </div>
+</section>
+
+<!-- ============ 2 ============ -->
+<section id="inzheneriya">
+  <div class="wrap">
+    <div class="snum">ЧАСТЬ 2</div>
+    <h2>Инженерия знака: шесть проверок</h2>
+    <p class="sub">То, чем хороший знак отличается от красивой картинки. Каждую из шести проверок наш будущий клевер обязан пройти до того, как попадёт в код.</p>
+
+    <div class="grid g3">
+      <div class="card">
+        <div class="art">
+          <svg width="120" height="120" viewBox="0 0 120 120">
+            <g stroke="#C9D8CF" stroke-width="1"><path d="M20 20h80M20 40h80M20 60h80M20 80h80M20 100h80M20 20v80M40 20v80M60 20v80M80 20v80M100 20v80"/></g>
+            <circle cx="60" cy="60" r="40" fill="none" stroke="#C9D8CF" stroke-width="1"/>
+            <g fill="#0E9F63"><circle cx="60" cy="45" r="15"/><circle cx="60" cy="75" r="15"/><circle cx="45" cy="60" r="15"/><circle cx="75" cy="60" r="15"/></g>
+          </svg>
+        </div>
+        <h3>1 · Сетка</h3>
+        <p>Знак строится на модуле, а не на глаз. Четыре круга одного радиуса, смещённые на один шаг сетки, — это можно повторить в любом размере и в любой программе.</p>
+      </div>
+
+      <div class="card">
+        <div class="art">
+          <svg width="150" height="110" viewBox="0 0 150 110">
+            <rect x="12" y="30" width="50" height="50" fill="#0D1A14"/>
+            <circle cx="112" cy="55" r="27" fill="#0D1A14"/>
+            <rect x="12" y="30" width="50" height="50" fill="none" stroke="#0E9F63" stroke-width="1.5" stroke-dasharray="3 3"/>
+            <circle cx="112" cy="55" r="25" fill="none" stroke="#0E9F63" stroke-width="1.5" stroke-dasharray="3 3"/>
+          </svg>
+        </div>
+        <h3>2 · Оптическая коррекция</h3>
+        <p>Круг той же высоты, что квадрат, выглядит мельче — его всегда рисуют чуть больше рамки. У клевера из кругов это критично: иначе он «проваливается» рядом со словом.</p>
+      </div>
+
+      <div class="card">
+        <div class="art">
+          <svg width="120" height="120" viewBox="0 0 120 120">
+            <rect x="20" y="20" width="80" height="80" rx="22" fill="#0E9F63"/>
+            <g fill="#F1FAF5"><circle cx="60" cy="47" r="13"/><circle cx="60" cy="73" r="13"/><circle cx="47" cy="60" r="13"/><circle cx="73" cy="60" r="13"/></g>
+            <circle cx="60" cy="60" r="6" fill="#0E9F63"/>
+          </svg>
+        </div>
+        <h3>3 · Негативное пространство</h3>
+        <p>Приём из твоей подборки — прорези в ZERO, диафрагма в МОМЕНТ. Дырка в центре клевера читается как точка «Ветра.» и как пустое окно: смысл рождается из пустоты, а не из линий.</p>
+      </div>
+
+      <div class="card">
+        <div class="art" style="gap:14px;display:flex;align-items:center;justify-content:center">
+          <svg width="64" height="64" viewBox="0 0 40 40"><g fill="#0E9F63"><circle cx="20" cy="14" r="7"/><circle cx="20" cy="26" r="7"/><circle cx="14" cy="20" r="7"/><circle cx="26" cy="20" r="7"/></g></svg>
+          <svg width="32" height="32" viewBox="0 0 40 40"><g fill="#0E9F63"><circle cx="20" cy="14" r="7"/><circle cx="20" cy="26" r="7"/><circle cx="14" cy="20" r="7"/><circle cx="26" cy="20" r="7"/></g></svg>
+          <svg width="16" height="16" viewBox="0 0 40 40"><g fill="#0E9F63"><circle cx="20" cy="14" r="7"/><circle cx="20" cy="26" r="7"/><circle cx="14" cy="20" r="7"/><circle cx="26" cy="20" r="7"/></g></svg>
+        </div>
+        <h3>4 · Минимальный размер</h3>
+        <p>Главный тест: 16 px — фавикон во вкладке. Тонкий контур на нём исчезает, а плотная форма из четырёх кругов держится. Поэтому контурные клеверы из галереи проигрывают заливным.</p>
+      </div>
+
+      <div class="card">
+        <div class="art" style="background:#0D1A14">
+          <div style="display:flex;gap:16px;align-items:center">
+            <svg width="52" height="52" viewBox="0 0 40 40"><g fill="#fff"><circle cx="20" cy="14" r="7"/><circle cx="20" cy="26" r="7"/><circle cx="14" cy="20" r="7"/><circle cx="26" cy="20" r="7"/></g></svg>
+            <svg width="52" height="52" viewBox="0 0 40 40"><rect width="40" height="40" rx="10" fill="#fff"/><g fill="#0D1A14"><circle cx="20" cy="14" r="7"/><circle cx="20" cy="26" r="7"/><circle cx="14" cy="20" r="7"/><circle cx="26" cy="20" r="7"/></g></svg>
+          </div>
+        </div>
+        <h3>5 · Одноцветная версия</h3>
+        <p>Знак обязан жить в один цвет: печать, факс салона, вышивка, штамп на документе, чёрно-белый скан договора. Если форма читается только в зелёном — это не знак, а иллюстрация.</p>
+      </div>
+
+      <div class="card">
+        <div class="art">
+          <svg width="120" height="100" viewBox="0 0 120 100">
+            <g fill="#0E9F63"><circle cx="60" cy="36" r="13"/><circle cx="60" cy="62" r="13"/><circle cx="47" cy="49" r="13"/><circle cx="73" cy="49" r="13"/></g>
+            <g fill="none" stroke="#0E9F63" stroke-width="1.4" opacity=".45">
+              <circle cx="60" cy="49" r="30"/><circle cx="60" cy="49" r="40"/></g>
+          </svg>
+        </div>
+        <h3>6 · Поведение</h3>
+        <p>Как знак оживает: лепестки собираются в центр при загрузке, один горит при новом сообщении. Одно правило движения — не аттракцион, а состояние продукта.</p>
+      </div>
+    </div>
+
+    <div class="note">
+      <b>Что это меняет практически.</b> Из двенадцати клеверов в <a href="../klever/">галерее</a> проверки 4 и 5 сразу отсеивают контурный, «точки и дуги» и «лепестки разной длины» — они разваливаются на 16 px и в одном цвете. Остаются плотные построения: капли, четыре круга, с просветом, с дыркой в центре.
+    </div>
+  </div>
+</section>
+
+<!-- ============ 3 ============ -->
+<section id="klever">
+  <div class="wrap">
+    <div class="snum">ЧАСТЬ 3</div>
+    <h2>Клевер под микроскопом</h2>
+    <p class="sub">Форма красивая. Но знак обязан не врать — а с клевером есть три вещи, которые надо решить до того, как он попадёт в код.</p>
+
+    <div class="note bad">
+      <b>Проблема первая: четыре лепестка, шесть каналов.</b> Если клевер читается как «каналы в одном окне» — их у нас шесть: Telegram, ВКонтакте, MAX, почта, WhatsApp, Авито. Четыре лепестка обещают четыре. Первый же внимательный владелец салона спросит, где остальные два, — и знак начнёт работать против продукта.
+    </div>
+
+    <div class="note bad">
+      <b>Проблема вторая: четырёхлистный клевер — это удача.</b> Смысл жёстко зашит в культуре: везение, лотерея, случай. Мы продаём ровно обратное — что ни одно сообщение не потеряется <em>не случайно</em>, а по системе. Знак и обещание тянут в разные стороны.
+    </div>
+
+    <div class="note bad">
+      <b>Проблема третья: имя.</b> «Ветра» — это про воздух и движение, а клевер — про землю и растение. Метафоры не сходятся. Раньше знаком была птица (отменена 31.08), и она хотя бы дружила с именем.
+    </div>
+
+    <h3 style="margin-top:34px">Три честных выхода</h3>
+    <div class="grid g3" style="margin-top:16px">
+      <div class="card">
+        <div class="art">
+          <svg width="90" height="90" viewBox="0 0 76 76"><g fill="#0E9F63"><circle cx="38" cy="26" r="11"/><circle cx="38" cy="50" r="11"/><circle cx="26" cy="38" r="11"/><circle cx="50" cy="38" r="11"/></g><circle cx="38" cy="38" r="5" fill="#FAFBFA"/></svg>
+        </div>
+        <span class="tag">выход 1</span>
+        <h3>Лепестки ничего не считают</h3>
+        <p>Мы нигде не говорим «четыре лепестка — четыре канала». Клевер — просто форма из четырёх кругов вокруг пустоты. Пустота в центре и есть окно.</p>
+        <div class="verdict"><b>Цена:</b> надо молча держать эту линию во всех текстах. Один слайд «наши четыре канала» — и всё сломано.</div>
+      </div>
+      <div class="card">
+        <div class="art">
+          <svg width="90" height="90" viewBox="0 0 76 76"><g fill="#0E9F63"><circle cx="38" cy="22" r="9"/><circle cx="54" cy="30" r="9"/><circle cx="54" cy="46" r="9"/><circle cx="38" cy="54" r="9"/><circle cx="22" cy="46" r="9"/><circle cx="22" cy="30" r="9"/></g><circle cx="38" cy="38" r="6" fill="#FAFBFA"/></svg>
+        </div>
+        <span class="tag">выход 2</span>
+        <h3>Шесть лепестков</h3>
+        <p>Считаем честно: шесть кругов по числу каналов, ромашка вместо клевера. Метафора сходится, каждый лепесток может гореть отдельно.</p>
+        <div class="verdict"><b>Цена:</b> шесть кругов на 16 px слипаются в пятно, и знак придётся менять при седьмом канале.</div>
+      </div>
+      <div class="card">
+        <div class="art">
+          <svg width="90" height="90" viewBox="0 0 76 76"><g fill="none" stroke="#0E9F63" stroke-width="7" stroke-linecap="round"><path d="M22 48c0-16 7-24 16-24s16 8 16 24"/></g><circle cx="38" cy="52" r="6" fill="#0E9F63"/></svg>
+        </div>
+        <span class="tag">выход 3</span>
+        <h3>Не клевер, а поток</h3>
+        <p>Абстрактная дуга: шесть линий сходятся в одну. Дружит с именем «Ветра», честно показывает «много входов — один выход», не обещает удачу.</p>
+        <div class="verdict"><b>Цена:</b> абстракцию надо приучать, она не читается с первого взгляда. И это отказ от клевера, который тебе понравился.</div>
+      </div>
+    </div>
+
+    <div class="note ok">
+      <b>Моя рекомендация — выход 1.</b> Клевер оставляем, но нигде не привязываем лепестки к каналам, а центр делаем пустым: дырка в середине — это и точка в «Ветра.», и то самое одно окно, куда всё сходится. Так мы получаем узнаваемую форму без вранья в цифрах. Зелёный при этом перестаёт быть просто цветом и становится объяснением знака.
+    </div>
+  </div>
+</section>
+
+<!-- ============ 4 ============ -->
+<section id="zelenyj">
+  <div class="wrap">
+    <div class="snum">ЧАСТЬ 4</div>
+    <h2>Зелёный, посчитанный по числам</h2>
+    <p class="sub">Пять оттенков из галереи прогнаны через формулу контраста WCAG. Один вывод оказался неприятным и важным.</p>
+
+    <div class="note bad">
+      <b>Правку надо внести сразу.</b> На странице клевера у изумруда <code>#0E9F63</code> подписано «белый текст читается». Это не так: контраст белого на нём <b>3,41:1</b> при норме 4,5:1. Ровно та же ловушка, что была с синим <code>#2C78D5</code> (4,4:1) — из-за неё в паспорте и появился отдельный <code>--blue-press</code>. Зелёному нужна такая же пара.
+    </div>
+
+    <table>
+      <thead><tr><th>Оттенок</th><th>Код</th><th>Белый текст</th><th>Чёрный текст</th><th>Годен для</th></tr></thead>
+      <tbody>
+        <tr><td><span class="chip" style="background:#0E9F63"></span>Изумруд</td><td class="mono">#0E9F63</td><td class="mono">3,41 ✗</td><td class="mono">6,16 ✓</td><td>знак, плашки, крупный текст, графики</td></tr>
+        <tr><td><span class="chip" style="background:#0A7A4C"></span>Изумруд тёмный</td><td class="mono">#0A7A4C</td><td class="mono">5,38 ✓</td><td class="mono">3,90 ✗</td><td><b>кнопки и ссылки</b> — только он под белый мелкий текст</td></tr>
+        <tr><td><span class="chip" style="background:#00C46A"></span>Кислотный</td><td class="mono">#00C46A</td><td class="mono">2,31 ✗</td><td class="mono">9,10 ✓</td><td>только тёмная тема, только с тёмным текстом</td></tr>
+        <tr><td><span class="chip" style="background:#1A6B4B"></span>Бутылочный</td><td class="mono">#1A6B4B</td><td class="mono">6,49 ✓</td><td class="mono">3,23 ✗</td><td>тёмные секции, подвал, глухой премиум</td></tr>
+        <tr><td><span class="chip" style="background:#7FB800"></span>Лайм</td><td class="mono">#7FB800</td><td class="mono">2,52 ✗</td><td class="mono">8,34 ✓</td><td>ничего: спорит с личным стилем Михаила</td></tr>
+        <tr><td><span class="chip" style="background:#12A594"></span>Мята</td><td class="mono">#12A594</td><td class="mono">3,06 ✗</td><td class="mono">6,86 ✓</td><td>уводит в бирюзу, к каналам ближе, чем к бренду</td></tr>
+      </tbody>
+    </table>
+
+    <h3 style="margin-top:30px">Рабочая пара</h3>
+    <div class="grid g2" style="margin-top:14px">
+      <div class="swatch">
+        <div class="fill">
+          <div style="background:#0E9F63;color:#062616">крупный текст ок</div>
+          <div style="background:#0E9F63;color:#fff;opacity:.99">мелкий белый — нет</div>
+        </div>
+        <div class="meta"><b>--green · #0E9F63</b><span>знак, акценты, кольца, ленты, крупные цифры</span></div>
+      </div>
+      <div class="swatch">
+        <div class="fill">
+          <div style="background:#0A7A4C;color:#fff">Подключить салон</div>
+          <div style="background:#0A7A4C;color:#fff;font-weight:400;font-size:12px">мелкий белый — 5,38:1 ✓</div>
+        </div>
+        <div class="meta"><b>--green-press · #0A7A4C</b><span>кнопки, ссылки, всё, где белый текст мельче 18 px</span></div>
+      </div>
+    </div>
+
+    <h3 style="margin-top:34px">Что тянет за собой смена цвета</h3>
+    <ul class="clean">
+      <li>Синий <code>#2C78D5</code> утверждён 16.08 и лежит в <code>packages/ui/src/tokens.css</code>, в макетах и во всей дизайн-системе. Перекрашивать надо за один заход, иначе половина продукта уедет.</li>
+      <li><b>В плюс:</b> цвета каналов Telegram <code>#2AABEE</code> и ВКонтакте <code>#0077FF</code> перестают конкурировать с фирменным — синие точки на аватарах наконец читаются как чужие логотипы, а не как наш бренд.</li>
+      <li><b>В плюс:</b> пункт <code>plan.md</code> §3.1в «кислотный акцент спорит с фирменным синим» отпадает сам.</li>
+      <li><b>В минус:</b> зелёный — цвет статуса «всё хорошо». Токен <code>--ok #167A41</code> почти совпадёт с брендом, и «успешно отправлено» перестанет отличаться от кнопки. Статусный зелёный придётся уводить в другой тон либо заменять на нейтральный.</li>
+      <li><b>В минус:</b> WhatsApp <code>#25D366</code> — тоже зелёный. Точка канала на аватаре сольётся с брендом. Лечится тем, что каналы остаются только точкой, как записано в паспорте.</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ============ 5 ============ -->
+<section id="sistemy">
+  <div class="wrap">
+    <div class="snum">ЧАСТЬ 5</div>
+    <h2>Четыре системы редизайна</h2>
+    <p class="sub">Не палитры, а собранные системы: фон, шрифт, форма кнопки, поведение окна продукта. Ниже — живые первые экраны, а не картинки.</p>
+
+    <!-- А -->
+    <div class="sys">
+      <header>
+        <h3>А · «Поле»</h3>
+        <div class="who">светлая органика · тёплая бумага + изумруд · знак из капель</div>
+      </header>
+      <div class="demo sA">
+        <div class="d-nav">
+          <div class="d-brand">
+            <svg width="26" height="26" viewBox="0 0 40 40"><g fill="#0E9F63"><circle cx="20" cy="13" r="7.5"/><circle cx="20" cy="27" r="7.5"/><circle cx="13" cy="20" r="7.5"/><circle cx="27" cy="20" r="7.5"/></g><circle cx="20" cy="20" r="3.4" fill="#FBFAF6"/></svg>
+            ветра
+          </div>
+          <span style="opacity:.6">возможности · цена · войти</span>
+        </div>
+        <div class="d-cols">
+          <div>
+            <h2 class="d-h1">Шесть мессенджеров<br>в одном окне</h2>
+            <p class="d-p">Салон отвечает клиентам из Telegram, ВК, MAX, почты, WhatsApp и Авито в одной переписке. Ночью отвечает сам.</p>
+            <div class="d-btns">
+              <span class="d-btn">Подключить салон</span>
+              <span class="d-btn d-btn2">Посмотреть окно</span>
+            </div>
+            <div class="d-stats"><div><b>6</b>каналов</div><div><b>0</b>потерянных</div><div><b>24/7</b>ответ ночью</div></div>
+          </div>
+          <div class="d-win">
+            <div class="bar"><span class="d-dot" style="background:#0E9F63"></span> Входящие · 4 новых</div>
+            <div class="row"><span class="d-av">АК</span><div><b>Алина К.</b><br><span style="opacity:.6">Можно завтра на окрашивание?</span></div></div>
+            <div class="row"><span class="d-av">МС</span><div><b>Марина С.</b><br><span style="opacity:.6">Сколько стоит каре?</span></div></div>
+            <div class="row"><span class="d-av">ДВ</span><div><b>Дина В.</b><br><span style="opacity:.6">Спасибо, всё понравилось!</span></div></div>
+          </div>
+        </div>
+      </div>
+      <div class="foot">
+        <div><b>Шрифт:</b> Unbounded в заголовках, Golos Text в тексте. <b>Кнопка:</b> пилюля, <code>#0A7A4C</code>. <b>Фон:</b> тёплый <code>#FBFAF6</code>.</div>
+        <div><b>Кому:</b> салонам красоты — мягко, живо, не пугает. <b>Риск:</b> самый безопасный и самый обычный вариант; на фоне конкурентов не кричит.</div>
+      </div>
+    </div>
+
+    <!-- Б -->
+    <div class="sys">
+      <header>
+        <h3>Б · «Ночная смена»</h3>
+        <div class="who">тёмный премиум · почти чёрный + кислотный · окно продукта героем</div>
+      </header>
+      <div class="demo sB">
+        <div class="d-nav">
+          <div class="d-brand">
+            <svg width="26" height="26" viewBox="0 0 40 40"><g fill="#00C46A"><circle cx="20" cy="13" r="7.5"/><circle cx="20" cy="27" r="7.5"/><circle cx="13" cy="20" r="7.5"/><circle cx="27" cy="20" r="7.5"/></g><circle cx="20" cy="20" r="3.4" fill="#07100C"/></svg>
+            ветра
+          </div>
+          <span style="opacity:.5">возможности · цена · войти</span>
+        </div>
+        <div class="d-cols">
+          <div>
+            <h2 class="d-h1">Пока салон спит,<br>Ветра отвечает</h2>
+            <p class="d-p">Шесть каналов сходятся в одно окно. Ночью автоответ держит клиента до утра — заявка не уходит к соседям.</p>
+            <div class="d-btns">
+              <span class="d-btn">Подключить салон</span>
+              <span class="d-btn d-btn2">Посмотреть окно</span>
+            </div>
+            <div class="d-stats"><div><b>6</b>каналов</div><div><b>0</b>потерянных</div><div><b>24/7</b>ответ ночью</div></div>
+          </div>
+          <div class="d-win">
+            <div class="bar"><span class="d-dot" style="background:#00C46A"></span> Входящие · 4 новых</div>
+            <div class="row"><span class="d-av">АК</span><div><b>Алина К.</b><br><span style="opacity:.55">Можно завтра на окрашивание?</span></div></div>
+            <div class="row"><span class="d-av">МС</span><div><b>Марина С.</b><br><span style="opacity:.55">Сколько стоит каре?</span></div></div>
+            <div class="row"><span class="d-av">ДВ</span><div><b>Дина В.</b><br><span style="opacity:.55">Спасибо, всё понравилось!</span></div></div>
+          </div>
+        </div>
+      </div>
+      <div class="foot">
+        <div><b>Шрифт:</b> Unbounded крупно, тонкий текст. <b>Кнопка:</b> кислотная <code>#00C46A</code> с тёмным текстом — иначе не читается. <b>Фон:</b> <code>#07100C</code> с зерном.</div>
+        <div><b>Кому:</b> нам самим и Авито — выглядит дороже всех. <b>Риск:</b> настоящее окно продукта светлое и в две колонки. Выберем — придётся перекрашивать сам продукт, а это неделя работы.</div>
+      </div>
+    </div>
+
+    <!-- В -->
+    <div class="sys">
+      <header>
+        <h3>В · «Спецификация»</h3>
+        <div class="who">инженерная · сетка и моношрифт · зелёный только как факт</div>
+      </header>
+      <div class="demo sV">
+        <div class="d-nav">
+          <div class="d-brand">
+            <svg width="24" height="24" viewBox="0 0 40 40"><rect width="40" height="40" rx="3" fill="#0E9F63"/><g fill="#fff"><circle cx="20" cy="13" r="6.5"/><circle cx="20" cy="27" r="6.5"/><circle cx="13" cy="20" r="6.5"/><circle cx="27" cy="20" r="6.5"/></g><circle cx="20" cy="20" r="3" fill="#0E9F63"/></svg>
+            ВЕТРА
+          </div>
+          <span style="opacity:.6">v1.0 · сборка 07.09</span>
+        </div>
+        <div class="d-cols">
+          <div>
+            <h2 class="d-h1">Одно окно.<br>Шесть каналов.<br>Ноль потерь.</h2>
+            <p class="d-p">Система приёма сообщений для салона. Подключение — 15 минут, без переноса номера и без нового телефона.</p>
+            <div class="d-btns">
+              <span class="d-btn">Подключить салон</span>
+              <span class="d-btn d-btn2">Спецификация</span>
+            </div>
+            <div class="d-stats"><div><b>06</b>каналов</div><div><b>00</b>потерянных</div><div><b>24/7</b>автоответ</div></div>
+          </div>
+          <div class="d-win">
+            <div class="bar">ВХОДЯЩИЕ / 04</div>
+            <div class="row"><span class="d-av">01</span><div><b>Алина К.</b> · telegram<br><span style="opacity:.6">Можно завтра на окрашивание?</span></div></div>
+            <div class="row"><span class="d-av">02</span><div><b>Марина С.</b> · вконтакте<br><span style="opacity:.6">Сколько стоит каре?</span></div></div>
+            <div class="row"><span class="d-av">03</span><div><b>Дина В.</b> · авито<br><span style="opacity:.6">Спасибо, всё понравилось!</span></div></div>
+          </div>
+        </div>
+      </div>
+      <div class="foot">
+        <div><b>Шрифт:</b> Golos Text жирно + JetBrains Mono в подписях. <b>Кнопка:</b> прямоугольная, чёрная. <b>Фон:</b> стальной с миллиметровкой.</div>
+        <div><b>Кому:</b> владельцу, который считает деньги, — выглядит как прибор, а не как реклама. <b>Риск:</b> холодно для индустрии красоты; зелёный тут почти не виден.</div>
+      </div>
+    </div>
+
+    <!-- Г -->
+    <div class="sys">
+      <header>
+        <h3>Г · «Знак»</h3>
+        <div class="who">типографика во весь экран · белое поле · зелёный — единственный цвет</div>
+      </header>
+      <div class="demo sG">
+        <div class="d-nav">
+          <div class="d-brand">
+            <svg width="24" height="24" viewBox="0 0 40 40"><g fill="#0E9F63"><circle cx="20" cy="13" r="7.5"/><circle cx="20" cy="27" r="7.5"/><circle cx="13" cy="20" r="7.5"/><circle cx="27" cy="20" r="7.5"/></g><circle cx="20" cy="20" r="3.4" fill="#fff"/></svg>
+            ветра
+          </div>
+          <span style="opacity:.55">возможности · цена · войти</span>
+        </div>
+        <div class="d-cols">
+          <div>
+            <h2 class="d-h1">одно<br>окно<span style="color:#0E9F63">.</span></h2>
+            <p class="d-p">Шесть мессенджеров салона в одной переписке. Ночью Ветра отвечает сама.</p>
+            <div class="d-btns">
+              <span class="d-btn">Подключить салон</span>
+              <span class="d-btn d-btn2">Посмотреть окно</span>
+            </div>
+          </div>
+          <div class="d-win">
+            <div class="bar">Входящие · 4 новых</div>
+            <div class="row"><span class="d-av">АК</span><div><b>Алина К.</b><br><span style="opacity:.6">Можно завтра на окрашивание?</span></div></div>
+            <div class="row"><span class="d-av">МС</span><div><b>Марина С.</b><br><span style="opacity:.6">Сколько стоит каре?</span></div></div>
+            <div class="row"><span class="d-av">ДВ</span><div><b>Дина В.</b><br><span style="opacity:.6">Спасибо, всё понравилось!</span></div></div>
+          </div>
+        </div>
+      </div>
+      <div class="foot">
+        <div><b>Шрифт:</b> Unbounded гигантский, всё остальное мелкое. <b>Кнопка:</b> зелёная пилюля. <b>Фон:</b> чистый белый.</div>
+        <div><b>Кому:</b> тем, кто смотрит с телефона, — заголовок читается за секунду. <b>Риск:</b> держится целиком на одном приёме; если заголовок слабый, страница пустая.</div>
+      </div>
+    </div>
+
+    <div class="note ok">
+      <b>Моя ставка — А, с одной деталью из Б.</b> Салонам продаём светлым «Полем»: оно тёплое, не пугает и не требует перекрашивать продукт. А тёмную сцену из Б оставляем для одной секции внизу лендинга — «ночной режим», где как раз показывается автоответ в 2 часа ночи. Тогда тёмный премиум работает по смыслу, а не ради вида, и неделя перекраски продукта не нужна.
+    </div>
+  </div>
+</section>
+
+<!-- ============ 6 ============ -->
+<section id="reshit">
+  <div class="wrap">
+    <div class="snum">ЧАСТЬ 6</div>
+    <h2>Что решить — пять вопросов</h2>
+    <p class="sub">Пока нет ответов на первые три, лендинг собирать нельзя: перекрашивать придётся дважды.</p>
+
+    <div class="q"><b>1 · Клевер остаётся?</b> Если да — берём выход 1: лепестки ничего не считают, центр пустой. Если смущает «удача» и разлад с именем — выход 3, поток из линий.</div>
+    <div class="q"><b>2 · Какой зелёный главный?</b> Изумруд <code>#0E9F63</code> + <code>#0A7A4C</code> под кнопки (моя рекомендация) или кислотный <code>#00C46A</code>, но тогда только тёмная тема.</div>
+    <div class="q"><b>3 · Какая система:</b> А «Поле», Б «Ночная смена», В «Спецификация» или Г «Знак».</div>
+    <div class="q"><b>4 · Что делаем со статусным зелёным</b> <code>--ok #167A41</code>, который теперь сливается с брендом. Предлагаю увести «успешно» в нейтральный серо-зелёный, а бренд оставить единственным ярким.</div>
+    <div class="q"><b>5 · Переписываем <code>docs/style.md</code>?</b> Там записано «знак — само слово с точкой, отдельного символа нет и не нужно». Берём клевер — этот раздел надо переписать, иначе паспорт и код разойдутся.</div>
+
+    <div class="note">
+      <b>После ответов</b> — за один заход перекрашиваю <code>packages/ui/src/tokens.css</code>, дизайн-систему и макеты, переписываю в паспорте разделы «Цвет» и «Знак», и собираю лендинг в <code>apps/landing</code> по выбранной системе.
+    </div>
+  </div>
+</section>
+
+<div class="wrap foot-final">
+  Ветра · внутренний документ, не для клиентов · 7 сентября 2026 ·
+  <a href="../klever/">двенадцать клеверов и оттенки</a> ·
+  <a href="../znaki/">двенадцать знаков</a> ·
+  <a href="../lending-stili/">четыре направления лендинга</a>
+</div>
+
+</body>
+</html>
