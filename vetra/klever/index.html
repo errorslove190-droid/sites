@@ -1,0 +1,271 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Ветра — клевер и зелёный</title>
+<style>
+@font-face{font-family:'Google Sans';font-style:normal;font-weight:400 700;font-display:swap;
+  src:url('../maket/fonts/google-sans-cyrillic-400-700.woff2') format('woff2');
+  unicode-range:U+0301,U+0400-045F,U+0490-0491,U+04B0-04B1,U+2116;}
+@font-face{font-family:'Google Sans';font-style:normal;font-weight:400 700;font-display:swap;
+  src:url('../maket/fonts/google-sans-latin-400-700.woff2') format('woff2');
+  unicode-range:U+0000-00FF,U+2000-206F,U+20AC,U+2122,U+2212,U+FEFF,U+FFFD;}
+@font-face{font-family:'Google Sans Text';font-style:normal;font-weight:400;font-display:swap;
+  src:url('../maket/fonts/google-sans-text-cyrillic-400.woff2') format('woff2');
+  unicode-range:U+0301,U+0400-045F,U+0490-0491,U+04B0-04B1,U+2116;}
+@font-face{font-family:'Google Sans Text';font-style:normal;font-weight:500;font-display:swap;
+  src:url('../maket/fonts/google-sans-text-cyrillic-500.woff2') format('woff2');
+  unicode-range:U+0301,U+0400-045F,U+0490-0491,U+04B0-04B1,U+2116;}
+
+:root{
+  /* акцент подставляется переключателем; по умолчанию — изумруд */
+  --acc:#0E9F63;        /* на светлом */
+  --acc-dark:#2BE08C;   /* на тёмном */
+  --on-acc:#FFFFFF;     /* текст на плашке акцента */
+  --ink:#0F1D2E;--muted:#56687F;--line:#DCE6F2;--page:#F7FAFE;--night:#080D14;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--page);color:var(--ink);
+  font-family:'Google Sans Text','Google Sans',system-ui,sans-serif;-webkit-font-smoothing:antialiased}
+.wrap{max-width:1180px;margin:0 auto;padding:34px 20px 90px}
+h1{font-family:'Google Sans';font-weight:700;letter-spacing:-.04em;font-size:clamp(27px,4vw,42px);
+  margin:0 0 10px;line-height:1.05}
+.lead{color:var(--muted);font-size:16px;line-height:1.55;max-width:72ch;margin:0 0 22px}
+.warn{background:#FFF6E5;border:1px solid #F0DDB5;border-radius:12px;padding:14px 16px;
+  font-size:14.5px;line-height:1.55;margin:0 0 30px;max-width:82ch}
+.warn b{font-family:'Google Sans'}
+
+/* ---------- переключатель зелёного ---------- */
+.picker{background:#fff;border:1px solid var(--line);border-radius:16px;padding:18px 20px 20px;
+  margin:0 0 34px}
+.picker h2{font-family:'Google Sans';font-weight:700;font-size:19px;letter-spacing:-.03em;
+  margin:0 0 4px}
+.picker p{margin:0 0 16px;font-size:13.5px;color:var(--muted);line-height:1.5}
+.swatches{display:grid;grid-template-columns:repeat(auto-fit,minmax(174px,1fr));gap:12px}
+.sw{border:1.5px solid var(--line);border-radius:13px;padding:0;overflow:hidden;cursor:pointer;
+  background:#fff;text-align:left;font:inherit;transition:border-color .16s,transform .16s}
+.sw:hover{transform:translateY(-3px)}
+.sw[aria-pressed="true"]{border-color:var(--ink)}
+.sw .band{height:52px;display:flex;align-items:center;justify-content:center;
+  font-family:'Google Sans';font-weight:700;font-size:14px}
+.sw .band .half{flex:1;height:100%;display:flex;align-items:center;justify-content:center}
+.sw .meta{padding:9px 12px 11px}
+.sw .meta b{display:block;font-family:'Google Sans';font-size:14px;letter-spacing:-.02em}
+.sw .meta span{display:block;font-size:11.5px;color:var(--muted);margin-top:3px}
+
+/* ---------- сетка знаков ---------- */
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(276px,1fr));gap:18px}
+.card{background:#fff;border:1px solid var(--line);border-radius:16px;overflow:hidden;
+  display:flex;flex-direction:column}
+.no{font-size:12px;letter-spacing:.1em;color:var(--acc);font-weight:500;padding:13px 16px 0}
+.card h3{font-family:'Google Sans';font-weight:700;font-size:17px;letter-spacing:-.03em;
+  margin:4px 16px 5px}
+.card .why{margin:0 16px 13px;font-size:13px;line-height:1.5;color:var(--muted)}
+.beds{display:grid;grid-template-columns:1fr 1fr;border-top:1px solid var(--line);margin-top:auto}
+.bed{display:flex;align-items:center;justify-content:center;padding:22px 12px;min-height:118px}
+.bed.light{background:#fff;border-right:1px solid var(--line)}
+.bed.dark{background:var(--night)}
+.tiny{display:flex;align-items:center;gap:13px;padding:11px 16px;border-top:1px solid var(--line);
+  background:#FBFCFE;font-size:11.5px;color:var(--muted)}
+.tiny .t,.tiny .t2{width:32px;height:32px;display:flex;align-items:center;justify-content:center;
+  border-radius:7px;flex:0 0 32px}
+.tiny .t{background:var(--night)}
+.tiny .t2{background:#fff;border:1px solid var(--line)}
+svg{display:block}
+.bed svg{max-width:100%;height:auto}
+/* акцент на светлом фоне и на тёмном — разные значения одной роли */
+.on-l{fill:var(--acc)}
+.on-d{fill:var(--acc-dark)}
+.st-l{stroke:var(--acc);fill:none}
+.st-d{stroke:var(--acc-dark);fill:none}
+.wordmark-l{fill:var(--ink)}
+.wordmark-d{fill:#fff}
+
+@media (max-width:480px){.beds{grid-template-columns:1fr}
+  .bed.light{border-right:0;border-bottom:1px solid var(--line)}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>Клевер и зелёный</h1>
+  <p class="lead">Двенадцать построений одного знака — четыре лепестка, четыре канала,
+    сходящиеся в центр. Сверху переключатель: нажми оттенок, и все знаки перекрасятся.
+    Каждый показан на белом, на тёмном и в размере иконки 32 px.</p>
+
+  <div class="warn"><b>Что меняет переход на зелёный.</b> Фирменный синий
+    <b>#2C78D5</b> утверждён 16 августа и лежит в <code>packages/ui/src/tokens.css</code>, в макетах
+    и в дизайн-системе — перекрашивать придётся всё сразу, иначе разъедется.
+    Два следствия, оба в плюс: пункт плана «кислотный акцент спорит с фирменным синим»
+    больше не действует, а цвета каналов (Telegram и ВКонтакте — синие) перестают
+    конкурировать с брендом. Одно следствие в минус: на светло-зелёной плашке белый
+    текст нечитаем, кнопка потребует тёмного текста — это видно на переключателе.</div>
+
+  <div class="picker">
+    <h2>Какой зелёный</h2>
+    <p>Левая половина плашки — цвет на белом фоне, правая — на тёмном. Подпись говорит,
+      каким текстом подписывается кнопка этого цвета.</p>
+    <div class="swatches" id="sw"></div>
+  </div>
+
+  <div class="grid" id="grid"></div>
+</div>
+
+<script>
+/* ---------- оттенки ---------- */
+const GREENS = [
+  { id:'izumrud', name:'Изумруд',      light:'#0E9F63', dark:'#2BE08C', onAcc:'#FFFFFF',
+    note:'белый текст читается · деловой, спокойный' },
+  { id:'xovio',   name:'Кислотный',    light:'#00C46A', dark:'#00E17B', onAcc:'#06231A',
+    note:'текст только тёмный · как у Xovio' },
+  { id:'butyl',   name:'Бутылочный',   light:'#1A6B4B', dark:'#4FCB94', onAcc:'#FFFFFF',
+    note:'белый текст читается · дорогой, глухой' },
+  { id:'lime',    name:'Лайм',         light:'#7FB800', dark:'#B7F53D', onAcc:'#1A2200',
+    note:'текст только тёмный · громкий, молодой' },
+  { id:'myata',   name:'Мята',         light:'#12A594', dark:'#3EE0C8', onAcc:'#FFFFFF',
+    note:'белый текст читается · уводит в бирюзу' },
+];
+
+/* ---------- знаки: каждый рисуется в viewBox 64×64 ---------- */
+/* cls — класс заливки/обводки, который подставит нужный оттенок */
+const MARKS = [
+  { n:'01', t:'Капли',
+    why:'Исходный клевер: четыре капли сходятся остриями в центр. Мягкий, плотный.',
+    svg: c => `<g class="${c}">${rot(`M32 32 C 32 18, 24 8, 10 8 C 10 22, 20 32, 32 32 Z`)}</g>` },
+
+  { n:'02', t:'Листья',
+    why:'Узкий лист с двумя остриями. Знак становится легче и злее, чем на каплях.',
+    svg: c => `<g class="${c}">${rot(`M32 32 C 25 29, 11 17, 7 6 C 18 10, 29 24, 32 32 Z`)}</g>` },
+
+  { n:'03', t:'Четыре круга',
+    why:'Самое простое построение: круги касаются в центре. Читается в любом размере.',
+    svg: c => `<g class="${c}"><circle cx="20" cy="20" r="11.4"/><circle cx="44" cy="20" r="11.4"/>
+      <circle cx="20" cy="44" r="11.4"/><circle cx="44" cy="44" r="11.4"/></g>` },
+
+  { n:'04', t:'С просветом',
+    why:'Лепестки отодвинуты от центра — между ними крест из фона. Знак дышит.',
+    svg: c => `<g class="${c}">${rot(`M32 32 C 32 19, 25 10, 12 10 C 12 23, 21 32, 32 32 Z`, 'translate(-3,-3)')}</g>` },
+
+  { n:'05', t:'Контурный',
+    why:'Одна толщина линии, ничего не залито — приём из набора иконок Streamline.',
+    svg: c => `<g class="${c.replace('on','st')}" stroke-width="4.6" stroke-linejoin="round">
+      ${rot(`M32 32 C 32 18, 24 8, 10 8 C 10 22, 20 32, 32 32 Z`)}</g>` },
+
+  { n:'06', t:'Дырка в центре',
+    why:'В середине вырез — знак становится кольцевым и лучше держит мелкий размер.',
+    svg: (c,i) => `<defs><mask id="m${i}"><rect width="64" height="64" fill="#000"/>
+      <g fill="#fff">${rot(`M32 32 C 32 18, 24 8, 10 8 C 10 22, 20 32, 32 32 Z`)}</g>
+      <circle cx="32" cy="32" r="7" fill="#000"/></mask></defs>
+      <rect width="64" height="64" mask="url(#m${i})" class="${c}"/>` },
+
+  { n:'07', t:'Один лепесток горит',
+    why:'Три лепестка приглушены, четвёртый в полную силу — канал, где ждут ответа.',
+    svg: (c,i,dark) => `<g fill="${dark?'#28405A':'#C9D8E6'}">
+        ${rot(`M32 32 C 32 18, 24 8, 10 8 C 10 22, 20 32, 32 32 Z`, null, [90,180,270])}</g>
+      <g class="${c}">${one(`M32 32 C 32 18, 24 8, 10 8 C 10 22, 20 32, 32 32 Z`)}</g>` },
+
+  { n:'08', t:'Косой крест',
+    why:'Тот же клевер, повёрнутый на 45° — стоит на острие, читается как звезда.',
+    svg: c => `<g class="${c}" transform="rotate(45 32 32)">
+      ${rot(`M32 32 C 32 18, 24 8, 10 8 C 10 22, 20 32, 32 32 Z`)}</g>` },
+
+  { n:'09', t:'Вертушка',
+    why:'Лепестки закручены в одну сторону — знак получает движение. Ветра как-никак.',
+    svg: c => `<g class="${c}">${rot(`M32 32 C 30 18, 20 10, 8 12 C 12 24, 22 32, 32 32 Z`)}</g>` },
+
+  { n:'10', t:'Разной длины',
+    why:'Четыре канала неравны: Telegram больше, Ozon меньше. Знак это признаёт.',
+    svg: c => `<g class="${c}">
+      <g>${one(`M32 32 C 32 16, 23 5, 6 5 C 6 22, 17 32, 32 32 Z`)}</g>
+      <g transform="rotate(90 32 32)">${one(`M32 32 C 32 20, 25 12, 13 12 C 13 24, 21 32, 32 32 Z`)}</g>
+      <g transform="rotate(180 32 32)">${one(`M32 32 C 32 18, 24 9, 10 9 C 10 23, 19 32, 32 32 Z`)}</g>
+      <g transform="rotate(270 32 32)">${one(`M32 32 C 32 22, 27 15, 17 15 C 17 25, 23 32, 32 32 Z`)}</g></g>` },
+
+  { n:'11', t:'Точки и дуги',
+    why:'Четыре точки-канала соединены дугами с ядром. Схема, а не растение.',
+    svg: (c,i,dark) => `<g class="${c.replace('on','st')}" stroke-width="3.4" stroke-linecap="round">
+        <path d="M17 17 C 24 20, 28 24, 31 31"/><path d="M47 17 C 40 20, 36 24, 33 31"/>
+        <path d="M17 47 C 24 44, 28 40, 31 33"/><path d="M47 47 C 40 44, 36 40, 33 33"/></g>
+      <g class="${c}"><circle cx="15" cy="15" r="5.4"/><circle cx="49" cy="15" r="5.4"/>
+        <circle cx="15" cy="49" r="5.4"/><circle cx="49" cy="49" r="5.4"/>
+        <circle cx="32" cy="32" r="7.6"/></g>` },
+
+  { n:'12', t:'Плитка приложения',
+    why:'Клевер вывороткой на залитом квадрате — так знак выглядит иконкой на телефоне.',
+    svg: (c,i,dark) => `<rect width="64" height="64" rx="15" class="${c}"/>
+      <g fill="${dark?'#061A12':'#FFFFFF'}" transform="translate(32 32) scale(.62) translate(-32 -32)">
+        ${rot(`M32 32 C 32 18, 24 8, 10 8 C 10 22, 20 32, 32 32 Z`)}</g>` },
+];
+
+/** один лепесток без поворота */
+function one(d){ return `<path d="${d}"/>`; }
+/** лепесток и его повороты вокруг центра */
+function rot(d, extra, angles){
+  const list = angles ?? [0,90,180,270];
+  return list.map(a=>{
+    const t = [a?`rotate(${a} 32 32)`:'', extra||''].filter(Boolean).join(' ');
+    return `<g${t?` transform="${t}"`:''}><path d="${d}"/></g>`;
+  }).join('');
+}
+
+/* ---------- отрисовка ---------- */
+const grid = document.getElementById('grid');
+grid.innerHTML = MARKS.map((m,i)=>`
+  <div class="card">
+    <div class="no">${m.n}</div>
+    <h3>${m.t}</h3>
+    <p class="why">${m.why}</p>
+    <div class="beds">
+      <div class="bed light">
+        <svg width="196" height="56" viewBox="0 0 196 56" role="img" aria-label="${m.t}">
+          <g transform="translate(2 -4) scale(.72)">${m.svg('on-l', 'l'+i, false)}</g>
+          <text x="60" y="39" font-family="Google Sans" font-weight="700" font-size="32"
+            letter-spacing="-1.3" class="wordmark-l">Ветра</text>
+        </svg>
+      </div>
+      <div class="bed dark">
+        <svg width="196" height="56" viewBox="0 0 196 56" role="img" aria-label="${m.t} на тёмном">
+          <g transform="translate(2 -4) scale(.72)">${m.svg('on-d', 'd'+i, true)}</g>
+          <text x="60" y="39" font-family="Google Sans" font-weight="700" font-size="32"
+            letter-spacing="-1.3" class="wordmark-d">Ветра</text>
+        </svg>
+      </div>
+    </div>
+    <div class="tiny">
+      <span class="t"><svg width="24" height="24" viewBox="0 0 64 64">${m.svg('on-d','td'+i,true)}</svg></span>
+      <span class="t2"><svg width="24" height="24" viewBox="0 0 64 64">${m.svg('on-l','tl'+i,false)}</svg></span>
+      ${m.n==='05'||m.n==='11' ? 'тонкие линии в 32 px слабеют' :
+        m.n==='10' ? 'в иконке неравенство лепестков почти не видно' :
+        m.n==='12' ? 'готовая иконка приложения, слово не нужно' :
+        'в иконке держится'}
+    </div>
+  </div>`).join('');
+
+/* ---------- переключатель ---------- */
+const sw = document.getElementById('sw');
+sw.innerHTML = GREENS.map((g,i)=>`
+  <button class="sw" type="button" data-i="${i}" aria-pressed="${i===0}">
+    <span class="band">
+      <span class="half" style="background:${g.light};color:${g.onAcc}">Посмотреть</span>
+      <span class="half" style="background:#080D14;color:${g.dark}">Посмотреть</span>
+    </span>
+    <span class="meta"><b>${g.name} · ${g.light}</b><span>${g.note}</span></span>
+  </button>`).join('');
+
+function apply(i){
+  const g = GREENS[i];
+  const r = document.documentElement.style;
+  r.setProperty('--acc', g.light);
+  r.setProperty('--acc-dark', g.dark);
+  r.setProperty('--on-acc', g.onAcc);
+  sw.querySelectorAll('.sw').forEach(b=>b.setAttribute('aria-pressed', b.dataset.i===String(i)));
+}
+sw.addEventListener('click', e=>{
+  const b = e.target.closest('.sw');
+  if (b) apply(Number(b.dataset.i));
+});
+apply(0);
+</script>
+</body>
+</html>
