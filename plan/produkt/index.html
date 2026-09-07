@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Цифровой продукт — черновик комплекта</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Golos+Text:wght@400;500;600;700&family=Unbounded:wght@600;800&display=swap" rel="stylesheet">
+<style>
+  :root{--ink:#0a0a0a;--paper:#fff;--lime:#d8f34e;--grey:#585858;--line:#e6e6e6;--soft:#f4f4f4}
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:'Golos Text',-apple-system,'Segoe UI',sans-serif;background:var(--paper);color:var(--ink);line-height:1.55;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:760px;margin:0 auto;padding:0 20px 80px}
+  header{padding:44px 0 28px;border-bottom:2px solid var(--ink)}
+  .kicker{font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--grey);font-weight:600}
+  h1{font-family:'Unbounded',sans-serif;font-size:clamp(26px,6vw,40px);line-height:1.08;letter-spacing:-.02em;margin:10px 0 12px;font-weight:800}
+  .lead{color:var(--grey);font-size:15px;max-width:56ch}
+  section{margin-top:44px}
+  h2{font-size:20px;font-weight:700;letter-spacing:-.01em;margin-bottom:6px}
+  .note{color:var(--grey);font-size:14px;margin-bottom:16px;max-width:60ch}
+  .big{font-family:'Unbounded',sans-serif;font-weight:800;font-size:clamp(22px,5vw,32px);line-height:1.15;margin:14px 0 8px}
+  .mark{background:var(--lime);padding:0 6px}
+  .row{display:flex;gap:14px;padding:14px 0;border-bottom:1px solid var(--line);align-items:flex-start}
+  .row:last-child{border-bottom:none}
+  .n{flex:none;width:28px;height:28px;border:2px solid var(--ink);display:grid;place-items:center;font-weight:700;font-size:13px}
+  .n.lime{background:var(--lime)}
+  .t{font-weight:600;font-size:16px}
+  .d{color:var(--grey);font-size:14px;margin-top:3px}
+  .d code{font-family:ui-monospace,Consolas,monospace;font-size:12.5px;background:var(--soft);padding:2px 5px}
+  .grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:14px}
+  @media(max-width:560px){.grid{grid-template-columns:1fr}}
+  .card{border:1px solid var(--line);padding:16px}
+  .card h3{font-size:14px;font-weight:700;margin-bottom:6px}
+  .card p{font-size:14px;color:var(--grey)}
+  .card.dark{background:var(--ink);color:#fff;border-color:var(--ink)}
+  .card.dark p{color:#c9c9c9}
+  .price{display:flex;gap:12px;flex-wrap:wrap;margin-top:14px}
+  .price div{border:2px solid var(--ink);padding:14px 18px;flex:1;min-width:180px}
+  .price b{font-family:'Unbounded',sans-serif;font-size:22px;display:block}
+  .price span{font-size:13px;color:var(--grey)}
+  .price .rec{background:var(--lime)}
+  .price .rec span{color:var(--ink)}
+  .warn{border-left:4px solid var(--ink);padding:10px 14px;background:var(--soft);font-size:14px;margin-top:14px}
+  .ask{margin-top:44px;border:2px solid var(--ink);padding:20px}
+  .ask h2{margin-bottom:10px}
+  .ask li{margin:8px 0 8px 18px;font-size:15px}
+  footer{margin-top:60px;font-size:12px;color:var(--grey)}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header>
+  <div class="kicker">Черновик · 07.09.2026 · для решения</div>
+  <h1>Комплект «Сайт для бизнеса за вечер с Claude Code»</h1>
+  <p class="lead">Первый цифровой продукт: то, что уже собрано для Андрея, упаковываем и продаём людям, которые хотят делать сайты на Claude Code, но не знают, как всё настроить.</p>
+</header>
+
+<section>
+  <h2>1. Что это, в одной фразе</h2>
+  <p class="big">Ставишь одним скриптом — и Claude Code <span class="mark">делает сайты как у Михаила</span>: со скилами, правилами и чек-листами.</p>
+  <p class="note">Покупатель получает не «курс», а готовое рабочее место. Ценность — сэкономленные недели настройки и рабочий процесс, который уже дал 20+ сайтов в портфолио.</p>
+</section>
+
+<section>
+  <h2>2. Кому продаём</h2>
+  <div class="grid">
+    <div class="card"><h3>Новичок с подпиской Claude</h3><p>Купил Claude Code, открыл пустое окно, не знает, что дальше. Хочет делать сайты себе или на заказ.</p></div>
+    <div class="card"><h3>Фрилансер на Тильде/WordPress</h3><p>Слышал про вайб-кодинг, хочет ускориться и брать больше заказов, но настраивать окружение лень.</p></div>
+    <div class="card"><h3>Владелец малого бизнеса</h3><p>Хочет сайт себе без студии. Сделает по инструкции за вечер.</p></div>
+    <div class="card dark"><h3>Не для кого</h3><p>Не для программистов: им проще собрать самим. Не для тех, кто хочет «кнопку деньги».</p></div>
+  </div>
+</section>
+
+<section>
+  <h2>3. Состав комплекта</h2>
+  <p class="note">Всё уже существует в <code>D:\Projects\andrey-kit</code>. Работа — вычистить личное, дописать инструкцию с картинками, снять два видео.</p>
+  <div class="row"><div class="n lime">1</div><div><div class="t">Установщик setup.cmd</div><div class="d">Один клик: ярлыки, рабочая папка, правила CLAUDE.md, разрешения, база знаний.</div></div></div>
+  <div class="row"><div class="n lime">2</div><div><div class="t">38 скилов</div><div class="d">Дизайн (Impeccable, frontend-design, style-lab, refs, библиотека вкуса), процесс (Superpowers), SEO и тексты, лид-форма без сервера.</div></div></div>
+  <div class="row"><div class="n lime">3</div><div><div class="t">Правила и чек-листы</div><div class="d">CLAUDE.md с «четырьмя запретами», чек-лист качества перед сдачей, паспорт стиля style.md, ошибки деплоя.</div></div></div>
+  <div class="row"><div class="n lime">4</div><div><div class="t">База знаний Obsidian</div><div class="d">70 заметок методологии: как выбирать референсы, ниши, что продаёт, экономия лимитов.</div></div></div>
+  <div class="row"><div class="n">5</div><div><div class="t">Инструменты</div><div class="d">Публикация на GitHub Pages и на хостинг одной командой, лаборатория стилей, бот-ассистент в Telegram, бесплатный режим через OmniRoute.</div></div></div>
+  <div class="row"><div class="n">6</div><div><div class="t">Два видео по 10 минут</div><div class="d">«Установка за 5 минут» и «Сайт кафе от пустой папки до ссылки». Снять с экрана, без лица. Это единственное, чего пока нет.</div></div></div>
+</section>
+
+<section>
+  <h2>4. Цена</h2>
+  <div class="price">
+    <div><b>1 990 ₽</b><span>Базовый: установщик, скилы, правила, база, инструкция</span></div>
+    <div class="rec"><b>3 990 ₽</b><span>Полный: + видео, бот-ассистент, лаборатория стилей, чат покупателей в Telegram на 30 дней</span></div>
+    <div><b>9 900 ₽</b><span>С разбором: + созвон 60 минут, ставлю и настраиваю под его задачу</span></div>
+  </div>
+  <p class="note" style="margin-top:12px">Цена ниже одного заказа на сайт, покупатель это понимает. Три уровня, потому что часть людей всегда берёт средний.</p>
+</section>
+
+<section>
+  <h2>5. Где происходит покупка</h2>
+  <div class="row"><div class="n lime">A</div><div><div class="t">Tribute в Telegram</div><div class="d">Человек жмёт кнопку в боте, платит картой РФ, сразу получает ссылку на приватный репозиторий или архив. Комиссия ~10 %. Ты ничего не делаешь руками.</div></div></div>
+  <div class="row"><div class="n">B</div><div><div class="t">Boosty — запасной</div><div class="d">Платный пост с файлами. Работает, но выглядит как донат.</div></div></div>
+  <div class="warn">Whop, Gumroad, Stripe в России не выплачивают. Платформа Гаджи нам недоступна в принципе, и это не проблема: покупатель у нас русскоязычный.</div>
+</section>
+
+<section>
+  <h2>6. Как о нём узнают</h2>
+  <p class="note">Файл сам себя не продаёт. Это то, что Гаджи называет «дистрибуцией»: класть продукт туда, где нужные люди уже собраны.</p>
+  <div class="row"><div class="n lime">1</div><div><div class="t">Партнёр-канал про Claude Code / вайб-кодинг</div><div class="d">Автору 40 % с продажи по его ссылке. Ему готовый продукт без работы, нам его подписчики. Найти 3 канала на 5–30 тыс., написать двоим.</div></div></div>
+  <div class="row"><div class="n lime">2</div><div><div class="t">Бесплатная приманка</div><div class="d">Короткий PDF «5 правил, чтобы Claude Code не умничал» бесплатно в обмен на подписку на бота. Внутри — ссылка на комплект.</div></div></div>
+  <div class="row"><div class="n">3</div><div><div class="t">Свои площадки</div><div class="d">Портфолио, Авито-карточки, Telegram-канал Михаила. Один пост «как я делаю сайт за вечер» с реальным экраном.</div></div></div>
+</section>
+
+<section>
+  <h2>7. План запуска</h2>
+  <div class="row"><div class="n lime">Н1</div><div><div class="t">Упаковать</div><div class="d">Вычистить личное из andrey-kit, переименовать в claude-site-kit, дописать инструкцию, проверить установку на чистой машине. Делает Claude, Михаил проверяет.</div></div></div>
+  <div class="row"><div class="n lime">Н1</div><div><div class="t">Снять два видео</div><div class="d">Экран + голос, 10 минут каждое. Михаил.</div></div></div>
+  <div class="row"><div class="n lime">Н2</div><div><div class="t">Страница продажи + Tribute</div><div class="d">Лендинг в фирменном стиле на GitHub Pages, бот с кнопкой оплаты. Делает Claude, Tribute подключает Михаил (нужен его аккаунт).</div></div></div>
+  <div class="row"><div class="n">Н2</div><div><div class="t">Написать трём каналам</div><div class="d">Текст готовлю я, отправляет Михаил.</div></div></div>
+  <div class="row"><div class="n">Н3–4</div><div><div class="t">Первые продажи</div><div class="d">Реалистично 5–10 продаж за первый месяц при одном партнёре. Без партнёра и аудитории — ноль, как у большинства у Гаджи.</div></div></div>
+</section>
+
+<div class="ask">
+  <h2>Что нужно от Михаила</h2>
+  <ul>
+    <li>Утвердить цены или назвать свои.</li>
+    <li>Согласен ли снять два видео с экрана (без лица) — или делаем без них и цена ниже.</li>
+    <li>Название: «claude-site-kit» или своё.</li>
+  </ul>
+</div>
+
+<footer>Черновик для обсуждения. Разбор саммита и источники — в базе: Методология / Саммит Имана Гаджи.</footer>
+</div>
+</body>
+</html>
