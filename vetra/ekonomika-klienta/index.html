@@ -1,0 +1,156 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Что Ветра приносит салону</title>
+<style>
+:root{--blue:#2C78D5;--press:#1F63BC;--mid:#81AEE6;--soft:#D6E5F7;--tint:#EFF5FD;--navy:#0E2A4A;--ink:#0F1D2E;--muted:#56687F;--line:#DCE6F2;--page:#F7FAFE;--ok:#167A41;--okbg:#E6F4EB;--warn:#9A5A00;--warnbg:#FFF3E0}
+*{box-sizing:border-box}
+body{margin:0;background:var(--page);color:var(--ink);font:16px/1.55 "Golos Text",Manrope,system-ui,"Segoe UI",sans-serif}
+.wrap{max-width:960px;margin:0 auto;padding:32px 20px 80px}
+h1{font-size:clamp(26px,4vw,38px);line-height:1.15;margin:0 0 8px}
+h2{font-size:22px;margin:48px 0 16px;padding-top:16px;border-top:2px solid var(--soft)}
+h3{font-size:17px;margin:0 0 8px}
+p{margin:0 0 12px}
+.lead{color:var(--muted);font-size:17px;margin-bottom:24px}
+.tag{display:inline-block;font-size:12px;font-weight:600;letter-spacing:.04em;text-transform:uppercase;color:var(--press);background:var(--soft);padding:3px 10px;border-radius:999px;margin-bottom:12px}
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px;margin:16px 0}
+.card{background:#fff;border:1px solid var(--line);border-radius:14px;padding:20px}
+.card.ok{border-top:4px solid var(--ok)}.card.blue{border-top:4px solid var(--blue)}.card.warn{border-top:4px solid var(--warn)}
+.big{font-size:32px;font-weight:700;color:var(--press);line-height:1.1;margin:6px 0}
+.big small{font-size:14px;font-weight:500;color:var(--muted)}
+.calc{background:#fff;border:1px solid var(--line);border-radius:16px;padding:22px;display:grid;grid-template-columns:1fr 1fr;gap:24px}
+@media(max-width:700px){.calc{grid-template-columns:1fr}}
+.row{margin-bottom:18px}
+.row label{display:flex;justify-content:space-between;font-size:14px;color:var(--muted);margin-bottom:4px}
+.row label b{color:var(--ink);font-size:16px}
+input[type=range]{width:100%;accent-color:var(--press)}
+.res{background:var(--navy);color:#fff;border-radius:14px;padding:22px}
+.res .big{color:#fff}.res .big small{color:#B9CFEA}
+.res p{color:#D6E5F7;font-size:14px}
+.res hr{border:0;border-top:1px solid #2A4A70;margin:14px 0}
+.tbl{overflow-x:auto;background:#fff;border:1px solid var(--line);border-radius:14px}
+table{border-collapse:collapse;width:100%;min-width:600px}
+th,td{padding:11px 14px;text-align:left;vertical-align:top;border-bottom:1px solid var(--line);font-size:15px}
+th{background:var(--tint);font-weight:600;color:var(--navy)}
+tr:last-child td{border-bottom:0}
+td.n{text-align:right;white-space:nowrap;font-variant-numeric:tabular-nums}
+figure{margin:20px 0;background:#fff;border:1px solid var(--line);border-radius:14px;padding:18px}
+figcaption{color:var(--muted);font-size:14px;margin-top:10px}
+svg{width:100%;height:auto;display:block}
+ul{padding-left:20px;margin:6px 0 12px}li{margin:4px 0}
+.src{font-size:13px;color:var(--muted)}
+</style>
+</head>
+<body>
+<div class="wrap">
+<span class="tag">Ветра · экономика клиента · 7 сентября 2026</span>
+<h1>Что Ветра приносит салону: деньги и часы</h1>
+<p class="lead">Приблизительная оценка для типового салона: 1–2 администратора, 4–6 каналов, поток записей каждый день. Ползунки ниже двигаются под конкретный салон.</p>
+
+<div class="cards">
+  <div class="card ok"><h3>Возвращённые записи</h3><div class="big">12–30 тыс. <small>₽ в месяц</small></div><p>Обращения, которые без окна терялись в пяти вкладках. Одна запись на окрашивание 3–6 тыс.</p></div>
+  <div class="card blue"><h3>Время администратора</h3><div class="big">≈ 40 ч <small>в месяц</small></div><p>Не перещёлкивать каналы, не искать переписку, отвечать шаблоном. Это 8–10 тыс. ₽ зарплаты.</p></div>
+  <div class="card blue"><h3>Время владельца</h3><div class="big">≈ 7 ч <small>в месяц</small></div><p>«Всё ли отвечено» за 3 минуты в панели вместо 20 минут обхода чатов.</p></div>
+</div>
+
+<h2>1. Откуда берутся цифры</h2>
+<figure>
+<svg viewBox="0 0 900 250" font-size="14">
+  <defs><marker id="a" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 z" fill="#56687F"/></marker></defs>
+  <text x="20" y="28" font-weight="700" fill="#0E2A4A" font-size="16">Путь одного обращения без окна и с окном</text>
+  <!-- without -->
+  <text x="20" y="70" fill="#C62828" font-weight="600">Без окна</text>
+  <g>
+    <rect x="120" y="50" width="120" height="40" rx="8" fill="#fff" stroke="#DCE6F2"/><text x="180" y="75" text-anchor="middle">Клиент пишет в ВК</text>
+    <line x1="240" y1="70" x2="280" y2="70" stroke="#56687F" stroke-width="2" marker-end="url(#a)"/>
+    <rect x="285" y="50" width="150" height="40" rx="8" fill="#fff" stroke="#DCE6F2"/><text x="360" y="75" text-anchor="middle">Админ на кассе</text>
+    <line x1="435" y1="70" x2="475" y2="70" stroke="#56687F" stroke-width="2" marker-end="url(#a)"/>
+    <rect x="480" y="50" width="150" height="40" rx="8" fill="#FFF3E0" stroke="#9A5A00"/><text x="555" y="75" text-anchor="middle" fill="#9A5A00">Через 20–40 минут</text>
+    <line x1="630" y1="70" x2="670" y2="70" stroke="#56687F" stroke-width="2" marker-end="url(#a)"/>
+    <rect x="675" y="50" width="200" height="40" rx="8" fill="#FDE8E8" stroke="#C62828"/><text x="775" y="75" text-anchor="middle" fill="#C62828">Записалась через дорогу</text>
+  </g>
+  <text x="120" y="115" fill="#56687F" font-size="13">Часть обращений не находят никогда. Владелец узнаёт случайно или не узнаёт.</text>
+  <!-- with -->
+  <text x="20" y="175" fill="#167A41" font-weight="600">С окном</text>
+  <g>
+    <rect x="120" y="155" width="120" height="40" rx="8" fill="#fff" stroke="#DCE6F2"/><text x="180" y="180" text-anchor="middle">Клиент пишет в ВК</text>
+    <line x1="240" y1="175" x2="280" y2="175" stroke="#56687F" stroke-width="2" marker-end="url(#a)"/>
+    <rect x="285" y="155" width="170" height="40" rx="8" fill="#EFF5FD" stroke="#2C78D5"/><text x="370" y="180" text-anchor="middle" fill="#1F63BC">Одно окно, сверху</text>
+    <line x1="455" y1="175" x2="495" y2="175" stroke="#56687F" stroke-width="2" marker-end="url(#a)"/>
+    <rect x="500" y="155" width="150" height="40" rx="8" fill="#E6F4EB" stroke="#167A41"/><text x="575" y="180" text-anchor="middle" fill="#167A41">Ответ за минуту</text>
+    <line x1="650" y1="175" x2="690" y2="175" stroke="#56687F" stroke-width="2" marker-end="url(#a)"/>
+    <rect x="695" y="155" width="180" height="40" rx="8" fill="#E6F4EB" stroke="#167A41"/><text x="785" y="180" text-anchor="middle" fill="#167A41">Запись 3–6 тыс. ₽</text>
+  </g>
+  <text x="120" y="222" fill="#56687F" font-size="13">Владелец утром видит: всё ли отвечено и за сколько.</text>
+</svg>
+<figcaption>Сценарий из `docs/vision.md`. Деньги считаем только по обращениям, которые без окна терялись; удобство и «приятно» в рублях не считаем.</figcaption>
+</figure>
+
+<h2>2. Калькулятор под конкретный салон</h2>
+<div class="calc">
+  <div>
+    <div class="row"><label><span>Обращений в день по всем каналам</span><b id="v1"></b></label><input type="range" id="i1" min="5" max="60" value="20"></div>
+    <div class="row"><label><span>Каналов у салона</span><b id="v2"></b></label><input type="range" id="i2" min="2" max="6" value="4"></div>
+    <div class="row"><label><span>Терялось записей в неделю без окна</span><b id="v3"></b></label><input type="range" id="i3" min="0" max="5" step="0.5" value="1.5"></div>
+    <div class="row"><label><span>Средний чек записи, ₽</span><b id="v4"></b></label><input type="range" id="i4" min="1000" max="6000" step="250" value="3000"></div>
+    <div class="row"><label><span>Администраторов в смене</span><b id="v5"></b></label><input type="range" id="i5" min="1" max="3" value="1"></div>
+    <div class="row"><label><span>Час администратора, ₽</span><b id="v6"></b></label><input type="range" id="i6" min="150" max="500" step="25" value="250"></div>
+    <div class="row"><label><span>Цена Ветры в месяц, ₽</span><b id="v7"></b></label><input type="range" id="i7" min="0" max="8000" step="500" value="4000"></div>
+  </div>
+  <div class="res">
+    <p>Возвращённые записи</p><div class="big" id="r1"></div>
+    <p>Сэкономлено времени администраторов</p><div class="big" id="r2"></div>
+    <p>Время владельца</p><div class="big" id="r3"></div>
+    <hr>
+    <p>Итого салону в месяц</p><div class="big" id="r4"></div>
+    <p id="r5"></p>
+  </div>
+</div>
+
+<h2>3. Как считается время администратора</h2>
+<div class="tbl"><table>
+<tr><th>Что делает без окна</th><th>Сколько</th><th class="n">Минут в смену</th></tr>
+<tr><td>Обходит все каналы по кругу, чтобы ничего не пропустить</td><td>каждые 15 минут за 10‑часовую смену, по 20 секунд на канал</td><td class="n" id="t1"></td></tr>
+<tr><td>Ищет прошлую переписку с клиенткой</td><td>10 раз в день по 2 минуты</td><td class="n">20</td></tr>
+<tr><td>Печатает одинаковые ответы («адрес», «цены», «свободно ли»)</td><td>половина обращений, экономия 30 секунд на каждом с шаблоном</td><td class="n" id="t3"></td></tr>
+<tr><td><b>Итого в смену</b></td><td>× 26 смен в месяц</td><td class="n" id="t4"></td></tr>
+</table></div>
+<p class="src" style="margin-top:10px">Время не превращается в деньги само: администратор всё равно на смене. Оно превращается в ответы за минуту вместо сорока, и это уже строка «возвращённые записи». Поэтому в «итого» время админа считаем по ставке, но честно говорим клиенту, что это второй порядок.</p>
+
+<h2>4. Что говорить клиенту</h2>
+<div class="cards">
+  <div class="card ok"><h3>Одна фраза</h3><p>«Подписка стоит меньше одной потерянной записи. Если окно вернёт одну запись в месяц, оно окупилось».</p></div>
+  <div class="card warn"><h3>Чего не обещать</h3><p>Не обещать «+30 тысяч». Обещать одно число: долю ответов быстрее 5 минут. Панель его покажет, и клиент сам увидит, сколько записей вернулось.</p></div>
+  <div class="card blue"><h3>Для внедрения от 20 000</h3><p>При 1,5 потерянных записи в неделю внедрение окупается за 1–2 месяца. Дальше каждый месяц салон в плюсе на 15–35 тысяч при подписке 4 000.</p></div>
+</div>
+
+<p class="src" style="margin-top:24px">Исходники: `docs/vision.md` (сценарий, 3–6 тыс. за запись, две в неделю ≈ 30 тыс.), `docs/audit-klienty-2026-08-18.md` (10 минут до ответа, «одно число»). Остальное оценки, помечены как оценки.</p>
+</div>
+<script>
+const $=id=>document.getElementById(id);
+const fmt=n=>Math.round(n).toLocaleString('ru-RU');
+function calc(){
+  const d=+$('i1').value,ch=+$('i2').value,lost=+$('i3').value,chk=+$('i4').value,adm=+$('i5').value,rate=+$('i6').value,price=+$('i7').value;
+  $('v1').textContent=d;$('v2').textContent=ch;$('v3').textContent=lost;$('v4').textContent=fmt(chk)+' ₽';$('v5').textContent=adm;$('v6').textContent=fmt(rate)+' ₽';$('v7').textContent=fmt(price)+' ₽';
+  const money=lost*4.33*chk;
+  const rounds=40*ch*20/60; // мин в смену на обход
+  const tpl=d*0.5*0.5;      // мин в смену на шаблоны
+  const perShift=rounds+20+tpl;
+  const hours=perShift*26/60*adm;
+  const ownerH=17*26/60;
+  $('t1').textContent=Math.round(rounds);$('t3').textContent=Math.round(tpl);$('t4').textContent=Math.round(perShift)+' мин → '+Math.round(perShift*26/60)+' ч/мес';
+  $('r1').innerHTML=fmt(money)+' <small>₽/мес</small>';
+  $('r2').innerHTML=Math.round(hours)+' <small>ч/мес ≈ '+fmt(hours*rate)+' ₽</small>';
+  $('r3').innerHTML=Math.round(ownerH)+' <small>ч/мес</small>';
+  const total=money+hours*rate-price;
+  $('r4').innerHTML=(total>=0?'+':'−')+fmt(Math.abs(total))+' <small>₽ после подписки</small>';
+  const setup=20000;
+  $('r5').textContent= total>0 ? 'Внедрение за 20 000 ₽ окупается за '+(Math.ceil(setup/total))+' мес.' : 'При таких вводных салон в минус: снизить цену или искать салон с потоком побольше.';
+}
+document.querySelectorAll('input').forEach(i=>i.addEventListener('input',calc));calc();
+</script>
+</body>
+</html>
