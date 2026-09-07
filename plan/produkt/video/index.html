@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Два видео — сценарии записи</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Golos+Text:wght@400;500;600;700&family=Unbounded:wght@600;800&display=swap" rel="stylesheet">
+<style>
+  :root{--ink:#0a0a0a;--paper:#fff;--lime:#d8f34e;--grey:#585858;--line:#e6e6e6;--soft:#f4f4f4}
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:'Golos Text',-apple-system,'Segoe UI',sans-serif;background:var(--paper);color:var(--ink);line-height:1.55;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:760px;margin:0 auto;padding:0 20px 80px}
+  header{padding:44px 0 28px;border-bottom:2px solid var(--ink)}
+  .kicker{font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--grey);font-weight:600}
+  h1{font-family:'Unbounded',sans-serif;font-size:clamp(26px,6vw,40px);line-height:1.08;letter-spacing:-.02em;margin:10px 0 12px;font-weight:800}
+  .lead{color:var(--grey);font-size:15px;max-width:56ch}
+  section{margin-top:44px}
+  h2{font-size:20px;font-weight:700;letter-spacing:-.01em;margin-bottom:6px}
+  h3{font-size:15px;font-weight:700;margin:22px 0 8px;text-transform:uppercase;letter-spacing:.08em}
+  .note{color:var(--grey);font-size:14px;margin-bottom:16px;max-width:60ch}
+  .row{display:flex;gap:14px;padding:14px 0;border-bottom:1px solid var(--line);align-items:flex-start}
+  .row:last-child{border-bottom:none}
+  .n{flex:none;width:28px;height:28px;border:2px solid var(--ink);display:grid;place-items:center;font-weight:700;font-size:12px}
+  .n.lime{background:var(--lime)}
+  .t{font-weight:600;font-size:16px}
+  .d{color:var(--grey);font-size:14px;margin-top:3px}
+  .d code,.say code{font-family:ui-monospace,Consolas,monospace;font-size:12.5px;background:var(--soft);padding:2px 5px}
+  .say{border-left:4px solid var(--lime);padding:8px 14px;margin-top:8px;font-size:15px;background:#fbfdf0}
+  .say b{color:var(--grey);font-size:11px;letter-spacing:.1em;text-transform:uppercase;display:block;margin-bottom:2px}
+  .warn{border-left:4px solid var(--ink);padding:10px 14px;background:var(--soft);font-size:14px;margin-top:14px}
+  .grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:14px}
+  @media(max-width:560px){.grid{grid-template-columns:1fr}}
+  .card{border:1px solid var(--line);padding:16px}
+  .card h4{font-size:14px;font-weight:700;margin-bottom:6px}
+  .card p{font-size:14px;color:var(--grey)}
+  .time{font-family:ui-monospace,Consolas,monospace;font-size:12px;color:var(--grey)}
+  footer{margin-top:60px;font-size:12px;color:var(--grey)}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header>
+  <div class="kicker">claude-site-kit · сценарии · 07.09.2026</div>
+  <h1>Два видео с экрана</h1>
+  <p class="lead">Без лица, голос поверх экрана. Первое — 5 минут, второе — 10–12 минут. Читай с телефона, записывай на компьютере. Ошибся — не останавливай запись, скажи «ещё раз» и повтори фразу, вырежем.</p>
+</header>
+
+<section>
+  <h2>0. Подготовка (один раз, 30 минут)</h2>
+  <div class="row"><div class="n lime">1</div><div><div class="t">Программа записи: OBS Studio, бесплатно</div><div class="d">obsproject.com → установить → «Источники» + «Захват экрана». Настройки → Вывод: 1080p, 30 кадров, MP4. Микрофон: любой, наушники с микрофоном лучше встроенного в ноутбук. Проверить 10-секундной пробой: голос слышно, экран не дёргается.</div></div></div>
+  <div class="row"><div class="n lime">2</div><div><div class="t">Чистый экран</div><div class="d">Отдельная учётка Windows или хотя бы: скрыть значки рабочего стола, закрыть Telegram и всё лишнее, убрать уведомления (режим «Не беспокоить»), обои однотонные. Масштаб Windows 125–150 %: с телефона мелкий текст не читается.</div></div></div>
+  <div class="row"><div class="n lime">3</div><div><div class="t">Терминал и браузер крупно</div><div class="d">В окне Claude Code шрифт 16–18. В браузере Ctrl и «+» до 125 %. Окна на весь экран, без двух окон рядом.</div></div></div>
+  <div class="row"><div class="n">4</div><div><div class="t">Чистая установка для видео 1</div><div class="d">Перед записью удалить: папку <code>claude-work</code> с рабочего стола, четыре ярлыка, <code>~\.claude\skills</code> (сделай копию на всякий). Иначе установщик напишет «уже есть» и видео не покажет магию. Я подготовлю команду отката, которая всё это вернёт.</div></div></div>
+  <div class="row"><div class="n">5</div><div><div class="t">Скорость</div><div class="d">Установка и сборка сайта занимают минуты ожидания. Ничего не говорить в паузах: их вырежем и ускорим в 8 раз с подписью «ускорено». Просто молчи, пока идёт.</div></div></div>
+  <div class="warn">Голос: спокойно, как объясняешь другу за соседним столом. Не «приветствую, друзья», не «в этом видео мы». Короткие фразы. Пауза перед каждым действием на секунду, потом действие.</div>
+</section>
+
+<section>
+  <h2>Видео 1 · «Установка за 5 минут»</h2>
+  <p class="note">Цель: покупатель видит, что три шага и правда три. Хронометраж после монтажа 4–5 минут.</p>
+
+  <h3><span class="time">0:00</span> Заставка (монтаж, без голоса)</h3>
+  <div class="d">Чёрный экран, белым Unbounded: «claude-site-kit · Установка». 3 секунды. Сделаю я.</div>
+
+  <h3><span class="time">0:03</span> Что нужно до установки</h3>
+  <div class="d">Экран: открытая консоль. По очереди набираешь четыре команды.</div>
+  <div class="say"><b>говоришь</b>Перед установкой на компьютере должны стоять четыре вещи. Проверяем.</div>
+  <div class="say"><b>делаешь</b><code>claude --version</code> → Enter → <code>node -v</code> → <code>python --version</code> → <code>git --version</code></div>
+  <div class="say"><b>говоришь</b>Claude Code, Node, Python и Git. Если какой-то команды нет, ссылки на установку в README, это минут десять. У меня всё есть, идём дальше.</div>
+
+  <h3><span class="time">0:40</span> Папка</h3>
+  <div class="say"><b>делаешь</b>Открыть проводник, диск C, показать папку <code>C:\claude-kit</code> с распакованным набором.</div>
+  <div class="say"><b>говоришь</b>Архив распакован в папку без русских букв в пути. Это важно: кириллица в пути ломает скрипты. C, claude-kit — нормально. Рабочий стол с русским именем пользователя — нет.</div>
+
+  <h3><span class="time">1:00</span> Установщик</h3>
+  <div class="say"><b>делаешь</b>Двойной клик по <code>setup.cmd</code>. Появляется окно. Вводишь имя, Telegram, логин GitHub.</div>
+  <div class="say"><b>говоришь</b>Один файл. Спросит, как к тебе обращаться, твой Telegram для подписи на сайтах и логин GitHub для ссылок. Дальше всё сам: рабочая папка, база знаний, сорок скилов, ярлыки.</div>
+  <div class="d">Молчишь, пока идёт. Это 2–4 минуты, вырежем.</div>
+
+  <h3><span class="time">1:40</span> Что появилось</h3>
+  <div class="say"><b>делаешь</b>Свернуть консоль. Показать четыре ярлыка на рабочем столе. Открыть <code>claude-work</code>, показать две папки и CLAUDE.md.</div>
+  <div class="say"><b>говоришь</b>Четыре ярлыка. «Claude» — основной. «Claude бесплатный» — когда лимит подписки кончился. «Claude на телефон» — управлять с телефона. «Запуск ботов» — ассистент в Telegram, его настроим отдельно. И рабочая папка: правила для Claude и база знаний, которую он читает перед каждой задачей.</div>
+
+  <h3><span class="time">2:30</span> Первый запуск</h3>
+  <div class="say"><b>делаешь</b>Ярлык «Claude» → вопрос про доверие к папке → Yes. Печатаешь: <code>прочитай СТАРТ.md и скажи, какие скилы и заметки ты видишь</code></div>
+  <div class="say"><b>говоришь</b>Первый запуск спросит, доверяешь ли ты папке. Да. И контрольная фраза: прочитай СТАРТ и скажи, что видишь.</div>
+  <div class="d">Ждёшь ответ Claude, он перечисляет разделы. Показать, что в списке есть Ниши, Стили, Клиенты.</div>
+  <div class="say"><b>говоришь</b>Видит базу, видит скилы. Всё встало. Установка закончена. Дальше — первый сайт, это второе видео.</div>
+
+  <h3><span class="time">4:30</span> Концовка (монтаж)</h3>
+  <div class="d">Чёрный экран: «Следующее видео: сайт за вечер». 3 секунды.</div>
+</section>
+
+<section>
+  <h2>Видео 2 · «Сайт кафе от пустой папки до ссылки»</h2>
+  <p class="note">Цель: покупатель видит весь путь, включая то, что Claude сначала спрашивает и показывает вариант, а не штампует. Реальное время 30–40 минут, после монтажа 10–12. Кафе берём вымышленное, чтобы не светить чужой бизнес: «Кофейня „Тёплый“, Казань, ул. Баумана 12».</p>
+
+  <div class="grid">
+    <div class="card"><h4>Данные кафе (держи рядом)</h4><p>Кофейня «Тёплый»<br>Казань, ул. Баумана, 12<br>+7 900 000-00-00<br>Пн–Вс 8:00–22:00<br>Кофе, завтраки, десерты, своя выпечка<br>Рейтинг 4,8, 214 отзывов (демо)</p></div>
+    <div class="card"><h4>Что должно быть на экране до записи</h4><p>Открыт Claude в claude-work. Открыт браузер на пустой вкладке. GitHub Pages уже подключён (docs/06), иначе ссылки не будет.</p></div>
+  </div>
+
+  <h3><span class="time">0:00</span> Заставка (монтаж)</h3>
+  <div class="d">«claude-site-kit · Сайт за вечер».</div>
+
+  <h3><span class="time">0:03</span> Постановка</h3>
+  <div class="say"><b>говоришь</b>Задача: сайт для кофейни. У меня есть адрес, телефон, часы и что они продают. Фото пока нет, будут от клиента. Смотри, как это делается с набором.</div>
+
+  <h3><span class="time">0:20</span> Бриф и стиль</h3>
+  <div class="say"><b>делаешь</b>Открыть в проводнике <code>1. Моя папка\Ниши</code>, показать список. Открыть «Кафе и рестораны», проскроллить. Открыть <code>Стили</code>, показать «01 Тёмный люкс».</div>
+  <div class="say"><b>говоришь</b>В базе десять брифов по нишам. Кафе есть. Внутри — какие секции, что продаёт, какой тон, какие цвета. И пять готовых стилей. Для вечерней кофейни беру «Тёмный люкс». Мне не нужно придумывать дизайн, он уже описан.</div>
+
+  <h3><span class="time">1:10</span> Запрос</h3>
+  <div class="say"><b>делаешь</b>В Claude печатаешь (можно скопировать):<br><code>Собери сайт для кофейни «Тёплый» по брифу «Кафе и рестораны» в стиле «01 Тёмный люкс». Данные: Казань, ул. Баумана 12, +7 900 000-00-00, Пн–Вс 8:00–22:00, кофе, завтраки, десерты, своя выпечка. Рейтинг 4,8, 214 отзывов. Фото пока нет, это демо.</code></div>
+  <div class="say"><b>говоришь</b>Одна фраза. Название, бриф, стиль, данные. Никаких промптов на страницу.</div>
+
+  <h3><span class="time">1:40</span> Claude показывает первый экран</h3>
+  <div class="d">Claude по правилу style-lab сначала соберёт hero и покажет. Ждёшь молча (вырежем). Когда покажет ссылку или откроет в панели браузера:</div>
+  <div class="say"><b>говоришь</b>Видишь, он не делает весь сайт сразу. Сначала первый экран: посмотри, нравится ли. Это экономит лимит: если стиль не тот, меняем сейчас, а не после часа работы. Мне нравится, говорю «да».</div>
+  <div class="say"><b>делаешь</b>Печатаешь <code>да, собирай остальное</code></div>
+
+  <h3><span class="time">3:00</span> Сборка (ускорить в монтаже)</h3>
+  <div class="d">Молчишь. Claude собирает секции, публикует. Это 10–20 минут реального времени. В монтаже ускорим до 30 секунд с подписью.</div>
+
+  <h3><span class="time">3:30</span> Результат</h3>
+  <div class="say"><b>делаешь</b>Открыть ссылку в браузере. Проскроллить сверху вниз медленно. Нажать F12 → Ctrl+Shift+M (режим телефона), проскроллить ещё раз.</div>
+  <div class="say"><b>говоришь</b>Готово. Первый экран, о месте, меню тизером без выдуманных цен, отзывы настоящей цифрой, контакты с кнопкой позвонить. Смотрим с телефона, потому что владелец откроет ссылку именно с него. Внизу плашка «демо» и моя подпись. Ни одной выдуманной детали: где данных не было, Claude оставил честные заглушки.</div>
+
+  <h3><span class="time">5:00</span> Проверка</h3>
+  <div class="say"><b>делаешь</b>Печатаешь <code>/impeccable critique index.html</code>, ждёшь. Потом <code>проверь по чек-листу качества</code>.</div>
+  <div class="say"><b>говоришь</b>Два скила перед сдачей. Первый смотрит на дизайн глазами критика: шаблонно ли, нет ли признаков ИИ-дизайна. Второй проверяет чек-лист: мобильная без горизонтального скролла, телефон кликабелен, теги для поиска, иконка. Если что-то нашлось, говорю «исправь».</div>
+
+  <h3><span class="time">7:00</span> Ссылка клиенту</h3>
+  <div class="say"><b>делаешь</b>Открыть <code>1. Моя папка\Клиенты\Сообщения клиенту.md</code>, показать шаблон 1. Или спросить Claude: <code>дай строку для СМС клиенту</code>.</div>
+  <div class="say"><b>говоришь</b>Дальше эту ссылку отправляю владельцу. Шаблон сообщения тоже в базе: короткое, без продажи, «собрал черновик, гляньте, завтра наберу». Скрипт звонка там же. Дальше по конвейеру: понравилось — счёт, предоплата, доработка на его фото.</div>
+
+  <h3><span class="time">8:30</span> Счёт</h3>
+  <div class="say"><b>делаешь</b>Печатаешь <code>выстави счёт для кофейни «Тёплый»: разработка сайта, 30000</code>. Открыть готовый HTML, Ctrl+P, показать одну страницу.</div>
+  <div class="say"><b>говоришь</b>Счёт одной фразой. Реквизиты вписываются один раз в скил, дальше Claude их помнит. Одна страница, сохраняем в PDF, отправляем.</div>
+
+  <h3><span class="time">9:30</span> Итог</h3>
+  <div class="say"><b>говоришь</b>Что было: адрес, телефон и часы. Что стало: сайт по ссылке, проверенный, с сообщением клиенту и счётом. Один вечер. И так с любой нишей из десяти: меняется бриф и стиль, процесс тот же. Маршрут на первые две недели, от установки до первого заказа, лежит в docs/08.</div>
+
+  <h3><span class="time">10:00</span> Концовка (монтаж)</h3>
+  <div class="d">Чёрный экран: «claude-site-kit». 3 секунды.</div>
+</section>
+
+<section>
+  <h2>После записи</h2>
+  <div class="row"><div class="n lime">1</div><div><div class="t">Файлы</div><div class="d">Два MP4 в <code>D:\Projects\claude-site-kit-video\raw\</code>. Не переименовывать, не сжимать.</div></div></div>
+  <div class="row"><div class="n lime">2</div><div><div class="t">Монтаж</div><div class="d">Делаю я: вырезать паузы, ускорить ожидания, заставки, подписи команд крупно внизу экрана. Инструмент: ffmpeg по списку меток, ты только говоришь «ок».</div></div></div>
+  <div class="row"><div class="n">3</div><div><div class="t">Куда</div><div class="d">YouTube «доступ по ссылке» (не публично): ссылки уходят покупателям в чат. Первое видео можно сделать публичным как рекламу.</div></div></div>
+</section>
+
+<footer>Сценарии для claude-site-kit. Данные кофейни вымышленные.</footer>
+</div>
+</body>
+</html>
