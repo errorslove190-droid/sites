@@ -1,0 +1,310 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Ветра — тёмная сцена v2</title>
+<style>
+@font-face{font-family:'Google Sans';font-style:normal;font-weight:400 700;font-display:swap;
+  src:url('../../maket/fonts/google-sans-cyrillic-400-700.woff2') format('woff2');
+  unicode-range:U+0301,U+0400-045F,U+0490-0491,U+04B0-04B1,U+2116;}
+@font-face{font-family:'Google Sans';font-style:normal;font-weight:400 700;font-display:swap;
+  src:url('../../maket/fonts/google-sans-latin-400-700.woff2') format('woff2');
+  unicode-range:U+0000-00FF,U+2000-206F,U+20AC,U+2122,U+2212,U+FEFF,U+FFFD;}
+@font-face{font-family:'Google Sans Text';font-style:normal;font-weight:400;font-display:swap;
+  src:url('../../maket/fonts/google-sans-text-cyrillic-400.woff2') format('woff2');
+  unicode-range:U+0301,U+0400-045F,U+0490-0491,U+04B0-04B1,U+2116;}
+@font-face{font-family:'Google Sans Text';font-style:normal;font-weight:500;font-display:swap;
+  src:url('../../maket/fonts/google-sans-text-cyrillic-500.woff2') format('woff2');
+  unicode-range:U+0301,U+0400-045F,U+0490-0491,U+04B0-04B1,U+2116;}
+
+:root{
+  --blue:#2C78D5; --blue-mid:#81AEE6;
+  --bg:#080D14;          /* почти чёрный, как у Calley — глубже нашего navy */
+  --panel:#0E1620;
+  --panel-2:#131D2A;
+  --line:rgba(255,255,255,.09);
+  --dim:#7E8FA3;
+  --dim-2:#4E5D70;
+}
+*{box-sizing:border-box}
+html,body{margin:0;padding:0}
+body{background:var(--bg);color:#fff;
+  font-family:'Google Sans Text','Google Sans',system-ui,sans-serif;
+  -webkit-font-smoothing:antialiased}
+.wrap{max-width:1240px;margin:0 auto;padding:0 24px;position:relative;z-index:2}
+
+.grain{position:fixed;inset:0;pointer-events:none;z-index:1;opacity:.42;mix-blend-mode:overlay}
+.beam{position:absolute;top:-160px;left:0;right:0;height:900px;pointer-events:none;z-index:0;
+  background:radial-gradient(48% 42% at 50% 40%,rgba(44,120,213,.28),transparent 70%)}
+
+/* ---------- шапка ---------- */
+.top{display:flex;align-items:center;justify-content:space-between;padding:22px 0;
+  position:relative;z-index:3}
+.logo{display:flex;align-items:center;gap:10px}
+.logo svg{display:block}
+.logo span{font-family:'Google Sans';font-weight:700;font-size:23px;letter-spacing:-.04em}
+.nav{display:flex;gap:28px;font-size:13.5px;color:var(--dim)}
+.nav a{color:inherit;text-decoration:none;transition:color .16s}
+.nav a:hover{color:#fff}
+.enter{border:1px solid var(--line);border-radius:999px;padding:9px 18px;font-size:13.5px;
+  color:#fff;text-decoration:none;transition:background .16s,border-color .16s}
+.enter:hover{background:rgba(255,255,255,.06);border-color:rgba(255,255,255,.22)}
+
+/* ---------- первый экран ---------- */
+.hero{padding:76px 0 0;text-align:center;position:relative}
+.kicker{display:inline-flex;align-items:center;gap:9px;font-size:12.5px;color:var(--blue-mid);
+  border:1px solid rgba(129,174,230,.28);border-radius:999px;padding:7px 15px;margin-bottom:34px}
+.kicker i{width:6px;height:6px;border-radius:999px;background:var(--blue-mid);display:block}
+
+/* заголовок гигантом, второй строкой — приглушённое пояснение того же кегля (paper.design) */
+h1{font-family:'Google Sans';font-weight:700;letter-spacing:-.05em;line-height:.92;
+  font-size:clamp(46px,8.6vw,128px);margin:0;position:relative}
+h1 .was{display:block;font-size:.30em;font-weight:400;color:var(--dim-2);letter-spacing:-.01em;
+  text-decoration:line-through;text-decoration-thickness:.05em;margin-bottom:18px}
+h1 .soft{color:var(--dim-2)}
+/* шар заходит на букву — приём NexStudio */
+h1 .orb{position:absolute;width:.60em;height:.60em;border-radius:999px;
+  background:radial-gradient(38% 38% at 34% 30%,#7FB3F0,#2C78D5 62%,#14498F);
+  left:50%;top:.44em;transform:translateX(1.62em);z-index:-1;
+  box-shadow:0 0 110px 16px rgba(44,120,213,.44)}
+
+.sub{max-width:54ch;margin:30px auto 0;font-size:17.5px;line-height:1.55;color:var(--dim)}
+
+.cta{display:flex;align-items:center;justify-content:center;gap:14px;margin:36px 0 0;
+  flex-wrap:wrap}
+.btn{background:#fff;color:#0B1119;border:0;border-radius:999px;padding:16px 32px;
+  font-family:'Google Sans';font-weight:700;font-size:15.5px;cursor:pointer;
+  transition:transform .16s,box-shadow .16s}
+.btn:hover{transform:translateY(-2px);box-shadow:0 14px 40px -12px rgba(255,255,255,.34)}
+.btn2{background:transparent;color:#fff;border:1px solid var(--line);border-radius:999px;
+  padding:16px 28px;font-size:15.5px;cursor:pointer;transition:background .16s}
+.btn2:hover{background:rgba(255,255,255,.06)}
+.note{margin:16px 0 0;font-size:13px;color:var(--dim-2)}
+
+/* ---------- окно продукта: три колонки, как у Calley ---------- */
+.app{margin:64px auto 0;max-width:1120px;border-radius:16px;overflow:hidden;
+  border:1px solid var(--line);background:var(--panel);text-align:left;
+  box-shadow:0 60px 140px -40px rgba(0,0,0,.9)}
+.chrome{display:flex;align-items:center;gap:8px;padding:11px 15px;border-bottom:1px solid var(--line);
+  background:var(--panel-2)}
+.chrome i{width:9px;height:9px;border-radius:999px;background:#2A3543;display:block}
+.chrome b{margin-left:10px;font-family:'Google Sans Text';font-weight:400;font-size:12.5px;
+  color:var(--dim-2)}
+.cols{display:grid;grid-template-columns:196px 300px 1fr;min-height:392px}
+.col{border-right:1px solid var(--line);min-width:0}
+.col:last-child{border-right:0}
+
+/* колонка 1 — каналы */
+.side{padding:16px 12px}
+.side .h{font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--dim-2);
+  padding:0 8px 10px}
+.ch{display:flex;align-items:center;gap:10px;padding:9px 10px;border-radius:9px;font-size:13.5px;
+  color:var(--dim)}
+.ch.on{background:rgba(255,255,255,.06);color:#fff}
+.ch s{width:8px;height:8px;border-radius:999px;display:block;flex:0 0 8px;text-decoration:none}
+.ch u{margin-left:auto;font-size:11.5px;color:var(--dim-2);text-decoration:none}
+.tg{background:#2AABEE}.vk{background:#0077FF}.mx{background:#8E5BF0}.av{background:#0AF}
+.ml{background:#F0A93B}.oz{background:#E15B9B}
+
+/* колонка 2 — список диалогов */
+.list .h{display:flex;align-items:center;justify-content:space-between;padding:14px 15px 10px;
+  font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--dim-2)}
+.d{display:flex;gap:11px;padding:12px 15px;border-top:1px solid var(--line);cursor:default}
+.d.sel{background:rgba(255,255,255,.05)}
+.d.hot{background:rgba(198,40,40,.10)}
+.ava{width:34px;height:34px;border-radius:999px;flex:0 0 34px;display:flex;align-items:center;
+  justify-content:center;font-family:'Google Sans';font-weight:700;font-size:12px;
+  background:#1D2937;color:#C6D4E4;position:relative}
+.ava s{position:absolute;right:-2px;bottom:-2px;width:11px;height:11px;border-radius:999px;
+  border:2px solid var(--panel);display:block;text-decoration:none}
+.dt{min-width:0;flex:1}
+.dt b{display:block;font-family:'Google Sans';font-size:13.5px;font-weight:700;letter-spacing:-.01em}
+.dt span{display:block;font-size:12.5px;color:var(--dim);overflow:hidden;text-overflow:ellipsis;
+  white-space:nowrap;margin-top:2px}
+.dm{text-align:right;flex:0 0 auto}
+.dm em{display:block;font-style:normal;font-size:11.5px;color:var(--dim-2)}
+.dm .w{color:#FF6B6B;font-weight:500;font-size:11.5px;margin-top:5px;display:block}
+.dm .n{display:inline-block;margin-top:5px;background:var(--blue);color:#fff;border-radius:999px;
+  min-width:18px;padding:1px 6px;font-size:11px;font-weight:700;font-family:'Google Sans'}
+
+/* колонка 3 — переписка */
+.chat{display:flex;flex-direction:column;min-width:0}
+.chat .h{padding:13px 18px;border-bottom:1px solid var(--line);display:flex;
+  align-items:center;justify-content:space-between;gap:12px}
+.chat .h b{font-family:'Google Sans';font-size:14.5px}
+.chat .h span{font-size:12px;color:var(--dim-2);display:block;margin-top:2px}
+.pill{border:1px solid rgba(255,107,107,.34);color:#FF6B6B;border-radius:999px;padding:5px 11px;
+  font-size:11.5px;white-space:nowrap}
+.msgs{padding:20px 18px;display:flex;flex-direction:column;gap:11px;flex:1}
+.m{max-width:78%;padding:10px 14px;border-radius:14px;font-size:13.5px;line-height:1.45}
+.m.in{background:var(--panel-2);border:1px solid var(--line);border-bottom-left-radius:5px;
+  align-self:flex-start}
+.m.out{background:var(--blue);border-bottom-right-radius:5px;align-self:flex-end}
+.day{align-self:center;font-size:11.5px;color:var(--dim-2);padding:2px 10px;
+  border:1px solid var(--line);border-radius:999px}
+.quick{display:flex;gap:7px;padding:0 18px 12px;flex-wrap:wrap}
+.q{border:1px solid var(--line);border-radius:999px;padding:6px 13px;font-size:12.5px;
+  color:var(--dim);transition:border-color .16s,color .16s}
+.q:hover{border-color:rgba(255,255,255,.28);color:#fff}
+.send{display:flex;align-items:center;gap:10px;padding:12px 18px;border-top:1px solid var(--line)}
+.send .f{flex:1;background:var(--panel-2);border:1px solid var(--line);border-radius:999px;
+  padding:11px 16px;font-size:13.5px;color:var(--dim-2)}
+.send .b{width:38px;height:38px;border-radius:999px;background:var(--blue);flex:0 0 38px;
+  display:flex;align-items:center;justify-content:center}
+
+/* ---------- цифры под окном ---------- */
+.facts{display:grid;grid-template-columns:repeat(4,1fr);gap:0;margin:72px 0 0;
+  border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.fact{padding:26px 22px;border-right:1px solid var(--line);min-width:0}
+.fact:last-child{border-right:0}
+.fact b{display:block;font-family:'Google Sans';font-weight:700;letter-spacing:-.04em;
+  font-size:clamp(28px,3.4vw,44px);line-height:1}
+.fact span{display:block;font-size:13px;color:var(--dim);margin-top:8px}
+
+@media (max-width:1000px){
+  .cols{grid-template-columns:1fr}
+  .col:nth-child(1){display:none}
+  .col{border-right:0;border-bottom:1px solid var(--line)}
+  .facts{grid-template-columns:1fr 1fr}
+  .fact:nth-child(2){border-right:0}
+  .fact:nth-child(1),.fact:nth-child(2){border-bottom:1px solid var(--line)}
+}
+@media (max-width:700px){
+  .nav{display:none}
+  .hero{padding-top:44px}
+  .app{margin-top:44px}
+  .facts{grid-template-columns:1fr}
+  .fact{border-right:0;border-bottom:1px solid var(--line)}
+  .fact:last-child{border-bottom:0}
+}
+</style>
+</head>
+<body>
+
+<svg class="grain" xmlns="http://www.w3.org/2000/svg">
+  <filter id="n"><feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="3"/>
+    <feColorMatrix type="saturate" values="0"/></filter>
+  <rect width="100%" height="100%" filter="url(#n)" opacity="0.15"/>
+</svg>
+<div class="beam"></div>
+
+<div class="wrap">
+  <header class="top">
+    <div class="logo">
+      <svg width="26" height="26" viewBox="0 0 26 26" aria-hidden="true">
+        <g fill="#81AEE6">
+          <path d="M13 13 C 13 7, 9 3, 3 3 C 3 9, 7 13, 13 13 Z"/>
+          <path d="M13 13 C 19 13, 23 9, 23 3 C 17 3, 13 7, 13 13 Z"/>
+          <path d="M13 13 C 7 13, 3 17, 3 23 C 9 23, 13 19, 13 13 Z"/>
+          <path d="M13 13 C 13 19, 17 23, 23 23 C 23 17, 19 13, 13 13 Z"/>
+        </g>
+      </svg>
+      <span>Ветра</span>
+    </div>
+    <nav class="nav">
+      <a href="#">Как работает</a><a href="#">Каналы</a><a href="#">Цена</a><a href="#">Вопросы</a>
+    </nav>
+    <a class="enter" href="#">Войти</a>
+  </header>
+
+  <section class="hero">
+    <div class="kicker"><i></i>Для салонов красоты и сервисов</div>
+
+    <h1>
+      <span class="was">Шесть вкладок и ничего не найти</span>
+      <span class="orb"></span>
+      Одно окно<br><span class="soft">для всех клиентов</span>
+    </h1>
+
+    <p class="sub">Ветра собирает сообщения клиентов из разных каналов в одном окне
+      и позволяет отвечать из него без переключения между мессенджерами.</p>
+
+    <div class="cta">
+      <button class="btn">Посмотреть окно</button>
+      <button class="btn2">Как это работает</button>
+    </div>
+    <p class="note">14 дней бесплатно · карта не нужна · договор не нужен</p>
+
+    <!-- ОКНО ПРОДУКТА -->
+    <div class="app">
+      <div class="chrome"><i></i><i></i><i></i><b>Ветра — входящие</b></div>
+      <div class="cols">
+
+        <div class="col side">
+          <div class="h">Каналы</div>
+          <div class="ch on"><s class="tg"></s>Telegram<u>2</u></div>
+          <div class="ch on"><s class="vk"></s>ВКонтакте<u>2</u></div>
+          <div class="ch"><s class="mx"></s>MAX<u>—</u></div>
+          <div class="ch"><s class="av"></s>Авито<u>—</u></div>
+          <div class="ch"><s class="ml"></s>Почта<u>—</u></div>
+          <div class="ch"><s class="oz"></s>Ozon<u>—</u></div>
+        </div>
+
+        <div class="col list">
+          <div class="h"><span>Ждут ответа</span><span>4</span></div>
+          <div class="d hot sel">
+            <div class="ava">АК<s class="vk"></s></div>
+            <div class="dt"><b>Алина Кузнецова</b>
+              <span>И сколько будет стоить, волосы ниже лопаток</span></div>
+            <div class="dm"><em>22:33</em><span class="w">висит 42 мин</span></div>
+          </div>
+          <div class="d">
+            <div class="ava">О<s class="tg"></s></div>
+            <div class="dt"><b>Ольга</b><span>Давайте четверг</span></div>
+            <div class="dm"><em>23:07</em><span class="n">1</span></div>
+          </div>
+          <div class="d">
+            <div class="ava">ДС<s class="vk"></s></div>
+            <div class="dt"><b>Дарья Соловьёва</b><span>Хорошо, будем ждать</span></div>
+            <div class="dm"><em>21:06</em></div>
+          </div>
+          <div class="d">
+            <div class="ava">ИП<s class="tg"></s></div>
+            <div class="dt"><b>Ирина Петрова</b><span>До встречи!</span></div>
+            <div class="dm"><em>20:04</em></div>
+          </div>
+        </div>
+
+        <div class="col chat">
+          <div class="h">
+            <div><b>Алина Кузнецова</b><span>ВКонтакте · @alina_kzn</span></div>
+            <div class="pill">ждёт 42 мин</div>
+          </div>
+          <div class="msgs">
+            <div class="day">Сегодня</div>
+            <div class="m in">Здравствуйте! А на субботу к Кате есть окошко на окрашивание?</div>
+            <div class="m in">И сколько будет стоить, волосы ниже лопаток</div>
+            <div class="m out">Здравствуйте! В субботу свободно в 14:00 — записываю?</div>
+          </div>
+          <div class="quick">
+            <span class="q">Часы работы</span><span class="q">Адрес</span>
+            <span class="q">Прайс</span><span class="q">Записала</span>
+          </div>
+          <div class="send">
+            <div class="f">Ответ клиенту. Enter — отправить</div>
+            <div class="b">
+              <svg width="17" height="17" viewBox="0 0 17 17" fill="none" stroke="#fff"
+                stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M2 8.5 L 15 8.5"/><path d="M9 2.5 L 15 8.5 L 9 14.5"/>
+              </svg>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="facts">
+      <div class="fact"><b>6</b><span>каналов в одном списке</span></div>
+      <div class="fact"><b>3 мин</b><span>подключить первый канал</span></div>
+      <div class="fact"><b>15 мин</b><span>и диалог краснеет сам</span></div>
+      <div class="fact"><b>0 ₽</b><span>первые 14 дней</span></div>
+    </div>
+  </section>
+</div>
+
+<div style="height:90px"></div>
+</body>
+</html>
