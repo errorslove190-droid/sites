@@ -1,0 +1,463 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Ветра — заявки из Telegram, ВКонтакте, MAX, почты и Авито в одном окне</title>
+<meta name="description" content="Соберём одно окно под ваш бизнес за 1–2 недели. Цена каждого элемента видна сразу, до звонка.">
+<meta property="og:title" content="Ветра — все заявки в одном окне">
+<meta property="og:description" content="Внедрение под ваш бизнес и сопровождение. Соберите состав и увидите цену.">
+<meta property="og:type" content="website">
+<meta property="og:image" content="video/poster.jpg">
+<link rel="icon" href="../favicon.svg" type="image/svg+xml">
+<link rel="preload" href="fonts/google-sans-cyrillic-400-700.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<header class="top">
+  <div class="wrap">
+    <a class="logo" href="#top" aria-label="Ветра"><span class="logo__word">Ветра</span><span class="logo__dot"></span></a>
+    <nav aria-label="Разделы">
+      <a href="#video">Как работает</a>
+      <a href="#segments">Кому</a>
+      <a href="#pay">За что платите</a>
+      <a href="#faq">Вопросы</a>
+    </nav>
+    <a class="btn btn-primary btn-sm" href="#konstruktor" data-go-calc="top">Посчитать</a>
+  </div>
+</header>
+
+<!-- ================= HERO ================= -->
+<section class="hero" id="top">
+  <div class="blob b1" style="width:520px;height:520px;top:-160px;right:-120px"></div>
+  <div class="blob b2" style="width:420px;height:420px;bottom:-200px;left:-140px"></div>
+  <div class="wrap hero__grid">
+    <div>
+      <span class="label rv in">Заявки из Telegram, ВКонтакте, MAX, почты и Авито — в одном окне</span>
+      <h1>
+        <span class="mask in"><span>Заявки теряются</span></span>
+        <span class="mask in"><span>в <span class="swap"><span class="old">пяти мессенджерах</span></span></span></span>
+        <span class="mask in"><span>Соберём <span class="new">одно окно</span></span></span>
+      </h1>
+      <p class="lead rv in d1">Под ваш бизнес, обычно за 1–2 недели. Сотрудники отвечают из одного списка, вы вечером видите, всё ли отвечено. Цену каждого элемента видите сразу, до звонка.</p>
+      <div class="hero__cta rv in d2">
+        <a class="btn btn-primary" href="#konstruktor" data-go-calc="hero">Посчитать для своего бизнеса <svg class="arr" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 10h11M11 5l5 5-5 5"/></svg></a>
+        <a class="btn btn-light" href="#video">Как работает — 60 секунд</a>
+      </div>
+      <div class="facts rv in d3">
+        <span class="fact"><b><span data-count="5"></span></b><span>каналов в одном списке</span></span>
+        <span class="fact"><b><span data-count="1" data-suf="–2"></span> нед.</b><span>от созвона до запуска</span></span>
+        <span class="fact"><b><span data-count="15" data-suf=" 000 ₽"></span></b><span>запуск, цена без «от»</span></span>
+      </div>
+      <div class="chan rv in d4" aria-label="Каналы">
+        <span class="chan__i"><i class="chan__d" style="background:var(--tg)"></i>Telegram</span>
+        <span class="chan__i"><i class="chan__d" style="background:var(--vk)"></i>ВКонтакте</span>
+        <span class="chan__i"><i class="chan__d" style="background:var(--max)"></i>MAX</span>
+        <span class="chan__i"><i class="chan__d" style="background:var(--mail)"></i>Почта</span>
+        <span class="chan__i"><i class="chan__d" style="background:var(--avito)"></i>Авито</span>
+      </div>
+      <p class="small muted rv in d5" style="margin-top:18px">Работаем с ИП и организациями. Цены без НДС.</p>
+    </div>
+    <div class="rv in d2">
+      <div class="laptop">
+        <div class="laptop__screen">
+          <div class="laptop__view">
+            <video id="heroLoop" src="video/hero-loop.mp4" poster="video/poster.jpg" autoplay muted loop playsinline aria-label="Окно Ветра: сообщения из пяти каналов в одном списке"></video>
+            <div class="window" id="heroWindow" hidden aria-hidden="true">
+              <div class="window__side">
+                <div class="window__title"><i></i>Входящие</div>
+                <div class="dlg on"><div class="dlg__av">А<i style="background:var(--vk)"></i></div><div class="dlg__t"><div class="dlg__n">Алина</div><div class="dlg__m">можно завтра на окрашивание?</div></div></div>
+                <div class="dlg"><div class="dlg__av">И<i style="background:var(--avito)"></i></div><div class="dlg__t"><div class="dlg__n">Игорь</div><div class="dlg__m">раковина 60 см, есть в наличии?</div></div><span class="dlg__w">18 мин</span></div>
+                <div class="dlg"><div class="dlg__av">М<i style="background:var(--tg)"></i></div><div class="dlg__t"><div class="dlg__n">Марина</div><div class="dlg__m">спасибо, до встречи</div></div></div>
+                <div class="dlg"><div class="dlg__av">З<i style="background:var(--mail)"></i></div><div class="dlg__t"><div class="dlg__n">Заказ с сайта</div><div class="dlg__m">Столешница, 2 м, дуб</div></div></div>
+                <div class="dlg"><div class="dlg__av">Д<i style="background:var(--max)"></i></div><div class="dlg__t"><div class="dlg__n">Дарья</div><div class="dlg__m">сколько стоит маникюр?</div></div></div>
+              </div>
+              <div class="window__main">
+                <div class="window__head"><b>Алина</b><span class="small muted">ВКонтакте · отвечает Оля</span></div>
+                <div class="window__chat">
+                  <div class="msg in"><span class="who">Алина</span>можно завтра на окрашивание?</div>
+                  <div class="msg out"><span class="who">Оля</span>Да, есть 12:00 и 16:30. Какое удобнее?</div>
+                  <div class="msg in"><span class="who">Алина</span>16:30, к Кате</div>
+                </div>
+                <div class="window__input">Записала на 16:30 к Кате<b>Отправить</b></div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="laptop__base"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="tape-wrap"><div class="tape" aria-hidden="true"><div class="tape__in">
+  <span>Telegram</span><span>ВКонтакте</span><span>MAX</span><span>Почта</span><span>Авито</span><span>Один список</span><span>Ответ за минуту</span><span>Вечером три цифры</span>
+  <span>Telegram</span><span>ВКонтакте</span><span>MAX</span><span>Почта</span><span>Авито</span><span>Один список</span><span>Ответ за минуту</span><span>Вечером три цифры</span>
+</div></div></div>
+
+<!-- ================= ВИДЕО ================= -->
+<section class="section section-deep on-dark video grain" id="video">
+  <div class="blob b3" style="width:700px;height:700px;top:-200px;left:50%;margin-left:-350px;opacity:.5"></div>
+  <div class="wrap">
+    <span class="label rv">60 секунд</span>
+    <h2 class="rv d1">Посмотрите, как это работает</h2>
+    <p class="lead rv d2" style="color:#C9D8EA">Сообщение из ВКонтакте падает в общий список. Администратор отвечает одной кнопкой. Вечером владелец получает три цифры.</p>
+    <div class="video__frame rv d3 plx" data-plx="6" style="margin-top:32px">
+      <video id="promo" src="video/promo.mp4" poster="video/poster.jpg" preload="metadata" playsinline></video>
+      <button class="video__play" id="playBtn" type="button" aria-label="Смотреть ролик"><span><svg viewBox="0 0 24 24" fill="currentColor"><path d="M6 4l14 8-14 8z"/></svg></span>Смотреть 60 секунд</button>
+    </div>
+    <div class="video__cap rv d4">
+      <span>Смотреть можно без звука — всё написано титрами. Никаких чат-ботов и автоответов: отвечает ваш сотрудник, просто из одного места.</span>
+      <a class="btn btn-ghost btn-sm" href="#konstruktor" data-go-calc="video">Посчитать для своего бизнеса</a>
+    </div>
+  </div>
+</section>
+
+<!-- ================= СЕГМЕНТЫ ================= -->
+<section class="section section-white" id="segments">
+  <div class="wrap">
+    <span class="label rv">Где теряются заявки</span>
+    <h2 class="rv d1">Найдите свой бизнес</h2>
+    <p class="lead rv d2">Дело не в том, что сотрудники плохо работают. Сообщения лежат в пяти приложениях, и видит их только тот, у кого в руках телефон.</p>
+    <div class="seg" style="margin-top:32px">
+      <div class="card rv d1">
+        <span class="k">Салон, студия, барбершоп</span>
+        <p>Клиентка пишет во ВКонтакте «можно завтра на окрашивание?». Администратор в это время рассчитывает человека на кассе. Через двадцать минут он открывает вкладку, а она уже записалась через дорогу, где ответили за минуту. Telegram висит на личном номере, MAX на другом, а в журнале видно только тех, кто дошёл до записи.</p>
+        <div class="loss"><b>3 000–6 000 ₽</b><br>одна потерянная запись. Две в неделю — около 30 000 ₽ в месяц, о которых вы узнаёте случайно или не узнаёте.</div>
+      </div>
+      <div class="card rv d2">
+        <span class="k">Производство: мебель, раковины, на заказ</span>
+        <p>Заявка приходит с Авито, с сайта на почту, в Telegram менеджеру — с фото, размерами и «а сколько будет в моём случае». Переписка длинная и живёт в телефоне того, кто первым ответил: уволился — ушла с ним. Пока менеджер в цеху или на замере, клиент получает расчёт у конкурента.</p>
+        <div class="loss"><b>Десятки тысяч ₽</b><br>одна заявка. Сколько их пришло за месяц и сколько остались без ответа — сегодня владелец не видит вообще.</div>
+      </div>
+      <div class="card rv d3">
+        <span class="k">Магазин: соцсети, Авито, маркетплейсы</span>
+        <p>«Есть в наличии?», «какой размер?», «когда доставка?» — десятки коротких вопросов в день, и каждый живёт час: не ответили — купили в соседней карточке. Авито ещё и опускает в выдаче за медленный ответ. Отвечают два-три человека с разных телефонов, и никто не знает, кто что уже ответил.</p>
+        <div class="loss"><b>1 000–3 000 ₽</b><br>один вопрос без ответа — одна несостоявшаяся покупка. Плюс позиция в выдаче Авито, которую не вернуть деньгами.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= МИНИ-КАЛЬКУЛЯТОР ПОТЕРЬ ================= -->
+<section class="section section-tint" id="loss">
+  <div class="wrap">
+    <span class="label rv">Сколько это стоит вам</span>
+    <h2 class="rv d1">Посчитайте, что теряете сейчас</h2>
+    <p class="lead rv d2">Три ползунка — и ваша цифра. Считается в браузере, никуда не отправляется.</p>
+    <div class="card glass rv d3 two" style="margin-top:28px" id="lossCard">
+      <div>
+        <div class="row" style="margin-bottom:18px"><label style="display:flex;justify-content:space-between;font-size:14px;color:var(--muted);margin-bottom:6px"><span>Обращений в день по всем каналам</span><b id="mcDv" style="color:var(--ink)"></b></label><input type="range" id="mcD" min="5" max="200" value="20" style="width:100%;accent-color:var(--press)"></div>
+        <div class="row" style="margin-bottom:18px"><label style="display:flex;justify-content:space-between;font-size:14px;color:var(--muted);margin-bottom:6px"><span>Средний чек, ₽</span><b id="chkV" style="color:var(--ink)"></b></label><input type="range" id="chk" min="1000" max="100000" step="500" value="4500" style="width:100%;accent-color:var(--press)"></div>
+        <div class="row"><label style="display:flex;justify-content:space-between;font-size:14px;color:var(--muted);margin-bottom:6px"><span>Заявок теряется в неделю</span><b id="mcLv" style="color:var(--ink)"></b></label><input type="range" id="mcL" min="0" max="20" step="0.5" value="2" style="width:100%;accent-color:var(--press)"></div>
+      </div>
+      <div style="background:var(--navy);color:#fff;border-radius:18px;padding:24px">
+        <div class="small" style="color:#9FB6D0">Вы теряете</div>
+        <div style="font-family:var(--head);font-weight:700;font-size:clamp(34px,4.6vw,52px);letter-spacing:-.04em;line-height:1;margin:6px 0 10px" id="mcTotal"></div>
+        <div class="small" style="color:#C9D8EA">в месяц. Считаем только заявки без ответа: <span id="mcNote"></span>. Время сотрудников на обход пяти чатов — 30–40 часов в месяц у одного администратора — сюда не входит.</div>
+        <hr style="border:0;border-top:1px solid rgba(255,255,255,.14);margin:14px 0">
+        <div class="small" style="color:#C9D8EA">Одна ваша заявка ≈ <b id="mcOne" style="color:#fff"></b>. Запомните эту цифру — она ещё встретится рядом с ценой.</div>
+        <a class="btn btn-primary" style="margin-top:16px" href="#konstruktor" data-go-calc="loss">Посчитать для своего бизнеса</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= ЗАЛИПАЮЩАЯ ИСТОРИЯ ================= -->
+<section class="section-navy on-dark story grain" id="story">
+  <div class="wrap story__pin">
+    <div>
+      <span class="label">Как будет у вас</span>
+      <div class="story__steps">
+        <div class="story__step on">
+          <div class="num">ШАГ 0 · СЕЙЧАС</div>
+          <h3>Пять чатов. Один администратор</h3>
+          <p>Клиент написал во ВКонтакте. Увидели через сорок минут. Записалась через дорогу. Это не вина сотрудника — это пять приложений на одном телефоне.</p>
+        </div>
+        <div class="story__step">
+          <div class="num">ШАГ 1 · СОЗВОН 20 МИНУТ И ПОДКЛЮЧЕНИЕ</div>
+          <h3>Подключаем ваши каналы</h3>
+          <p>Не презентация: подключаем один ваш настоящий канал и смотрим на живые сообщения. Telegram и ВКонтакте — минуты, MAX — после проверки на dev.max.ru, почта и Авито — по инструкции. Делает Андрей. От вас — 20 минут и доступ к сообществу или боту.</p>
+        </div>
+        <div class="story__step">
+          <div class="num">ШАГ 2 · ВНЕДРЕНИЕ, ОБЫЧНО 1–2 НЕДЕЛИ</div>
+          <h3>Всё — в одном списке, с телефона</h3>
+          <p>Компания, сотрудники, быстрые ответы, сводка — по чек-листу. Сотрудник отвечает одной кнопкой; жёлтая точка — диалог ждёт дольше 15 минут. Ответ уходит туда, откуда написал клиент. Есть доработка по ТЗ — сначала оценка, потом код (Михаил). Точный срок — в договоре.</p>
+        </div>
+        <div class="story__step">
+          <div class="num">ШАГ 3 · СОПРОВОЖДЕНИЕ</div>
+          <h3>Вечером — три цифры владельцу</h3>
+          <p>Место на сервере в России, обновления, ответы в чате в рабочие часы. Отвечают те же двое, что делали внедрение. От вас — ничего. Вечером в Telegram: сколько пришло, сколько без ответа, за сколько отвечали.</p>
+        </div>
+      </div>
+      <div class="story__dots" aria-hidden="true"><i class="on"></i><i></i><i></i><i></i></div>
+    </div>
+    <div class="story__stage" aria-hidden="true">
+      <div class="story__glow"></div>
+      <div class="chaos" id="scChaos">
+        <div class="bub" style="left:6%;top:8%;background:#1C3A62"><i style="background:var(--vk)"></i>можно завтра на окрашивание?</div>
+        <div class="bub" style="right:4%;top:18%;background:#1C3A62"><i style="background:var(--tg)"></i>сколько стоит маникюр?</div>
+        <div class="bub" style="left:14%;top:40%;background:#1C3A62"><i style="background:var(--avito)"></i>раковина 60 см в наличии?</div>
+        <div class="bub" style="right:10%;top:50%;background:#1C3A62"><i style="background:var(--mail)"></i>Столешница 2 м, дуб — расчёт?</div>
+        <div class="bub" style="left:22%;top:72%;background:#1C3A62"><i style="background:var(--max)"></i>а сегодня есть окно?</div>
+        <div class="bub" style="right:18%;top:82%;background:#3A1C1C;color:#FFC9C9"><i style="background:var(--bad)"></i>увидели через 40 минут</div>
+      </div>
+      <div class="connect" id="scConnect" style="opacity:0">
+        <div class="cc glass-dark"><i style="background:var(--tg)"></i>Telegram<b>подключён</b></div>
+        <div class="cc glass-dark"><i style="background:var(--vk)"></i>ВКонтакте<b>подключён</b></div>
+        <div class="cc glass-dark"><i style="background:var(--max)"></i>MAX<b>подключён</b></div>
+        <div class="cc glass-dark"><i style="background:var(--mail)"></i>Почта<b>подключена</b></div>
+        <div class="cc glass-dark"><i style="background:var(--avito)"></i>Авито<b>подключён</b></div>
+        <div class="cc glass-dark" style="color:#9FB6D0"><i style="background:#3A4D66"></i>WhatsApp<b style="color:#9FB6D0">по запросу</b></div>
+      </div>
+      <div class="phone" id="scPhone" style="opacity:0">
+        <div class="phone__screen">
+          <div class="phone__notch"></div>
+          <div class="phone__head"><i></i>Алина <span class="small muted" style="font-weight:400;margin-left:auto">ВКонтакте</span></div>
+          <div class="phone__chat">
+            <div class="msg in">можно завтра на окрашивание?</div>
+            <div class="msg out">Да, есть 12:00 и 16:30. Какое удобнее?</div>
+            <div class="msg in">16:30, к Кате</div>
+            <div class="msg out">Записала на 16:30 к Кате. До встречи</div>
+          </div>
+          <div class="quick"><span>Адрес</span><span>Часы работы</span><span>Прайс</span><span>Свободно ли</span></div>
+          <div class="phone__bar"><span>Ответить…</span><b>↑</b></div>
+        </div>
+      </div>
+      <div class="desk" id="scDesk" style="opacity:0">
+        <div class="laptop">
+          <div class="laptop__screen"><div class="laptop__view" style="background:#fff">
+            <div style="padding:12px 12px 0;display:flex;justify-content:space-between;align-items:center;color:var(--ink);font-size:12px"><b style="font-family:var(--head)">Сегодня · сводка владельцу</b><span class="muted">вторник, 19:00</span></div>
+            <div class="panel">
+              <div class="kpi"><b>47</b><span>обращений пришло</span></div>
+              <div class="kpi bad"><b>2</b><span>без ответа</span></div>
+              <div class="kpi"><b>3 мин</b><span>медиана ответа</span></div>
+            </div>
+            <div class="bars">
+              <div><span>Оля</span><i data-w="82%"></i><span>21</span></div>
+              <div><span>Катя</span><i data-w="60%"></i><span>15</span></div>
+              <div><span>Ночью</span><i data-w="35%"></i><span>9</span></div>
+            </div>
+          </div></div>
+          <div class="laptop__base"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= ОКНО И СВОДКА ================= -->
+<section class="section section-white" id="product">
+  <div class="wrap">
+    <span class="label rv">Что вы получаете</span>
+    <h2 class="rv d1">Окно сотруднику, цифры — вам</h2>
+    <p class="lead rv d2">Платит владелец, пользуются сотрудники. Поэтому у окна две стороны.</p>
+    <div class="two w" style="margin-top:32px">
+      <figure class="card rv d1" style="margin:0;padding:14px">
+        <img src="img/okno-spisok.png" alt="Список администратора: все каналы в одном списке, по времени" loading="lazy" style="border-radius:12px;border:1px solid var(--line)">
+        <figcaption class="small muted" style="margin-top:12px"><b style="color:var(--ink)">Кому ответить прямо сейчас.</b> Все каналы в одном списке, по времени. Жёлтая точка — диалог без ответа дольше 15 минут. Ответ уходит туда, откуда написал клиент.</figcaption>
+      </figure>
+      <figure class="card rv d2" style="margin:0;display:flex;flex-direction:column;gap:12px">
+        <div style="background:var(--navy);color:#fff;border-radius:14px;padding:16px;font-size:14px;line-height:1.5">
+          <div class="small" style="color:#9FB6D0;margin-bottom:8px">Ветра · вторник, 19:00</div>
+          Сегодня: <b>47</b> обращений, <b style="color:#FFC9C9">2</b> без ответа, отвечали в среднем за <b>3 минуты</b>.<br>Дольше всех ждал Игорь с Авито — 18 минут.
+        </div>
+        <figcaption class="small muted"><b style="color:var(--ink)">Сводка владельцу.</b> Вечером в Telegram: сколько обращений пришло, сколько без ответа, за сколько отвечали. Медиана ответа, а не среднее — одно долгое ожидание не прячется за десятком быстрых.</figcaption>
+        <p class="small muted" style="margin:auto 0 0">Панель с цифрами по каждому сотруднику — отдельная опция в конструкторе.</p>
+      </figure>
+    </div>
+  </div>
+</section>
+
+<!-- ================= ЧЕМ ОТЛИЧАЕТСЯ ================= -->
+<section class="section section-tint" id="why">
+  <div class="wrap">
+    <span class="label rv">Чем это отличается</span>
+    <h2 class="rv d1">Не инструмент, а окно, собранное под вас</h2>
+    <p class="lead rv d2">Сервисы «подключи сам» дают кабинет и инструкцию. Мы отдаём работающее окно и остаёмся на связи.</p>
+    <div class="cards" style="margin-top:32px">
+      <div class="card rv d1"><h3>Делаем под вас</h3><p>Каналы, быстрые ответы, кто за что отвечает — настраиваем по вашим реальным сообщениям, а не по инструкции на сорок экранов. Нужна связка с CRM или своя логика — делаем по ТЗ.</p></div>
+      <div class="card rv d2"><h3>Сервер в России, свой контур</h3><p>На общем сервере у каждой компании своя база и свои ключи доступа. Нужно хранить переписку отдельно — ставим выделенный сервер с отдельным ключом, который отключается независимо от остальных.</p></div>
+      <div class="card rv d3"><h3>Отвечают два человека, которые это сделали</h3><p>Андрей — настройка и запуск, Михаил — код. Пишете в чат — отвечаем сами, в рабочий день. Без тикетов, очереди и «ваш звонок очень важен».</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= ЗА ЧТО ПЛАТИТЕ ================= -->
+<section class="section section-white" id="pay">
+  <div class="wrap">
+    <span class="label rv">За что вы платите</span>
+    <h2 class="rv d1">Две колонки: нам и площадкам</h2>
+    <p class="lead rv d2">Мы не берём процент с площадок и не перепродаём их тарифы. Что стоит у площадки — платите ей напрямую, мы это просто показываем рядом.</p>
+    <div class="pay" style="margin-top:32px">
+      <div class="card us rv d1">
+        <div class="k">Нам</div>
+        <ul>
+          <li><span><b>Разово</b> — за подключение и настройку: запуск, каналы, шаблоны, обучение. Часы работы, проданные один раз.</span></li>
+          <li><span><b>В месяц</b> — за сопровождение и опции: место на сервере, обновления, ответы в чате, ИИ, отчёты. Первые 3 месяца сопровождения оплачиваются при запуске.</span></li>
+          <li><span><b>По ТЗ</b> — за доработки под вас: 2 500 ₽ за час работы Михаила, часы и срок пишем в оценке заранее.</span></li>
+        </ul>
+      </div>
+      <div class="card them rv d2">
+        <div class="k">Площадкам, не нам</div>
+        <ul>
+          <li><span>Telegram, ВКонтакте, MAX, почта</span><b>0 ₽</b></li>
+          <li><span>Авито — тариф для услуг или товаров. Без платного тарифа Авито не выдаёт ключ к сообщениям</span><b>~2 000–3 000 ₽/мес</b></li>
+          <li><span>WhatsApp — российский провайдер по договору между вами и провайдером</span><b>~5 000 ₽/мес</b></li>
+        </ul>
+      </div>
+    </div>
+    <p class="small muted rv d3" style="margin-top:16px">Цены в рублях, без НДС (УСН). Прайс на странице совпадает с тем, что пойдёт в договор.</p>
+  </div>
+</section>
+
+<!-- ================= КОНСТРУКТОР ================= -->
+<section class="section section-tint konst" id="konstruktor">
+  <div class="wrap">
+    <span class="label rv">Конструктор</span>
+    <h2 class="rv d1">Соберите своё окно и увидите цену</h2>
+    <p class="lead rv d2">Пять вопросов — и состав собран под ваш бизнес. Дальше включайте и выключайте элементы, цена меняется на глазах. Нет нужного элемента — сделаем по ТЗ.</p>
+    <p class="small muted rv d3" style="margin-top:8px">5 вопросов, 40 секунд. Состав и цена — сразу, без звонка.</p>
+
+    <div class="konst__grid" style="margin-top:28px">
+      <div>
+        <div id="quiz">
+          <div class="q" data-q="seg"><div class="q__t"><span class="i">1/6</span>Чем занимаетесь?</div>
+            <div class="opts" role="radiogroup">
+              <button class="opt" data-v="salon" aria-pressed="false" tabindex="0">Салон / студия</button><button class="opt" data-v="prod" aria-pressed="false">Производство</button><button class="opt" data-v="shop" aria-pressed="false">Магазин</button><button class="opt" data-v="other" aria-pressed="false">Услуги</button><button class="opt" data-v="other" aria-pressed="false">Другое</button>
+            </div><p class="small muted" style="margin:10px 0 0">От ответа зависят примеры, быстрые ответы и средний чек в расчёте.</p></div>
+          <div class="q" data-q="chans" data-multi><div class="q__t"><span class="i">2/6</span>Куда пишут клиенты? <span class="small muted" style="font-weight:400">несколько ответов</span></div>
+            <div class="opts" role="group">
+              <button class="opt" data-v="tg" aria-pressed="false">Telegram</button><button class="opt" data-v="vk" aria-pressed="false">ВКонтакте</button><button class="opt" data-v="max" aria-pressed="false">MAX</button><button class="opt" data-v="mail" aria-pressed="false">Почта</button><button class="opt" data-v="avito" aria-pressed="false">Авито</button><button class="opt" data-v="wa" aria-pressed="false">WhatsApp</button>
+            </div><p class="small muted" style="margin:10px 0 0">Авито — нужен платный тариф Авито. WhatsApp — в России работает нестабильно, подключаем по запросу.</p></div>
+          <div class="q" data-q="d"><div class="q__t"><span class="i">3/6</span>Сколько обращений в день?</div>
+            <div class="opts" role="radiogroup"><button class="opt" data-v="a" aria-pressed="false">до 10</button><button class="opt" data-v="b" aria-pressed="false">10–30</button><button class="opt" data-v="c" aria-pressed="false">30–100</button><button class="opt" data-v="d" aria-pressed="false">больше 100</button></div>
+            <p class="small muted" style="margin:10px 0 0">От этого зависит размер сервера и нужно ли оповещение «не ответили».</p></div>
+          <div class="q" data-q="adm"><div class="q__t"><span class="i">4/6</span>Сколько человек отвечают клиентам?</div>
+            <div class="opts" role="radiogroup"><button class="opt" data-v="a" aria-pressed="false">1</button><button class="opt" data-v="b" aria-pressed="false">2–3</button><button class="opt" data-v="c" aria-pressed="false">4–7</button><button class="opt" data-v="d" aria-pressed="false">больше 7</button></div>
+            <p class="small muted" style="margin:10px 0 0">Три рабочих места входят в базу, дальше — 500 ₽/мес за каждое.</p></div>
+          <div class="q" data-q="crm"><div class="q__t"><span class="i">5/6</span>Есть ли CRM или журнал записи?</div>
+            <div class="opts" role="radiogroup"><button class="opt" data-v="no" aria-pressed="false">Нет</button><button class="opt" data-v="yes" aria-pressed="false">YCLIENTS / Dikidi</button><button class="opt" data-v="yes" aria-pressed="false">Битрикс24 / amoCRM</button><button class="opt" data-v="yes" aria-pressed="false">Другая</button></div>
+            <p class="small muted" style="margin:10px 0 0">Не трогаем, живёт рядом. Передача диалога в сделку — доработка по ТЗ.</p></div>
+          <div class="q" data-q="server"><div class="q__t"><span class="i">6/6</span>Нужен свой сервер? <span class="small muted" style="font-weight:400">необязательно</span></div>
+            <div class="opts" role="radiogroup"><button class="opt" data-v="yes" aria-pressed="false">Да, у нас есть такое требование</button><button class="opt" data-v="no" aria-pressed="false">Не знаю, подскажите</button></div>
+            <p class="small muted" style="margin:10px 0 0">«Не знаю» — ставим общий сервер, объясним разницу на созвоне.</p></div>
+          <div style="display:flex;gap:12px;flex-wrap:wrap;align-items:center;margin:6px 0 10px">
+            <button class="btn btn-primary" id="showBuild" type="button">Показать состав</button>
+            <button class="btn btn-light btn-sm" id="skipQuiz" type="button">Пропустить вопросы</button>
+            <span class="small muted">Ответы уйдут в заявку вместе с составом — Андрей позвонит, уже зная ваш бизнес.</span>
+          </div>
+        </div>
+
+        <div id="build" hidden>
+          <p id="presetLine" style="font-family:var(--head);font-weight:700;font-size:18px;margin:26px 0 6px"></p>
+          <div class="presets"><span class="small muted" style="align-self:center">Или готовый набор:</span><button class="opt preset-btn" data-seg="salon" type="button">Для салона</button><button class="opt preset-btn" data-seg="prod" type="button">Для производства</button><button class="opt preset-btn" data-seg="shop" type="button">Для магазина</button></div>
+
+          <div class="group"><div class="group__t"><h3>Под ТЗ</h3><span>считаем по клиенту, в итог не плюсуется</span></div><div id="g-tz"></div>
+            <p class="small muted" style="margin-top:8px">Оценка ТЗ — 5 000 ₽, зачитывается в заказ. Для сравнения: внедрение CRM у интеграторов — 80–120 тыс. ₽, поддержка 5–10 тыс. ₽ в месяц (рынок, сентябрь 2026).</p></div>
+          <div class="group"><div class="group__t"><h3>База</h3><span>входит всегда</span></div><div id="g-base"></div>
+            <details class="small" style="margin-top:8px"><summary style="cursor:pointer;color:var(--press)">Что входит в базу за 0 ₽ — 8 пунктов</summary>
+              <ul class="muted" style="margin-top:8px"><li><b>Окно «Входящие»</b> — все диалоги в одном списке, поиск, ответ с фото и файлами</li><li><b>Вход по коду на почту</b> — без паролей, видно, кто вошёл</li><li><b>Копии базы</b> — раз в сутки, хранятся 14 штук</li><li><b>Быстрые ответы</b> — адрес, часы, прайс в одно нажатие</li><li><b>Автоответ в нерабочее время</b> — клиент ночью получает ответ, что вы закрыты и когда откроетесь</li><li><b>Диктовка ответа голосом</b> — сотрудник говорит, текст ложится в поле</li><li><b>Вечерняя сводка владельцу</b> — три цифры в Telegram</li><li><b>Сигнал нам о поломке</b> — узнаём о сбое раньше вас</li></ul></details></div>
+          <div class="group"><div class="group__t"><h3>Каналы</h3><span>разово, за подключение и наладку</span></div><div id="g-chan"></div>
+            <p class="small muted" style="margin-top:8px">Wildberries и Ozon — по запросу, цену назовём после проверки на вашем аккаунте. Для Ozon нужна подписка Premium Plus.</p></div>
+          <div class="group"><div class="group__t"><h3>Опции</h3><span>«скоро» — строится под первый заказ, до готовности не оплачивается</span></div><div id="g-opt"></div></div>
+        </div>
+      </div>
+
+      <aside class="total" id="total" aria-label="Итог" hidden>
+        <div class="gain"><span class="small">Вы теряете</span><b id="tLoss"></b><span class="small" id="tLossNote"></span></div>
+        <div class="k">Разово</div><div class="v"><output id="tOnce" aria-live="polite"></output></div>
+        <div class="k">В месяц</div><div class="v"><output id="tMonthly" aria-live="polite"></output></div>
+        <div class="row"><span>Первый платёж, с 3 месяцами сопровождения</span><b id="tFirst"></b></div>
+        <div class="row"><span id="tThird"></span></div>
+        <div class="row" id="tCustom" hidden><span>+ доработка по ТЗ — от 62 500 ₽, оценим отдельно</span></div>
+        <hr>
+        <div class="row"><span>Окупится за</span><b id="tPayback"></b></div>
+        <div class="small" style="color:#9FB6D0" id="tVs"></div>
+        <div id="tEmpty" hidden class="small" style="margin-top:10px;color:#FFC9C9">Только база — окно, вход, сервер. Каналов нет: сообщения приходить не будут. <button id="restore" class="btn btn-ghost btn-sm" type="button" style="margin-top:6px">Вернуть набор</button></div>
+        <div id="tHint" hidden class="small" style="margin-top:10px;color:#C9D8EA">Можно начать легче: панель и сервер добавляются позже без переделки. <button id="lighter" class="btn btn-ghost btn-sm" type="button" style="margin-top:6px">Убрать панель и сервер</button></div>
+        <hr>
+        <div class="small" style="color:#C9D8EA"><b style="color:#fff">Входит бесплатно:</b> созвон и разбор 20 минут, замер скорости ответа до подключения, вечерняя сводка, обучающий созвон 1 час, обновления.</div>
+        <a class="btn btn-primary" href="#lead" id="toForm">Отправить состав — перезвоним сегодня</a>
+        <p class="disc">Расчёт показывает состав работ и их стоимость по действующему прайсу и не является публичной офертой (п. 1 ст. 437 ГК РФ). Итоговая цена и срок фиксируются в договоре после уточнения задачи; если состав работ не меняется, цена в договоре совпадает с расчётом. Цены в рублях, без НДС (УСН).</p>
+      </aside>
+    </div>
+
+    <!-- ================= ФОРМА ================= -->
+    <div class="form" id="lead" hidden>
+      <span class="label">Заявка</span>
+      <h3 style="font-size:clamp(22px,3vw,30px);margin-bottom:8px">Отправьте состав — перезвоним сегодня</h3>
+      <p class="muted">Состав и ответы на вопросы уже в заявке. Разговор 20 минут: уточним каналы, назовём точную цену и срок.</p>
+      <div class="sostav" id="sostav"></div>
+      <form id="leadForm" novalidate>
+        <div class="form__grid">
+          <div class="field"><label for="fName">Имя</label><input id="fName" name="name" placeholder="Как к вам обращаться" autocomplete="name"><div class="err">Напишите, как к вам обращаться</div></div>
+          <div class="field"><label for="fBiz">Чем занимаетесь</label><input id="fBiz" name="business" placeholder="Салон, производство, магазин…" autocomplete="organization"><div class="err">Одно-два слова о бизнесе</div></div>
+          <div class="field"><label for="fContact">Телефон или Telegram</label><input id="fContact" name="contact" placeholder="+7 … или @имя" inputmode="tel" autocomplete="tel"><div class="err">Нужен телефон или ник в Telegram — хотя бы одно</div></div>
+          <div class="field"><label>Когда удобно</label><div class="opts"><button type="button" class="opt time-opt" aria-pressed="true">Сегодня до 18:00</button><button type="button" class="opt time-opt" aria-pressed="false">Завтра до 12:00</button><button type="button" class="opt time-opt" aria-pressed="false">Напишу в Telegram сам</button></div><input type="hidden" name="time" value="Сегодня до 18:00"></div>
+        </div>
+        <input class="hp" type="text" name="site" tabindex="-1" autocomplete="off" aria-hidden="true">
+        <label class="agree"><input type="checkbox" name="agree"><span>Даю согласие ИП [ФИО] на обработку моих персональных данных (имя, телефон или e-mail, мессенджер) для связи по моей заявке на условиях <a href="politika.html">Политики обработки персональных данных</a>.</span></label>
+        <div class="small" id="agreeErr" style="color:var(--bad);display:none;margin:-8px 0 10px">Без согласия отправить заявку нельзя</div>
+        <p class="small muted">Оператор — ИП [ФИО], ОГРНИП [номер], [e-mail]. Заявка хранится на сервере в России.</p>
+        <button class="btn btn-primary" id="sendBtn" type="submit">Отправить состав</button>
+        <div class="small" id="formErr" style="color:var(--bad);display:none;margin-top:10px">Не отправилось — состав сохранён. Попробуйте ещё раз или напишите в Telegram.</div>
+      </form>
+      <div class="form__ok" id="formOk"><b>Состав получен.</b> <span class="t">Андрей позвонит сегодня до 18:00 (после 18:00 — завтра до 12:00). Разговор 20 минут — уточним каналы и назовём точную цену и срок. После созвона пришлём одно сообщение на одну страницу: состав, цена, срок.</span><div id="okSostav" style="margin-top:10px"></div></div>
+    </div>
+  </div>
+</section>
+
+<div class="totalbar" id="totalbar"><div><b id="barOnce"></b><span>первый платёж · <span id="barMonthly"></span></span></div><button class="btn btn-primary btn-sm" id="barBtn" type="button">Итог</button></div>
+
+<!-- ================= ГАРАНТИИ ================= -->
+<section class="section section-white" id="free">
+  <div class="wrap">
+    <span class="label rv">Без доплат</span>
+    <h2 class="rv d1">Что не стоит ничего и за что отвечаем</h2>
+    <div class="cards" style="margin-top:28px">
+      <div class="card rv d1"><h3>14 дней проверки</h3><p>После запуска две недели смотрим на сводку. Если доля ответов быстрее 5 минут не выросла по сравнению с замером до подключения — дорабатываем за свой счёт. Решаете по цифре, а не по ощущению.</p></div>
+      <div class="card rv d2"><h3>Право на доработки</h3><p>Вы получаете бессрочное право пользоваться Ветра и всеми доработками под вас; программа остаётся нашей и продолжает обновляться. Порядок передачи прописан в договоре, читаете до оплаты.</p></div>
+      <div class="card rv d3"><h3>Срок ответа</h3><p>По сопровождению отвечаем сами, до конца рабочего дня. Круглосуточной службы нет — и мы её не обещаем.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= FAQ ================= -->
+<section class="section section-tint" id="faq">
+  <div class="wrap">
+    <span class="label rv">Частые вопросы</span>
+    <h2 class="rv d1">Что спрашивают до созвона</h2>
+    <div class="faq rv d2" style="margin-top:20px">
+      <details><summary>А WhatsApp?</summary><p>С февраля 2026 WhatsApp в России работает нестабильно, и как надёжный канал мы его не подключаем. Окно собирает Telegram, ВКонтакте, MAX, почту и Авито. Если клиенты пишут в WhatsApp — на созвоне обсудим подключение через российского провайдера по запросу и готовый текст, которым клиентов переводят в другие каналы.</p></details>
+      <details><summary>Где хранятся данные?</summary><p>На сервере в России. На общем сервере у каждой компании своя база и свои ключи доступа; при выделенном сервере — отдельная машина и отдельный ключ. Доступ к серверу есть у двух названных людей по обязательству о конфиденциальности, поручение на обработку по 152-ФЗ — в договоре.</p></details>
+      <details><summary>Кто владеет кодом доработок?</summary><p>Вы получаете бессрочное право пользоваться Ветра и всеми доработками, сделанными под вас. Сама программа остаётся нашей и продолжает обновляться. Права и порядок передачи прописаны в договоре — читаете до оплаты.</p></details>
+      <details><summary>Что, если администратор уволится?</summary><p>Переписка живёт в окне, а не в его телефоне: история остаётся, каналы подключены к компании, а не к личному номеру. Новому сотруднику даёте вход по коду на почту за пару минут, старому — закрываете.</p></details>
+      <details><summary>У нас есть YCLIENTS или amoCRM. Вы их заменяете?</summary><p>Нет. Ветра отвечает за сообщения до записи и до сделки; журнал и CRM остаются вашими, мы в них не лезем. Если нужно передавать диалог в сделку Битрикс24 или amoCRM — это доработка по ТЗ, оцениваем отдельно.</p></details>
+      <details><summary>Клиент поймёт, что ему отвечают через сервис?</summary><p>Нет. Ответ уходит в тот же чат, откуда написал клиент: в Telegram — от вашего бота, во ВКонтакте — от сообщества, на почту — с вашего адреса. Ветра работает со стороны компании.</p></details>
+      <details><summary>Вас двое. Кто будет поддерживать?</summary><p>Те же двое, что делали внедрение: Андрей — настройка, Михаил — код. Отвечаем сами, в рабочий день, до конца рабочего дня. Если нужен ответ за 2 часа и мелкие правки без счёта — расширенное сопровождение, 6 000 ₽/мес.</p></details>
+      <details><summary>А если не сработает?</summary><p>Созвон и разбор ничего не стоят. После запуска 14 дней смотрим на сводку: не выросла доля ответов быстрее 5 минут — дорабатываем за свой счёт. Дальше решаете по цифре, которую показывает сводка, а не по нашим словам.</p></details>
+    </div>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="wrap">
+    <div class="footer__grid">
+      <div><a class="logo on-dark" href="#top" style="color:#fff"><span class="logo__word" style="color:#fff">Ветра</span><span class="logo__dot" style="background:var(--mid)"></span></a>
+        <p style="margin-top:14px">Заявки из Telegram, ВКонтакте, MAX, почты и Авито в одном окне. Внедрение под ваш бизнес и сопровождение.</p>
+        <p class="small">Работаем с ИП и организациями. Цены в рублях, без НДС (УСН). Расчёт на странице не является публичной офертой.</p></div>
+      <div><h4>Документы</h4><ul><li><a href="politika.html">Политика обработки персональных данных</a></li><li><a href="#">Образец договора</a></li><li><a href="#video">Как работает — 60 секунд</a></li></ul></div>
+      <div><h4>Связь</h4><ul><li>ИП [ФИО] · ОГРНИП [номер]</li><li>[e-mail]</li><li>Telegram: [аккаунт Андрея]</li></ul></div>
+    </div>
+    <div class="footer__bottom"><span>© Ветра, 2026</span><span>Telegram, ВКонтакте, MAX, Авито — товарные знаки их владельцев. Подключаем через открытые инструменты площадок.</span></div>
+  </div>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script src="js/script.js"></script>
+</body>
+</html>
