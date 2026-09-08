@@ -1,0 +1,257 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Себестоимость Ветры</title>
+<style>
+:root{--blue:#2C78D5;--press:#1F63BC;--mid:#81AEE6;--soft:#D6E5F7;--tint:#EFF5FD;--navy:#0E2A4A;--ink:#0F1D2E;--muted:#56687F;--line:#DCE6F2;--page:#F7FAFE;--ok:#167A41;--okbg:#E6F4EB;--warn:#9A5A00;--warnbg:#FFF3E0;--red:#C62828;--redbg:#FDE8E8}
+*{box-sizing:border-box}
+body{margin:0;background:var(--page);color:var(--ink);font:16px/1.55 "Golos Text",Manrope,system-ui,"Segoe UI",sans-serif}
+.wrap{max-width:960px;margin:0 auto;padding:32px 20px 80px}
+h1{font-size:clamp(26px,4vw,38px);line-height:1.15;margin:0 0 8px}
+h2{font-size:22px;margin:48px 0 16px;padding-top:16px;border-top:2px solid var(--soft)}
+h3{font-size:17px;margin:0 0 8px}
+p{margin:0 0 12px}
+.lead{color:var(--muted);font-size:17px;margin-bottom:24px}
+.tag{display:inline-block;font-size:12px;font-weight:600;letter-spacing:.04em;text-transform:uppercase;color:var(--press);background:var(--soft);padding:3px 10px;border-radius:999px;margin-bottom:12px}
+.steps{display:flex;gap:8px;flex-wrap:wrap;margin:0 0 24px}
+.step{font-size:13px;padding:6px 12px;border-radius:999px;border:1px solid var(--line);background:#fff;color:var(--muted)}
+.step.on{background:var(--navy);color:#fff;border-color:var(--navy)}
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px;margin:16px 0}
+.card{background:#fff;border:1px solid var(--line);border-radius:14px;padding:20px}
+.card.ok{border-top:4px solid var(--ok)}.card.blue{border-top:4px solid var(--blue)}.card.warn{border-top:4px solid var(--warn)}.card.red{border-top:4px solid var(--red)}
+.big{font-size:32px;font-weight:700;color:var(--press);line-height:1.1;margin:6px 0}
+.big small{font-size:14px;font-weight:500;color:var(--muted)}
+.note{background:var(--warnbg);border-left:4px solid var(--warn);padding:12px 16px;border-radius:8px;margin:16px 0;font-size:15px}
+.note.ok{background:var(--okbg);border-color:var(--ok)}
+.note.red{background:var(--redbg);border-color:var(--red)}
+.calc{background:#fff;border:1px solid var(--line);border-radius:16px;padding:22px;display:grid;grid-template-columns:1fr 1fr;gap:24px}
+@media(max-width:700px){.calc{grid-template-columns:1fr}}
+.row{margin-bottom:16px}
+.row label{display:flex;justify-content:space-between;font-size:14px;color:var(--muted);margin-bottom:4px;gap:12px}
+.row label b{color:var(--ink);font-size:16px;white-space:nowrap}
+.row.chk label{justify-content:flex-start;align-items:center;cursor:pointer;color:var(--ink);font-size:15px}
+input[type=range]{width:100%;accent-color:var(--press)}
+input[type=checkbox]{width:18px;height:18px;accent-color:var(--press)}
+.res{background:var(--navy);color:#fff;border-radius:14px;padding:22px}
+.res .big{color:#fff}.res .big small{color:#B9CFEA}
+.res p{color:#D6E5F7;font-size:14px;margin-bottom:4px}
+.res hr{border:0;border-top:1px solid #2A4A70;margin:14px 0}
+.res .line{display:flex;justify-content:space-between;font-size:14px;color:#D6E5F7;padding:3px 0}
+.res .line b{color:#fff;font-variant-numeric:tabular-nums}
+.tbl{overflow-x:auto;background:#fff;border:1px solid var(--line);border-radius:14px}
+table{border-collapse:collapse;width:100%;min-width:640px}
+th,td{padding:11px 14px;text-align:left;vertical-align:top;border-bottom:1px solid var(--line);font-size:15px}
+th{background:var(--tint);font-weight:600;color:var(--navy)}
+tr:last-child td{border-bottom:0}
+td.n{text-align:right;white-space:nowrap;font-variant-numeric:tabular-nums}
+tr.sum td{font-weight:700;background:var(--tint)}
+.pill{display:inline-block;font-size:12px;font-weight:600;padding:2px 8px;border-radius:999px;white-space:nowrap}
+.pill.f{background:var(--okbg);color:var(--ok)}.pill.e{background:var(--warnbg);color:var(--warn)}.pill.x{background:var(--redbg);color:var(--red)}.pill.z{background:var(--soft);color:var(--press)}
+figure{margin:20px 0;background:#fff;border:1px solid var(--line);border-radius:14px;padding:18px}
+figcaption{color:var(--muted);font-size:14px;margin-top:10px}
+svg{width:100%;height:auto;display:block}
+ul,ol{padding-left:20px;margin:6px 0 12px}li{margin:4px 0}
+.src{font-size:13px;color:var(--muted)}
+code{font-size:14px;background:var(--tint);padding:1px 5px;border-radius:4px}
+</style>
+</head>
+<body>
+<div class="wrap">
+<span class="tag">Ветра · себестоимость · 8 сентября 2026</span>
+<h1>Себестоимость Ветры: из чего складывается и кто кому платит</h1>
+<div class="steps"><span class="step on">1. Себестоимость</span><span class="step">2. Ценники по каналам</span><span class="step">3. Где подкрутить цену</span></div>
+<p class="lead">Шаг первый из трёх. Здесь только расходы: что платим мы каждый месяц, что растёт с каждым клиентом, что клиент платит площадкам мимо нас, и сколько часов стоит подключить и вести одного клиента. Цены здесь не назначаются, они на втором шаге.</p>
+
+<div class="cards">
+  <div class="card blue"><h3>Постоянные, в месяц</h3><div class="big">20 450 <small>₽</small></div><p>Платим независимо от числа клиентов. Со взносами ИП — 25 230 ₽. Из них 14 000 ₽ — подписка Claude, а не серверы.</p></div>
+  <div class="card ok"><h3>Переменные, на клиента</h3><div class="big">≈ 250–1 300 <small>₽ в месяц</small></div><p>Эквайринг, голос, хранилище, ИИ-автоответ. Верхняя граница — с выделенным сервером и крупным потоком.</p></div>
+  <div class="card warn"><h3>Часы на внедрение</h3><div class="big">15–20 <small>или 30–44 ч</small></div><p>Настройка по чек-листу (Андрей) или разработка по ТЗ (Михаил). Главный расход, который не платим деньгами.</p></div>
+</div>
+
+<div class="note">Все цифры взяты из <code>docs/rashody.md</code>, <code>docs/finansovaya-karta.md</code>, <code>docs/ii-avtootvet.md</code>, <code>docs/integrations.md</code>, <code>docs/kanaly-4-razvedka.md</code> и <code>scripts/econ.py</code>. Пометки: <span class="pill f">факт</span> платим или цена известна точно · <span class="pill e">оценка</span> порядок величины, уточнить при покупке · <span class="pill x">нет данных</span> замера не было.</div>
+
+<h2>1. Постоянные расходы: платим, даже если клиентов ноль</h2>
+<div class="tbl"><table>
+<tr><th>Статья</th><th class="n">В месяц</th><th>Пометка</th></tr>
+<tr><td>Подписка Claude, Михаил</td><td class="n">14 000 ₽</td><td><span class="pill f">факт</span> инструмент разработки; этим двое заменяют команду</td></tr>
+<tr><td>Генерация картинок (kie.ai)</td><td class="n">~4 000 ₽</td><td><span class="pill e">оценка</span> единственная режущаяся строка: можно до ~1 000 ₽</td></tr>
+<tr><td>Серверы Timeweb (рабочий + пробный)</td><td class="n">~2 000 ₽</td><td><span class="pill e">оценка</span> тариф 2 ГБ ≈ 880 ₽/мес за сервер, проверено 02.09</td></tr>
+<tr><td>Хранилище S3 (вложения клиентов)</td><td class="n">~300 ₽</td><td><span class="pill e">оценка</span> растёт с числом клиентов</td></tr>
+<tr><td>Домен <code>vetra.me</code> в пересчёте на месяц</td><td class="n">~200 ₽</td><td><span class="pill e">оценка</span> 2 000–2 500 ₽/год</td></tr>
+<tr><td>GitHub, Sentry, Яндекс Метрика</td><td class="n">0 ₽</td><td><span class="pill f">факт</span> бесплатных тарифов хватает</td></tr>
+<tr><td>Расчётный счёт</td><td class="n">0–1 500 ₽</td><td><span class="pill e">оценка</span> первые месяцы у банков бесплатно</td></tr>
+<tr><td>Связь, телефон для звонков</td><td class="n">—</td><td><span class="pill x">нет данных</span> личные номера или отдельная линия — не решено</td></tr>
+<tr class="sum"><td>Итого постоянных</td><td class="n">20 450 ₽</td><td>это число стоит во всех расчётах точки нуля</td></tr>
+<tr><td>Взносы ИП «за себя», 57 390 ₽ за 2026 год</td><td class="n">+4 782 ₽</td><td><span class="pill f">факт</span> платятся к 28 декабря, но деньги настоящие; УСН 6 % ими перекрывается примерно до 956 тыс ₽ дохода в год</td></tr>
+<tr class="sum"><td>Итого со взносами</td><td class="n">25 232 ₽</td><td>честная цифра для расчёта цены</td></tr>
+</table></div>
+<p class="src">Вторая подписка Claude для Андрея (+14 000 ₽) решением от 29.08 не покупается. Платная реклама — 0 ₽ до десяти платящих.</p>
+
+<h2>2. Переменные расходы: растут с каждым клиентом</h2>
+<div class="tbl"><table>
+<tr><th>Статья</th><th class="n">На клиента в месяц</th><th>Как считается</th></tr>
+<tr><td>Эквайринг ЮKassa</td><td class="n">3 % от платежа</td><td><span class="pill e">оценка</span> касса и чеки внутри агрегатора, отдельно не покупаем</td></tr>
+<tr><td>Голос в текст (Яндекс SpeechKit)</td><td class="n">~0,65 ₽ за минуту</td><td><span class="pill e">оценка</span> единица тарификации — блок 15 секунд с округлением вверх; в документах проекта заложено ~150 ₽ на клиента вместе с хранилищем</td></tr>
+<tr><td>Хранилище вложений (S3)</td><td class="n">~30 ₽</td><td><span class="pill e">оценка</span> 300 ₽ на десять клиентов; фото и голосовые</td></tr>
+<tr><td>ИИ-автоответ (YandexGPT Lite, 0,20 ₽ за 1 000 токенов)</td><td class="n">82 / 246 / 574 ₽</td><td><span class="pill f">факт цены</span> маленький 100 обращений · средний 300 · крупный 700; одно обращение ≈ 4 100 токенов ≈ 0,82 ₽</td></tr>
+<tr><td>Выделенный сервер клиента («Ветра Премиум»)</td><td class="n">880 ₽</td><td><span class="pill f">факт</span> Timeweb 2 ГБ; в записи Андрея названо 500 ₽, по тарифам это 880</td></tr>
+<tr><td>Поддержка клиента</td><td class="n">0 ₽ деньгами</td><td><span class="pill x">нет данных</span> в часах не замерено; см. раздел 4</td></tr>
+<tr class="sum"><td>Итого без сервера, средний салон</td><td class="n">≈ 280 ₽ + 3 %</td><td>голос ~50 ₽ + хранилище 30 ₽ + ИИ 246 ₽; без ИИ ≈ 80 ₽ + 3 %</td></tr>
+<tr class="sum"><td>Итого с выделенным сервером</td><td class="n">≈ 1 160 ₽ + 3 %</td><td>то же плюс 880 ₽; из подписки 1 500 ₽ до нас доходит ≈ 300 ₽</td></tr>
+</table></div>
+
+<h2>3. По каналам: что стоит нам и что клиент платит площадке</h2>
+<p>Главное открытие этого раздела: <b>прямых денежных расходов на канал у нас нет ни по одному из них.</b> API Telegram, ВКонтакте, MAX и почты бесплатны. Там, где площадка берёт деньги (Авито, WhatsApp, Wildberries, Ozon), она берёт их <b>с клиента на его аккаунте</b>, мимо нас. Наша себестоимость канала — это часы на подключение, разбор ошибок и поддержку.</p>
+<div class="tbl"><table>
+<tr><th>Канал</th><th>Нам за API</th><th>Клиент платит площадке</th><th>Голос (SpeechKit)</th><th>Подключение и барьер</th></tr>
+<tr><td><b>Telegram</b></td><td><span class="pill f">0 ₽</span></td><td>0 ₽</td><td>да, есть голосовые</td><td>минуты: бот создаётся бесплатно, ключ выдаётся сразу</td></tr>
+<tr><td><b>ВКонтакте</b></td><td><span class="pill f">0 ₽</span></td><td>0 ₽</td><td>у ВК своя расшифровка аудио, проверить при написании адаптера</td><td>минуты: сообщество с включёнными сообщениями</td></tr>
+<tr><td><b>MAX</b></td><td><span class="pill f">0 ₽</span></td><td>0 ₽</td><td>да, есть голосовые</td><td>дни: проверка на dev.max.ru (юрлицо, ИП или самозанятый), бесплатно</td></tr>
+<tr><td><b>Почта</b></td><td><span class="pill f">0 ₽</span></td><td>0 ₽</td><td>нет</td><td>десять минут: пароль приложения; нужна инструкция с картинками. Адаптер сложнее остальных: разбор писем, цитат, вложений</td></tr>
+<tr><td><b>Авито</b></td><td><span class="pill f">0 ₽</span></td><td><span class="pill e">~2 000 ₽/мес</span> тариф «Расширенный» в Услугах, ~3 000 ₽ в Товарах</td><td>нет</td><td>без платного тарифа не дают даже ключей; наш пилот и так на тарифе</td></tr>
+<tr><td><b>WhatsApp</b></td><td><span class="pill f">0 ₽</span></td><td><span class="pill e">~5 000 ₽/мес</span> провайдеру (edna, Radist) плюс шаблоны</td><td>да</td><td>без гарантий в РФ; канал стоит в плане после снятия ограничений</td></tr>
+<tr><td><b>Wildberries</b></td><td><span class="pill f">0 ₽</span></td><td><span class="pill e">10 000 ₽</span> возвратный взнос продавца</td><td>нет</td><td>вторая ниша; ключ категории «Чат с покупателем»</td></tr>
+<tr><td><b>Ozon</b></td><td><span class="pill f">0 ₽</span></td><td><span class="pill e">подписка Premium Plus</span> цена уточняется</td><td>нет</td><td>чаты только по подписке; на FBO первым писать нельзя</td></tr>
+<tr><td><b>Яндекс</b></td><td>—</td><td>—</td><td>—</td><td>чата в карточке нет; тип «чат организации» у Диалогов не проверен</td></tr>
+</table></div>
+<div class="note ok">Для второго шага это значит: ценник на канал не может опираться на «нам он дорого обходится». Он опирается на <b>ценность канала для клиента</b> и на <b>часы подключения</b>. И у каждого платного канала на ценнике честно пишем: «плюс столько-то площадке, не нам».</div>
+
+<figure>
+<svg viewBox="0 0 900 330" font-size="14">
+  <defs><marker id="a" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 z" fill="#56687F"/></marker></defs>
+  <text x="20" y="28" font-weight="700" fill="#0E2A4A" font-size="16">Куда уходят деньги клиента</text>
+  <rect x="20" y="120" width="150" height="70" rx="10" fill="#EFF5FD" stroke="#2C78D5"/>
+  <text x="95" y="150" text-anchor="middle" font-weight="600" fill="#1F63BC">Клиент</text>
+  <text x="95" y="172" text-anchor="middle" fill="#56687F" font-size="12">салон, фабрика, магазин</text>
+
+  <line x1="170" y1="140" x2="300" y2="90" stroke="#56687F" stroke-width="2" marker-end="url(#a)"/>
+  <text x="200" y="100" fill="#167A41" font-size="12" font-weight="600">внедрение + в месяц</text>
+  <rect x="305" y="55" width="170" height="70" rx="10" fill="#E6F4EB" stroke="#167A41"/>
+  <text x="390" y="85" text-anchor="middle" font-weight="600" fill="#167A41">Ветра</text>
+  <text x="390" y="107" text-anchor="middle" fill="#56687F" font-size="12">ИП Андрея, счёт ЮKassa</text>
+
+  <g stroke="#56687F" stroke-width="1.5" marker-end="url(#a)">
+    <line x1="475" y1="70" x2="600" y2="40"/>
+    <line x1="475" y1="85" x2="600" y2="85"/>
+    <line x1="475" y1="100" x2="600" y2="130"/>
+    <line x1="475" y1="112" x2="600" y2="175"/>
+  </g>
+  <g font-size="13" fill="#0F1D2E">
+    <text x="610" y="44">ЮKassa — 3 % с платежа</text>
+    <text x="610" y="89">Timeweb — 880 ₽ за сервер</text>
+    <text x="610" y="134">Yandex Cloud — голос и ИИ, по штукам</text>
+    <text x="610" y="179">Claude, домен, взносы ИП — постоянные</text>
+  </g>
+
+  <line x1="170" y1="175" x2="300" y2="250" stroke="#9A5A00" stroke-width="2" stroke-dasharray="6 4" marker-end="url(#a)"/>
+  <text x="180" y="235" fill="#9A5A00" font-size="12" font-weight="600">напрямую, мимо нас</text>
+  <rect x="305" y="220" width="170" height="70" rx="10" fill="#FFF3E0" stroke="#9A5A00"/>
+  <text x="390" y="250" text-anchor="middle" font-weight="600" fill="#9A5A00">Площадки</text>
+  <text x="390" y="272" text-anchor="middle" fill="#56687F" font-size="12">на аккаунте клиента</text>
+  <g font-size="13" fill="#0F1D2E">
+    <text x="500" y="240">Авито — тариф ~2 000 ₽/мес</text>
+    <text x="500" y="262">WhatsApp-провайдер — ~5 000 ₽/мес</text>
+    <text x="500" y="284">WB — взнос 10 000 ₽ · Ozon — Premium Plus</text>
+    <text x="500" y="306" fill="#167A41">Telegram, ВК, MAX, почта — 0 ₽</text>
+  </g>
+</svg>
+<figcaption>Два потока. Верхний проходит через нас и из него платится всё наше. Нижний идёт площадкам напрямую: мы его не видим, не берём с него процент и за него не отвечаем, но клиенту его надо показать заранее, иначе он решит, что это скрытая доплата Ветры.</figcaption>
+</figure>
+
+<h2>4. Часы: расход, который не платим деньгами</h2>
+<div class="tbl"><table>
+<tr><th>Что</th><th class="n">Часов</th><th>Кто</th><th>Пометка</th></tr>
+<tr><td>Настройка по чек-листу: каналы, сотрудники, шаблоны, обучение</td><td class="n">15–20</td><td>Андрей</td><td><span class="pill e">оценка</span> чек-листа внедрения ещё нет, поэтому это продажа часов вслепую</td></tr>
+<tr><td>Разработка по ТЗ под клиента, две недели</td><td class="n">30–44</td><td>Михаил</td><td><span class="pill e">оценка</span> из разбора 08.09: дешевле 62 000 ₽ продавать нельзя</td></tr>
+<tr><td>Подключение одного канала на стороне клиента</td><td class="n">0,2–1</td><td>Андрей</td><td><span class="pill e">оценка</span> Telegram и ВК минуты, MAX ждём проверку днями, почта с инструкцией</td></tr>
+<tr><td>Поддержка платящего в месяц</td><td class="n">—</td><td>оба</td><td><span class="pill x">нет данных</span> замерить на первом пилоте</td></tr>
+<tr><td>Привлечение одного платящего</td><td class="n">≈ 22</td><td>оба</td><td><span class="pill e">оценка</span> 45 касаний по полчаса, воронка наполовину гипотеза</td></tr>
+</table></div>
+<p class="src">Условная ставка часа в расчётах проекта — 1 000 ₽. При ней два внедрения по чек-листу за 20 000 ₽ дают 970–1 293 ₽/ч, а разработка по ТЗ за 20 000 ₽ — 441 ₽/ч.</p>
+
+<h2>5. Калькулятор себестоимости одного клиента</h2>
+<p>Двигайте ползунки под конкретного клиента. Справа — во сколько он нам обходится и ниже какой цены уходить нельзя. Это ещё не цена, это пол.</p>
+<div class="calc">
+  <div>
+    <div class="row"><label><span>Платящих клиентов всего (делим постоянные)</span><b id="v1"></b></label><input type="range" id="i1" min="1" max="30" value="5"></div>
+    <div class="row"><label><span>Обращений в месяц у клиента</span><b id="v2"></b></label><input type="range" id="i2" min="50" max="1000" step="50" value="300"></div>
+    <div class="row"><label><span>Голосовых минут в месяц</span><b id="v3"></b></label><input type="range" id="i3" min="0" max="300" step="10" value="60"></div>
+    <div class="row"><label><span>Ежемесячный платёж клиента, ₽ (для эквайринга)</span><b id="v4"></b></label><input type="range" id="i4" min="0" max="10000" step="250" value="1500"></div>
+    <div class="row"><label><span>Часов на внедрение</span><b id="v5"></b></label><input type="range" id="i5" min="5" max="60" value="18"></div>
+    <div class="row"><label><span>Ставка часа, ₽</span><b id="v6"></b></label><input type="range" id="i6" min="500" max="3000" step="100" value="1000"></div>
+    <div class="row chk"><label><input type="checkbox" id="c1" checked> Выделенный сервер клиенту (880 ₽/мес)</label></div>
+    <div class="row chk"><label><input type="checkbox" id="c2" checked> ИИ-автоответ включён</label></div>
+    <div class="row chk"><label><input type="checkbox" id="c3" checked> Считать взносы ИП в постоянных</label></div>
+  </div>
+  <div class="res">
+    <p>Переменные на клиента в месяц</p><div class="big" id="r1"></div>
+    <div class="line"><span>Эквайринг 3 %</span><b id="l1"></b></div>
+    <div class="line"><span>Голос и хранилище</span><b id="l2"></b></div>
+    <div class="line"><span>ИИ-автоответ</span><b id="l3"></b></div>
+    <div class="line"><span>Сервер</span><b id="l4"></b></div>
+    <hr>
+    <p>Доля постоянных на этого клиента</p><div class="big" id="r2"></div>
+    <p>Полная себестоимость в месяц</p><div class="big" id="r3"></div>
+    <hr>
+    <p>Внедрение разово, в часах по ставке</p><div class="big" id="r4"></div>
+    <hr>
+    <p>Пол ежемесячной цены: ниже уходим в минус на этом клиенте</p><div class="big" id="r5"></div>
+    <p>Пол с покрытием доли постоянных</p><div class="big" id="r6"></div>
+    <p id="r7" style="margin-top:10px"></p>
+  </div>
+</div>
+
+<h2>6. Что из этого следует для второго шага</h2>
+<ol>
+  <li><b>Сервер — единственная крупная переменная.</b> Без него клиент обходится нам в сотни рублей, с ним — больше тысячи. Значит «свой сервер каждому» либо стоит отдельной строкой в ценнике, либо входит только в дорогие внедрения.</li>
+  <li><b>Каналы для нас бесплатны, поэтому ценник на канал — это ценность и часы, а не расходы.</b> На ценнике платного канала пишем две суммы: нам и площадке.</li>
+  <li><b>ИИ-автоответ — самая дешёвая дорогая опция.</b> Себестоимость 82–574 ₽, продавать можно кратно дороже, маржа около 90 %.</li>
+  <li><b>Постоянные 25 тыс ₽ в месяц никуда не деваются.</b> При пяти клиентах на каждого ложится 5 000 ₽ в месяц; подпиской 1 500 ₽ это не закрыть, закрывает только разовое внедрение. Это и есть довод за «Ветра Премиум».</li>
+  <li><b>Чего не хватает, чтобы цифры стали фактами:</b> точная цена SpeechKit из калькулятора Yandex Cloud · часы поддержки одного клиента · часы внедрения по чек-листу · связь.</li>
+</ol>
+
+<p class="src">Источники: <code>docs/rashody.md</code> (19.08, пометка 08.09) · <code>docs/finansovaya-karta.md</code> §2–3 · <code>docs/ii-avtootvet.md</code> · <code>docs/integrations.md</code> §3 · <code>docs/kanaly-4-razvedka.md</code> · <code>docs/razbor-whatsapp-2026-08-22.md</code> · <code>docs/razbor-konferencii-2026-09-07.md</code> · <code>scripts/econ.py</code> · <code>packages/shared/src/index.ts</code> (CHANNEL_REQUIREMENTS) · тарифы SpeechKit: aistudio.yandex.ru/docs/ru/speechkit/pricing.html.</p>
+</div>
+
+<script>
+(function(){
+  var FIXED=20450, VZNOS=4782, SERVER=880, ACQ=0.03, VOICE=0.65, S3=30, AI_PER=0.82;
+  var ids=['i1','i2','i3','i4','i5','i6'];
+  function fmt(n){return Math.round(n).toLocaleString('ru-RU')+' ₽';}
+  function g(id){return document.getElementById(id);}
+  function calc(){
+    var n=+g('i1').value, req=+g('i2').value, mins=+g('i3').value, pay=+g('i4').value, hrs=+g('i5').value, rate=+g('i6').value;
+    var srv=g('c1').checked, ai=g('c2').checked, vz=g('c3').checked;
+    g('v1').textContent=n; g('v2').textContent=req; g('v3').textContent=mins+' мин';
+    g('v4').textContent=pay.toLocaleString('ru-RU')+' ₽'; g('v5').textContent=hrs+' ч'; g('v6').textContent=rate.toLocaleString('ru-RU')+' ₽';
+    var acq=pay*ACQ, voice=mins*VOICE+S3, aic=ai?req*AI_PER:0, server=srv?SERVER:0;
+    var vars=acq+voice+aic+server;
+    var fixed=FIXED+(vz?VZNOS:0), share=fixed/n;
+    var full=vars+share;
+    var impl=hrs*rate;
+    var floor=(voice+aic+server)/(1-ACQ);
+    var floor2=(voice+aic+server+share)/(1-ACQ);
+    g('r1').textContent=fmt(vars);
+    g('l1').textContent=fmt(acq); g('l2').textContent=fmt(voice); g('l3').textContent=fmt(aic); g('l4').textContent=fmt(server);
+    g('r2').textContent=fmt(share);
+    g('r3').textContent=fmt(full);
+    g('r4').textContent=fmt(impl);
+    g('r5').textContent=fmt(floor);
+    g('r6').textContent=fmt(floor2);
+    var margin=pay*(1-ACQ)-(voice+aic+server);
+    var msg;
+    if(pay===0) msg='Ежемесячного платежа нет: все переменные ('+fmt(voice+aic+server)+' в месяц) и доля постоянных должны окупаться разовым внедрением.';
+    else if(margin<0) msg='При платеже '+fmt(pay)+' клиент приносит минус '+fmt(-margin)+' в месяц ещё до постоянных расходов.';
+    else msg='При платеже '+fmt(pay)+' остаётся '+fmt(margin)+' в месяц; постоянные закроются при '+Math.ceil(fixed/margin)+' таких клиентах.';
+    g('r7').textContent=msg;
+  }
+  ids.forEach(function(i){g(i).addEventListener('input',calc);});
+  ['c1','c2','c3'].forEach(function(i){g(i).addEventListener('change',calc);});
+  calc();
+})();
+</script>
+</body>
+</html>
