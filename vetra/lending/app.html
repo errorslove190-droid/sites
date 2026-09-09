@@ -144,11 +144,12 @@ td.num{font-variant-numeric:tabular-nums}
 <header class="app-top">
   <div class="app-top__in">
     <a class="logo" href="index.html"><span class="logo__word" style="font-size:22px">Ветра</span><span class="logo__dot"></span></a>
-    <span class="chip chip-line" style="margin-left:6px">Салон «Аврора»</span>
+    <span class="chip chip-line" style="margin-left:6px" data-user-company>Салон «Аврора»</span>
     <div class="app-top__right">
       <button class="icon-btn" title="Помощь" aria-label="Помощь">?</button>
       <button class="icon-btn" title="Настройки" aria-label="Настройки">⚙</button>
-      <span class="ava" title="Михаил">М</span>
+      <span class="ava" title="Михаил" data-user-initial>М</span>
+      <button class="icon-btn" title="Выйти" aria-label="Выйти" data-signout>⏻</button>
     </div>
   </div>
 </header>
@@ -168,7 +169,7 @@ td.num{font-variant-numeric:tabular-nums}
   <!-- ---------- Содержимое ---------- -->
   <main class="main">
     <div class="hello reveal">
-      <h1>Здравствуйте, <b>Михаил</b></h1>
+      <h1>Здравствуйте, <b data-user-name>Михаил</b></h1>
       <p>Воскресенье, 16 августа · за сегодня всё под контролем, кроме трёх диалогов</p>
     </div>
 
@@ -330,6 +331,10 @@ td.num{font-variant-numeric:tabular-nums}
   </main>
 </div>
 
+<script src="js/vendor/supabase.js"></script>
+<script src="js/vetra-config.js"></script>
+<script src="js/vetra-db.js"></script>
 <script src="js/vetra.js"></script>
+<script src="js/vetra-app.js"></script>
 </body>
 </html>

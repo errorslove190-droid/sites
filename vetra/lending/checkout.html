@@ -92,7 +92,8 @@
       </p>
 
       <form class="co__grid" style="margin-top:clamp(28px,3.5vw,44px)"
-            data-fake-form="Это макет — оплата не проводится. В рабочем сервисе здесь открылась бы страница ЮKassa.">
+            data-lead="checkout"
+            data-lead-ok="Заявка принята. Напишем на указанную почту и включим пробный период.">
         <div>
           <h2 class="h-3" style="margin-bottom:16px">Тариф</h2>
           <div class="pick">
@@ -149,11 +150,16 @@
           <div class="grid g2">
             <label class="field">
               <span class="field__label">Название компании</span>
-              <input class="input" name="company" value="Салон «Аврора»" required>
+              <input class="input" name="company" placeholder="Салон «Аврора»" required>
             </label>
             <label class="field">
               <span class="field__label">Почта для чеков</span>
               <input class="input" type="email" name="email" placeholder="buh@company.ru" required>
+            </label>
+            <label class="field">
+              <span class="field__label">Телефон</span>
+              <input class="input" type="tel" name="phone" placeholder="+7 900 000-00-00" autocomplete="tel">
+              <span class="field__hint">Не обязательно. Так быстрее поможем с подключением.</span>
             </label>
           </div>
 
@@ -199,6 +205,10 @@
   </main>
 </div>
 
+<script src="js/vendor/supabase.js"></script>
+<script src="js/vetra-config.js"></script>
+<script src="js/vetra-db.js"></script>
 <script src="js/vetra.js"></script>
+<script src="js/vetra-lead.js"></script>
 </body>
 </html>

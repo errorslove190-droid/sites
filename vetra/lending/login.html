@@ -82,14 +82,26 @@
         <h1 class="h-2 auth__title">С возвращением</h1>
         <p class="auth__sub">Войдите, чтобы увидеть сообщения клиентов.</p>
 
-        <form style="margin-top:28px" data-fake-form="Это макет — код не отправляется. В рабочем окне здесь появился бы второй шаг: шесть цифр из письма.">
-          <label class="field">
-            <span class="field__label">Почта</span>
-            <input class="input" type="email" name="email" placeholder="you@company.ru" autocomplete="email" required>
-            <span class="field__hint">Пришлём код из шести цифр. Пароль не нужен.</span>
-          </label>
+        <form style="margin-top:28px" data-auth="in" novalidate>
+          <div data-step="email">
+            <label class="field">
+              <span class="field__label">Почта</span>
+              <input class="input" type="email" name="email" placeholder="you@company.ru" autocomplete="email" required>
+              <span class="field__hint">Пришлём код из шести цифр. Пароль не нужен.</span>
+            </label>
+            <button class="btn btn-primary btn-block" style="margin-top:20px" type="submit">Получить код</button>
+          </div>
 
-          <button class="btn btn-primary btn-block" style="margin-top:20px" type="submit">Получить код</button>
+          <div data-step="code" hidden>
+            <label class="field">
+              <span class="field__label">Код из письма</span>
+              <input class="input" name="code" inputmode="numeric" autocomplete="one-time-code" maxlength="6" placeholder="123456">
+              <span class="field__hint">Шесть цифр с адреса <b data-echo-email>вашей почты</b>. Если письма нет — загляните в «Спам».</span>
+            </label>
+            <button class="btn btn-primary btn-block" style="margin-top:20px" type="submit">Войти</button>
+            <button class="btn btn-light btn-block" style="margin-top:10px" type="button" data-back>Другая почта</button>
+          </div>
+
           <p class="small" data-form-note hidden></p>
         </form>
 
@@ -107,28 +119,41 @@
         <h1 class="h-2 auth__title">Заведём компанию</h1>
         <p class="auth__sub">14 дней бесплатно. Карта не нужна.</p>
 
-        <form style="margin-top:28px" data-fake-form="Это макет — аккаунт не создаётся. Дальше был бы шаг подключения канала.">
-          <label class="field">
-            <span class="field__label">Как вас зовут</span>
-            <input class="input" name="name" placeholder="Михаил" autocomplete="name" required>
-            <span class="field__hint">Так к вам будет обращаться сервис.</span>
-          </label>
-          <label class="field">
-            <span class="field__label">Название компании</span>
-            <input class="input" name="company" placeholder="Салон «Аврора»" required>
-          </label>
-          <label class="field">
-            <span class="field__label">Почта</span>
-            <input class="input" type="email" name="email" placeholder="you@company.ru" autocomplete="email" required>
-            <span class="field__hint">На неё придёт код для входа — пароль придумывать не нужно.</span>
-          </label>
+        <form style="margin-top:28px" data-auth="up" novalidate>
+          <div data-step="email">
+            <label class="field">
+              <span class="field__label">Как вас зовут</span>
+              <input class="input" name="name" placeholder="Михаил" autocomplete="name" required>
+              <span class="field__hint">Так к вам будет обращаться сервис.</span>
+            </label>
+            <label class="field">
+              <span class="field__label">Название компании</span>
+              <input class="input" name="company" placeholder="Салон «Аврора»" required>
+            </label>
+            <label class="field">
+              <span class="field__label">Почта</span>
+              <input class="input" type="email" name="email" placeholder="you@company.ru" autocomplete="email" required>
+              <span class="field__hint">На неё придёт код для входа — пароль придумывать не нужно.</span>
+            </label>
 
-          <label class="check" style="margin:6px 0 24px">
-            <input type="checkbox" required>
-            <span>Соглашаюсь с <a href="#">офертой</a> и <a href="#">обработкой персональных данных</a></span>
-          </label>
+            <label class="check" style="margin:6px 0 24px">
+              <input type="checkbox" name="agree" required>
+              <span>Соглашаюсь с <a href="#">офертой</a> и <a href="#">обработкой персональных данных</a></span>
+            </label>
 
-          <button class="btn btn-primary btn-block" type="submit">Создать компанию</button>
+            <button class="btn btn-primary btn-block" type="submit">Создать компанию</button>
+          </div>
+
+          <div data-step="code" hidden>
+            <label class="field">
+              <span class="field__label">Код из письма</span>
+              <input class="input" name="code" inputmode="numeric" autocomplete="one-time-code" maxlength="6" placeholder="123456">
+              <span class="field__hint">Шесть цифр с адреса <b data-echo-email>вашей почты</b>. Если письма нет — загляните в «Спам».</span>
+            </label>
+            <button class="btn btn-primary btn-block" style="margin-top:20px" type="submit">Подтвердить и войти</button>
+            <button class="btn btn-light btn-block" style="margin-top:10px" type="button" data-back>Другая почта</button>
+          </div>
+
           <p class="small" data-form-note hidden></p>
         </form>
 
@@ -165,6 +190,10 @@
   </aside>
 </main>
 
+<script src="js/vendor/supabase.js"></script>
+<script src="js/vetra-config.js"></script>
+<script src="js/vetra-db.js"></script>
 <script src="js/vetra.js"></script>
+<script src="js/vetra-auth.js"></script>
 </body>
 </html>

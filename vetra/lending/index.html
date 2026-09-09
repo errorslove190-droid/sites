@@ -818,6 +818,24 @@ kbd{font-family:'Google Sans',sans-serif; font-size:12.5px; font-weight:700; bac
       14 дней бесплатно, карта не нужна. Если не подойдёт — просто перестаньте пользоваться.
     </p>
     <a class="btn btn-light reveal d2" href="checkout.html">Начать бесплатно</a>
+
+    <!-- Заявка для тех, кому проще, чтобы позвонили -->
+    <div class="callback reveal d3">
+      <p class="callback__or">или оставьте контакт — перезвоним и всё покажем</p>
+      <form class="callback__form" data-lead="lending"
+            data-lead-ok="Спасибо, заявка у нас. Свяжемся в течение рабочего дня.">
+        <label class="callback__f">
+          <span class="sr-only">Как вас зовут</span>
+          <input class="input" name="name" placeholder="Как вас зовут" autocomplete="name" required>
+        </label>
+        <label class="callback__f">
+          <span class="sr-only">Телефон или почта</span>
+          <input class="input" name="phone" placeholder="Телефон или почта" autocomplete="tel" required>
+        </label>
+        <button class="btn btn-primary" type="submit">Оставить заявку</button>
+      </form>
+      <p class="small callback__note" data-form-note hidden></p>
+    </div>
   </div>
 </section>
 
@@ -869,6 +887,10 @@ kbd{font-family:'Google Sans',sans-serif; font-size:12.5px; font-weight:700; bac
   </div>
 </footer>
 
+<script src="js/vendor/supabase.js"></script>
+<script src="js/vetra-config.js"></script>
+<script src="js/vetra-db.js"></script>
 <script src="js/vetra.js"></script>
+<script src="js/vetra-lead.js"></script>
 </body>
 </html>
