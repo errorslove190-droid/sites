@@ -208,7 +208,7 @@
     var chk = state.chk;
     var payback = Math.max(1, Math.ceil(first / (chk * CONV[state.seg || 'other'])));
     $('#tSoon').hidden = !soonNames.length;
-    if (soonNames.length) $('#tSoon').innerHTML = '<span>Когда будут готовы: ' + soonNames.join(', ').toLowerCase() + '</span><b>+ ' + fmt(soonMonthly) + '/мес' + (soonOnce ? ' и ' + fmt(soonOnce) + ' разово' : '') + '</b>';
+    if (soonNames.length) $('#tSoon').innerHTML = '<span>Опции «скоро» (' + soonNames.length + ') — после готовности</span><b>+ ' + fmt(soonMonthly) + '/мес' + (soonOnce ? ' и ' + fmt(soonOnce) + ' разово' : '') + '</b>';
     $('#tLater').hidden = !later;
     if (later) $('#tLater').innerHTML = '<span>WhatsApp — после подключения, по факту</span><b>+ ' + fmt(later) + '</b>';
 
@@ -248,7 +248,7 @@
   function miniCalc() {
     var t = $('#mcTotal'); if (!t) return;
     var l = lossCalc();
-    $('#mcDv').textContent = state.d || 20; $('#mcLv').textContent = l.lost.toLocaleString('ru-RU') + ' в нед.'; var cv = $('#chkV'); if (cv) cv.textContent = fmt(state.chk);
+    $('#mcDv').textContent = state.d || 20; $('#mcLv').textContent = l.lost.toLocaleString('ru-RU'); var cv = $('#chkV'); if (cv) cv.textContent = fmt(state.chk);
     t.textContent = fmt(l.total);
     $('#mcNote').textContent = l.lost.toLocaleString('ru-RU') + ' в неделю × 4,3 недели × ' + fmt(state.chk) + ' × ' + Math.round(CONV[state.seg || 'other'] * 100) + ' % (доля, которая стала бы покупкой)';
     $('#mcOne').textContent = fmt(state.chk);

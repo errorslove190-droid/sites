@@ -484,6 +484,33 @@ h3{font-size:clamp(17px,1.7vw,21px);font-weight:600}
 .quiz2 .opt{padding:9px 14px;font-size:14px}
 .quiz2 .q p{display:none}
 .quiz2__foot{grid-column:1/-1;display:flex;gap:12px;flex-wrap:wrap;align-items:center;padding-top:14px;border-top:1px solid var(--line)}
+/* третий заход 09.09: компактные вопросы, итог без переносов, история крупнее */
+.quiz2{grid-template-columns:1fr;gap:0;padding:8px 26px}
+.quiz2 .q{display:grid;grid-template-columns:260px 1fr;gap:16px;align-items:center;padding:14px 0;border-top:1px solid var(--line)}
+.quiz2 .q:first-child{border-top:0}
+.quiz2 .q__t{margin:0;font-size:15px;display:block}
+.quiz2 .q__t .i{display:block;font-size:11px;margin-bottom:2px}
+.quiz2 .q__t .small{display:block;font-size:12px;margin-top:2px}
+.quiz2 .opt{padding:8px 13px;font-size:14px}
+.quiz2__foot{padding:16px 0 12px;border-top:1px solid var(--line)}
+@media(max-width:700px){.quiz2 .q{grid-template-columns:1fr;gap:8px}}
+.konst__grid{grid-template-columns:1fr 400px}
+.total{padding:22px 24px}
+.total .v{font-size:clamp(26px,2.6vw,34px)}
+.total .row{display:grid;grid-template-columns:1fr auto;gap:14px;align-items:baseline;padding:6px 0;font-size:13.5px;line-height:1.35}
+.total .row b,.total .v,.el__price,.pay2__row b,.segc__n,.stepper output,.facts2 b{white-space:nowrap}
+.total .gain b{font-size:24px}
+.total .gain{padding:12px 14px;line-height:1.35}
+.total .btn{font-size:15px;padding:16px 18px;white-space:normal;text-align:center}
+.total .disc{font-size:11.5px;line-height:1.4;color:#7E9BBC}
+.pay2__row{grid-template-columns:170px 1fr}
+@media(max-width:480px){.pay2__row{grid-template-columns:1fr}}
+.chaos .bub{font-size:17px;padding:14px 18px 14px 14px;border-radius:18px;background:#1C3A62;gap:10px;box-shadow:0 14px 40px rgba(0,0,0,.4);display:grid;grid-template-columns:auto auto;grid-template-rows:auto auto;column-gap:10px;row-gap:2px;align-items:center}
+.chaos .bub i{grid-row:1/3;width:12px;height:12px}
+.chaos .bub b{font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:#9FB6D0;font-weight:600}
+.chaos .bub--bad{background:#3A1C1C;color:#FFC9C9}
+.chaos .bub--bad b{color:#FF8A80}
+@media(max-width:900px){.chaos .bub{font-size:13px;padding:10px 12px}}
 @media(max-width:960px){.hero__grid{grid-template-columns:1fr}.hero__video{width:100%;aspect-ratio:16/10}.h-big{font-size:clamp(32px,9vw,44px)}.facts2{grid-template-columns:1fr 1fr}.story__text{padding-top:18px}}
 @media(max-width:560px){.btn-lg{padding:16px 22px;font-size:16px}.calc2__in{padding:22px}.calc2__out{padding:22px}.stepper output{min-width:96px}}
 @media(max-width:560px){
