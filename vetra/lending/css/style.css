@@ -332,6 +332,45 @@ p{margin:0 0 14px}
 .mask>span{display:block;transform:translateY(110%);transition:transform .7s var(--ease)}
 .in .mask>span,.mask.in>span{transform:none}
 
+/* ---- редакционная сетка и крупная типографика (правка 09.09, против шаблонности) ---- */
+h2{font-size:clamp(32px,4.8vw,54px)}
+.h-big{font-size:clamp(40px,5.3vw,72px);letter-spacing:-.045em;line-height:.98}
+.lead{max-width:560px}
+.section{padding:clamp(72px,10vw,140px) 0}
+.head2{display:grid;grid-template-columns:1.1fr .9fr;gap:clamp(20px,4vw,56px);align-items:end;margin-bottom:clamp(28px,4vw,48px)}
+.head2 .lead{margin:0 0 6px}
+@media(max-width:860px){.head2{grid-template-columns:1fr;align-items:start}}
+.ed{display:grid;grid-template-columns:.85fr 1.15fr;gap:clamp(28px,5vw,80px);align-items:start}
+.ed__side{position:sticky;top:96px}
+@media(max-width:900px){.ed{grid-template-columns:1fr}.ed__side{position:static}}
+.segrow{display:grid;grid-template-columns:200px 1fr;gap:24px;padding:28px 0;border-top:1px solid var(--line)}
+.segrow:last-child{border-bottom:1px solid var(--line)}
+.segrow h3{margin-bottom:8px}
+.segrow p{color:var(--muted);margin:0}
+.segrow__n b{display:block;font-family:var(--head);font-size:clamp(24px,2.6vw,32px);font-weight:700;letter-spacing:-.035em;color:var(--bad);line-height:1}
+.segrow__n span{font-size:13px;color:var(--muted);display:block;margin-top:6px}
+@media(max-width:640px){.segrow{grid-template-columns:1fr;gap:10px}}
+.nlist .nrow{display:grid;grid-template-columns:110px 1fr;gap:24px;padding:26px 0;border-top:1px solid var(--line)}
+.nlist .nrow:last-child{border-bottom:1px solid var(--line)}
+.nrow__n{font-family:var(--head);font-weight:700;font-size:clamp(22px,2.4vw,30px);letter-spacing:-.035em;color:var(--press);line-height:1.1}
+.nrow h3{margin-bottom:8px}.nrow p{color:var(--muted);margin:0}
+@media(max-width:560px){.nlist .nrow{grid-template-columns:1fr;gap:8px}}
+.zero{list-style:none;padding:0;margin:22px 0 0}
+.zero li{display:grid;grid-template-columns:56px 1fr;gap:12px;padding:10px 0;border-top:1px solid var(--line);font-size:15px;color:var(--muted)}
+.zero li b{font-family:var(--head);color:var(--ok);letter-spacing:-.02em}
+.facts2{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;margin-top:clamp(36px,5vw,64px);padding-top:26px;border-top:1px solid var(--line)}
+.facts2 b{display:block;font-family:var(--head);font-size:clamp(22px,2.4vw,30px);font-weight:700;letter-spacing:-.035em;line-height:1.05;margin-bottom:6px}
+.facts2 span{font-size:14px;color:var(--muted);line-height:1.4;display:block}
+@media(max-width:860px){.facts2{grid-template-columns:repeat(2,1fr)}}
+.hero__grid{grid-template-columns:1.08fr .92fr}
+.hero__laptop{width:min(100%,720px);margin-left:auto}
+@media(max-width:960px){.hero__grid{grid-template-columns:1fr}.hero__laptop{margin:0 auto}}
+.hero .lead{margin:26px 0 30px}
+.frame{margin:0;border-radius:var(--r3);overflow:hidden;background:#050A14;box-shadow:0 40px 100px rgba(14,42,74,.25)}
+.frame img{width:100%;display:block}
+.tgcard{background:var(--navy);color:#fff;border-radius:16px;padding:18px 20px;font-size:15px;line-height:1.5}
+.card:hover{transform:none;box-shadow:none}
+.pay .card{padding:28px 30px}
 @media(max-width:560px){
   .connect{grid-template-columns:1fr;gap:8px;padding:0 4%}
   .connect .cc{font-size:13px;padding:10px 12px}

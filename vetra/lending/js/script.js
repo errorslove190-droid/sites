@@ -406,7 +406,12 @@
   }
 
   document.addEventListener('DOMContentLoaded', function () {
+    if (/[?&]nomotion/.test(location.search)) reduced = true;   // служебное: отключить движение для проверок
     initQuiz(); syncChk(); renderItems(); initForm(); initBar(); initVideo(); initMotion();
     $('#build').hidden = true;
+    // служебное: ?go=id&seg=shop&y=300 — открыть секцию/пресет для проверки и скриншотов
+    var q = new URLSearchParams(location.search);
+    if (q.get('seg')) { var b = $('.q[data-q=seg] .opt[data-v=' + q.get('seg') + ']'); if (b) b.click(); }
+    if (q.get('go')) setTimeout(function () { document.documentElement.style.scrollBehavior = 'auto'; var t = document.getElementById(q.get('go')); if (t) window.scrollTo(0, t.offsetTop + (+q.get('y') || 0)); }, 300);
   });
 })();
