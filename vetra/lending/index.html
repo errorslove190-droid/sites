@@ -14,9 +14,18 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Unbounded:wght@500;600;700&family=Onest:wght@400;500;600&display=swap">
-<link rel="stylesheet" href="css/style.css?v=6">
+<link rel="stylesheet" href="css/style.css?v=7">
 </head>
 <body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="i-tg" viewBox="0 0 24 24"><circle cx="12" cy="12" r="12" fill="#2AABEE"/><path fill="#fff" d="M5.4 11.6l11.2-4.4c.5-.2 1 .1.8.9l-1.9 9c-.1.6-.5.8-1.1.5l-2.9-2.2-1.4 1.4c-.2.2-.3.3-.6.3l.2-3 5.4-4.9c.2-.2 0-.3-.3-.1l-6.7 4.2-2.9-.9c-.6-.2-.6-.6.2-.8z"/></symbol>
+  <symbol id="i-vk" viewBox="0 0 24 24"><rect width="24" height="24" rx="6" fill="#0077FF"/><path fill="#fff" d="M12.8 17C7.6 17 4.7 13.5 4.6 7.6h2.6c.1 4.3 2 6.1 3.5 6.5V7.6h2.5v3.7c1.5-.2 3-1.8 3.5-3.7h2.5c-.4 2.3-2.1 4-3.3 4.7 1.2.6 3.2 2.1 3.9 4.7h-2.7c-.6-1.8-2.1-3.2-3.9-3.4V17h-.4z"/></symbol>
+  <symbol id="i-max" viewBox="0 0 24 24"><rect width="24" height="24" rx="7" fill="#7B5CFA"/><path fill="#fff" d="M6 17V7h2.6l3.4 5.4L15.4 7H18v10h-2.4v-6l-3.6 5.6L8.4 11v6z"/></symbol>
+  <symbol id="i-mail" viewBox="0 0 24 24"><rect width="24" height="24" rx="6" fill="#5B6B85"/><path fill="none" stroke="#fff" stroke-width="1.7" d="M5 8.5h14v8H5z"/><path fill="none" stroke="#fff" stroke-width="1.7" d="M5 9l7 4.5L19 9"/></symbol>
+  <symbol id="i-avito" viewBox="0 0 24 24"><rect width="24" height="24" rx="6" fill="#fff"/><circle cx="9.2" cy="9" r="4.2" fill="#FF4053"/><circle cx="16.8" cy="7.6" r="2.4" fill="#0AF"/><circle cx="16.6" cy="14.6" r="3.6" fill="#97CF26"/><circle cx="8.8" cy="16.6" r="2.4" fill="#965EEB"/></symbol>
+  <symbol id="i-wa" viewBox="0 0 24 24"><circle cx="12" cy="12" r="12" fill="#25D366"/><path fill="#fff" d="M12 5.5a6.5 6.5 0 0 0-5.6 9.8L5.5 18.5l3.3-.9A6.5 6.5 0 1 0 12 5.5zm0 1.6a4.9 4.9 0 1 1-2.5 9.1l-.3-.2-1.6.4.4-1.6-.2-.3A4.9 4.9 0 0 1 12 7.1zm-1.9 2.4c-.2 0-.4.1-.6.3-.2.2-.7.7-.7 1.6s.7 1.9.8 2c.1.1 1.4 2.2 3.5 2.9 1.7.6 2 .5 2.4.4.4-.1 1.1-.5 1.3-1 .2-.5.2-.9.1-1l-.4-.2-1.3-.6c-.2-.1-.3-.1-.4.1l-.6.7c-.1.1-.2.2-.4.1-.2-.1-.8-.3-1.5-.9-.6-.5-.9-1.1-1-1.3-.1-.2 0-.3.1-.4l.3-.3.2-.3v-.4l-.6-1.4c-.1-.3-.3-.3-.4-.3h-.4z"/></symbol>
+</svg>
+
 
 <header class="top">
   <div class="wrap">
@@ -27,7 +36,7 @@
       <a href="#pay">За что платите</a>
       <a href="#faq">Вопросы</a>
     </nav>
-    <a class="btn btn-primary btn-sm" href="#konstruktor" data-go-calc="top">Посчитать</a>
+    <a class="btn btn-primary btn-sm" href="raschet/" data-go-calc="top">Посчитать</a>
   </div>
 </header>
 
@@ -43,9 +52,9 @@
           <span class="mask in"><span>Все заявки —</span></span>
           <span class="mask in"><span>в <span class="new">одном окне</span></span></span>
         </h1>
-        <p class="lead rv in d1">Соберём под ваш бизнес за 1–2 недели. Цену каждого элемента видите сразу, до звонка.</p>
+        <p class="lead rv in d1">Под ваш бизнес за 1–2 недели. Цена каждого элемента — сразу.</p>
         <div class="hero__cta rv in d2">
-          <a class="btn btn-primary btn-lg" href="#konstruktor" data-go-calc="hero">Посчитать для своего бизнеса <svg class="arr" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M4 10h11M11 5l5 5-5 5"/></svg></a>
+          <a class="btn btn-primary btn-lg" href="raschet/" data-go-calc="hero">Посчитать для своего бизнеса <svg class="arr" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M4 10h11M11 5l5 5-5 5"/></svg></a>
           <a class="btn btn-play" href="#video"><span class="btn-play__i"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M7 5l12 7-12 7z"/></svg></span>Как работает<small>ролик 78 секунд</small></a>
         </div>
       </div>
@@ -55,9 +64,9 @@
           <div class="window" id="heroWindow" hidden aria-hidden="true">
             <div class="window__side">
               <div class="window__title"><i></i>Входящие</div>
-              <div class="dlg on"><div class="dlg__av">А<i style="background:var(--vk)"></i></div><div class="dlg__t"><div class="dlg__n">Алина</div><div class="dlg__m">можно завтра на окрашивание?</div></div></div>
-              <div class="dlg"><div class="dlg__av">И<i style="background:var(--avito)"></i></div><div class="dlg__t"><div class="dlg__n">Игорь</div><div class="dlg__m">раковина 60 см, есть в наличии?</div></div><span class="dlg__w">18 мин</span></div>
-              <div class="dlg"><div class="dlg__av">М<i style="background:var(--tg)"></i></div><div class="dlg__t"><div class="dlg__n">Марина</div><div class="dlg__m">спасибо, до встречи</div></div></div>
+              <div class="dlg on"><div class="dlg__av">А<svg class="ico" aria-hidden="true"><use href="#i-vk"/></svg></div><div class="dlg__t"><div class="dlg__n">Алина</div><div class="dlg__m">можно завтра на окрашивание?</div></div></div>
+              <div class="dlg"><div class="dlg__av">И<svg class="ico" aria-hidden="true"><use href="#i-avito"/></svg></div><div class="dlg__t"><div class="dlg__n">Игорь</div><div class="dlg__m">раковина 60 см, есть в наличии?</div></div><span class="dlg__w">18 мин</span></div>
+              <div class="dlg"><div class="dlg__av">М<svg class="ico" aria-hidden="true"><use href="#i-tg"/></svg></div><div class="dlg__t"><div class="dlg__n">Марина</div><div class="dlg__m">спасибо, до встречи</div></div></div>
             </div>
             <div class="window__main">
               <div class="window__head"><b>Алина</b><span class="small muted">ВКонтакте · отвечает Оля</span></div>
@@ -72,10 +81,10 @@
       </div>
     </div>
     <div class="facts2 rv in d3">
-      <div><b>5 каналов</b><span>в одном списке, ответ уходит туда, откуда написали</span></div>
+      <div><b>5 каналов</b><span>в одном списке</span></div>
       <div><b>1–2 недели</b><span>от созвона до запуска</span></div>
-      <div><b>15 000 ₽</b><span>запуск, точная цена без «от»</span></div>
-      <div><b>Сервер в РФ</b><span>своя база и свои ключи у каждой компании</span></div>
+      <div><b>15 000 ₽</b><span>запуск, без «от»</span></div>
+      <div><b>Сервер в РФ</b><span>свои ключи у каждой компании</span></div>
     </div>
   </div>
 </section>
@@ -90,8 +99,8 @@
       <button class="video__play" id="playBtn" type="button" aria-label="Смотреть ролик"><span><svg viewBox="0 0 24 24" fill="currentColor"><path d="M6 4l14 8-14 8z"/></svg></span>Смотреть — 78 секунд</button>
     </div>
     <div class="video__cta rv d3">
-      <a class="btn btn-primary btn-lg" href="#konstruktor" data-go-calc="video">Посчитать для своего бизнеса <svg class="arr" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M4 10h11M11 5l5 5-5 5"/></svg></a>
-      <span class="small" style="color:#9FB6D0">Без звука тоже понятно — всё написано титрами</span>
+      <a class="btn btn-primary btn-lg" href="raschet/" data-go-calc="video">Посчитать для своего бизнеса <svg class="arr" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M4 10h11M11 5l5 5-5 5"/></svg></a>
+      <span class="small" style="color:#9FB6D0">Понятно и без звука</span>
     </div>
   </div>
 </section>
@@ -101,62 +110,26 @@
   <div class="wrap">
     <span class="label rv">Где теряются заявки</span>
     <h2 class="rv d1 hook">Одна заявка без ответа —<br>это <span class="new">от 3 000 ₽</span>, которые ушли к соседу</h2>
-    <p class="lead rv d2">Сотрудники работают нормально. Просто сообщения лежат в пяти приложениях, и видит их тот, у кого в руках телефон.</p>
+    <p class="lead rv d2">Сообщения лежат в пяти приложениях. Видит их тот, у кого в руках телефон.</p>
     <div class="segs">
       <article class="segc rv d1">
         <div class="segc__k">Салон, студия, барбершоп</div>
         <h3>Записалась через дорогу, пока админ был на кассе</h3>
-        <p>Две потерянные записи в неделю — около 30 000 ₽ в месяц, о которых вы не узнаёте.</p>
+        <p>Две записи в неделю — 30 000 ₽ в месяц.</p>
         <div class="segc__n">3–6 тыс. ₽ <span>одна запись</span></div>
       </article>
       <article class="segc rv d2">
         <div class="segc__k">Производство и изделия на заказ</div>
         <h3>Расчёт получили у конкурента, пока менеджер был в цеху</h3>
-        <p>Переписка живёт в телефоне того, кто первым ответил. Уволился — ушла с ним.</p>
+        <p>Переписка живёт в телефоне менеджера. Уволился — ушла с ним.</p>
         <div class="segc__n">десятки тыс. ₽ <span>одна заявка</span></div>
       </article>
       <article class="segc rv d3">
         <div class="segc__k">Магазин: соцсети, Авито, маркетплейсы</div>
         <h3>«Есть в наличии?» — не ответили за час, купили в соседней карточке</h3>
-        <p>Авито ещё и опускает в выдаче за медленный ответ. Эту позицию не вернуть деньгами.</p>
+        <p>Авито ещё и опускает в выдаче за медленный ответ.</p>
         <div class="segc__n">1–3 тыс. ₽ <span>один вопрос</span></div>
       </article>
-    </div>
-  </div>
-</section>
-
-<!-- ================= КАЛЬКУЛЯТОР ПОТЕРЬ ================= -->
-<section class="section section-tint" id="loss">
-  <div class="wrap">
-    <span class="label rv">Сколько это стоит вам</span>
-    <h2 class="rv d1 hook">Посчитайте, что теряете сейчас</h2>
-    <div class="calc2 lit rv d2" id="lossCard">
-      <div class="calc2__in">
-        <div class="ctl">
-          <div class="ctl__t">Обращений в день по всем каналам</div>
-          <div class="opts" id="mcDopts" role="radiogroup">
-            <button class="opt" data-d="7" type="button">до 10</button><button class="opt" data-d="20" type="button" aria-pressed="true">10–30</button><button class="opt" data-d="60" type="button">30–100</button><button class="opt" data-d="120" type="button">больше 100</button>
-          </div>
-        </div>
-        <div class="ctl">
-          <div class="ctl__t">Средний чек, ₽</div>
-          <div class="stepper"><button type="button" class="stepper__b" data-step="chk" data-dir="-1" aria-label="Меньше">−</button><output id="chkV"></output><button type="button" class="stepper__b" data-step="chk" data-dir="1" aria-label="Больше">+</button></div>
-          <input type="hidden" id="chk" value="4500">
-        </div>
-        <div class="ctl">
-          <div class="ctl__t">Заявок теряется в неделю</div>
-          <div class="stepper"><button type="button" class="stepper__b" data-step="lost" data-dir="-1" aria-label="Меньше">−</button><output id="mcLv"></output><button type="button" class="stepper__b" data-step="lost" data-dir="1" aria-label="Больше">+</button></div>
-        </div>
-      </div>
-      <div class="calc2__out">
-        <div class="small" style="color:#9FB6D0">Вы теряете в месяц</div>
-        <div class="calc2__big" id="mcTotal"></div>
-        <div class="small" style="color:#C9D8EA" id="mcNote"></div>
-        <hr>
-        <div class="small" style="color:#C9D8EA">Одна ваша заявка ≈ <b id="mcOne" style="color:#fff"></b>. Эта цифра ещё встретится рядом с ценой.</div>
-        <a class="btn btn-primary" style="margin-top:18px" href="#konstruktor" data-go-calc="loss">Посчитать для своего бизнеса</a>
-        <span id="mcDv" hidden></span>
-      </div>
     </div>
   </div>
 </section>
@@ -167,25 +140,25 @@
     <div class="story__stage" aria-hidden="true">
       <div class="story__glow"></div>
       <div class="chaos" id="scChaos">
-        <div class="bub" style="left:5%;top:8%"><i style="background:var(--vk)"></i><b>ВКонтакте</b>можно завтра на окрашивание?</div>
-        <div class="bub" style="right:6%;top:9%"><i style="background:var(--tg)"></i><b>Telegram</b>сколько стоит маникюр?</div>
-        <div class="bub" style="left:26%;top:22%"><i style="background:var(--avito)"></i><b>Авито</b>раковина 60 см в наличии?</div>
-        <div class="bub" style="right:24%;top:26%"><i style="background:var(--mail)"></i><b>Почта</b>Столешница 2 м, дуб — расчёт?</div>
-        <div class="bub" style="left:8%;top:36%"><i style="background:var(--max)"></i><b>MAX</b>а сегодня есть окно?</div>
-        <div class="bub" style="right:8%;top:44%"><i style="background:var(--vk)"></i><b>ВКонтакте</b>ещё актуально? цена?</div>
-        <div class="bub" style="left:34%;top:52%"><i style="background:var(--tg)"></i><b>Telegram</b>давайте четверг, 15:00?</div>
-        <div class="bub" style="right:28%;top:60%"><i style="background:var(--avito)"></i><b>Авито</b>доставка в Казань есть?</div>
-        <div class="bub" style="left:38%;top:70%"><i style="background:var(--mail)"></i><b>Почта</b>вопрос по записи на пятницу</div>
-        <div class="bub" style="right:10%;top:78%"><i style="background:var(--max)"></i><b>MAX</b>добрый день, есть окошко?</div>
+        <div class="bub" style="left:5%;top:8%"><svg class="ico" aria-hidden="true"><use href="#i-vk"/></svg><b>ВКонтакте</b>можно завтра на окрашивание?</div>
+        <div class="bub" style="right:6%;top:9%"><svg class="ico" aria-hidden="true"><use href="#i-tg"/></svg><b>Telegram</b>сколько стоит маникюр?</div>
+        <div class="bub" style="left:26%;top:22%"><svg class="ico" aria-hidden="true"><use href="#i-avito"/></svg><b>Авито</b>раковина 60 см в наличии?</div>
+        <div class="bub" style="right:24%;top:26%"><svg class="ico" aria-hidden="true"><use href="#i-mail"/></svg><b>Почта</b>Столешница 2 м, дуб — расчёт?</div>
+        <div class="bub" style="left:8%;top:36%"><svg class="ico" aria-hidden="true"><use href="#i-max"/></svg><b>MAX</b>а сегодня есть окно?</div>
+        <div class="bub" style="right:8%;top:44%"><svg class="ico" aria-hidden="true"><use href="#i-vk"/></svg><b>ВКонтакте</b>ещё актуально? цена?</div>
+        <div class="bub" style="left:34%;top:52%"><svg class="ico" aria-hidden="true"><use href="#i-tg"/></svg><b>Telegram</b>давайте четверг, 15:00?</div>
+        <div class="bub" style="right:28%;top:60%"><svg class="ico" aria-hidden="true"><use href="#i-avito"/></svg><b>Авито</b>доставка в Казань есть?</div>
+        <div class="bub" style="left:38%;top:70%"><svg class="ico" aria-hidden="true"><use href="#i-mail"/></svg><b>Почта</b>вопрос по записи на пятницу</div>
+        <div class="bub" style="right:10%;top:78%"><svg class="ico" aria-hidden="true"><use href="#i-max"/></svg><b>MAX</b>добрый день, есть окошко?</div>
         <div class="bub bub--bad" style="left:56%;top:84%"><i style="background:var(--bad)"></i><b>43 мин без ответа</b>записалась через дорогу</div>
       </div>
       <div class="connect" id="scConnect" style="opacity:0">
-        <div class="cc glass-dark"><i style="background:var(--tg)"></i>Telegram<b>подключён</b></div>
-        <div class="cc glass-dark"><i style="background:var(--vk)"></i>ВКонтакте<b>подключён</b></div>
-        <div class="cc glass-dark"><i style="background:var(--max)"></i>MAX<b>подключён</b></div>
-        <div class="cc glass-dark"><i style="background:var(--mail)"></i>Почта<b>подключена</b></div>
-        <div class="cc glass-dark"><i style="background:var(--avito)"></i>Авито<b>подключён</b></div>
-        <div class="cc glass-dark" style="color:#9FB6D0"><i style="background:#3A4D66"></i>WhatsApp<b style="color:#9FB6D0">по запросу</b></div>
+        <div class="cc glass-dark"><svg class="ico" aria-hidden="true"><use href="#i-tg"/></svg>Telegram<b>подключён</b></div>
+        <div class="cc glass-dark"><svg class="ico" aria-hidden="true"><use href="#i-vk"/></svg>ВКонтакте<b>подключён</b></div>
+        <div class="cc glass-dark"><svg class="ico" aria-hidden="true"><use href="#i-max"/></svg>MAX<b>подключён</b></div>
+        <div class="cc glass-dark"><svg class="ico" aria-hidden="true"><use href="#i-mail"/></svg>Почта<b>подключена</b></div>
+        <div class="cc glass-dark"><svg class="ico" aria-hidden="true"><use href="#i-avito"/></svg>Авито<b>подключён</b></div>
+        <div class="cc glass-dark" style="color:#9FB6D0"><svg class="ico" aria-hidden="true"><use href="#i-wa"/></svg>WhatsApp<b style="color:#9FB6D0">по запросу</b></div>
       </div>
       <div class="phone" id="scPhone" style="opacity:0">
         <div class="phone__screen">
@@ -221,9 +194,9 @@
     <span class="label rv">Чем это отличается</span>
     <h2 class="rv d1 hook">Не инструмент, а окно,<br>собранное <span class="new">под вас</span></h2>
     <div class="why3">
-      <div class="whyc rv d1"><span class="nrow__n">01</span><h3>Делаем под вас</h3><p>Настраиваем по вашим реальным сообщениям, а не по инструкции на сорок экранов. Нужна связка с CRM — делаем по ТЗ.</p></div>
-      <div class="whyc rv d2"><span class="nrow__n">02</span><h3>Сервер в России, свой контур</h3><p>Своя база и свои ключи у каждой компании. Нужно отдельно — выделенный сервер с отдельным ключом.</p></div>
-      <div class="whyc rv d3"><span class="nrow__n">03</span><h3>Следим каждый день</h3><p>Разработчики ежедневно проверяют систему и устраняют сбои до того, как их заметят. Обновления выходят без остановки работы.</p></div>
+      <div class="whyc rv d1"><span class="nrow__n">01</span><h3>Делаем под вас</h3><p>Настраиваем по вашим реальным сообщениям. Нужна связка с CRM — делаем по ТЗ.</p></div>
+      <div class="whyc rv d2"><span class="nrow__n">02</span><h3>Сервер в России, свой контур</h3><p>Свои ключи у каждой компании. Нужно отдельно — выделенный сервер.</p></div>
+      <div class="whyc rv d3"><span class="nrow__n">03</span><h3>Следим каждый день</h3><p>Сбои находим и устраняем до того, как их заметят. Обновления — без остановки работы.</p></div>
     </div>
   </div>
 </section>
@@ -236,121 +209,21 @@
     <div class="pay2">
       <div class="pay2__us rv d1">
         <div class="k">Нам</div>
-        <div class="pay2__row"><b>Разово</b><span>подключение и настройка: запуск, каналы, шаблоны, обучение</span></div>
-        <div class="pay2__row"><b>В месяц</b><span>сопровождение и опции: сервер, обновления, ответы в чате. Первые 3 месяца — при запуске</span></div>
-        <div class="pay2__row"><b>По ТЗ</b><span>доработки под вас — 2 500 ₽ за час разработки, часы и срок пишем в оценке заранее</span></div>
+        <div class="pay2__row"><b>Разово</b><span>запуск, каналы, шаблоны, обучение</span></div>
+        <div class="pay2__row"><b>В месяц</b><span>сопровождение и опции. Первые 3 месяца — при запуске</span></div>
+        <div class="pay2__row"><b>По ТЗ</b><span>доработки — 2 500 ₽ за час, срок и часы в оценке заранее</span></div>
       </div>
       <div class="pay2__them rv d2">
         <div class="k">Площадкам, не нам</div>
         <div class="pay2__row"><b>0 ₽</b><span>Telegram, ВКонтакте, MAX, почта</span></div>
-        <div class="pay2__row"><b>~2–3 тыс. ₽/мес</b><span>Авито — тариф площадки, без него ключа к сообщениям нет</span></div>
-        <div class="pay2__row"><b>~5 000 ₽/мес</b><span>WhatsApp — российский провайдер по вашему договору</span></div>
+        <div class="pay2__row"><b>~2–3 тыс. ₽/мес</b><span>Авито — тариф площадки</span></div>
+        <div class="pay2__row"><b>~5 000 ₽/мес</b><span>WhatsApp — провайдер по вашему договору</span></div>
       </div>
     </div>
-    <p class="small muted rv d3" style="margin-top:18px">Цены в рублях, без НДС (УСН). Прайс на странице совпадает с тем, что пойдёт в договор.</p>
+    <p class="small muted rv d3" style="margin-top:18px">Цены без НДС. В договор идёт тот же прайс.</p>
   </div>
 </section>
 
-<!-- ================= КОНСТРУКТОР ================= -->
-<section class="section section-tint konst" id="konstruktor">
-  <div class="wrap">
-    <span class="label rv">Конструктор</span>
-    <h2 class="rv d1 hook">Соберите своё окно —<br>и увидите <span class="new">цену каждого элемента</span></h2>
-    <p class="lead rv d2">Пять вопросов — и состав собран под ваш бизнес. Дальше включайте и выключайте элементы, цена меняется на глазах. Нет нужного элемента — сделаем по ТЗ.</p>
-    <p class="small muted rv d3" style="margin-top:8px">5 вопросов, 40 секунд. Состав и цена — сразу, без звонка.</p>
-
-    <div class="konst__grid" style="margin-top:28px">
-      <div>
-        <div id="quiz" class="quiz2">
-          <div class="q" data-q="seg"><div class="q__t"><span class="i">1/6</span>Чем занимаетесь?</div>
-            <div class="opts" role="radiogroup">
-              <button class="opt" data-v="salon" aria-pressed="false" tabindex="0">Салон / студия</button><button class="opt" data-v="prod" aria-pressed="false">Производство</button><button class="opt" data-v="shop" aria-pressed="false">Магазин</button><button class="opt" data-v="other" aria-pressed="false">Услуги</button><button class="opt" data-v="other" aria-pressed="false">Другое</button>
-            </div><p class="small muted" style="margin:10px 0 0">От ответа зависят примеры, быстрые ответы и средний чек в расчёте.</p></div>
-          <div class="q" data-q="chans" data-multi><div class="q__t"><span class="i">2/6</span>Куда пишут клиенты? <span class="small muted" style="font-weight:400">несколько ответов</span></div>
-            <div class="opts" role="group">
-              <button class="opt" data-v="tg" aria-pressed="false">Telegram</button><button class="opt" data-v="vk" aria-pressed="false">ВКонтакте</button><button class="opt" data-v="max" aria-pressed="false">MAX</button><button class="opt" data-v="mail" aria-pressed="false">Почта</button><button class="opt" data-v="avito" aria-pressed="false">Авито</button><button class="opt" data-v="wa" aria-pressed="false">WhatsApp</button>
-            </div><p class="small muted" style="margin:10px 0 0">Авито — нужен платный тариф Авито. WhatsApp — в России работает нестабильно, подключаем по запросу.</p></div>
-          <div class="q" data-q="d"><div class="q__t"><span class="i">3/6</span>Сколько обращений в день?</div>
-            <div class="opts" role="radiogroup"><button class="opt" data-v="a" aria-pressed="false">до 10</button><button class="opt" data-v="b" aria-pressed="false">10–30</button><button class="opt" data-v="c" aria-pressed="false">30–100</button><button class="opt" data-v="d" aria-pressed="false">больше 100</button></div>
-            <p class="small muted" style="margin:10px 0 0">От этого зависит размер сервера и нужно ли оповещение «не ответили».</p></div>
-          <div class="q" data-q="adm"><div class="q__t"><span class="i">4/6</span>Сколько человек отвечают клиентам?</div>
-            <div class="opts" role="radiogroup"><button class="opt" data-v="a" aria-pressed="false">1</button><button class="opt" data-v="b" aria-pressed="false">2–3</button><button class="opt" data-v="c" aria-pressed="false">4–7</button><button class="opt" data-v="d" aria-pressed="false">больше 7</button></div>
-            <p class="small muted" style="margin:10px 0 0">Три рабочих места входят в базу, дальше — 500 ₽/мес за каждое.</p></div>
-          <div class="q" data-q="crm"><div class="q__t"><span class="i">5/6</span>Есть ли CRM или журнал записи?</div>
-            <div class="opts" role="radiogroup"><button class="opt" data-v="no" aria-pressed="false">Нет</button><button class="opt" data-v="yes" aria-pressed="false">YCLIENTS / Dikidi</button><button class="opt" data-v="yes" aria-pressed="false">Битрикс24 / amoCRM</button><button class="opt" data-v="yes" aria-pressed="false">Другая</button></div>
-            <p class="small muted" style="margin:10px 0 0">Не трогаем, живёт рядом. Передача диалога в сделку — доработка по ТЗ.</p></div>
-          <div class="q" data-q="server"><div class="q__t"><span class="i">6/6</span>Нужен свой сервер? <span class="small muted" style="font-weight:400">необязательно</span></div>
-            <div class="opts" role="radiogroup"><button class="opt" data-v="yes" aria-pressed="false">Да, у нас есть такое требование</button><button class="opt" data-v="no" aria-pressed="false">Не знаю, подскажите</button></div>
-            <p class="small muted" style="margin:10px 0 0">«Не знаю» — ставим общий сервер, объясним разницу на созвоне.</p></div>
-          <div class="quiz2__foot">
-            <button class="btn btn-primary" id="showBuild" type="button">Показать состав</button>
-            <button class="btn btn-light btn-sm" id="skipQuiz" type="button">Пропустить вопросы</button>
-            <span class="small muted">Ответы уйдут в заявку вместе с составом — перезвоним, уже зная ваш бизнес.</span>
-          </div>
-        </div>
-
-        <div id="build" hidden>
-          <p id="presetLine" style="font-family:var(--head);font-weight:700;font-size:18px;margin:26px 0 6px"></p>
-          <div class="presets"><span class="small muted" style="align-self:center">Или готовый набор:</span><button class="opt preset-btn" data-seg="salon" type="button">Для салона</button><button class="opt preset-btn" data-seg="prod" type="button">Для производства</button><button class="opt preset-btn" data-seg="shop" type="button">Для магазина</button></div>
-
-          <div class="group"><div class="group__t"><h3>Под ТЗ</h3><span>считаем по клиенту, в итог не плюсуется</span></div><div id="g-tz"></div>
-            <p class="small muted" style="margin-top:8px">Оценка ТЗ — 5 000 ₽, зачитывается в заказ. Для сравнения: внедрение CRM у интеграторов — 80–120 тыс. ₽, поддержка 5–10 тыс. ₽ в месяц (рынок, сентябрь 2026).</p></div>
-          <div class="group"><div class="group__t"><h3>База</h3><span>входит всегда</span></div><div id="g-base"></div>
-            <details class="small" style="margin-top:8px"><summary style="cursor:pointer;color:var(--press)">Что входит в базу за 0 ₽ — 8 пунктов</summary>
-              <ul class="muted" style="margin-top:8px"><li><b>Окно «Входящие»</b> — все диалоги в одном списке, поиск, ответ с фото и файлами</li><li><b>Вход по коду на почту</b> — без паролей, видно, кто вошёл</li><li><b>Копии базы</b> — раз в сутки, хранятся 14 штук</li><li><b>Быстрые ответы</b> — адрес, часы, прайс в одно нажатие</li><li><b>Автоответ в нерабочее время</b> — клиент ночью получает ответ, что вы закрыты и когда откроетесь</li><li><b>Диктовка ответа голосом</b> — сотрудник говорит, текст ложится в поле</li><li><b>Вечерняя сводка владельцу</b> — три цифры в Telegram</li><li><b>Сигнал нам о поломке</b> — узнаём о сбое раньше вас</li></ul></details></div>
-          <div class="group"><div class="group__t"><h3>Каналы</h3><span>разово, за подключение и наладку</span></div><div id="g-chan"></div>
-            <p class="small muted" style="margin-top:8px">Wildberries и Ozon — по запросу, цену назовём после проверки на вашем аккаунте. Для Ozon нужна подписка Premium Plus.</p></div>
-          <div class="group"><div class="group__t"><h3>Опции</h3><span>«скоро» — строится под первый заказ, до готовности не оплачивается</span></div><div id="g-opt"></div></div>
-        </div>
-      </div>
-
-      <aside class="total" id="total" aria-label="Итог" hidden>
-        <div class="gain"><span class="small">Вы теряете</span><b id="tLoss"></b><span class="small" id="tLossNote"></span></div>
-        <div class="k">Разово</div><div class="v"><output id="tOnce" aria-live="polite"></output></div>
-        <div class="k">В месяц</div><div class="v"><output id="tMonthly" aria-live="polite"></output></div>
-        <div class="row"><span>Первый платёж, с 3 месяцами сопровождения</span><b id="tFirst"></b></div>
-        <div class="row"><span id="tThird"></span></div>
-        <div class="row" id="tSoon" hidden></div>
-        <div class="row" id="tLater" hidden></div>
-        <div class="row" id="tCustom" hidden><span>+ доработка по ТЗ — от 62 500 ₽, оценим отдельно</span></div>
-        <hr>
-        <div class="row"><span>Окупится за</span><b id="tPayback"></b></div>
-        <div class="small" style="color:#9FB6D0" id="tVs"></div>
-        <div id="tEmpty" hidden class="small" style="margin-top:10px;color:#FFC9C9">Только база — окно, вход, сервер. Каналов нет: сообщения приходить не будут. <button id="restore" class="btn btn-ghost btn-sm" type="button" style="margin-top:6px">Вернуть набор</button></div>
-        <div id="tHint" hidden class="small" style="margin-top:10px;color:#C9D8EA">Можно начать легче: панель и сервер добавляются позже без переделки. <button id="lighter" class="btn btn-ghost btn-sm" type="button" style="margin-top:6px">Убрать панель и сервер</button></div>
-        <hr>
-        <div class="small" style="color:#C9D8EA"><b style="color:#fff">Входит бесплатно:</b> созвон и разбор 20 минут, замер скорости ответа до подключения, вечерняя сводка, обучающий созвон 1 час, обновления.</div>
-        <a class="btn btn-primary" href="#lead" id="toForm">Отправить состав — перезвоним сегодня</a>
-        <p class="disc">Расчёт показывает состав работ и их стоимость по действующему прайсу и не является публичной офертой (п. 1 ст. 437 ГК РФ). Итоговая цена и срок фиксируются в договоре после уточнения задачи; если состав работ не меняется, цена в договоре совпадает с расчётом. Цены в рублях, без НДС (УСН).</p>
-      </aside>
-    </div>
-
-    <!-- ================= ФОРМА ================= -->
-    <div class="form" id="lead" hidden>
-      <span class="label">Заявка</span>
-      <h3 style="font-size:clamp(22px,3vw,30px);margin-bottom:8px">Отправьте состав — перезвоним сегодня</h3>
-      <p class="muted">Состав и ответы на вопросы уже в заявке. Разговор 20 минут: уточним каналы, назовём точную цену и срок.</p>
-      <div class="sostav" id="sostav"></div>
-      <form id="leadForm" novalidate>
-        <div class="form__grid">
-          <div class="field"><label for="fName">Имя</label><input id="fName" name="name" placeholder="Как к вам обращаться" autocomplete="name"><div class="err">Напишите, как к вам обращаться</div></div>
-          <div class="field"><label for="fBiz">Чем занимаетесь</label><input id="fBiz" name="business" placeholder="Салон, производство, магазин…" autocomplete="organization"><div class="err">Одно-два слова о бизнесе</div></div>
-          <div class="field"><label for="fContact">Телефон или Telegram</label><input id="fContact" name="contact" placeholder="+7 … или @имя" inputmode="tel" autocomplete="tel"><div class="err">Нужен телефон или ник в Telegram — хотя бы одно</div></div>
-          <div class="field"><label>Когда удобно</label><div class="opts"><button type="button" class="opt time-opt" aria-pressed="true">Сегодня до 18:00</button><button type="button" class="opt time-opt" aria-pressed="false">Завтра до 12:00</button><button type="button" class="opt time-opt" aria-pressed="false">Напишу в Telegram сам</button></div><input type="hidden" name="time" value="Сегодня до 18:00"></div>
-        </div>
-        <input class="hp" type="text" name="site" tabindex="-1" autocomplete="off" aria-hidden="true">
-        <label class="agree"><input type="checkbox" name="agree"><span>Даю согласие ИП [ФИО] на обработку моих персональных данных (имя, телефон или e-mail, мессенджер) для связи по моей заявке на условиях <a href="politika.html">Политики обработки персональных данных</a>.</span></label>
-        <div class="small" id="agreeErr" style="color:var(--bad);display:none;margin:-8px 0 10px">Без согласия отправить заявку нельзя</div>
-        <p class="small muted">Оператор — ИП [ФИО], ОГРНИП [номер], [e-mail]. Заявка хранится на сервере в России.</p>
-        <button class="btn btn-primary" id="sendBtn" type="submit">Отправить состав</button>
-        <div class="small" id="formErr" style="color:var(--bad);display:none;margin-top:10px">Не отправилось — состав сохранён. Попробуйте ещё раз или напишите в Telegram.</div>
-      </form>
-      <div class="form__ok" id="formOk"><b>Состав получен.</b> <span class="t">Перезвоним сегодня до 18:00 (после 18:00 — завтра до 12:00). Разговор 20 минут — уточним каналы и назовём точную цену и срок. После созвона пришлём одно сообщение на одну страницу: состав, цена, срок.</span><div id="okSostav" style="margin-top:10px"></div></div>
-    </div>
-  </div>
-</section>
-
-<div class="totalbar" id="totalbar"><div><b id="barOnce"></b><span>первый платёж · <span id="barMonthly"></span></span></div><button class="btn btn-primary btn-sm" id="barBtn" type="button">Итог</button></div>
 
 <!-- ================= ГАРАНТИИ ================= -->
 <section class="section section-white" id="free">
@@ -358,9 +231,9 @@
     <span class="label rv">Без доплат</span>
     <h2 class="rv d1 hook">Что входит бесплатно<br>и за что <span class="new">отвечаем</span></h2>
     <div class="why3" style="margin-top:34px">
-      <div class="whyc rv d1"><span class="nrow__n">0 ₽</span><h3>До запуска</h3><p>Созвон и разбор 20 минут, подключаем один ваш канал. Замер скорости ответа до подключения, чтобы было с чем сравнивать.</p></div>
-      <div class="whyc rv d2"><span class="nrow__n">14 дней</span><h3>Проверка по цифре</h3><p>Две недели смотрим на сводку. Если ответы не стали быстрее по сравнению с замером — дорабатываем за свой счёт.</p></div>
-      <div class="whyc rv d3"><span class="nrow__n">Право</span><h3>На доработки</h3><p>Бессрочное право пользоваться Ветра и всеми доработками под вас. Правки в пределах лимита часов входят в сопровождение, сверх — по ставке.</p></div>
+      <div class="whyc rv d1"><span class="nrow__n">0 ₽</span><h3>До запуска</h3><p>Созвон 20 минут и замер скорости ответа до подключения.</p></div>
+      <div class="whyc rv d2"><span class="nrow__n">14 дней</span><h3>Проверка по цифре</h3><p>Ответы не стали быстрее по сравнению с замером — дорабатываем за свой счёт.</p></div>
+      <div class="whyc rv d3"><span class="nrow__n">Право</span><h3>На доработки</h3><p>Бессрочное право на Ветра и все доработки под вас. Правки в пределах лимита часов — в сопровождении.</p></div>
     </div>
   </div>
 </section>
@@ -370,14 +243,11 @@
     <span class="label rv">Частые вопросы</span>
     <h2 class="rv d1">Что спрашивают до созвона</h2>
     <div class="faq rv d2" style="margin-top:20px">
-      <details><summary>А WhatsApp?</summary><p>С февраля 2026 WhatsApp в России работает нестабильно, и как надёжный канал мы его не подключаем. Окно собирает Telegram, ВКонтакте, MAX, почту и Авито. Если клиенты пишут в WhatsApp — на созвоне обсудим подключение через российского провайдера по запросу и готовый текст, которым клиентов переводят в другие каналы.</p></details>
-      <details><summary>Где хранятся данные?</summary><p>На сервере в России. На общем сервере у каждой компании своя база и свои ключи доступа; при выделенном сервере — отдельная машина и отдельный ключ. Доступ к серверу есть у двух названных людей по обязательству о конфиденциальности, поручение на обработку по 152-ФЗ — в договоре.</p></details>
-      <details><summary>Кто владеет кодом доработок?</summary><p>Вы получаете бессрочное право пользоваться Ветра и всеми доработками, сделанными под вас. Сама программа остаётся нашей и продолжает обновляться. Права и порядок передачи прописаны в договоре — читаете до оплаты.</p></details>
-      <details><summary>Что, если администратор уволится?</summary><p>Переписка живёт в окне, а не в его телефоне: история остаётся, каналы подключены к компании, а не к личному номеру. Новому сотруднику даёте вход по коду на почту за пару минут, старому — закрываете.</p></details>
-      <details><summary>У нас есть YCLIENTS или amoCRM. Вы их заменяете?</summary><p>Нет. Ветра отвечает за сообщения до записи и до сделки; журнал и CRM остаются вашими, мы в них не лезем. Если нужно передавать диалог в сделку Битрикс24 или amoCRM — это доработка по ТЗ, оцениваем отдельно.</p></details>
-      <details><summary>Клиент поймёт, что ему отвечают через сервис?</summary><p>Нет. Ответ уходит в тот же чат, откуда написал клиент: в Telegram — от вашего бота, во ВКонтакте — от сообщества, на почту — с вашего адреса. Ветра работает со стороны компании.</p></details>
-      <details><summary>Кто будет поддерживать?</summary><p>Команда разработки: следим за системой каждый день, сбои устраняем до того, как их заметят, обновления выходят без остановки работы. Пишете в чат — отвечаем в рабочий день. Нужен ответ за 2 часа и мелкие правки без счёта — расширенное сопровождение, 6 000 ₽/мес.</p></details>
-      <details><summary>А если не сработает?</summary><p>Созвон и разбор ничего не стоят. После запуска 14 дней смотрим на сводку: не выросла доля ответов быстрее 5 минут — дорабатываем за свой счёт. Дальше решаете по цифре, которую показывает сводка, а не по нашим словам.</p></details>
+      <details><summary>А WhatsApp?</summary><p>В России работает нестабильно, как надёжный канал не подключаем. По запросу — через российского провайдера.</p></details>
+      <details><summary>Где хранятся данные?</summary><p>На сервере в России. У каждой компании своя база и свои ключи; при выделенном сервере — отдельная машина.</p></details>
+      <details><summary>Кто владеет кодом доработок?</summary><p>Вы получаете бессрочное право на Ветра и доработки под вас. Программа остаётся нашей и обновляется.</p></details>
+      <details><summary>У нас есть CRM или журнал записи</summary><p>Не трогаем. Ветра отвечает за сообщения до записи и до сделки. Передача в сделку — доработка по ТЗ.</p></details>
+      <details><summary>Клиент поймёт, что ему отвечают через сервис?</summary><p>Нет. Ответ уходит в тот же чат: от вашего бота, сообщества или с вашей почты.</p></details>
     </div>
   </div>
 </section>
@@ -397,6 +267,6 @@
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
-<script src="js/script.js?v=6"></script>
+<script src="js/script.js?v=7"></script>
 </body>
 </html>

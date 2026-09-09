@@ -103,6 +103,11 @@
     on.zapusk = on.soprov = true;
     chans.forEach(function (c) { if (byId[c]) on[c] = true; });   // WhatsApp тоже включается, но идёт строкой «после подключения»
     p.opt.forEach(function (o) { on[o] = true; });
+    // ответы влияют на состав: поток обращений → оповещение и панель
+    var why = [];
+    if (state.d && state.d >= 60) { on.alert = true; why.push('от 30 обращений в день — оповещение «не ответили»'); }
+    if (state.d && state.d >= 120 && state.adm && state.adm >= 2) { on.panel = true; why.push('от 100 в день и несколько сотрудников — панель руководителя'); }
+    if (state.adm && state.adm >= 5) why.push('сотрудников больше трёх — добавили места');
     if (on.panel && state.adm && state.adm < 2) on.panel = false;
     if (state.server === 'yes') on.server = true;
     if (state.server === 'no') on.server = false;
@@ -117,7 +122,7 @@
     if (!state.chkTouched) { state.chk = p.chk; syncChk(); }
     var label = { salon: 'салон', prod: 'производство', shop: 'магазин', other: 'ваш бизнес' }[seg];
     var nCh = chans.filter(function (c) { return on[c]; }).length, nOpt = p.opt.length;
-    $('#presetLine').textContent = 'Собрали под ' + label + ': ' + nCh + ' ' + plural(nCh, 'канал', 'канала', 'каналов') + ', ' + nOpt + ' ' + plural(nOpt, 'опция', 'опции', 'опций') + '. Всё можно включить или снять.';
+    $('#presetLine').innerHTML = 'Собрали под ' + label + ': ' + nCh + ' ' + plural(nCh, 'канал', 'канала', 'каналов') + ', ' + nOpt + ' ' + plural(nOpt, 'опция', 'опции', 'опций') + '.' + (why.length ? '<span class="small muted" style="display:block;font-family:var(--text);font-weight:400;margin-top:6px">Учли ответы: ' + why.join(' · ') + '.</span>' : '');
     $('#build').hidden = false;
     $('#total').hidden = false;
     $('#lead').hidden = false;
@@ -162,7 +167,8 @@
     if (i.lock) badges += '<span class="el__badge">входит всегда</span>';
     if (i.soon) badges += '<span class="el__badge" style="background:#D6E5F7;color:#1F63BC">скоро</span>';
     if (i.request) badges += '<span class="el__badge" style="background:#FFF3E0;color:#9A5A00">по запросу</span>';
-    var dot = i.dot ? '<i style="display:inline-block;width:9px;height:9px;border-radius:50%;background:' + i.dot + ';margin-right:6px;vertical-align:1px"></i>' : '';
+    var ICO = { tg: 'i-tg', vk: 'i-vk', max: 'i-max', mail: 'i-mail', avito: 'i-avito', wa: 'i-wa' };
+    var dot = ICO[i.id] ? '<svg class="ico ico--row" aria-hidden="true"><use href="#' + ICO[i.id] + '"/></svg>' : '';
     el.innerHTML = ctrl + '<div><div class="el__name">' + dot + i.name + badges + '</div><div class="el__desc">' + i.desc + (i.needsStaff && state.adm && state.adm < i.needsStaff ? ' · нужно от 2 сотрудников' : '') + '</div>' + (i.thirdNote ? '<div class="el__plus">' + i.thirdNote + '</div>' : '') + '</div>' + price;
     return el;
   }
@@ -178,7 +184,7 @@
       renderItems(); return;
     }
     var c = e.target.closest('[data-custom]');
-    if (c) { var cid = c.getAttribute('data-custom'); state.custom[cid] = !state.custom[cid]; push('item_custom_click', { id: cid }); renderItems(); return; }
+    if (c) { var cid = c.getAttribute('data-custom'); state.custom[cid] = !state.custom[cid]; push('item_custom_click', { id: cid }); if (c.classList.contains('btn') && c.closest('.tzcard')) { c.setAttribute('aria-pressed', state.custom[cid] ? 'true' : 'false'); c.textContent = state.custom[cid] ? 'В составе' : 'Обсудить'; recalc(); } else renderItems(); return; }
     var q = e.target.closest('.qty');
     if (q) { byId.staff.qty = Math.max(0, Math.min(20, byId.staff.qty + (+q.getAttribute('data-q')))); state.on.staff = byId.staff.qty > 0; renderItems(); return; }
     var r = e.target.closest('#restore');
@@ -246,8 +252,10 @@
   }
   function syncChk() { var c = $('#chk'); if (c) { c.value = state.chk; } var v = $('#chkV'); if (v) v.textContent = fmt(state.chk); miniCalc(); }
   function miniCalc() {
-    var t = $('#mcTotal'); if (!t) return;
     var l = lossCalc();
+    var cv0 = $('#chkV'); if (cv0) cv0.textContent = fmt(state.chk);
+    var lv0 = $('#mcLv'); if (lv0) lv0.textContent = l.lost.toLocaleString('ru-RU');
+    var t = $('#mcTotal'); if (!t) return;
     $('#mcDv').textContent = state.d || 20; $('#mcLv').textContent = l.lost.toLocaleString('ru-RU'); var cv = $('#chkV'); if (cv) cv.textContent = fmt(state.chk);
     t.textContent = fmt(l.total);
     $('#mcNote').textContent = l.lost.toLocaleString('ru-RU') + ' в неделю × 4,3 недели × ' + fmt(state.chk) + ' × ' + Math.round(CONV[state.seg || 'other'] * 100) + ' % (доля, которая стала бы покупкой)';
@@ -320,6 +328,7 @@
   /* ---------- кнопка «Посчитать» ---------- */
   $$('[data-go-calc]').forEach(function (a) {
     a.addEventListener('click', function (e) {
+      if ((a.getAttribute('href') || '').charAt(0) !== '#') { push('calc_open', { from: a.getAttribute('data-go-calc') }); return; } // переход на страницу расчёта
       e.preventDefault();
       var k = $('#konstruktor');
       k.scrollIntoView({ behavior: reduced ? 'auto' : 'smooth', block: 'start' });
@@ -408,16 +417,21 @@
         });
       },
       '(max-width: 900px)': function () {
-        $$('.story__step').forEach(function (s) { s.classList.add('on'); });
-        ScrollTrigger.create({ trigger: story, start: 'top 70%', end: 'bottom 30%', scrub: .6, animation: tl });
+        // на телефоне тоже закрепляем экран: шаги листаются медленно и фиксируются
+        ScrollTrigger.create({
+          trigger: story, start: 'top top', end: '+=260%', pin: '.story__pin', scrub: 1, animation: tl,
+          snap: { snapTo: 'labelsDirectional', duration: { min: .3, max: .8 }, delay: .05, ease: 'power2.inOut' },
+          onUpdate: function (st) { var t = st.progress * tl.duration(), n = 0; labels.forEach(function (l, i) { if (t >= tl.labels[l] - .01) n = i; }); setStep(n); }
+        });
       }
     });
   }
 
   document.addEventListener('DOMContentLoaded', function () {
     if (/[?&]nomotion/.test(location.search)) reduced = true;   // служебное: отключить движение для проверок
-    initQuiz(); syncChk(); renderItems(); initForm(); initBar(); initVideo(); initMotion();
-    $('#build').hidden = true;
+    var hasCalc = !!$('#konstruktor');
+    if (hasCalc) { initQuiz(); syncChk(); renderItems(); initForm(); initBar(); $('#build').hidden = true; }
+    initVideo(); initMotion();
     // служебное: ?go=id&seg=shop&y=300 — открыть секцию/пресет для проверки и скриншотов
     var q = new URLSearchParams(location.search);
     if (q.get('seg')) { var b = $('.q[data-q=seg] .opt[data-v=' + q.get('seg') + ']'); if (b) b.click(); }
