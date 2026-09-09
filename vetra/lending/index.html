@@ -3,270 +3,872 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="robots" content="noindex">
-<title>Ветра — заявки из Telegram, ВКонтакте, MAX, почты и Авито в одном окне</title>
-<meta name="description" content="Соберём одно окно под ваш бизнес за 1–2 недели. Цена каждого элемента видна сразу, до звонка.">
-<meta property="og:title" content="Ветра — все заявки в одном окне">
-<meta property="og:description" content="Внедрение под ваш бизнес и сопровождение. Соберите состав и увидите цену.">
+<title>Ветра — все сообщения клиентов в одном окне</title>
+<meta name="description" content="Ветра собирает сообщения клиентов из Telegram, ВК, MAX, почты и Авито в одно окно. Сотрудники отвечают без переключений, руководитель видит, что отвечено, а что висит.">
+<meta property="og:title" content="Ветра — все сообщения клиентов в одном окне">
+<meta property="og:description" content="Один список вместо шести вкладок. Подключается за три минуты.">
 <meta property="og:type" content="website">
-<meta property="og:image" content="video/poster.jpg?v=2">
-<link rel="icon" href="../favicon.svg" type="image/svg+xml">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Unbounded:wght@500;600;700&family=Onest:wght@400;500;600&display=swap">
-<link rel="stylesheet" href="css/style.css?v=7">
+<link rel="stylesheet" href="css/vetra.css">
+<style>
+/* ---------- Первый экран ---------- */
+.hero{position:relative; padding:clamp(48px,7vw,96px) 0 clamp(40px,5vw,64px); overflow:clip}
+.hero__name{display:flex; align-items:flex-end; gap:clamp(10px,1.6vw,22px); flex-wrap:wrap}
+.hero__name .word{color:var(--ink)}
+.hero__name .dot{width:clamp(14px,2vw,26px); height:clamp(14px,2vw,26px); border-radius:50%;
+  background:var(--blue); margin-bottom:clamp(8px,1.4vw,20px); flex:none;
+  animation:pulse 4.5s var(--ease) infinite}
+@keyframes pulse{0%,100%{transform:scale(1); opacity:1} 50%{transform:scale(.82); opacity:.72}}
+.hero__slogan{margin-top:clamp(14px,2vw,26px); max-width:min(20ch,100%)}
+.hero__text{margin-top:22px; max-width:min(56ch,100%)}
+.hero__cta{display:flex; gap:14px; flex-wrap:wrap; margin-top:34px; align-items:center}
+.hero__meta{display:flex; gap:22px; flex-wrap:wrap; margin-top:26px; font-size:14.5px; color:var(--muted)}
+.hero__meta b{color:var(--ink); font-weight:500}
+.hero__grid{display:grid; grid-template-columns:1.05fr .95fr; gap:clamp(24px,4vw,60px); align-items:center}
+@media (max-width:960px){.hero__grid{grid-template-columns:1fr}}
+
+/* окно-превью в первом экране */
+.peek{background:#fff; border:1px solid var(--line); border-radius:var(--r-xl); box-shadow:var(--sh-2);
+  overflow:hidden; transform:rotate(-1deg); transition:transform var(--slow) var(--ease)}
+.peek:hover{transform:rotate(0)}
+.peek__bar{display:flex; align-items:center; gap:8px; padding:14px 18px; border-bottom:1px solid var(--line);
+  background:var(--blue-tint)}
+.peek__bar i{width:10px; height:10px; border-radius:50%; background:var(--blue-mid); opacity:.6}
+.peek__bar span{margin-left:8px; font-size:13.5px; color:var(--muted)}
+.peek__body{display:grid; grid-template-columns:1fr 1.25fr; min-height:340px}
+/* на телефоне две колонки не помещаются — кладём список над перепиской */
+@media (max-width:620px){
+  .peek__body{grid-template-columns:1fr; min-height:0}
+  .peek__list{border-right:0; border-bottom:1px solid var(--line)}
+  .peek__tx{max-width:none}
+}
+.peek__list{border-right:1px solid var(--line); padding:12px}
+.peek__row{display:flex; gap:11px; padding:11px; border-radius:var(--r); transition:background var(--fast) var(--ease),
+  opacity var(--mid) var(--ease), transform var(--mid) var(--ease)}
+.peek__row.lit{background:var(--blue-soft); transform:translateX(3px)}
+.peek__row.dim{opacity:.34}
+.peek__ava{width:38px; height:38px; border-radius:50%; flex:none; display:grid; place-items:center;
+  font-family:'Google Sans',sans-serif; font-weight:500; color:#fff; font-size:15px; position:relative}
+.peek__ava small{position:absolute; right:-3px; bottom:-3px; width:16px; height:16px; border-radius:50%;
+  border:2px solid #fff; display:block}
+.peek__nm{font-family:'Google Sans',sans-serif; font-weight:500; font-size:14.5px}
+.peek__tx{font-size:13px; color:var(--muted); overflow:hidden; text-overflow:ellipsis; white-space:nowrap; max-width:20ch}
+.peek__chat{padding:16px; display:flex; flex-direction:column; gap:10px; background:var(--page)}
+.bub{max-width:78%; padding:11px 15px; border-radius:18px; font-size:14.5px; line-height:1.45}
+.bub-in{background:#fff; border:1px solid var(--line); border-bottom-left-radius:6px}
+.bub-out{background:var(--blue-pale); align-self:flex-end; border-bottom-right-radius:6px}
+.peek__input{margin-top:auto; display:flex; gap:9px; align-items:center; background:#fff;
+  border:1px solid var(--line); border-radius:var(--r-pill); padding:10px 16px; font-size:14px; color:var(--faint)}
+
+/* ---------- Каналы-строка ---------- */
+.chan{display:flex; gap:10px; flex-wrap:wrap; margin-top:26px}
+.chan__i{display:inline-flex; align-items:center; gap:9px; padding:10px 16px; background:#fff;
+  border:1px solid var(--line); border-radius:var(--r-pill); font-family:'Google Sans',sans-serif;
+  font-size:14.5px; font-weight:500; cursor:default;
+  transition:border-color var(--fast) var(--ease), transform var(--fast) var(--ease),
+             box-shadow var(--fast) var(--ease), background var(--fast) var(--ease)}
+.chan__i:hover,.chan__i.active{border-color:var(--blue); transform:translateY(-3px); box-shadow:var(--sh-3); background:var(--blue-tint)}
+/* на тёмной секции белая пилюля с унаследованным белым текстом нечитаема */
+.section-navy .chan__i{background:rgba(255,255,255,.08); border-color:rgba(255,255,255,.2); color:#EAF2FC}
+.section-navy .chan__i:hover{background:rgba(255,255,255,.16); border-color:var(--blue-mid); box-shadow:none}
+.chan__d{width:11px; height:11px; border-radius:50%; flex:none}
+
+/* ---------- Как работает ---------- */
+.steps{counter-reset:s; display:grid; gap:clamp(14px,2vw,20px)}
+.step{display:grid; grid-template-columns:auto 1fr; gap:22px; align-items:start; padding:clamp(20px,2.4vw,30px);
+  background:#fff; border:1px solid var(--line); border-radius:var(--r-lg);
+  transition:border-color var(--mid) var(--ease), transform var(--mid) var(--ease), box-shadow var(--mid) var(--ease)}
+.step:hover{border-color:var(--blue-mid); transform:translateX(6px); box-shadow:var(--sh-2)}
+.step__n{counter-increment:s; width:46px; height:46px; border-radius:50%; background:var(--blue-soft);
+  color:var(--blue-press); display:grid; place-items:center; font-family:'Google Sans',sans-serif;
+  font-weight:700; font-size:19px; transition:background var(--mid) var(--ease), color var(--mid) var(--ease)}
+.step__n::before{content:counter(s)}
+.step:hover .step__n{background:var(--blue); color:#fff}
+
+/* ---------- Демонстрация ввода ---------- */
+.demo{background:#fff; border:1px solid var(--line); border-radius:var(--r-lg); padding:clamp(20px,2.4vw,30px);
+  transition:border-color var(--mid) var(--ease), box-shadow var(--mid) var(--ease)}
+.demo:hover{border-color:var(--blue); box-shadow:var(--sh-2)}
+.demo__field{position:relative; display:flex; align-items:center; gap:2px; min-height:56px; padding:15px 18px;
+  border:1.5px solid var(--line); border-radius:var(--r-pill); background:var(--page); font-size:15.5px; overflow:hidden}
+.demo__field .caret{width:2px; height:19px; background:var(--blue); animation:blink 1.05s step-end infinite}
+@keyframes blink{50%{opacity:0}}
+[data-ghost]{color:var(--faint)}
+.demo__hint{display:inline-flex; align-items:center; gap:9px; margin-top:14px; padding:8px 14px;
+  border-radius:var(--r-pill); background:var(--blue-soft); color:var(--blue-press); font-size:13.5px;
+  opacity:0; transform:translateY(-5px); transition:opacity var(--mid) var(--ease), transform var(--mid) var(--ease)}
+.demo__hint.show{opacity:1; transform:none}
+kbd{font-family:'Google Sans',sans-serif; font-size:12.5px; font-weight:700; background:#fff;
+  border:1px solid var(--blue-mid); border-bottom-width:2px; border-radius:6px; padding:3px 8px; color:var(--blue-press)}
+.demo__sent{margin-top:14px; opacity:0; transform:translateY(6px);
+  transition:opacity var(--mid) var(--ease), transform var(--mid) var(--ease)}
+.demo__sent.show{opacity:1; transform:none}
+.demo__cap{font-size:13.5px; color:var(--muted); margin-top:14px}
+
+/* голос */
+.wave{display:inline-flex; align-items:center; gap:4px; height:26px}
+.wave i{width:3px; height:8px; background:var(--blue-mid); border-radius:2px}
+.rec .wave i{animation:wv .9s var(--ease) infinite alternate}
+@keyframes wv{to{height:24px; background:var(--blue)}}
+[data-voice-out]{min-height:1.6em; display:block; margin-top:12px; font-size:15.5px}
+
+/* ---------- Панель руководителя (превью) ---------- */
+.mini{background:#fff; border:1px solid var(--line); border-radius:var(--r-lg); padding:22px}
+.mini__n{font-family:'Google Sans',sans-serif; font-size:clamp(30px,3.4vw,44px); font-weight:700;
+  letter-spacing:-.03em; line-height:1.05}
+.mini__l{font-size:14px; color:var(--muted); margin-top:6px}
+.mini__delta{font-size:13px; font-weight:500; color:var(--ok); margin-top:8px}
+.mini__delta.bad{color:var(--warn)}
+
+/* ---------- Тарифы ---------- */
+.plan{display:flex; flex-direction:column; gap:16px; padding:clamp(24px,2.8vw,34px); background:#fff;
+  border:1.5px solid var(--line); border-radius:var(--r-xl);
+  transition:border-color var(--mid) var(--ease), transform var(--mid) var(--ease), box-shadow var(--mid) var(--ease)}
+.plan:hover{border-color:var(--blue); transform:translateY(-6px); box-shadow:var(--sh-2)}
+.plan--hi{border-color:var(--blue); background:linear-gradient(180deg,var(--blue-tint),#fff 60%)}
+.plan__price{font-family:'Google Sans',sans-serif; font-size:clamp(34px,4vw,50px); font-weight:700; letter-spacing:-.035em}
+.plan__price span{font-size:16px; font-weight:400; color:var(--muted); letter-spacing:0}
+.plan ul{display:grid; gap:11px; font-size:15px}
+.plan li{display:grid; grid-template-columns:22px 1fr; gap:10px; align-items:start; color:var(--muted)}
+.plan li b{color:var(--ink); font-weight:500}
+/* на планшете сетка из трёх карточек становится 2+1: главную «Команду» растягиваем на всю ширину, чтобы не сиротела */
+@media (min-width:681px) and (max-width:1000px){#price .plan--hi{grid-column:1 / -1}}
+
+/* ---------- Калькулятор ---------- */
+.calc{display:grid; grid-template-columns:1fr 1fr; gap:clamp(20px,3vw,44px); align-items:center}
+@media (max-width:860px){.calc{grid-template-columns:1fr}}
+.range{width:100%; accent-color:var(--blue); margin-top:10px}
+.calc__row{margin-bottom:22px}
+.calc__row label{display:flex; justify-content:space-between; font-size:15px; font-family:'Google Sans',sans-serif; font-weight:500}
+.calc__row label b{color:var(--blue-press)}
+.calc__out{background:var(--navy); color:#fff; border-radius:var(--r-xl); padding:clamp(24px,3vw,38px)}
+.calc__big{font-family:'Google Sans',sans-serif; font-size:clamp(38px,5.4vw,66px); font-weight:700;
+  letter-spacing:-.04em; line-height:1.02}
+.calc__sub{color:#A9C2DE; margin-top:12px; font-size:15px}
+
+/* ---------- FAQ ---------- */
+.acc__item{border-bottom:1px solid var(--line)}
+.acc__q{width:100%; display:flex; justify-content:space-between; gap:20px; align-items:center;
+  background:none; border:0; cursor:pointer; text-align:left; padding:24px 0;
+  font-family:'Google Sans',sans-serif; font-size:clamp(17px,1.8vw,21px); font-weight:500; color:var(--ink);
+  transition:color var(--fast) var(--ease)}
+.acc__q:hover{color:var(--blue-press)}
+.acc__q i{flex:none; width:30px; height:30px; border-radius:50%; background:var(--blue-soft); color:var(--blue-press);
+  display:grid; place-items:center; font-style:normal; font-size:19px; transition:transform var(--mid) var(--ease),
+  background var(--fast) var(--ease)}
+.acc__item.open .acc__q i{transform:rotate(45deg); background:var(--blue); color:#fff}
+.acc__a{max-height:0; overflow:hidden; transition:max-height var(--slow) var(--ease)}
+.acc__item.open .acc__a{max-height:340px}
+.acc__a p{padding-bottom:24px; color:var(--muted); max-width:75ch}
+
+/* ---------- Финальный блок ---------- */
+.final{text-align:center}
+.final .btn{margin-top:12px}
+
+
+/* ---------- Колода сообщений: свайп ----------
+   Показываем не фотографию ниши, а сам продукт: карточки из разных каналов
+   идут одной лентой. Карточка тянется пальцем и мышью, ход дублируется
+   стрелками и точками — жест не должен быть единственным способом. */
+.sw{margin-top:clamp(30px,4vw,50px); outline:none}
+.sw:focus-visible .sw__deck{box-shadow:0 0 0 3px var(--blue-mid)}
+.sw__deck{position:relative; height:clamp(228px,25vw,260px); max-width:560px;
+  margin-inline:auto; touch-action:pan-y}
+.sw__card{position:absolute; inset:0; background:#fff; border:1px solid var(--line);
+  border-left:4px solid var(--ch,var(--blue)); border-radius:var(--r-lg); padding:clamp(18px,2.2vw,26px);
+  display:flex; flex-direction:column; gap:12px; box-shadow:var(--sh-2);
+  transition:transform var(--slow) var(--ease), opacity var(--mid) var(--ease);
+  will-change:transform; cursor:grab; user-select:none}
+.sw__card.drag{transition:none; cursor:grabbing}
+.sw__card.gone{transition:transform .42s cubic-bezier(.36,.06,.2,1), opacity .42s linear}
+.sw__top{display:flex; align-items:center; gap:12px}
+.sw__ava{width:42px; height:42px; border-radius:50%; flex:none; display:grid; place-items:center;
+  color:#fff; font-family:'Google Sans',sans-serif; font-weight:500; font-size:17px}
+.sw__who{display:flex; flex-direction:column; min-width:0}
+.sw__who b{font-family:'Google Sans',sans-serif; font-weight:500; font-size:16px; color:var(--ink)}
+.sw__who span{font-size:13px; color:var(--muted)}
+.sw__wait{margin-left:auto; flex:none; font-size:12.5px; font-weight:700; letter-spacing:.04em;
+  color:var(--blue-press); background:var(--blue-soft); padding:5px 11px; border-radius:var(--r-pill);
+  font-variant-numeric:tabular-nums}
+.sw__msg{margin:0; font-size:clamp(17px,1.9vw,21px); line-height:1.4; color:var(--ink); flex:1}
+.sw__tag{display:inline-block; margin-right:8px; font-size:11.5px; font-weight:700; letter-spacing:.06em;
+  text-transform:uppercase; color:var(--blue-press); background:var(--blue-tint);
+  padding:3px 8px; border-radius:var(--r-pill); vertical-align:middle}
+.sw__foot{display:flex; align-items:center; gap:9px; font-size:13.5px; color:var(--muted);
+  padding-top:12px; border-top:1px solid var(--line)}
+.sw__foot i{width:9px; height:9px; border-radius:50%; background:var(--ok); flex:none}
+.sw__ui{display:flex; align-items:center; justify-content:center; gap:16px; margin-top:clamp(18px,2.4vw,26px)}
+.sw__nav{width:44px; height:44px; border-radius:50%; border:1px solid var(--line); background:#fff;
+  color:var(--blue-press); display:grid; place-items:center; cursor:pointer;
+  transition:border-color var(--fast) var(--ease), background var(--fast) var(--ease),
+             transform var(--fast) var(--ease)}
+.sw__nav svg{width:20px; height:20px}
+.sw__nav:hover{border-color:var(--blue); background:var(--blue-tint); transform:translateY(-2px)}
+.sw__nav:focus-visible{outline:2px solid var(--blue); outline-offset:3px}
+.sw__dots{display:flex; gap:8px}
+.sw__dot{width:8px; height:8px; border-radius:50%; background:var(--blue-mid); opacity:.42; border:0;
+  padding:0; cursor:pointer; transition:opacity var(--fast) var(--ease), transform var(--fast) var(--ease)}
+.sw__dot.on{opacity:1; transform:scale(1.5); background:var(--blue-press)}
+.sw__dot:focus-visible{outline:2px solid var(--blue); outline-offset:3px}
+.sw__hint{text-align:center; margin-top:14px; font-size:13.5px; color:var(--faint);
+  transition:opacity var(--mid) var(--ease)}
+.sw__hint.hide{opacity:0}
+@media (prefers-reduced-motion: reduce){
+  .sw__card,.sw__card.gone{transition:none}
+}
+</style>
 </head>
 <body>
-<svg width="0" height="0" style="position:absolute" aria-hidden="true">
-  <symbol id="i-tg" viewBox="0 0 24 24"><circle cx="12" cy="12" r="12" fill="#2AABEE"/><path fill="#fff" d="M5.4 11.6l11.2-4.4c.5-.2 1 .1.8.9l-1.9 9c-.1.6-.5.8-1.1.5l-2.9-2.2-1.4 1.4c-.2.2-.3.3-.6.3l.2-3 5.4-4.9c.2-.2 0-.3-.3-.1l-6.7 4.2-2.9-.9c-.6-.2-.6-.6.2-.8z"/></symbol>
-  <symbol id="i-vk" viewBox="0 0 24 24"><rect width="24" height="24" rx="6" fill="#0077FF"/><path fill="#fff" d="M12.8 17C7.6 17 4.7 13.5 4.6 7.6h2.6c.1 4.3 2 6.1 3.5 6.5V7.6h2.5v3.7c1.5-.2 3-1.8 3.5-3.7h2.5c-.4 2.3-2.1 4-3.3 4.7 1.2.6 3.2 2.1 3.9 4.7h-2.7c-.6-1.8-2.1-3.2-3.9-3.4V17h-.4z"/></symbol>
-  <symbol id="i-max" viewBox="0 0 24 24"><rect width="24" height="24" rx="7" fill="#7B5CFA"/><path fill="#fff" d="M6 17V7h2.6l3.4 5.4L15.4 7H18v10h-2.4v-6l-3.6 5.6L8.4 11v6z"/></symbol>
-  <symbol id="i-mail" viewBox="0 0 24 24"><rect width="24" height="24" rx="6" fill="#5B6B85"/><path fill="none" stroke="#fff" stroke-width="1.7" d="M5 8.5h14v8H5z"/><path fill="none" stroke="#fff" stroke-width="1.7" d="M5 9l7 4.5L19 9"/></symbol>
-  <symbol id="i-avito" viewBox="0 0 24 24"><rect width="24" height="24" rx="6" fill="#fff"/><circle cx="9.2" cy="9" r="4.2" fill="#FF4053"/><circle cx="16.8" cy="7.6" r="2.4" fill="#0AF"/><circle cx="16.6" cy="14.6" r="3.6" fill="#97CF26"/><circle cx="8.8" cy="16.6" r="2.4" fill="#965EEB"/></symbol>
-  <symbol id="i-wa" viewBox="0 0 24 24"><circle cx="12" cy="12" r="12" fill="#25D366"/><path fill="#fff" d="M12 5.5a6.5 6.5 0 0 0-5.6 9.8L5.5 18.5l3.3-.9A6.5 6.5 0 1 0 12 5.5zm0 1.6a4.9 4.9 0 1 1-2.5 9.1l-.3-.2-1.6.4.4-1.6-.2-.3A4.9 4.9 0 0 1 12 7.1zm-1.9 2.4c-.2 0-.4.1-.6.3-.2.2-.7.7-.7 1.6s.7 1.9.8 2c.1.1 1.4 2.2 3.5 2.9 1.7.6 2 .5 2.4.4.4-.1 1.1-.5 1.3-1 .2-.5.2-.9.1-1l-.4-.2-1.3-.6c-.2-.1-.3-.1-.4.1l-.6.7c-.1.1-.2.2-.4.1-.2-.1-.8-.3-1.5-.9-.6-.5-.9-1.1-1-1.3-.1-.2 0-.3.1-.4l.3-.3.2-.3v-.4l-.6-1.4c-.1-.3-.3-.3-.4-.3h-.4z"/></symbol>
-</svg>
 
-
-<header class="top">
-  <div class="wrap">
-    <a class="logo" href="#top" aria-label="Ветра"><span class="logo__word">Ветра</span><span class="logo__dot"></span></a>
-    <nav aria-label="Разделы" class="top__nav">
-      <a href="#video">Как работает</a>
-      <a href="#segments">Кому</a>
-      <a href="#pay">За что платите</a>
-      <a href="#faq">Вопросы</a>
+<!-- ======================= ШАПКА ======================= -->
+<header class="nav">
+  <div class="wrap nav__in">
+    <a class="logo" href="index.html" aria-label="Ветра, на главную">
+      <span class="logo__word">Ветра</span><span class="logo__dot" aria-hidden="true"></span>
+    </a>
+    <nav class="nav__links" aria-label="Разделы">
+      <a href="#how">Как работает</a>
+      <a href="#work">Сотруднику</a>
+      <a href="#boss">Руководителю</a>
+      <a href="#price">Цены</a>
     </nav>
-    <a class="btn btn-primary btn-sm" href="raschet/" data-go-calc="top">Посчитать</a>
+    <div class="nav__cta">
+      <a class="btn btn-light btn-sm" href="login.html">Войти</a>
+      <a class="btn btn-primary btn-sm" href="checkout.html">Попробовать бесплатно</a>
+    </div>
   </div>
 </header>
 
-<!-- ================= HERO ================= -->
-<section class="hero" id="top">
-  <div class="blob b1" style="width:720px;height:720px;top:-260px;right:-200px"></div>
-  <div class="blob b3" style="width:520px;height:520px;bottom:-260px;left:-180px"></div>
-  <div class="wrap">
-    <div class="hero__grid">
-      <div>
-        <span class="label rv in">Telegram · ВКонтакте · MAX · Почта · Авито</span>
-        <h1 class="h-big">
-          <span class="mask in"><span>Все заявки —</span></span>
-          <span class="mask in"><span>в <span class="new">одном окне</span></span></span>
-        </h1>
-        <p class="lead rv in d1">Под ваш бизнес за 1–2 недели. Цена каждого элемента — сразу.</p>
-        <div class="hero__cta rv in d2">
-          <a class="btn btn-primary btn-lg" href="raschet/" data-go-calc="hero">Посчитать для своего бизнеса <svg class="arr" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M4 10h11M11 5l5 5-5 5"/></svg></a>
-          <a class="btn btn-play" href="#video"><span class="btn-play__i"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M7 5l12 7-12 7z"/></svg></span>Как работает<small>ролик 54 секунды</small></a>
+<!-- ======================= ПЕРВЫЙ ЭКРАН ======================= -->
+<section class="hero">
+  <svg class="shape drift" style="top:-16%;right:-12%;width:52rem" viewBox="0 0 600 600" aria-hidden="true">
+    <path fill="currentColor" opacity=".22" d="M300 20c95 0 130 80 190 130s110 90 80 190-140 90-215 130-160 40-215-60-10-190 40-260S205 20 300 20z"/>
+  </svg>
+  <svg class="shape drift drift--slow drift--rev" style="bottom:-30%;left:-18%;width:44rem" viewBox="0 0 600 600" aria-hidden="true">
+    <circle cx="300" cy="300" r="290" fill="none" stroke="currentColor" stroke-width="40" opacity=".16"/>
+  </svg>
+
+  <div class="wrap hero__grid">
+    <div>
+      <h1 class="h-hero hero__name reveal in">
+        <span class="line-mask in"><span class="word">Ветра</span></span>
+        <span class="dot" aria-hidden="true"></span>
+      </h1>
+      <p class="h-1 hero__slogan reveal d1">
+        <span class="swap" data-words="Одно окно|Один список|Одно место">
+          <span class="swap__old">Шесть вкладок</span>
+          <span class="swap__new">Одно окно</span>
+        </span><br>для всех клиентов
+      </p>
+      <p class="lead hero__text reveal d2">
+        Клиентка пишет «есть окно в субботу?» — и ждёт ответа минуту, а не полчаса.
+        Ветра собирает обращения из всех мессенджеров в один список, и администратор отвечает,
+        не переключая вкладки.
+      </p>
+
+      <div class="facts reveal d3">
+        <span class="fact"><b>6</b><span>каналов в одном списке</span></span>
+        <span class="fact"><b>3</b><span>минуты на подключение</span></span>
+        <span class="fact"><b>0 ₽</b><span>первые 14 дней</span></span>
+      </div>
+
+      <div class="hero__cta reveal d4">
+        <a class="btn btn-primary btn-circle" href="checkout.html"><span>Начать бесплатно — 14 дней</span></a>
+        <a class="btn btn-light btn-circle" href="#how"><span>Посмотреть, как работает</span></a>
+        <span class="stamp" aria-hidden="true">
+          <svg viewBox="0 0 120 120">
+            <defs><path id="ring" d="M60,60 m-46,0 a46,46 0 1,1 92,0 a46,46 0 1,1 -92,0"/></defs>
+            <text font-family="Google Sans, sans-serif" font-size="11" font-weight="700"
+                  letter-spacing="1.6" fill="var(--blue-mid)">
+              <textPath href="#ring">БЕЗ КАРТЫ · БЕЗ ДОГОВОРА · </textPath>
+            </text>
+          </svg>
+          <span class="stamp__core">14<span style="font-size:11px; display:block; letter-spacing:.08em">ДНЕЙ</span></span>
+        </span>
+      </div>
+
+      <div class="chan reveal d5" role="list" aria-label="Каналы">
+        <span class="chan__i" role="listitem" tabindex="0" data-channel="tg"><i class="chan__d" style="background:#2AABEE"></i>Telegram</span>
+        <span class="chan__i" role="listitem" tabindex="0" data-channel="vk"><i class="chan__d" style="background:#0077FF"></i>ВКонтакте</span>
+        <span class="chan__i" role="listitem" tabindex="0" data-channel="max"><i class="chan__d" style="background:#7B5CFA"></i>MAX</span>
+        <span class="chan__i" role="listitem" tabindex="0" data-channel="mail"><i class="chan__d" style="background:#7C8AA0"></i>Почта</span>
+        
+        <span class="chan__i" role="listitem" tabindex="0" data-channel="wb"><i class="chan__d" style="background:#CB11AB"></i>Wildberries</span>
+        <span class="chan__i" role="listitem" tabindex="0" data-channel="ozon"><i class="chan__d" style="background:#005BFF"></i>Ozon</span>
+      </div>
+    </div>
+
+    <div class="peek reveal d3" aria-label="Как выглядит окно Ветра">
+      <div class="peek__bar"><i></i><i></i><i></i><span>Ветра — Входящие</span></div>
+      <div class="peek__body">
+        <div class="peek__list">
+          <div class="peek__row" data-channel-msg="tg">
+            <span class="peek__ava" style="background:#2C78D5">А<small style="background:#2AABEE"></small></span>
+            <span><span class="peek__nm">Анна</span><br><span class="peek__tx">Есть окно к Насте в субботу?</span></span>
+          </div>
+          <div class="peek__row" data-channel-msg="vk">
+            <span class="peek__ava" style="background:#81AEE6">И<small style="background:#0077FF"></small></span>
+            <span><span class="peek__nm">Ирина</span><br><span class="peek__tx">Сколько стоит окрашивание?</span></span>
+          </div>
+          <div class="peek__row" data-channel-msg="max">
+            <span class="peek__ava" style="background:#5B8FD6">М<small style="background:#7B5CFA"></small></span>
+            <span><span class="peek__nm">Марина</span><br><span class="peek__tx">Голосовое, 0:12</span></span>
+          </div>
+          <div class="peek__row" data-channel-msg="mail">
+            <span class="peek__ava" style="background:#7C8AA0">Я<small style="background:#7C8AA0"></small></span>
+            <span><span class="peek__nm">Яндекс Бизнес</span><br><span class="peek__tx">Новая заявка с карты</span></span>
+          </div>
+          <div class="peek__row" data-channel-msg="wa">
+            <span class="peek__ava" style="background:#3E8E63">С<small style="background:#25D366"></small></span>
+            <span><span class="peek__nm">Светлана</span><br><span class="peek__tx">Можно перенести на пятницу?</span></span>
+          </div>
+        </div>
+        <div class="peek__chat">
+          <div class="bub bub-in">Есть окно к Насте в субботу?</div>
+          <div class="bub bub-out">Добрый день! У Насти свободно в 12:00 и 15:30 — какое удобнее?</div>
+          <div class="bub bub-in">Давайте в 12</div>
+          <div class="peek__input"><span>Написать ответ…</span></div>
         </div>
       </div>
-      <div class="rv in d2">
-        <div class="hero__video lit">
-          <video id="heroLoop" src="video/hero-loop.mp4?v=3" poster="video/poster.jpg?v=2" autoplay muted loop playsinline aria-label="Окно Ветра на телефоне и ноутбуке"></video>
-          <div class="window" id="heroWindow" hidden aria-hidden="true">
-            <div class="window__side">
-              <div class="window__title"><i></i>Входящие</div>
-              <div class="dlg on"><div class="dlg__av">А<svg class="ico" aria-hidden="true"><use href="#i-vk"/></svg></div><div class="dlg__t"><div class="dlg__n">Алина</div><div class="dlg__m">можно завтра на окрашивание?</div></div></div>
-              <div class="dlg"><div class="dlg__av">И<svg class="ico" aria-hidden="true"><use href="#i-avito"/></svg></div><div class="dlg__t"><div class="dlg__n">Игорь</div><div class="dlg__m">раковина 60 см, есть в наличии?</div></div><span class="dlg__w">18 мин</span></div>
-              <div class="dlg"><div class="dlg__av">М<svg class="ico" aria-hidden="true"><use href="#i-tg"/></svg></div><div class="dlg__t"><div class="dlg__n">Марина</div><div class="dlg__m">спасибо, до встречи</div></div></div>
-            </div>
-            <div class="window__main">
-              <div class="window__head"><b>Алина</b><span class="small muted">ВКонтакте · отвечает Оля</span></div>
-              <div class="window__chat">
-                <div class="msg in"><span class="who">Алина</span>можно завтра на окрашивание?</div>
-                <div class="msg out"><span class="who">Оля</span>Да, есть 12:00 и 16:30. Какое удобнее?</div>
-              </div>
-              <div class="window__input">Записала на 16:30 к Кате<b>Отправить</b></div>
-            </div>
+    </div>
+  </div>
+</section>
+
+<!-- ======================= ЛЕНТА ======================= -->
+<div class="band-clip">
+  <div class="band band-tilt" aria-hidden="true">
+    <div class="band__track"><div class="band__list">
+      <span>Telegram<i class="band__dot"></i></span><span>ВКонтакте<i class="band__dot"></i></span>
+      <span>MAX<i class="band__dot"></i></span><span>Почта<i class="band__dot"></i></span>
+      <span>Авито<i class="band__dot"></i></span>
+      <span>Wildberries<i class="band__dot"></i></span><span>Ozon<i class="band__dot"></i></span>
+      <span>Яндекс Бизнес<i class="band__dot"></i></span><span>2ГИС<i class="band__dot"></i></span>
+      <span>Ничего не теряется<i class="band__dot"></i></span>
+    </div></div>
+  </div>
+</div>
+
+<!-- ======================= КАК РАБОТАЕТ ======================= -->
+<section class="section section-white" id="how">
+  <div class="wrap">
+    <p class="eyebrow reveal">Как это работает</p>
+    <h2 class="h-1 reveal d1" style="margin-top:14px; max-width:16ch">Три шага — и сообщения в одном месте</h2>
+    <p class="lead reveal d2" style="margin-top:18px">
+      Ничего не нужно устанавливать и настраивать месяцами. Всё делается в браузере.
+    </p>
+
+    <div class="steps" style="margin-top:44px">
+      <div class="step reveal d1">
+        <span class="step__n" aria-hidden="true"></span>
+        <span>
+          <span class="h-3">Подключаете канал</span>
+          <p class="small" style="margin-top:8px; max-width:70ch">
+            Выбираете мессенджер, вставляете ключ доступа — мы показываем, где его взять,
+            с картинками. Дальше пишете «привет» своему боту и видите сообщение в окне.
+          </p>
+        </span>
+      </div>
+      <div class="step reveal d2">
+        <span class="step__n" aria-hidden="true"></span>
+        <span>
+          <span class="h-3">Приглашаете сотрудников</span>
+          <p class="small" style="margin-top:8px; max-width:70ch">
+            Отправляете ссылку — коллега заходит и сразу видит общий список диалогов.
+            Каждый берёт свои, никто не отвечает дважды.
+          </p>
+        </span>
+      </div>
+      <div class="step reveal d3">
+        <span class="step__n" aria-hidden="true"></span>
+        <span>
+          <span class="h-3">Работаете в одном окне</span>
+          <p class="small" style="margin-top:8px; max-width:70ch">
+            Сообщения из всех каналов приходят в один список. Ответ уходит туда,
+            откуда написал клиент — думать об этом не нужно.
+          </p>
+        </span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ======================= КОЛОДА СООБЩЕНИЙ (свайп) ======================= -->
+<section class="section section-pale" id="stream">
+  <div class="wrap">
+    <p class="eyebrow reveal">Одна лента</p>
+    <h2 class="h-1 reveal d1" style="margin-top:14px; max-width:17ch">Шесть вкладок — одна колода</h2>
+    <p class="lead reveal d2" style="margin-top:18px">
+      Проведите по карточке. Так сообщения из разных мессенджеров идут одной лентой:
+      администратор не выбирает, куда смотреть, — он просто разбирает верхнее.
+    </p>
+
+    <div class="sw reveal d3" data-swipe tabindex="0" role="group"
+         aria-label="Сообщения из разных каналов, листаются свайпом">
+      <div class="sw__deck" data-swipe-deck>
+
+        <article class="sw__card" style="--ch:#2AABEE">
+          <header class="sw__top">
+            <span class="sw__ava" style="background:#2C78D5">А</span>
+            <span class="sw__who"><b>Анна Ковалёва</b><span>Telegram</span></span>
+            <span class="sw__wait">2 мин</span>
+          </header>
+          <p class="sw__msg">Есть окно к Насте в субботу на окрашивание?</p>
+          <footer class="sw__foot"><i></i>Ответили за 2 минуты · записана на 12:00</footer>
+        </article>
+
+        <article class="sw__card" style="--ch:#0077FF">
+          <header class="sw__top">
+            <span class="sw__ava" style="background:#81AEE6">И</span>
+            <span class="sw__who"><b>Ирина</b><span>ВКонтакте</span></span>
+            <span class="sw__wait">1 мин</span>
+          </header>
+          <p class="sw__msg">Сколько стоит окрашивание в два тона?</p>
+          <footer class="sw__foot"><i></i>Ответили шаблоном за 40 секунд</footer>
+        </article>
+
+        <article class="sw__card" style="--ch:#25D366">
+          <header class="sw__top">
+            <span class="sw__ava" style="background:#3E8E63">С</span>
+            <span class="sw__who"><b>Светлана Панова</b><span>ВКонтакте</span></span>
+            <span class="sw__wait">3 мин</span>
+          </header>
+          <p class="sw__msg">Можно перенести запись на пятницу?</p>
+          <footer class="sw__foot"><i></i>Перенесена · клиентка не ушла к соседям</footer>
+        </article>
+
+        <article class="sw__card" style="--ch:#7B5CFA">
+          <header class="sw__top">
+            <span class="sw__ava" style="background:#5B8FD6">М</span>
+            <span class="sw__who"><b>Марина</b><span>MAX · голосовое</span></span>
+            <span class="sw__wait">4 мин</span>
+          </header>
+          <p class="sw__msg"><span class="sw__tag">Расшифровано</span>«Здравствуйте, хочу к вам на стрижку, когда есть свободное время?»</p>
+          <footer class="sw__foot"><i></i>Голосовое читается текстом — слушать не нужно</footer>
+        </article>
+
+        <article class="sw__card" style="--ch:#7C8AA0">
+          <header class="sw__top">
+            <span class="sw__ava" style="background:#7C8AA0">Я</span>
+            <span class="sw__who"><b>Яндекс Бизнес</b><span>Почта</span></span>
+            <span class="sw__wait">6 мин</span>
+          </header>
+          <p class="sw__msg">Новая заявка с карты: маникюр, ближайшее время</p>
+          <footer class="sw__foot"><i></i>Заявка с карты попала в тот же список</footer>
+        </article>
+
+        <article class="sw__card" style="--ch:#1F63BC">
+          <header class="sw__top">
+            <span class="sw__ava" style="background:#1F63BC">О</span>
+            <span class="sw__who"><b>Ольга</b><span>Авито</span></span>
+            <span class="sw__wait">2 мин</span>
+          </header>
+          <p class="sw__msg">Здравствуйте! Вы работаете в воскресенье?</p>
+          <footer class="sw__foot"><i></i>Шесть каналов, один список, ноль пропущенных</footer>
+        </article>
+
+      </div>
+
+      <div class="sw__ui">
+        <button class="sw__nav" type="button" data-swipe-prev aria-label="Предыдущее сообщение">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5l-7 7 7 7" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+        <div class="sw__dots" data-swipe-dots></div>
+        <button class="sw__nav" type="button" data-swipe-next aria-label="Следующее сообщение">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5l7 7-7 7" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+      </div>
+
+      <p class="sw__hint" data-swipe-hint>Проведите по карточке — или стрелками на клавиатуре</p>
+    </div>
+  </div>
+</section>
+
+<!-- ======================= ПУТЬ СООБЩЕНИЯ (залипает) ======================= -->
+<section class="story section-navy" id="story" style="padding:0" aria-label="Что происходит с сообщением клиента">
+  <div class="story__track">
+    <div class="story__stage">
+      <svg class="shape" style="top:50%;left:50%;width:46rem;transform:translate(-50%,-50%)" viewBox="0 0 600 600" aria-hidden="true">
+        <circle cx="300" cy="300" r="270" fill="none" stroke="currentColor" stroke-width="60"/>
+      </svg>
+
+      <div class="story__scene on">
+        <div class="wrap-narrow" style="text-align:center">
+          <p class="story__num">Шаг 1 из 4</p>
+          <h2 class="h-1" style="margin-top:16px">Клиентка пишет туда,<br>где ей удобно</h2>
+          <p class="lead" style="margin:18px auto 0">
+            В Telegram, ВКонтакте, MAX или на почту. Просить её писать в одно место бесполезно —
+            она выберет сама.
+          </p>
+          <div class="chan" style="justify-content:center; margin-top:26px">
+            <span class="chan__i"><i class="chan__d" style="background:#2AABEE"></i>Telegram</span>
+            <span class="chan__i"><i class="chan__d" style="background:#0077FF"></i>ВКонтакте</span>
+            <span class="chan__i"><i class="chan__d" style="background:#7B5CFA"></i>MAX</span>
+            <span class="chan__i"><i class="chan__d" style="background:#7C8AA0"></i>Почта</span>
           </div>
         </div>
       </div>
-    </div>
-    <div class="facts2 rv in d3">
-      <div><b>5 каналов</b><span>в одном списке</span></div>
-      <div><b>1–2 недели</b><span>от созвона до запуска</span></div>
-      <div><b>15 000 ₽</b><span>запуск, без «от»</span></div>
-      <div><b>Сервер в РФ</b><span>свои ключи у каждой компании</span></div>
-    </div>
-  </div>
-</section>
 
-<!-- ================= ВИДЕО ================= -->
-<section class="section section-deep on-dark video grain" id="video">
-  <div class="blob b3" style="width:900px;height:900px;top:-300px;left:50%;margin-left:-450px;opacity:.7"></div>
-  <div class="wrap">
-    <h2 class="rv h-center">Посмотрите, как это работает</h2>
-    <div class="video__frame lit rv d2">
-      <video id="promo" src="video/promo.mp4?v=4" poster="video/poster.jpg?v=2" preload="metadata" playsinline></video>
-      <button class="video__play" id="playBtn" type="button" aria-label="Смотреть ролик"><span><svg viewBox="0 0 24 24" fill="currentColor"><path d="M6 4l14 8-14 8z"/></svg></span>Смотреть — 54 секунды</button>
-    </div>
-    <div class="video__cta rv d3">
-      <a class="btn btn-primary btn-lg" href="raschet/" data-go-calc="video">Посчитать для своего бизнеса <svg class="arr" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M4 10h11M11 5l5 5-5 5"/></svg></a>
-      <span class="small" style="color:#9FB6D0">Понятно и без звука</span>
-    </div>
-  </div>
-</section>
-
-<!-- ================= СЕГМЕНТЫ ================= -->
-<section class="section section-white" id="segments">
-  <div class="wrap">
-    <span class="label rv">Где теряются заявки</span>
-    <h2 class="rv d1 hook">Одна заявка без ответа —<br>это <span class="new">от 3 000 ₽</span>, которые ушли к соседу</h2>
-    <p class="lead rv d2">Сообщения лежат в пяти приложениях. Видит их тот, у кого в руках телефон.</p>
-    <div class="segs">
-      <article class="segc rv d1">
-        <div class="segc__k">Салон, студия, барбершоп</div>
-        <h3>Записалась через дорогу, пока админ был на кассе</h3>
-        <p>Две записи в неделю — 30 000 ₽ в месяц.</p>
-        <div class="segc__n">3–6 тыс. ₽ <span>одна запись</span></div>
-      </article>
-      <article class="segc rv d2">
-        <div class="segc__k">Производство и изделия на заказ</div>
-        <h3>Расчёт получили у конкурента, пока менеджер был в цеху</h3>
-        <p>Переписка живёт в телефоне менеджера. Уволился — ушла с ним.</p>
-        <div class="segc__n">десятки тыс. ₽ <span>одна заявка</span></div>
-      </article>
-      <article class="segc rv d3">
-        <div class="segc__k">Магазин: соцсети, Авито, маркетплейсы</div>
-        <h3>«Есть в наличии?» — не ответили за час, купили в соседней карточке</h3>
-        <p>Авито ещё и опускает в выдаче за медленный ответ.</p>
-        <div class="segc__n">1–3 тыс. ₽ <span>один вопрос</span></div>
-      </article>
-    </div>
-  </div>
-</section>
-
-<!-- ================= ЗАЛИПАЮЩАЯ ИСТОРИЯ ================= -->
-<section class="story on-dark grain" id="story">
-  <div class="story__pin">
-    <div class="story__stage" aria-hidden="true">
-      <div class="story__glow"></div>
-      <div class="chaos" id="scChaos">
-        <div class="bub" style="left:5%;top:8%"><svg class="ico" aria-hidden="true"><use href="#i-vk"/></svg><b>ВКонтакте</b>можно завтра на окрашивание?</div>
-        <div class="bub" style="right:6%;top:9%"><svg class="ico" aria-hidden="true"><use href="#i-tg"/></svg><b>Telegram</b>сколько стоит маникюр?</div>
-        <div class="bub" style="left:26%;top:22%"><svg class="ico" aria-hidden="true"><use href="#i-avito"/></svg><b>Авито</b>раковина 60 см в наличии?</div>
-        <div class="bub" style="right:24%;top:26%"><svg class="ico" aria-hidden="true"><use href="#i-mail"/></svg><b>Почта</b>Столешница 2 м, дуб — расчёт?</div>
-        <div class="bub" style="left:8%;top:36%"><svg class="ico" aria-hidden="true"><use href="#i-max"/></svg><b>MAX</b>а сегодня есть окно?</div>
-        <div class="bub" style="right:8%;top:44%"><svg class="ico" aria-hidden="true"><use href="#i-vk"/></svg><b>ВКонтакте</b>ещё актуально? цена?</div>
-        <div class="bub" style="left:34%;top:52%"><svg class="ico" aria-hidden="true"><use href="#i-tg"/></svg><b>Telegram</b>давайте четверг, 15:00?</div>
-        <div class="bub" style="right:28%;top:60%"><svg class="ico" aria-hidden="true"><use href="#i-avito"/></svg><b>Авито</b>доставка в Казань есть?</div>
-        <div class="bub" style="left:38%;top:70%"><svg class="ico" aria-hidden="true"><use href="#i-mail"/></svg><b>Почта</b>вопрос по записи на пятницу</div>
-        <div class="bub" style="right:10%;top:78%"><svg class="ico" aria-hidden="true"><use href="#i-max"/></svg><b>MAX</b>добрый день, есть окошко?</div>
-        <div class="bub bub--bad" style="left:56%;top:84%"><i style="background:var(--bad)"></i><b>43 мин без ответа</b>записалась через дорогу</div>
-      </div>
-      <div class="connect" id="scConnect" style="opacity:0">
-        <div class="cc glass-dark"><svg class="ico" aria-hidden="true"><use href="#i-tg"/></svg>Telegram<b>подключён</b></div>
-        <div class="cc glass-dark"><svg class="ico" aria-hidden="true"><use href="#i-vk"/></svg>ВКонтакте<b>подключён</b></div>
-        <div class="cc glass-dark"><svg class="ico" aria-hidden="true"><use href="#i-max"/></svg>MAX<b>скоро</b></div>
-        <div class="cc glass-dark"><svg class="ico" aria-hidden="true"><use href="#i-mail"/></svg>Почта<b>скоро</b></div>
-        <div class="cc glass-dark"><svg class="ico" aria-hidden="true"><use href="#i-avito"/></svg>Авито<b>по запросу</b></div>
-        <div class="cc glass-dark" style="color:#9FB6D0"><svg class="ico" aria-hidden="true"><use href="#i-wa"/></svg>WhatsApp<b style="color:#9FB6D0">по запросу</b></div>
-      </div>
-      <div class="phone" id="scPhone" style="opacity:0">
-        <div class="phone__screen">
-          <div class="phone__notch"></div>
-          <div class="phone__head"><i></i>Алина <span class="small muted" style="font-weight:400;margin-left:auto">ВКонтакте</span></div>
-          <div class="phone__chat">
-            <div class="msg in">можно завтра на окрашивание?</div>
-            <div class="msg out">Да, есть 12:00 и 16:30. Какое удобнее?</div>
-            <div class="msg in">16:30, к Кате</div>
-            <div class="msg out">Записала на 16:30 к Кате. До встречи</div>
-          </div>
-          <div class="quick"><span>Адрес</span><span>Часы работы</span><span>Прайс</span><span>Свободно ли</span></div>
-          <div class="phone__bar"><span>Ответить…</span><b>↑</b></div>
+      <div class="story__scene">
+        <div class="wrap-narrow" style="text-align:center">
+          <p class="story__num">Шаг 2 из 4</p>
+          <h2 class="h-1" style="margin-top:16px">Сообщение попадает<br>в общий список</h2>
+          <p class="lead" style="margin:18px auto 0">
+            За три секунды, в том же виде, что отправил клиент: с фото, файлами и голосовыми.
+            Голосовое приходит уже расшифрованным.
+          </p>
+          <p class="chip" style="margin-top:26px">Ничего не теряется даже при перезапуске</p>
         </div>
       </div>
-      <div class="desk" id="scDesk" style="opacity:0"><img src="img/frame-panel.jpg" alt="" class="desk__img"></div>
-    </div>
-    <div class="story__text">
-      <div class="story__steps">
-        <div class="story__step on"><div class="num">СЕЙЧАС</div><h3>Пять чатов. Один администратор</h3><p>Увидели через сорок минут — записалась через дорогу.</p></div>
-        <div class="story__step"><div class="num">ШАГ 1 · 20 МИНУТ</div><h3>Подключаем ваши каналы</h3><p>Telegram и ВКонтакте — минуты, остальное — по инструкции. Ключи вставили — канал горит зелёным.</p></div>
-        <div class="story__step"><div class="num">ШАГ 2 · 1–2 НЕДЕЛИ</div><h3>Всё в одном списке, с телефона</h3><p>Ответ одной кнопкой, туда, откуда написал клиент.</p></div>
-        <div class="story__step"><div class="num">ШАГ 3 · ДАЛЬШЕ</div><h3>Вечером — три цифры владельцу</h3><p>Сколько пришло, сколько без ответа, за сколько отвечали.</p></div>
+
+      <div class="story__scene">
+        <div class="wrap-narrow" style="text-align:center">
+          <p class="story__num">Шаг 3 из 4</p>
+          <h2 class="h-1" style="margin-top:16px">Администратор отвечает<br>за секунды</h2>
+          <p class="lead" style="margin:18px auto 0">
+            Три буквы — и подсказка дописывает фразу целиком. Ответ уходит туда, откуда пришёл,
+            думать об этом не нужно. Даже когда перед стойкой стоит человек.
+          </p>
+          <p class="chip" style="margin-top:26px">Медиана ответа падает с 19 минут до 4</p>
+        </div>
       </div>
+
+      <div class="story__scene">
+        <div class="wrap-narrow" style="text-align:center">
+          <p class="story__num">Шаг 4 из 4</p>
+          <h2 class="h-1" style="margin-top:16px">Владелец видит<br>цифру, а не переписку</h2>
+          <p class="lead" style="margin:18px auto 0">
+            Сколько обращений пришло, как быстро ответили, что висит прямо сейчас.
+            Три минуты утром — и картина понятна.
+          </p>
+          <a class="btn btn-light" style="margin-top:26px" href="app.html">Открыть панель руководителя</a>
+        </div>
+      </div>
+
       <div class="story__dots" aria-hidden="true"><i class="on"></i><i></i><i></i><i></i></div>
     </div>
   </div>
 </section>
 
-<!-- ================= ЧЕМ ОТЛИЧАЕТСЯ ================= -->
-<section class="section section-tint" id="why">
+<!-- ======================= СОТРУДНИКУ ======================= -->
+<section class="section section-pale" id="work">
+  <svg class="shape drift drift--slow" style="top:8%;left:-14%;width:40rem" viewBox="0 0 600 600" aria-hidden="true">
+    <path fill="currentColor" opacity=".3" d="M80 300c0-120 100-220 220-220s220 100 220 220-100 220-220 220S80 420 80 300zm90 0c0 72 58 130 130 130s130-58 130-130-58-130-130-130-130 58-130 130z"/>
+  </svg>
   <div class="wrap">
-    <span class="label rv">Чем это отличается</span>
-    <h2 class="rv d1 hook">Не инструмент, а окно,<br>собранное <span class="new">под вас</span></h2>
-    <div class="why3">
-      <div class="whyc rv d1"><span class="nrow__n">01</span><h3>Делаем под вас</h3><p>Настраиваем по вашим реальным сообщениям. Нужна связка с CRM — делаем по ТЗ.</p></div>
-      <div class="whyc rv d2"><span class="nrow__n">02</span><h3>Сервер в России, свой контур</h3><p>Свои ключи у каждой компании. Нужно отдельно — выделенный сервер.</p></div>
-      <div class="whyc rv d3"><span class="nrow__n">03</span><h3>Следим каждый день</h3><p>Сбои находим и устраняем до того, как их заметят. Обновления — без остановки работы.</p></div>
-    </div>
-  </div>
-</section>
+    <p class="eyebrow reveal">Сотруднику</p>
+    <h2 class="h-1 reveal d1" style="margin-top:14px; max-width:18ch">Ответ занимает секунды, а не минуты</h2>
 
-<!-- ================= ЗА ЧТО ПЛАТИТЕ ================= -->
-<section class="section section-white" id="pay">
-  <div class="wrap">
-    <span class="label rv">За что вы платите</span>
-    <h2 class="rv d1 hook">Нам — за работу.<br>Площадкам — <span class="new">напрямую, не через нас</span></h2>
-    <div class="pay2">
-      <div class="pay2__us rv d1">
-        <div class="k">Нам</div>
-        <div class="pay2__row"><b>Разово</b><span>запуск, каналы, шаблоны, обучение</span></div>
-        <div class="pay2__row"><b>В месяц</b><span>сопровождение и опции. Первые 3 месяца — при запуске</span></div>
-        <div class="pay2__row"><b>По ТЗ</b><span>доработки — 2 500 ₽ за час, срок и часы в оценке заранее</span></div>
+    <div class="grid g2" style="margin-top:44px">
+      <div class="demo reveal d1" data-demo="type" tabindex="0"
+           data-stem="доб" data-full="Добрый день! Подскажу по записи — на какой день удобно?">
+        <p class="eyebrow" style="color:var(--muted)">Наведите — покажем</p>
+        <p class="h-3" style="margin:10px 0 18px">Три буквы вместо целой фразы</p>
+        <div class="demo__field">
+          <span data-typed></span><span data-ghost></span><span class="caret" aria-hidden="true"></span>
+        </div>
+        <span class="demo__hint" data-hint><kbd>Tab</kbd> вставить подсказку</span>
+        <div class="demo__sent" data-sent>
+          <span class="chip">Отправлено в Telegram · 2 секунды</span>
+        </div>
+        <p class="demo__cap">
+          Ветра запоминает фразы, которые вы отправляете часто, и предлагает их сама.
+          Ничего не нужно заранее настраивать.
+        </p>
       </div>
-      <div class="pay2__them rv d2">
-        <div class="k">Площадкам, не нам</div>
-        <div class="pay2__row"><b>0 ₽</b><span>Telegram, ВКонтакте, MAX, почта</span></div>
-        <div class="pay2__row"><b>~2–3 тыс. ₽/мес</b><span>Авито — тариф площадки</span></div>
-        <div class="pay2__row"><b>~5 000 ₽/мес</b><span>WhatsApp — провайдер по вашему договору</span></div>
+
+      <div class="demo reveal d2" data-demo="voice" tabindex="0"
+           data-text="Да, свободное время есть в четверг после трёх.">
+        <p class="eyebrow" style="color:var(--muted)">Наведите — покажем</p>
+        <p class="h-3" style="margin:10px 0 18px">Голосом, когда некогда печатать</p>
+        <div class="demo__field" style="justify-content:space-between">
+          <span class="wave" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i></span>
+          <span class="chip">Микрофон</span>
+        </div>
+        <span data-voice-out></span>
+        <p class="demo__cap">
+          Сотрудник диктует — Ветра пишет текстом. И наоборот: голосовое от клиента
+          приходит уже расшифрованным, слушать не нужно.
+        </p>
       </div>
     </div>
-    <p class="small muted rv d3" style="margin-top:18px">Цены без НДС. В договор идёт тот же прайс.</p>
-  </div>
-</section>
 
-
-<!-- ================= ГАРАНТИИ ================= -->
-<section class="section section-white" id="free">
-  <div class="wrap">
-    <span class="label rv">Без доплат</span>
-    <h2 class="rv d1 hook">Что входит бесплатно<br>и за что <span class="new">отвечаем</span></h2>
-    <div class="why3" style="margin-top:34px">
-      <div class="whyc rv d1"><span class="nrow__n">0 ₽</span><h3>До запуска</h3><p>Созвон 20 минут и замер скорости ответа до подключения.</p></div>
-      <div class="whyc rv d2"><span class="nrow__n">14 дней</span><h3>Проверка по цифре</h3><p>Ответы не стали быстрее по сравнению с замером — дорабатываем за свой счёт.</p></div>
-      <div class="whyc rv d3"><span class="nrow__n">Право</span><h3>На доработки</h3><p>Бессрочное право на Ветра и все доработки под вас. Правки в пределах лимита часов — в сопровождении.</p></div>
+    <div class="grid g3" style="margin-top:26px">
+      <div class="card card-lift card-pad reveal d1">
+        <p class="h-3">Один список</p>
+        <p class="small" style="margin-top:10px">Все каналы вперемешку, по времени. Не нужно помнить, где кто написал.</p>
+      </div>
+      <div class="card card-lift card-pad reveal d2">
+        <p class="h-3">Видно, кто отвечает</p>
+        <p class="small" style="margin-top:10px">Коллега взял диалог — это сразу видно. Двух ответов одному клиенту не будет.</p>
+      </div>
+      <div class="card card-lift card-pad reveal d3">
+        <p class="h-3">Заметки для своих</p>
+        <p class="small" style="margin-top:10px">«Постоянный клиент, скидка 10 %» — видит команда, не видит клиент.</p>
+      </div>
     </div>
   </div>
 </section>
 
-<section class="section section-tint" id="faq">
+<!-- ======================= РУКОВОДИТЕЛЮ ======================= -->
+<section class="section section-navy" id="boss">
+  <svg class="shape drift drift--rev" style="bottom:-25%;right:-10%;width:46rem" viewBox="0 0 600 600" aria-hidden="true">
+    <circle cx="300" cy="300" r="270" fill="none" stroke="currentColor" stroke-width="56"/>
+  </svg>
   <div class="wrap">
-    <span class="label rv">Частые вопросы</span>
-    <h2 class="rv d1">Что спрашивают до созвона</h2>
-    <div class="faq rv d2" style="margin-top:20px">
-      <details><summary>А WhatsApp?</summary><p>В России работает нестабильно, как надёжный канал не подключаем. По запросу — через российского провайдера.</p></details>
-      <details><summary>Где хранятся данные?</summary><p>На сервере в России. У каждой компании своя база и свои ключи; при выделенном сервере — отдельная машина.</p></details>
-      <details><summary>Кто владеет кодом доработок?</summary><p>Вы получаете бессрочное право на Ветра и доработки под вас. Программа остаётся нашей и обновляется.</p></details>
-      <details><summary>У нас есть CRM или журнал записи</summary><p>Не трогаем. Ветра отвечает за сообщения до записи и до сделки. Передача в сделку — доработка по ТЗ.</p></details>
-      <details><summary>Клиент поймёт, что ему отвечают через сервис?</summary><p>Нет. Ответ уходит в тот же чат: от вашего бота, сообщества или с вашей почты.</p></details>
+    <p class="eyebrow reveal">Руководителю</p>
+    <h2 class="h-1 reveal d1" style="margin-top:14px; max-width:17ch">Видно, что отвечено, а что висит</h2>
+    <p class="lead reveal d2" style="margin-top:18px">
+      Отдельное окно, куда заходят на три минуты утром и вечером. Без чтения переписки.
+    </p>
+
+    <div class="grid g4" style="margin-top:44px">
+      <div class="mini reveal d1">
+        <p class="mini__n"><span data-count="48">0</span></p>
+        <p class="mini__l">новых диалогов сегодня</p>
+        <p class="mini__delta">+12 к прошлой неделе</p>
+      </div>
+      <div class="mini reveal d2">
+        <p class="mini__n"><span data-count="4" data-suffix=" мин">0</span></p>
+        <p class="mini__l">среднее время первого ответа</p>
+        <p class="mini__delta">было 19 минут</p>
+      </div>
+      <div class="mini reveal d3">
+        <p class="mini__n"><span data-count="3">0</span></p>
+        <p class="mini__l">ждут ответа прямо сейчас</p>
+        <p class="mini__delta bad">один висит 40 минут</p>
+      </div>
+      <div class="mini reveal d4">
+        <p class="mini__n"><span data-count="41">0</span></p>
+        <p class="mini__l">закрыто за сегодня</p>
+        <p class="mini__delta">85 % от всех</p>
+      </div>
+    </div>
+
+    <div class="grid g3" style="margin-top:26px">
+      <div class="glass card-pad reveal d1">
+        <i class="glass__fill"></i><i class="glass__soft"></i><i class="glass__edge"></i>
+        <i class="glass__dark"></i><i class="glass__glow"></i>
+        <p class="h-3">Таблица сотрудников</p>
+        <p class="small" style="margin-top:10px">Кто сколько взял и закрыл, сколько ждал клиент, доля нагрузки. Сортируется в один клик.</p>
+      </div>
+      <div class="glass card-pad reveal d2">
+        <i class="glass__fill"></i><i class="glass__soft"></i><i class="glass__edge"></i>
+        <i class="glass__dark"></i><i class="glass__glow"></i>
+        <p class="h-3">Требует внимания</p>
+        <p class="small" style="margin-top:10px">Диалоги без ответа дольше 15 минут — с именем ответственного и кнопкой «переназначить».</p>
+      </div>
+      <div class="glass card-pad reveal d3">
+        <i class="glass__fill"></i><i class="glass__soft"></i><i class="glass__edge"></i>
+        <i class="glass__dark"></i><i class="glass__glow"></i>
+        <p class="h-3">Отчёт в понедельник</p>
+        <p class="small" style="margin-top:10px">Письмо с цифрами за неделю приходит само. Открывать сервис для этого не нужно.</p>
+      </div>
+    </div>
+
+    <p class="small reveal d4" style="margin-top:26px; max-width:70ch">
+      Сотрудник видит свои цифры сам — это честно и работает лучше скрытого контроля.
+      При включении панели мы даём готовый шаблон уведомления для команды.
+    </p>
+
+    <a class="btn btn-outline reveal d5" style="margin-top:28px" href="app.html">Посмотреть панель целиком</a>
+  </div>
+</section>
+
+<div class="band-clip">
+  <div class="band band-soft band-tilt" aria-hidden="true">
+    <div class="band__track"><div class="band__list">
+      <span>Ни одной потерянной заявки<i class="band__dot"></i></span>
+      <span>Ответ за минуты<i class="band__dot"></i></span>
+      <span>Ничему не нужно учиться<i class="band__dot"></i></span>
+      <span>Подключение за 3 минуты<i class="band__dot"></i></span>
+    </div></div>
+  </div>
+</div>
+
+<!-- ======================= КАЛЬКУЛЯТОР ======================= -->
+<section class="section section-white">
+  <div class="wrap">
+    <p class="eyebrow reveal">Сколько это стоит вам сейчас</p>
+    <h2 class="h-1 reveal d1" style="margin-top:14px; max-width:17ch">Посчитайте потери на пропущенных сообщениях</h2>
+
+    <div class="calc" style="margin-top:44px" data-calc>
+      <div class="reveal d1">
+        <div class="calc__row">
+          <label for="c-msgs">Сообщений от клиентов в неделю <b><span data-val="msgs"></span></b></label>
+          <input class="range" type="range" id="c-msgs" name="msgs" min="10" max="500" step="10" value="120">
+        </div>
+        <div class="calc__row">
+          <label for="c-check">Средний чек за визит, ₽ <b><span data-val="check"></span></b></label>
+          <input class="range" type="range" id="c-check" name="check" min="500" max="50000" step="500" value="4500">
+        </div>
+        <div class="calc__row">
+          <label for="c-missed">Остаются без ответа, % <b><span data-val="missed"></span></b></label>
+          <input class="range" type="range" id="c-missed" name="missed" min="1" max="30" step="1" value="8">
+        </div>
+        <p class="small">Считается в браузере, ничего никуда не отправляется.</p>
+      </div>
+
+      <div class="calc__out reveal d2">
+        <p class="eyebrow" style="color:var(--blue-mid)">Потери в месяц</p>
+        <p class="calc__big"><span data-out="money">0</span> ₽</p>
+        <p class="calc__sub">
+          Это <span data-out="lost">0</span> обращений, на которые никто не ответил.
+          Даже если купит каждый третий — потери всё равно больше подписки.
+        </p>
+        <a class="btn btn-light" style="margin-top:22px" href="checkout.html">Перестать терять</a>
+      </div>
     </div>
   </div>
 </section>
 
+<!-- ======================= ТАРИФЫ ======================= -->
+<section class="section section-soft" id="price">
+  <div class="wrap">
+    <p class="eyebrow reveal">Цены</p>
+    <h2 class="h-1 reveal d1" style="margin-top:14px; max-width:16ch">Бесплатно для одного. Одна цена за весь салон</h2>
+    <p class="lead reveal d2" style="margin-top:18px">
+      Не за канал и не за человека. 14 дней «Команды» бесплатно, карта не нужна.
+    </p>
+
+    <div class="grid g3" style="margin-top:44px; max-width:1100px">
+      <div class="plan reveal d1">
+        <p class="h-3">Бесплатно</p>
+        <p class="plan__price">0 ₽ <span>/ месяц</span></p>
+        <p class="small">Чтобы начать и не потерять ни одного сообщения.</p>
+        <ul>
+          <li><span>✓</span><span><b>Один сотрудник</b></span></li>
+          <li><span>✓</span><span><b>Один канал</b> на выбор</span></li>
+          <li><span>✓</span><span>100 диалогов в месяц</span></li>
+          <li><span>✓</span><span>История за 30 дней</span></li>
+        </ul>
+        <a class="btn btn-light btn-block" style="margin-top:auto" href="checkout.html">Начать бесплатно</a>
+      </div>
+
+      <div class="plan reveal d2">
+        <p class="h-3">Старт</p>
+        <p class="plan__price">1 500 ₽ <span>/ месяц</span></p>
+        <p class="small">Для тех, кто отвечает клиентам сам.</p>
+        <ul>
+          <li><span>✓</span><span><b>Один сотрудник</b></span></li>
+          <li><span>✓</span><span><b>Два канала</b> на выбор</span></li>
+          <li><span>✓</span><span>Диалоги и история без лимита</span></li>
+          <li><span>✓</span><span>Шаблоны, автодополнение и голос</span></li>
+        </ul>
+        <a class="btn btn-light btn-block" style="margin-top:auto" href="checkout.html">Попробовать</a>
+      </div>
+
+      <div class="plan plan--hi reveal d3">
+        <span class="chip" style="align-self:flex-start">Для салона</span>
+        <p class="h-3">Команда</p>
+        <p class="plan__price">4 000 ₽ <span>/ месяц</span></p>
+        <p class="small">Когда клиентам отвечают сотрудники.</p>
+        <ul>
+          <li><span>✓</span><span><b>До пяти сотрудников</b></span></li>
+          <li><span>✓</span><span><b>Все каналы</b>, включая Авито</span></li>
+          <li><span>✓</span><span><b>Панель руководителя</b> с метриками</span></li>
+          <li><span>✓</span><span>Назначение диалогов и отчёт за неделю</span></li>
+        </ul>
+        <a class="btn btn-primary btn-block" style="margin-top:auto" href="checkout.html">Попробовать 14 дней</a>
+      </div>
+    </div>
+
+    <p class="small reveal d3" style="margin-top:22px; max-width:70ch">
+      Сеть салонов или свои условия — тариф <b>«Своё»</b>: от шести сотрудников, настройка под вас,
+      подписка по договору от 20 000 ₽ в месяц плюс внедрение. <a href="mailto:hello@vetra.me">Напишите нам</a>. При оплате за год — минус 20 %.
+    </p>
+  </div>
+</section>
+
+<!-- ======================= FAQ ======================= -->
+<section class="section section-white">
+  <div class="wrap-narrow">
+    <h2 class="h-1 reveal">Частые вопросы</h2>
+    <div style="margin-top:34px" data-acc>
+      <div class="acc__item">
+        <button class="acc__q" aria-expanded="false">Клиент поймёт, что ему отвечают через сервис?<i aria-hidden="true">+</i></button>
+        <div class="acc__a"><p>Нет. Ответ приходит в тот же чат, откуда клиент написал — в Telegram он видит ваш обычный аккаунт, во ВКонтакте — сообщество. Ветра работает со стороны компании.</p></div>
+      </div>
+      <div class="acc__item">
+        <button class="acc__q" aria-expanded="false">Что будет, если канал заблокируют?<i aria-hidden="true">+</i></button>
+        <div class="acc__a"><p>Каждый канал подключён отдельно и не связан с остальными. Если один перестаёт работать, всё остальное продолжает: переписка и история никуда не исчезают.</p></div>
+      </div>
+      <div class="acc__item">
+        <button class="acc__q" aria-expanded="false">Где хранится переписка?<i aria-hidden="true">+</i></button>
+        <div class="acc__a"><p>На серверах в России, как требует закон о персональных данных. Переписку можно выгрузить в любой момент или удалить вместе с аккаунтом.</p></div>
+      </div>
+      <div class="acc__item">
+        <button class="acc__q" aria-expanded="false">Сложно ли подключить?<i aria-hidden="true">+</i></button>
+        <div class="acc__a"><p>Первый канал занимает около трёх минут: выбрать мессенджер, вставить ключ доступа, отправить тестовое сообщение. Мы показываем каждый шаг с картинками.</p></div>
+      </div>
+      <div class="acc__item">
+        <button class="acc__q" aria-expanded="false">А если у меня всего один сотрудник — я сам?<i aria-hidden="true">+</i></button>
+        <div class="acc__a"><p>Тогда начните с «Бесплатно» — один канал и сто диалогов в месяц, без срока. Когда станет тесно, есть «Старт»: два канала, шаблоны и голос, без панели руководителя — следить не за кем. Перейти на «Команду» можно в любой момент.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ======================= ФИНАЛ ======================= -->
+<section class="section section-navy final">
+  <svg class="shape" style="top:-46%;left:50%;width:52rem;transform:translateX(-50%);opacity:.14" viewBox="0 0 600 600" aria-hidden="true">
+    <circle cx="300" cy="300" r="280" fill="none" stroke="currentColor" stroke-width="70"/>
+  </svg>
+  <div class="wrap-narrow">
+    <h2 class="h-1 reveal">Попробуйте на своих клиентах</h2>
+    <p class="lead reveal d1" style="margin:18px auto 0">
+      14 дней бесплатно, карта не нужна. Если не подойдёт — просто перестаньте пользоваться.
+    </p>
+    <a class="btn btn-light reveal d2" href="checkout.html">Начать бесплатно</a>
+  </div>
+</section>
+
+<!-- ======================= ПОДВАЛ ======================= -->
 <footer class="footer">
   <div class="wrap">
     <div class="footer__grid">
-      <div><a class="logo on-dark" href="#top" style="color:#fff"><span class="logo__word" style="color:#fff">Ветра</span><span class="logo__dot" style="background:var(--mid)"></span></a>
-        <p style="margin-top:14px">Заявки из Telegram, ВКонтакте, MAX, почты и Авито в одном окне. Внедрение под ваш бизнес и сопровождение.</p>
-        <p class="small">Работаем с ИП и организациями. Цены в рублях, без НДС (УСН). Расчёт на странице не является публичной офертой.</p></div>
-      <div><h4>Документы</h4><ul><li><a href="politika.html">Политика обработки персональных данных</a></li><li><span style="color:#7E9BBC">Образец договора — после согласования с юристом</span></li><li><a href="#video">Как работает — 54 секунды</a></li></ul></div>
-      <div><h4>Связь</h4><ul><li>ИП [ФИО] · ОГРНИП [номер]</li><li>[e-mail]</li><li>Telegram: [аккаунт]</li></ul></div>
+      <div>
+        <a class="logo" href="index.html"><span class="logo__word" style="color:#fff">Ветра</span><span class="logo__dot"></span></a>
+        <p style="margin-top:14px; max-width:34ch; font-size:15px">
+          Сообщения клиентов из всех каналов в одном окне.
+        </p>
+      </div>
+      <div>
+        <h4>Продукт</h4>
+        <ul>
+          <li><a href="#how">Как работает</a></li>
+          <li><a href="#price">Цены</a></li>
+          <li><a href="app.html">Панель руководителя</a></li>
+          <li><a href="inbox.html">Окно сотрудника</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Помощь</h4>
+        <ul>
+          <li><a href="connect.html">Подключение канала</a></li>
+          <li><a href="login.html">Войти</a></li>
+          <li><a href="#">Написать нам</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Документы</h4>
+        <ul>
+          <li><a href="#">Оферта</a></li>
+          <li><a href="#">Обработка данных</a></li>
+        </ul>
+      </div>
     </div>
-    <div class="footer__bottom"><span>© Ветра, 2026</span><span>Telegram, ВКонтакте, MAX, Авито — товарные знаки их владельцев. Подключаем через открытые инструменты площадок.</span></div>
+    <!-- Подпись бренда: слово во всю ширину, нижняя часть уходит за край.
+         Приём maximatherapy.com. Персонажей ставим сюда, когда будет утверждён маскот. -->
+    <div class="signature" aria-hidden="true">
+      <p class="signature__word">Ветра</p>
+    </div>
+
+    <div class="footer__bottom">
+      <span>© 2026 Ветра</span>
+      <span>Макет. Цифры и отзывы — примеры.</span>
+    </div>
   </div>
 </footer>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
-<script src="js/script.js?v=7"></script>
+<script src="js/vetra.js"></script>
 </body>
 </html>
