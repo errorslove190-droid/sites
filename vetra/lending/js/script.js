@@ -73,12 +73,10 @@
             $$('.opt', q).forEach(function (x) { x.setAttribute('aria-pressed', 'false'); });
             b.setAttribute('aria-pressed', 'true');
             if (key === 'seg') { state.seg = v; if (!state.chkTouched) { state.chk = PRESETS[v].chk; syncChk(); } }
-            if (key === 'd') { state.d = Q3[v]; var md = $('#mcD'); if (md) { md.value = state.d; } state.lost = Math.max(0.5, Math.round(state.d * 0.075 * 2) / 2); var ml = $('#mcL'); if (ml) ml.value = state.lost; miniCalc(); }
+            if (key === 'd') { state.d = Q3[v]; state.lost = Math.max(0.5, Math.round(state.d * 0.075 * 2) / 2); $$('#mcDopts .opt').forEach(function (x) { x.setAttribute('aria-pressed', +x.getAttribute('data-d') === state.d ? 'true' : 'false'); }); miniCalc(); }
             if (key === 'adm') state.adm = Q4[v];
             if (key === 'crm') state.crm = v;
             if (key === 'server') state.server = v;
-            var next = q.nextElementSibling;
-            if (next && next.classList.contains('q')) { var f = $('.opt', next); if (f) f.focus({ preventScroll: true }); }
           }
           push('quiz_answer', { q: key, value: v });
           state.answered = true;
@@ -125,7 +123,7 @@
     $('#lead').hidden = false;
     renderItems();
     push('preset_built', { segment: seg });
-    if (force || state.answered) { setTimeout(function () { $('#build').scrollIntoView({ behavior: reduced ? 'auto' : 'smooth', block: 'start' }); }, 80); }
+    if (force) { setTimeout(function () { $('#build').scrollIntoView({ behavior: reduced ? 'auto' : 'smooth', block: 'start' }); }, 80); }
   }
 
   function plural(n, a, b, c) { var m = n % 10, h = n % 100; if (h > 10 && h < 20) return c; if (m === 1) return a; if (m > 1 && m < 5) return b; return c; }
@@ -250,7 +248,7 @@
   function miniCalc() {
     var t = $('#mcTotal'); if (!t) return;
     var l = lossCalc();
-    $('#mcDv').textContent = state.d || 20; $('#mcLv').textContent = l.lost.toLocaleString('ru-RU');
+    $('#mcDv').textContent = state.d || 20; $('#mcLv').textContent = l.lost.toLocaleString('ru-RU') + ' в нед.'; var cv = $('#chkV'); if (cv) cv.textContent = fmt(state.chk);
     t.textContent = fmt(l.total);
     $('#mcNote').textContent = l.lost.toLocaleString('ru-RU') + ' в неделю × 4,3 недели × ' + fmt(state.chk) + ' × ' + Math.round(CONV[state.seg || 'other'] * 100) + ' % (доля, которая стала бы покупкой)';
     $('#mcOne').textContent = fmt(state.chk);
@@ -264,11 +262,22 @@
   }
 
   /* ---------- чек клиента ---------- */
-  var chkInput = $('#chk');
-  if (chkInput) chkInput.addEventListener('input', function () { state.chk = +chkInput.value; state.chkTouched = true; $('#chkV').textContent = fmt(state.chk); miniCalc(); recalc(); });
-  var mcD = $('#mcD'), mcL = $('#mcL');
-  if (mcD) mcD.addEventListener('input', function () { state.d = +mcD.value; miniCalc(); recalc(); });
-  if (mcL) mcL.addEventListener('input', function () { state.lost = +mcL.value; miniCalc(); recalc(); });
+  // калькулятор потерь: кнопки-шаги вместо ползунков (правка 09.09)
+  $$('.stepper__b').forEach(function (b) {
+    b.addEventListener('click', function () {
+      var dir = +b.getAttribute('data-dir'), what = b.getAttribute('data-step');
+      if (what === 'chk') { var step = state.chk >= 20000 ? 5000 : state.chk >= 5000 ? 1000 : 500; state.chk = Math.max(500, Math.min(200000, state.chk + dir * step)); state.chkTouched = true; var c = $('#chk'); if (c) c.value = state.chk; }
+      if (what === 'lost') { state.lost = Math.max(0, Math.min(30, (state.lost == null ? 2 : state.lost) + dir * 0.5)); }
+      miniCalc(); recalc();
+    });
+  });
+  $$('#mcDopts .opt').forEach(function (b) {
+    b.addEventListener('click', function () {
+      $$('#mcDopts .opt').forEach(function (x) { x.setAttribute('aria-pressed', 'false'); }); b.setAttribute('aria-pressed', 'true');
+      state.d = +b.getAttribute('data-d'); if (state.lost == null) state.lost = Math.max(0.5, Math.round(state.d * 0.075 * 2) / 2);
+      miniCalc(); recalc();
+    });
+  });
 
   /* ---------- форма ---------- */
   function initForm() {
@@ -354,7 +363,7 @@
 
     // параллакс пятен и чипов в hero
     $$('.hero .blob').forEach(function (b, i) { gsap.to(b, { yPercent: (i % 2 ? -1 : 1) * 30, ease: 'none', scrollTrigger: { trigger: '.hero', start: 'top top', end: 'bottom top', scrub: true } }); });
-    gsap.to('.hero .laptop', { yPercent: -8, ease: 'none', scrollTrigger: { trigger: '.hero', start: 'top top', end: 'bottom top', scrub: true } });
+    if ($('.hero__video')) gsap.to('.hero__video', { yPercent: -6, ease: 'none', scrollTrigger: { trigger: '.hero', start: 'top top', end: 'bottom top', scrub: true } });
     $$('.plx').forEach(function (el) { var s = +(el.getAttribute('data-plx') || 20); gsap.fromTo(el, { yPercent: s }, { yPercent: -s, ease: 'none', scrollTrigger: { trigger: el, start: 'top bottom', end: 'bottom top', scrub: true } }); });
 
     // залипающая история
@@ -380,8 +389,7 @@
     tl.addLabel('s3', '+=1.2');
     tl.to(scenes.phone, { autoAlpha: 0, x: -140, scale: .8, duration: .5 }, 's3');
     tl.fromTo(scenes.desk, { autoAlpha: 0, y: 80, rotateX: 12 }, { autoAlpha: 1, y: 0, rotateX: 0, duration: .8, ease: 'power3.out' }, 's3+=.2');
-    tl.from($$('.kpi', scenes.desk), { autoAlpha: 0, y: 12, stagger: .12, duration: .4 }, 's3+=.7');
-    tl.fromTo($$('.bars i', scenes.desk), { '--w': '0%' }, { '--w': function (i, el) { return el.getAttribute('data-w'); }, stagger: .1, duration: .6 }, 's3+=.9');
+    tl.from(scenes.desk, { scale: .92, duration: 1.2, ease: 'power2.out' }, 's3+=.3');
     tl.addLabel('end', '+=.8');
 
     function setStep(n) { steps.forEach(function (s, i) { s.classList.toggle('on', i === n); }); dots.forEach(function (d, i) { d.classList.toggle('on', i <= n); }); }
@@ -390,7 +398,8 @@
     ScrollTrigger.matchMedia({
       '(min-width: 901px)': function () {
         ScrollTrigger.create({
-          trigger: story, start: 'top top', end: '+=320%', pin: '.story__pin', scrub: .6, animation: tl,
+          trigger: story, start: 'top top', end: '+=300%', pin: '.story__pin', scrub: .8, animation: tl,
+          snap: { snapTo: 'labelsDirectional', duration: { min: .25, max: .7 }, delay: .05, ease: 'power2.inOut' },
           onUpdate: function (st) {
             var t = st.progress * tl.duration(), n = 0;
             labels.forEach(function (l, i) { if (t >= tl.labels[l] - .01) n = i; });
