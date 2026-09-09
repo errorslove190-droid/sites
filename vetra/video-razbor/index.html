@@ -13,6 +13,7 @@ body{margin:0;background:#050A14;color:#E8EEF7;font:16px/1.5 Onest,system-ui,san
 main{max-width:980px;margin:0 auto;padding:28px 18px 80px}
 h1{font:700 30px/1.15 Unbounded,sans-serif;margin:0 0 8px}
 h2{font:600 20px/1.2 Unbounded,sans-serif;margin:0}
+h2.sec{margin:40px 0 14px;font-size:22px}
 .lead{color:#9FB3CC;margin:0 0 22px}
 .lead a{color:#6FA8F0}
 video{width:100%;border-radius:14px;background:#000;display:block;margin:0 0 30px;box-shadow:0 0 60px rgba(44,120,213,.25)}
@@ -24,82 +25,111 @@ video{width:100%;border-radius:14px;background:#000;display:block;margin:0 0 30p
 .titles{margin:8px 0 0;padding:0;list-style:none}
 .titles li{display:inline-block;margin:0 8px 6px 0;padding:3px 10px;border-radius:999px;background:#12203A;color:#CFE0F8;font-size:14px}
 .titles li b{color:#6FA8F0;font-weight:500;margin-right:6px}
-.what{margin:8px 0 0;color:#C7D3E3;font-size:15px}
 .jump{display:inline-block;margin-top:10px;color:#6FA8F0;text-decoration:none;font-weight:500}
 .jump:hover{text-decoration:underline}
 .note{margin-top:34px;padding:16px 18px;border-radius:12px;background:#0C1830;color:#C7D3E3;font-size:15px}
+.done{margin:0 0 26px;padding:16px 18px;border-radius:12px;background:#0C1F17;border:1px solid #1B4230;color:#C7E3D3;font-size:15px}
+.done ul,.note ul{margin:8px 0 0;padding-left:20px}
+.done li,.note li{margin:3px 0}
+.mus{display:grid;gap:12px}
+.mo{padding:14px 16px;border-radius:12px;background:#0C1830;border:1px solid #172740}
+.mo b{display:block;font-size:16px;margin-bottom:2px}
+.mo span{color:#9FB3CC;font-size:14px;display:block;margin-bottom:8px}
+.mo audio{width:100%}
 </style>
 </head>
 <body>
 <main>
 <h1>Ролик Ветры — разбор по сценам</h1>
-<p class="lead">Шесть сцен ролика 78 с и hero-цикл. Нажми на кадр или «смотреть с …» — видео перемотается на начало сцены. Правки можно диктовать так: «сцена 3 — …».</p>
+<p class="lead">Версия 2 от 9 сентября, 54 секунды. Нажми на кадр или «смотреть с …» — видео перемотается на начало сцены. Правки диктуй так: «сцена 3 — …».</p>
 
-<video id="v" src="../lending/video/promo.mp4" poster="../lending/video/poster.jpg" controls playsinline preload="metadata"></video>
+<video id="v" src="../lending/video/promo.mp4?v=2" poster="../lending/video/poster.jpg?v=2" controls playsinline preload="metadata"></video>
 
-<section class="scene" data-t="0">
-  <img src="img/s5.jpg" alt="Сцена 1 — Хаос">
+<div class="done"><b>Что изменилось по правкам Михаила</b>
+<ul>
+<li>Ролик короче почти на полминуты: 54 с вместо 78. Уведомления в хаосе прилетают за 2,5 с, подключение шести каналов — за 6 с, камера ездит быстрее.</li>
+<li>Звук уведомлений — присланный iPhone-динь, на каждую карточку.</li>
+<li>Телефон — iPhone 15 Pro: островок, статус-бар со временем и батареей, полоска «домой». Приложение перерисовано как настоящее: экран «Диалоги» с крупным заголовком, поиском и нижними вкладками, градиентные аватары с инициалами, значок канала на аватаре.</li>
+<li>Экран блокировки вместо чёрного экрана: обои, дата и время, стопка уведомлений.</li>
+<li>Значки каналов — как на лендинге: Telegram, ВКонтакте, MAX, WhatsApp, Авито, Почта. Ozon убран, WhatsApp добавлен везде.</li>
+<li>Новая сцена «Панель руководителя»: обращения за день, время первого ответа, кто ждёт, сотрудники с нагрузкой, «Требует внимания» и переназначение в клик.</li>
+<li>Финал: свечение без колец — плавный градиент из девяти ступеней плюс зерно; финальный файл сжат мягче.</li>
+</ul></div>
+
+<section class="scene">
+  <img src="img/n3.jpg" alt="Сцена 1 — Хаос">
   <div>
-    <div class="n">Сцена 1 · 0:00–0:10</div>
+    <div class="n">Сцена 1 · 0:00–0:05</div>
     <h2>Хаос</h2>
-    <p class="t">Телефон один в темноте, на него сыплются 12 уведомлений из шести приложений: Telegram, ВКонтакте, MAX, Почта, Авито, Ozon. Экран тёмный, только время 18:42.</p>
-    <ul class="titles"><li><b>1,2 с</b>Шесть приложений</li><li><b>4,4 с</b>Один владелец</li><li><b>7,4 с</b>Клиент ждёт 43 минуты</li></ul>
+    <p class="t">iPhone с экраном блокировки. За 2,5 секунды прилетают 12 уведомлений из шести приложений и на экран ложится стопка баннеров. На каждое — динь.</p>
+    <ul class="titles"><li><b>0,6 с</b>Шесть приложений</li><li><b>2,6 с</b>Один владелец</li><li><b>4,2 с</b>Клиент ждёт 43 минуты</li></ul>
     <a class="jump" href="#" data-t="0">▶ смотреть с 0:00</a>
   </div>
 </section>
 
 <section class="scene">
-  <img src="img/s13.jpg" alt="Сцена 2 — Имя">
+  <img src="img/n7.jpg" alt="Сцена 2 — Имя">
   <div>
-    <div class="n">Сцена 2 · 0:10–0:16</div>
+    <div class="n">Сцена 2 · 0:05–0:09</div>
     <h2>Имя</h2>
-    <p class="t">Карточки втягиваются в телефон, экран загорается окном Ветры. Телефон уходит вправо, из-за него выезжает ноутбук. Свечение вспыхивает, вступает музыка.</p>
-    <ul class="titles"><li><b>11,0 с</b>Ветра·</li><li><b>11,6 с</b>Все заявки в одном окне</li></ul>
-    <a class="jump" href="#" data-t="10">▶ смотреть с 0:10</a>
+    <p class="t">Карточки втягиваются в телефон, экран загорается «Диалогами» Ветры. Из-за телефона выезжает ноутбук.</p>
+    <ul class="titles"><li><b>6,3 с</b>Ветра·</li><li><b>6,8 с</b>Все заявки в одном окне</li></ul>
+    <a class="jump" href="#" data-t="5.5">▶ смотреть с 0:05</a>
   </div>
 </section>
 
 <section class="scene">
-  <img src="img/s24.jpg" alt="Сцена 3 — Подключение">
+  <img src="img/n12.jpg" alt="Сцена 3 — Подключение">
   <div>
-    <div class="n">Сцена 3 · 0:16–0:32</div>
+    <div class="n">Сцена 3 · 0:09–0:15</div>
     <h2>Подключение</h2>
-    <p class="t">Ноутбук по центру, страница «Подключить каналы». Ключ Telegram набирается посимвольно, «Подключить», статус зелёный. Дальше ВКонтакте, MAX, Почта, Авито. В шапке «5 каналов подключено».</p>
-    <ul class="titles"><li><b>17,6 с</b>Подключение за минуты</li><li><b>22,5 с</b>Вставил ключ — канал горит</li><li><b>28,8 с</b>Пять каналов. Одно окно.</li></ul>
-    <a class="jump" href="#" data-t="16">▶ смотреть с 0:16</a>
+    <p class="t">Ключ Telegram набирается за 0,8 с, дальше ВКонтакте, MAX, WhatsApp, Авито, Почта — по 0,6 с на канал. Шапка: «6 каналов подключено».</p>
+    <ul class="titles"><li><b>9,6 с</b>Подключение за минуту</li><li><b>12,2 с</b>Вставил ключ — канал горит</li><li><b>14,7 с</b>Шесть каналов. Одно окно.</li></ul>
+    <a class="jump" href="#" data-t="9">▶ смотреть с 0:09</a>
   </div>
 </section>
 
 <section class="scene">
-  <img src="img/s42.jpg" alt="Сцена 4 — Телефон">
+  <img src="img/n19.jpg" alt="Сцена 4 — Телефон">
   <div>
-    <div class="n">Сцена 4 · 0:32–0:52</div>
+    <div class="n">Сцена 4 · 0:15–0:27</div>
     <h2>Телефон</h2>
-    <p class="t">Телефон крупно. Список → диалог Алины → заготовка «Часы работы» → диктовка голосом «Да, у Кати есть окошко в субботу в 14:00» → отправка → «отвечено» → возврат к списку без красной метки.</p>
-    <ul class="titles"><li><b>33,0 с</b>Одно окно на телефоне</li><li><b>37,2 с</b>Быстрые ответы</li><li><b>41,4 с</b>Диктовка голосом</li><li><b>47,0 с</b>Отвечаешь одной рукой</li></ul>
-    <a class="jump" href="#" data-t="32">▶ смотреть с 0:32</a>
+    <p class="t">Список → диалог Алины → заготовка «Часы работы» → диктовка «Да, у Кати есть окошко в субботу в 14:00» → отправка → «отвечено» → назад к списку.</p>
+    <ul class="titles"><li><b>16,3 с</b>Одно окно на телефоне</li><li><b>18,7 с</b>Быстрые ответы</li><li><b>21,0 с</b>Диктовка голосом</li><li><b>24,1 с</b>Отвечаешь одной рукой</li></ul>
+    <a class="jump" href="#" data-t="15.5">▶ смотреть с 0:15</a>
   </div>
 </section>
 
 <section class="scene">
-  <img src="img/s60.jpg" alt="Сцена 5 — ПК">
+  <img src="img/n31.jpg" alt="Сцена 5 — ПК">
   <div>
-    <div class="n">Сцена 5 · 0:52–1:08</div>
+    <div class="n">Сцена 5 · 0:27–0:35</div>
     <h2>ПК</h2>
-    <p class="t">То же окно на ноутбуке с панелью владельца: «Не отвечено 3», «Ждут дольше 15 мин 1», «Ответили сегодня 42». Приходит «Марина · Авито», плитка 3 → 4. Алина отвечена, 4 → 3, ожидание 1 → 0.</p>
-    <ul class="titles"><li><b>53,0 с</b>То же окно на ПК</li><li><b>57,5 с</b>Кто не отвечен, сколько ждут</li><li><b>63,0 с</b>Панель владельца</li></ul>
-    <a class="jump" href="#" data-t="52">▶ смотреть с 0:52</a>
+    <p class="t">То же окно на ноутбуке, плитки «Не отвечено · Ждут дольше 15 мин · Ответили сегодня». Приходит Марина с Авито, Алина переходит в «отвечено».</p>
+    <ul class="titles"><li><b>27,8 с</b>То же окно на ПК</li><li><b>30,5 с</b>Кто не отвечен, сколько ждут</li></ul>
+    <a class="jump" href="#" data-t="27">▶ смотреть с 0:27</a>
   </div>
 </section>
 
 <section class="scene">
-  <img src="img/s73.jpg" alt="Сцена 6 — Финал">
+  <img src="img/n40.jpg" alt="Сцена 6 — Панель руководителя">
   <div>
-    <div class="n">Сцена 6 · 1:08–1:18</div>
+    <div class="n">Сцена 6 · 0:35–0:44 · новая</div>
+    <h2>Панель руководителя</h2>
+    <p class="t">Вкладка «Панель»: 48 обращений, первый ответ 4 мин вместо 19, трое ждут, закрыто 85 %. Таблица сотрудников с нагрузкой. «Требует внимания» — курсор жмёт «Переназначить», диалог уходит, 3 → 2.</p>
+    <ul class="titles"><li><b>35,6 с</b>Панель руководителя</li><li><b>38,5 с</b>Кто как отвечает — видно сразу</li><li><b>41,3 с</b>Переназначил в два клика</li></ul>
+    <a class="jump" href="#" data-t="35">▶ смотреть с 0:35</a>
+  </div>
+</section>
+
+<section class="scene">
+  <img src="img/n48.jpg" alt="Сцена 7 — Финал">
+  <div>
+    <div class="n">Сцена 7 · 0:44–0:54</div>
     <h2>Финал</h2>
-    <p class="t">Устройства уходят в темноту. Имя крупно, слоган, адрес. Свечение собирается в центр, затемнение, музыка затухает.</p>
-    <ul class="titles"><li><b>69,2 с</b>Ветра·</li><li><b>70,2 с</b>Все заявки в одном окне.</li><li><b>72,5 с</b>vetra.me</li></ul>
-    <a class="jump" href="#" data-t="68">▶ смотреть с 1:08</a>
+    <p class="t">Устройства уходят в темноту, имя, слоган, адрес. Свечение теперь без колец.</p>
+    <ul class="titles"><li><b>45,2 с</b>Ветра·</li><li><b>46,0 с</b>Все заявки в одном окне.</li><li><b>47,4 с</b>vetra.me</li></ul>
+    <a class="jump" href="#" data-t="44">▶ смотреть с 0:44</a>
   </div>
 </section>
 
@@ -108,12 +138,26 @@ video{width:100%;border-radius:14px;background:#000;display:block;margin:0 0 30p
   <div>
     <div class="n">Hero-цикл · 14 с, без звука</div>
     <h2>Фон в hero лендинга</h2>
-    <p class="t">Телефон впереди слева, ноутбук сзади справа, медленный облёт камеры. На ноутбуке въезжает новый диалог «Ольга · Telegram» и гаснет счётчик; на телефоне нажата заготовка и появляется пузырь. Склейка цикла незаметна.</p>
-    <a class="jump" href="../lending/video/hero-loop.mp4">▶ открыть hero-цикл</a>
+    <p class="t">Тот же новый интерфейс: телефон с диалогом Натальи из WhatsApp, ноутбук со списком. Въезжает диалог Ольги, на телефоне нажата заготовка. Цикл бесшовный.</p>
+    <a class="jump" href="../lending/video/hero-loop.mp4?v=2">▶ открыть hero-цикл</a>
   </div>
 </section>
 
-<div class="note">Что уже знаю сам: ролик остался на Google Sans, а лендинг перешёл на Unbounded + Onest, градиентные кнопки и свечение. Стиль титров и окна в ролике надо подтягивать к странице.</div>
+<h2 class="sec">Музыка — выбери вариант</h2>
+<p class="lead">Все три собраны кодом, без чужих треков. В ролике сейчас стоит вариант Б. Хочешь настоящий трек из каталога — см. записку внизу.</p>
+<div class="mus">
+  <div class="mo"><b>А — «Лёгкий»</b><span>До-мажор, 108 ударов в минуту, перебор и хай-хэт. Светлый, быстрый.</span><audio controls preload="none" src="muzyka/bgm-a.mp3"></audio></div>
+  <div class="mo"><b>Б — «Премиум» (стоит сейчас)</b><span>Ля-минор, 96 ударов в минуту, пэд и мягкий бас, почти без ударных. Спокойный, дорогой.</span><audio controls preload="none" src="muzyka/bgm-b.mp3"></audio></div>
+  <div class="mo"><b>В — «Драйв»</b><span>Ре-минор, 124 удара в минуту, бочка на каждую долю, шестнадцатые. Энергичный.</span><audio controls preload="none" src="muzyka/bgm-c.mp3"></audio></div>
+  <div class="mo"><b>Звук уведомления</b><span>Присланный iPhone-динь, стоит в ролике.</span><audio controls preload="none" src="muzyka/ding.mp3"></audio></div>
+</div>
+
+<div class="note"><b>Что нужно от Михаила</b>
+<ul>
+<li>Выбрать музыку: А, Б, В — или «ни одна». Тогда два пути к настоящему треку: каталог HeyGen (10 000 треков, бесплатно, но нужно поставить их консоль и войти в аккаунт) или генерация через подключённый Higgsfield (платно, скажу цену до запуска).</li>
+<li>Прислать официальную иконку MAX (SVG или PNG). Сейчас стоит условная «M» на фиолетовом — та же, что на лендинге.</li>
+<li>Шрифт титров: ролик пока на Google Sans, лендинг — на Unbounded + Onest. Переводить ролик на шрифты лендинга?</li>
+</ul></div>
 </main>
 <script>
 var v=document.getElementById('v');
