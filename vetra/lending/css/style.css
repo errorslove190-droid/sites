@@ -513,6 +513,35 @@ h3{font-size:clamp(17px,1.7vw,21px);font-weight:600}
 @media(max-width:900px){.chaos .bub{font-size:13px;padding:10px 12px}}
 @media(max-width:960px){.hero__grid{grid-template-columns:1fr}.hero__video{width:100%;aspect-ratio:16/10}.h-big{font-size:clamp(32px,9vw,44px)}.facts2{grid-template-columns:1fr 1fr}.story__text{padding-top:18px}}
 @media(max-width:560px){.btn-lg{padding:16px 22px;font-size:16px}.calc2__in{padding:22px}.calc2__out{padding:22px}.stepper output{min-width:96px}}
+/* мобильный прогон 09.09 */
+@media(max-width:900px){
+  .facts2{gap:14px}.facts2 b{font-size:19px;white-space:normal}.facts2 span{font-size:13px}
+  .story__stage{min-height:82vh}
+  .chaos .bub{font-size:12.5px;padding:8px 11px 8px 9px;border-radius:12px;column-gap:8px;box-shadow:0 8px 24px rgba(0,0,0,.35)}
+  .chaos .bub b{font-size:9px}
+  .chaos .bub:nth-child(3),.chaos .bub:nth-child(6),.chaos .bub:nth-child(9){display:none}
+  .chaos .bub{max-width:62%}
+  .story__text{padding:18px 18px 36px}
+  .story__step h3{font-size:22px}
+  .segc{min-height:0;padding:22px}
+  .whyc{padding:22px}
+  .pay2__us,.pay2__them{padding:22px}
+  .h-center{font-size:26px}
+  .konst__grid{grid-template-columns:1fr}
+  .konst{padding-bottom:110px}
+  .el.tz{grid-template-columns:1fr}
+  .el.tz .btn{order:3;justify-self:start}
+  .el.tz .el__price{border-top:0;padding-top:0}
+  .presets{gap:6px}.presets .opt{padding:8px 12px;font-size:13px}
+  .group__t{flex-direction:column;align-items:flex-start;gap:2px}
+  .video__frame{border-radius:18px}
+  .lit::before{inset:-16px;filter:blur(20px)}
+  .total{padding:20px 18px}
+  .total .v{font-size:28px}
+  .quiz2{padding:6px 16px}
+  .form{padding:20px 16px}
+  .faq summary{font-size:16px}
+}
 @media(max-width:560px){
   .connect{grid-template-columns:1fr;gap:8px;padding:0 4%}
   .connect .cc{font-size:13px;padding:10px 12px}
