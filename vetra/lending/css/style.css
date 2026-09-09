@@ -484,6 +484,8 @@ h3{font-size:clamp(17px,1.7vw,21px);font-weight:600}
 .quiz2 .opt{padding:9px 14px;font-size:14px}
 .quiz2 .q p{display:none}
 .quiz2__foot{grid-column:1/-1;display:flex;gap:12px;flex-wrap:wrap;align-items:center;padding-top:14px;border-top:1px solid var(--line)}
+@media(max-width:960px){.hero__grid{grid-template-columns:1fr}.hero__video{width:100%;aspect-ratio:16/10}.h-big{font-size:clamp(32px,9vw,44px)}.facts2{grid-template-columns:1fr 1fr}.story__text{padding-top:18px}}
+@media(max-width:560px){.btn-lg{padding:16px 22px;font-size:16px}.calc2__in{padding:22px}.calc2__out{padding:22px}.stepper output{min-width:96px}}
 @media(max-width:560px){
   .connect{grid-template-columns:1fr;gap:8px;padding:0 4%}
   .connect .cc{font-size:13px;padding:10px 12px}
