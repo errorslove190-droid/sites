@@ -158,7 +158,7 @@
         <div style="font-family:var(--head);font-weight:700;font-size:clamp(34px,4.6vw,52px);letter-spacing:-.04em;line-height:1;margin:6px 0 10px" id="mcTotal"></div>
         <div class="small" style="color:#C9D8EA">в месяц. Считаем только заявки без ответа: <span id="mcNote"></span>. Время сотрудников на обход пяти чатов — 30–40 часов в месяц у одного администратора — сюда не входит.</div>
         <hr style="border:0;border-top:1px solid rgba(255,255,255,.14);margin:14px 0">
-        <div class="small" style="color:#C9D8EA">Одна ваша заявка ≈ <b id="mcOne" style="color:#fff"></b>. Запомните эту цифру — она ещё встретится рядом с ценой.</div>
+        <div class="small" style="color:#C9D8EA">Одна ваша заявка ≈ <b id="mcOne" style="color:#fff"></b>. Запомните эту цифру — она ещё встретится рядом с ценой. Доля покупок по умолчанию — по типу бизнеса из первого вопроса конструктора.</div>
         <a class="btn btn-primary" style="margin-top:16px" href="#konstruktor" data-go-calc="loss">Посчитать для своего бизнеса</a>
       </div>
     </div>
@@ -372,6 +372,8 @@
         <div class="k">В месяц</div><div class="v"><output id="tMonthly" aria-live="polite"></output></div>
         <div class="row"><span>Первый платёж, с 3 месяцами сопровождения</span><b id="tFirst"></b></div>
         <div class="row"><span id="tThird"></span></div>
+        <div class="row" id="tSoon" hidden></div>
+        <div class="row" id="tLater" hidden></div>
         <div class="row" id="tCustom" hidden><span>+ доработка по ТЗ — от 62 500 ₽, оценим отдельно</span></div>
         <hr>
         <div class="row"><span>Окупится за</span><b id="tPayback"></b></div>
@@ -449,7 +451,7 @@
       <div><a class="logo on-dark" href="#top" style="color:#fff"><span class="logo__word" style="color:#fff">Ветра</span><span class="logo__dot" style="background:var(--mid)"></span></a>
         <p style="margin-top:14px">Заявки из Telegram, ВКонтакте, MAX, почты и Авито в одном окне. Внедрение под ваш бизнес и сопровождение.</p>
         <p class="small">Работаем с ИП и организациями. Цены в рублях, без НДС (УСН). Расчёт на странице не является публичной офертой.</p></div>
-      <div><h4>Документы</h4><ul><li><a href="politika.html">Политика обработки персональных данных</a></li><li><a href="#">Образец договора</a></li><li><a href="#video">Как работает — 60 секунд</a></li></ul></div>
+      <div><h4>Документы</h4><ul><li><a href="politika.html">Политика обработки персональных данных</a></li><li><span style="color:#7E9BBC">Образец договора — после согласования с юристом</span></li><li><a href="#video">Как работает — 60 секунд</a></li></ul></div>
       <div><h4>Связь</h4><ul><li>ИП [ФИО] · ОГРНИП [номер]</li><li>[e-mail]</li><li>Telegram: [аккаунт Андрея]</li></ul></div>
     </div>
     <div class="footer__bottom"><span>© Ветра, 2026</span><span>Telegram, ВКонтакте, MAX, Авито — товарные знаки их владельцев. Подключаем через открытые инструменты площадок.</span></div>

@@ -103,14 +103,14 @@
     var on = {};
     ITEMS.forEach(function (i) { on[i.id] = false; });
     on.zapusk = on.soprov = true;
-    chans.forEach(function (c) { if (byId[c] && !byId[c].request) on[c] = true; });
+    chans.forEach(function (c) { if (byId[c]) on[c] = true; });   // WhatsApp тоже включается, но идёт строкой «после подключения»
     p.opt.forEach(function (o) { on[o] = true; });
     if (on.panel && state.adm && state.adm < 2) on.panel = false;
     if (state.server === 'yes') on.server = true;
-    if (state.server === 'no' && seg !== 'prod') on.server = false;
+    if (state.server === 'no') on.server = false;
     byId.staff.qty = state.adm ? (state.adm === 5 ? 3 : state.adm === 8 ? 5 : 0) : (p.staff || 0);
     on.staff = byId.staff.qty > 0;
-    if (on.ext) byId.soprov.hidden = true;
+    byId.soprov.hidden = !!on.ext;
     state.on = on;
     state.custom = {};
     (p.custom || []).forEach(function (c) { state.custom[c] = true; });
@@ -192,20 +192,27 @@
   /* ---------- итог ---------- */
   var lastOnce = 0, lastMonthly = 0;
   function recalc() {
-    var once = 0, monthly = 0, third = 0, list = [];
+    var once = 0, monthly = 0, third = 0, later = 0, soonMonthly = 0, soonOnce = 0, soonNames = [], list = [];
     ITEMS.forEach(function (i) {
       if (i.group === 'tz') { if (state.custom[i.id]) list.push({ id: i.id, title: i.name, custom: true }); return; }
       if (!state.on[i.id]) return;
       if (i.replaces && state.on[i.id]) { /* расширенное вместо обычного */ }
       var m = i.monthly * (i.qty != null ? i.qty : 1);
-      once += i.once || 0; monthly += m; third += i.third || 0;
-      list.push({ id: i.id, title: i.name, once: i.once || 0, monthly: m, thirdParty: i.third || 0, status: i.soon ? 'soon' : 'ready' });
+      third += i.third || 0;
+      if (i.request) { later += i.once || 0; }                       // WhatsApp: деньги после подключения, в первый платёж не входит
+      else if (i.soon) { soonMonthly += m; soonOnce += i.once || 0; soonNames.push(i.name); } // «скоро»: до готовности не оплачивается
+      else { once += i.once || 0; monthly += m; }
+      list.push({ id: i.id, title: i.name, once: i.once || 0, monthly: m, thirdParty: i.third || 0, status: i.request ? 'request' : i.soon ? 'soon' : 'ready' });
     });
     if (state.on.ext) monthly -= byId.soprov.monthly;
     var first = once + 3 * (state.on.ext ? byId.ext.monthly : byId.soprov.monthly);
     var loss = lossCalc();
     var chk = state.chk;
-    var payback = Math.max(1, Math.ceil(first / chk));
+    var payback = Math.max(1, Math.ceil(first / (chk * CONV[state.seg || 'other'])));
+    $('#tSoon').hidden = !soonNames.length;
+    if (soonNames.length) $('#tSoon').innerHTML = '<span>Когда будут готовы: ' + soonNames.join(', ').toLowerCase() + '</span><b>+ ' + fmt(soonMonthly) + '/мес' + (soonOnce ? ' и ' + fmt(soonOnce) + ' разово' : '') + '</b>';
+    $('#tLater').hidden = !later;
+    if (later) $('#tLater').innerHTML = '<span>WhatsApp — после подключения, по факту</span><b>+ ' + fmt(later) + '</b>';
 
     animateNum($('#tOnce'), lastOnce, once); lastOnce = once;
     animateNum($('#tMonthly'), lastMonthly, monthly); lastMonthly = monthly;
@@ -214,7 +221,7 @@
     $('#tLoss').textContent = fmt(loss.total);
     $('#tLossNote').textContent = '≈ ' + loss.lost.toLocaleString('ru-RU') + ' ' + plural(Math.round(loss.lost), 'заявка', 'заявки', 'заявок') + ' в неделю по ' + fmt(chk) + ' + ' + Math.round(loss.hours) + ' ч на перещёлкивание каналов';
     $('#tPayback').textContent = payback + ' ' + plural(payback, 'заявку', 'заявки', 'заявок');
-    $('#tVs').textContent = 'дальше ' + fmt(monthly) + ' в месяц против ≈ ' + fmt(loss.total) + ' потерь';
+    $('#tVs').textContent = 'считаем по марже ' + Math.round(CONV[state.seg || 'other'] * 100) + ' % с заявки; дальше ' + fmt(monthly) + ' в месяц против ≈ ' + fmt(loss.total) + ' потерь';
     var customs = list.filter(function (x) { return x.custom; }).length;
     $('#tCustom').hidden = !customs;
     var onlyBase = !ITEMS.some(function (i) { return i.group === 'chan' && state.on[i.id]; });
@@ -224,16 +231,18 @@
     // мобильная плашка
     $('#barOnce').textContent = fmt(first); $('#barMonthly').textContent = fmt(monthly) + ' в месяц';
     // состав для формы
-    state.totals = { once: once, monthly: monthly, thirdParty: third, first: first };
+    state.totals = { once: once, monthly: monthly, thirdParty: third, first: first, soonMonthly: soonMonthly, soonOnce: soonOnce, later: later };
     state.list = list; state.loss = { perMonth: Math.round(loss.total), payback: payback };
     $('#sostav').innerHTML = '<b>Состав:</b> ' + list.map(function (x) { return x.title + (x.custom ? ' (под ТЗ)' : ''); }).join(' · ') + '.<br><b>Разово</b> ' + fmt(once) + ' · <b>в месяц</b> ' + fmt(monthly) + (third ? ' · площадкам ~' + fmt(third) : '');
   }
 
-  // потери: только заявки без ответа — N в неделю × 4,33 недели × средний чек (teksty.md §4). Часы сотрудников не считаем.
+  // потери: заявки без ответа × 4,33 недели × средний чек × доля, которая стала бы покупкой/маржой (правка оппонента 09.09:
+  // без этой доли производство при чеке 40 000 «теряло» 260 000 ₽/мес). Часы сотрудников не считаем.
+  var CONV = { salon: 0.6, prod: 0.3, shop: 0.5, other: 0.4 };
   function lossCalc() {
     var d = state.d || 20, ch = Math.max(2, ITEMS.filter(function (i) { return i.group === 'chan' && state.on[i.id]; }).length), adm = state.adm || 1, chk = state.chk;
     var lost = state.lost != null ? state.lost : Math.max(0.5, Math.round(d * 0.075 * 2) / 2);
-    var money = lost * 4.33 * chk;
+    var money = lost * 4.33 * chk * CONV[state.seg || 'other'];
     var hours = (40 * ch * 20 / 60 + 20 + d * 0.25) * 26 / 60 * Math.min(adm, 3);
     return { lost: lost, money: money, hours: hours, total: money };
   }
@@ -243,7 +252,7 @@
     var l = lossCalc();
     $('#mcDv').textContent = state.d || 20; $('#mcLv').textContent = l.lost.toLocaleString('ru-RU');
     t.textContent = fmt(l.total);
-    $('#mcNote').textContent = l.lost.toLocaleString('ru-RU') + ' в неделю × 4,3 недели × ' + fmt(state.chk);
+    $('#mcNote').textContent = l.lost.toLocaleString('ru-RU') + ' в неделю × 4,3 недели × ' + fmt(state.chk) + ' × ' + Math.round(CONV[state.seg || 'other'] * 100) + ' % (доля, которая стала бы покупкой)';
     $('#mcOne').textContent = fmt(state.chk);
   }
 
