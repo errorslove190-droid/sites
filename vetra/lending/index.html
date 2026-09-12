@@ -3,11 +3,14 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Ветра — все сообщения клиентов в одном окне</title>
-<meta name="description" content="Ветра собирает сообщения клиентов из Telegram, ВК, MAX, почты и Авито в одно окно. Сотрудники отвечают без переключений, руководитель видит, что отвечено, а что висит.">
-<meta property="og:title" content="Ветра — все сообщения клиентов в одном окне">
-<meta property="og:description" content="Один список вместо шести вкладок. Подключается за три минуты.">
+<title>Ветра — сообщения из Telegram и ВКонтакте в одном окне</title>
+<meta name="description" content="Ветра собирает обращения из Telegram и ВКонтакте в один список. Настраиваем окно под ваш бизнес и подключаем команду.">
+<meta name="robots" content="noindex, nofollow">
+<meta property="og:title" content="Ветра — сообщения клиентов в одном окне">
+<meta property="og:description" content="Рабочее окно для команды, которое настраиваем под ваш бизнес.">
 <meta property="og:type" content="website">
+<meta property="og:image" content="https://errorslove190-droid.github.io/sites/vetra/lending/video/poster.jpg">
+<link rel="icon" href="../favicon.svg" type="image/svg+xml">
 <link rel="stylesheet" href="css/vetra.css">
 <style>
 /* ---------- Первый экран ---------- */
@@ -229,11 +232,10 @@ kbd{font-family:'Google Sans',sans-serif; font-size:12.5px; font-weight:700; bac
       <a href="#how">Как работает</a>
       <a href="#work">Сотруднику</a>
       <a href="#boss">Руководителю</a>
-      <a href="#price">Цены</a>
+      <a href="#price">Под ключ</a>
     </nav>
     <div class="nav__cta">
-      <a class="btn btn-light btn-sm" href="login.html">Войти</a>
-      <a class="btn btn-primary btn-sm" href="checkout.html">Попробовать бесплатно</a>
+      <a class="btn btn-primary btn-sm" href="#request">Обсудить задачу</a>
     </div>
   </div>
 </header>
@@ -249,51 +251,37 @@ kbd{font-family:'Google Sans',sans-serif; font-size:12.5px; font-weight:700; bac
 
   <div class="wrap hero__grid">
     <div>
-      <h1 class="h-hero hero__name reveal in">
+      <div class="h-hero hero__name reveal in" aria-label="Ветра">
         <span class="line-mask in"><span class="word">Ветра</span></span>
         <span class="dot" aria-hidden="true"></span>
-      </h1>
-      <p class="h-1 hero__slogan reveal d1">
+      </div>
+      <h1 class="h-1 hero__slogan reveal d1">
         <span class="swap" data-words="Одно окно|Один список|Одно место">
-          <span class="swap__old">Шесть вкладок</span>
+          <span class="swap__old">Две вкладки</span>
           <span class="swap__new">Одно окно</span>
         </span><br>для всех клиентов
-      </p>
+      </h1>
       <p class="lead hero__text reveal d2">
         Клиентка пишет «есть окно в субботу?» — и ждёт ответа минуту, а не полчаса.
-        Ветра собирает обращения из всех мессенджеров в один список, и администратор отвечает,
+        Ветра собирает обращения из Telegram и ВКонтакте в один список, и администратор отвечает,
         не переключая вкладки.
       </p>
 
       <div class="facts reveal d3">
-        <span class="fact"><b>6</b><span>каналов в одном списке</span></span>
-        <span class="fact"><b>3</b><span>минуты на подключение</span></span>
-        <span class="fact"><b>0 ₽</b><span>первые 14 дней</span></span>
+        <span class="fact"><b>2</b><span>рабочих канала сейчас</span></span>
+        <span class="fact"><b>1</b><span>список для команды</span></span>
+        <span class="fact"><b>Под ключ</b><span>под ваш процесс</span></span>
       </div>
 
       <div class="hero__cta reveal d4">
-        <a class="btn btn-primary btn-circle" href="checkout.html"><span>Начать бесплатно — 14 дней</span></a>
+        <a class="btn btn-primary btn-circle" href="#request"><span>Обсудить свой бизнес</span></a>
         <a class="btn btn-light btn-circle" href="#how"><span>Посмотреть, как работает</span></a>
-        <span class="stamp" aria-hidden="true">
-          <svg viewBox="0 0 120 120">
-            <defs><path id="ring" d="M60,60 m-46,0 a46,46 0 1,1 92,0 a46,46 0 1,1 -92,0"/></defs>
-            <text font-family="Google Sans, sans-serif" font-size="11" font-weight="700"
-                  letter-spacing="1.6" fill="var(--blue-mid)">
-              <textPath href="#ring">БЕЗ КАРТЫ · БЕЗ ДОГОВОРА · </textPath>
-            </text>
-          </svg>
-          <span class="stamp__core">14<span style="font-size:11px; display:block; letter-spacing:.08em">ДНЕЙ</span></span>
-        </span>
       </div>
 
       <div class="chan reveal d5" role="list" aria-label="Каналы">
         <span class="chan__i" role="listitem" tabindex="0" data-channel="tg"><i class="chan__d" style="background:#2AABEE"></i>Telegram</span>
         <span class="chan__i" role="listitem" tabindex="0" data-channel="vk"><i class="chan__d" style="background:#0077FF"></i>ВКонтакте</span>
-        <span class="chan__i" role="listitem" tabindex="0" data-channel="max"><i class="chan__d" style="background:#7B5CFA"></i>MAX</span>
-        <span class="chan__i" role="listitem" tabindex="0" data-channel="mail"><i class="chan__d" style="background:#7C8AA0"></i>Почта</span>
-        
-        <span class="chan__i" role="listitem" tabindex="0" data-channel="wb"><i class="chan__d" style="background:#CB11AB"></i>Wildberries</span>
-        <span class="chan__i" role="listitem" tabindex="0" data-channel="ozon"><i class="chan__d" style="background:#005BFF"></i>Ozon</span>
+        <span class="small" role="listitem">Другие каналы — только после проверки доступа и API.</span>
       </div>
     </div>
 
@@ -308,18 +296,6 @@ kbd{font-family:'Google Sans',sans-serif; font-size:12.5px; font-weight:700; bac
           <div class="peek__row" data-channel-msg="vk">
             <span class="peek__ava" style="background:#81AEE6">И<small style="background:#0077FF"></small></span>
             <span><span class="peek__nm">Ирина</span><br><span class="peek__tx">Сколько стоит окрашивание?</span></span>
-          </div>
-          <div class="peek__row" data-channel-msg="max">
-            <span class="peek__ava" style="background:#5B8FD6">М<small style="background:#7B5CFA"></small></span>
-            <span><span class="peek__nm">Марина</span><br><span class="peek__tx">Голосовое, 0:12</span></span>
-          </div>
-          <div class="peek__row" data-channel-msg="mail">
-            <span class="peek__ava" style="background:#7C8AA0">Я<small style="background:#7C8AA0"></small></span>
-            <span><span class="peek__nm">Яндекс Бизнес</span><br><span class="peek__tx">Новая заявка с карты</span></span>
-          </div>
-          <div class="peek__row" data-channel-msg="wa">
-            <span class="peek__ava" style="background:#3E8E63">С<small style="background:#25D366"></small></span>
-            <span><span class="peek__nm">Светлана</span><br><span class="peek__tx">Можно перенести на пятницу?</span></span>
           </div>
         </div>
         <div class="peek__chat">
@@ -338,10 +314,7 @@ kbd{font-family:'Google Sans',sans-serif; font-size:12.5px; font-weight:700; bac
   <div class="band band-tilt" aria-hidden="true">
     <div class="band__track"><div class="band__list">
       <span>Telegram<i class="band__dot"></i></span><span>ВКонтакте<i class="band__dot"></i></span>
-      <span>MAX<i class="band__dot"></i></span><span>Почта<i class="band__dot"></i></span>
-      <span>Авито<i class="band__dot"></i></span>
-      <span>Wildberries<i class="band__dot"></i></span><span>Ozon<i class="band__dot"></i></span>
-      <span>Яндекс Бизнес<i class="band__dot"></i></span><span>2ГИС<i class="band__dot"></i></span>
+      <span>Один список<i class="band__dot"></i></span><span>Одна команда<i class="band__dot"></i></span>
       <span>Ничего не теряется<i class="band__dot"></i></span>
     </div></div>
   </div>
@@ -382,7 +355,7 @@ kbd{font-family:'Google Sans',sans-serif; font-size:12.5px; font-weight:700; bac
         <span>
           <span class="h-3">Работаете в одном окне</span>
           <p class="small" style="margin-top:8px; max-width:70ch">
-            Сообщения из всех каналов приходят в один список. Ответ уходит туда,
+            Сообщения из подключённых каналов приходят в один список. Ответ уходит туда,
             откуда написал клиент — думать об этом не нужно.
           </p>
         </span>
@@ -395,7 +368,7 @@ kbd{font-family:'Google Sans',sans-serif; font-size:12.5px; font-weight:700; bac
 <section class="section section-pale" id="stream">
   <div class="wrap">
     <p class="eyebrow reveal">Одна лента</p>
-    <h2 class="h-1 reveal d1" style="margin-top:14px; max-width:17ch">Шесть вкладок — одна колода</h2>
+    <h2 class="h-1 reveal d1" style="margin-top:14px; max-width:17ch">Telegram и ВКонтакте — одна лента</h2>
     <p class="lead reveal d2" style="margin-top:18px">
       Проведите по карточке. Так сообщения из разных мессенджеров идут одной лентой:
       администратор не выбирает, куда смотреть, — он просто разбирает верхнее.
@@ -435,36 +408,6 @@ kbd{font-family:'Google Sans',sans-serif; font-size:12.5px; font-weight:700; bac
           <footer class="sw__foot"><i></i>Перенесена · клиентка не ушла к соседям</footer>
         </article>
 
-        <article class="sw__card" style="--ch:#7B5CFA">
-          <header class="sw__top">
-            <span class="sw__ava" style="background:#5B8FD6">М</span>
-            <span class="sw__who"><b>Марина</b><span>MAX · голосовое</span></span>
-            <span class="sw__wait">4 мин</span>
-          </header>
-          <p class="sw__msg"><span class="sw__tag">Расшифровано</span>«Здравствуйте, хочу к вам на стрижку, когда есть свободное время?»</p>
-          <footer class="sw__foot"><i></i>Голосовое читается текстом — слушать не нужно</footer>
-        </article>
-
-        <article class="sw__card" style="--ch:#7C8AA0">
-          <header class="sw__top">
-            <span class="sw__ava" style="background:#7C8AA0">Я</span>
-            <span class="sw__who"><b>Яндекс Бизнес</b><span>Почта</span></span>
-            <span class="sw__wait">6 мин</span>
-          </header>
-          <p class="sw__msg">Новая заявка с карты: маникюр, ближайшее время</p>
-          <footer class="sw__foot"><i></i>Заявка с карты попала в тот же список</footer>
-        </article>
-
-        <article class="sw__card" style="--ch:#1F63BC">
-          <header class="sw__top">
-            <span class="sw__ava" style="background:#1F63BC">О</span>
-            <span class="sw__who"><b>Ольга</b><span>Авито</span></span>
-            <span class="sw__wait">2 мин</span>
-          </header>
-          <p class="sw__msg">Здравствуйте! Вы работаете в воскресенье?</p>
-          <footer class="sw__foot"><i></i>Шесть каналов, один список, ноль пропущенных</footer>
-        </article>
-
       </div>
 
       <div class="sw__ui">
@@ -495,14 +438,12 @@ kbd{font-family:'Google Sans',sans-serif; font-size:12.5px; font-weight:700; bac
           <p class="story__num">Шаг 1 из 4</p>
           <h2 class="h-1" style="margin-top:16px">Клиентка пишет туда,<br>где ей удобно</h2>
           <p class="lead" style="margin:18px auto 0">
-            В Telegram, ВКонтакте, MAX или на почту. Просить её писать в одно место бесполезно —
-            она выберет сама.
+            Сейчас — в Telegram-бот или сообщество ВКонтакте. Другие источники подключаем
+            только после проверки, что площадка даёт нужный доступ.
           </p>
           <div class="chan" style="justify-content:center; margin-top:26px">
             <span class="chan__i"><i class="chan__d" style="background:#2AABEE"></i>Telegram</span>
             <span class="chan__i"><i class="chan__d" style="background:#0077FF"></i>ВКонтакте</span>
-            <span class="chan__i"><i class="chan__d" style="background:#7B5CFA"></i>MAX</span>
-            <span class="chan__i"><i class="chan__d" style="background:#7C8AA0"></i>Почта</span>
           </div>
         </div>
       </div>
@@ -513,7 +454,7 @@ kbd{font-family:'Google Sans',sans-serif; font-size:12.5px; font-weight:700; bac
           <h2 class="h-1" style="margin-top:16px">Сообщение попадает<br>в общий список</h2>
           <p class="lead" style="margin:18px auto 0">
             За три секунды, в том же виде, что отправил клиент: с фото, файлами и голосовыми.
-            Голосовое приходит уже расшифрованным.
+            Голосовое можно открыть прямо в диалоге и прослушать на удобной скорости.
           </p>
           <p class="chip" style="margin-top:26px">Ничего не теряется даже при перезапуске</p>
         </div>
@@ -524,7 +465,7 @@ kbd{font-family:'Google Sans',sans-serif; font-size:12.5px; font-weight:700; bac
           <p class="story__num">Шаг 3 из 4</p>
           <h2 class="h-1" style="margin-top:16px">Администратор отвечает<br>за секунды</h2>
           <p class="lead" style="margin:18px auto 0">
-            Три буквы — и подсказка дописывает фразу целиком. Ответ уходит туда, откуда пришёл,
+            Сотрудник выбирает готовый ответ или пишет свой. Ответ уходит туда, откуда пришёл,
             думать об этом не нужно. Даже когда перед стойкой стоит человек.
           </p>
           <p class="chip" style="margin-top:26px">Медиана ответа падает с 19 минут до 4</p>
@@ -539,7 +480,7 @@ kbd{font-family:'Google Sans',sans-serif; font-size:12.5px; font-weight:700; bac
             Сколько обращений пришло, как быстро ответили, что висит прямо сейчас.
             Три минуты утром — и картина понятна.
           </p>
-          <a class="btn btn-light" style="margin-top:26px" href="app.html">Открыть панель руководителя</a>
+          <a class="btn btn-light" style="margin-top:26px" href="app.html">Посмотреть макет панели</a>
         </div>
       </div>
 
@@ -558,35 +499,27 @@ kbd{font-family:'Google Sans',sans-serif; font-size:12.5px; font-weight:700; bac
     <h2 class="h-1 reveal d1" style="margin-top:14px; max-width:18ch">Ответ занимает секунды, а не минуты</h2>
 
     <div class="grid g2" style="margin-top:44px">
-      <div class="demo reveal d1" data-demo="type" tabindex="0"
-           data-stem="доб" data-full="Добрый день! Подскажу по записи — на какой день удобно?">
-        <p class="eyebrow" style="color:var(--muted)">Наведите — покажем</p>
-        <p class="h-3" style="margin:10px 0 18px">Три буквы вместо целой фразы</p>
+      <div class="demo reveal d1">
+        <p class="eyebrow" style="color:var(--muted)">Уже работает</p>
+        <p class="h-3" style="margin:10px 0 18px">Готовый ответ вместо повторного набора</p>
         <div class="demo__field">
-          <span data-typed></span><span data-ghost></span><span class="caret" aria-hidden="true"></span>
+          <span>Добрый день! Подскажу по записи — на какой день удобно?</span>
         </div>
-        <span class="demo__hint" data-hint><kbd>Tab</kbd> вставить подсказку</span>
-        <div class="demo__sent" data-sent>
-          <span class="chip">Отправлено в Telegram · 2 секунды</span>
-        </div>
+        <span class="chip" style="margin-top:14px">Шаблон ответа</span>
         <p class="demo__cap">
-          Ветра запоминает фразы, которые вы отправляете часто, и предлагает их сама.
-          Ничего не нужно заранее настраивать.
+          Команда заранее сохраняет адрес, часы и частые ответы в настройках.
         </p>
       </div>
 
-      <div class="demo reveal d2" data-demo="voice" tabindex="0"
-           data-text="Да, свободное время есть в четверг после трёх.">
-        <p class="eyebrow" style="color:var(--muted)">Наведите — покажем</p>
-        <p class="h-3" style="margin:10px 0 18px">Голосом, когда некогда печатать</p>
+      <div class="demo reveal d2">
+        <p class="eyebrow" style="color:var(--muted)">Уже работает</p>
+        <p class="h-3" style="margin:10px 0 18px">Голосовое прямо в диалоге</p>
         <div class="demo__field" style="justify-content:space-between">
           <span class="wave" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i></span>
-          <span class="chip">Микрофон</span>
+          <span class="chip">1× · 1,5× · 2×</span>
         </div>
-        <span data-voice-out></span>
         <p class="demo__cap">
-          Сотрудник диктует — Ветра пишет текстом. И наоборот: голосовое от клиента
-          приходит уже расшифрованным, слушать не нужно.
+          Голосовое от клиента можно прослушать, перемотать и ускорить, не открывая мессенджер.
         </p>
       </div>
     </div>
@@ -617,7 +550,7 @@ kbd{font-family:'Google Sans',sans-serif; font-size:12.5px; font-weight:700; bac
     <p class="eyebrow reveal">Руководителю</p>
     <h2 class="h-1 reveal d1" style="margin-top:14px; max-width:17ch">Видно, что отвечено, а что висит</h2>
     <p class="lead reveal d2" style="margin-top:18px">
-      Отдельное окно, куда заходят на три минуты утром и вечером. Без чтения переписки.
+      Панель сейчас проходит проверку. Ниже — пример того, какие цифры владелец увидит без чтения переписки.
     </p>
 
     <div class="grid g4" style="margin-top:44px">
@@ -628,7 +561,7 @@ kbd{font-family:'Google Sans',sans-serif; font-size:12.5px; font-weight:700; bac
       </div>
       <div class="mini reveal d2">
         <p class="mini__n"><span data-count="4" data-suffix=" мин">0</span></p>
-        <p class="mini__l">среднее время первого ответа</p>
+        <p class="mini__l">медиана первого ответа</p>
         <p class="mini__delta">было 19 минут</p>
       </div>
       <div class="mini reveal d3">
@@ -648,38 +581,37 @@ kbd{font-family:'Google Sans',sans-serif; font-size:12.5px; font-weight:700; bac
         <i class="glass__fill"></i><i class="glass__soft"></i><i class="glass__edge"></i>
         <i class="glass__dark"></i><i class="glass__glow"></i>
         <p class="h-3">Таблица сотрудников</p>
-        <p class="small" style="margin-top:10px">Кто сколько взял и закрыл, сколько ждал клиент, доля нагрузки. Сортируется в один клик.</p>
+        <p class="small" style="margin-top:10px">Кто сколько взял, ответил и закрыл. Первая версия этой сводки сейчас проходит проверку.</p>
       </div>
       <div class="glass card-pad reveal d2">
         <i class="glass__fill"></i><i class="glass__soft"></i><i class="glass__edge"></i>
         <i class="glass__dark"></i><i class="glass__glow"></i>
         <p class="h-3">Требует внимания</p>
-        <p class="small" style="margin-top:10px">Диалоги без ответа дольше 15 минут — с именем ответственного и кнопкой «переназначить».</p>
+        <p class="small" style="margin-top:10px">Диалоги без ответа дольше 15 минут — с именем ответственного и ссылкой на разговор.</p>
       </div>
       <div class="glass card-pad reveal d3">
         <i class="glass__fill"></i><i class="glass__soft"></i><i class="glass__edge"></i>
         <i class="glass__dark"></i><i class="glass__glow"></i>
-        <p class="h-3">Отчёт в понедельник</p>
-        <p class="small" style="margin-top:10px">Письмо с цифрами за неделю приходит само. Открывать сервис для этого не нужно.</p>
+        <p class="h-3">Следующий этап</p>
+        <p class="small" style="margin-top:10px">Недельный отчёт появится после проверки ежедневной сводки на пилоте.</p>
       </div>
     </div>
 
     <p class="small reveal d4" style="margin-top:26px; max-width:70ch">
-      Сотрудник видит свои цифры сам — это честно и работает лучше скрытого контроля.
-      При включении панели мы даём готовый шаблон уведомления для команды.
+      Цифры на этом экране — пример, а не данные действующего салона.
     </p>
 
-    <a class="btn btn-outline reveal d5" style="margin-top:28px" href="app.html">Посмотреть панель целиком</a>
+    <a class="btn btn-outline reveal d5" style="margin-top:28px" href="app.html">Посмотреть макет панели</a>
   </div>
 </section>
 
 <div class="band-clip">
   <div class="band band-soft band-tilt" aria-hidden="true">
     <div class="band__track"><div class="band__list">
-      <span>Ни одной потерянной заявки<i class="band__dot"></i></span>
+      <span>Меньше пропущенных заявок<i class="band__dot"></i></span>
       <span>Ответ за минуты<i class="band__dot"></i></span>
-      <span>Ничему не нужно учиться<i class="band__dot"></i></span>
-      <span>Подключение за 3 минуты<i class="band__dot"></i></span>
+      <span>Понятный рабочий экран<i class="band__dot"></i></span>
+      <span>Настройка под ваш бизнес<i class="band__dot"></i></span>
     </div></div>
   </div>
 </div>
@@ -712,68 +644,59 @@ kbd{font-family:'Google Sans',sans-serif; font-size:12.5px; font-weight:700; bac
         <p class="calc__big"><span data-out="money">0</span> ₽</p>
         <p class="calc__sub">
           Это <span data-out="lost">0</span> обращений, на которые никто не ответил.
-          Даже если купит каждый третий — потери всё равно больше подписки.
+          Даже часть потерянных обращений помогает понять цену медленного ответа.
         </p>
-        <a class="btn btn-light" style="margin-top:22px" href="checkout.html">Перестать терять</a>
+        <a class="btn btn-light" style="margin-top:22px" href="#request">Обсудить задачу</a>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ======================= ТАРИФЫ ======================= -->
+<!-- ======================= ПОД КЛЮЧ ======================= -->
 <section class="section section-soft" id="price">
   <div class="wrap">
-    <p class="eyebrow reveal">Цены</p>
-    <h2 class="h-1 reveal d1" style="margin-top:14px; max-width:16ch">Бесплатно для одного. Одна цена за весь салон</h2>
+    <p class="eyebrow reveal">Ветра Премиум</p>
+    <h2 class="h-1 reveal d1" style="margin-top:14px; max-width:16ch">Собираем рабочее окно под ваш бизнес</h2>
     <p class="lead reveal d2" style="margin-top:18px">
-      Не за канал и не за человека. 14 дней «Команды» бесплатно, карта не нужна.
+      Сначала разбираем ваши каналы и процесс. После разговора фиксируем состав, срок и цену — до начала работ.
     </p>
 
     <div class="grid g3" style="margin-top:44px; max-width:1100px">
       <div class="plan reveal d1">
-        <p class="h-3">Бесплатно</p>
-        <p class="plan__price">0 ₽ <span>/ месяц</span></p>
-        <p class="small">Чтобы начать и не потерять ни одного сообщения.</p>
+        <p class="h-3">1. Разбираем</p>
+        <p class="small">Смотрим, откуда приходят обращения и где команда теряет время.</p>
         <ul>
-          <li><span>✓</span><span><b>Один сотрудник</b></span></li>
-          <li><span>✓</span><span><b>Один канал</b> на выбор</span></li>
-          <li><span>✓</span><span>100 диалогов в месяц</span></li>
-          <li><span>✓</span><span>История за 30 дней</span></li>
+          <li><span>✓</span><span>Каналы и сотрудники</span></li>
+          <li><span>✓</span><span>Путь заявки</span></li>
+          <li><span>✓</span><span>Что нужно владельцу</span></li>
         </ul>
-        <a class="btn btn-light btn-block" style="margin-top:auto" href="checkout.html">Начать бесплатно</a>
       </div>
 
       <div class="plan reveal d2">
-        <p class="h-3">Старт</p>
-        <p class="plan__price">1 500 ₽ <span>/ месяц</span></p>
-        <p class="small">Для тех, кто отвечает клиентам сам.</p>
+        <p class="h-3">2. Собираем</p>
+        <p class="small">Настраиваем Ветру под согласованный процесс, без скрытых функций «на потом».</p>
         <ul>
-          <li><span>✓</span><span><b>Один сотрудник</b></span></li>
-          <li><span>✓</span><span><b>Два канала</b> на выбор</span></li>
-          <li><span>✓</span><span>Диалоги и история без лимита</span></li>
-          <li><span>✓</span><span>Шаблоны, автодополнение и голос</span></li>
+          <li><span>✓</span><span>Один список диалогов</span></li>
+          <li><span>✓</span><span>Роли команды</span></li>
+          <li><span>✓</span><span>Нужные подсказки и шаблоны</span></li>
         </ul>
-        <a class="btn btn-light btn-block" style="margin-top:auto" href="checkout.html">Попробовать</a>
       </div>
 
       <div class="plan plan--hi reveal d3">
-        <span class="chip" style="align-self:flex-start">Для салона</span>
-        <p class="h-3">Команда</p>
-        <p class="plan__price">4 000 ₽ <span>/ месяц</span></p>
-        <p class="small">Когда клиентам отвечают сотрудники.</p>
+        <span class="chip" style="align-self:flex-start">Под ключ</span>
+        <p class="h-3">3. Подключаем</p>
+        <p class="small">Проверяем один настоящий канал вместе с вашей командой и остаёмся на связи после запуска.</p>
         <ul>
-          <li><span>✓</span><span><b>До пяти сотрудников</b></span></li>
-          <li><span>✓</span><span><b>Все каналы</b>, включая Авито</span></li>
-          <li><span>✓</span><span><b>Панель руководителя</b> с метриками</span></li>
-          <li><span>✓</span><span>Назначение диалогов и отчёт за неделю</span></li>
+          <li><span>✓</span><span>Тестовое сообщение</span></li>
+          <li><span>✓</span><span>Короткое обучение</span></li>
+          <li><span>✓</span><span>Проверка на ваших устройствах</span></li>
         </ul>
-        <a class="btn btn-primary btn-block" style="margin-top:auto" href="checkout.html">Попробовать 14 дней</a>
+        <a class="btn btn-primary btn-block" style="margin-top:auto" href="#request">Обсудить задачу</a>
       </div>
     </div>
 
     <p class="small reveal d3" style="margin-top:22px; max-width:70ch">
-      Сеть салонов или свои условия — тариф <b>«Своё»</b>: от шести сотрудников, настройка под вас,
-      подписка по договору от 20 000 ₽ в месяц плюс внедрение. <a href="mailto:hello@vetra.me">Напишите нам</a>. При оплате за год — минус 20 %.
+      Единой публичной цены сейчас нет: она зависит от каналов и доработок. Точную сумму называем после разбора и не меняем без согласования.
     </p>
   </div>
 </section>
@@ -785,7 +708,7 @@ kbd{font-family:'Google Sans',sans-serif; font-size:12.5px; font-weight:700; bac
     <div style="margin-top:34px" data-acc>
       <div class="acc__item">
         <button class="acc__q" aria-expanded="false">Клиент поймёт, что ему отвечают через сервис?<i aria-hidden="true">+</i></button>
-        <div class="acc__a"><p>Нет. Ответ приходит в тот же чат, откуда клиент написал — в Telegram он видит ваш обычный аккаунт, во ВКонтакте — сообщество. Ветра работает со стороны компании.</p></div>
+        <div class="acc__a"><p>Ответ приходит в тот же канал. Сейчас Telegram подключается через бота компании, а ВКонтакте — через сообщество; личные аккаунты сотрудников Ветра не читает.</p></div>
       </div>
       <div class="acc__item">
         <button class="acc__q" aria-expanded="false">Что будет, если канал заблокируют?<i aria-hidden="true">+</i></button>
@@ -793,35 +716,34 @@ kbd{font-family:'Google Sans',sans-serif; font-size:12.5px; font-weight:700; bac
       </div>
       <div class="acc__item">
         <button class="acc__q" aria-expanded="false">Где хранится переписка?<i aria-hidden="true">+</i></button>
-        <div class="acc__a"><p>На серверах в России, как требует закон о персональных данных. Переписку можно выгрузить в любой момент или удалить вместе с аккаунтом.</p></div>
+        <div class="acc__a"><p>Для рабочего запуска выбираем сервер в России и фиксируем хранение, доступ и удаление данных в договоре до подключения клиентов.</p></div>
       </div>
       <div class="acc__item">
         <button class="acc__q" aria-expanded="false">Сложно ли подключить?<i aria-hidden="true">+</i></button>
-        <div class="acc__a"><p>Первый канал занимает около трёх минут: выбрать мессенджер, вставить ключ доступа, отправить тестовое сообщение. Мы показываем каждый шаг с картинками.</p></div>
+        <div class="acc__a"><p>Первый канал подключаем вместе: получаем доступ, отправляем тестовое сообщение с другого устройства и проверяем ответ.</p></div>
       </div>
       <div class="acc__item">
-        <button class="acc__q" aria-expanded="false">А если у меня всего один сотрудник — я сам?<i aria-hidden="true">+</i></button>
-        <div class="acc__a"><p>Тогда начните с «Бесплатно» — один канал и сто диалогов в месяц, без срока. Когда станет тесно, есть «Старт»: два канала, шаблоны и голос, без панели руководителя — следить не за кем. Перейти на «Команду» можно в любой момент.</p></div>
+        <button class="acc__q" aria-expanded="false">Как считается цена?<i aria-hidden="true">+</i></button>
+        <div class="acc__a"><p>После короткого разбора каналов, числа сотрудников и нужных доработок. Состав, срок и сумму фиксируем до начала работ.</p></div>
       </div>
     </div>
   </div>
 </section>
 
 <!-- ======================= ФИНАЛ ======================= -->
-<section class="section section-navy final">
+<section class="section section-navy final" id="request">
   <svg class="shape" style="top:-46%;left:50%;width:52rem;transform:translateX(-50%);opacity:.14" viewBox="0 0 600 600" aria-hidden="true">
     <circle cx="300" cy="300" r="280" fill="none" stroke="currentColor" stroke-width="70"/>
   </svg>
   <div class="wrap-narrow">
-    <h2 class="h-1 reveal">Попробуйте на своих клиентах</h2>
+    <h2 class="h-1 reveal">Покажите, откуда вам пишут клиенты</h2>
     <p class="lead reveal d1" style="margin:18px auto 0">
-      14 дней бесплатно, карта не нужна. Если не подойдёт — просто перестаньте пользоваться.
+      Разберём ваш путь заявки, проверим доступные каналы и назовём состав, срок и цену до начала работ.
     </p>
-    <a class="btn btn-light reveal d2" href="checkout.html">Начать бесплатно</a>
 
     <!-- Заявка для тех, кому проще, чтобы позвонили -->
     <div class="callback reveal d3">
-      <p class="callback__or">или оставьте контакт — перезвоним и всё покажем</p>
+      <p class="callback__or">Оставьте контакт — свяжемся и зададим несколько вопросов о бизнесе</p>
       <form class="callback__form" data-lead="lending"
             data-lead-ok="Спасибо, заявка у нас. Свяжемся в течение рабочего дня.">
         <label class="callback__f">
@@ -829,8 +751,8 @@ kbd{font-family:'Google Sans',sans-serif; font-size:12.5px; font-weight:700; bac
           <input class="input" name="name" placeholder="Как вас зовут" autocomplete="name" required>
         </label>
         <label class="callback__f">
-          <span class="sr-only">Телефон или почта</span>
-          <input class="input" name="phone" placeholder="Телефон или почта" autocomplete="tel" required>
+          <span class="sr-only">Телефон, почта или Telegram</span>
+          <input class="input" name="contact" placeholder="Телефон, почта или Telegram" required>
         </label>
         <button class="btn btn-primary" type="submit">Оставить заявку</button>
       </form>
@@ -846,31 +768,28 @@ kbd{font-family:'Google Sans',sans-serif; font-size:12.5px; font-weight:700; bac
       <div>
         <a class="logo" href="index.html"><span class="logo__word" style="color:#fff">Ветра</span><span class="logo__dot"></span></a>
         <p style="margin-top:14px; max-width:34ch; font-size:15px">
-          Сообщения клиентов из всех каналов в одном окне.
+          Telegram и ВКонтакте в одном рабочем окне. Остальные каналы — после проверки доступа.
         </p>
       </div>
       <div>
         <h4>Продукт</h4>
         <ul>
           <li><a href="#how">Как работает</a></li>
-          <li><a href="#price">Цены</a></li>
-          <li><a href="app.html">Панель руководителя</a></li>
-          <li><a href="inbox.html">Окно сотрудника</a></li>
+          <li><a href="#price">Работа под ключ</a></li>
+          <li><a href="app.html">Макет панели</a></li>
+          <li><a href="inbox.html">Макет окна</a></li>
         </ul>
       </div>
       <div>
         <h4>Помощь</h4>
         <ul>
-          <li><a href="connect.html">Подключение канала</a></li>
-          <li><a href="login.html">Войти</a></li>
-          <li><a href="#">Написать нам</a></li>
+          <li><a href="#request">Обсудить задачу</a></li>
         </ul>
       </div>
       <div>
         <h4>Документы</h4>
         <ul>
-          <li><a href="#">Оферта</a></li>
-          <li><a href="#">Обработка данных</a></li>
+          <li><span>Готовятся до первого договора</span></li>
         </ul>
       </div>
     </div>
@@ -887,9 +806,7 @@ kbd{font-family:'Google Sans',sans-serif; font-size:12.5px; font-weight:700; bac
   </div>
 </footer>
 
-<script src="js/vendor/supabase.js"></script>
 <script src="js/vetra-config.js"></script>
-<script src="js/vetra-db.js"></script>
 <script src="js/vetra.js"></script>
 <script src="js/vetra-lead.js"></script>
 </body>

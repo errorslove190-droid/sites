@@ -1,11 +1,38 @@
 /* ================================================================
    Ветра — приём заявок.
    Любая форма с атрибутом data-lead="источник" отправляет свои поля
-   в таблицу leads. Никакой настройки в разметке больше не нужно:
-   берутся все input/select с атрибутом name.
+   на российский сервер Ветры: POST {LEAD_API_URL}/api/leads.
+   Если адрес ещё не задан, данные никуда не уходят и успех не показывается.
    ================================================================ */
 (function () {
   'use strict';
+
+  var cfg = window.VETRA_CONFIG || {};
+  var apiBase = String(cfg.LEAD_API_URL || '').replace(/\/$/, '');
+
+  function sendLead(data) {
+    if (!apiBase) {
+      return Promise.resolve({
+        ok: false,
+        message: 'Приём заявок пока настраивается. Мы не получили ваши данные.'
+      });
+    }
+
+    return fetch(apiBase + '/api/leads', {
+      method: 'POST',
+      headers: { 'content-type': 'application/json' },
+      body: JSON.stringify(data)
+    }).then(function (res) {
+      return res.json().catch(function () { return {}; }).then(function (body) {
+        if (!res.ok || body.ok !== true) {
+          return { ok: false, message: body.error || 'Не получилось отправить заявку. Попробуйте позже.' };
+        }
+        return { ok: true };
+      });
+    }).catch(function () {
+      return { ok: false, message: 'Нет связи с сервером. Мы не получили ваши данные.' };
+    });
+  }
 
   document.querySelectorAll('[data-lead]').forEach(function (form) {
     var okText = form.dataset.leadOk || 'Заявка принята. Свяжемся в течение рабочего дня.';
@@ -35,7 +62,9 @@
       var idle = btn && btn.textContent;
       if (btn) { btn.disabled = true; btn.textContent = 'Отправляем…'; }
 
-      Vetra.saveLead(data).then(function (r) {
+      data.page = location.pathname;
+
+      sendLead(data).then(function (r) {
         if (btn) { btn.disabled = false; btn.textContent = idle; }
         if (!r.ok) { note(r.message, true); return; }
         note(okText, false);
