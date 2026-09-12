@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="robots" content="noindex">
+  <title>Vetra × EchoMind — выбор стиля презентации</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Onest:wght@400;500;600;700&family=Unbounded:wght@500;600&display=swap" rel="stylesheet">
+  <style>
+    *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:#101216;color:#fff;font-family:Onest,Arial,sans-serif}a{color:inherit}.jump{position:sticky;top:0;z-index:9;display:flex;gap:7px;align-items:center;padding:10px 14px;background:rgba(16,18,22,.92);backdrop-filter:blur(12px);overflow:auto;border-bottom:1px solid #ffffff22}.jump strong{font:600 12px Manrope,sans-serif;white-space:nowrap;margin-right:6px}.jump a{display:block;min-width:40px;padding:8px 12px;border:1px solid #ffffff2f;border-radius:99px;text-align:center;text-decoration:none;font:700 12px Manrope,sans-serif}.style{position:relative;min-height:720px;padding:24px;display:flex;align-items:center;justify-content:center;overflow:hidden}.tag{position:absolute;top:18px;left:20px;z-index:2;padding:7px 10px;border-radius:99px;font:700 10px Manrope,sans-serif;letter-spacing:.08em;text-transform:uppercase}.frame{position:relative;width:min(1120px,100%);min-height:600px;padding:34px;display:flex;flex-direction:column}.brand{display:flex;align-items:center;justify-content:space-between;font:700 14px Manrope,sans-serif}.brand b{font-size:20px}.brand i{font-style:normal;opacity:.45}.eyebrow{font:700 11px Manrope,sans-serif;letter-spacing:.13em;text-transform:uppercase}.hero{margin:auto 0}.hero h2{margin:18px 0;max-width:900px;font-size:clamp(42px,7vw,92px);line-height:.95;letter-spacing:-.055em}.hero p{max-width:640px;margin:0;font-size:clamp(17px,2vw,23px);line-height:1.4}.flow{display:grid;grid-template-columns:repeat(4,1fr);margin-top:34px}.flow span{padding:14px 12px;border-top:1px solid currentColor;font:600 12px Manrope,sans-serif}.flow small{display:block;margin-bottom:7px;opacity:.5}.facts{display:flex;gap:28px;align-items:end;margin-top:auto}.facts b{display:block;font-size:22px}.facts span{font:600 11px Manrope,sans-serif;opacity:.65}.cta{margin-left:auto;padding:12px 18px;border-radius:99px;font:700 12px Manrope,sans-serif}
+    .s1{background:#dce8ff;color:#0a1020}.s1:before{content:"";position:absolute;width:620px;height:620px;right:-170px;top:-170px;border-radius:50%;background:#2c78d5;filter:blur(1px)}.s1 .tag{background:#0a1020;color:#fff}.s1 .frame{background:#f8f5ed;border:1px solid #0a1020;border-radius:24px;box-shadow:18px 20px 0 #2c78d5}.s1 .hero em{font-style:normal;color:#2c78d5}.s1 .flow span{border-color:#0a102033}.s1 .cta{background:#0a1020;color:#fff}
+    .s2{background:#8fa6b8;color:#f7fbff}.s2:after{content:"";position:absolute;inset:0;background:linear-gradient(#ffffff15 1px,transparent 1px),linear-gradient(90deg,#ffffff15 1px,transparent 1px);background-size:44px 44px}.s2 .tag{background:#eff8ff;color:#14212b}.s2 .frame{z-index:1;border:1px solid #eef8ff88;background:linear-gradient(135deg,#2b59ffcc,#8fa6b844);backdrop-filter:blur(8px)}.s2 .hero h2{font-family:Unbounded,Arial,sans-serif;font-size:clamp(36px,6vw,76px);letter-spacing:-.04em}.s2 .hero em{font-style:normal;color:#101cff}.s2 .cta{background:#eef8ff;color:#14212b}
+    .s3{background:#080a0e;color:#f5f6f1}.s3:before{content:"";position:absolute;width:70vw;height:70vw;left:42%;top:8%;border-radius:50%;background:radial-gradient(circle at 38% 38%,#ff7a3d 0 6%,#2b59ff 24%,transparent 65%);filter:blur(22px);opacity:.85}.s3 .tag{background:#ff7a3d;color:#080a0e}.s3 .frame{background:#080a0ecc;border:1px solid #ffffff33}.s3 .hero h2{font-family:Unbounded,Arial,sans-serif;text-transform:uppercase;font-size:clamp(34px,6vw,72px);letter-spacing:-.04em}.s3 .hero em{font-style:normal;color:#ff7a3d}.s3 .flow{gap:8px}.s3 .flow span{border:1px solid #ffffff2b}.s3 .cta{background:#2b59ff}
+    .s4{background:#f0ede4;color:#15181f}.s4 .tag{background:#2b59ff;color:#fff}.s4 .frame{border-top:5px solid #15181f;border-bottom:1px solid #15181f;padding-left:0;padding-right:0}.s4 .brand{border-bottom:1px solid #15181f;padding-bottom:18px}.s4 .hero{display:grid;grid-template-columns:1.3fr .7fr;gap:50px;align-items:end}.s4 .hero h2{font-family:Manrope,Arial,sans-serif;font-weight:500}.s4 .hero em{display:block;font-family:Georgia,serif;font-weight:400;color:#2b59ff}.s4 .hero p{font-size:18px;border-left:3px solid #ff7148;padding-left:18px}.s4 .flow span{border-color:#15181f}.s4 .cta{border:1px solid #15181f}
+    @media(max-width:650px){.style{min-height:680px;padding:14px}.frame{min-height:610px;padding:24px}.brand b{font-size:16px}.hero h2{font-size:41px}.hero p{font-size:16px}.flow{grid-template-columns:1fr 1fr}.flow span{padding:10px 6px}.facts{gap:16px;flex-wrap:wrap}.facts b{font-size:18px}.cta{order:5;margin-left:0}.s1 .frame{box-shadow:8px 10px 0 #2c78d5}.s4 .frame{padding-left:0;padding-right:0}.s4 .hero{display:block}.s4 .hero p{margin-top:22px}.tag{top:12px;left:14px}}
+  </style>
+</head>
+<body>
+  <nav class="jump"><strong>Выбрать стиль</strong><a href="#s1">01</a><a href="#s2">02</a><a href="#s3">03</a><a href="#s4">04</a></nav>
+
+  <section class="style s1" id="s1"><div class="tag">01 · рекомендую · ясная система</div><div class="frame">
+    <div class="brand"><b>Vetra<span style="color:#2c78d5">.</span> × EchoMind</b><i>совместный пилот</i></div>
+    <div class="hero"><div class="eyebrow">От обращения — к следующей продаже</div><h2>Одно окно.<br><em>Два слоя ценности.</em></h2><p>Vetra собирает и ведёт обращения. EchoMind понимает, где менеджер теряет клиента и что делать дальше.</p><div class="flow"><span><small>01</small>Обращение</span><span><small>02</small>Ответ</span><span><small>03</small>Анализ</span><span><small>04</small>Следующий шаг</span></div></div>
+    <div class="facts"><div><b>14 дней</b><span>на проверку гипотезы</span></div><div><b>1 отдел</b><span>без тяжёлого внедрения</span></div><div><b>4 метрики</b><span>вместо обещаний</span></div><div class="cta">Обсудить пилот →</div></div>
+  </div></section>
+
+  <section class="style s2" id="s2"><div class="tag">02 · металл и электрик · product-tech</div><div class="frame">
+    <div class="brand"><b>VETRA × ECHOMIND</b><i>pilot specification / 01</i></div>
+    <div class="hero"><div class="eyebrow">Операционный слой + интеллект продаж</div><h2>Сигнал не должен <em>теряться.</em></h2><p>Сообщения превращаются в назначенные действия, а диалоги — в измеримые точки роста отдела продаж.</p><div class="flow"><span><small>INPUT</small>Telegram / VK</span><span><small>WORKFLOW</small>Vetra</span><span><small>INTELLIGENCE</small>EchoMind</span><span><small>OUTPUT</small>Возврат сделки</span></div></div>
+    <div class="facts"><div><b>0</b><span>ничьих обращений</span></div><div><b>100%</b><span>диалогов в контуре</span></div><div><b>1</b><span>проверяемый пилот</span></div><div class="cta">Протокол пилота ↗</div></div>
+  </div></section>
+
+  <section class="style s3" id="s3"><div class="tag">03 · тёмная лаборатория · смелый</div><div class="frame">
+    <div class="brand"><b>Vetra<span style="color:#2b59ff">.</span> / EchoMind</b><i>conversation intelligence</i></div>
+    <div class="hero"><div class="eyebrow">Новая связка для отделов продаж</div><h2>Не просто видеть диалог. <em>Двигать сделку.</em></h2><p>Vetra отвечает за поток и работу команды. EchoMind — за смысл, качество и точный следующий шаг.</p><div class="flow"><span><small>01</small>Все каналы</span><span><small>02</small>Ответственный</span><span><small>03</small>Оценка диалога</span><span><small>04</small>Действие</span></div></div>
+    <div class="facts"><div><b>2 недели</b><span>до решения</span></div><div><b>Без долей</b><span>до результата</span></div><div><b>Совместно</b><span>если метрики растут</span></div><div class="cta">Проверить связку →</div></div>
+  </div></section>
+
+  <section class="style s4" id="s4"><div class="tag">04 · редакционная стратегия · деловой</div><div class="frame">
+    <div class="brand"><b>Vetra × EchoMind</b><i>предложение · сентябрь 2026</i></div>
+    <div class="hero"><div><div class="eyebrow">Гипотеза стратегического партнёрства</div><h2>От первого сообщения <em>до понятного действия.</em></h2></div><p>Не презентация «идеи», а предложение проверить совместную ценность на одном отделе продаж за 14 дней.</p></div>
+    <div class="flow"><span><small>VETRA</small>Окно и очередь</span><span><small>ECHOMIND</small>Анализ и обучение</span><span><small>ПИЛОТ</small>Один отдел</span><span><small>РЕШЕНИЕ</small>Только по цифрам</span></div>
+    <div class="facts"><div><b>Коротко</b><span>7 экранов</span></div><div><b>Честно</b><span>без готовой интеграции</span></div><div><b>Предметно</b><span>метрики и роли</span></div><div class="cta">К плану встречи →</div></div>
+  </div></section>
+</body>
+</html>
+
+
