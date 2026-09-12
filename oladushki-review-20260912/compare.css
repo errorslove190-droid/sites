@@ -1,0 +1,8 @@
+.compare-bar { position: relative; z-index: 100; display: flex; align-items: center; justify-content: space-between;
+  gap: 12px; padding: 10px 24px; background: #F8EFDB; color: #3E2814; font: 14px/1.4 'Golos Text',sans-serif; border-bottom: 1px solid #CBB98F; }
+.compare-bar nav { display: flex; gap: 4px; }
+.compare-bar nav a { min-height: 44px; min-width: 66px; display: flex; align-items: center; justify-content: center; border-radius: 999px; padding: 8px 14px; }
+.compare-bar nav a[aria-current] { background: #3E2814; color: #FBF3E2; }
+.compare-live { text-decoration: underline; text-underline-offset: 3px; }
+.compare-bar a:focus-visible { outline: 3px solid #2F4D8F; outline-offset: 3px; }
+@media(max-width:640px) { .compare-bar { padding: 8px 18px; gap: 8px; font-size: 12px; } .compare-live { display: none; } }
