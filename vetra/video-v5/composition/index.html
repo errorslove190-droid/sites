@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <script src="runtime.js"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=1920, height=1080">
+    <title>Ветра — promo</title>
+    <script src="assets/gsap.min.js"></script>
+    <link rel="stylesheet" href="assets/ui.css">
+  </head>
+  <body>
+    <div data-hf-id="hf-6sdl" id="root" data-composition-id="main" data-start="0" data-duration="54" data-width="1920" data-height="1080" data-fps="30">
+      <!-- значки каналов: те же, что на лендинге (sites/vetra/lending) -->
+      <svg data-hf-id="hf-g9yd" class="sprite" aria-hidden="true">
+        <symbol data-hf-id="hf-l66i" id="i-tg" viewBox="0 0 24 24"><circle data-hf-id="hf-2y8u" cx="12" cy="12" r="12" fill="#2AABEE" /><path data-hf-id="hf-8v9d" fill="#fff" d="M5.4 11.6l11.2-4.4c.5-.2 1 .1.8.9l-1.9 9c-.1.6-.5.8-1.1.5l-2.9-2.2-1.4 1.4c-.2.2-.3.3-.6.3l.2-3 5.4-4.9c.2-.2 0-.3-.3-.1l-6.7 4.2-2.9-.9c-.6-.2-.6-.6.2-.8z" /></symbol>
+        <symbol data-hf-id="hf-lr08" id="i-vk" viewBox="0 0 24 24"><rect data-hf-id="hf-jj3r" width="24" height="24" rx="6" fill="#0077FF" /><path data-hf-id="hf-0g5j" fill="#fff" d="M12.8 17C7.6 17 4.7 13.5 4.6 7.6h2.6c.1 4.3 2 6.1 3.5 6.5V7.6h2.5v3.7c1.5-.2 3-1.8 3.5-3.7h2.5c-.4 2.3-2.1 4-3.3 4.7 1.2.6 3.2 2.1 3.9 4.7h-2.7c-.6-1.8-2.1-3.2-3.9-3.4V17h-.4z" /></symbol>
+        <symbol data-hf-id="hf-h86n" id="i-max" viewBox="0 0 24 24"><image data-hf-id="hf-avdi" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGAAAABgCAYAAADimHc4AAAACXBIWXMAAAAAAAAAAQCEeRdzAAAQAElEQVR4nOVdCZwdRZn/V3e/e2YymckcOWZyk4OEAAmnihyCi4uCgoKiRrIa0EXYlSy4uyoIqyIQWN3lUFh2WYRF4KcuKIeKyLkJAZIQBsg9yZDJTOaeefd73bW/qq7qrn7HvDczb5DoB53u191vuvo7/t/3VX1Vj2CCRIgOf2Tu4mDN0hMDkUXH+YIti3WjboYv0NwMi9TCogAFQO09YV9ie3YOFEQ5TzznveeKHlMCTe4B6IRAI4AO4h4Twj8bbE80cU3j59k5A+xYg8HPafwzOzaIDh/RqQbaH810dcczvQf7U/ve2R/bvKk99tqGg4kd2y1qToh/xni/6I/Maq2eftaFkfoPXuAPtR5NSMjPmE0tCzAtUCtrc4hxRzLWYbAQHrx7m6j7md1Lihznf9G5xP6CeJznu/KcvdlXKSWgzjVq64ny2aIW0YheXx+YVz89tGjpYpxyxocavoCMFU13J3Zu3jb49KOb+n71867Uno73RACBmrkLps678KrqxlM/q+k1U6xsFjAzoFbcwxjCVM/ycsBmi3OLd8+EozCYHZPRhCA/K6cl49XLeRuloMQVkCoQWxj8SHxm99rXsjQNWCYsCEuD5m8JLzthftUxJ3y0+dJvvdb/+INPd/90fWdix25MhgA0fyQwbcnqf6ydfd43NFJVTTMJUDNmc0pT+CI5wKBH87y5xxLkMZHfszmYp9SqEJxj54LnLkXlPYceRqvEmsQaYf/HhGLbRUHhOAKRwqPI0DRMMwVDC0z5cOPnv3p83Scu/sOh+259vPNHNyataKpiAgg3Lj92+nFX3x2oXnCslWKMjztMJwx21JuZ1mvum1PL1n319QsgB7hgxAWb0Yzj9nck5nuklSss5RHutwowvahl2I+U4GQzWxEOv+6+qyowk1pImjEYmq/m4zOuuO6oKad//L5913xlV/TVzRMWQN2Scz/ffOwVdxIEqqxMHETzvm1BVFCcrcNctglIymUNEf/YFkEKCsFmuvAPygO5cJSGMBiRbFS8SUGmq+cxGkwpzHetRRW0fc2iFhJmFDPDi1auW/Q/z//P/usue67ngQfGLYCmlWvWNR375ZutdAZWNm3jelEPqDSHM5K61sA+K8fOZ0Ec+/nXJZKL87m+QV7PhS71QARdogUFoce+SXW+BZyzB34UGCoKby5vMlYKOvFVfWnOzT+r8TU0P975r+sxVgE0Hb9mXfNxl95spZKcW0QnhUORfE5IcHWYpQqCHfM7tRx/kCNQ95PQ/Lzn5ON+sdO5MJNnCQ7cuPjuxX3lGteuwsJVucPC0wxN4fyZ19zCPhcTQkEB1K/45Oenf4AxP83DSIf53Lyl6noFwR8uXo5YzDFLTBBX5deYIDx+gTiQlBcZ5XDVgZs8yjnrccbKtxzmy2jJfr4HhooIySsMr9ar/sALxxbSVhKfmnn1LcOZnq5CcJQngMisFce2nPGNu0BNEMZEznwV9YsF4xQwAaKLU0wIDh4oaimsgSdgVi6Lc/d26Or6Ey9E5TTM+1HKXmkt9w+uKRX0BygojPwoqfDfyGmMEAILYT/bet1PDiS2v5XrmD0C0ANh/5xz/vlePRiKWMmkw3zv44QKC82RumSzStF0Sfat4msiNBWMJ7mw5CE3b+CyMinfqNhY5ssu8yzYIo5f0FiWCwKfrsHH2q8rzFH0wNVg+1rh6EjR9pwEjUJzrucKI/ddGBz5tVBk9ewf3vu9t889IWlF0wUFMOPUS78VnrV0hRkbEbAjGi5ieK7QHrx2H2frSK4GuBGCjfMO6LrWACkIgfUWgWVRZDImzAzl3QVVYQP1TX40NgT4Vl8XQE21D8GgBkPXuGBSSRPRIRMDvWn0dqXQ05XGUG8ayajJheP3aQj4dGgyRC7XCgrlBk7IKoWXbxm5xBzz7Miyoz8x48p/evjd712XJ4BQ0/z5jR+48O+pmQTRNZdRblihmJjqcO1/vHmuirDiXgk9lmoNxBaMBc70dNoC68GorfFh0bIpOGZFLY5aXov586vQ1BhAJFJ+4h6PmejpSmHv9ijaXh9G26Yh7N8ZR3zERMCnIRjQC8CJ6mxdJudHQrmRktcfePNxl1JWHKc1fvGqF3sf+e/O5I49HgFMP+1LV/siU6qysRjXfkqZMQsVzft7Ajs8zs7bzyPJ0xgqGsf/J5zxWZMinbRQHTFwwsqpOPO0Jpx8Qj1aZoUxEQpHdMyeH+bbqR9r5AzdvyuGV57tx0tP9mHvm1FkMhZCIQNU6JsM3lQrcAy2QF/SaP6gULDA8oSwMaXqo81rr/7P9nWXOQIINs5urV959ueolQYxhI3y1sinFwq6chktwEY4OTcNUgJM+XWLwmQan7IwqymIc86cjnPPnoEF86owWcSaNXthhG8XfKWFW8TTD3bh1WcGOEyFwwa3yEKQ5DKcKP1DnrcuCUGS0mYCx9Wd87knDt7+ve7U3g4ugIbjPnGRr6auyoyOQBPa7wiA9SUIR2bH7dIn5HpbRe55LREnGNQASKQstDSF8LlPtuCCv56J2ik+vJfEhLHs+Cl827c9jsfu7sTGJ/qRSloIBVkYl++QC53LhR/VHxQOl9n7W4gYtdUn1p930f923nazQTQd9SvP+jQPOyX2qxrPhOEcs75AqdsShtxIwIUb1R270kikTFQFDaw+vxVrLpyDqe8x4wvR7EVhfP2WBTjrsyP4+fp3sX1jFKEggW6MxvB8jS8skMKUtTI4pvajn36888c3G+GZRywOtxyxAqYUANNwpqcy8pHHzBJY6MWEkEvyO/JrHvcLNkSQTJs4eWU9rlm7EIvmVeP9RotWVuM7Dy7Bk/d247HbDyIdzbcG97hwp1yuQIpZgUkzmB5acPTM0BGLjJpFK080qqp92egIQBnWSAa7oafrcO3ecDlwYY+1SGmrfc+uBqQzFH5Dwz98eR7+5oLZeL/T2WuasPSkatz3Tx3Yvy2BSMTtay+u8YX9QTEBsLsCWsQ3v2rliUb1gmOOJ7oOtnEtpopGO3+dHTMGi64Ixn1dGpsqKO+DGeS0NAfxL5cvxqoja3G40OwlYVzzwELc/+0OvPrYELSwZoekSjRk9x8VyqrVUH10tzw3ctTxRmjW/MU8SWRCYD2EEoI4vNsZpv0EJSfgzFf7hOTjmYXYJhlPmli5tBY3X7kETfUBHG4UCGv48vrZmDajC7+/uw96QABECcece664MzYxLTBnseFrmDWdJ0gs/MzzMkpfDrVsA+MZrcim+PWc/h7G/ISJ04+bhpsuX4xQwMbRw5XOu6oZ4WoDv7mthwvBiVNKREGlQlLWPTHVmD7dCDfOamRxObMArvFul6GSC9if+Z9XLcKxBGmfGmLJLM48oQE3f20RjLy+pMOTzlo7jfPlydt6YQTtODY32inmD4o74izqAs2Nhub3T6WZLIjlQpDb36Nkwuw8gxiRn7PeTBkLiG44xFMWTllRh5u++ufDfElnrq1HctjCc/cMQI/YXb6uFyzcKSevFeMEIdpUg+gagcWCXnabqeTcNv7bAmHHAt9FuMn2sj+UCYqFmUfOrcKNaxfCZ/x5MV/Sx9c1YKjTxLYnY9BZdOSBmvxB/TJIM4jBmM8Y72q6dy+jIRkBSQuwLYKl5tksxbRaP35wyXxUhw5vzC9FF1zfiL72TvTsyEJncDSBrJiRwcNPK5fx0hrUzwLrpUB0ESmxZECj+OYFrZjdKFr0Z0zBKg3nX9+A/1jTxXtuWff2aFlxqXBUWABjrGljP7cGxRE7Q3qS+VIgtnCSqSwuOrkBpy8/fOL8idKsZQGcurYWv7t1CHpY8qcw/JQKR20LcHBecbji2B55kptIQIQAslkTC6aH8bWzmvCXRh+6ZAp2PJvEgTdS0AJk3OGowZMwZkcMuh3IYQWnkunSIlSfwDadpwJf/UgDIoGcYaZJosHBDPbuS6BjfwI9PWnEolnepqqIgYZpfrS0hNA6J4S6+snv5NN04CNX1uL+tYfcIpBxDNIYLJ0mhCodcWKUysmKJTxJC7FzhUTGxAcWVuHURZPXh88okTTx/MsDeObZXrz1dhQDfWlkUqwI2B5J4yNsbE/ZODDB1FofjlhUhVNOq8Mpp09Fbd3kCWPu8QEsOTOMtidiCIZKD9oXgiF7RExe4bXcLB+Qmi4cMWO54yNswQT8BKtPmjzctyyKXz3Vg4d+cRDt7XHOZL+uwfDp8ElrVQTAFcOkGB4yseHFQbz8x0Hcd0cAZ5/XgE9/oRlTpo67EHxU+uAl1djxbJyPsNpdQ2MbpOEQ5N2ImxV7xuHc6CiVAT40L4jlMyanj2f3vgRuvrMdr20dhk8jfNjQZbiILVhlBa8ycSstWOUe68fnSaAFDAxk8V+3d+J3j/Vj7d/Nwhnn1FW8rdOX+nHEh0N466k49FB+ElYqHLUFwN/Iu+d+wRBZseML7MRM9wGfPCqCyaBnNwziB3fsxfBgFhE2TMg1XJS7cIaL8hI5JiTGluU5qYVsbxgERjVBT3cGN6zbizc2RfH1b7fw85WkVZ+pwju/j3tKVyTl5wcFBCD9QGFrkGGqHYZmslksagxg1Uw/Kk2/ea4fN961n8uaaz1PuvMb7bCPWYTaVtl1zwUiLIQCPr8dZPzyZ73ofjeDa388FyGRyVaC5hwXRPNSP7rb0vBztpQ/SOP1AU54L7y21CrHQZswNeD0+QZ3F5WkF14fxk3/8S63PINhvOm6LrueSGlPjrJwq3DrxYRQhKXwUhj7eqTawIY/DuO7l7fjhp/Mhc9fmZdggl96ZhidW1Og/sKV08UccQEfoGzyb7B/mAw0A9UhDSfPqqxD29+Vwo33doKyeVk+YjOf15aKrm4eKnt1SX0RpxKbW7JXCLL5NnQRRKoMbPzjCH70nQNYd+Osir0D8wMv/GQIVoY6xV+F/EGuRTuc9Gh9bgIsXigLYPFUHa01lVX/9Q90Y4CNwbLwhk/qUwZ5RHs9JbRy3oDDWHksoUixHA5TxCMc1r//9KODWHp0BB+7aGpF3qFhvg+NC/3ofCMF3Z8/SIMiVuBCUJ72K5MjxDeYYh7diIrS4y8O4dW3ExzzWRgpPL2QvIhweOuVOU0c69V+SPeViBIhSaa7kCQjJwKfH7j/xz1YdUoVGmdUJldoXRVAx+tJAUPlZcUFfYCq9aoVsEGz5fWV0/54ysJDzwzB5xc+xanAEAbrGRDyvgK/5vEDysw+T9sl01WBEA51/YdMPHxXHy6/vrki79N6TAAvs7oq2eQyBmlcMC+i9XLPev+rAxRzKgg/z7wWx/4eEyG/Lpyu7PK2m28LQIzCaW5ZY75PgHJNMlkKJN8vyIkMgZCO55+I4lNrMpgxZ+JW0LjQh2CNBjNhOeWOpQZpPALI1Xp1Y71DjSGgroI9zk+/loDhMzizbGW3y87ZGIOMfPj4s9QJFZLk7BunjVSZvyZfWXSfyNk4TIgswRTV2Kw/Z2TIwrOPDePiK+onxRzWDwAADsBJREFU/D7VDTqqm3T07bb42HE5gzTecGaUcJT5xukRNsMcFaGdBzLYedCE32+AsMotx+myme+i2VwAjGkqJCmOmM3ekaxmjM0NTbm/sBM1znRThKtsIgm3AgKfj2DTs3Fc9LV6nkVPhHQfQe1MAz07MqC+8gZpvBA0ysb8WhPv+64Mvbo7g2RWA0t2bU21pwA5Ws+IM5yNQ4tj6XwdSxBVGk5WLOYoSJjKeQdn8jiHM1sgjGkH2k3s35XG3MUTTy5rZxi8ErDcQZo8CygYjgqqryD8bNtn8o41e+BZTM5wNNwWiDMgxK+J15AleTbqOMe2INQoSTSd46orDMcyeAJlQ1IyTrG7rTICqG7UiyZhuc6Z3ZFvdDla43RXE6CmQr0P8RRFRz+4AGymKxAkYMipOZLhqFOtLdyYxHbpI2Q3hJjF6LyDMmncEwkxa+DrbNgp9Lt7WJYzcQrV6qMmYblZ8ag+QN2zRrPumUpQzwgwlNRFr6Uoe3QGetTVVURVviMAd+8Ea8IXyLd2oiPuE6i3n0hESU5o6vSiaujrzi23Hx8FIqLXoCgEuf6A7QtaQLHOOTl3Y6LUM0yRMjW7fCUrmc8eLI/l/AO7kS4cKRXbmuIXZE7g+AhX891ISVnTQsCSVCwGS4loZd5N9/QvlR6kKQxBOXsutULzj8ZJ/TEKEwS8rbqKFXbJo10Cb392tF+dP+RUyoomqnWrMkeQ2C+Wy3HzAQan3vxARnmVotzVWFz4yRdISR+ASWjkcNL1r5wkQ/ikPTEphBV+saWSZGSkZMmuAEQUJJdQcMBVWalFwI/rB5gliPzAzckQ4tVuEydWquIYrPvYollxYVQvkBWzo3RlYBKJNB0F6ogQhIyEcpkuHLGAIS4g/pYu01UYspXedcyO1gshcAFQYNr0yji4FMuC6ehJmOoPigqgUF9QskICyFrlOH7ixu689fasTeoIQFRns2RMhqOOT5CfFXRzLEURiJwmq7EJfJURQHyIrbI1ehKmCqP4U3OzYgCxykRqRSGOFh2ZkwLR3Nn1IhyVIamToDldD4pFqEKQ0Y+MiEARigDzj6yMAEZ67DXkSiVh0h8Uh6ACDBjOVKSNdlWDkymh6L5oUugIRA0xFdyXYSo/JyMpZRaVIuRMFliwSEfL/Mr4gIFOVq9oN3S0JKx4FKSQygD2vgMVEkCQjXqVo/Uof+8VlhykISV7edmSdyee4c9bwmA8xNxS37tskZPSSVh5EOTpRwH6nCUmJkbVQWXREjL6eHT5EFUIskb/OywHnDpNw4f/ujIp/kivicEu055rrbB5NH9Qtg9gVsUEwLrtJ9ojWhsmtsaRUTZMDKIciB/l+6kUxTkXBtDQXJkMs3t3FrEBi4+2FXO6uf5gdM+jaAtj2EAaGMkAtRNUmLoqAp+YlkCKMXIcWj/avbnXGPZPb9Vw/urK9TDu3ZzikMYEUE4SVtIHqAxhFjBiAj2pCgggQhAJEETjYimyPO0vjtmjOuYy9zK1uOSKMGpqJ2jOCu3alOaDPOUmYaUFIO8XTpjlAR0JYOEEJ7rXspG1KoKhGHXri0h5I3MT0Xr5jESC4sIvBHHyaZUr3O3Zl8W772SgsQBDsLhUEla4M06lHDxmX9wTpTi9cWJaw4brWusIdnUBPscXTK7W87/DqroTFs46x4/VX63sbJ6251M8CQuFy0/CyrYAyQDmB3ZVqNdw8XSCZ94q4DQnQ+tFP1YqSfGxcwO4/KoQKk2bn0pAUxb4kFSqU6689E/pjt4XtzPiMSxeVZCWzdAQYM5KrhenaCvrqjAzALNmdeW08eyZQDJpC36d4G8uDeL8Cytf0b1zUxr72jJ8fFk8tQT8lBsFyRcRG8Pr3rTtBxZP0A/MayBoqdPQfsjijJbPSKSBo1o1nLZMx6PPZ3DgkIUAKzsfB9azSMdMUxy51MCaNUEsWTI5MziffyiGLFMYY/Ty9PFBkLxZvGSCAm8NT1wAzJpOWahh50GLN5xBRDINnLRIwzfP86E6RHDKkRp+9VIWv3/VRHevBc3iFfPOKKMa58ueB5Mz3baeBQs0nPNXfpx2qq8imW4hYpr/xnMp+IKl4v7C/qB8CBJ79tLbhig+NXPi4dvHluv49VYTnX0WqnwEF3/QwCWnupXXUyIEq8/y4ZMfNPDKWxY2vJnFrv0WBgbZAn8AzYq1Si32QwxAOAg0zdRw5EIdJ60ysGxp/iqJlaan7okhnQCCofKc7tiiIEmKaTPN3REFEqyGf4IWPTUMXHO2gRe2W/jIUg1LZhTmVk2Y4COrdL7FkhTdvRTd/RTRqN0TGvIDU2sIGuoJGuq0SWe6pDdfTGPLH2ztl6wu5XTHDUHSU+oaRXcK2BsDltZM/CWObtH4Vi5FggTzZrENf1LKpCl+8aMRe5QwZ0XFcpOwMQuAKgnZG0OVEcDhSo/dGcfetizCYandheGnlD8YWzApsJlh9JZBiotaKpfGH07UtiGNJ++Lw88d7+gYX8ofjA2CpB/QgV0xYCgDvA8WPnxPaeCQhXuvi8LMUhj+0hhfyh+MOZ1i4ahOKPrTwJ4YcMxfzhIRYLH+Hd8cQVeHiTCfmF0a4yUVu5cJQA7ZjMkKMhRoG/7LEsCd3xrBGxsyiDi4Xxzjy0nC2Mw2g1pWP9G08orj1e5pDXhnpHzZHe700+tjeO7xlML88TlddXUti1oDRryr41B16+x6VlBUFonUn4Wj++NsRXDgPVqr409Gd1wbw+8fSTqwMxGnK+9lv0A4kDxwyMj0HjiIubOX8CmQY4yE+jJAXwqYUfnOxfcFJRMUP/rnGF56Ks0136aJOV1JGjEwlO08aMT373in/sSTTy+7VcoADcuGu/9MBXBgn4V//VYU2zdnEQwXq/Ufu9OVn9nvfPSl2t8xhts2bQK+NLbWyXnDFDhU1u/FHV70/G/TuOeWBIZ6LQRZubm6pJ5yXyn4Ge1edtwR2/KKMbT1pf8z4zQDQnyeb5ThB9ifqVSt0PuB+vso/vvOBJ79TYr/Dg1LtHgZiPMDcWPraCt2LzufsmKZ/dHXNhjR3W9uj+15a2v14iNXWWOp+xFQNJIdfyTUEwPufDmLTy3Xsaz5TxdNsUqGp3+dxqP3J9HTaSHoFyuwKKuwMA4WYvJ4/IFG/OiOb9vSndi+3aCmiUN/+MXDU5aPQQA5+cB46MAwxQ1/MNF2kGLTvgw+s0LHRceKxZjeI8pkgJeez+CXj6Sw++0sX3GL4T2fsZ8zHl0K58fiDzTNh7cHn3yErR/NM+GDv7n/odmrr/62HghU5/0wxmhECGJ8gvXY6Jm9Fu56xUR/FKgO2Br4nxtNvLzbwheP13HSvMmNa3v7KF58IYNnfpvG3l0mH+DhjtbM0frcTcDQRPwBm3gSzw6MbOn7xUPsMxdAvGNnR/dvH35w1qe/cCn7odSySIwNbBsuPxdo66V44E0LGzsoX3Y6wJ7O5/AShPwUu3sprv11FkfPIPjECh2r5mgIVqivqbefou2tLDZszGLrVhODffZQaIDhPGN6Aa3Pr6ooj8mj+QNDD+P1Q4882Cd+ANrpC2q/74c3NX/0oos1v6+qLCuQg/RJ4LZdFFfOJwUHaPqSwOYeit+1U2zpsrjZM8bzBTVM7ziurJbb3GFhS7uFWbUEx7RoWNFKMKdBQ10VEA7YP1NejLImEItT9A9SvNtlYfdeE9t3WmjfZ2FowOLwwqEmxHDeHlErtwojZy3zMSdhLPlKZAejL3fffpO85gggtqdtT8fP/239vLXfuDYbK0MAQgh+jeDJQxTbBilWTgGa2Tr7FOhLAO3DFO1DFP1xgJhAgLhabzcIzt+Re3bO77OXnOkcpHwticdepXxCd02AoCYIVPuBoEF4TRGvOGc/hZUC4nF7lGxkmCI6QnkixYYt7d+TBwIBIXiu8eOrPZpQz6cWxktdd6zvSdi/IeYRAKPdP73u+w2nfPzcyIKFR1vlxPdCQ9hPBBxMAb/stE2ZMZu9JFvd2EcZs8S97OVp+ZUNhm4PwrMZ7aZJ0TdC0TPojgXLTWoynxpmUT45hgkmECAgDMIktps5xV9laH3eeTqeJIwxP4iDsTe2vNB56/dVFnoEYMZG0m3fXXPJqrufe4EYWhVfv7UcIYgqB77UmGy40DIezkkzV+4vqWnEywBWHs8W+dWdteyEEJgPcRgs5v0yaJNzv4uVqY9B6z17OvYkjBADaSsefWLfNy5JK78jmScARoNbXtzy9g8vv2zZdXf8jM91Gs0fkPFrUqlrYxZWEUYWg7rxtrW0xnsFwmyRxf1Pt1912YHoK1uQQwUHZA48eucDgfrm5oVXfOcWBkWlhFCx2k3yHk3OmGBbZVZcyh8w5utaEC8cuH7d1t77C/60edERsT0/uZb9AjRd+PXvrLcyYjnpYjRpWk/GVbBbVOsr0dYcJhfzByzi0YkPLx64Yd3GzlvG/pPmQgi3pvq6upZc/e93aSGtuqBjnlStR+UKditloSIcLZaEMTEwrTetePSP+9Zd1tbzXwU1X1LJMeEDj975YGzXtreXXnvv3TWLF640EwUgaSJaTyqj9SX3lbBQdeO/IJKr9Rp8Whh98a2vPdd+5Ve6ohs9v549LgEwGtzy4uaNFx978rxLv/vN1gu/fpVR46ux2HIDVgW0HpOo9STnGePYl5MV81UYtRAy2cHhN7tuv/X1zpt+kMmJdopR2VURZjya3nnbVdd3/u+9P5uz+pqrms76zOf8tYFa5h/YltuH8r7QelRY63MsgEU3Ps2HTLZ/aE/vQw+82fXj9YPJd5wkqxwac1kKy5jbrv3i3+695/obm8/+/Gcazzj/gqp5Rx6rR4ifmASUCYMJRa7s8afSelJJrWezOtkiwzp3ruxa1oqm++NvbD4w+Pij7X0P/3wktZv37YyVxj3NIt6xq2PPT69bv/eeG9ZXLVh2xJTlJ59Ys2TVcZFZRywO1M2YEZzW2kQ0far4ae7izMIkaX2BZG58Ws/y7OzASKK9O5nsOhiN7X6nf+S1V/pGXtk4lHh7O1t4ZyL0/9Hg0goMdyTMAAAAAElFTkSuQmCC" width="24" height="24" /></symbol>
+        <symbol data-hf-id="hf-xko4" id="i-mail" viewBox="0 0 24 24"><rect data-hf-id="hf-uxxx" width="24" height="24" rx="6" fill="#5B6B85" /><path data-hf-id="hf-gimp" fill="none" stroke="#fff" stroke-width="1.7" d="M5 8.5h14v8H5z" /><path data-hf-id="hf-c66i" fill="none" stroke="#fff" stroke-width="1.7" d="M5 9l7 4.5L19 9" /></symbol>
+        <symbol data-hf-id="hf-xpck" id="i-avito" viewBox="0 0 24 24"><rect data-hf-id="hf-lt4x" width="24" height="24" rx="6" fill="#fff" /><circle data-hf-id="hf-q4d9" cx="9.2" cy="9" r="4.2" fill="#FF4053" /><circle data-hf-id="hf-0834" cx="16.8" cy="7.6" r="2.4" fill="#0AF" /><circle data-hf-id="hf-oltz" cx="16.6" cy="14.6" r="3.6" fill="#97CF26" /><circle data-hf-id="hf-fv3i" cx="8.8" cy="16.6" r="2.4" fill="#965EEB" /></symbol>
+        <symbol data-hf-id="hf-cpix" id="i-wa" viewBox="0 0 24 24"><circle data-hf-id="hf-cmm6" cx="12" cy="12" r="12" fill="#25D366" /><path data-hf-id="hf-24rm" fill="#fff" d="M12 5.5a6.5 6.5 0 0 0-5.6 9.8L5.5 18.5l3.3-.9A6.5 6.5 0 1 0 12 5.5zm0 1.6a4.9 4.9 0 1 1-2.5 9.1l-.3-.2-1.6.4.4-1.6-.2-.3A4.9 4.9 0 0 1 12 7.1zm-1.9 2.4c-.2 0-.4.1-.6.3-.2.2-.7.7-.7 1.6s.7 1.9.8 2c.1.1 1.4 2.2 3.5 2.9 1.7.6 2 .5 2.4.4.4-.1 1.1-.5 1.3-1 .2-.5.2-.9.1-1l-.4-.2-1.3-.6c-.2-.1-.3-.1-.4.1l-.6.7c-.1.1-.2.2-.4.1-.2-.1-.8-.3-1.5-.9-.6-.5-.9-1.1-1-1.3-.1-.2 0-.3.1-.4l.3-.3.2-.3v-.4l-.6-1.4c-.1-.3-.3-.3-.4-.3h-.4z" /></symbol>
+        <!-- статус-бар iOS -->
+        <symbol data-hf-id="hf-h0ui" id="i-sig" viewBox="0 0 18 12"><rect data-hf-id="hf-mvdr" x="0" y="8" width="3" height="4" rx="1" fill="currentColor" /><rect data-hf-id="hf-o3u7" x="5" y="5.5" width="3" height="6.5" rx="1" fill="currentColor" /><rect data-hf-id="hf-jwv0" x="10" y="3" width="3" height="9" rx="1" fill="currentColor" /><rect data-hf-id="hf-s05q" x="15" y="0" width="3" height="12" rx="1" fill="currentColor" /></symbol>
+        <symbol data-hf-id="hf-33nb" id="i-wifi" viewBox="0 0 17 12"><path data-hf-id="hf-582m" fill="currentColor" d="M8.5 2.6c2.6 0 5 1 6.8 2.7l1.2-1.3A11.6 11.6 0 0 0 8.5.8 11.6 11.6 0 0 0 .5 4l1.2 1.3A9.8 9.8 0 0 1 8.5 2.6zm0 3.4c1.7 0 3.2.6 4.4 1.7l1.2-1.3A8 8 0 0 0 8.5 4.2 8 8 0 0 0 2.9 6.4l1.2 1.3A6.2 6.2 0 0 1 8.5 6zm0 3.4c.8 0 1.5.3 2 .8L8.5 12l-2-1.8c.5-.5 1.2-.8 2-.8z" /></symbol>
+        <symbol data-hf-id="hf-7phj" id="i-bat" viewBox="0 0 27 13"><rect data-hf-id="hf-y685" x=".5" y=".5" width="22" height="12" rx="3.5" stroke="currentColor" opacity=".4" fill="none" /><rect data-hf-id="hf-xp0o" x="2" y="2" width="19" height="9" rx="2" fill="currentColor" /><path data-hf-id="hf-gjih" d="M24.5 4.5v4a2 2 0 0 0 0-4z" fill="currentColor" opacity=".4" /></symbol>
+        <!-- вкладки приложения -->
+        <symbol data-hf-id="hf-cza4" id="i-chats" viewBox="0 0 24 24"><path data-hf-id="hf-40ld" fill="currentColor" d="M12 3C6.9 3 3 6.5 3 10.8c0 2.3 1.1 4.3 2.9 5.7L5 21l4.6-2.2c.8.2 1.6.3 2.4.3 5.1 0 9-3.5 9-7.8S17.1 3 12 3z" /></symbol>
+        <symbol data-hf-id="hf-a17p" id="i-chan" viewBox="0 0 24 24"><path data-hf-id="hf-kbtw" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7l-1 1" /><path data-hf-id="hf-x53d" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" d="M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1-1" /></symbol>
+        <symbol data-hf-id="hf-the7" id="i-panel" viewBox="0 0 24 24"><path data-hf-id="hf-z868" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" d="M4 20V10M10 20V4M16 20v-7M22 20H2" /></symbol>
+        <symbol data-hf-id="hf-tvw0" id="i-user" viewBox="0 0 24 24"><circle data-hf-id="hf-sdqc" cx="12" cy="8" r="4" fill="none" stroke="currentColor" stroke-width="2" /><path data-hf-id="hf-z8ib" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" d="M4 21c0-4 3.6-6 8-6s8 2 8 6" /></symbol>
+        <symbol data-hf-id="hf-nnuz" id="i-srch" viewBox="0 0 24 24"><circle data-hf-id="hf-kw62" cx="11" cy="11" r="7" fill="none" stroke="currentColor" stroke-width="2" /><path data-hf-id="hf-hnx4" stroke="currentColor" stroke-width="2" stroke-linecap="round" d="M20 20l-4-4" /></symbol>
+        <symbol data-hf-id="hf-5xqf" id="i-clip" viewBox="0 0 24 24"><path data-hf-id="hf-qqk3" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" d="M21 11.5 12.5 20a5.5 5.5 0 0 1-7.8-7.8l9-9a3.5 3.5 0 0 1 5 5l-9 9a1.5 1.5 0 0 1-2.1-2.1l8.3-8.3" /></symbol>
+        <symbol data-hf-id="hf-2j2g" id="i-mic" viewBox="0 0 24 24"><rect data-hf-id="hf-6i4z" x="9" y="3" width="6" height="11" rx="3" fill="none" stroke="currentColor" stroke-width="2" /><path data-hf-id="hf-r0o1" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" d="M5 11a7 7 0 0 0 14 0M12 18v3" /></symbol>
+        <symbol data-hf-id="hf-cbwo" id="i-back" viewBox="0 0 24 24"><path data-hf-id="hf-o5xi" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" d="M15 5l-7 7 7 7" /></symbol>
+        <symbol data-hf-id="hf-bcwb" id="i-torch" viewBox="0 0 24 24"><path data-hf-id="hf-b93u" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" d="M8 3h8v4l-2 3v11h-4V10L8 7z" /></symbol>
+        <symbol data-hf-id="hf-0930" id="i-cam" viewBox="0 0 24 24"><path data-hf-id="hf-a293" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" d="M4 8h3l2-3h6l2 3h3v11H4z" /><circle data-hf-id="hf-1agc" cx="12" cy="13" r="3.5" fill="none" stroke="currentColor" stroke-width="2" /></symbol>
+        <symbol data-hf-id="hf-6qmr" id="i-cursor" viewBox="0 0 24 24"><path data-hf-id="hf-23i2" d="M5 3l14 9-6 1.5L10 21z" fill="#fff" stroke="#0f1d2e" stroke-width="1.6" stroke-linejoin="round" /></symbol>
+      </svg>
+
+      <div data-hf-id="hf-m7dd" class="bg"></div>
+      <div data-hf-id="hf-qdvn" class="glow" id="glow" data-layout-ignore=""><div data-hf-id="hf-l28e" class="glow-pulse" id="glow-pulse"></div></div>
+      <div data-hf-id="hf-kk9u" class="floor"></div>
+
+      <div data-hf-id="hf-j1he" id="stage" data-layout-allow-overflow="">
+        <div data-hf-id="hf-j427" id="world">
+          <!-- ================= ноутбук ================= -->
+          <div data-hf-id="hf-vgyg" class="device" id="laptop">
+            <div data-hf-id="hf-ao6b" class="lap-lid"></div>
+            <div data-hf-id="hf-5gr0" class="lap-screen">
+              <!-- входящие -->
+              <div data-hf-id="hf-gdv5" class="view ui" id="lp-desk">
+                <div data-hf-id="hf-tyyu" class="hdr">
+                  <div data-hf-id="hf-tuoe" class="logo">Ветра<i data-hf-id="hf-wt6k"></i></div>
+                  <div data-hf-id="hf-5rmk" class="tabs"><span data-hf-id="hf-5xbe" class="on">Входящие</span><span data-hf-id="hf-v56b">Панель</span><span data-hf-id="hf-6knw">Каналы</span><span data-hf-id="hf-1wqg">Команда</span></div>
+                  <div data-hf-id="hf-t2jr" class="hdr-r"><span data-hf-id="hf-8dng" class="st lp-st"><b data-hf-id="hf-xujp"></b><span data-hf-id="hf-y8yw" class="lp-st-text">Каналы не подключены</span></span><div data-hf-id="hf-g7t7" class="ava uava g3">МА</div></div>
+                </div>
+                <div data-hf-id="hf-2t3w" class="body">
+                  <aside data-hf-id="hf-ydg3" class="list">
+                    <div data-hf-id="hf-53cp" class="search"><svg data-hf-id="hf-1hb7" width="18" height="18"><use data-hf-id="hf-rhu8" href="#i-srch" /></svg>Поиск по имени или сообщению</div>
+                    <div data-hf-id="hf-9uej" class="row hot" id="lp-r1"><div data-hf-id="hf-lbac" class="ava g1">АК<svg data-hf-id="hf-zs9w" class="ch"><use data-hf-id="hf-scef" href="#i-vk" /></svg></div><div data-hf-id="hf-jg91" class="rc"><div data-hf-id="hf-dvvi" class="rn">Алина Кузнецова<span data-hf-id="hf-u55g" class="tm">03:29</span></div><div data-hf-id="hf-4j5y" class="rp"><span data-hf-id="hf-6ufd" class="txt">И сколько будет стоить…</span><span data-hf-id="hf-df8y" class="wait bad" id="lp-r1-wait">висит 43 мин</span></div></div></div>
+                    <div data-hf-id="hf-8zv3" class="row" id="lp-r2"><div data-hf-id="hf-qa23" class="ava g4">О<svg data-hf-id="hf-xmzg" class="ch"><use data-hf-id="hf-62j1" href="#i-tg" /></svg></div><div data-hf-id="hf-nejd" class="rc"><div data-hf-id="hf-o01q" class="rn">Ольга<span data-hf-id="hf-vnyr" class="tm">04:03</span></div><div data-hf-id="hf-leyy" class="rp"><span data-hf-id="hf-8cpz" class="txt">Давайте четверг</span><span data-hf-id="hf-c9hf" class="wait" style="color:#56687f" id="lp-r2-wait">ждёт 8 мин</span><span data-hf-id="hf-r2a1" class="badge">1</span></div></div></div>
+                    <div data-hf-id="hf-dx4r" class="row" id="lp-rnew" style="height:0;overflow:hidden;padding-top:0;padding-bottom:0;opacity:0"><div data-hf-id="hf-ql9z" class="ava g2">М<svg data-hf-id="hf-wg2d" class="ch"><use data-hf-id="hf-24nj" href="#i-avito" /></svg></div><div data-hf-id="hf-olgg" class="rc"><div data-hf-id="hf-wsip" class="rn">Марина<span data-hf-id="hf-8cla" class="tm">только что</span></div><div data-hf-id="hf-lt9z" class="rp"><span data-hf-id="hf-vaa5" class="txt">Ещё актуально? Цена?</span><span data-hf-id="hf-bt4t" class="badge">1</span></div></div></div>
+                    <div data-hf-id="hf-51r2" class="row" id="lp-r3"><div data-hf-id="hf-4lnz" class="ava g3">ДС<svg data-hf-id="hf-wude" class="ch"><use data-hf-id="hf-dhvw" href="#i-max" /></svg></div><div data-hf-id="hf-o75f" class="rc"><div data-hf-id="hf-noa8" class="rn">Дарья Соловьёва<span data-hf-id="hf-w7wm" class="tm">02:02</span></div><div data-hf-id="hf-m7l0" class="rp"><span data-hf-id="hf-cdzh" class="txt">Хорошо, будем ждать</span></div></div></div>
+                    <div data-hf-id="hf-fx8p" class="row" id="lp-r4"><div data-hf-id="hf-jj5l" class="ava g7">ИП<svg data-hf-id="hf-ytwj" class="ch"><use data-hf-id="hf-tgyz" href="#i-mail" /></svg></div><div data-hf-id="hf-m7ma" class="rc"><div data-hf-id="hf-07ff" class="rn">Ирина Петрова<span data-hf-id="hf-bppb" class="tm">01:00</span></div><div data-hf-id="hf-mlw1" class="rp"><span data-hf-id="hf-k4pv" class="txt">До встречи!</span></div></div></div>
+                    <div data-hf-id="hf-cxz4" class="row" id="lp-r5"><div data-hf-id="hf-kwwx" class="ava g5">Н<svg data-hf-id="hf-z87k" class="ch"><use data-hf-id="hf-x51q" href="#i-wa" /></svg></div><div data-hf-id="hf-ltb9" class="rc"><div data-hf-id="hf-w9j1" class="rn">Наталья<span data-hf-id="hf-2yby" class="tm">вчера</span></div><div data-hf-id="hf-n072" class="rp"><span data-hf-id="hf-ct4l" class="txt">Спасибо, приду</span></div></div></div>
+                  </aside>
+                  <main data-hf-id="hf-k5fe" class="pane">
+                    <div data-hf-id="hf-i8mw" class="ph"><div data-hf-id="hf-5nh8" class="ava g1">АК<svg data-hf-id="hf-y1ah" class="ch"><use data-hf-id="hf-dqlj" href="#i-vk" /></svg></div><div data-hf-id="hf-yeow"><div data-hf-id="hf-xwpg" class="pn">Алина Кузнецова</div><div data-hf-id="hf-93pq" class="ps">ВКонтакте · <span data-hf-id="hf-bve1" id="lp-wait">ждёт 43 мин</span></div></div></div>
+                    <div data-hf-id="hf-h8n5" class="tiles" id="lp-tiles">
+                      <div data-hf-id="hf-f6ek" class="tile"><div data-hf-id="hf-yilc" class="tl">Не отвечено</div><div data-hf-id="hf-m8do" class="tv bad" id="tile-1">3</div></div>
+                      <div data-hf-id="hf-8r7o" class="tile"><div data-hf-id="hf-dcjg" class="tl">Ждут дольше 15 мин</div><div data-hf-id="hf-5o87" class="tv bad" id="tile-2">1</div></div>
+                      <div data-hf-id="hf-7kal" class="tile"><div data-hf-id="hf-k5vt" class="tl">Ответили сегодня</div><div data-hf-id="hf-kfhu" class="tv" id="tile-3">42</div></div>
+                    </div>
+                    <div data-hf-id="hf-vshe" class="chat">
+                      <div data-hf-id="hf-wzjr" class="day">Сегодня</div>
+                      <div data-hf-id="hf-z1ob" class="bb">Здравствуйте! А на субботу к Кате есть окошко на окрашивание?<span data-hf-id="hf-kkae" class="bt">03:28</span></div>
+                      <div data-hf-id="hf-todh" class="bb">И сколько будет стоить, волосы ниже лопаток<span data-hf-id="hf-k5zd" class="bt">03:29</span></div>
+                      <div data-hf-id="hf-gcxm" class="bb me" id="lp-me1" style="opacity:0">Работаем с 10 до 21, без выходных<span data-hf-id="hf-vqk0" class="bt">04:12</span></div>
+                      <div data-hf-id="hf-mlax" class="bb me" id="lp-me2" style="opacity:0">Да, у Кати есть окошко в субботу в 14:00<span data-hf-id="hf-vc8z" class="bt">04:13</span></div>
+                    </div>
+                    <div data-hf-id="hf-exrd" class="chips"><span data-hf-id="hf-6mqs" class="chip">Часы работы</span><span data-hf-id="hf-xbj3" class="chip">Адрес</span><span data-hf-id="hf-qm92" class="chip">Прайс</span><span data-hf-id="hf-e399" class="chip">Записала</span><span data-hf-id="hf-oqzw" class="chip">Уточню и вернусь</span><span data-hf-id="hf-o7yc" class="more">Настроить</span></div>
+                    <div data-hf-id="hf-9ve7" class="inp">
+                      <div data-hf-id="hf-g8ue" class="clipbtn"><svg data-hf-id="hf-ef75" width="18" height="18" style="color:#0f1d2e"><use data-hf-id="hf-1ckk" href="#i-clip" /></svg></div>
+                      <div data-hf-id="hf-0ztw" class="field"><span data-hf-id="hf-lca3" class="pl">Ответ клиенту. Enter — отправить</span></div>
+                      <div data-hf-id="hf-54up" class="mic"><svg data-hf-id="hf-5hln" width="18" height="18" style="color:#fff"><use data-hf-id="hf-2atz" href="#i-mic" /></svg></div>
+                    </div>
+                  </main>
+                </div>
+              </div>
+
+              <!-- подключение каналов -->
+              <div data-hf-id="hf-rej4" class="view ui" id="lp-connect">
+                <div data-hf-id="hf-q9my" class="hdr">
+                  <div data-hf-id="hf-wcr6" class="logo">Ветра<i data-hf-id="hf-zeb8"></i></div>
+                  <div data-hf-id="hf-ias4" class="tabs"><span data-hf-id="hf-gyxh">Входящие</span><span data-hf-id="hf-p5xv">Панель</span><span data-hf-id="hf-v9tb" class="on">Каналы</span><span data-hf-id="hf-el74">Команда</span></div>
+                  <div data-hf-id="hf-rq2v" class="hdr-r"><span data-hf-id="hf-smc4" class="st lp-st"><b data-hf-id="hf-ey49"></b><span data-hf-id="hf-4m3k" class="lp-st-text">Каналы не подключены</span></span><div data-hf-id="hf-4c17" class="ava uava g3">МА</div></div>
+                </div>
+                <div data-hf-id="hf-5owj" class="cwrap">
+                  <h2 data-hf-id="hf-t93t">Подключить каналы</h2>
+                  <p data-hf-id="hf-5u5a">Один раз положить сюда ключ канала — сообщения клиентов начнут приходить в окно.</p>
+                  <div data-hf-id="hf-z5x9" class="crow"><div data-hf-id="hf-c9yo" class="cn"><svg data-hf-id="hf-vwu9"><use data-hf-id="hf-eqo1" href="#i-tg" /></svg>Telegram</div><div data-hf-id="hf-x7yw" class="ckey"><span data-hf-id="hf-q8o3" class="klabel">Ключ бота</span><span data-hf-id="hf-4089" class="kval"><span data-hf-id="hf-kprf" class="hl" id="hl-tg"></span><span data-hf-id="hf-d5vr" class="kv" id="k-tg"><span data-hf-id="hf-c5p7" class="ph">7712345678:AAH…</span></span></span></div><div data-hf-id="hf-aaix" class="cbtn"><button data-hf-id="hf-qe2h" id="b-tg">Подключить</button><span data-hf-id="hf-vf3p" class="cok" id="s-tg">✓ Подключён</span></div></div>
+                  <div data-hf-id="hf-47o1" class="crow"><div data-hf-id="hf-xxur" class="cn"><svg data-hf-id="hf-8vth"><use data-hf-id="hf-dcai" href="#i-vk" /></svg>ВКонтакте</div><div data-hf-id="hf-yqk0" class="ckey"><span data-hf-id="hf-vjxz" class="klabel">Ключ сообщества</span><span data-hf-id="hf-behp" class="kval"><span data-hf-id="hf-nko1" class="hl" id="hl-vk"></span><span data-hf-id="hf-6l85" class="kv" id="k-vk"><span data-hf-id="hf-61ck" class="ph">vk1.a.…</span></span></span></div><div data-hf-id="hf-5cjh" class="cbtn"><button data-hf-id="hf-969r" id="b-vk">Подключить</button><span data-hf-id="hf-dbkz" class="cok" id="s-vk">✓ Подключён</span></div></div>
+                  <div data-hf-id="hf-5el4" class="crow"><div data-hf-id="hf-ln9j" class="cn"><svg data-hf-id="hf-e4po"><use data-hf-id="hf-57ms" href="#i-max" /></svg>MAX</div><div data-hf-id="hf-xjmx" class="ckey"><span data-hf-id="hf-5hsz" class="klabel">Ключ бота</span><span data-hf-id="hf-cles" class="kval"><span data-hf-id="hf-m6kq" class="hl" id="hl-max"></span><span data-hf-id="hf-b0ly" class="kv" id="k-max"><span data-hf-id="hf-ksd9" class="ph">max…</span></span></span></div><div data-hf-id="hf-6jgk" class="cbtn"><button data-hf-id="hf-94ja" id="b-max">Подключить</button><span data-hf-id="hf-ybai" class="cok" id="s-max">✓ Подключён</span></div></div>
+                  <div data-hf-id="hf-50a3" class="crow"><div data-hf-id="hf-ozdt" class="cn"><svg data-hf-id="hf-dqen"><use data-hf-id="hf-nh76" href="#i-wa" /></svg>WhatsApp</div><div data-hf-id="hf-xxxy" class="ckey"><span data-hf-id="hf-8oax" class="klabel">Номер и ключ провайдера</span><span data-hf-id="hf-c73r" class="kval"><span data-hf-id="hf-f6lo" class="hl" id="hl-wa"></span><span data-hf-id="hf-3vk0" class="kv" id="k-wa"><span data-hf-id="hf-xdpb" class="ph">+7 ··· · ключ</span></span></span></div><div data-hf-id="hf-655j" class="cbtn"><button data-hf-id="hf-tepe" id="b-wa">Подключить</button><span data-hf-id="hf-7v04" class="cok" id="s-wa">✓ Подключён</span></div></div>
+                  <div data-hf-id="hf-30qy" class="crow"><div data-hf-id="hf-l2p7" class="cn"><svg data-hf-id="hf-exbq"><use data-hf-id="hf-i5v3" href="#i-avito" /></svg>Авито</div><div data-hf-id="hf-wr0v" class="ckey"><span data-hf-id="hf-ulmb" class="klabel">Ключ приложения</span><span data-hf-id="hf-de0u" class="kval"><span data-hf-id="hf-vgbp" class="hl" id="hl-avito"></span><span data-hf-id="hf-gfip" class="kv" id="k-avito"><span data-hf-id="hf-9j6b" class="ph">client_id · client_secret</span></span></span></div><div data-hf-id="hf-7c2m" class="cbtn"><button data-hf-id="hf-ofyh" id="b-avito">Подключить</button><span data-hf-id="hf-wss7" class="cok" id="s-avito">✓ Подключён</span></div></div>
+                  <div data-hf-id="hf-2mfx" class="crow"><div data-hf-id="hf-5qvh" class="cn"><svg data-hf-id="hf-ej0p"><use data-hf-id="hf-7dvv" href="#i-mail" /></svg>Почта</div><div data-hf-id="hf-x5bw" class="ckey"><span data-hf-id="hf-pq29" class="klabel">Пароль приложения</span><span data-hf-id="hf-czpt" class="kval"><span data-hf-id="hf-1l9h" class="hl" id="hl-mail"></span><span data-hf-id="hf-0psx" class="kv" id="k-mail"><span data-hf-id="hf-t44e" class="ph">salon@yandex.ru</span></span></span></div><div data-hf-id="hf-6xrl" class="cbtn"><button data-hf-id="hf-fpun" id="b-mail">Подключить</button><span data-hf-id="hf-rc93" class="cok" id="s-mail">✓ Подключён</span></div></div>
+                </div>
+              </div>
+
+              <!-- панель руководителя -->
+              <div data-hf-id="hf-f9kj" class="view ui" id="lp-admin">
+                <div data-hf-id="hf-qnxz" class="hdr">
+                  <div data-hf-id="hf-wr27" class="logo">Ветра<i data-hf-id="hf-y7e5"></i></div>
+                  <div data-hf-id="hf-h3v1" class="tabs"><span data-hf-id="hf-9pu1">Входящие</span><span data-hf-id="hf-yv10" class="on">Панель</span><span data-hf-id="hf-9t04">Каналы</span><span data-hf-id="hf-dea1">Команда</span></div>
+                  <div data-hf-id="hf-rbru" class="hdr-r"><span data-hf-id="hf-fn1q" class="st ok"><b data-hf-id="hf-g51c"></b><span data-hf-id="hf-89km">6 каналов подключено</span></span><div data-hf-id="hf-3xq6" class="ava uava g3">МА</div></div>
+                </div>
+                <div data-hf-id="hf-ib1s" class="adm">
+                  <h2 data-hf-id="hf-ol4h">Панель руководителя</h2>
+                  <div data-hf-id="hf-u0sm" class="sub">Салон «Аврора» · вторник, 9 сентября</div>
+                  <div data-hf-id="hf-ta0z" class="seg"><span data-hf-id="hf-2rxz" class="on">Сегодня</span><span data-hf-id="hf-1s8q">Неделя</span><span data-hf-id="hf-70mw">Месяц</span></div>
+                  <div data-hf-id="hf-nd38" class="atiles">
+                    <div data-hf-id="hf-gk31" class="atile"><div data-hf-id="hf-0na4" class="tl">Обращений сегодня</div><div data-hf-id="hf-pc2h" class="tv" id="a-1">0</div><div data-hf-id="hf-gfab" class="td">из 6 каналов</div></div>
+                    <div data-hf-id="hf-weap" class="atile"><div data-hf-id="hf-1c5f" class="tl">Первый ответ</div><div data-hf-id="hf-be8k" class="tv good" id="a-2">19 мин</div><div data-hf-id="hf-56km" class="td">было 19 минут до Ветра</div></div>
+                    <div data-hf-id="hf-xl7s" class="atile"><div data-hf-id="hf-r7p3" class="tl">Ждут ответа сейчас</div><div data-hf-id="hf-xf8z" class="tv bad" id="a-3">3</div><div data-hf-id="hf-ztx7" class="td warn" id="a-3d">один висит 40 минут</div></div>
+                    <div data-hf-id="hf-x6wr" class="atile"><div data-hf-id="hf-fbgk" class="tl">Закрыто за сегодня</div><div data-hf-id="hf-azp5" class="tv" style="font-size:20px;margin-top:38px" id="a-4d">41 из 48</div>
+                      <div data-hf-id="hf-0qcu" class="ring"><svg data-hf-id="hf-tyxu" width="92" height="92" viewBox="0 0 92 92"><circle data-hf-id="hf-xylw" cx="46" cy="46" r="39" fill="none" stroke="#d6e5f7" stroke-width="10" /><circle data-hf-id="hf-1gcw" id="a-ring" cx="46" cy="46" r="39" fill="none" stroke="#2c78d5" stroke-width="10" stroke-linecap="round" stroke-dasharray="245" stroke-dashoffset="245" /></svg><div data-hf-id="hf-s25z" class="rv" id="a-4">0 %</div></div>
+                    </div>
+                  </div>
+                  <div data-hf-id="hf-cz2g" class="acols">
+                    <div data-hf-id="hf-jysx" class="panel team">
+                      <h3 data-hf-id="hf-9iex">Сотрудники<span data-hf-id="hf-7brg" class="chip-c">3 в смене</span></h3>
+                      <table data-hf-id="hf-2j5r">
+                        <thead data-hf-id="hf-zd89"><tr data-hf-id="hf-p3r7"><th data-hf-id="hf-06ww">Сотрудник</th><th data-hf-id="hf-06q4">Взял</th><th data-hf-id="hf-pklm">Закрыл</th><th data-hf-id="hf-9a4y">Первый ответ</th><th data-hf-id="hf-ca03">Нагрузка</th></tr></thead>
+                        <tbody data-hf-id="hf-bsvf">
+                          <tr data-hf-id="hf-ddj7"><td data-hf-id="hf-54xx"><div data-hf-id="hf-vain" class="person"><div data-hf-id="hf-hgln" class="ava g4">О</div><div data-hf-id="hf-y7yw"><b data-hf-id="hf-qxzh">Ольга</b><small data-hf-id="hf-0q22">в сети</small></div></div></td><td data-hf-id="hf-urn0">21</td><td data-hf-id="hf-11vj">19</td><td data-hf-id="hf-li0f" class="good">2 мин</td><td data-hf-id="hf-pxlq"><span data-hf-id="hf-flu0" class="bar"><i data-hf-id="hf-578a" id="bar-1"></i></span>44 %</td></tr>
+                          <tr data-hf-id="hf-cz86"><td data-hf-id="hf-t9cp"><div data-hf-id="hf-vtvj" class="person"><div data-hf-id="hf-addf" class="ava g6">Д</div><div data-hf-id="hf-x11t"><b data-hf-id="hf-3buy">Дмитрий</b><small data-hf-id="hf-e372">в сети</small></div></div></td><td data-hf-id="hf-zgnf">15</td><td data-hf-id="hf-zuyg">14</td><td data-hf-id="hf-a5n0" class="good">3 мин</td><td data-hf-id="hf-0siy"><span data-hf-id="hf-78ow" class="bar"><i data-hf-id="hf-z1ih" id="bar-2"></i></span>31 %</td></tr>
+                          <tr data-hf-id="hf-ckx5"><td data-hf-id="hf-ug9s"><div data-hf-id="hf-vfki" class="person"><div data-hf-id="hf-l002" class="ava g7">К</div><div data-hf-id="hf-xfcu"><b data-hf-id="hf-19mj">Кристина</b><small data-hf-id="hf-x69m">была 12 минут назад</small></div></div></td><td data-hf-id="hf-xh4a">12</td><td data-hf-id="hf-oxc7">8</td><td data-hf-id="hf-98sx" class="slow">17 мин</td><td data-hf-id="hf-pvlr"><span data-hf-id="hf-61rt" class="bar"><i data-hf-id="hf-y9uo" id="bar-3"></i></span>25 %</td></tr>
+                        </tbody>
+                      </table>
+                    </div>
+                    <div data-hf-id="hf-z5ar" class="panel att">
+                      <h3 data-hf-id="hf-nb6d">Требует внимания<span data-hf-id="hf-zfdm" class="chip-c" id="att-n">3 диалога</span></h3>
+                      <div data-hf-id="hf-sybk" class="ai" id="ai-1"><div data-hf-id="hf-klhm" class="tm">40 мин</div><div data-hf-id="hf-xhzk" class="who"><b data-hf-id="hf-gqhj">Марина · Авито</b><span data-hf-id="hf-9j2u">«Ещё актуально? Цена?» · ответственная Кристина</span></div><div data-hf-id="hf-edgv" class="rb" id="rb-1">Переназначить</div></div>
+                      <div data-hf-id="hf-1m7f" class="ai" id="ai-2"><div data-hf-id="hf-idri" class="tm">22 мин</div><div data-hf-id="hf-e2p4" class="who"><b data-hf-id="hf-kw09">Игорь · ВКонтакте</b><span data-hf-id="hf-fsyf">«Сколько стоит выезд?» · никто не взял</span></div><div data-hf-id="hf-2xdj" class="rb">Переназначить</div></div>
+                      <div data-hf-id="hf-xo3e" class="ai" id="ai-3"><div data-hf-id="hf-wlet" class="tm">16 мин</div><div data-hf-id="hf-cvs1" class="who"><b data-hf-id="hf-743z">Наталья · WhatsApp</b><span data-hf-id="hf-3km8">«Вы сегодня работаете?» · никто не взял</span></div><div data-hf-id="hf-abuf" class="rb">Переназначить</div></div>
+                    </div>
+                  </div>
+                </div>
+                <svg data-hf-id="hf-uv1f" class="cursor" id="cursor"><use data-hf-id="hf-bmxk" href="#i-cursor" /></svg>
+              </div>
+
+              <div data-hf-id="hf-xpd6" class="view sleep" id="lp-sleep"><div data-hf-id="hf-rws8" class="mark">Ветра<i data-hf-id="hf-ylp6"></i></div></div>
+            </div>
+            <div data-hf-id="hf-rwp5" class="lap-glare"></div>
+            <div data-hf-id="hf-her3" class="lap-base"></div>
+            <div data-hf-id="hf-wy8u" class="lap-notch"></div>
+          </div>
+
+          <!-- ================= телефон ================= -->
+          <div data-hf-id="hf-hskg" class="device" id="phone">
+            <div data-hf-id="hf-q65t" class="phone-body"></div>
+            <div data-hf-id="hf-9o7x" class="phone-screen">
+              <div data-hf-id="hf-7sfr" class="island"></div>
+              <!-- экран блокировки -->
+              <div data-hf-id="hf-b7y2" class="view lock" id="ph-lock" style="opacity:1">
+                <div data-hf-id="hf-yckn" class="sb light"><span data-hf-id="hf-jlxo">18:42</span><span data-hf-id="hf-dduw" class="sbr"><svg data-hf-id="hf-viy1" width="18" height="12"><use data-hf-id="hf-qrc9" href="#i-sig" /></svg><svg data-hf-id="hf-eanq" width="17" height="12"><use data-hf-id="hf-i48t" href="#i-wifi" /></svg><svg data-hf-id="hf-6enw" width="27" height="13"><use data-hf-id="hf-79dr" href="#i-bat" /></svg></span></div>
+                <div data-hf-id="hf-xjty" class="ldate">вторник, 9 сентября</div>
+                <div data-hf-id="hf-m9ly" class="ltime">18:42</div>
+                <div data-hf-id="hf-ojac" class="lns" id="lns">
+                  <div data-hf-id="hf-u9d9" class="ln" style="top:0"><svg data-hf-id="hf-fpxs"><use data-hf-id="hf-fxl4" href="#i-tg" /></svg><div data-hf-id="hf-ebvj" class="lc"><div data-hf-id="hf-gljm" class="lh">Ольга<span data-hf-id="hf-f984">сейчас</span></div><div data-hf-id="hf-ckeb" class="lx">Давайте четверг, 15:00?</div></div></div>
+                  <div data-hf-id="hf-tho7" class="ln" style="top:80px"><svg data-hf-id="hf-fbmr"><use data-hf-id="hf-cxzh" href="#i-vk" /></svg><div data-hf-id="hf-dden" class="lc"><div data-hf-id="hf-9htu" class="lh">Алина Кузнецова<span data-hf-id="hf-a26k">сейчас</span></div><div data-hf-id="hf-y8i7" class="lx">И сколько будет стоить?</div></div></div>
+                  <div data-hf-id="hf-12ae" class="ln" style="top:160px"><svg data-hf-id="hf-63oa"><use data-hf-id="hf-nvi7" href="#i-wa" /></svg><div data-hf-id="hf-cz3m" class="lc"><div data-hf-id="hf-u6jt" class="lh">Наталья<span data-hf-id="hf-8v9h">сейчас</span></div><div data-hf-id="hf-khm8" class="lx">Вы сегодня работаете?</div></div></div>
+                  <div data-hf-id="hf-y9ln" class="ln" style="top:240px"><svg data-hf-id="hf-5pd9"><use data-hf-id="hf-hrk2" href="#i-avito" /></svg><div data-hf-id="hf-cksl" class="lc"><div data-hf-id="hf-dv7x" class="lh">Марина<span data-hf-id="hf-99ki">сейчас</span></div><div data-hf-id="hf-fqyu" class="lx">Ещё актуально? Цена?</div></div></div>
+                  <div data-hf-id="hf-cg00" class="ln" style="top:320px"><svg data-hf-id="hf-x933"><use data-hf-id="hf-40pp" href="#i-max" /></svg><div data-hf-id="hf-fcxs" class="lc"><div data-hf-id="hf-tnbd" class="lh">Дарья<span data-hf-id="hf-b93n">сейчас</span></div><div data-hf-id="hf-sjpo" class="lx">Добрый день, есть окошко?</div></div></div>
+                </div>
+                <div data-hf-id="hf-8xcw" class="lbtn l"><svg data-hf-id="hf-1mwn" width="24" height="24" style="color:#fff"><use data-hf-id="hf-qh6s" href="#i-torch" /></svg></div>
+                <div data-hf-id="hf-9lja" class="lbtn r"><svg data-hf-id="hf-c113" width="24" height="24" style="color:#fff"><use data-hf-id="hf-k9jf" href="#i-cam" /></svg></div>
+                <div data-hf-id="hf-7dcl" class="home light"></div>
+              </div>
+
+              <!-- список диалогов -->
+              <div data-hf-id="hf-b2up" class="view ui m" id="ph-list">
+                <div data-hf-id="hf-hf8z" class="sb"><span data-hf-id="hf-cauc">18:42</span><span data-hf-id="hf-vy3k" class="sbr"><svg data-hf-id="hf-dyfx" width="18" height="12"><use data-hf-id="hf-bm59" href="#i-sig" /></svg><svg data-hf-id="hf-kdei" width="17" height="12"><use data-hf-id="hf-wbv5" href="#i-wifi" /></svg><svg data-hf-id="hf-27g4" width="27" height="13"><use data-hf-id="hf-ffwf" href="#i-bat" /></svg></span></div>
+                <div data-hf-id="hf-sijt" class="top">
+                  <div data-hf-id="hf-vw2a" class="lt">Диалоги</div>
+                  <span data-hf-id="hf-yfsi" class="st ok"><b data-hf-id="hf-fqqb"></b><span data-hf-id="hf-qzv1">6 каналов</span></span>
+                  <div data-hf-id="hf-3jf5" class="ava uava g3">МА</div>
+                  <div data-hf-id="hf-5dw0" class="search"><svg data-hf-id="hf-d4gz" width="18" height="18"><use data-hf-id="hf-6s4o" href="#i-srch" /></svg>Поиск</div>
+                </div>
+                <div data-hf-id="hf-33o8" class="list">
+                  <div data-hf-id="hf-fk47" class="row hot" id="ph-r1"><div data-hf-id="hf-4gk5" class="ava g1">АК<svg data-hf-id="hf-yfli" class="ch"><use data-hf-id="hf-fq4o" href="#i-vk" /></svg></div><div data-hf-id="hf-n08c" class="rc"><div data-hf-id="hf-zp8i" class="rn">Алина Кузнецова<span data-hf-id="hf-plf0" class="tm">03:29</span></div><div data-hf-id="hf-nei3" class="rp"><span data-hf-id="hf-vat9" class="txt">И сколько будет стоить…</span><span data-hf-id="hf-ck37" class="wait bad" id="ph-r1-wait">43 мин</span></div></div></div>
+                  <div data-hf-id="hf-thy4" class="row"><div data-hf-id="hf-h2am" class="ava g4">О<svg data-hf-id="hf-u287" class="ch"><use data-hf-id="hf-fja3" href="#i-tg" /></svg></div><div data-hf-id="hf-mlxb" class="rc"><div data-hf-id="hf-37z6" class="rn">Ольга<span data-hf-id="hf-w48j" class="tm">04:03</span></div><div data-hf-id="hf-nst4" class="rp"><span data-hf-id="hf-7qx3" class="txt">Давайте четверг</span><span data-hf-id="hf-d01w" class="badge">1</span></div></div></div>
+                  <div data-hf-id="hf-lt04" class="row"><div data-hf-id="hf-dktx" class="ava g5">Н<svg data-hf-id="hf-ugj8" class="ch"><use data-hf-id="hf-o9t8" href="#i-wa" /></svg></div><div data-hf-id="hf-kme6" class="rc"><div data-hf-id="hf-387l" class="rn">Наталья<span data-hf-id="hf-uvcp" class="tm">04:01</span></div><div data-hf-id="hf-o745" class="rp"><span data-hf-id="hf-j5rl" class="txt">Вы сегодня работаете?</span><span data-hf-id="hf-s974" class="badge">2</span></div></div></div>
+                  <div data-hf-id="hf-km31" class="row"><div data-hf-id="hf-b8i7" class="ava g3">ДС<svg data-hf-id="hf-0udg" class="ch"><use data-hf-id="hf-4f0q" href="#i-max" /></svg></div><div data-hf-id="hf-k835" class="rc"><div data-hf-id="hf-7s08" class="rn">Дарья Соловьёва<span data-hf-id="hf-tyiy" class="tm">02:02</span></div><div data-hf-id="hf-olf6" class="rp"><span data-hf-id="hf-u8sh" class="txt">Хорошо, будем ждать</span></div></div></div>
+                  <div data-hf-id="hf-l0e2" class="row"><div data-hf-id="hf-rb7x" class="ava g7">ИП<svg data-hf-id="hf-0g2f" class="ch"><use data-hf-id="hf-6zku" href="#i-mail" /></svg></div><div data-hf-id="hf-vn0r" class="rc"><div data-hf-id="hf-5o7v" class="rn">Ирина Петрова<span data-hf-id="hf-he8v" class="tm">01:00</span></div><div data-hf-id="hf-gpji" class="rp"><span data-hf-id="hf-d1pf" class="txt">До встречи!</span></div></div></div>
+                  <div data-hf-id="hf-mzx7" class="row"><div data-hf-id="hf-12k7" class="ava g2">М<svg data-hf-id="hf-01re" class="ch"><use data-hf-id="hf-hd91" href="#i-avito" /></svg></div><div data-hf-id="hf-w1bs" class="rc"><div data-hf-id="hf-lth1" class="rn">Марина<span data-hf-id="hf-bioi" class="tm">вчера</span></div><div data-hf-id="hf-gb8h" class="rp"><span data-hf-id="hf-mai1" class="txt">Спасибо, приду</span></div></div></div>
+                  <div data-hf-id="hf-ne88" class="row"><div data-hf-id="hf-8xre" class="ava g6">СВ<svg data-hf-id="hf-zngd" class="ch"><use data-hf-id="hf-djqy" href="#i-tg" /></svg></div><div data-hf-id="hf-uuep" class="rc"><div data-hf-id="hf-ew80" class="rn">Света<span data-hf-id="hf-bwzj" class="tm">вчера</span></div><div data-hf-id="hf-hi5k" class="rp"><span data-hf-id="hf-klk8" class="txt">Можно к вам сегодня?</span></div></div></div>
+                </div>
+                <div data-hf-id="hf-x348" class="tabbar">
+                  <div data-hf-id="hf-ea2v" class="on"><svg data-hf-id="hf-xne4"><use data-hf-id="hf-ww2f" href="#i-chats" /></svg>Диалоги</div>
+                  <div data-hf-id="hf-xyph"><svg data-hf-id="hf-wgh1"><use data-hf-id="hf-82da" href="#i-chan" /></svg>Каналы</div>
+                  <div data-hf-id="hf-vlt2"><svg data-hf-id="hf-wus2"><use data-hf-id="hf-er20" href="#i-panel" /></svg>Панель</div>
+                  <div data-hf-id="hf-pdds"><svg data-hf-id="hf-yub7"><use data-hf-id="hf-z1kv" href="#i-user" /></svg>Профиль</div>
+                </div>
+                <div data-hf-id="hf-fc6d" class="home"></div>
+                <div data-hf-id="hf-gt1v" class="tap" id="tap-row"></div>
+              </div>
+
+              <!-- диалог -->
+              <div data-hf-id="hf-4vs5" class="view ui m" id="ph-dialog">
+                <div data-hf-id="hf-0c0j" class="sb"><span data-hf-id="hf-b3x9">18:42</span><span data-hf-id="hf-ur6h" class="sbr"><svg data-hf-id="hf-f5d0" width="18" height="12"><use data-hf-id="hf-ct2c" href="#i-sig" /></svg><svg data-hf-id="hf-krpj" width="17" height="12"><use data-hf-id="hf-xis8" href="#i-wifi" /></svg><svg data-hf-id="hf-10j1" width="27" height="13"><use data-hf-id="hf-f1le" href="#i-bat" /></svg></span></div>
+                <div data-hf-id="hf-yhbu" class="pane">
+                  <div data-hf-id="hf-e5hr" class="nav"><div data-hf-id="hf-q64h" class="back"><svg data-hf-id="hf-wse5" width="22" height="22"><use data-hf-id="hf-l37v" href="#i-back" /></svg></div><div data-hf-id="hf-4uv6" class="ava g1">АК<svg data-hf-id="hf-2flk" class="ch"><use data-hf-id="hf-fbtn" href="#i-vk" /></svg></div><div data-hf-id="hf-l113" class="nm"><div data-hf-id="hf-i4mk" class="pn">Алина Кузнецова</div><div data-hf-id="hf-x7v6" class="ps">ВКонтакте · <span data-hf-id="hf-w18d" id="ph-wait">ждёт 43 мин</span></div></div></div>
+                  <div data-hf-id="hf-cpti" class="chat">
+                    <div data-hf-id="hf-rcvr" class="day">Сегодня</div>
+                    <div data-hf-id="hf-m8e3" class="bb">Здравствуйте! А на субботу к Кате есть окошко на окрашивание?<span data-hf-id="hf-9lay" class="bt">03:28</span></div>
+                    <div data-hf-id="hf-hwqh" class="bb">И сколько будет стоить, волосы ниже лопаток<span data-hf-id="hf-v96l" class="bt">03:29</span></div>
+                    <div data-hf-id="hf-f306" class="bb me" id="ph-me1" style="opacity:0">Работаем с 10 до 21, без выходных<span data-hf-id="hf-0e14" class="bt">04:12</span></div>
+                    <div data-hf-id="hf-jdv1" class="bb me" id="ph-me2" style="opacity:0">Да, у Кати есть окошко в субботу в 14:00<span data-hf-id="hf-0z7n" class="bt">04:13</span></div>
+                  </div>
+                  <div data-hf-id="hf-4dp9" class="chips"><span data-hf-id="hf-c801" class="chip" id="ph-chip">Часы работы</span><span data-hf-id="hf-6wbj" class="chip">Адрес</span><span data-hf-id="hf-l6sq" class="chip">Прайс</span><span data-hf-id="hf-btap" class="chip">Записала</span></div>
+                  <div data-hf-id="hf-elov" class="inp">
+                    <div data-hf-id="hf-13uy" class="clipbtn"><svg data-hf-id="hf-jjad" width="18" height="18" style="color:#0f1d2e"><use data-hf-id="hf-rogs" href="#i-clip" /></svg></div>
+                    <div data-hf-id="hf-bxgc" class="field"><span data-hf-id="hf-5fn4" class="pl" id="ph-pl">Сообщение</span><span data-hf-id="hf-rzq9" id="ph-typed"></span><span data-hf-id="hf-lpsi" class="wave" id="ph-wave"><b data-hf-id="hf-dr76"></b><b data-hf-id="hf-dcw5"></b><b data-hf-id="hf-ejt8"></b><b data-hf-id="hf-e5i7"></b><b data-hf-id="hf-c5z2"></b><b data-hf-id="hf-bro1"></b></span></div>
+                    <div data-hf-id="hf-pz5x" class="mic" id="ph-mic"><svg data-hf-id="hf-wtcr" width="18" height="18" style="color:#fff"><use data-hf-id="hf-8yfr" href="#i-mic" /></svg></div>
+                  </div>
+                </div>
+                <div data-hf-id="hf-rik9" class="home"></div>
+                <div data-hf-id="hf-lp17" class="tap" id="tap-chip"></div>
+                <div data-hf-id="hf-k2oi" class="tap" id="tap-mic"></div>
+              </div>
+            </div>
+            <div data-hf-id="hf-r4nq" class="phone-glare"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- карточки хаоса (в экранных координатах) -->
+      <div data-hf-id="hf-1lgx" id="cards" data-layout-allow-overlap="" data-layout-allow-occlusion="" data-layout-allow-overflow=""></div>
+
+      <!-- титры -->
+      <div data-hf-id="hf-q5hr" id="t1" class="clip" data-start="0.5" data-duration="2" data-track-index="1"><div data-hf-id="hf-0duk" class="t t-bot"><div data-hf-id="hf-50wz" class="h">Шесть приложений</div></div></div>
+      <div data-hf-id="hf-ghp9" id="t2" class="clip" data-start="2.5" data-duration="1.6" data-track-index="1"><div data-hf-id="hf-ovf8" class="t t-bot"><div data-hf-id="hf-nqhf" class="h">Один владелец</div></div></div>
+      <div data-hf-id="hf-niwu" id="t3" class="clip" data-start="4.1" data-duration="1.6" data-track-index="1"><div data-hf-id="hf-noi5" class="t t-bot"><div data-hf-id="hf-3gu0" class="h">Клиент ждёт <span data-hf-id="hf-qrkm" class="red">43 минуты</span></div></div></div>
+
+      <div data-hf-id="hf-yywb" id="t4" class="clip" data-start="6.5" data-duration="2.5" data-track-index="1"><div data-hf-id="hf-ulww" class="t t-brand"><div data-hf-id="hf-jrxj" class="h big">Ветра<span data-hf-id="hf-9gry" class="dot"></span></div><div data-hf-id="hf-iztb" class="s big" id="t4s">Все заявки в одном окне</div></div></div>
+
+      <div data-hf-id="hf-5l2g" id="t5" class="clip" data-start="9.5" data-duration="2.6" data-track-index="1"><div data-hf-id="hf-bsje" class="t t-top"><div data-hf-id="hf-z7yo" class="h">Подключение за минуту</div></div></div>
+      <div data-hf-id="hf-5yiq" id="t6" class="clip" data-start="12.1" data-duration="2.5" data-track-index="1"><div data-hf-id="hf-mwv2" class="t t-top"><div data-hf-id="hf-au8r" class="h">Вставил ключ — канал горит</div></div></div>
+      <div data-hf-id="hf-txcr" id="t7" class="clip" data-start="14.6" data-duration="1.3" data-track-index="1"><div data-hf-id="hf-nb63" class="t t-top"><div data-hf-id="hf-wlcg" class="h">Шесть каналов. Одно окно.</div></div></div>
+
+      <div data-hf-id="hf-0jdy" id="t8" class="clip" data-start="16.2" data-duration="2.4" data-track-index="1"><div data-hf-id="hf-aelm" class="t t-left"><div data-hf-id="hf-8pmm" class="h">Одно окно на телефоне</div></div></div>
+      <div data-hf-id="hf-mv1s" id="t9" class="clip" data-start="18.6" data-duration="2.3" data-track-index="1"><div data-hf-id="hf-wjla" class="t t-left"><div data-hf-id="hf-oat1" class="h">Быстрые ответы</div><div data-hf-id="hf-xb8c" class="s">Адрес, часы, прайс — одно нажатие</div></div></div>
+      <div data-hf-id="hf-nbol" id="t10" class="clip" data-start="20.9" data-duration="3.1" data-track-index="1"><div data-hf-id="hf-wxwb" class="t t-left"><div data-hf-id="hf-6jgr" class="h">Диктовка голосом</div><div data-hf-id="hf-ouzh" class="s">Сказал — текст в поле</div></div></div>
+      <div data-hf-id="hf-f42k" id="t11" class="clip" data-start="24" data-duration="3" data-track-index="1"><div data-hf-id="hf-xc7c" class="t t-left"><div data-hf-id="hf-v4o5" class="h">Отвечаешь одной рукой</div></div></div>
+
+      <div data-hf-id="hf-vx81" id="t12" class="clip" data-start="27.7" data-duration="2.7" data-track-index="1"><div data-hf-id="hf-nph4" class="t t-top"><div data-hf-id="hf-ej22" class="h">То же окно на ПК</div></div></div>
+      <div data-hf-id="hf-7et1" id="t13" class="clip" data-start="30.4" data-duration="4.3" data-track-index="1"><div data-hf-id="hf-kxbx" class="t t-top"><div data-hf-id="hf-6q0v" class="h">Кто не отвечен, сколько ждут</div></div></div>
+
+      <div data-hf-id="hf-x8li" id="t14" class="clip" data-start="35.5" data-duration="2.9" data-track-index="1"><div data-hf-id="hf-lbmy" class="t t-top"><div data-hf-id="hf-ib0c" class="h">Панель руководителя</div></div></div>
+      <div data-hf-id="hf-c942" id="t15" class="clip" data-start="38.4" data-duration="2.8" data-track-index="1"><div data-hf-id="hf-lpxz" class="t t-top"><div data-hf-id="hf-quq7" class="h">Кто как отвечает — видно сразу</div></div></div>
+      <div data-hf-id="hf-zc6b" id="t16" class="clip" data-start="41.2" data-duration="2.8" data-track-index="1"><div data-hf-id="hf-m490" class="t t-top"><div data-hf-id="hf-vknx" class="h">Переназначил в два клика</div></div></div>
+
+      <div data-hf-id="hf-rz3n" id="t17" class="clip" data-start="45" data-duration="9" data-track-index="1"><div data-hf-id="hf-onqn" class="t t-center" style="top:330px"><div data-hf-id="hf-yqgm" class="h huge">Ветра<span data-hf-id="hf-zcc2" class="dot"></span></div><div data-hf-id="hf-xikh" class="s big" id="t17s">Все заявки в одном окне.</div><div data-hf-id="hf-25ou" class="url" id="t17u">vetra.me</div></div></div>
+
+      <div data-hf-id="hf-dxr6" class="fade" id="fade"></div>
+
+      <!-- Сдержанный микс: три уведомления, действия, одно подтверждение подключения.
+           Без ударов, свистов и звука на каждой новой подписи. Музыка исходная. -->
+      <audio data-hf-id="hf-i2zo" id="bgm" src="assets/bgm.mp3" data-start="0" data-duration="54" data-track-index="10" data-volume="1"></audio>
+      <audio data-hf-id="hf-dai6" id="sfx-01" src="assets/sfx/ding.mp3" data-start="0.4" data-duration="1.2" data-track-index="11" data-volume="0.14"></audio>
+      <audio data-hf-id="hf-r7rw" id="sfx-05" src="assets/sfx/ding.mp3" data-start="1.2" data-duration="1.2" data-track-index="12" data-volume="0.12"></audio>
+      <audio data-hf-id="hf-rl7m" id="sfx-09" src="assets/sfx/ding.mp3" data-start="2" data-duration="1.2" data-track-index="11" data-volume="0.1"></audio>
+      <audio data-hf-id="hf-1dh9" id="sfx-16" src="assets/sfx/click-soft.mp3" data-start="10.9" data-duration="0.36" data-track-index="11" data-volume="0.16"></audio>
+      <audio data-hf-id="hf-bywg" id="sfx-22" src="assets/sfx/chime.mp3" data-start="14.5" data-duration="1.6" data-track-index="12" data-volume="0.12"></audio>
+      <audio data-hf-id="hf-p2j2" id="sfx-24" src="assets/sfx/click-soft.mp3" data-start="16.9" data-duration="0.36" data-track-index="11" data-volume="0.14"></audio>
+      <audio data-hf-id="hf-qlwz" id="sfx-25" src="assets/sfx/click-soft.mp3" data-start="18.3" data-duration="0.36" data-track-index="11" data-volume="0.14"></audio>
+      <audio data-hf-id="hf-7mrq" id="sfx-27" src="assets/sfx/click-soft.mp3" data-start="20.3" data-duration="0.36" data-track-index="11" data-volume="0.14"></audio>
+      <audio data-hf-id="hf-v1x3" id="sfx-28" src="assets/sfx/click-soft.mp3" data-start="23.4" data-duration="0.36" data-track-index="11" data-volume="0.12"></audio>
+      <audio data-hf-id="hf-waem" id="sfx-31" src="assets/sfx/ding.mp3" data-start="30" data-duration="1.2" data-track-index="11" data-volume="0.12"></audio>
+      <audio data-hf-id="hf-46fj" id="sfx-34" src="assets/sfx/click-soft.mp3" data-start="41.3" data-duration="0.36" data-track-index="11" data-volume="0.14"></audio>
+    </div>
+
+    <script>
+      /* ================= данные ================= */
+      const APPS = {
+        tg: "Telegram", vk: "ВКонтакте", max: "MAX", mail: "Почта", avito: "Авито", wa: "WhatsApp",
+      };
+      // карточки хаоса: приложение, отправитель, текст, конечная позиция (от центра), поворот, откуда влетает
+      const CARDS = [
+        ["tg", "Ольга", "Давайте четверг, 15:00?", -520, -300, -6, -1300, -700],
+        ["vk", "Алина Кузнецова", "И сколько будет стоить?", 430, -330, 5, 1300, -800],
+        ["wa", "Наталья", "Вы сегодня работаете?", -600, -120, 3, -1400, 0],
+        ["mail", "Ирина Петрова", "Вопрос по записи на пятницу", 530, -150, -4, 1400, -200],
+        ["avito", "Марина", "Ещё актуально? Цена?", -470, 60, -2, -1300, 300],
+        ["max", "Дарья", "Добрый день, есть окошко?", 490, 40, 6, 1400, 200],
+        ["tg", "Катя", "Перенесите на 18:00, пожалуйста", -560, 240, 4, -1200, 800],
+        ["vk", "Света", "Можно к вам сегодня?", 460, 230, -5, 1300, 800],
+        ["max", "Анна", "Вы работаете в воскресенье?", -170, -470, 2, -300, -900],
+        ["mail", "Сергей", "Счёт на оплату", 90, 330, -3, 200, 900],
+        ["avito", "Никита", "Торг уместен?", -290, -190, -8, -900, -900],
+        ["wa", "Павел", "Записаться можно на завтра?", 300, 140, 7, 1100, 900],
+      ];
+      const cardsEl = document.getElementById("cards");
+      const cardEls = CARDS.map((c, i) => {
+        const el = document.createElement("div");
+        el.className = "card";
+        el.id = "card-" + i;
+        el.innerHTML =
+          '<svg class="app"><use href="#i-' + c[0] + '"/></svg>' +
+          '<div class="cc"><div class="cl">' + APPS[c[0]] + '</div><div class="cs">' + c[1] + '</div><div class="ct">' + c[2] + "</div></div>" +
+          '<div class="cm">' + (18 + (i % 2)) + ":" + String(40 + ((i * 7) % 19)).padStart(2, "0") + "</div>";
+        cardsEl.appendChild(el);
+        return el;
+      });
+
+      /* ================= таймлайн ================= */
+      const tl = gsap.timeline({ paused: true });
+      tl.fromTo("#bgm", { volume: 0 }, { volume: 0.65, duration: 1.2, ease: "sine.inOut" }, 0);
+      tl.to("#bgm", { volume: 0, duration: 2, ease: "sine.inOut" }, 52);
+      const $ = (s) => document.querySelector(s);
+      const phone = $("#phone"), laptop = $("#laptop"), world = $("#world");
+
+      gsap.set(phone, { xPercent: -50, yPercent: -50, x: 0, y: -30, z: 60, scale: 0.8, rotationY: -14, rotationX: 5, transformOrigin: "50% 50%" });
+      gsap.set(laptop, { xPercent: -50, yPercent: -50, x: 640, y: 40, z: -40, scale: 0.58, rotationY: 18, rotationX: 4, opacity: 0, transformOrigin: "50% 50%" });
+      gsap.set($("#glow"), { opacity: 0.35, scale: 0.9, transformOrigin: "50% 50%" });
+
+      const cam = (el, vars, t, d = 1.4, ease = "sine.inOut") => tl.to(el, { ...vars, duration: d, ease }, t);
+      const show = (sel, t, d = 0.3) => tl.to(sel, { autoAlpha: 1, duration: d, ease: "power2.out" }, t);
+      const hide = (sel, t, d = 0.3) => tl.to(sel, { autoAlpha: 0, duration: d, ease: "power2.in" }, t);
+      const press = (sel, t) => { tl.to(sel, { scale: 0.975, duration: 0.12, ease: "sine.out" }, t); tl.to(sel, { scale: 1, duration: 0.32, ease: "power2.out" }, t + 0.12); };
+      const tap = (sel, x, y, t) => { tl.fromTo(sel, { x, y, scale: 0.4, opacity: 0.9 }, { scale: 1.3, opacity: 0, duration: 0.45, ease: "power2.out", immediateRender: false }, t); tl.set(sel, { opacity: 0 }, t + 0.46); };
+      const title = (id, tIn, tOut) => {
+        // Полный выход до конца clip: раньше его обрезало на последних кадрах.
+        const clipEnd = Number($("#" + id).dataset.start) + Number($("#" + id).dataset.duration);
+        const end = Math.min(tOut, clipEnd);
+        tl.fromTo("#" + id + " .t", { y: 10, opacity: 0 }, { y: 0, opacity: 1, duration: 0.6, ease: "power2.out" }, tIn);
+        tl.to("#" + id + " .t", { opacity: 0, y: -4, duration: 0.38, ease: "sine.inOut" }, end - 0.4);
+      };
+
+      /* --- Сцена 1. Хаос (0–5,5): уведомления летят быстро --- */
+      cam(phone, { scale: 0.9, rotationY: -9 }, 0, 5.5, "sine.inOut");
+      cardEls.forEach((el, i) => {
+        const c = CARDS[i];
+        tl.fromTo(el, { x: c[3] + (c[3] < 0 ? -70 : 70), y: c[4] - 22, rotation: c[5], opacity: 0, scale: 0.97 }, { x: c[3], y: c[4], rotation: c[5], opacity: 1, scale: 1, duration: 0.7, ease: "power2.out" }, 0.4 + i * 0.2);
+      });
+      document.querySelectorAll("#lns .ln").forEach((el, i) => tl.fromTo(el, { y: -30, opacity: 0, scale: 0.96 }, { y: 0, opacity: 1, scale: 1, duration: 0.4, ease: "power3.out" }, 0.7 + i * 0.4));
+      title("t1", 0.6, 2.5); title("t2", 2.6, 4.1); title("t3", 4.2, 5.7);
+
+      /* --- Сцена 2. Имя (5,5–9) --- */
+      cardEls.forEach((el, i) => tl.to(el, { x: CARDS[i][3] * 0.94, y: CARDS[i][4] - 12, scale: 0.96, opacity: 0, duration: 0.55, ease: "sine.inOut" }, 5.35 + i * 0.018));
+      hide("#lns", 5.5, 0.3);
+      hide("#ph-lock", 5.9, 0.3); show("#ph-list", 5.95, 0.35);
+      tl.to("#glow", { opacity: 0.75, scale: 1.05, duration: 1, ease: "power2.out" }, 5.8);
+      cam(phone, { x: -390, y: 115, scale: 0.68, rotationY: -5, rotationX: 2 }, 5.8, 1.25);
+      // Оба устройства прибывают одним движением, название — после посадки.
+      tl.set(laptop, { x: 190, y: 140, scale: 0.64, rotationY: 4 }, 5.8);
+      cam(laptop, { x: 190, y: 115, scale: 0.66, rotationY: 4, opacity: 1 }, 5.95, 1.1);
+      show("#lp-desk", 5.8, 0.01);
+      title("t4", 6.85, 9);
+
+      /* --- Сцена 3. Подключение (9–15,5): шесть каналов за шесть секунд --- */
+      cam(laptop, { x: 80, y: 70, scale: 0.92, rotationY: 3, rotationX: 2 }, 9, 1.2);
+      cam(phone, { x: -720, y: 120, scale: 0.5, rotationY: -18 }, 9, 1.2);
+      hide("#lp-desk", 9.1, 0.25); show("#lp-connect", 9.15, 0.3);
+      hide("#ph-list", 9.1, 0.25); show("#ph-lock", 9.15, 0.3);
+      title("t5", 9.6, 12.1);
+      press("#b-tg", 10.9);
+      hide("#b-tg", 11.2, 0.2); tl.fromTo("#s-tg", { scale: 0.96, autoAlpha: 0 }, { scale: 1, autoAlpha: 1, duration: 0.45, ease: "power2.out" }, 11.2);
+      const paste = (ch, tPaste, tOk) => {
+        tl.fromTo("#hl-" + ch, { opacity: 0.9 }, { opacity: 0, duration: 0.5, ease: "power2.out", immediateRender: false }, tPaste);
+        hide("#b-" + ch, tOk, 0.2); tl.fromTo("#s-" + ch, { scale: 0.96, autoAlpha: 0 }, { scale: 1, autoAlpha: 1, duration: 0.45, ease: "power2.out" }, tOk);
+      };
+      const PASTE = [["vk", 11.7, 12.1], ["max", 12.3, 12.7], ["wa", 12.9, 13.3], ["avito", 13.5, 13.9], ["mail", 14.1, 14.5]];
+      PASTE.forEach((p) => paste(p[0], p[1], p[2]));
+      title("t6", 12.2, 14.6); title("t7", 14.7, 15.9);
+      cam(laptop, { scale: 0.96, y: 60 }, 10.25, 4.85, "sine.inOut");
+
+      /* --- Сцена 4. Телефон (15,5–27) --- */
+      cam(phone, { x: 210, y: 0, scale: 0.95, rotationY: -3, rotationX: 2 }, 15.5, 1.4);
+      cam(laptop, { scale: 0.9, opacity: 0 }, 15.5, 0.7);
+      hide("#lp-connect", 15.6, 0.25); show("#lp-sleep", 15.65, 0.3);
+      hide("#ph-lock", 15.6, 0.25); show("#ph-list", 15.65, 0.3);
+      title("t8", 16.8, 18.6);
+      tap("#tap-row", 200, 190, 16.9);
+      press("#ph-r1", 16.9);
+      hide("#ph-list", 17.2, 0.2); show("#ph-dialog", 17.25, 0.25);
+      tap("#tap-chip", 62, 718, 18.3);
+      press("#ph-chip", 18.3);
+      tl.fromTo("#ph-me1", { y: 18, autoAlpha: 0 }, { y: 0, autoAlpha: 1, duration: 0.4, ease: "power3.out" }, 18.7);
+      title("t9", 18.7, 21);
+      tap("#tap-mic", 356, 777, 20.3);
+      press("#ph-mic", 20.3);
+      hide("#ph-pl", 20.5, 0.15);
+      show("#ph-wave", 20.6, 0.25);
+      title("t10", 21, 24.1);
+      hide("#ph-wave", 23.1, 0.25);
+      tl.fromTo("#ph-me2", { y: 18, autoAlpha: 0 }, { y: 0, autoAlpha: 1, duration: 0.4, ease: "power3.out" }, 23.4);
+      show("#ph-pl", 23.6, 0.25);
+      title("t11", 24.1, 27.1);
+      hide("#ph-dialog", 25.6, 0.2); show("#ph-list", 25.65, 0.25);
+      // Во время чтения и диктовки телефон стоит устойчиво.
+
+      /* --- Сцена 5. ПК (27–35) --- */
+      cam(laptop, { x: 80, y: 70, scale: 0.92, rotationY: 3, rotationX: 2, opacity: 1 }, 27, 1.4);
+      cam(phone, { x: -720, y: 120, scale: 0.5, rotationY: -18 }, 27, 1.2);
+      hide("#lp-sleep", 27.1, 0.25); show("#lp-desk", 27.15, 0.3);
+      hide("#ph-list", 27.1, 0.25); show("#ph-lock", 27.15, 0.3);
+      show("#lp-tiles", 27.8, 0.4);
+      tl.fromTo("#lp-tiles .tile", { y: 12, opacity: 0 }, { y: 0, opacity: 1, duration: 0.45, stagger: 0.1, ease: "power3.out" }, 27.8);
+      show("#lp-me1", 27, 0.01); show("#lp-me2", 27, 0.01);
+      title("t12", 27.8, 30.5);
+      tl.to("#lp-rnew", { height: 72, paddingTop: 11, paddingBottom: 11, opacity: 1, duration: 0.5, ease: "power3.out" }, 30);
+      title("t13", 30.5, 34.8);
+      cam(laptop, { scale: 0.98, y: 56, rotationY: 1 }, 28.5, 6.5, "sine.inOut");
+
+      /* --- Сцена 6. Панель руководителя (35–44) --- */
+      cam(laptop, { x: 60, y: 64, scale: 0.94, rotationY: -2 }, 35, 1);
+      hide("#lp-desk", 35.05, 0.25); show("#lp-admin", 35.1, 0.3);
+      tl.fromTo("#lp-admin .atile", { y: 14, opacity: 0 }, { y: 0, opacity: 1, duration: 0.45, stagger: 0.08, ease: "power3.out" }, 35.4);
+      tl.fromTo("#lp-admin .panel", { y: 14, opacity: 0 }, { y: 0, opacity: 1, duration: 0.45, stagger: 0.1, ease: "power3.out" }, 35.8);
+      tl.to("#bar-1", { width: "44%", duration: 0.7, ease: "power3.out" }, 36.2);
+      tl.to("#bar-2", { width: "31%", duration: 0.7, ease: "power3.out" }, 36.3);
+      tl.to("#bar-3", { width: "25%", duration: 0.7, ease: "power3.out" }, 36.4);
+      title("t14", 35.6, 38.5);
+      title("t15", 38.5, 41.3);
+      // курсор подъезжает к «Переназначить» и нажимает
+      tl.fromTo("#cursor", { x: 900, y: 700, autoAlpha: 0 }, { x: 1150, y: 420, autoAlpha: 1, duration: 0.8, ease: "power2.inOut" }, 40.4);
+      press("#rb-1", 41.3);
+      tl.to("#ai-1", { height: 0, opacity: 0, duration: 0.45, ease: "power3.inOut" }, 41.6);
+      tl.to("#cursor", { autoAlpha: 0, duration: 0.3 }, 42.2);
+      title("t16", 41.3, 44.1);
+      cam(laptop, { scale: 0.97, y: 60 }, 36, 8, "sine.inOut");
+
+      /* --- Сцена 7. Финал (44–54) --- */
+      cam(laptop, { scale: 0.7, y: 160, opacity: 0 }, 44, 1.3, "power2.in");
+      cam(phone, { scale: 0.35, y: 200, opacity: 0 }, 44, 1.2, "power2.in");
+      tl.to("#glow", { opacity: 0.6, scale: 1.1, y: -120, duration: 1.8, ease: "power2.inOut" }, 44.3);
+      tl.fromTo("#t17 .t", { opacity: 0 }, { opacity: 1, duration: 0.01 }, 45);
+      tl.fromTo("#t17 .h", { y: 30, opacity: 0, scale: 0.94 }, { y: 0, opacity: 1, scale: 1, duration: 0.8, ease: "power3.out" }, 45.2);
+      tl.fromTo("#t17s", { y: 20, opacity: 0 }, { y: 0, opacity: 1, duration: 0.6, ease: "power3.out" }, 46);
+      tl.fromTo("#t17u", { y: 10, opacity: 0, scale: 0.98 }, { y: 0, opacity: 1, scale: 1, duration: 0.7, ease: "power2.out" }, 47.4);
+      tl.to("#fade", { opacity: 1, duration: 1, ease: "power2.in" }, 52.8);
+
+      /* ================= состояние как функция времени =================
+         Всё дискретное (набор текста, счётчики, подписи) и дрейф камеры
+         вычисляются из t — кадр воспроизводим при любом порядке сика. */
+      const ramp = (t, a, b) => Math.max(0, Math.min(1, (t - a) / (b - a)));
+      const setTyped = (el, text, p, cursor) => {
+        const n = Math.round(p * text.length);
+        el.textContent = text.slice(0, n) + (cursor && p > 0 && p < 1 ? "|" : "");
+      };
+      const KEYS = { tg: "7712345678:AAHkR3vQ9tLxWq2pZ", vk: "vk1.a.Zq8LmN4tR7yP2xW9", max: "max_bot_5f31c9e2a7b4", wa: "+7 903 ··· 41 20 · wa_7f2c…", avito: "9f2c41a0 · ••••••••••••", mail: "salon@yandex.ru · ••••••••" };
+      const E = {};
+      ["k-tg", "k-vk", "k-max", "k-wa", "k-avito", "k-mail", "ph-typed", "ph-wait", "lp-wait", "ph-r1-wait", "lp-r1-wait", "lp-r2-wait", "tile-1", "tile-2", "tile-3", "glow-pulse", "a-1", "a-2", "a-3", "a-3d", "a-4", "a-4d", "a-ring", "att-n"].forEach((id) => (E[id] = document.getElementById(id)));
+      const KPH = { "k-tg": '<span class="ph">7712345678:AAH…</span>', "k-vk": '<span class="ph">vk1.a.…</span>', "k-max": '<span class="ph">max…</span>', "k-wa": '<span class="ph">+7 ··· · ключ</span>', "k-avito": '<span class="ph">client_id · client_secret</span>', "k-mail": '<span class="ph">salon@yandex.ru</span>' };
+      const waveBars = Array.from(document.querySelectorAll("#ph-wave b"));
+      const phR1 = document.getElementById("ph-r1"), lpR1 = document.getElementById("lp-r1");
+      const lpSt = Array.from(document.querySelectorAll(".lp-st")), lpStText = Array.from(document.querySelectorAll(".lp-st-text"));
+
+      function applyState(t) {
+        // дрейф камеры и дыхание света
+        world.style.transform = "translate3d(" + (2 * Math.sin((2 * Math.PI * t) / 22)).toFixed(2) + "px," + (1.5 * Math.sin((2 * Math.PI * t) / 27)).toFixed(2) + "px,0)";
+        E["glow-pulse"].style.transform = "scale(" + (1 + 0.05 * Math.sin((2 * Math.PI * t) / 7)).toFixed(4) + ")";
+        // ключи каналов
+        const pTg = ramp(t, 9.9, 10.7);
+        if (pTg <= 0) E["k-tg"].innerHTML = KPH["k-tg"]; else setTyped(E["k-tg"], KEYS.tg, pTg, true);
+        for (const p of PASTE) {
+          const el = E["k-" + p[0]];
+          if (t < p[1]) el.innerHTML = KPH["k-" + p[0]]; else el.textContent = KEYS[p[0]];
+        }
+        const connected = t >= 14.8;
+        lpStText.forEach((el) => (el.textContent = connected ? "6 каналов подключено" : "Каналы не подключены"));
+        lpSt.forEach((el) => el.classList.toggle("ok", connected));
+        // диктовка на телефоне
+        const pD = ramp(t, 20.8, 23);
+        if (t >= 23.4) E["ph-typed"].textContent = ""; else setTyped(E["ph-typed"], "Да, у Кати есть окошко в субботу в 14:00", pD, false);
+        waveBars.forEach((b, i) => { const h = 6 + 12 * Math.abs(Math.sin(t * 9 + i * 1.3)) * (t > 20.8 && t < 23 ? 1 : 0.3); b.style.height = h.toFixed(1) + "px"; });
+        // ожидание в диалоге и в списке
+        const answered = t >= 24.2;
+        E["ph-wait"].textContent = answered ? "отвечено" : "ждёт 43 мин";
+        E["ph-wait"].style.color = answered ? "#167a41" : "";
+        E["ph-r1-wait"].textContent = answered ? "отвечено" : "43 мин";
+        E["ph-r1-wait"].className = answered ? "wait ok" : "wait bad";
+        phR1.classList.toggle("hot", !answered); phR1.classList.toggle("sel", answered);
+        // список на ПК: время растёт, счётчики меняются
+        const lpAnswered = t >= 32.5;
+        const w1 = 43 + Math.floor(Math.max(0, t - 27) / 3);
+        E["lp-r1-wait"].textContent = lpAnswered ? "отвечено" : "висит " + w1 + " мин";
+        E["lp-r1-wait"].className = lpAnswered ? "wait ok" : "wait bad";
+        E["lp-r2-wait"].textContent = "ждёт " + (8 + Math.floor(Math.max(0, t - 27) / 2)) + " мин";
+        lpR1.classList.toggle("hot", !lpAnswered); lpR1.classList.toggle("sel", lpAnswered);
+        E["lp-wait"].textContent = lpAnswered ? "отвечено" : "ждёт " + w1 + " мин";
+        E["lp-wait"].style.color = lpAnswered ? "#167a41" : "";
+        const unans = (t >= 30 ? 4 : 3) - (lpAnswered ? 1 : 0);
+        E["tile-1"].textContent = String(unans);
+        E["tile-2"].textContent = lpAnswered ? "0" : "1";
+        E["tile-2"].className = lpAnswered ? "tv ok" : "tv bad";
+        E["tile-3"].textContent = String(42 + (lpAnswered ? 1 : 0));
+        // панель руководителя: цифры набегают, переназначение убирает диалог
+        const pA = ramp(t, 35.5, 36.7);
+        const reassigned = t >= 41.6;
+        E["a-1"].textContent = String(Math.round(48 * pA));
+        E["a-2"].textContent = Math.round(19 - 15 * pA) + " мин";
+        E["a-3"].textContent = String(reassigned ? 2 : 3);
+        E["a-3d"].textContent = reassigned ? "дольше 15 минут — никого" : "один висит 40 минут";
+        E["a-3d"].className = reassigned ? "td" : "td warn";
+        E["a-4"].textContent = Math.round(85 * pA) + " %";
+        E["a-ring"].setAttribute("stroke-dashoffset", (245 * (1 - 0.85 * pA)).toFixed(1));
+        E["att-n"].textContent = reassigned ? "2 диалога" : "3 диалога";
+      }
+      const master = { t: 0 };
+      tl.to(master, { t: 54, duration: 54, ease: "none", onUpdate: () => applyState(master.t) }, 0);
+      applyState(0);
+
+      window.__timelines = window.__timelines || {};
+      window.__timelines["main"] = tl;
+    </script>
+  </body>
+</html>

@@ -1,0 +1,267 @@
+/* Общий CSS сцены и окна Ветры для promo и hero-loop. Источник — promo/assets/ui.css, в hero-loop лежит копия. */
+@font-face { font-family: "Google Sans"; font-weight: 400 700; font-display: block; src: url("fonts/google-sans-cyrillic-400-700.woff2") format("woff2"); unicode-range: U+0400-04FF; }
+@font-face { font-family: "Google Sans"; font-weight: 400 700; font-display: block; src: url("fonts/google-sans-latin-400-700.woff2") format("woff2"); unicode-range: U+0000-00FF, U+2000-206F, U+20AC, U+2116; }
+@font-face { font-family: "Google Sans Text"; font-weight: 400; font-display: block; src: url("fonts/google-sans-text-cyrillic-400.woff2") format("woff2"); unicode-range: U+0400-04FF; }
+@font-face { font-family: "Google Sans Text"; font-weight: 400; font-display: block; src: url("fonts/google-sans-text-latin-400.woff2") format("woff2"); unicode-range: U+0000-00FF, U+2000-206F, U+20AC, U+2116; }
+@font-face { font-family: "Google Sans Text"; font-weight: 500; font-display: block; src: url("fonts/google-sans-text-cyrillic-500.woff2") format("woff2"); unicode-range: U+0400-04FF; }
+@font-face { font-family: "Google Sans Text"; font-weight: 500; font-display: block; src: url("fonts/google-sans-text-latin-500.woff2") format("woff2"); unicode-range: U+0000-00FF, U+2000-206F, U+20AC, U+2116; }
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html, body { width: 1920px; height: 1080px; overflow: hidden; background: #000; }
+body { font-family: "Google Sans", "Google Sans Text", system-ui, sans-serif; color: #fff; -webkit-font-smoothing: antialiased; }
+#root { position: relative; width: 1920px; height: 1080px; overflow: hidden; }
+
+/* ---------- сцена ---------- */
+.bg { position: absolute; inset: 0; background: #050a14; }
+.glow { position: absolute; left: 960px; top: 640px; width: 1700px; height: 1150px; margin: -575px 0 0 -850px; opacity: 0.45; }
+/* много мягких ступеней вместо трёх — иначе на тёмном фоне видны кольца */
+.glow-pulse { position: absolute; inset: 0; background: radial-gradient(closest-side, rgba(44, 120, 213, 0.52) 0%, rgba(44, 120, 213, 0.44) 12%, rgba(44, 120, 213, 0.34) 24%, rgba(44, 120, 213, 0.24) 36%, rgba(44, 120, 213, 0.15) 48%, rgba(44, 120, 213, 0.085) 60%, rgba(44, 120, 213, 0.04) 72%, rgba(44, 120, 213, 0.013) 86%, rgba(44, 120, 213, 0) 100%); }
+.floor { position: absolute; left: 0; right: 0; bottom: 0; height: 320px; background: linear-gradient(to top, rgba(44, 120, 213, 0.08), rgba(44, 120, 213, 0)); }
+.grain { position: absolute; inset: 0; opacity: 0.11; mix-blend-mode: soft-light; background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='240' height='240'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch' seed='7'/><feColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 0.9 0'/></filter><rect width='240' height='240' filter='url(%23n)'/></svg>"); }
+#stage { position: absolute; inset: 0; perspective: 2400px; perspective-origin: 50% 46%; }
+#world { position: absolute; inset: 0; transform-style: preserve-3d; }
+.device { position: absolute; left: 50%; top: 50%; transform-style: preserve-3d; }
+.sprite { position: absolute; width: 0; height: 0; overflow: hidden; }
+
+/* ---------- телефон 418×872, экран 390×844 (iPhone 15 Pro) ---------- */
+#phone { width: 418px; height: 872px; }
+.phone-body { position: absolute; inset: 0; border-radius: 64px; background: #0b0f16; box-shadow: inset 0 0 0 2px #2a3340, 0 50px 110px rgba(0, 0, 0, 0.65), 0 0 70px rgba(44, 120, 213, 0.22); }
+.phone-screen { position: absolute; left: 14px; top: 14px; width: 390px; height: 844px; border-radius: 50px; overflow: hidden; background: #000; }
+.island { position: absolute; left: 50%; top: 11px; width: 126px; height: 37px; margin-left: -63px; border-radius: 20px; background: #000; z-index: 40; box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.05); }
+.island::after { content: ""; position: absolute; right: 12px; top: 12px; width: 13px; height: 13px; border-radius: 50%; background: radial-gradient(circle at 40% 40%, #1c2433, #05070b 70%); }
+.phone-glare { position: absolute; inset: 0; border-radius: 50px; background: linear-gradient(115deg, rgba(255, 255, 255, 0.07), rgba(255, 255, 255, 0) 40%); z-index: 41; pointer-events: none; }
+/* статус-бар iOS: время слева от островка, сигнал/вайфай/батарея справа */
+.sb { position: absolute; left: 0; right: 0; top: 0; height: 54px; z-index: 30; display: flex; align-items: center; justify-content: space-between; padding: 8px 30px 0 44px; font-weight: 600; font-size: 17px; letter-spacing: -0.01em; color: #0f1d2e; }
+.sb .sbr { display: flex; align-items: center; gap: 7px; }
+.sb.light { color: #fff; }
+.home { position: absolute; left: 50%; bottom: 8px; width: 134px; height: 5px; margin-left: -67px; border-radius: 3px; background: #0f1d2e; opacity: 0.9; z-index: 30; }
+.home.light { background: #fff; }
+
+/* ---------- ноутбук 1360×866, экран 1280×800 ---------- */
+#laptop { width: 1360px; height: 866px; }
+.lap-lid { position: absolute; left: 20px; top: 0; width: 1320px; height: 840px; border-radius: 26px 26px 6px 6px; background: #0e1218; box-shadow: inset 0 0 0 2px #2a3340, 0 50px 110px rgba(0, 0, 0, 0.6), 0 0 80px rgba(44, 120, 213, 0.18); }
+.lap-screen { position: absolute; left: 40px; top: 20px; width: 1280px; height: 800px; border-radius: 10px; overflow: hidden; background: #f7fafe; }
+.lap-base { position: absolute; left: 0; top: 838px; width: 1360px; height: 28px; border-radius: 4px 4px 16px 16px; background: linear-gradient(#323b48, #161b24); box-shadow: 0 30px 60px rgba(0, 0, 0, 0.5); }
+.lap-notch { position: absolute; left: 560px; top: 838px; width: 240px; height: 8px; border-radius: 0 0 8px 8px; background: #0b0f16; }
+.lap-glare { position: absolute; left: 40px; top: 20px; width: 1280px; height: 800px; border-radius: 10px; background: linear-gradient(110deg, rgba(255, 255, 255, 0.06), rgba(255, 255, 255, 0) 35%); z-index: 9; pointer-events: none; }
+
+.view { position: absolute; inset: 0; opacity: 0; }
+
+/* ---------- аватары: градиенты как в Telegram + значок канала ---------- */
+.ava { width: 44px; height: 44px; border-radius: 50%; background: linear-gradient(135deg, #72d5fd, #2a9ef1); color: #fff; display: grid; place-items: center; font-weight: 600; font-size: 15px; flex: none; position: relative; letter-spacing: 0; }
+.ava.g1 { background: linear-gradient(135deg, #ff9a6b, #ff4f6a); }
+.ava.g2 { background: linear-gradient(135deg, #ffd36a, #ff9d3c); }
+.ava.g3 { background: linear-gradient(135deg, #8fb8ff, #9289ff); }
+.ava.g4 { background: linear-gradient(135deg, #a9e67f, #3fbf5f); }
+.ava.g5 { background: linear-gradient(135deg, #5df0dc, #1cb9a8); }
+.ava.g6 { background: linear-gradient(135deg, #72d5fd, #2a9ef1); }
+.ava.g7 { background: linear-gradient(135deg, #f0a6ff, #cf5ff0); }
+.ava { color: #0a1020; }
+.ava .ch { position: absolute; right: -3px; bottom: -3px; width: 18px; height: 18px; border-radius: 6px; box-shadow: 0 0 0 2px #fff; background: #fff; }
+
+/* ---------- окно Ветры на ПК (светлая тема продукта) ---------- */
+.ui { position: absolute; inset: 0; background: #f7fafe; color: #0f1d2e; font-family: "Google Sans", "Google Sans Text", system-ui, sans-serif; font-size: 15px; line-height: 1.35; overflow: hidden; }
+.hdr { height: 56px; background: #fff; border-bottom: 1px solid #dce6f2; display: flex; align-items: center; padding: 0 22px; gap: 22px; }
+.logo { font-weight: 700; font-size: 21px; letter-spacing: -0.04em; display: flex; align-items: center; }
+.logo i { display: inline-block; width: 7px; height: 7px; border-radius: 50%; background: #2c78d5; margin-left: 3px; margin-top: 6px; }
+.tabs { display: flex; height: 56px; }
+.tabs span { padding: 0 14px; line-height: 56px; font-size: 15px; color: #56687f; }
+.tabs span.on { color: #1f63bc; box-shadow: inset 0 -2px 0 #1f63bc; }
+.hdr-r { margin-left: auto; display: flex; align-items: center; gap: 14px; font-size: 14px; color: #56687f; }
+.st { display: flex; align-items: center; gap: 8px; height: 30px; padding: 0 12px; border-radius: 999px; background: #fdf3e3; color: #8a5a12; font-size: 13px; font-weight: 500; white-space: nowrap; }
+.st b { display: inline-block; width: 8px; height: 8px; border-radius: 50%; background: #b7791f; }
+.st.ok { background: #e6f4ea; color: #167a41; }
+.st.ok b { background: #167a41; }
+.uava { width: 34px; height: 34px; font-size: 13px; }
+.body { position: absolute; top: 57px; left: 0; right: 0; bottom: 0; display: flex; }
+.list { width: 330px; background: #fff; border-right: 1px solid #dce6f2; padding-top: 14px; }
+.search { margin: 0 14px 14px; height: 40px; border-radius: 12px; background: #eef2f7; color: #596b82; display: flex; align-items: center; gap: 8px; padding: 0 12px; font-size: 15px; }
+.row { display: flex; align-items: center; gap: 12px; padding: 11px 14px; position: relative; }
+.row.hot { background: #fdeee8; }
+.row.sel { background: #eff5fd; }
+.rc { flex: 1; min-width: 0; }
+.rn { display: flex; justify-content: space-between; align-items: baseline; font-weight: 600; font-size: 15px; }
+.rn .tm { font-weight: 400; font-size: 13px; color: #596b82; }
+.rp { display: flex; justify-content: space-between; align-items: center; gap: 8px; color: #56687f; font-size: 14px; margin-top: 2px; }
+.rp .txt { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.wait { font-size: 12px; font-weight: 500; white-space: nowrap; }
+.wait.bad { color: #c62828; }
+.wait.ok { color: #167a41; }
+.badge { display: inline-grid; place-items: center; min-width: 22px; height: 22px; border-radius: 11px; background: #1f63bc; color: #fff; font-size: 12px; font-weight: 500; padding: 0 6px; }
+.pane { flex: 1; position: relative; }
+.ph { height: 70px; background: #fff; border-bottom: 1px solid #dce6f2; padding: 12px 18px; display: flex; align-items: center; gap: 12px; }
+.pn { font-weight: 600; font-size: 17px; }
+.ps { font-size: 13px; color: #56687f; margin-top: 2px; }
+.chat { position: absolute; left: 0; right: 0; top: 71px; bottom: 124px; padding: 18px; display: flex; flex-direction: column; justify-content: flex-end; gap: 8px; }
+.day { align-self: center; background: #e6edf5; color: #0f1d2e; font-size: 13px; padding: 5px 12px; border-radius: 999px; margin-bottom: 8px; }
+.bb { max-width: 560px; background: #fff; border-radius: 16px; padding: 9px 14px; font-size: 15px; display: flex; align-items: flex-end; gap: 10px; box-shadow: 0 1px 2px rgba(15, 29, 46, 0.06); }
+.bb .bt { font-size: 12px; color: #56687f; flex: none; }
+.bb.me { align-self: flex-end; background: #d0e2f7; }
+.bb.me .bt { color: #3f5068; }
+.chips { position: absolute; left: 0; right: 0; bottom: 68px; height: 56px; border-top: 1px solid #dce6f2; background: #f7fafe; display: flex; align-items: center; gap: 8px; padding: 0 18px; }
+.chip { height: 36px; border-radius: 999px; border: 1px solid #dce6f2; background: #fff; padding: 0 14px; display: flex; align-items: center; font-size: 14px; white-space: nowrap; }
+.chips .more { color: #56687f; font-size: 14px; margin-left: 4px; }
+.inp { position: absolute; left: 0; right: 0; bottom: 0; height: 68px; background: #f7fafe; display: flex; align-items: center; gap: 12px; padding: 0 18px; }
+.clipbtn { width: 44px; height: 44px; border-radius: 50%; background: #fff; border: 1px solid #dce6f2; display: grid; place-items: center; flex: none; }
+.field { flex: 1; height: 42px; border-radius: 999px; border: 1.5px solid #2c78d5; background: #fff; display: flex; align-items: center; padding: 0 16px; font-size: 15px; color: #0f1d2e; position: relative; overflow: hidden; }
+.field .pl { color: #56687f; }
+.mic { width: 44px; height: 44px; border-radius: 50%; background: #1f63bc; display: grid; place-items: center; flex: none; }
+.tiles { position: absolute; left: 18px; right: 18px; top: 88px; display: flex; gap: 12px; opacity: 0; }
+.tile { flex: 1; background: #fff; border: 1px solid #dce6f2; border-radius: 14px; padding: 14px 16px; }
+.tile .tl { font-size: 13px; color: #56687f; }
+.tile .tv { font-size: 30px; font-weight: 700; letter-spacing: -0.03em; margin-top: 2px; }
+.tile .tv.bad { color: #c62828; }
+.tile .tv.ok { color: #167a41; }
+.wave { display: flex; align-items: center; gap: 3px; height: 20px; position: absolute; right: 14px; top: 11px; opacity: 0; }
+.wave b { display: block; width: 3px; height: 8px; border-radius: 2px; background: #2c78d5; }
+
+/* страница подключения */
+.cwrap { position: absolute; left: 280px; top: 74px; width: 720px; }
+.cwrap h2 { font-size: 26px; font-weight: 700; letter-spacing: -0.02em; }
+.cwrap p { color: #56687f; font-size: 15px; margin: 6px 0 16px; }
+.crow { display: flex; align-items: center; gap: 16px; background: #fff; border: 1px solid #dce6f2; border-radius: 14px; padding: 12px 18px; margin-bottom: 10px; height: 74px; }
+.cn { width: 160px; font-weight: 500; font-size: 16px; display: flex; align-items: center; gap: 12px; }
+.cn svg { width: 30px; height: 30px; border-radius: 8px; flex: none; }
+.ckey { flex: 1; }
+.klabel { display: block; font-size: 12px; color: #56687f; margin-bottom: 4px; }
+.kval { display: block; height: 32px; border-radius: 8px; border: 1px solid #dce6f2; background: #f7fafe; padding: 0 10px; font-family: Consolas, "Courier New", monospace; font-size: 14px; line-height: 30px; color: #0f1d2e; white-space: nowrap; overflow: hidden; position: relative; }
+.kval .ph { color: #56687f; }
+.kval .hl { position: absolute; inset: 0; background: #d6e5f7; opacity: 0; }
+.kval .kv { position: relative; }
+.cbtn { width: 150px; position: relative; height: 42px; }
+.cbtn button { position: absolute; inset: 0; border: 0; border-radius: 999px; background: #1f63bc; color: #fff; font: inherit; font-weight: 500; font-size: 15px; }
+.cok { position: absolute; inset: 0; border-radius: 999px; background: #e6f4ea; color: #167a41; font-weight: 500; font-size: 15px; display: flex; align-items: center; justify-content: center; gap: 8px; opacity: 0; }
+
+/* панель руководителя */
+.adm { position: absolute; top: 57px; left: 0; right: 0; bottom: 0; padding: 24px 36px; overflow: hidden; }
+.adm h2 { font-size: 26px; font-weight: 700; letter-spacing: -0.02em; }
+.adm .sub { color: #56687f; font-size: 14px; margin-top: 2px; }
+.seg { position: absolute; right: 36px; top: 26px; display: flex; background: #e6edf5; border-radius: 999px; padding: 3px; }
+.seg span { padding: 6px 14px; border-radius: 999px; font-size: 14px; color: #56687f; }
+.seg span.on { background: #fff; color: #0f1d2e; box-shadow: 0 1px 2px rgba(0, 0, 0, 0.08); }
+.atiles { display: flex; gap: 14px; margin-top: 18px; }
+.atile { flex: 1; background: #fff; border: 1px solid #dce6f2; border-radius: 16px; padding: 16px 18px; height: 124px; position: relative; opacity: 0; }
+.atile .tl { font-size: 13px; color: #56687f; }
+.atile .tv { font-size: 38px; font-weight: 700; letter-spacing: -0.03em; margin-top: 4px; line-height: 1.1; font-variant-numeric: tabular-nums; }
+.atile .tv.bad { color: #c62828; }
+.atile .tv.good { color: #167a41; }
+.atile .td { font-size: 13px; color: #56687f; margin-top: 6px; }
+.atile .td.warn { color: #c62828; }
+.ring { position: absolute; right: 16px; top: 16px; width: 92px; height: 92px; }
+.ring svg { transform: rotate(-90deg); }
+.ring .rv { position: absolute; inset: 0; display: grid; place-items: center; font-weight: 700; font-size: 18px; letter-spacing: -0.02em; }
+.acols { display: flex; gap: 14px; margin-top: 14px; }
+.panel { background: #fff; border: 1px solid #dce6f2; border-radius: 16px; padding: 16px 18px; opacity: 0; }
+.panel h3 { font-size: 17px; font-weight: 600; display: flex; justify-content: space-between; align-items: center; }
+.panel.team { flex: 1.35; }
+.panel.att { flex: 1; }
+.chip-c { font-size: 13px; color: #56687f; background: #e6edf5; border-radius: 999px; padding: 4px 10px; font-weight: 400; }
+.adm table { width: 100%; border-collapse: collapse; margin-top: 10px; font-size: 14px; }
+.adm th { font-weight: 500; color: #56687f; text-align: left; padding: 6px 8px; border-bottom: 1px solid #dce6f2; font-size: 12px; }
+.adm td { padding: 10px 8px; border-bottom: 1px solid #eef2f7; font-variant-numeric: tabular-nums; white-space: nowrap; }
+.adm td.good { color: #167a41; }
+.adm td.slow { color: #c62828; }
+.person { display: flex; align-items: center; gap: 10px; }
+.person .ava { width: 34px; height: 34px; font-size: 13px; }
+.person small { display: block; font-size: 12px; color: #56687f; font-weight: 400; }
+.person b { font-weight: 500; }
+.bar { display: inline-block; width: 90px; height: 6px; border-radius: 3px; background: #e6edf5; vertical-align: middle; margin-right: 6px; overflow: hidden; }
+.bar i { display: block; height: 100%; background: #2c78d5; border-radius: 3px; width: 0; }
+.ai { display: flex; align-items: center; gap: 12px; padding: 0; border-bottom: 1px solid #eef2f7; height: 66px; overflow: hidden; }
+.ai .tm { width: 62px; font-weight: 600; color: #c62828; font-size: 15px; flex: none; }
+.ai .who { flex: 1; min-width: 0; }
+.ai .who b { display: block; font-weight: 500; font-size: 14px; }
+.ai .who span { display: block; font-size: 12px; color: #56687f; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.ai .rb { height: 32px; padding: 0 12px; border-radius: 999px; background: #eff5fd; color: #1f63bc; font-size: 13px; display: flex; align-items: center; white-space: nowrap; flex: none; }
+.cursor { position: absolute; width: 22px; height: 22px; z-index: 50; opacity: 0; filter: drop-shadow(0 2px 3px rgba(0, 0, 0, 0.35)); }
+
+/* ---------- окно Ветры на телефоне: как настоящее приложение ---------- */
+.m { background: #fff; }
+.m .top { position: absolute; left: 0; right: 0; top: 0; height: 152px; background: #fff; border-bottom: 1px solid #e3e9f1; z-index: 5; }
+.m .lt { position: absolute; left: 16px; top: 58px; font-size: 34px; font-weight: 700; letter-spacing: -0.03em; line-height: 1; }
+.m .top .uava { position: absolute; right: 16px; top: 54px; width: 40px; height: 40px; font-size: 14px; }
+.m .top .st { position: absolute; right: 64px; top: 60px; height: 26px; font-size: 12px; padding: 0 10px; }
+.m .search { position: absolute; left: 16px; right: 16px; top: 106px; margin: 0; height: 36px; border-radius: 10px; font-size: 16px; }
+.m .list { position: absolute; left: 0; right: 0; top: 153px; bottom: 83px; width: auto; border: 0; padding: 0; overflow: hidden; }
+.m .row { padding: 9px 16px; gap: 12px; }
+.m .row::after { content: ""; position: absolute; left: 84px; right: 0; bottom: 0; height: 1px; background: #eef2f7; }
+.m .row .ava { width: 56px; height: 56px; font-size: 18px; }
+.m .row .ava .ch { width: 20px; height: 20px; }
+.m .rn { font-size: 16px; }
+.m .rn .tm { font-size: 14px; }
+.m .rp { font-size: 15px; margin-top: 3px; }
+.m .row.hot { background: #fff; }
+.m .row.hot .txt { color: #0f1d2e; }
+.m .badge { min-width: 21px; height: 21px; font-size: 13px; }
+.tabbar { position: absolute; left: 0; right: 0; bottom: 0; height: 83px; background: #fff; border-top: 1px solid #e3e9f1; display: flex; justify-content: space-around; padding: 8px 10px 0; z-index: 20; }
+.tabbar div { display: flex; flex-direction: column; align-items: center; gap: 3px; width: 70px; font-size: 10px; font-weight: 500; color: #596b82; }
+.tabbar div.on { color: #1f63bc; }
+.tabbar svg { width: 26px; height: 26px; }
+.m .nav { position: absolute; left: 0; right: 0; top: 54px; height: 54px; background: #fff; border-bottom: 1px solid #e3e9f1; display: flex; align-items: center; gap: 8px; padding: 0 12px 0 8px; z-index: 5; }
+.m .nav .back { width: 30px; height: 44px; display: grid; place-items: center; color: #1f63bc; }
+.m .nav .ava { width: 40px; height: 40px; font-size: 14px; }
+.m .nav .pn { font-size: 17px; }
+.m .nav .ps { font-size: 12px; margin-top: 1px; }
+.m .nav .nm { flex: 1; min-width: 0; }
+.m .chat { top: 109px; bottom: 156px; padding: 14px; background: #eaf0f7; }
+.m .bb { max-width: 290px; font-size: 15px; border-radius: 18px; }
+.m .chips { height: 52px; bottom: 100px; padding: 0 12px; gap: 8px; overflow: hidden; border-top: 0; background: #eaf0f7; }
+.m .chip { height: 34px; }
+.m .inp { height: 66px; bottom: 34px; padding: 0 12px; gap: 10px; background: #fff; border-top: 1px solid #e3e9f1; }
+.m .inp::after { content: ""; position: absolute; left: 0; right: 0; top: 100%; height: 34px; background: #fff; }
+.m .field { font-size: 15px; height: 40px; justify-content: flex-end; padding-right: 62px; white-space: nowrap; }
+.m .field .pl { margin-right: auto; }
+.m .clipbtn, .m .mic { width: 40px; height: 40px; }
+.m .pane { position: absolute; inset: 0; }
+.m .tap { position: absolute; width: 56px; height: 56px; margin: -28px 0 0 -28px; border-radius: 50%; background: rgba(44, 120, 213, 0.35); border: 2px solid rgba(255, 255, 255, 0.9); opacity: 0; z-index: 35; }
+
+/* спящий экран ноутбука */
+.sleep { background: #0b0f16; display: grid; place-items: center; }
+.sleep .mark { font-size: 44px; font-weight: 700; color: #9db6d6; letter-spacing: -0.04em; display: flex; align-items: center; }
+.sleep .mark i { display: inline-block; width: 11px; height: 11px; border-radius: 50%; background: #2c78d5; margin-left: 5px; margin-top: 12px; }
+
+/* экран блокировки iPhone */
+.lock { background: radial-gradient(120% 80% at 30% 15%, #2d5fb8 0%, #16326f 38%, #0a1a3d 70%, #060c1f 100%); color: #fff; }
+.lock .ldate { position: absolute; left: 0; right: 0; top: 80px; text-align: center; font-size: 20px; font-weight: 500; color: rgba(255, 255, 255, 0.85); }
+.lock .ltime { position: absolute; left: 0; right: 0; top: 118px; text-align: center; font-size: 92px; font-weight: 500; letter-spacing: -0.03em; line-height: 1; }
+.lock .lns { position: absolute; left: 14px; right: 14px; top: 300px; }
+.ln { position: absolute; left: 0; right: 0; height: 72px; border-radius: 22px; background: rgba(255, 255, 255, 0.16); backdrop-filter: blur(12px); display: flex; align-items: center; gap: 12px; padding: 0 14px; opacity: 0; }
+.ln svg { width: 40px; height: 40px; border-radius: 11px; flex: none; }
+.ln .lc { flex: 1; min-width: 0; }
+.ln .lh { display: flex; justify-content: space-between; font-size: 14px; font-weight: 600; }
+.ln .lh span { font-weight: 400; color: rgba(255, 255, 255, 0.7); font-size: 13px; }
+.ln .lx { font-size: 14px; color: rgba(255, 255, 255, 0.92); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.lock .lbtn { position: absolute; bottom: 44px; width: 52px; height: 52px; border-radius: 50%; background: rgba(255, 255, 255, 0.18); display: grid; place-items: center; }
+.lock .lbtn.l { left: 46px; }
+.lock .lbtn.r { right: 46px; }
+
+/* ---------- карточки хаоса ---------- */
+#cards { position: absolute; inset: 0; z-index: 5; }
+.card { position: absolute; left: 960px; top: 540px; width: 320px; height: 86px; margin: -43px 0 0 -160px; border-radius: 20px; background: rgba(21, 28, 40, 0.94); border: 1px solid rgba(255, 255, 255, 0.09); box-shadow: 0 30px 60px rgba(0, 0, 0, 0.5); display: flex; align-items: center; gap: 14px; padding: 0 16px; opacity: 0; }
+.card .app { width: 44px; height: 44px; border-radius: 12px; flex: none; }
+.cc { flex: 1; min-width: 0; }
+.cl { font-size: 11px; letter-spacing: 0.06em; text-transform: uppercase; color: #8da2bf; }
+.cs { font-size: 15px; font-weight: 500; margin-top: 1px; }
+.ct { font-size: 14px; color: #c8d4e4; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.cm { font-size: 12px; color: #8da2bf; align-self: flex-start; margin-top: 12px; }
+
+/* ---------- титры ---------- */
+.clip { position: absolute; inset: 0; pointer-events: none; }
+.t { position: absolute; opacity: 0; }
+.t-bot { left: 0; right: 0; top: 930px; text-align: center; }
+.t-left { left: 450px; top: 470px; width: 440px; }
+.t-left .h { font-size: 64px; line-height: 1.06; }
+.t-left .s { max-width: 420px; line-height: 1.35; }
+.t-brand { left: 360px; top: 72px; width: 1200px; text-align: center; }
+.t-brand .s { margin-top: 12px; }
+.t-top { left: 0; right: 0; top: 66px; text-align: center; }
+.t-center { left: 0; right: 0; top: 400px; text-align: center; }
+.h { font-weight: 700; font-size: 72px; line-height: 1.02; letter-spacing: -0.035em; color: #fff; }
+.h .red { color: #ff6b6b; }
+.h .dot { display: inline-block; width: 0.16em; height: 0.16em; border-radius: 50%; background: #81aee6; margin-left: 0.06em; vertical-align: 0.06em; }
+.h.big { font-size: 112px; }
+.h.huge { font-size: 150px; letter-spacing: -0.045em; }
+.s { font-weight: 400; font-size: 30px; color: #9db6d6; margin-top: 18px; letter-spacing: -0.01em; }
+.s.big { font-size: 42px; color: #fff; margin-top: 10px; }
+.url { display: inline-block; margin-top: 44px; font-size: 34px; font-weight: 500; color: #050a14; background: #81aee6; padding: 10px 30px; border-radius: 999px; }
+.fade { position: absolute; inset: 0; background: #000; opacity: 0; z-index: 50; }
