@@ -1,0 +1,114 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-09-14T00:00:00+03:00",
+  "title": "Design System: Ветра — презентация",
+  "extensions": {
+    "colorMeta": {
+      "blue": { "role": "primary", "displayName": "Фирменный синий" },
+      "link": { "role": "primary", "displayName": "Синий действия" },
+      "sky": { "role": "primary", "displayName": "Мягкий голубой" },
+      "paper": { "role": "neutral", "displayName": "Холодный светлый фон" },
+      "surface": { "role": "neutral", "displayName": "Белая поверхность" },
+      "ink": { "role": "neutral", "displayName": "Тёмные чернила" },
+      "muted": { "role": "neutral", "displayName": "Вторичный текст" },
+      "navy": { "role": "neutral", "displayName": "Тёмно-синяя поверхность" }
+    },
+    "typographyMeta": {
+      "display": { "displayName": "Главный заголовок", "purpose": "Действующая шкала .slide h1 с учётом специфичности CSS." },
+      "headline": { "displayName": "Заголовок раздела", "purpose": "Действующая шкала .slide h2." },
+      "brand": { "displayName": "Словесный знак", "purpose": "Локальный Google Sans, CSS-имя Vetra; слово «Ветра» с круглой синей точкой." }
+    },
+    "shadows": [
+      { "name": "screen", "value": "0 16px 50px #0e2a4a0d", "purpose": "Экран и видеоплеер." },
+      { "name": "cover-screen", "value": "0 24px 60px #0e2a4a1a", "purpose": "Экран на обложке." },
+      { "name": "settings-screen", "value": "0 12px 35px #0e2a4a08", "purpose": "Компактные экраны настроек." },
+      { "name": "pager", "value": "0 12px 40px #0e2a4a26", "purpose": "Панель переключения слайдов." },
+      { "name": "dialog", "value": "0 30px 100px #0e2a4a44", "purpose": "Диалог увеличения." }
+    ],
+    "motion": [
+      { "name": "video-entry", "value": "y:22px → 0; opacity:0 → 1; 620ms; power2.out", "purpose": "Повторяемое появление элементов видеокомпозиции." },
+      { "name": "video-crossfade", "value": "520ms; power1.inOut", "purpose": "Перекрывающееся проявление и исчезновение сцен." },
+      { "name": "reduced-motion-web", "value": "scroll-behavior:auto", "purpose": "Отключение плавной прокрутки страницы при prefers-reduced-motion:reduce." }
+    ],
+    "breakpoints": [
+      { "name": "toolbar-inset", "value": "1200px" },
+      { "name": "compact-slides", "value": "1000px" },
+      { "name": "mobile-type-and-grids", "value": "760px" },
+      { "name": "mobile-cover", "value": "700px" }
+    ]
+  },
+  "components": [
+    {
+      "name": "Основное действие",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "Синяя пилюля с белым текстом и видимым фокусом.",
+      "html": "<a class=\"ds-button\" href=\"#landing\">Посмотреть продукт</a>",
+      "css": ".ds-button{display:inline-flex;align-items:center;gap:18px;min-height:44px;padding:14px 25px;border:0;border-radius:999px;background:var(--link,#1f63bc);color:white;font:500 17px/1.5 Vetra,Arial,sans-serif;text-decoration:none}.ds-button:hover{background:#164f9a;color:white;transform:none;box-shadow:none}.ds-button:focus-visible{outline:3px solid var(--blue,#2c78d5);outline-offset:4px}"
+    },
+    {
+      "name": "Спокойное действие",
+      "kind": "button",
+      "refersTo": "button-quiet",
+      "description": "Кнопка печати из верхней панели.",
+      "html": "<button class=\"ds-quiet\" type=\"button\">Печать</button>",
+      "css": ".ds-quiet{min-height:44px;padding:9px 14px;border:0;border-radius:999px;background:var(--paper,#f7fafe);color:var(--ink,#0f1d2e);font:400 14px/1.5 Vetra,Arial,sans-serif;cursor:pointer}.ds-quiet:hover{background:#164f9a;color:white}.ds-quiet:focus-visible{outline:3px solid var(--blue,#2c78d5);outline-offset:4px}.ds-quiet:disabled{opacity:.4;cursor:default}"
+    },
+    {
+      "name": "Главы",
+      "kind": "nav",
+      "refersTo": "chapter-selected",
+      "description": "Горизонтальные ссылки с голубой подложкой текущей главы.",
+      "html": "<nav class=\"ds-chapters\" aria-label=\"Разделы презентации\"><a href=\"#product\" aria-current=\"true\">Продукт</a><a href=\"#inbox\">Администратор</a><a href=\"#manager\">Руководитель</a></nav>",
+      "css": ".ds-chapters{display:flex;gap:5px;padding:8px 22px;background:var(--paper,#f7fafe);border-bottom:1px solid var(--line,#dce6f2);overflow-x:auto}.ds-chapters a{flex:none;padding:5px 9px;border:0;border-radius:999px;color:var(--muted,#56687f);font:400 13px/1.5 Vetra,Arial,sans-serif;text-decoration:none}.ds-chapters a:hover,.ds-chapters a[aria-current]{background:var(--sky,#d6e5f7);color:var(--link,#1f63bc)}.ds-chapters a:focus-visible{outline:3px solid var(--blue,#2c78d5);outline-offset:4px}"
+    },
+    {
+      "name": "Статус",
+      "kind": "chip",
+      "refersTo": "status",
+      "description": "Неинтерактивные метки локальной версии и ожидающих этапов.",
+      "html": "<span class=\"ds-status\">Локальная версия</span> <span class=\"ds-status ds-pending\">До реального запуска</span>",
+      "css": ".ds-status{display:inline-block;padding:6px 10px;border:0;border-radius:999px;background:#eff5fd;color:var(--link,#1f63bc);font:400 13px/1.5 Vetra,Arial,sans-serif}.ds-pending{background:var(--paper,#f7fafe);color:var(--muted,#56687f)}"
+    },
+    {
+      "name": "Контейнер экрана",
+      "kind": "card",
+      "refersTo": "screen",
+      "description": "Оболочка снимка: поверхность, граница, тень и подпись; изображение не подменяется новым макетом.",
+      "html": "<figure class=\"ds-screen\"><figcaption class=\"ds-caption\">Локальная версия · учебная переписка, не реальные клиенты</figcaption></figure>",
+      "css": ".ds-screen{margin:0;min-width:0;border:1px solid var(--line,#dce6f2);border-radius:24px;overflow:hidden;background:white;box-shadow:0 16px 50px #0e2a4a0d}.ds-caption{display:flex;justify-content:space-between;gap:12px;margin:0;padding:14px 20px;border-top:1px solid var(--line,#dce6f2);color:var(--muted,#56687f);font:400 13px/1.5 Vetra,Arial,sans-serif;background:white}"
+    },
+    {
+      "name": "Знак Ветры",
+      "kind": "custom",
+      "description": "Слово и отдельная круглая точка в масштабе верхней панели.",
+      "html": "<a class=\"ds-brand\" href=\"#product\">Ветра<span aria-hidden=\"true\"></span></a>",
+      "css": ".ds-brand{display:inline-flex;align-items:baseline;color:var(--ink,#0f1d2e);font:700 30px/1 Vetra,Arial,sans-serif;letter-spacing:-.04em;text-decoration:none}.ds-brand span{display:inline-block;width:7px;height:7px;border-radius:50%;background:var(--blue,#2c78d5);margin-left:4px;position:relative;bottom:2px}.ds-brand:focus-visible{outline:3px solid var(--blue,#2c78d5);outline-offset:4px}"
+    }
+  ],
+  "narrative": {
+    "northStar": "Исходный дизайн Ветры",
+    "overview": "Холодный светлый фон, белые поверхности, синие акценты и мягкая глубина сохраняют утверждённый облик продукта. Основной визуальный материал — интерфейсы Ветры; оболочка даёт им место и не меняет их дизайн. Направление закреплено запросом Михаила от 14.09.2026, `PRODUCT.md` и исходным `D:/Projects/vetra/docs/style.md`.\n\nЭтот файл описывает наблюдаемую реализацию внутри `presentation/`; `style.md` остаётся паспортом проекта. Источник значений — `css/brand.css`, включая импортированный `css/style.css` и специфичность его селекторов. Правила видео сверены с `redesign-lab/vetra-presentation/video/index.html`. Документ не устанавливает новый визуальный мир и не переносит сюда отсутствующие компоненты основного приложения.",
+    "keyCharacteristics": [
+      "Холодный белый фон и спокойная синяя палитра.",
+      "Локальный Google Sans с кириллицей, средние заголовки и жирный словесный знак.",
+      "Кнопки-пилюли, мягкие границы и размытые тени под экранами.",
+      "Интерфейсы без наклона, сохранение пропорций и читаемые подписи."
+    ],
+    "rules": [
+      { "name": "The Синий для действия Rule", "body": "Под белым текстом основных кнопок используется `link`; фирменная точка использует `blue`.", "section": "colors" },
+      { "name": "The Слово и точка Rule", "body": "Знак — только «Ветра» с отдельной круглой синей точкой справа. В шапке точка имеет диаметр 7px, отступ слева 4px и подъём 2px; в видео масштабируется вместе со знаком.", "section": "typography" },
+      { "name": "The Мягкая глубина Rule", "body": "Использовать размытые тени экранов; жёсткие смещённые тени из прежнего импортируемого оформления не являются правилом системы.", "section": "elevation" }
+    ],
+    "dos": [
+      "Do сохранять холодную светлую палитру, синие действия и мягкие тени экранов.",
+      "Do набирать «Ветра» локальным Google Sans 700 с отдельной круглой синей точкой.",
+      "Do сохранять заголовки весом 500, пропорции экранов и видимый клавиатурный фокус."
+    ],
+    "donts": [
+      "Don't заменять словесный знак латиницей, птицей или другой фигурой вместо точки.",
+      "Don't возвращать жёсткие смещённые тени, наклонять экраны или добавлять тяжёлые рамки.",
+      "Don't добавлять новый визуальный мир, шрифты или несуществующие компоненты по этому описанию."
+    ]
+  }
+}

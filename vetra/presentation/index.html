@@ -9,14 +9,19 @@
 <meta property="og:description" content="От первого обращения до работы команды. Экраны Ветры и сценарий совместного пилота с EchoMind.">
 <meta property="og:type" content="website">
 <meta property="og:image" content="https://errorslove190-droid.github.io/sites/vetra/presentation/img/inbox.png">
-<meta name="theme-color" content="#f8f5ed">
+<meta name="theme-color" content="#f7fafe">
 <title>Ветра — продукт и предложение партнёрства</title>
 <link rel="icon" href="../favicon.svg" type="image/svg+xml">
-<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/brand.css">
 <script src="js/script.js" defer></script>
 </head>
 <body>
-<!-- Продолжение утверждённого стиля 01. Реальные экраны ведут рассказ: лендинг → вход → работа → контроль → совместный пилот. Демонстрационные данные не являются результатами клиентов. -->
+<!-- THESIS: Показать рабочее окно Ветры и предложить совместный пилот EchoMind.
+OWN-WORLD: Исходный дизайн Ветры: Google Sans, холодный белый, синие акценты, мягкие тени, кнопки-пилюли. Логотип только «Ветра» с синей точкой.
+STORY: Лендинг → вход → работа → контроль → видео → готовность → совместный пилот. Макеты подписаны, результаты клиентов не выдуманы.
+FIRST VIEWPORT: Слева крупный заголовок и переход к продукту, справа исходный интерфейс на плоской голубой форме. На телефоне — одна колонка.
+FORM: Сохранены 11 разделов и режим показа. Мир закреплён прямым запросом Михаила 14.09.2026 и docs/style.md Ветры; новый выбор стиля не требуется.
+FINISH: Проверка на телефоне и десктопе, независимый обзор, паспорт дизайна. -->
 <a class="skip" href="#product">К презентации</a>
 <header class="toolbar">
   <a class="brand" href="#product">Ветра<span aria-hidden="true">.</span></a>
@@ -35,9 +40,9 @@
       <p class="lead">Ветра объединяет переписки с клиентами и помогает руководителю видеть, что происходит с обращениями.</p>
       <p>Показываем продукт и предлагаем проверить связку с аналитикой EchoMind на одном бизнесе.</p>
       <a class="button" href="#landing">Посмотреть продукт <span aria-hidden="true">→</span></a></div>
-      <figure class="cover-screen"><button class="image-button" data-zoom="img/inbox.png" data-caption="Рабочее окно Ветры. Все диалоги вымышленные." aria-label="Увеличить рабочее окно"><img src="img/inbox.png" width="1280" height="720" alt="Рабочее окно Ветры: список обращений слева и переписка с клиентом справа" fetchpriority="high"></button><figcaption>Рабочий интерфейс · демонстрационные данные</figcaption></figure>
+      <figure class="cover-screen"><button class="image-button" data-zoom="img/design-inbox.png" data-caption="Исходный дизайн-проект Ветры. Все диалоги и показатели демонстрационные." aria-label="Увеличить рабочее окно"><img src="img/design-inbox.png" width="1280" height="720" alt="Исходный дизайн Ветры: очередь обращений, переписка и карточка клиента в одном окне" fetchpriority="high"></button><figcaption>Исходный дизайн-проект · демонстрационные данные</figcaption></figure>
     </div>
-    <footer class="slide-footer"><span>Михаил Абросимов · команда Ветры</span><span>Материалы от 13 сентября 2026</span></footer>
+    <footer class="slide-footer"><span>Михаил Абросимов · команда Ветры</span><span>Материалы от 14 сентября 2026</span></footer>
   </section>
 
   <section class="slide" id="landing" aria-labelledby="landing-title">
@@ -84,9 +89,9 @@
   <section class="slide video-slide" id="video" aria-labelledby="video-title">
     <div class="slide-top"><span>Продукт в движении</span><span>07 / 11</span></div>
     <h2 id="video-title">Как выглядит идея Ветры</h2>
-    <p class="video-warning">Черновой ролик, 54 секунды. В нём есть макеты и планы: шесть каналов, подключение «за минуту» и другие обещания не подтверждают готовность текущей версии.</p>
-    <video id="promo" src="../lending/video/promo.mp4" poster="../lending/video/poster.jpg" controls playsinline preload="none" aria-label="Черновой ролик о Ветре, 54 секунды">Ваш браузер не поддерживает видео. <a href="../lending/video/promo.mp4">Открыть ролик</a>.</video>
-    <div class="video-links"><a href="../lending/video/hero-loop.mp4" target="_blank" rel="noopener">Короткая заставка · 14 секунд ↗</a><a href="../video-razbor/" target="_blank" rel="noopener">Архив версий и разбор сцен ↗</a></div>
+    <p class="video-warning">54 секунды в исходном стиле Ветры: от первого сообщения до работы команды. Экраны — дизайн-проект, диалоги и показатели — демонстрационные.</p>
+    <video id="promo" src="video/vetra-design.mp4" poster="video/poster.jpg" controls playsinline preload="metadata" aria-label="Ветра: продукт в исходном дизайне, 54 секунды">Ваш браузер не поддерживает видео. <a href="video/vetra-design.mp4">Открыть ролик</a>.</video>
+    <div class="video-links"><a href="video/vetra-design.mp4" target="_blank" rel="noopener">Открыть видео отдельно ↗</a><a href="../lending/" target="_blank" rel="noopener">Исходный стиль на лендинге ↗</a></div>
     <p class="bottom-line">Ролик передаёт направление продукта. Актуальная готовность — на следующем слайде.</p>
   </section>
 
@@ -131,7 +136,7 @@
     <footer class="slide-footer"><a href="../echomind/" target="_blank" rel="noopener">Краткое предложение партнёрства ↗</a><a href="#product">Вернуться к продукту ↑</a></footer>
   </section>
 </main>
-<footer class="page-footer">Ветра · презентация для обсуждения · 13.09.2026<br>Снимки на демонстрационных данных. Регистрация и видеосценарий содержат макеты.</footer>
+<footer class="page-footer">Ветра · презентация для обсуждения · 14.09.2026<br>Снимки на демонстрационных данных. Обложка, регистрация и видео содержат макеты исходного дизайн-проекта.</footer>
 <div class="pager" hidden><button id="prev" type="button" aria-label="Предыдущий слайд">←</button><output id="counter" aria-live="polite">1 / 11</output><button id="next-slide" type="button" aria-label="Следующий слайд">→</button></div>
 <dialog id="zoom" aria-labelledby="zoom-caption"><div class="zoom-bar"><p id="zoom-caption"></p><button id="close-zoom" type="button">Закрыть</button></div><img id="zoom-image" src="img/inbox.png" alt="Рабочее окно Ветры"><a id="original" target="_blank" rel="noopener">Открыть снимок в полном размере ↗</a></dialog>
 </body>
