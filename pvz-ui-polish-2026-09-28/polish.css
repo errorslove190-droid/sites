@@ -1,0 +1,117 @@
+/* Small visual refinement of the original UI. Art, copy, layout and logic stay original. */
+:root {
+  --text-muted: #736653;
+  --text-soft: #625643;
+  --ui-paper: #f3ead7;
+  --ui-button: #efe3cb;
+  --ui-ink: #352d27;
+  --ui-edge: #c5b494;
+  --ui-amber: #d4a14c;
+  --ui-shadow: 0 2px 5px rgba(32, 24, 27, .16);
+}
+
+/* Original cream HUD, with quieter surfaces and readable captions. */
+#game-hud { background: #e8ddc7; box-shadow: 0 2px 6px #20181b24; }
+.stat-pill { background: #f4ebd8; border-color: #c9baa0; border-radius: 8px; box-shadow: none; }
+.stat-pill:hover { transform: none; box-shadow: none; }
+.stat-label { color: #74634f; font-weight: 650; letter-spacing: .15px; }
+.stat-val { font-weight: 750; }
+.stat-val.gold { color: #895011; }
+.stat-val.rating { color: #5b517e; }
+.stat-val.stock { color: #396b53; }
+.hud-icon-btn { background: #f7efdf; border-color: #c5b494; box-shadow: none; border-radius: 8px; }
+.hud-icon-btn:hover { background: #fff7e8; border-color: #927956; }
+
+/* Dialogues keep their words, type, rhythm and size. */
+.scene-narration { background: #f3ead7; border-color: #c9b99b; box-shadow: 0 3px 10px #20181b24; }
+.scene-visitor-chip, .scene-order-line {
+  background: #f0e5cf; border-color: #c8b897; box-shadow: 0 1px 4px #20181b1a;
+}
+.scene-order-line strong { color: #94571f; }
+.scene-line.v .who { background: #e3dbe8; color: #59416b; border-color: #beadc8; }
+.scene-line.you .who { background: #dde9dc; color: #355e40; border-color: #b0c4aa; }
+
+.scene-choice {
+  background: var(--ui-button); color: var(--ui-ink);
+  border: 1px solid var(--ui-edge); border-radius: 10px;
+  box-shadow: var(--ui-shadow); backdrop-filter: none;
+  transition: background-color .15s, border-color .15s, box-shadow .15s;
+}
+.scene-choice b { font-weight: 700; }
+.scene-choice span { color: #6c5943; }
+.scene-choice-icon { background: #e5d4b4; border-color: #c0a681; border-radius: 8px; }
+.scene-choice:hover { background: #faf0dd; border-color: #a2865d; transform: none; box-shadow: 0 3px 8px #20181b26; }
+.scene-choice:active { background: #dfcfaf; transform: none; box-shadow: none; }
+.scene-choice.scandal-choice { border-color: #b68878; background: #f0dfd3; }
+.scene-choice.scandal-choice:hover { background: #f7e9df; border-color: #9b6252; }
+
+/* Shared action surface; !important only replaces incumbent inline decoration. */
+.action-btn, .scene-continue, .shop-buy-btn, .tut-btn {
+  background: var(--ui-amber); color: #312314; border: 1px solid #af7d37;
+  border-radius: 10px; box-shadow: var(--ui-shadow) !important;
+  text-shadow: none; font-weight: 700 !important;
+}
+.action-btn:hover:not(:disabled), .scene-continue:hover:not(:disabled), .tut-btn:hover,
+.shop-buy-btn:hover:not(:disabled):not(.disabled):not(.bought):not(.maxed):not(.active-boost) {
+  background: #e0b267; border-color: #95632b; transform: none;
+  box-shadow: 0 3px 8px #20181b26 !important; filter: none;
+}
+.action-btn:active:not(:disabled), .scene-continue:active:not(:disabled), .tut-btn:active,
+.shop-buy-btn:active:not(:disabled):not(.disabled):not(.bought):not(.maxed):not(.active-boost) {
+  background: #c59140; transform: none; box-shadow: none !important;
+}
+.btn-ghost { background: #eee3cf; color: #5e4e3d; border-color: #c1ad8d; border-radius: 10px; }
+.btn-ghost:hover { background: #f7eedc; border-color: #927956; }
+.btn-ghost:active { background: #e0d1b7; transform: none; }
+
+.end-acceptance-btn {
+  background: #eee1cb !important; color: #79503f !important;
+  border: 1px solid #bda17e !important; border-radius: 10px;
+  box-shadow: var(--ui-shadow) !important; text-shadow: none; font-weight: 700;
+}
+.end-acceptance-btn:hover { background: #f8ecd8 !important; filter: none; transform: none; }
+.end-acceptance-btn:active { background: #ddcbb0 !important; box-shadow: none !important; transform: none; }
+.refuse-btn { background: #a45848; border: 1px solid #7b3c30; border-radius: 10px; color: #fff5e8; box-shadow: var(--ui-shadow); font-weight: 700; }
+.refuse-btn:hover { background: #ae6352; transform: none; box-shadow: 0 3px 8px #20181b26; }
+.refuse-btn:active { background: #904b3d; transform: none; box-shadow: none; }
+
+/* Sorting keeps all three original color meanings and all labels. */
+.sort-bin { border: 1px solid !important; border-radius: 11px; box-shadow: var(--ui-shadow) !important; }
+.sort-bin.bin-ours { background: #416e5a; border-color: #294e3e !important; }
+.sort-bin.bin-others { background: #a45848; border-color: #7b3c30 !important; }
+.sort-bin.bin-broken { background: #d2a44e; border-color: #ad7d32 !important; }
+.sort-bin-title { font-weight: 750; letter-spacing: .3px; text-shadow: none; }
+.sort-bin-hint { color: #fff5e3; font-weight: 600; }
+.sort-bin-count { background: #14241b30; color: #fff6e6; border-radius: 5px; backdrop-filter: none; }
+.sort-bin-icon { filter: none; }
+.sort-bin.bin-broken .sort-bin-title, .sort-bin.bin-broken .sort-bin-hint { color: #382c17; }
+.sort-bin.bin-broken .sort-bin-count { background: #f9ebcd; color: #61451d; }
+.sort-bin:hover { transform: none !important; filter: brightness(1.07) !important; }
+.sort-bin:active, .sort-bin.pressed { transform: none !important; filter: brightness(.92) !important; box-shadow: none !important; }
+.sort-bin:hover .sort-bin-icon { transform: none; }
+.acc-top-pill, .invoice-panel { background: #f2e8d3; border-color: #c7b797; box-shadow: 0 2px 5px #20181b20; }
+
+/* Keep shop structure and states; match its controls to the same palette. */
+.shop-tab-pill { color: #6c5943; border-radius: 8px; }
+.shop-tab-pill.active { background: #e9d8b8; color: #61431f; border-color: #b89c6e; box-shadow: none; }
+.shop-tab-pill:hover { color: #533d25; transform: none; }
+.shop-ad-btn { background: #756382; border-color: #594764; color: #fff5e8; border-radius: 10px; box-shadow: var(--ui-shadow); font-weight: 700; }
+.shop-ad-btn:hover { background: #847190; box-shadow: 0 3px 8px #20181b26; filter: none; }
+.shop-buy-btn.bought, .shop-buy-btn.maxed { background: #dee9d7; color: #3c6043; border-color: #9bb297; box-shadow: none !important; }
+.shop-buy-btn.active-boost { background: #dce5e4; color: #3d6169; border-color: #a7bfc0; box-shadow: none !important; }
+.shop-buy-btn:disabled, .shop-buy-btn.disabled, .shop-ad-btn.disabled,
+.action-btn:disabled, .scene-continue:disabled {
+  background: #ded6c5; color: #716451; border-color: #c1b49b;
+  box-shadow: none !important; transform: none; filter: none; cursor: default;
+}
+
+.wh-bottom, .scan-card, .tutorial-card, .result-top-card, .dayend-top-card {
+  border-color: #c5b494; box-shadow: 0 3px 12px #20181b26;
+}
+button:focus-visible, .scene-choice:focus-visible {
+  outline: 3px solid #786589; outline-offset: 2px;
+}
+button:disabled:focus-visible { outline: none; }
+@media (prefers-reduced-motion: reduce) {
+  .scene-choice, .action-btn, .scene-continue, .sort-bin, .shop-buy-btn { transition: none; }
+}
