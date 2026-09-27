@@ -46,7 +46,9 @@ function settle(s, r, payout, multiplier, result) {
   s.rounds.unshift(r);
   if (s.rounds.length > 100) s.rounds.length = 100;
   if (payout > 0) move(s, payout, 'win', r.id);
-  s.open = null;
+  s.stats.rounds += 1; s.stats.wagered += r.bet; s.stats.won += payout;
+  // мгновенная игра не должна закрывать открытый раунд Mines или Crash
+  if (s.open === r) s.open = null;
   return { round: r, balance: s.balance };
 }
 async function instant(s, body, game, count, prepare) {
@@ -163,10 +165,7 @@ export function createMock() {
     if (!h) throw new Error('нет такого запроса: ' + key);
     ready = (ready || Promise.resolve()).then(async () => {
       const s = await state();
-      const before = s.rounds.length;
       const out = await h(s, body || {}, q);
-      // статистика считается по завершённым раундам
-      for (const r of s.rounds.slice(0, s.rounds.length - before)) { s.stats.rounds += 1; s.stats.wagered += r.bet; s.stats.won += r.payout; }
       save(s);
       return JSON.parse(JSON.stringify(out));
     });

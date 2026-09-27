@@ -307,7 +307,7 @@ function crashTick() {
   const m = Math.floor(Math.exp(GROWTH * t) * 100 + 1e-9) / 100;
   $('#cr-big').textContent = m.toFixed(2) + '×';
   crashDraw(t, m);
-  $('#go').textContent = 'Забрать ' + fmt(Math.floor(st.crashBet * m));
+  if (st.game === 'crash') $('#go').textContent = 'Забрать ' + fmt(Math.floor(st.crashBet * m));
   cr.raf = requestAnimationFrame(crashTick);
 }
 async function crashPoll() {
@@ -388,7 +388,7 @@ async function playPlinko() {
   ball.style.left = ((150 + (bucket - pl.N / 2) * s) / 3) + '%'; ball.style.top = '96%';
   await sleep(160);
   $$('#pl-buckets span')[bucket].classList.add('hi');
-  toast((r.round.payout > 0 ? 'Выигрыш ' : 'Выпало ') + mult(r.round.result.multiplier) + ' → ' + fmt(r.round.payout) + ' USDT');
+  toast((r.round.result.win ? 'Выигрыш ' : 'Выпало ') + mult(r.round.result.multiplier) + ' → ' + fmt(r.round.payout) + ' USDT');
   finish(r);
 }
 
