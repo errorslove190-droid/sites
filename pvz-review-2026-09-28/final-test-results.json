@@ -1,0 +1,30 @@
+{
+  "sha256": "bbffb39033321938d066013d2a81b3a4ec214396eb05cd394ba0976b5bdcd883",
+  "environment": "Node VM with mocked DOM, SDK and clock",
+  "results": [
+    {
+      "suite": "platform",
+      "passed": true,
+      "output": "PASS scripts parse\nPASS Game Ready waits for rendered UI and loading overlay removal, sends once\nPASS SDK arriving after five seconds reconnects without late cloud overwrite\nPASS hanging SDK init cannot block boot indefinitely\nPASS pause subscriptions precede player data request completion\nPASS returning to a visible tab does not dismiss tutorial pause\nPASS ad completion cannot resume audio in hidden document\nPASS SDK resume cannot release visibility or orientation pause\nPASS reward only after onRewarded, once, with both success and failure recovery\nPASS scan interval stays frozen during pause\nPASS final dialogue timer is cancelled and restored across pause\nPASS round created while hidden preserves full time until resume\nPASS sorting and explicit round completion cannot bypass pause\nPASS gameplay stops on results and menus, resumes on active game\nAll 14 platform regression checks passed. Mocks only; real SDK moderation is not certified.\n",
+      "error": ""
+    },
+    {
+      "suite": "saves",
+      "passed": true,
+      "output": "[\n  {\n    \"name\": \"unfinished acceptance reloads acceptance and preserves starting coffee/debts/stock\",\n    \"passed\": true\n  },\n  {\n    \"name\": \"current debt visitor survives save/reload without shifting the next debt\",\n    \"passed\": true\n  },\n  {\n    \"name\": \"success cannot reopen the already removed parcel or pay a second result\",\n    \"passed\": true\n  },\n  {\n    \"name\": \"saved successful result resumes next customer once\",\n    \"passed\": true\n  },\n  {\n    \"name\": \"repeated lost-parcel promise save does not charge again or remove current debt\",\n    \"passed\": true\n  },\n  {\n    \"name\": \"reload inside scan success animation preserves undelivered stock\",\n    \"passed\": true\n  },\n  {\n    \"name\": \"checkpoint between customers does not advance twice\",\n    \"passed\": true\n  },\n  {\n    \"name\": \"scandal outcome is committed once before dialogue acknowledgement\",\n    \"passed\": true\n  },\n  {\n    \"name\": \"courier payment reload ends the day without a second payment\",\n    \"passed\": true\n  }\n]\n",
+      "error": ""
+    },
+    {
+      "suite": "economy",
+      "passed": true,
+      "output": "[\n  {\n    \"name\": \"calendar early balance stays unchanged through day 14 for 3 slots and day 28 for 6\",\n    \"passed\": true\n  },\n  {\n    \"name\": \"days 29 and 43 have transparent expense ceilings by capacity\",\n    \"passed\": true\n  },\n  {\n    \"name\": \"0 rubles and 5 stars earn first expansion in two clean shifts on days 29 and 43\",\n    \"passed\": true\n  },\n  {\n    \"name\": \"0 rubles and 1 star can afford first expansion within six clean shifts without ads\",\n    \"passed\": true\n  },\n  {\n    \"name\": \"reopening the report neither charges twice nor grants a repeated discount\",\n    \"passed\": true\n  },\n  {\n    \"name\": \"legacy already-paid report is preserved without a retroactive refund\",\n    \"passed\": true\n  }\n]\n",
+      "error": ""
+    },
+    {
+      "suite": "pause-tail",
+      "passed": true,
+      "output": "PASS completed scan waits for resume; blur preserves paused progress; ordinary release resets\nPASS unknown cloud contents disable cloud writes; confirmed empty cloud remains writable\nBoth regression groups passed. Model tests, not a real SDK check.\n",
+      "error": ""
+    }
+  ]
+}
