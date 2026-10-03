@@ -1,0 +1,9 @@
+Источники и примеры, проверка 03.10.2026
+
+https://openai.com/index/practical-guide-building-gpt-6/
+https://developers.openai.com/blog/rethinking-skills-and-prompts-for-gpt-6-astra
+https://developers.openai.com/api/docs/guides/latest-model
+https://www.youtube.com/watch?v=o-KeFse7804
+https://github.com/heygen-com/hyperframes/blob/main/docs/introduction.mdx
+https://errorslove190-droid.github.io/sites/vetra/presentation/
+https://errorslove190-droid.github.io/sites/updates-vpn/bot-preview/
