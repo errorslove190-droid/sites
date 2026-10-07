@@ -27,6 +27,11 @@
   const btn = (label, action, style="", extra="") => '<button type="button" class="button ' + style + '" data-action="' + action + '" ' + extra + '>' + esc(label) + '</button>';
   const supportLink = (label, route, style="") => '<a class="button ' + style + '" href="https://t.me/' + encodeURIComponent(C.botUsername) + '?start=' + route + '" data-bot>' + esc(label) + '</a>';
   const go = (label, route, style="") => '<a class="button ' + style + '" href="#' + route + '">' + esc(label) + '</a>';
+  const discountPrice = amount => Math.round(amount * (100 - (account.promo_discount || 0)) / 100);
+  const priceMarkup = (before, after) => before === after ? esc(money(after)) :
+    '<span class="price-pair"><del aria-label="' + esc(fmt("price_before",{amount:money(before)})) + '">' + esc(money(before)) + '</del><span aria-label="' + esc(fmt("price_now",{amount:money(after)})) + '">' + esc(money(after)) + '</span></span>';
+  const priceButton = (prefix,before,after,action,extra) => '<button type="button" class="button secondary price-button" data-action="'+action+'" '+extra+'><span>'+esc(prefix)+' ·</span> '+priceMarkup(before,after)+'</button>';
+  const promoNotice = (code=account.promo_code,discount=account.promo_discount) => code && discount ? '<p class="promo-notice">'+esc(fmt("promo_active",{code,discount}))+'</p>' : '';
   const section = (title, body) => '<section class="section"><h2>' + esc(title) + '</h2>' + body + '</section>';
   const empty = key => '<p class="empty">' + esc(T[key]) + '</p>';
   const row = (title, subtitle, value) => '<div class="row"><div class="grow"><div class="name">' + esc(title) + '</div><small>' + esc(subtitle) + '</small></div><div class="value">' + esc(value) + '</div></div>';
@@ -41,6 +46,10 @@
   nav.setAttribute("aria-label", T.nav);
   nav.innerHTML = ["home","payment","friends","profile"].map(key =>
     '<a class="tab" href="#' + key + '" data-tab="' + key + '">' + icon(key) + '<span>' + esc(T[key]) + '</span></a>').join("");
+
+  const updateNavHeight = () => document.documentElement.style.setProperty("--nav-height", nav.getBoundingClientRect().height + "px");
+  new ResizeObserver(updateNavHeight).observe(nav);
+  updateNavHeight();
 
   if (tg) {
     tg.ready();
@@ -85,6 +94,7 @@
       else a.removeAttribute("aria-current");
     });
     nav.hidden = screen === "home" && account.onboarding;
+    updateNavHeight();
     if (screen === "home") home();
     if (screen === "payment") payment();
     if (screen === "friends") friends();
@@ -175,19 +185,19 @@
     if(screen === "help") main.innerHTML=back("profile")+title(T.help_title)+Object.values(C.faq).map(([q,a])=>'<details class="faq"><summary>'+esc(q)+'</summary><p>'+esc(a)+'</p></details>').join('')+stack(go(T.change_country,"profile","secondary")+supportLink(T.support,"support"));
     if(screen === "buy") {
       main.innerHTML=back("payment")+title(T.buy)+(purchase.gift?'<p class="muted">'+esc(T.gift_select)+'</p>':'')+
-        Object.entries(C.plans).map(([key,p])=>'<section class="plan-option"><h2>'+esc(p.title)+'</h2><p class="price">'+esc(fmt("monthly",{amount:money(p.price)}))+'</p><p>'+esc(fmt(key+"_hint",{count:Object.keys(C.countries).length}))+'</p>'+btn(p.title+" · "+money(p.price),"choose-plan","secondary",'data-plan="'+key+'"')+'</section>').join('')+
-        (account.promo_discount?'<p class="helper">'+esc(fmt("promo_ok",{discount:account.promo_discount}))+'</p>':'')+
+        Object.entries(C.plans).map(([key,p])=>'<section class="plan-option"><h2>'+esc(p.title)+'</h2><p class="price">'+fmt("monthly",{amount:priceMarkup(p.price,discountPrice(p.price))})+'</p><p>'+esc(fmt(key+"_hint",{count:Object.keys(C.countries).length}))+'</p>'+priceButton(p.title,p.price,discountPrice(p.price),"choose-plan",'data-plan="'+key+'"')+'</section>').join('')+
+        promoNotice()+
         stack(go(T.promo,"promo","secondary")+btn(purchase.gift?T.cancel:T.gift_action,"gift-toggle","ghost"));
     }
     if(screen === "period") {
       if(!purchase.plan) { navigate("buy"); return; }
-      main.innerHTML=back("buy")+title(T.period)+'<p class="muted">'+esc(C.plans[purchase.plan].title)+'</p>'+stack(Object.entries(C.prices[purchase.plan]).map(([months,amount])=>btn(fmt("period_price",{months,amount:money(Math.round(amount*(100-account.promo_discount)/100))}),"choose-period","secondary",'data-months="'+months+'"')).join(''));
+      main.innerHTML=back("buy")+title(T.period)+'<p class="muted">'+esc(C.plans[purchase.plan].title)+'</p>'+promoNotice()+stack(Object.entries(C.prices[purchase.plan]).map(([months,amount])=>priceButton(fmt("period_label",{months}),amount,discountPrice(amount),"choose-period",'data-months="'+months+'"')).join(''));
     }
     if(screen === "checkout") {
       const o=purchase.order;
       if(!o) { navigate("buy"); return; }
       const debit=Math.min(account.balance,o.amount), remainder=o.amount-debit;
-      main.innerHTML=back(o.topup?"topup":"period")+title(T.payment_method)+'<p>'+esc(o.topup?money(o.amount):fmt("checkout",{plan:C.plans[o.plan].title,months:o.months,amount:money(o.amount)}))+'</p>'+
+      main.innerHTML=back(o.topup?"topup":"period")+title(T.payment_method)+'<p>'+esc(o.topup?money(o.amount):fmt("checkout",{plan:C.plans[o.plan].title,months:o.months,amount:money(o.amount)}))+'</p>'+(!o.topup && o.promo_code ? '<p>'+priceMarkup(o.base_amount,o.amount)+'</p>'+promoNotice(o.promo_code,o.promo_discount) : '')+
         (C.DEMO_MODE?'<p class="muted">'+esc(T.pay_demo)+'</p>':'')+
         (purchase.mixed?'<p class="muted">'+esc(fmt("mixed_hint",{balance:money(debit),amount:money(remainder)}))+'</p>':'')+
         stack((!o.topup&&!purchase.mixed?btn(fmt(remainder?"mixed_pay":"balance_pay",{amount:money(remainder||o.amount)}),remainder?"mixed":"pay","",'data-method="balance"'):'')+
@@ -208,7 +218,7 @@
     // Keep the request key after a transport failure; retry returns the same order.
     const fingerprint=JSON.stringify(values);
     if(purchase.fingerprint!==fingerprint) { purchase.requestId=requestId(); purchase.fingerprint=fingerprint; }
-    purchase.order = C.DEMO_MODE ? {...values,id:purchase.requestId,amount:values.topup||Math.round(C.prices[values.plan][values.months]*(100-account.promo_discount)/100)} :
+    purchase.order = C.DEMO_MODE ? {...values,id:purchase.requestId,base_amount:values.topup||C.prices[values.plan][values.months],promo_code:values.topup?null:account.promo_code,promo_discount:values.topup?0:account.promo_discount,amount:values.topup||discountPrice(C.prices[values.plan][values.months])} :
       await api("action",{action:"order",...values,request_id:purchase.requestId});
     purchase.mixed=false;
     navigate("checkout");
@@ -366,7 +376,7 @@
     screen = routes.includes(next) ? next : "home";
     if(dialog.open) dialog.close();
     render();
-    window.scrollTo(0,0);
+    main.scrollTo(0,0);
     main.focus({preventScroll:true});
   });
 
